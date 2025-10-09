@@ -1,73 +1,140 @@
-# Welcome to your Lovable project
+# TLC Planner
 
-## Project info
+Production-ready calisthenics training application with calendar-first planning, skill progressions, and intelligent workout tracking.
 
-**URL**: https://lovable.dev/projects/7e9fed94-8ada-4706-827e-2ef8e6fbea79
+## 🎯 Features
 
-## How can I edit this code?
+- **Calendar-First Planning** - Intuitive monthly calendar with drag-to-schedule sessions
+- **Exercise Library** - Comprehensive database with progressions and coaching cues
+- **Skill Tree System** - Deterministic progression pathways from basics to advanced
+- **Workout Builder** - Block-based sessions (warm-up, skill, strength, accessory, cool-down)
+- **Role-Based Access** - User, Coach, and Admin roles with appropriate permissions
+- **Multi-Factor Auth** - Email/password with optional 4-digit PIN second factor
+- **Data Export** - Download your complete training history
+- **Neumorphic Design** - Beautiful, modern UI with soft shadows and depth
 
-There are several ways of editing your application.
+## 🚀 Tech Stack
 
-**Use Lovable**
+- **Frontend**: React 18, TypeScript, Vite
+- **Backend**: Lovable Cloud (Supabase)
+- **Database**: PostgreSQL with Row Level Security
+- **Auth**: Multi-factor authentication with OAuth support
+- **Design**: Neumorphic CSS variables (no Tailwind classes)
+- **Icons**: Lucide React
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7e9fed94-8ada-4706-827e-2ef8e6fbea79) and start prompting.
+## 📁 Project Structure
 
-Changes made via Lovable will be committed automatically to this repo.
+```
+/src
+  /components     - Reusable UI components
+    /Calendar     - Calendar views and interactions
+    /Forms        - Form components and validation
+    /Library      - Exercise library components
+    /SkillTree    - Progression visualization
+    /UI           - Base UI components (shadcn)
+  /hooks          - Custom React hooks
+  /pages          - Route pages
+  /providers      - Context providers (Auth, Theme, Query)
+  /services       - API and business logic
+  /styles         - Design system and neumorphic CSS
+/docs             - Comprehensive documentation
+/supabase         - Database migrations and policies
+```
 
-**Use your preferred IDE**
+## 🎨 Design System
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+TLC Planner uses a neumorphic design system with CSS variables:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Color Palette
+- Navy: `#0f1b2d` - Primary brand color
+- Electric Blue: `#1178ff` - Accent and interactive elements
+- Charcoal: `#1e1f24` - Text and secondary surfaces
+- White: `#ffffff` - Light mode background
 
-Follow these steps:
+### Neumorphic Tokens
+- `--neumorph-distance: 8px` - Shadow offset
+- `--neumorph-blur: 16px` - Shadow blur radius
+- Dual shadows (light/dark) for depth effect
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+## 🔒 Security
+
+- Row Level Security (RLS) on all tables
+- Server-side role validation via security definer functions
+- PIN hashing with per-user salt
+- No client-side role checks
+- Secrets managed via Lovable Cloud
+
+## 📚 Documentation
+
+- [Quick Start Guide](docs/QUICKSTART.md) - Get up and running
+- [Database Schema](docs/SCHEMA.md) - Complete data model
+- [Deployment Guide](docs/DEPLOY.md) - Production deployment
+- [Accessibility](docs/ACCESSIBILITY.md) - WCAG compliance
+
+## 🛠️ Development
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+- Lovable account (for backend)
+
+### Setup
+```bash
+# Clone repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Install dependencies
+npm install
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Environment
+Backend services are automatically configured via Lovable Cloud. No manual setup required.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🧪 Testing
 
-**Use GitHub Codespaces**
+- Unit tests with Vitest
+- Component tests with React Testing Library
+- E2E tests for critical flows
+- Accessibility audits with Lighthouse
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Run tests:
+```bash
+npm test
+```
 
-## What technologies are used for this project?
+## 📦 Deployment
 
-This project is built with:
+Deploy via Lovable:
+1. Click "Publish" in Lovable editor
+2. App deploys to `yoursite.lovable.app`
+3. Optional: Connect custom domain
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+See [DEPLOY.md](docs/DEPLOY.md) for details.
 
-## How can I deploy this project?
+## 🎯 Roadmap
 
-Simply open [Lovable](https://lovable.dev/projects/7e9fed94-8ada-4706-827e-2ef8e6fbea79) and click on Share -> Publish.
+- [ ] Workout templates marketplace
+- [ ] Social features and training partners
+- [ ] Video exercise demonstrations
+- [ ] AI-powered progression suggestions
+- [ ] Mobile app (React Native)
+- [ ] Coach certification program
 
-## Can I connect a custom domain to my Lovable project?
+## 🤝 Contributing
 
-Yes, you can!
+This is a production app. For feature requests or bug reports, contact support.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📄 License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Proprietary - All rights reserved to TLC
+
+## 🙏 Credits
+
+Built with [Lovable](https://lovable.dev) - The AI-powered full-stack platform
+
+---
+
+**TLC Planner** - Master calisthenics through intelligent progression
