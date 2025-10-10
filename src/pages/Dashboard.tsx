@@ -4,6 +4,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Calendar, Library, Settings, LogOut } from 'lucide-react';
+import logo from '@/assets/logo.jfif';
 import '@/styles/neumorph.css';
 
 export default function Dashboard() {
@@ -36,11 +37,18 @@ export default function Dashboard() {
       <div className="max-w-6xl mx-auto">
         <header className="neumorph p-6 mb-8">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-navy mb-2">CalX Bulls Planner</h1>
-              <p className="text-muted-foreground">
-                {user ? `Welcome back, ${profile?.display_name || user.email}` : 'Start your calisthenics journey'}
-              </p>
+            <div className="flex items-center gap-4">
+              <img 
+                src={logo} 
+                alt="CalX Bulls" 
+                className="w-16 h-16 object-contain rounded-xl"
+              />
+              <div>
+                <h1 className="text-3xl font-bold text-navy mb-2">CalX Bulls</h1>
+                <p className="text-muted-foreground">
+                  {user ? `Welcome back, ${profile?.display_name || user.email}` : 'Start your calisthenics journey'}
+                </p>
+              </div>
             </div>
             {user ? (
               <Button
@@ -82,7 +90,7 @@ export default function Dashboard() {
             <Library className="h-12 w-12 text-primary mb-4" />
             <h2 className="text-xl font-bold mb-2">Exercise Library</h2>
             <p className="text-muted-foreground">
-              Browse exercises and progressions
+              Browse 115+ calisthenics exercises
             </p>
           </button>
 
