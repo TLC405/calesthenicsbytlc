@@ -13,13 +13,10 @@ export default function Planner() {
   const [workoutDates, setWorkoutDates] = useState<Date[]>([]);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-      return;
+    if (user) {
+      fetchWorkouts();
     }
-
-    fetchWorkouts();
-  }, [user, navigate]);
+  }, [user]);
 
   const fetchWorkouts = async () => {
     if (!user) return;

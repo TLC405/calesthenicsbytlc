@@ -14,13 +14,8 @@ export default function Library() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-      return;
-    }
-
     fetchExercises();
-  }, [user, navigate]);
+  }, []);
 
   const fetchExercises = async () => {
     const { data } = await supabase

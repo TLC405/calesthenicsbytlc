@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { Calendar, TrendingUp, Target } from 'lucide-react';
+import logo from '@/assets/logo.jfif';
 import '@/styles/neumorph.css';
 
 const Index = () => {
@@ -29,17 +30,32 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto px-4 py-16">
         <div className="neumorph p-12 mb-12 text-center">
-          <h1 className="text-5xl font-bold text-navy mb-4">TLC Planner</h1>
+          <img 
+            src={logo} 
+            alt="CalX Bulls Logo" 
+            className="w-24 h-24 object-contain rounded-2xl shadow-lg mx-auto mb-6"
+          />
+          <h1 className="text-5xl font-bold text-navy mb-4">CalX Bulls Planner</h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Master calisthenics through intelligent progression tracking
+            Elite Calisthenics Training System - Master bodyweight movements through intelligent progression
           </p>
-          <Button
-            onClick={() => navigate('/auth')}
-            size="lg"
-            className="neumorph-hover neumorph-pressed text-lg px-8"
-          >
-            Get Started
-          </Button>
+          <div className="flex gap-4 justify-center">
+            <Button
+              onClick={() => navigate('/dashboard')}
+              size="lg"
+              className="neumorph-hover neumorph-pressed text-lg px-8"
+            >
+              Start Training
+            </Button>
+            <Button
+              onClick={() => navigate('/auth')}
+              size="lg"
+              variant="outline"
+              className="neumorph-flat neumorph-hover text-lg px-8"
+            >
+              Sign In
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

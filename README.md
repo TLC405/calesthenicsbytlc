@@ -1,17 +1,17 @@
-# TLC Planner
+# CalX Bulls - Elite Calisthenics Training System
 
-Production-ready calisthenics training application with calendar-first planning, skill progressions, and intelligent workout tracking.
+Complete workout logger and planner featuring 120+ exercises from the CalX Bulls Complete Exercise Database. Master bodyweight movements through intelligent progression tracking.
 
 ## 🎯 Features
 
-- **Calendar-First Planning** - Intuitive monthly calendar with drag-to-schedule sessions
-- **Exercise Library** - Comprehensive database with progressions and coaching cues
-- **Skill Tree System** - Deterministic progression pathways from basics to advanced
-- **Workout Builder** - Block-based sessions (warm-up, skill, strength, accessory, cool-down)
-- **Role-Based Access** - User, Coach, and Admin roles with appropriate permissions
-- **Multi-Factor Auth** - Email/password with optional 4-digit PIN second factor
-- **Data Export** - Download your complete training history
+- **Complete Exercise Library** - 120+ exercises across 8 categories (Push, Pull, Core, Legs, Yoga, Skills, Cardio, Corrective)
+- **Calendar-First Planning** - Intuitive monthly calendar for workout scheduling
+- **Workout Logger** - Track sets, reps, RPE, and progression over time
+- **Skill Progressions** - Foundation → Beginner → Intermediate → Advanced → Master
+- **AI Coaching Prompts** - Motivational cues and form tips for every exercise
 - **Neumorphic Design** - Beautiful, modern UI with soft shadows and depth
+- **Multi-Factor Auth** - Secure login with optional guest mode
+- **Exercise Categories**: Push, Pull, Core, Legs, Yoga, Skills, Cardio, Corrective, Warm-up, Mobility
 
 ## 🚀 Tech Stack
 
@@ -50,6 +50,14 @@ TLC Planner uses a neumorphic design system with CSS variables:
 - Electric Blue: `#1178ff` - Accent and interactive elements
 - Charcoal: `#1e1f24` - Text and secondary surfaces
 - White: `#ffffff` - Light mode background
+
+### Exercise Database
+120+ exercises from CalX Bulls Complete Exercise Database including:
+- Foundation exercises (Wall Push-ups, Assisted Squats)
+- Beginner movements (Standard Push-ups, Planks)
+- Intermediate skills (Diamond Push-ups, L-Sit)
+- Advanced techniques (Handstand Push-ups, Pull-ups, Pistol Squats)
+- Master movements (One-Arm Push-ups, Muscle-ups, Planche, Front Lever)
 
 ### Neumorphic Tokens
 - `--neumorph-distance: 8px` - Shadow offset
@@ -129,12 +137,13 @@ This is a production app. For feature requests or bug reports, contact support.
 
 ## 📄 License
 
-Proprietary - All rights reserved to TLC
+Built with Lovable ❤️
 
 ## 🙏 Credits
 
+Exercise Database: CalX Bulls Complete Exercise Database
 Built with [Lovable](https://lovable.dev) - The AI-powered full-stack platform
 
 ---
 
-**TLC Planner** - Master calisthenics through intelligent progression
+**CalX Bulls** - Elite Calisthenics Training System

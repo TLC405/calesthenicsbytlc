@@ -12,29 +12,24 @@ export default function Dashboard() {
   const [profile, setProfile] = useState<any>(null);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-      return;
-    }
-
     const fetchProfile = async () => {
-      const { data } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-      setProfile(data);
+      if (user) {
+        const { data } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+        setProfile(data);
+      }
     };
 
     fetchProfile();
-  }, [user, navigate]);
+  }, [user]);
 
   const handleSignOut = async () => {
     await signOut();
     navigate('/auth');
   };
-
-  if (!user) return null;
 
   return (
     <div className="min-h-screen bg-background p-4 md:p-8">
@@ -42,19 +37,29 @@ export default function Dashboard() {
         <header className="neumorph p-6 mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-navy mb-2">TLC Planner</h1>
+              <h1 className="text-3xl font-bold text-navy mb-2">CalX Bulls Planner</h1>
               <p className="text-muted-foreground">
-                Welcome back, {profile?.display_name || user.email}
+                {user ? `Welcome back, ${profile?.display_name || user.email}` : 'Start your calisthenics journey'}
               </p>
             </div>
-            <Button
-              variant="ghost"
-              onClick={handleSignOut}
-              className="neumorph-flat neumorph-hover"
-            >
-              <LogOut className="h-5 w-5 mr-2" />
-              Sign Out
-            </Button>
+            {user ? (
+              <Button
+                variant="ghost"
+                onClick={handleSignOut}
+                className="neumorph-flat neumorph-hover"
+              >
+                <LogOut className="h-5 w-5 mr-2" />
+                Sign Out
+              </Button>
+            ) : (
+              <Button
+                variant="ghost"
+                onClick={() => navigate('/auth')}
+                className="neumorph-flat neumorph-hover"
+              >
+                Sign In
+              </Button>
+            )}
           </div>
         </header>
 
