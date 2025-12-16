@@ -4,6 +4,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { CalendarView } from '@/components/Calendar/CalendarView';
+import { WorkoutModal } from '@/components/Workout/WorkoutModal';
 import { ArrowLeft } from 'lucide-react';
 import '@/styles/neumorph.css';
 
@@ -11,6 +12,7 @@ export default function Planner() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [workoutDates, setWorkoutDates] = useState<Date[]>([]);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
   useEffect(() => {
     if (user) {
@@ -32,8 +34,7 @@ export default function Planner() {
   };
 
   const handleDateClick = (date: Date) => {
-    console.log('Selected date:', date);
-    // TODO: Open workout editor
+    setSelectedDate(date);
   };
 
   return (
@@ -64,6 +65,13 @@ export default function Planner() {
           workoutDates={workoutDates}
         />
       </div>
+
+      <WorkoutModal
+        date={selectedDate}
+        open={!!selectedDate}
+        onClose={() => setSelectedDate(null)}
+        onSave={fetchWorkouts}
+      />
     </div>
   );
 }

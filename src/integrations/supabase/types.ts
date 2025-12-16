@@ -53,12 +53,15 @@ export type Database = {
           cues: Json | null
           equipment: string[]
           id: string
+          image_url: string | null
+          instagram_url: string | null
           media_url: string | null
           name: string
           primary_muscles: string[]
           secondary_muscles: string[]
           slug: string
           updated_at: string
+          youtube_url: string | null
         }
         Insert: {
           category: string
@@ -66,12 +69,15 @@ export type Database = {
           cues?: Json | null
           equipment?: string[]
           id?: string
+          image_url?: string | null
+          instagram_url?: string | null
           media_url?: string | null
           name: string
           primary_muscles?: string[]
           secondary_muscles?: string[]
           slug: string
           updated_at?: string
+          youtube_url?: string | null
         }
         Update: {
           category?: string
@@ -79,12 +85,15 @@ export type Database = {
           cues?: Json | null
           equipment?: string[]
           id?: string
+          image_url?: string | null
+          instagram_url?: string | null
           media_url?: string | null
           name?: string
           primary_muscles?: string[]
           secondary_muscles?: string[]
           slug?: string
           updated_at?: string
+          youtube_url?: string | null
         }
         Relationships: []
       }
