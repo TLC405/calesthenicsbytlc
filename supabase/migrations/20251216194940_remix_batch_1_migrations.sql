@@ -1,3 +1,5 @@
+
+-- Migration: 20251009110529
 -- Create app_role enum
 CREATE TYPE public.app_role AS ENUM ('user', 'coach', 'admin');
 
