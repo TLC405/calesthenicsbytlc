@@ -50,7 +50,9 @@ export type Database = {
         Row: {
           category: string
           created_at: string
+          created_by: string | null
           cues: Json | null
+          difficulty_level: number | null
           equipment: string[]
           id: string
           image_url: string | null
@@ -58,15 +60,19 @@ export type Database = {
           media_url: string | null
           name: string
           primary_muscles: string[]
+          progression_parent_id: string | null
           secondary_muscles: string[]
           slug: string
           updated_at: string
+          video_verified: boolean | null
           youtube_url: string | null
         }
         Insert: {
           category: string
           created_at?: string
+          created_by?: string | null
           cues?: Json | null
+          difficulty_level?: number | null
           equipment?: string[]
           id?: string
           image_url?: string | null
@@ -74,15 +80,19 @@ export type Database = {
           media_url?: string | null
           name: string
           primary_muscles?: string[]
+          progression_parent_id?: string | null
           secondary_muscles?: string[]
           slug: string
           updated_at?: string
+          video_verified?: boolean | null
           youtube_url?: string | null
         }
         Update: {
           category?: string
           created_at?: string
+          created_by?: string | null
           cues?: Json | null
+          difficulty_level?: number | null
           equipment?: string[]
           id?: string
           image_url?: string | null
@@ -90,12 +100,22 @@ export type Database = {
           media_url?: string | null
           name?: string
           primary_muscles?: string[]
+          progression_parent_id?: string | null
           secondary_muscles?: string[]
           slug?: string
           updated_at?: string
+          video_verified?: boolean | null
           youtube_url?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "exercises_progression_parent_id_fkey"
+            columns: ["progression_parent_id"]
+            isOneToOne: false
+            referencedRelation: "exercises"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       feature_flags: {
         Row: {
@@ -127,9 +147,13 @@ export type Database = {
           display_name: string | null
           email: string
           id: string
+          last_workout_date: string | null
+          level: number | null
           pin_hash: string | null
           pin_salt: string | null
           role: Database["public"]["Enums"]["app_role"]
+          streak_days: number | null
+          total_xp: number | null
           updated_at: string
         }
         Insert: {
@@ -137,9 +161,13 @@ export type Database = {
           display_name?: string | null
           email: string
           id: string
+          last_workout_date?: string | null
+          level?: number | null
           pin_hash?: string | null
           pin_salt?: string | null
           role?: Database["public"]["Enums"]["app_role"]
+          streak_days?: number | null
+          total_xp?: number | null
           updated_at?: string
         }
         Update: {
@@ -147,9 +175,13 @@ export type Database = {
           display_name?: string | null
           email?: string
           id?: string
+          last_workout_date?: string | null
+          level?: number | null
           pin_hash?: string | null
           pin_salt?: string | null
           role?: Database["public"]["Enums"]["app_role"]
+          streak_days?: number | null
+          total_xp?: number | null
           updated_at?: string
         }
         Relationships: []
@@ -185,6 +217,50 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "progressions_exercise_id_fkey"
+            columns: ["exercise_id"]
+            isOneToOne: false
+            referencedRelation: "exercises"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_exercise_progress: {
+        Row: {
+          created_at: string | null
+          exercise_id: string
+          id: string
+          mastered: boolean | null
+          notes: string | null
+          personal_best: Json | null
+          updated_at: string | null
+          user_id: string
+          xp_earned: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          exercise_id: string
+          id?: string
+          mastered?: boolean | null
+          notes?: string | null
+          personal_best?: Json | null
+          updated_at?: string | null
+          user_id: string
+          xp_earned?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          exercise_id?: string
+          id?: string
+          mastered?: boolean | null
+          notes?: string | null
+          personal_best?: Json | null
+          updated_at?: string | null
+          user_id?: string
+          xp_earned?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_exercise_progress_exercise_id_fkey"
             columns: ["exercise_id"]
             isOneToOne: false
             referencedRelation: "exercises"

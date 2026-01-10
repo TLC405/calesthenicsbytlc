@@ -1,0 +1,43 @@
+{
+  "name": "CalX Bulls - Elite Calisthenics",
+  "short_name": "CalX Bulls",
+  "description": "Master calisthenics with elite training protocols, 120+ exercises, and AI-powered coaching",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a1628",
+  "theme_color": "#1e90ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["fitness", "health", "sports"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Exercise Library",
+      "url": "/library",
+      "description": "Browse 120+ exercises"
+    },
+    {
+      "name": "AI Lab",
+      "url": "/ai-lab",
+      "description": "Discover exercises with AI"
+    },
+    {
+      "name": "Workout Planner",
+      "url": "/planner",
+      "description": "Plan your workouts"
+    }
+  ]
+}

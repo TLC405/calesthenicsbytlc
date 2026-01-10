@@ -3,11 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft, Search } from 'lucide-react';
+import { ArrowLeft, Search, Plus, Sparkles } from 'lucide-react';
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
 import { WorkoutModal } from '@/components/Workout/WorkoutModal';
+import { AddExerciseModal } from '@/components/Exercise/AddExerciseModal';
+import { ExerciseCardSkeletonGrid } from '@/components/Exercise/ExerciseCardSkeleton';
+import { useAuth } from '@/providers/AuthProvider';
 import '@/styles/neumorph.css';
 
 interface Exercise {
@@ -22,21 +25,26 @@ interface Exercise {
   youtube_url?: string | null;
   instagram_url?: string | null;
   image_url?: string | null;
+  difficulty_level?: number;
 }
 
 export default function Library() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [workoutModalDate, setWorkoutModalDate] = useState<Date | null>(null);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     fetchExercises();
   }, []);
 
   const fetchExercises = async () => {
+    setLoading(true);
     const { data } = await supabase
       .from('exercises')
       .select('*')
@@ -44,6 +52,7 @@ export default function Library() {
       .order('name');
 
     setExercises(data || []);
+    setLoading(false);
   };
 
   const categories = [...new Set(exercises.map(e => e.category))];
@@ -74,11 +83,27 @@ export default function Library() {
                 <ArrowLeft className="h-5 w-5" />
               </Button>
               <div>
-                <h1 className="text-3xl font-bold text-navy">Exercise Library</h1>
+                <h1 className="text-3xl font-bold">Exercise Library</h1>
                 <p className="text-muted-foreground">
-                  Browse and learn calisthenics movements
+                  {exercises.length} exercises • Browse and learn movements
                 </p>
               </div>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                onClick={() => navigate('/ai-lab')}
+                className="neumorph-flat"
+              >
+                <Sparkles className="h-4 w-4 mr-2" />
+                AI Lab
+              </Button>
+              {user && (
+                <Button onClick={() => setShowAddModal(true)} className="neumorph">
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add Exercise
+                </Button>
+              )}
             </div>
           </div>
 
@@ -100,11 +125,11 @@ export default function Library() {
           />
         </header>
 
-        {filteredExercises.length === 0 ? (
+        {loading ? (
+          <ExerciseCardSkeletonGrid count={8} />
+        ) : filteredExercises.length === 0 ? (
           <div className="neumorph p-12 text-center">
-            <p className="text-muted-foreground">
-              No exercises found.
-            </p>
+            <p className="text-muted-foreground">No exercises found.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -132,6 +157,12 @@ export default function Library() {
         open={!!workoutModalDate}
         onClose={() => setWorkoutModalDate(null)}
         onSave={() => {}}
+      />
+
+      <AddExerciseModal
+        open={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onSuccess={fetchExercises}
       />
     </div>
   );
