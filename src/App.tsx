@@ -10,6 +10,7 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Planner from "./pages/Planner";
 import Library from "./pages/Library";
+import AILab from "./pages/AILab";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import "./styles/neumorph.css";
@@ -31,6 +32,7 @@ function AppContent() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/planner" element={<Planner />} />
         <Route path="/library" element={<Library />} />
+        <Route path="/ai-lab" element={<AILab />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
