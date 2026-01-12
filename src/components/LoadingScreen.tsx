@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Sparkles } from 'lucide-react';
 import logo from '@/assets/logo.jfif';
-import '@/styles/neumorph.css';
 
 export function LoadingScreen() {
   const [dots, setDots] = useState('');
@@ -14,17 +14,35 @@ export function LoadingScreen() {
 
   return (
     <div className="fixed inset-0 bg-background flex items-center justify-center">
-      <div className="neumorph p-12 rounded-3xl flex flex-col items-center gap-6">
-        <img 
-          src={logo} 
-          alt="CalX Bulls Logo" 
-          className="w-32 h-32 object-contain rounded-2xl shadow-lg"
-        />
+      <div className="premium-card p-12 flex flex-col items-center gap-6 animate-scale-in">
+        {/* Logo with glow */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-gold/30 to-primary/30 rounded-2xl blur-xl animate-pulse" />
+          <img 
+            src={logo} 
+            alt="Calisthenics Lifestyle" 
+            className="relative w-24 h-24 object-contain rounded-2xl shadow-lg"
+          />
+        </div>
+
+        {/* Brand */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-navy mb-2">CalX Bulls</h1>
-          <p className="text-muted-foreground">
-            Loading your workout planner{dots}
-          </p>
+          <h1 className="font-display text-3xl font-bold mb-1">
+            <span className="gradient-text">Calisthenics</span>{' '}
+            <span className="text-foreground">Lifestyle</span>
+          </h1>
+          <div className="flex items-center justify-center gap-2 text-muted-foreground">
+            <Sparkles className="w-3 h-3 text-gold" />
+            <p className="text-sm">
+              Loading your training{dots}
+            </p>
+            <Sparkles className="w-3 h-3 text-gold" />
+          </div>
+        </div>
+
+        {/* Loading bar */}
+        <div className="w-48 h-1 bg-muted rounded-full overflow-hidden">
+          <div className="h-full bg-gradient-to-r from-primary to-gold shimmer" />
         </div>
       </div>
     </div>

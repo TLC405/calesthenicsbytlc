@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { Sparkles } from 'lucide-react';
+import logo from '@/assets/logo.jfif';
 import '@/styles/neumorph.css';
 
 export default function Auth() {
@@ -37,8 +39,8 @@ export default function Auth() {
         });
       } else if (isSignUp) {
         toast({
-          title: 'Success',
-          description: 'Account created! You can now sign in.',
+          title: 'Welcome to Calisthenics Lifestyle',
+          description: 'Your account has been created. Start your journey!',
         });
       }
     } catch (error: any) {
@@ -54,31 +56,51 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="neumorph p-8 w-full max-w-md">
+      <div className="premium-card p-8 w-full max-w-md animate-scale-in">
+        {/* Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-navy mb-2">TLC Planner</h1>
-          <p className="text-muted-foreground">
-            {isSignUp ? 'Create your account' : 'Sign in to your account'}
-          </p>
+          <div className="relative inline-block mb-4">
+            <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-primary/20 rounded-2xl blur-lg" />
+            <img 
+              src={logo} 
+              alt="Calisthenics Lifestyle" 
+              className="relative w-20 h-20 object-contain rounded-xl mx-auto"
+            />
+          </div>
+          <h1 className="font-display text-2xl font-bold mb-1">
+            <span className="gradient-text">Calisthenics</span>{' '}
+            <span className="text-foreground">Lifestyle</span>
+          </h1>
+          <div className="flex items-center justify-center gap-2 text-muted-foreground">
+            <Sparkles className="w-3 h-3 text-gold" />
+            <p className="text-sm">
+              {isSignUp ? 'Begin your transformation' : 'Welcome back, athlete'}
+            </p>
+            <Sparkles className="w-3 h-3 text-gold" />
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {isSignUp && (
             <div className="space-y-2">
-              <Label htmlFor="displayName">Display Name</Label>
+              <Label htmlFor="displayName" className="text-sm font-medium">
+                Display Name
+              </Label>
               <Input
                 id="displayName"
                 type="text"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 placeholder="Your name"
-                className="neumorph-inset"
+                className="h-12 bg-muted/50 border-border/50 focus:border-primary transition-colors"
               />
             </div>
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-sm font-medium">
+              Email
+            </Label>
             <Input
               id="email"
               type="email"
@@ -86,12 +108,14 @@ export default function Auth() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
               required
-              className="neumorph-inset"
+              className="h-12 bg-muted/50 border-border/50 focus:border-primary transition-colors"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-sm font-medium">
+              Password
+            </Label>
             <Input
               id="password"
               type="password"
@@ -100,28 +124,35 @@ export default function Auth() {
               placeholder="••••••••"
               required
               minLength={6}
-              className="neumorph-inset"
+              className="h-12 bg-muted/50 border-border/50 focus:border-primary transition-colors"
             />
           </div>
 
           <Button
             type="submit"
             disabled={loading}
-            className="w-full neumorph-hover neumorph-pressed"
+            className="w-full h-12 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary font-semibold premium-hover"
           >
-            {loading ? 'Loading...' : isSignUp ? 'Sign Up' : 'Sign In'}
+            {loading ? 'Loading...' : isSignUp ? 'Create Account' : 'Sign In'}
           </Button>
         </form>
 
         <div className="mt-6 text-center">
           <button
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-sm text-primary hover:underline"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors"
           >
             {isSignUp
               ? 'Already have an account? Sign in'
               : "Don't have an account? Sign up"}
           </button>
+        </div>
+
+        {/* Bottom accent */}
+        <div className="mt-8 pt-6 border-t border-border/50 text-center">
+          <p className="text-xs text-muted-foreground tracking-widest uppercase">
+            Master the Art of Movement
+          </p>
         </div>
       </div>
     </div>
