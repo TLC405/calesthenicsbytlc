@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Download, LogOut, User, Shield } from 'lucide-react';
 import '@/styles/neumorph.css';
 
 export default function Settings() {
@@ -59,8 +59,8 @@ export default function Settings() {
       });
     } else {
       toast({
-        title: 'Success',
-        description: 'Profile updated successfully',
+        title: 'Profile Updated',
+        description: 'Your changes have been saved.',
       });
       fetchProfile();
     }
@@ -80,101 +80,124 @@ export default function Settings() {
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'tlc-planner-data.json';
+    link.download = 'calisthenics-lifestyle-data.json';
     link.click();
 
     toast({
-      title: 'Success',
-      description: 'Data exported successfully',
+      title: 'Data Exported',
+      description: 'Your training data has been downloaded.',
     });
   };
 
   return (
     <div className="min-h-screen bg-background p-4 md:p-8">
-      <div className="max-w-2xl mx-auto">
-        <header className="neumorph p-6 mb-8">
+      <div className="max-w-2xl mx-auto space-y-6">
+        {/* Header */}
+        <header className="premium-card p-6 animate-fade-in">
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
+              size="icon"
               onClick={() => navigate('/dashboard')}
-              className="neumorph-flat neumorph-hover"
+              className="hover:bg-primary/10"
             >
               <ArrowLeft className="h-5 w-5" />
             </Button>
             <div>
-              <h1 className="text-3xl font-bold text-navy">Settings</h1>
-              <p className="text-muted-foreground">
+              <h1 className="font-display text-2xl font-bold">Settings</h1>
+              <p className="text-sm text-muted-foreground">
                 Manage your account and preferences
               </p>
             </div>
           </div>
         </header>
 
-        <div className="space-y-6">
-          <div className="neumorph p-6">
-            <h2 className="text-xl font-bold mb-4">Profile</h2>
-            <form onSubmit={handleUpdateProfile} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={user?.email || ''}
-                  disabled
-                  className="neumorph-inset"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="displayName">Display Name</Label>
-                <Input
-                  id="displayName"
-                  type="text"
-                  value={displayName}
-                  onChange={(e) => setDisplayName(e.target.value)}
-                  className="neumorph-inset"
-                />
-              </div>
-
-              <Button
-                type="submit"
-                disabled={loading}
-                className="neumorph-hover neumorph-pressed"
-              >
-                {loading ? 'Saving...' : 'Save Changes'}
-              </Button>
-            </form>
+        {/* Profile Section */}
+        <div className="premium-card p-6 animate-slide-up" style={{ animationDelay: '100ms' }}>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <User className="w-5 h-5 text-primary" />
+            </div>
+            <h2 className="font-display text-xl font-semibold">Profile</h2>
           </div>
 
-          <div className="neumorph p-6">
-            <h2 className="text-xl font-bold mb-4">Data Export</h2>
-            <p className="text-muted-foreground mb-4">
-              Download your workout data and profile information
-            </p>
+          <form onSubmit={handleUpdateProfile} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={user?.email || ''}
+                disabled
+                className="h-12 bg-muted/30 border-border/50"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="displayName" className="text-sm font-medium">Display Name</Label>
+              <Input
+                id="displayName"
+                type="text"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                className="h-12 bg-muted/50 border-border/50 focus:border-primary transition-colors"
+              />
+            </div>
+
             <Button
-              onClick={handleExportData}
-              variant="outline"
-              className="neumorph-flat neumorph-hover"
+              type="submit"
+              disabled={loading}
+              className="bg-gradient-to-r from-primary to-primary/80 premium-hover"
             >
-              Export Data (JSON)
+              {loading ? 'Saving...' : 'Save Changes'}
             </Button>
+          </form>
+        </div>
+
+        {/* Data Export Section */}
+        <div className="premium-card p-6 animate-slide-up" style={{ animationDelay: '200ms' }}>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center">
+              <Download className="w-5 h-5 text-gold" />
+            </div>
+            <h2 className="font-display text-xl font-semibold">Data Export</h2>
           </div>
 
-          <div className="neumorph p-6">
-            <h2 className="text-xl font-bold mb-4 text-destructive">Danger Zone</h2>
-            <p className="text-muted-foreground mb-4">
-              Sign out of your account
-            </p>
-            <Button
-              onClick={async () => {
-                await signOut();
-                navigate('/auth');
-              }}
-              variant="destructive"
-            >
-              Sign Out
-            </Button>
+          <p className="text-sm text-muted-foreground mb-4">
+            Download your workout history and profile information as a JSON file.
+          </p>
+          <Button
+            onClick={handleExportData}
+            variant="outline"
+            className="premium-hover"
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Export Training Data
+          </Button>
+        </div>
+
+        {/* Danger Zone */}
+        <div className="premium-card p-6 border-destructive/20 animate-slide-up" style={{ animationDelay: '300ms' }}>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-destructive/10 flex items-center justify-center">
+              <Shield className="w-5 h-5 text-destructive" />
+            </div>
+            <h2 className="font-display text-xl font-semibold text-destructive">Account</h2>
           </div>
+
+          <p className="text-sm text-muted-foreground mb-4">
+            Sign out of your account on this device.
+          </p>
+          <Button
+            onClick={async () => {
+              await signOut();
+              navigate('/auth');
+            }}
+            variant="destructive"
+          >
+            <LogOut className="w-4 h-4 mr-2" />
+            Sign Out
+          </Button>
         </div>
       </div>
     </div>

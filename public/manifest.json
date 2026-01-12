@@ -1,7 +1,7 @@
 {
-  "name": "CalX Bulls - Elite Calisthenics",
-  "short_name": "CalX Bulls",
-  "description": "Master calisthenics with elite training protocols, 120+ exercises, and AI-powered coaching",
+  "name": "Calisthenics Lifestyle - Master the Art of Movement",
+  "short_name": "Calisthenics Lifestyle",
+  "description": "Premium bodyweight training with 120+ exercises, skill progressions, and AI-powered coaching",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a1628",
@@ -27,17 +27,17 @@
     {
       "name": "Exercise Library",
       "url": "/library",
-      "description": "Browse 120+ exercises"
+      "description": "Browse 120+ premium exercises"
     },
     {
-      "name": "AI Lab",
+      "name": "AI Coach",
       "url": "/ai-lab",
-      "description": "Discover exercises with AI"
+      "description": "Intelligent training guidance"
     },
     {
       "name": "Workout Planner",
       "url": "/planner",
-      "description": "Plan your workouts"
+      "description": "Plan your training sessions"
     }
   ]
 }

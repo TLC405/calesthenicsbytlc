@@ -1,10 +1,10 @@
-/* Neumorphic Design System */
+/* Neumorphic Design System - Premium Edition */
 
 .neumorph {
-  background: hsl(var(--background));
+  background: hsl(var(--card));
   box-shadow: 
-    var(--neumorph-distance) var(--neumorph-distance) var(--neumorph-blur) hsl(var(--shadow-dark) / 0.2),
-    calc(-1 * var(--neumorph-distance)) calc(-1 * var(--neumorph-distance)) var(--neumorph-blur) hsl(var(--shadow-light) / 0.8);
+    var(--neumorph-distance) var(--neumorph-distance) var(--neumorph-blur) hsl(var(--shadow-dark) / 0.15),
+    calc(-1 * var(--neumorph-distance)) calc(-1 * var(--neumorph-distance)) var(--neumorph-blur) hsl(var(--shadow-light) / 0.9);
   border-radius: var(--radius);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -12,29 +12,53 @@
 .neumorph-inset {
   background: hsl(var(--background));
   box-shadow: 
-    inset var(--neumorph-distance) var(--neumorph-distance) var(--neumorph-blur) hsl(var(--shadow-dark) / 0.2),
-    inset calc(-1 * var(--neumorph-distance)) calc(-1 * var(--neumorph-distance)) var(--neumorph-blur) hsl(var(--shadow-light) / 0.8);
+    inset var(--neumorph-distance) var(--neumorph-distance) var(--neumorph-blur) hsl(var(--shadow-dark) / 0.12),
+    inset calc(-1 * var(--neumorph-distance)) calc(-1 * var(--neumorph-distance)) var(--neumorph-blur) hsl(var(--shadow-light) / 0.9);
   border-radius: var(--radius);
 }
 
 .neumorph-flat {
-  background: hsl(var(--background));
+  background: hsl(var(--card));
   box-shadow: 
-    4px 4px 8px hsl(var(--shadow-dark) / 0.15),
-    -4px -4px 8px hsl(var(--shadow-light) / 0.7);
+    4px 4px 8px hsl(var(--shadow-dark) / 0.1),
+    -4px -4px 8px hsl(var(--shadow-light) / 0.8);
   border-radius: var(--radius);
 }
 
 .neumorph-hover:hover {
   box-shadow: 
-    calc(var(--neumorph-distance) * 1.5) calc(var(--neumorph-distance) * 1.5) calc(var(--neumorph-blur) * 1.2) hsl(var(--shadow-dark) / 0.25),
-    calc(-1 * var(--neumorph-distance) * 1.5) calc(-1 * var(--neumorph-distance) * 1.5) calc(var(--neumorph-blur) * 1.2) hsl(var(--shadow-light) / 0.9);
+    calc(var(--neumorph-distance) * 1.5) calc(var(--neumorph-distance) * 1.5) calc(var(--neumorph-blur) * 1.2) hsl(var(--shadow-dark) / 0.18),
+    calc(-1 * var(--neumorph-distance) * 1.5) calc(-1 * var(--neumorph-distance) * 1.5) calc(var(--neumorph-blur) * 1.2) hsl(var(--shadow-light) / 0.95);
   transform: translateY(-2px);
 }
 
 .neumorph-pressed:active {
   box-shadow: 
-    inset 4px 4px 8px hsl(var(--shadow-dark) / 0.2),
-    inset -4px -4px 8px hsl(var(--shadow-light) / 0.5);
+    inset 4px 4px 8px hsl(var(--shadow-dark) / 0.15),
+    inset -4px -4px 8px hsl(var(--shadow-light) / 0.6);
   transform: translateY(1px);
+}
+
+/* Premium card with subtle gradient border */
+.neumorph-premium {
+  background: hsl(var(--card));
+  box-shadow: 
+    0 4px 20px -4px hsl(var(--shadow-dark) / 0.1),
+    0 8px 32px -8px hsl(var(--shadow-dark) / 0.1);
+  border-radius: var(--radius);
+  position: relative;
+}
+
+.neumorph-premium::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  padding: 1px;
+  background: linear-gradient(135deg, hsl(var(--gold) / 0.3), transparent, hsl(var(--primary) / 0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }

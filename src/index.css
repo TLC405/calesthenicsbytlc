@@ -2,17 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Premium Design System - Calisthenics Lifestyle
+   All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    /* TLC Color Palette */
+    /* Premium Color Palette */
     --navy: 218 64% 12%;
     --electric-blue: 211 100% 54%;
     --charcoal: 220 11% 12%;
     --white: 0 0% 100%;
+    --gold: 45 93% 47%;
+    --gold-light: 45 93% 60%;
+    --platinum: 220 10% 94%;
     
     /* Neumorphic Shadows */
     --shadow-light: 0 0% 100%;
@@ -21,7 +24,7 @@ All colors MUST be HSL.
     --neumorph-blur: 16px;
     
     /* Base colors */
-    --background: var(--white);
+    --background: var(--platinum);
     --foreground: var(--charcoal);
     
     /* Card colors */
@@ -45,8 +48,8 @@ All colors MUST be HSL.
     --muted-foreground: 218 10% 45%;
     
     /* Accent colors */
-    --accent: var(--electric-blue);
-    --accent-foreground: var(--white);
+    --accent: var(--gold);
+    --accent-foreground: var(--charcoal);
     
     /* Destructive colors */
     --destructive: 0 84% 60%;
@@ -89,7 +92,7 @@ All colors MUST be HSL.
     --muted: 218 20% 18%;
     --muted-foreground: 218 10% 65%;
     
-    --accent: var(--electric-blue);
+    --accent: var(--gold);
     --accent-foreground: var(--white);
     
     --destructive: 0 62% 50%;
@@ -119,6 +122,120 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Premium Glass Effect */
+  .glass {
+    @apply backdrop-blur-xl bg-white/10 border border-white/20;
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-xl bg-black/20 border border-white/10;
+  }
+
+  /* Premium Gradient Text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  .gradient-text-gold {
+    @apply bg-gradient-to-r from-[hsl(45,93%,47%)] to-[hsl(45,93%,60%)] bg-clip-text text-transparent;
+  }
+
+  /* Premium Card Styles */
+  .premium-card {
+    @apply relative overflow-hidden rounded-2xl bg-card;
+    box-shadow: 
+      0 4px 20px -4px hsl(var(--shadow-dark) / 0.1),
+      0 8px 32px -8px hsl(var(--shadow-dark) / 0.1);
+  }
+
+  .premium-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-50 pointer-events-none;
+  }
+
+  /* Shimmer Animation */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 0%,
+      hsl(var(--background)) 50%,
+      hsl(var(--muted)) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Premium Button Hover */
+  .premium-hover {
+    @apply transition-all duration-300;
+  }
+
+  .premium-hover:hover {
+    @apply shadow-lg -translate-y-0.5;
+    box-shadow: 0 10px 40px -10px hsl(var(--primary) / 0.3);
+  }
+
+  /* Gold Accent */
+  .gold-glow {
+    box-shadow: 0 0 20px hsl(var(--gold) / 0.3);
+  }
+
+  /* Fade In Animation */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+}
+
+@layer utilities {
+  /* Stats/Numbers styling */
+  .font-stats {
+    font-family: 'Space Grotesk', monospace;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 5px hsl(var(--primary) / 0.5); }
+  50% { box-shadow: 0 0 20px hsl(var(--primary) / 0.8); }
 }
