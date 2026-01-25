@@ -3,7 +3,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { useEffect } from 'react';
 import { Sparkles, ArrowRight } from 'lucide-react';
-import logo from '@/assets/logo.jfif';
+import logo from '@/assets/logo.png';
 import '@/styles/neumorph.css';
 
 export default function Index() {
@@ -24,21 +24,21 @@ export default function Index() {
           <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-primary/20 rounded-3xl blur-xl" />
           <img 
             src={logo} 
-            alt="Calisthenics Lifestyle" 
+            alt="TLC's Workout" 
             className="relative w-32 h-32 object-contain rounded-2xl shadow-lg"
           />
         </div>
 
         {/* Premium Title */}
         <h1 className="font-display text-5xl md:text-6xl font-bold mb-4">
-          <span className="gradient-text">Calisthenics</span>
+          <span className="gradient-text">TLC's</span>
           <br />
-          <span className="text-foreground">Lifestyle</span>
+          <span className="text-foreground">Workout</span>
         </h1>
 
         {/* Tagline */}
         <p className="text-xl text-muted-foreground mb-2 font-light tracking-wide">
-          Master the Art of Movement
+          Master Your Training
         </p>
         
         {/* Subtitle with gold accent */}

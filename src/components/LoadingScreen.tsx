@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Sparkles } from 'lucide-react';
-import logo from '@/assets/logo.jfif';
+import logo from '@/assets/logo.png';
 
 export function LoadingScreen() {
   const [dots, setDots] = useState('');
@@ -20,7 +20,7 @@ export function LoadingScreen() {
           <div className="absolute inset-0 bg-gradient-to-br from-gold/30 to-primary/30 rounded-2xl blur-xl animate-pulse" />
           <img 
             src={logo} 
-            alt="Calisthenics Lifestyle" 
+            alt="TLC's Workout" 
             className="relative w-24 h-24 object-contain rounded-2xl shadow-lg"
           />
         </div>
@@ -28,8 +28,8 @@ export function LoadingScreen() {
         {/* Brand */}
         <div className="text-center">
           <h1 className="font-display text-3xl font-bold mb-1">
-            <span className="gradient-text">Calisthenics</span>{' '}
-            <span className="text-foreground">Lifestyle</span>
+            <span className="gradient-text">TLC's</span>{' '}
+            <span className="text-foreground">Workout</span>
           </h1>
           <div className="flex items-center justify-center gap-2 text-muted-foreground">
             <Sparkles className="w-3 h-3 text-gold" />
