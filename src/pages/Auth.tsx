@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Sparkles } from 'lucide-react';
-import logo from '@/assets/logo.jfif';
+import logo from '@/assets/logo.png';
 import '@/styles/neumorph.css';
 
 export default function Auth() {
@@ -39,7 +39,7 @@ export default function Auth() {
         });
       } else if (isSignUp) {
         toast({
-          title: 'Welcome to Calisthenics Lifestyle',
+          title: "Welcome to TLC's Workout",
           description: 'Your account has been created. Start your journey!',
         });
       }
@@ -63,13 +63,13 @@ export default function Auth() {
             <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-primary/20 rounded-2xl blur-lg" />
             <img 
               src={logo} 
-              alt="Calisthenics Lifestyle" 
+              alt="TLC's Workout" 
               className="relative w-20 h-20 object-contain rounded-xl mx-auto"
             />
           </div>
           <h1 className="font-display text-2xl font-bold mb-1">
-            <span className="gradient-text">Calisthenics</span>{' '}
-            <span className="text-foreground">Lifestyle</span>
+            <span className="gradient-text">TLC's</span>{' '}
+            <span className="text-foreground">Workout</span>
           </h1>
           <div className="flex items-center justify-center gap-2 text-muted-foreground">
             <Sparkles className="w-3 h-3 text-gold" />
@@ -151,7 +151,7 @@ export default function Auth() {
         {/* Bottom accent */}
         <div className="mt-8 pt-6 border-t border-border/50 text-center">
           <p className="text-xs text-muted-foreground tracking-widest uppercase">
-            Master the Art of Movement
+            Master Your Training
           </p>
         </div>
       </div>

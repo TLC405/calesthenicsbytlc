@@ -80,7 +80,7 @@ export default function Settings() {
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'calisthenics-lifestyle-data.json';
+    link.download = 'tlc-workout-data.json';
     link.click();
 
     toast({

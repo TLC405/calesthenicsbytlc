@@ -9,7 +9,7 @@ import { QuickStats } from '@/components/Dashboard/QuickStats';
 import { TodayFocus } from '@/components/Dashboard/TodayFocus';
 import { XPBadge } from '@/components/Gamification/XPBadge';
 import { format, startOfWeek, endOfWeek, parseISO, isToday } from 'date-fns';
-import logo from '@/assets/logo.jfif';
+import logo from '@/assets/logo.png';
 import '@/styles/neumorph.css';
 
 const motivationalQuotes = [
@@ -95,14 +95,14 @@ export default function Dashboard() {
                 <div className="absolute inset-0 bg-gradient-to-br from-gold/30 to-primary/30 rounded-xl blur-lg" />
                 <img 
                   src={logo} 
-                  alt="Calisthenics Lifestyle" 
+                  alt="TLC's Workout" 
                   className="relative w-14 h-14 object-contain rounded-xl"
                 />
               </div>
               <div>
                 <h1 className="font-display text-2xl md:text-3xl font-bold">
-                  <span className="gradient-text">Calisthenics</span>{' '}
-                  <span className="text-foreground">Lifestyle</span>
+                  <span className="gradient-text">TLC's</span>{' '}
+                  <span className="text-foreground">Workout</span>
                 </h1>
                 <p className="text-sm text-muted-foreground">
                   {user ? `Welcome back, ${profile?.display_name || 'Athlete'}` : 'Start your journey'}
