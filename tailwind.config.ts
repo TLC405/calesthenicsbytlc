@@ -19,7 +19,7 @@ export default {
   				'serif'
   			],
   			sans: [
-  				'Montserrat',
+  				'Space Grotesk',
   				'ui-sans-serif',
   				'system-ui',
   				'-apple-system',
@@ -32,7 +32,7 @@ export default {
   				'sans-serif'
   			],
   			mono: [
-  				'IBM Plex Mono',
+  				'Space Mono',
   				'ui-monospace',
   				'SFMono-Regular',
   				'Menlo',
@@ -43,7 +43,7 @@ export default {
   				'monospace'
   			],
   			serif: [
-  				'Cormorant Garamond',
+  				'Lora',
   				'ui-serif',
   				'Georgia',
   				'Cambria',
@@ -123,7 +123,7 @@ export default {
   					height: '0'
   				}
   			},
-  			'shimmer': {
+  			shimmer: {
   				'0%': {
   					backgroundPosition: '-200% 0'
   				},
@@ -131,7 +131,7 @@ export default {
   					backgroundPosition: '200% 0'
   				}
   			},
-  			'float': {
+  			float: {
   				'0%, 100%': {
   					transform: 'translateY(0)'
   				},
@@ -181,8 +181,8 @@ export default {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
-  			'shimmer': 'shimmer 1.5s infinite',
-  			'float': 'float 3s ease-in-out infinite',
+  			shimmer: 'shimmer 1.5s infinite',
+  			float: 'float 3s ease-in-out infinite',
   			'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
   			'fade-in': 'fade-in 0.5s ease-out',
   			'slide-up': 'slide-up 0.5s ease-out',
