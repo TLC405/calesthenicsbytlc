@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Sparkles } from 'lucide-react';
-import logo from '@/assets/logo.png';
+
 
 export function LoadingScreen() {
   const [dots, setDots] = useState('');
@@ -19,7 +19,7 @@ export function LoadingScreen() {
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-br from-gold/30 to-primary/30 rounded-2xl blur-xl animate-pulse" />
           <img 
-            src={logo} 
+            src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png" 
             alt="TLC's Workout" 
             className="relative w-24 h-24 object-contain rounded-2xl shadow-lg"
           />

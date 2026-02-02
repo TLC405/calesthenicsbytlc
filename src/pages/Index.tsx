@@ -3,7 +3,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { useEffect } from 'react';
 import { Sparkles, ArrowRight } from 'lucide-react';
-import logo from '@/assets/logo.png';
+
 import '@/styles/neumorph.css';
 
 export default function Index() {
@@ -23,7 +23,7 @@ export default function Index() {
         <div className="relative inline-block mb-8">
           <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-primary/20 rounded-3xl blur-xl" />
           <img 
-            src={logo} 
+            src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png" 
             alt="TLC's Workout" 
             className="relative w-32 h-32 object-contain rounded-2xl shadow-lg"
           />
