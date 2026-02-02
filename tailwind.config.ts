@@ -13,45 +13,39 @@ export default {
   		}
   	},
   	extend: {
-  		fontFamily: {
-  			display: [
-  				'Playfair Display',
-  				'serif'
-  			],
-  			sans: [
-  				'Space Grotesk',
-  				'ui-sans-serif',
-  				'system-ui',
-  				'-apple-system',
-  				'BlinkMacSystemFont',
-  				'Segoe UI',
-  				'Roboto',
-  				'Helvetica Neue',
-  				'Arial',
-  				'Noto Sans',
-  				'sans-serif'
-  			],
-  			mono: [
-  				'Space Mono',
-  				'ui-monospace',
-  				'SFMono-Regular',
-  				'Menlo',
-  				'Monaco',
-  				'Consolas',
-  				'Liberation Mono',
-  				'Courier New',
-  				'monospace'
-  			],
-  			serif: [
-  				'Lora',
-  				'ui-serif',
-  				'Georgia',
-  				'Cambria',
-  				'Times New Roman',
-  				'Times',
-  				'serif'
-  			]
-  		},
+		fontFamily: {
+			display: [
+				'Space Grotesk',
+				'ui-sans-serif',
+				'system-ui',
+				'-apple-system',
+				'BlinkMacSystemFont',
+				'sans-serif'
+			],
+			sans: [
+				'Inter',
+				'ui-sans-serif',
+				'system-ui',
+				'-apple-system',
+				'BlinkMacSystemFont',
+				'Segoe UI',
+				'Roboto',
+				'Helvetica Neue',
+				'Arial',
+				'Noto Sans',
+				'sans-serif'
+			],
+			mono: [
+				'ui-monospace',
+				'SFMono-Regular',
+				'Menlo',
+				'Monaco',
+				'Consolas',
+				'Liberation Mono',
+				'Courier New',
+				'monospace'
+			]
+		},
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
