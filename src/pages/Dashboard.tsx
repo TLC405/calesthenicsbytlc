@@ -85,7 +85,7 @@ export default function Dashboard() {
               <div>
                 <h1 className="font-display text-2xl md:text-3xl font-bold">
                   <span className="gradient-text">TLC's</span>{' '}
-                  <span className="text-foreground">Workout</span>
+                  <span className="text-foreground">Hybrid</span>
                 </h1>
                 <p className="text-sm text-muted-foreground">
                   {user ? `Welcome back, ${profile?.display_name || 'Athlete'}` : 'Start your journey'}
