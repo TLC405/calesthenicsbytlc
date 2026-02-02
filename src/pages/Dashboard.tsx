@@ -9,7 +9,7 @@ import { QuickStats } from '@/components/Dashboard/QuickStats';
 import { TodayFocus } from '@/components/Dashboard/TodayFocus';
 import { XPBadge } from '@/components/Gamification/XPBadge';
 import { format, startOfWeek, endOfWeek, parseISO, isToday } from 'date-fns';
-import logo from '@/assets/logo.png';
+
 import '@/styles/neumorph.css';
 const motivationalQuotes = ["Every rep brings you closer to mastery.", "Consistency beats intensity.", "Your body can stand almost anything. It's your mind you have to convince.", "Progress, not perfection.", "The only bad workout is the one that didn't happen."];
 export default function Dashboard() {
