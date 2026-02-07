@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Sparkles } from 'lucide-react';
-import logo from '@/assets/logo.png';
+const logo = '/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png';
 import '@/styles/neumorph.css';
 
 export default function Auth() {
