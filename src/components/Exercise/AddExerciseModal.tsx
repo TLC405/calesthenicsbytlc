@@ -37,7 +37,7 @@ const muscles = [
 
 const equipmentOptions = [
   'None (Bodyweight)', 'Pull-up Bar', 'Parallel Bars', 'Rings',
-  'Resistance Bands', 'Weight Vest', 'Parallettes', 'Ab Wheel'
+  'Resistance Bands', 'Weight Vest', 'Parallettes'
 ];
 
 const exerciseSchema = z.object({
