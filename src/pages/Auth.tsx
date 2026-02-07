@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Sparkles } from 'lucide-react';
+import { Dumbbell, Lock, Mail, User } from 'lucide-react';
+
 const logo = '/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png';
-import '@/styles/neumorph.css';
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -40,7 +40,7 @@ export default function Auth() {
       } else if (isSignUp) {
         toast({
           title: "Welcome to TLC's Workout",
-          description: 'Your account has been created. Start your journey!',
+          description: 'Check your email to confirm your account.',
         });
       }
     } catch (error: any) {
@@ -55,104 +55,177 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="premium-card p-8 w-full max-w-md animate-scale-in">
-        {/* Header */}
-        <div className="mb-8 text-center">
-          <div className="relative inline-block mb-4">
-            <div className="absolute inset-0 bg-gradient-to-br from-gold/20 to-primary/20 rounded-2xl blur-lg" />
+    <div className="min-h-screen bg-background flex">
+      {/* Left Panel - Branding */}
+      <div className="hidden lg:flex lg:w-1/2 bg-foreground relative overflow-hidden">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--muted)/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--muted)/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        
+        <div className="relative z-10 flex flex-col justify-between p-12 w-full">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
             <img 
               src={logo} 
               alt="TLC's Workout" 
-              className="relative w-20 h-20 object-contain rounded-xl mx-auto"
+              className="w-12 h-12 object-contain"
             />
+            <div>
+              <h1 className="font-display text-xl font-bold text-background">
+                TLC's Hybrid
+              </h1>
+              <p className="text-xs text-background/60 uppercase tracking-widest">
+                Training System
+              </p>
+            </div>
           </div>
-          <h1 className="font-display text-2xl font-bold mb-1">
-            <span className="gradient-text">TLC's</span>{' '}
-            <span className="text-foreground">Workout</span>
-          </h1>
-          <div className="flex items-center justify-center gap-2 text-muted-foreground">
-            <Sparkles className="w-3 h-3 text-gold" />
-            <p className="text-sm">
-              {isSignUp ? 'Begin your transformation' : 'Welcome back, athlete'}
-            </p>
-            <Sparkles className="w-3 h-3 text-gold" />
-          </div>
-        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {isSignUp && (
+          {/* Center content */}
+          <div className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="displayName" className="text-sm font-medium">
-                Display Name
+              <p className="text-background/60 text-sm uppercase tracking-widest">
+                Master Your Training
+              </p>
+              <h2 className="font-display text-4xl font-bold text-background leading-tight">
+                Build Strength.<br />
+                Track Progress.<br />
+                Achieve Goals.
+              </h2>
+            </div>
+            
+            <div className="flex gap-8 pt-4">
+              <div className="space-y-1">
+                <p className="font-display text-3xl font-bold text-background">120+</p>
+                <p className="text-background/60 text-sm">Exercises</p>
+              </div>
+              <div className="space-y-1">
+                <p className="font-display text-3xl font-bold text-background">6</p>
+                <p className="text-background/60 text-sm">Categories</p>
+              </div>
+              <div className="space-y-1">
+                <p className="font-display text-3xl font-bold text-background">∞</p>
+                <p className="text-background/60 text-sm">Potential</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <p className="text-background/40 text-xs">
+            © 2025 TLC's Hybrid Training. All rights reserved.
+          </p>
+        </div>
+      </div>
+
+      {/* Right Panel - Auth Form */}
+      <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
+        <div className="w-full max-w-md space-y-8">
+          {/* Mobile Logo */}
+          <div className="lg:hidden flex items-center justify-center gap-3 mb-8">
+            <img 
+              src={logo} 
+              alt="TLC's Workout" 
+              className="w-12 h-12 object-contain"
+            />
+            <div>
+              <h1 className="font-display text-xl font-bold">TLC's Hybrid</h1>
+              <p className="text-xs text-muted-foreground uppercase tracking-widest">
+                Training System
+              </p>
+            </div>
+          </div>
+
+          {/* Header */}
+          <div className="space-y-2">
+            <h2 className="font-display text-2xl font-bold">
+              {isSignUp ? 'Create Account' : 'Welcome Back'}
+            </h2>
+            <p className="text-muted-foreground">
+              {isSignUp 
+                ? 'Start your training journey today' 
+                : 'Sign in to continue your training'}
+            </p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {isSignUp && (
+              <div className="space-y-2">
+                <Label htmlFor="displayName" className="text-sm font-medium flex items-center gap-2">
+                  <User className="w-4 h-4" />
+                  Display Name
+                </Label>
+                <Input
+                  id="displayName"
+                  type="text"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  placeholder="Your name"
+                  className="h-12 bg-secondary border-2 border-border focus:border-foreground transition-colors"
+                />
+              </div>
+            )}
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-medium flex items-center gap-2">
+                <Mail className="w-4 h-4" />
+                Email
               </Label>
               <Input
-                id="displayName"
-                type="text"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                placeholder="Your name"
-                className="h-12 bg-muted/50 border-border/50 focus:border-primary transition-colors"
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                required
+                className="h-12 bg-secondary border-2 border-border focus:border-foreground transition-colors"
               />
             </div>
-          )}
 
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-sm font-medium">
-              Email
-            </Label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              required
-              className="h-12 bg-muted/50 border-border/50 focus:border-primary transition-colors"
-            />
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-sm font-medium flex items-center gap-2">
+                <Lock className="w-4 h-4" />
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                minLength={6}
+                className="h-12 bg-secondary border-2 border-border focus:border-foreground transition-colors"
+              />
+            </div>
+
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full h-12 font-semibold text-base shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow)] transition-shadow"
+            >
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <Dumbbell className="w-4 h-4 animate-pulse" />
+                  Loading...
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <Dumbbell className="w-4 h-4" />
+                  {isSignUp ? 'Create Account' : 'Sign In'}
+                </span>
+              )}
+            </Button>
+          </form>
+
+          {/* Toggle */}
+          <div className="text-center pt-4 border-t border-border">
+            <button
+              onClick={() => setIsSignUp(!isSignUp)}
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {isSignUp
+                ? 'Already have an account? Sign in'
+                : "Don't have an account? Sign up"}
+            </button>
           </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="password" className="text-sm font-medium">
-              Password
-            </Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-              minLength={6}
-              className="h-12 bg-muted/50 border-border/50 focus:border-primary transition-colors"
-            />
-          </div>
-
-          <Button
-            type="submit"
-            disabled={loading}
-            className="w-full h-12 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary font-semibold premium-hover"
-          >
-            {loading ? 'Loading...' : isSignUp ? 'Create Account' : 'Sign In'}
-          </Button>
-        </form>
-
-        <div className="mt-6 text-center">
-          <button
-            onClick={() => setIsSignUp(!isSignUp)}
-            className="text-sm text-muted-foreground hover:text-primary transition-colors"
-          >
-            {isSignUp
-              ? 'Already have an account? Sign in'
-              : "Don't have an account? Sign up"}
-          </button>
-        </div>
-
-        {/* Bottom accent */}
-        <div className="mt-8 pt-6 border-t border-border/50 text-center">
-          <p className="text-xs text-muted-foreground tracking-widest uppercase">
-            Master Your Training
-          </p>
         </div>
       </div>
     </div>
