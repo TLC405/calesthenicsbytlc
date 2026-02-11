@@ -2,6 +2,7 @@ import { Play, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { DifficultyBadge } from './DifficultyBadge';
+import { cn } from '@/lib/utils';
 
 interface Exercise {
   id: string;
@@ -30,13 +31,13 @@ const getYouTubeVideoId = (url: string): string | null => {
   return match && match[2].length === 11 ? match[2] : null;
 };
 
-const categoryColors: Record<string, string> = {
-  'Push': 'bg-red-500/20 text-red-600 border-red-500/30',
-  'Pull': 'bg-blue-500/20 text-blue-600 border-blue-500/30',
-  'Legs': 'bg-green-500/20 text-green-600 border-green-500/30',
-  'Core': 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30',
-  'Skills': 'bg-purple-500/20 text-purple-600 border-purple-500/30',
-  'Mobility': 'bg-teal-500/20 text-teal-600 border-teal-500/30',
+const categoryBorder: Record<string, string> = {
+  'Push': 'border-l-red-500',
+  'Pull': 'border-l-blue-500',
+  'Legs': 'border-l-green-500',
+  'Core': 'border-l-orange-500',
+  'Skills': 'border-l-purple-500',
+  'Mobility': 'border-l-teal-500',
 };
 
 export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: ExerciseCardProps) {
@@ -47,94 +48,91 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
 
   return (
     <div 
-      className="premium-card overflow-hidden group cursor-pointer hover:shadow-xl transition-all duration-300 animate-fade-in"
+      className={cn(
+        "group cursor-pointer rounded-xl border border-border bg-card overflow-hidden transition-all duration-200 hover:border-foreground/20 hover:shadow-lg border-l-[3px]",
+        categoryBorder[exercise.category] || 'border-l-muted'
+      )}
       onClick={() => onViewDetails(exercise)}
     >
-      {/* Thumbnail/Image Section */}
+      {/* Thumbnail */}
       <div className="aspect-video bg-muted relative overflow-hidden">
         {thumbnailUrl ? (
           <>
             <img 
               src={thumbnailUrl} 
               alt={exercise.name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
               onError={(e) => {
                 if (videoId) {
                   const target = e.target as HTMLImageElement;
                   if (target.src.includes('mqdefault')) {
                     target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                  } else if (target.src.includes('hqdefault')) {
-                    target.src = `https://img.youtube.com/vi/${videoId}/default.jpg`;
                   }
                 }
               }}
             />
             {videoId && (
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg transform scale-90 group-hover:scale-100 transition-transform">
-                  <Play className="w-6 h-6 text-foreground ml-0.5" fill="currentColor" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-background/90 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 transition-all duration-300">
+                  <Play className="w-5 h-5 text-foreground ml-0.5" fill="currentColor" />
                 </div>
               </div>
             )}
           </>
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted to-muted/50">
-            <span className="text-5xl font-display font-bold text-muted-foreground/20">
+          <div className="w-full h-full flex items-center justify-center bg-secondary">
+            <span className="text-4xl font-display font-bold text-muted-foreground/15">
               {exercise.name.charAt(0)}
             </span>
           </div>
         )}
         
-        {/* Category Badge */}
-        <Badge 
-          className={`absolute top-3 left-3 ${categoryColors[exercise.category] || 'bg-muted'} font-medium`}
-        >
-          {exercise.category}
-        </Badge>
-
-        {/* Difficulty Badge */}
+        {/* Difficulty */}
         {exercise.difficulty_level && (
-          <div className="absolute top-3 right-3">
-            <DifficultyBadge level={exercise.difficulty_level} size="sm" />
+          <div className="absolute top-2 right-2">
+            <DifficultyBadge level={exercise.difficulty_level} size="sm" showLabel={false} />
           </div>
         )}
       </div>
 
-      {/* Content Section */}
-      <div className="p-4">
-        <h3 className="font-display font-semibold text-lg mb-2 group-hover:text-primary transition-colors line-clamp-1">
-          {exercise.name}
-        </h3>
+      {/* Content */}
+      <div className="p-4 space-y-3">
+        <div>
+          <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider mb-1">
+            {exercise.category}
+          </p>
+          <h3 className="font-display font-semibold text-sm leading-tight line-clamp-1">
+            {exercise.name}
+          </h3>
+        </div>
         
-        {/* Muscle Tags */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
+        {/* Muscles */}
+        <div className="flex flex-wrap gap-1">
           {exercise.primary_muscles.slice(0, 3).map((muscle) => (
-            <span
-              key={muscle}
-              className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium"
-            >
+            <span key={muscle} className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground font-medium">
               {muscle}
             </span>
           ))}
           {exercise.primary_muscles.length > 3 && (
-            <span className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground">
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">
               +{exercise.primary_muscles.length - 3}
             </span>
           )}
         </div>
 
-        {/* Quick Actions */}
+        {/* Add button */}
         {onAddToWorkout && (
           <Button 
             size="sm" 
             variant="outline"
-            className="w-full premium-hover"
+            className="w-full h-8 text-xs"
             onClick={(e) => {
               e.stopPropagation();
               onAddToWorkout(exercise);
             }}
           >
-            <Plus className="w-4 h-4 mr-1" />
+            <Plus className="w-3 h-3 mr-1" />
             Add to Workout
           </Button>
         )}

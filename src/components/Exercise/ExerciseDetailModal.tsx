@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { VideoPlayer } from './VideoPlayer';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { DifficultyBadge } from './DifficultyBadge';
+import { cn } from '@/lib/utils';
 
 interface Exercise {
   id: string;
@@ -14,6 +16,7 @@ interface Exercise {
   secondary_muscles: string[];
   equipment: string[];
   cues: any;
+  difficulty_level?: number | null;
   youtube_url?: string | null;
   instagram_url?: string | null;
   image_url?: string | null;
@@ -26,15 +29,6 @@ interface ExerciseDetailModalProps {
   onAddToWorkout?: (exercise: Exercise) => void;
 }
 
-const categoryColors: Record<string, string> = {
-  'Push': 'bg-red-500/20 text-red-400 border-red-500/30',
-  'Pull': 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-  'Legs': 'bg-green-500/20 text-green-400 border-green-500/30',
-  'Core': 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-  'Skills': 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-  'Mobility': 'bg-teal-500/20 text-teal-400 border-teal-500/30',
-};
-
 export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }: ExerciseDetailModalProps) {
   if (!exercise) return null;
 
@@ -46,59 +40,57 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
-      <DialogContent className="max-w-2xl max-h-[90vh] p-0 overflow-hidden">
+      <DialogContent className="max-w-2xl max-h-[90vh] p-0 overflow-hidden border-border">
         <ScrollArea className="max-h-[90vh]">
-          <div className="p-6">
-            <DialogHeader className="mb-4">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <Badge className={`mb-2 ${categoryColors[exercise.category] || 'bg-muted'}`}>
-                    {exercise.category}
-                  </Badge>
-                  <DialogTitle className="text-2xl">{exercise.name}</DialogTitle>
-                </div>
+          <div className="p-6 space-y-6">
+            <DialogHeader>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
+                  {exercise.category}
+                </span>
+                {exercise.difficulty_level && (
+                  <>
+                    <span className="text-muted-foreground/30">·</span>
+                    <DifficultyBadge level={exercise.difficulty_level} size="sm" />
+                  </>
+                )}
               </div>
+              <DialogTitle className="text-xl font-display">{exercise.name}</DialogTitle>
             </DialogHeader>
 
-            {/* Video Player */}
-            <div className="mb-6">
-              <VideoPlayer 
-                youtubeUrl={exercise.youtube_url} 
-                instagramUrl={exercise.instagram_url}
-                title={exercise.name}
-              />
-            </div>
+            {/* Video */}
+            <VideoPlayer 
+              youtubeUrl={exercise.youtube_url} 
+              instagramUrl={exercise.instagram_url}
+              title={exercise.name}
+            />
 
             {/* Muscle Groups */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="neumorph-inset rounded-lg p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <Target className="w-4 h-4 text-primary" />
-                  <h4 className="font-semibold text-sm">Primary Muscles</h4>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="rounded-lg border border-border p-4">
+                <div className="flex items-center gap-2 mb-2.5">
+                  <Target className="w-3.5 h-3.5 text-foreground" />
+                  <h4 className="text-xs font-semibold uppercase tracking-wider">Primary</h4>
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {exercise.primary_muscles.map((muscle) => (
-                    <Badge key={muscle} variant="secondary" className="capitalize">
-                      {muscle}
-                    </Badge>
+                    <Badge key={muscle} variant="secondary" className="text-[10px] capitalize">{muscle}</Badge>
                   ))}
                 </div>
               </div>
               
-              <div className="neumorph-inset rounded-lg p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <Target className="w-4 h-4 text-muted-foreground" />
-                  <h4 className="font-semibold text-sm">Secondary Muscles</h4>
+              <div className="rounded-lg border border-border p-4">
+                <div className="flex items-center gap-2 mb-2.5">
+                  <Target className="w-3.5 h-3.5 text-muted-foreground" />
+                  <h4 className="text-xs font-semibold uppercase tracking-wider">Secondary</h4>
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {exercise.secondary_muscles.length > 0 ? (
                     exercise.secondary_muscles.map((muscle) => (
-                      <Badge key={muscle} variant="outline" className="capitalize">
-                        {muscle}
-                      </Badge>
+                      <Badge key={muscle} variant="outline" className="text-[10px] capitalize">{muscle}</Badge>
                     ))
                   ) : (
-                    <span className="text-sm text-muted-foreground">None</span>
+                    <span className="text-xs text-muted-foreground">None</span>
                   )}
                 </div>
               </div>
@@ -106,16 +98,14 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
 
             {/* Equipment */}
             {exercise.equipment.length > 0 && (
-              <div className="neumorph-inset rounded-lg p-4 mb-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <Dumbbell className="w-4 h-4 text-primary" />
-                  <h4 className="font-semibold text-sm">Equipment</h4>
+              <div className="rounded-lg border border-border p-4">
+                <div className="flex items-center gap-2 mb-2.5">
+                  <Dumbbell className="w-3.5 h-3.5 text-foreground" />
+                  <h4 className="text-xs font-semibold uppercase tracking-wider">Equipment</h4>
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {exercise.equipment.map((item) => (
-                    <Badge key={item} variant="outline" className="capitalize">
-                      {item}
-                    </Badge>
+                    <Badge key={item} variant="outline" className="text-[10px] capitalize">{item}</Badge>
                   ))}
                 </div>
               </div>
@@ -123,35 +113,32 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
 
             {/* Form Cues */}
             {cues.length > 0 && (
-              <div className="neumorph-inset rounded-lg p-4 mb-6">
+              <div className="rounded-lg border border-border p-4">
                 <div className="flex items-center gap-2 mb-3">
-                  <Info className="w-4 h-4 text-primary" />
-                  <h4 className="font-semibold text-sm">Form Cues</h4>
+                  <Info className="w-3.5 h-3.5 text-foreground" />
+                  <h4 className="text-xs font-semibold uppercase tracking-wider">Form Cues</h4>
                 </div>
-                <ul className="space-y-2">
+                <ol className="space-y-2">
                   {cues.map((cue: string, index: number) => (
-                    <li key={index} className="flex items-start gap-2 text-sm">
-                      <span className="w-5 h-5 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 text-xs font-medium">
+                    <li key={index} className="flex items-start gap-2.5 text-sm">
+                      <span className="w-5 h-5 rounded-full bg-secondary text-foreground flex items-center justify-center flex-shrink-0 text-[10px] font-mono font-bold">
                         {index + 1}
                       </span>
-                      <span>{cue}</span>
+                      <span className="text-muted-foreground leading-relaxed">{cue}</span>
                     </li>
                   ))}
-                </ul>
+                </ol>
               </div>
             )}
 
-            {/* Add to Workout Button */}
+            {/* Add to Workout */}
             {onAddToWorkout && (
               <Button 
-                className="w-full neumorph" 
+                className="w-full" 
                 size="lg"
-                onClick={() => {
-                  onAddToWorkout(exercise);
-                  onClose();
-                }}
+                onClick={() => { onAddToWorkout(exercise); onClose(); }}
               >
-                <Plus className="w-5 h-5 mr-2" />
+                <Plus className="w-4 h-4 mr-2" />
                 Add to Today's Workout
               </Button>
             )}
