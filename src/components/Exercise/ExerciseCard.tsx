@@ -68,6 +68,11 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
                   const target = e.target as HTMLImageElement;
                   if (target.src.includes('mqdefault')) {
                     target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                  } else if (target.src.includes('hqdefault')) {
+                    target.src = `https://img.youtube.com/vi/${videoId}/sddefault.jpg`;
+                  } else {
+                    // All YouTube thumbnails failed — hide and show placeholder
+                    target.style.display = 'none';
                   }
                 }
               }}
@@ -81,9 +86,12 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
             )}
           </>
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-secondary">
-            <span className="text-4xl font-display font-bold text-muted-foreground/15">
+              <div className="w-full h-full flex items-center justify-center bg-secondary relative">
+            <span className="text-4xl font-display font-bold text-muted-foreground/10">
               {exercise.name.charAt(0)}
+            </span>
+            <span className="absolute bottom-2 right-2 text-[8px] font-mono text-muted-foreground/30 uppercase tracking-wider">
+              {exercise.category}
             </span>
           </div>
         )}
