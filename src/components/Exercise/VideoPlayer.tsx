@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Play, ExternalLink } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -10,7 +10,6 @@ interface VideoPlayerProps {
   thumbnailMode?: boolean;
   startSec?: number;
   privacyEnhanced?: boolean;
-  showExternalLink?: boolean;
   className?: string;
 }
 
@@ -34,6 +33,8 @@ function buildEmbedSrc(youtubeId: string, startSec?: number, privacyEnhanced = t
     modestbranding: "1",
     playsinline: "1",
     rel: "0",
+    showinfo: "0",
+    controls: "1",
   });
   
   if (autoplay) params.set("autoplay", "1");
@@ -49,15 +50,13 @@ export function VideoPlayer({
   thumbnailMode = false,
   startSec,
   privacyEnhanced = true,
-  showExternalLink = true,
   className
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = React.useState(false);
 
-  // No video available state
   if (!youtubeUrl && !instagramUrl) {
     return (
-      <div className={cn("relative w-full overflow-hidden rounded-xl border border-border/50 shadow-sm bg-muted/50", className)}>
+      <div className={cn("relative w-full overflow-hidden rounded-xl border border-border/50 bg-muted/50", className)}>
         <div className="aspect-video flex items-center justify-center">
           <p className="text-muted-foreground text-sm">No video available</p>
         </div>
@@ -65,13 +64,12 @@ export function VideoPlayer({
     );
   }
 
-  // YouTube handling
   if (youtubeUrl) {
     const videoId = getYouTubeVideoId(youtubeUrl);
     
     if (!videoId) {
       return (
-        <div className={cn("relative w-full overflow-hidden rounded-xl border border-border/50 shadow-sm bg-muted/50", className)}>
+        <div className={cn("relative w-full overflow-hidden rounded-xl border border-border/50 bg-muted/50", className)}>
           <div className="aspect-video flex items-center justify-center">
             <p className="text-muted-foreground text-sm">Invalid video URL</p>
           </div>
@@ -79,14 +77,10 @@ export function VideoPlayer({
       );
     }
 
-    // Parse start time from URL if not provided as prop
     const effectiveStartSec = startSec ?? getStartTime(youtubeUrl);
-    
-    // High quality thumbnail (try maxres first, fallback to hq)
     const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
     const fallbackThumbnail = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
-    // Thumbnail-first, click-to-load pattern (recommended for grids/lists)
     if (thumbnailMode && !isPlaying) {
       return (
         <div className={cn("relative w-full overflow-hidden rounded-xl border border-border/50 shadow-lg bg-background", className)}>
@@ -94,12 +88,6 @@ export function VideoPlayer({
             <button
               type="button"
               onClick={() => setIsPlaying(true)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  setIsPlaying(true);
-                }
-              }}
               className="group relative h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-xl"
               aria-label={`Play tutorial: ${title}`}
             >
@@ -112,14 +100,20 @@ export function VideoPlayer({
                   (e.target as HTMLImageElement).src = fallbackThumbnail;
                 }}
               />
-              {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent rounded-xl transition-opacity group-hover:opacity-90" />
               
               {/* Play button */}
               <div className="absolute inset-0 grid place-items-center">
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary/90 backdrop-blur-sm flex items-center justify-center shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-focus-visible:scale-110">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary/90 backdrop-blur-sm flex items-center justify-center shadow-xl transition-all duration-300 group-hover:scale-110 group-hover:bg-primary">
                   <Play className="w-7 h-7 md:w-8 md:h-8 text-primary-foreground ml-1" fill="currentColor" />
                 </div>
+              </div>
+
+              {/* tlcTV brand badge */}
+              <div className="absolute top-3 left-3">
+                <span className="px-2 py-1 bg-black/60 backdrop-blur-sm rounded text-[10px] font-mono font-bold text-white/90 tracking-wider uppercase">
+                  tlcTV
+                </span>
               </div>
 
               {/* Title overlay */}
@@ -130,32 +124,25 @@ export function VideoPlayer({
               </div>
             </button>
           </div>
-
-          {/* External link option */}
-          {showExternalLink && (
-            <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-              <a
-                href={youtubeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-2.5 py-1.5 bg-black/60 backdrop-blur-sm rounded-lg text-white text-xs hover:bg-black/80 transition-colors"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ExternalLink className="w-3 h-3" />
-                YouTube
-              </a>
-            </div>
-          )}
         </div>
       );
     }
 
-    // Full iframe embed (for detail pages or after click)
+    // Full iframe embed
     return (
       <div className={cn("relative w-full overflow-hidden rounded-xl border border-border/50 shadow-lg bg-background", className)}>
+        {/* tlcTV brand bar */}
+        <div className="flex items-center justify-between px-3 py-1.5 bg-secondary/80 border-b border-border/50">
+          <span className="text-[10px] font-mono font-bold text-foreground/80 tracking-wider uppercase">
+            tlcTV
+          </span>
+          <span className="text-[10px] font-mono text-muted-foreground tracking-wider">
+            {title}
+          </span>
+        </div>
         <div className="aspect-video">
           <iframe
-            className="h-full w-full rounded-xl"
+            className="h-full w-full"
             src={buildEmbedSrc(videoId, effectiveStartSec, privacyEnhanced, isPlaying)}
             title={title}
             loading="lazy"
@@ -164,21 +151,6 @@ export function VideoPlayer({
             allowFullScreen
           />
         </div>
-        
-        {/* External link for full embed */}
-        {showExternalLink && (
-          <div className="absolute top-3 right-3">
-            <a
-              href={youtubeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-2.5 py-1.5 bg-black/60 backdrop-blur-sm rounded-lg text-white text-xs hover:bg-black/80 transition-colors"
-            >
-              <ExternalLink className="w-3 h-3" />
-              YouTube
-            </a>
-          </div>
-        )}
       </div>
     );
   }
@@ -187,17 +159,21 @@ export function VideoPlayer({
   if (instagramUrl) {
     return (
       <div className={cn("relative w-full overflow-hidden rounded-xl border border-border/50 shadow-lg bg-muted/30", className)}>
+        <div className="flex items-center px-3 py-1.5 bg-secondary/80 border-b border-border/50">
+          <span className="text-[10px] font-mono font-bold text-foreground/80 tracking-wider uppercase">
+            tlcTV
+          </span>
+        </div>
         <div className="aspect-video flex flex-col items-center justify-center gap-4 p-6">
           <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 flex items-center justify-center">
             <div className="w-10 h-10 rounded-full bg-background flex items-center justify-center">
               <Play className="w-5 h-5 text-foreground ml-0.5" />
             </div>
           </div>
-          <p className="text-muted-foreground text-center text-sm">Instagram Video</p>
+          <p className="text-muted-foreground text-center text-sm">Tutorial Video</p>
           <Button variant="outline" size="sm" asChild className="gap-2">
             <a href={instagramUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="w-4 h-4" />
-              Open in Instagram
+              Watch Tutorial
             </a>
           </Button>
         </div>
