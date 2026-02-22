@@ -2,10 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
-import { Button } from '@/components/ui/button';
 import { CalendarView } from '@/components/Calendar/CalendarView';
 import { WorkoutModal } from '@/components/Workout/WorkoutModal';
-import { ArrowLeft, CalendarDays } from 'lucide-react';
 
 export default function Planner() {
   const { user } = useAuth();
@@ -30,26 +28,18 @@ export default function Planner() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Sticky header */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="text-muted-foreground">
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
+      {/* Brutalist header */}
+      <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 h-14 flex items-center gap-3">
+          <div className="w-1.5 h-6 bg-foreground" />
           <div>
-            <h1 className="font-display text-lg font-bold">Workout Planner</h1>
-            <p className="text-xs text-muted-foreground">Plan and schedule your training</p>
+            <h1 className="font-display text-sm font-bold uppercase tracking-wider leading-none">Planner</h1>
+            <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.2em]">Schedule training</p>
           </div>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-4 md:px-8 py-6">
-        <div className="flex items-center gap-2 mb-4">
-          <CalendarDays className="w-4 h-4 text-muted-foreground" />
-          <h2 className="font-display text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-            Select a Date
-          </h2>
-        </div>
         <CalendarView onDateClick={handleDateClick} workoutDates={workoutDates} />
       </main>
 

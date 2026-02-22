@@ -25,12 +25,12 @@ export function CategoryTabs({ categories, activeCategory, onCategoryChange, cou
         data-active={activeCategory === null}
         onClick={() => onCategoryChange(null)}
         className={cn(
-          "px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-150 border",
-          "border-border bg-card text-muted-foreground hover:text-foreground hover:border-foreground/20",
+          "px-3 py-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.15em] transition-all duration-100 border-2",
+          "border-foreground/20 bg-card text-muted-foreground hover:text-foreground hover:border-foreground/40",
           "data-[active=true]:bg-foreground data-[active=true]:text-background data-[active=true]:border-foreground"
         )}
       >
-        All{totalCount !== null && <span className="ml-1 font-mono opacity-60">{totalCount}</span>}
+        All{totalCount !== null && <span className="ml-1 opacity-50">{totalCount}</span>}
       </button>
       {categories.map((category) => (
         <button
@@ -38,14 +38,14 @@ export function CategoryTabs({ categories, activeCategory, onCategoryChange, cou
           data-active={activeCategory === category}
           onClick={() => onCategoryChange(category)}
           className={cn(
-            "px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-150 border",
-            "border-border bg-card text-muted-foreground hover:text-foreground hover:border-foreground/20",
+            "px-3 py-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.15em] transition-all duration-100 border-2",
+            "border-foreground/20 bg-card text-muted-foreground hover:text-foreground hover:border-foreground/40",
             categoryAccent[category] || "data-[active=true]:bg-foreground data-[active=true]:text-background"
           )}
         >
           {category}
           {counts && counts[category] !== undefined && (
-            <span className="ml-1 font-mono opacity-60">{counts[category]}</span>
+            <span className="ml-1 opacity-50">{counts[category]}</span>
           )}
         </button>
       ))}

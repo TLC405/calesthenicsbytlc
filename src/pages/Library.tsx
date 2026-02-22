@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft, Search, Plus, Sparkles } from 'lucide-react';
+import { Search, Plus, Sparkles } from 'lucide-react';
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
@@ -76,27 +76,25 @@ export default function Library() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Sticky header */}
-      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
+      {/* Brutalist header */}
+      <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background">
         <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="h-16 flex items-center justify-between">
+          <div className="h-14 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="text-muted-foreground">
-                <ArrowLeft className="h-4 w-4" />
-              </Button>
+              <div className="w-1.5 h-6 bg-foreground" />
               <div>
-                <h1 className="font-display text-lg font-bold">Exercise Library</h1>
-                <p className="text-xs text-muted-foreground">{exercises.length} exercises</p>
+                <h1 className="font-display text-sm font-bold uppercase tracking-wider leading-none">Library</h1>
+                <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.2em]">{exercises.length} exercises</p>
               </div>
             </div>
-            <div className="flex gap-2">
-              <Button variant="ghost" size="sm" onClick={() => navigate('/ai-lab')} className="text-muted-foreground">
-                <Sparkles className="h-4 w-4 mr-1.5" />
-                <span className="hidden sm:inline">AI Coach</span>
+            <div className="flex gap-1.5">
+              <Button variant="ghost" size="sm" onClick={() => navigate('/ai-lab')} className="text-muted-foreground h-8 text-[10px] font-mono uppercase tracking-wider">
+                <Sparkles className="h-3.5 w-3.5 mr-1" />
+                <span className="hidden sm:inline">AI</span>
               </Button>
               {user && (
-                <Button size="sm" onClick={() => setShowAddModal(true)}>
-                  <Plus className="h-4 w-4 mr-1.5" />
+                <Button size="sm" onClick={() => setShowAddModal(true)} className="h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground">
+                  <Plus className="h-3.5 w-3.5 mr-1" />
                   <span className="hidden sm:inline">Add</span>
                 </Button>
               )}
@@ -104,15 +102,15 @@ export default function Library() {
           </div>
 
           {/* Search & Filters */}
-          <div className="pb-4 space-y-3">
+          <div className="pb-3 space-y-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder="Search by name, muscle, or category..."
+                placeholder="Search exercises..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 h-10 bg-secondary/50 border-border"
+                className="pl-10 h-10 border-2 border-foreground/20 focus:border-foreground"
               />
             </div>
             <CategoryTabs
@@ -126,15 +124,15 @@ export default function Library() {
       </header>
 
       {/* Content */}
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-6">
+      <main className="max-w-6xl mx-auto px-4 md:px-8 py-5">
         {loading ? (
           <ExerciseCardSkeletonGrid count={9} />
         ) : filteredExercises.length === 0 ? (
           <div className="py-20 text-center">
-            <p className="text-muted-foreground text-sm">No exercises found matching your search.</p>
+            <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">No exercises found</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredExercises.map(exercise => (
               <ExerciseCard
                 key={exercise.id}
