@@ -24,22 +24,21 @@ export function CalendarView({ onDateClick, workoutDates }: CalendarViewProps) {
   const hasWorkout = (date: Date) =>
     workoutDates.some(d => isSameDay(d, date));
 
-  // Count workouts this month
   const monthWorkoutCount = workoutDates.filter(d => isSameMonth(d, currentMonth)).length;
 
   return (
-    <div className="rounded-xl border border-border bg-card">
+    <div className="border-2 border-foreground bg-card">
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+      <div className="flex items-center justify-between px-4 py-3 border-b-2 border-foreground">
         <div>
-          <h2 className="font-display text-lg font-bold text-foreground">
+          <h2 className="font-display text-sm font-bold uppercase tracking-wider">
             {format(currentMonth, 'MMMM yyyy')}
           </h2>
-          <p className="text-xs text-muted-foreground font-mono mt-0.5">
-            {monthWorkoutCount} session{monthWorkoutCount !== 1 ? 's' : ''} logged
+          <p className="text-[9px] text-muted-foreground font-mono uppercase tracking-[0.2em]">
+            {monthWorkoutCount} session{monthWorkoutCount !== 1 ? 's' : ''}
           </p>
         </div>
-        <div className="flex gap-1">
+        <div className="flex gap-0.5">
           <Button variant="ghost" size="icon" onClick={previousMonth} className="h-8 w-8 text-muted-foreground hover:text-foreground">
             <ChevronLeft className="h-4 w-4" />
           </Button>
@@ -49,18 +48,18 @@ export function CalendarView({ onDateClick, workoutDates }: CalendarViewProps) {
         </div>
       </div>
 
-      <div className="p-4">
+      <div className="p-3">
         {/* Day headers */}
         <div className="grid grid-cols-7 mb-1">
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
-            <div key={i} className="text-center text-[10px] font-mono font-semibold text-muted-foreground uppercase tracking-wider py-2">
+            <div key={i} className="text-center text-[9px] font-mono font-bold text-muted-foreground uppercase tracking-wider py-2">
               {day}
             </div>
           ))}
         </div>
 
         {/* Days grid */}
-        <div className="grid grid-cols-7 gap-1">
+        <div className="grid grid-cols-7 gap-0.5">
           {days.map(day => {
             const isCurrentMonth = isSameMonth(day, currentMonth);
             const isCurrentDay = isToday(day);
@@ -71,21 +70,16 @@ export function CalendarView({ onDateClick, workoutDates }: CalendarViewProps) {
                 key={day.toISOString()}
                 onClick={() => onDateClick(day)}
                 className={cn(
-                  "aspect-square rounded-lg text-sm font-medium transition-all duration-150 relative flex flex-col items-center justify-center",
+                  "aspect-square text-xs font-mono font-medium transition-all duration-100 relative flex items-center justify-center",
                   "hover:bg-secondary",
-                  !isCurrentMonth && "opacity-25",
+                  !isCurrentMonth && "opacity-20",
                   isCurrentDay && "ring-2 ring-foreground ring-offset-1 ring-offset-background",
-                  hasSession && "bg-foreground text-background hover:bg-foreground/90"
+                  hasSession && "bg-foreground text-background hover:bg-foreground/90 font-bold"
                 )}
               >
-                <span className={cn(
-                  "text-sm",
-                  isCurrentDay && !hasSession && "font-bold"
-                )}>
-                  {format(day, 'd')}
-                </span>
+                {format(day, 'd')}
                 {hasSession && (
-                  <span className="absolute bottom-1 w-1 h-1 rounded-full bg-gold" />
+                  <span className="absolute bottom-0.5 w-1 h-0.5 bg-destructive" />
                 )}
               </button>
             );
