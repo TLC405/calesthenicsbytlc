@@ -1,11 +1,11 @@
 {
-  "name": "TLC's Workout - Master Your Training",
-  "short_name": "TLC's Workout",
-  "description": "Premium training with 120+ exercises, skill progressions, and AI-powered coaching",
+  "name": "I GOT THE POWA",
+  "short_name": "POWA",
+  "description": "Raw power training. 120+ exercises, skill progressions, and AI coaching.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a1628",
-  "theme_color": "#1e90ff",
+  "background_color": "#000000",
+  "theme_color": "#000000",
   "orientation": "portrait-primary",
   "icons": [
     {
@@ -27,7 +27,7 @@
     {
       "name": "Exercise Library",
       "url": "/library",
-      "description": "Browse 120+ premium exercises"
+      "description": "Browse 120+ exercises"
     },
     {
       "name": "AI Coach",
