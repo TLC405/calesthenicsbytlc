@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { Settings, LogOut, Sparkles, ArrowRight, Dumbbell, Library } from 'lucide-react';
+import { Settings, LogOut, Sparkles, ArrowRight, Library, Zap, TrendingUp, Calendar } from 'lucide-react';
 import { CalendarView } from '@/components/Calendar/CalendarView';
 import { MasterSkillList } from '@/components/Dashboard/MasterSkillList';
 import { parseISO } from 'date-fns';
+import { cn } from '@/lib/utils';
 
 export default function Dashboard() {
   const { user, signOut } = useAuth();
@@ -46,18 +47,18 @@ export default function Dashboard() {
     navigate('/planner', { state: { selectedDate: date } });
   };
 
+  const streak = profile?.streak_days || 0;
+  const totalXp = profile?.total_xp || 0;
+  const level = profile?.level || 1;
+
   return (
-    <div className="min-h-screen bg-background">
-      {/* Brutalist header */}
+    <div className="min-h-screen bg-background pb-20 md:pb-0">
+      {/* Header */}
       <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background">
         <div className="max-w-6xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 border-2 border-foreground overflow-hidden">
-              <img
-                alt="I GOT THE POWA"
-                className="w-full h-full object-cover"
-                src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png"
-              />
+            <div className="w-8 h-8 border-2 border-foreground bg-[hsl(270,76%,55%)] flex items-center justify-center">
+              <Zap className="w-4 h-4 text-white" />
             </div>
             <div>
               <h1 className="font-display text-sm font-bold uppercase tracking-wider leading-none">
@@ -83,14 +84,33 @@ export default function Dashboard() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-6 space-y-6">
+      <main className="max-w-6xl mx-auto px-4 md:px-8 py-6 space-y-5">
+        {/* Stats Row */}
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            { label: 'Streak', value: `${streak}d`, color: 'bg-[hsl(25,95%,53%)]', icon: '🔥' },
+            { label: 'XP', value: totalXp.toLocaleString(), color: 'bg-[hsl(270,76%,55%)]', icon: '⚡' },
+            { label: 'Level', value: level, color: 'bg-[hsl(217,91%,60%)]', icon: '🎯' },
+          ].map(stat => (
+            <div key={stat.label} className="border-2 border-foreground p-3 relative overflow-hidden">
+              <div className={cn("absolute top-0 left-0 w-full h-1", stat.color)} />
+              <div className="text-lg font-display font-black leading-none mt-1">
+                {stat.icon} {stat.value}
+              </div>
+              <div className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em] mt-1">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
         {/* Calendar */}
         <CalendarView workoutDates={workoutDates} onDateClick={handleDateClick} />
 
-        {/* Skills */}
+        {/* Categories */}
         <section>
           <div className="flex items-center gap-2 mb-3">
-            <div className="w-1.5 h-4 bg-foreground" />
+            <div className="w-1.5 h-4 bg-[hsl(270,76%,55%)]" />
             <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em]">Categories</h2>
           </div>
           <MasterSkillList />
@@ -100,7 +120,7 @@ export default function Dashboard() {
         <section className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <button
             onClick={() => navigate('/library')}
-            className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-foreground hover:text-background transition-colors duration-150 text-left"
+            className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-[hsl(217,91%,60%)] hover:text-white transition-colors duration-150 text-left"
           >
             <div className="w-10 h-10 border-2 border-current flex items-center justify-center flex-shrink-0">
               <Library className="h-4 w-4" />
@@ -114,7 +134,7 @@ export default function Dashboard() {
 
           <button
             onClick={() => navigate('/ai-lab')}
-            className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-foreground hover:text-background transition-colors duration-150 text-left"
+            className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-[hsl(270,76%,55%)] hover:text-white transition-colors duration-150 text-left"
           >
             <div className="w-10 h-10 border-2 border-current flex items-center justify-center flex-shrink-0">
               <Sparkles className="h-4 w-4" />
