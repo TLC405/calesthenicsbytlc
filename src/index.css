@@ -8,7 +8,7 @@
 
 @layer base {
   :root {
-    /* Premium Color Palette */
+    /* Vibrant Color Palette */
     --navy: 218 64% 12%;
     --electric-blue: 211 100% 54%;
     --charcoal: 220 11% 12%;
@@ -16,6 +16,18 @@
     --gold: 45 93% 47%;
     --gold-light: 45 93% 60%;
     --platinum: 220 10% 94%;
+
+    /* Category Colors */
+    --cat-push: 0 84% 60%;
+    --cat-pull: 217 91% 60%;
+    --cat-legs: 142 71% 45%;
+    --cat-core: 25 95% 53%;
+    --cat-skills: 270 76% 55%;
+    --cat-mobility: 174 72% 40%;
+
+    /* Accent Gradient */
+    --gradient-start: 270 76% 55%;
+    --gradient-end: 217 91% 60%;
 
     /* Neumorphic Shadows */
     --shadow-light: 0 0% 100%;

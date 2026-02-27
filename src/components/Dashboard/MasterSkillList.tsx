@@ -11,12 +11,12 @@ import {
 } from 'lucide-react';
 
 const categories = [
-  { name: 'Push', icon: ArrowUpFromLine, description: 'Push-ups, dips, HSPU', accent: 'border-l-red-500 hover:bg-red-500/5' },
-  { name: 'Pull', icon: ArrowDownToLine, description: 'Pull-ups, rows, muscle-ups', accent: 'border-l-blue-500 hover:bg-blue-500/5' },
-  { name: 'Legs', icon: Footprints, description: 'Squats, lunges, pistols', accent: 'border-l-green-500 hover:bg-green-500/5' },
-  { name: 'Core', icon: Target, description: 'Planks, L-sits, levers', accent: 'border-l-orange-500 hover:bg-orange-500/5' },
-  { name: 'Skills', icon: Sparkles, description: 'Handstands, flags, planches', accent: 'border-l-purple-500 hover:bg-purple-500/5' },
-  { name: 'Mobility', icon: Wind, description: 'Stretches, flows, balance', accent: 'border-l-teal-500 hover:bg-teal-500/5' },
+  { name: 'Push', icon: ArrowUpFromLine, description: 'Push-ups, dips, HSPU', color: 'bg-[hsl(0,84%,60%)]', hoverBg: 'hover:bg-[hsl(0,84%,60%)]/10' },
+  { name: 'Pull', icon: ArrowDownToLine, description: 'Pull-ups, rows, muscle-ups', color: 'bg-[hsl(217,91%,60%)]', hoverBg: 'hover:bg-[hsl(217,91%,60%)]/10' },
+  { name: 'Legs', icon: Footprints, description: 'Squats, lunges, pistols', color: 'bg-[hsl(142,71%,45%)]', hoverBg: 'hover:bg-[hsl(142,71%,45%)]/10' },
+  { name: 'Core', icon: Target, description: 'Planks, L-sits, levers', color: 'bg-[hsl(25,95%,53%)]', hoverBg: 'hover:bg-[hsl(25,95%,53%)]/10' },
+  { name: 'Skills', icon: Sparkles, description: 'Handstands, flags, planches', color: 'bg-[hsl(270,76%,55%)]', hoverBg: 'hover:bg-[hsl(270,76%,55%)]/10' },
+  { name: 'Mobility', icon: Wind, description: 'Stretches, flows, balance', color: 'bg-[hsl(174,72%,40%)]', hoverBg: 'hover:bg-[hsl(174,72%,40%)]/10' },
 ];
 
 export function MasterSkillList() {
@@ -33,12 +33,17 @@ export function MasterSkillList() {
           key={cat.name}
           onClick={() => handleCategoryClick(cat.name)}
           className={cn(
-            "group flex flex-col justify-between p-3 border-2 border-foreground bg-card text-left transition-all duration-150 border-l-[4px]",
-            cat.accent
+            "group flex flex-col justify-between p-3 border-2 border-foreground bg-card text-left transition-all duration-150 relative overflow-hidden",
+            cat.hoverBg
           )}
         >
-          <div className="flex items-start justify-between mb-2">
-            <cat.icon className="w-4 h-4 text-foreground" />
+          {/* Color bar top */}
+          <div className={cn("absolute top-0 left-0 w-full h-1", cat.color)} />
+          
+          <div className="flex items-start justify-between mb-2 mt-1">
+            <div className={cn("w-7 h-7 flex items-center justify-center", cat.color)}>
+              <cat.icon className="w-3.5 h-3.5 text-white" />
+            </div>
             <ArrowRight className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div>
