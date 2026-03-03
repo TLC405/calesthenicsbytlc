@@ -1,122 +1,147 @@
-# Complete Video Fix + Homepage + UI Optimization Overhaul
 
-## Part 1: Broken Video Audit Results
+# I GOT THE POWA — Progression Paths, Category Reorganization, and Music System
 
-I verified every single YouTube URL in the database using YouTube's oembed API. **20 out of 42 exercises have broken/dead video links.** Here is the full breakdown:
-
-### BROKEN Videos (20 exercises) - Need Replacement
-
-
-| Exercise                | Category | Current Video Status             | Replacement URL     | Source                 |
-| ----------------------- | -------- | -------------------------------- | ------------------- | ---------------------- |
-| Dragon Flag             | Core     | DEAD (mjCMq2OKzKY)               | watch?v=qNbAyeLVMeY | School of Calisthenics |
-| Shrimp Squat            | Legs     | DEAD (5cKDVmrWBgw)               | watch?v=_FBuC-VPbRY | Al Kavadlo             |
-| Nordic Curl             | Legs     | DEAD (HUXS3S2xSV4)               | watch?v=dJ8LBl3U85g | Simonster Strength     |
-| Deep Squat Hold         | Mobility | DEAD (M7GOMfsj8ig)               | watch?v=zJBLDJMJiDE | GMB Fitness            |
-| Pigeon Pose             | Mobility | DEAD (_cU4fjffARI)               | watch?v=0RQVD6viVXo | YouAligned             |
-| Worlds Greatest Stretch | Mobility | DEAD (gYVY4EvB8Hc)               | watch?v=-CiWQ2IvY34 | Squat University       |
-| Archer Pull-up          | Pull     | DEAD (Ry1N4jI7W8A)               | watch?v=_LGLKUiQH5k | Pullup & Dip           |
-| Australian Row          | Pull     | DEAD (PGcTxvw6-JM)               | watch?v=Fl0UMfdEzsE | Zack Henderson         |
-| Front Lever Raise       | Pull     | DEAD (cVUoatKZQKM)               | watch?v=-kI16UUefGs | Pullup & Dip           |
-| Muscle-up               | Pull     | DEAD (NEeEBIjNBpY)               | watch?v=BbkFT3HlrIg | Vitality               |
-| Archer Push-up          | Push     | DEAD (LYJnKdLqnyo)               | watch?v=A0r8ploEnZY | Victory Calisthenics   |
-| Pike Push-up            | Push     | FORBIDDEN (sposDXWEB0A)          | watch?v=2avz4xI25vQ | School of Calisthenics |
-| Planche Lean            | Push     | DEAD (1i2bl-vT2Tg)               | watch?v=wKV5zVJTYBo | Vitality               |
-| Straddle Planche        | Push     | UNAUTHORIZED (yjHcyYvPfg8)       | watch?v=V9LWMkorWoc | Calisthenics Family    |
-| Back Lever              | Skills   | DEAD (F-fGyIOB7Nc)               | watch?v=HXaG8mJmSnU | FitnessFAQs            |
-| Elbow Lever             | Skills   | DEAD (O-6Y5JTBCTU)               | watch?v=w_XvThlKMrU | Calisthenics Family    |
-| Freestanding Handstand  | Skills   | DEAD (DTvkwkqQMgE)               | watch?v=d6_lcWtQDxw | GMB Fitness            |
-| Front Lever             | Skills   | DEAD (same as Front Lever Raise) | watch?v=AGhb8V8M758 | FitnessFAQs            |
-| Human Flag              | Skills   | DEAD (yJXMYohiS2c)               | watch?v=TF9XhvYh_m8 | Chris Heria            |
-| Planche                 | Skills   | DEAD (kv8kCQnqVFQ)               | watch?v=bn-HZm7bpy0 | FitnessFAQs            |
-
-
-### Title Mismatch Issues (2 exercises)
-
-
-| Exercise              | Video Title                                         | Issue                                                |
-| --------------------- | --------------------------------------------------- | ---------------------------------------------------- |
-| Tuck Planche          | "How to Improve Active Pike Compression" (Antranik) | Wrong video - pike compression, not planche tutorial |
-| Advanced Tuck Planche | Same video with &t=180                              | Same wrong video                                     |
-
-
-These will be replaced with proper planche tutorial videos from FitnessFAQs (watch?v=bn-HZm7bpy0).
-
-### WORKING Videos (20 exercises) - Verified correct
-
-Hollow Body Hold, Hanging Leg Raise, L-Sit, Plank, Bodyweight Squat, Bulgarian Split Squat, Calf Raise, Pistol Squat, Bridge Pose, Cat-Cow Stretch, Cobra Pose, Downward Dog, Shoulder Dislocate, Chin-up, Pull-up, Diamond Push-up, Handstand Push-up, Parallel Bar Dip, Pseudo Planche Push-up, Push-up
+This is a large feature set covering 5 major areas. Here's the plan broken into phases:
 
 ---
 
-## Part 2: Homepage Redesign
+## Phase 1: Database — Category Reorganization and Progression Chains
 
-The current homepage is functional but visually flat -- the logo area shows a small dark square, and the layout feels like a template. The redesign will:
+### New Categories
+Currently: Push, Pull, Legs, Core, Skills, Mobility
 
-- Make the logo larger and more prominent with a glow effect
-- Add an animated hero section with staggered text reveals
-- Replace static feature chips with interactive, hover-responsive feature cards showing icons and descriptions
-- Add a subtle scroll indicator at the bottom
-- Improve mobile layout with better spacing and touch targets
-- Add a secondary "Learn More" link alongside the main CTA
+Change to: **Push, Pull, Legs, Core, Skills, Yoga, Mobility, Flexibility**
 
-### Dashboard Cleanup
+- **Yoga**: Move yoga-specific exercises out of Mobility (Downward Dog, Pigeon Pose, Cobra Pose, Bridge Pose, Cat-Cow Stretch) and add new ones (Warrior I, Warrior II, Tree Pose, Child's Pose, Triangle Pose, Chair Pose, etc.)
+- **Flexibility**: New category for static stretching and range-of-motion work (Splits progression, Pancake, Pike, Straddle, Shoulder flexibility drills)
+- **Mobility**: Keeps dynamic/active mobility drills (Thoracic Extension, Shoulder Dislocate, Wrist Circles, Deep Squat Hold, Jefferson Curl, World's Greatest Stretch, Frog Stretch)
 
-- Confirm no gamification (XP, streaks, levels) appears anywhere in the header or dashboard
-- The current dashboard already has Calendar + Master Skill List -- this is correct
-- Improve the visual weight and spacing of the quick action cards
-
----
-
-## Part 3: UI Optimization for All Devices
-
-### Current Issues Found
-
-1. `--radius: 0rem` makes all components have sharp corners -- this is intentional for the bold design, but some elements need subtle rounding
-2. The ExerciseCard thumbnail fallback chain only goes mqdefault -> hqdefault, missing the final fallback to a branded placeholder
-3. No bottom navigation on mobile -- users have to use the back button constantly
-4. Homepage logo appears as a tiny dark square (barely visible against the dark background)
-
-### Planned Improvements
-
-- Add a mobile-optimized bottom navigation bar for Dashboard, Library, Planner, AI Coach
-- Improve ExerciseCard thumbnail fallback to include a styled placeholder with the exercise initial letter when all YouTube thumbnails fail
-- Fine-tune responsive breakpoints for the exercise grid (better card sizing on tablets)
-- Ensure the homepage logo has proper contrast and visibility
-
----
-
-## Technical Implementation
-
-### Database Updates (20 broken videos + 2 mismatched)
-
-```sql
--- All 22 exercises updated with verified, working YouTube URLs
-UPDATE exercises SET youtube_url = '...', video_verified = true WHERE name = '...';
+### Progression Chain System
+Add a new `progression_order` column to the `exercises` table so exercises within the same category can be linked in a chain (before/after). For example in Push:
+```
+Wall Push-up (1) -> Incline Push-up (2) -> Pseudo Push-up (3) -> Push-up (4) -> Diamond Push-up (5) -> Archer Push-up (6) -> One Arm Push-up (7)
 ```
 
-### Files to Modify
+Each category gets a `progression_chain` group identifier so multiple chains can exist per category (e.g., Push has a "push-up chain" and a "dip chain").
 
+**New DB column on exercises:**
+- `chain_group` (text, nullable) — groups exercises into a progression chain (e.g., "pushup-chain", "lever-chain")
+- `chain_order` (integer, nullable) — position within that chain
 
-| File                                       | Changes                                                                                       |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------- |
-| `src/pages/Index.tsx`                      | Redesigned homepage with better hero, larger logo, animated sections, mobile-optimized layout |
-| `src/pages/Dashboard.tsx`                  | Confirm no gamification, improve spacing and card visual weight                               |
-| `src/components/Exercise/ExerciseCard.tsx` | Better thumbnail fallback chain (mqdefault -> hqdefault -> sddefault -> branded placeholder)  |
-| `src/components/Layout/MobileNav.tsx`      | NEW: Bottom navigation bar for mobile (Dashboard, Library, Planner, AI)                       |
-| `src/App.tsx`                              | Integrate MobileNav into the app layout                                                       |
+This lets us query: "What comes before and after this exercise?"
 
+### Data Population
+- Define chain groups and ordering for all major movement patterns across Push, Pull, Legs, Core, Skills
+- Add missing standard calisthenics exercises to fill gaps in chains
+- Insert 10-15 yoga exercises and 8-10 flexibility exercises
 
-### New Component
+---
 
-**MobileNav** -- A fixed bottom navigation bar that appears only on mobile (<768px). Shows 4 tabs: Dashboard, Library, Planner, AI Coach. Uses active state highlighting based on current route.
+## Phase 2: Clickable Progression Path UI
 
-&nbsp;
+### Exercise Detail Modal Enhancement
+When viewing any exercise, show a **horizontal progression path** at the top:
 
-i dont want any text from youtube on the screen i want our own world class and youtuge is insdie tbscreen bo that is bradined tlcTV. 
+```text
+[Wall Push-up] -> [Incline Push-up] -> [>>PUSH-UP<<] -> [Diamond Push-up] -> [Archer Push-up]
+```
 
-### Summary
+- Current exercise is highlighted/enlarged
+- Each step in the path is **clickable** — tapping navigates to that exercise's detail modal
+- Shows difficulty level color-coding per step
+- If a user has progress data, show completed steps with a checkmark
 
-- Fix all 22 broken/mismatched exercise videos with verified replacements
-- Redesign the homepage for world-class first impression
-- Add mobile bottom navigation for better device optimization
-- Improve thumbnail fallback system so no card ever shows a gray YouTube placeholder
+### New Component: `ProgressionPathStrip`
+- Horizontal scrollable strip
+- Fetches all exercises in the same `chain_group`, ordered by `chain_order`
+- Each node is a clickable pill/card showing exercise name and difficulty level
+- Active exercise is visually distinct (border, scale, color)
+
+---
+
+## Phase 3: Landing Page — Path Explorer and Calendar
+
+### Landing Page Additions (for logged-out users)
+Add two new sections to the Index page between the feature grid and CTA:
+
+1. **Path Explorer Preview**: Show 3-4 example progression paths (Push-up chain, Handstand chain, Lever chain, Muscle-up chain) as interactive horizontal strips. Visitors can see the journey from beginner to elite. Non-clickable but visually compelling.
+
+2. **Calendar Preview**: A compact visual showing a sample training week with color-coded session blocks, demonstrating how the planner works.
+
+---
+
+## Phase 4: Global Music Player
+
+### Persistent Music Component
+Create a `MusicPlayer` provider/component that:
+- Persists across all page navigations (lives in App.tsx, outside Routes)
+- Shows a small floating control bar (bottom-right, above MobileNav) with play/pause and volume toggle
+- Stores music state in localStorage so preference survives refresh
+- Default track: "I Got The Power" via YouTube embed
+- On/off toggle visible on every page
+
+### Architecture
+- `MusicProvider` context wrapping the app
+- Hidden YouTube iframe managed by the provider
+- Floating `MusicControl` mini-bar component rendered globally
+- State: `isPlaying`, `isMuted`, `currentTrack`
+
+---
+
+## Phase 5: YouTube Music Integration in Settings
+
+### Settings Page — Music Section
+Add a new "Music" section to Settings with:
+- Toggle for background music on/off
+- Input field for a YouTube playlist URL
+- "Connect YouTube" button that saves the playlist URL to the user's profile
+- Dropdown to select from saved playlists
+- Volume slider
+
+### Database Change
+Add to `profiles` table:
+- `music_playlist_url` (text, nullable) — user's YouTube playlist URL
+- `music_enabled` (boolean, default true)
+
+### How it Works
+- User pastes a YouTube Music/YouTube playlist URL
+- The app extracts the playlist ID and uses it in the YouTube embed iframe
+- The MusicProvider reads the user's saved playlist from their profile
+- Playback continues across pages via the persistent iframe
+
+**Note**: This won't be a full YouTube Music API integration (that would require OAuth and API keys). Instead, it uses YouTube's embed player with playlist support, which works without authentication and allows users to play their public/unlisted playlists.
+
+---
+
+## Technical Summary
+
+### Database Migrations
+1. Add `chain_group` (text) and `chain_order` (integer) columns to `exercises`
+2. Add `music_playlist_url` (text) and `music_enabled` (boolean) columns to `profiles`
+
+### Data Inserts
+1. Update existing exercises with `chain_group` and `chain_order` values
+2. Re-categorize yoga exercises from Mobility to Yoga
+3. Insert new Yoga exercises (10-15)
+4. Insert new Flexibility exercises (8-10)
+
+### New Files
+- `src/providers/MusicProvider.tsx` — global music context
+- `src/components/Music/MusicControl.tsx` — floating play/pause bar
+- `src/components/Exercise/ProgressionPathStrip.tsx` — clickable chain strip
+
+### Modified Files
+- `src/App.tsx` — wrap with MusicProvider, add MusicControl
+- `src/pages/Index.tsx` — add path explorer preview and calendar preview
+- `src/pages/Settings.tsx` — add Music section
+- `src/components/Exercise/ExerciseDetailModal.tsx` — add ProgressionPathStrip
+- `src/components/Exercise/CategoryTabs.tsx` — add Yoga, Flexibility colors
+- `src/components/Exercise/ExerciseCard.tsx` — add Yoga, Flexibility color styles
+- `src/components/Dashboard/MasterSkillList.tsx` — add new categories
+- `src/components/Layout/MobileNav.tsx` — no structural changes needed
+
+### Estimated Scope
+- 3 new components/providers
+- 8-10 modified files
+- 2 DB migrations
+- ~50 data inserts/updates
