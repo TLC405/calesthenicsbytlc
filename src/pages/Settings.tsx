@@ -1,25 +1,34 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
+import { useMusic } from '@/providers/MusicProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import { Slider } from '@/components/ui/slider';
 import { useToast } from '@/hooks/use-toast';
-import { Download, LogOut, User, Shield } from 'lucide-react';
+import { Download, LogOut, User, Shield, Music, Link } from 'lucide-react';
 
 export default function Settings() {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const music = useMusic();
   const [profile, setProfile] = useState<any>(null);
   const [displayName, setDisplayName] = useState('');
   const [loading, setLoading] = useState(false);
+  const [playlistInput, setPlaylistInput] = useState('');
 
   useEffect(() => {
     if (!user) { navigate('/auth'); return; }
     fetchProfile();
   }, [user, navigate]);
+
+  useEffect(() => {
+    setPlaylistInput(music.playlistUrl);
+  }, [music.playlistUrl]);
 
   const fetchProfile = async () => {
     if (!user) return;
@@ -54,9 +63,13 @@ export default function Settings() {
     toast({ title: 'Exported', description: 'Training data downloaded.' });
   };
 
+  const handleSavePlaylist = () => {
+    music.setPlaylistUrl(playlistInput);
+    toast({ title: 'Saved', description: 'Playlist URL updated.' });
+  };
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Brutalist header */}
       <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background">
         <div className="max-w-2xl mx-auto px-4 md:px-8 h-14 flex items-center gap-3">
           <div className="w-1.5 h-6 bg-foreground" />
@@ -73,7 +86,6 @@ export default function Settings() {
             </div>
             <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em]">Profile</h2>
           </div>
-
           <form onSubmit={handleUpdateProfile} className="space-y-4">
             <div className="space-y-1.5">
               <Label htmlFor="email" className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">Email</Label>
@@ -87,6 +99,49 @@ export default function Settings() {
               {loading ? 'Saving...' : 'Save Changes'}
             </Button>
           </form>
+        </section>
+
+        {/* Music */}
+        <section className="border-2 border-[hsl(270,76%,55%)] bg-card p-5">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-8 h-8 border-2 border-[hsl(270,76%,55%)] bg-[hsl(270,76%,55%)] flex items-center justify-center">
+              <Music className="w-4 h-4 text-white" />
+            </div>
+            <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em]">Music</h2>
+          </div>
+
+          <div className="space-y-4">
+            {/* Toggle */}
+            <div className="flex items-center justify-between">
+              <Label className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">Background Music</Label>
+              <Switch checked={music.musicEnabled} onCheckedChange={music.setMusicEnabled} />
+            </div>
+
+            {/* Volume */}
+            <div className="space-y-2">
+              <Label className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">Volume</Label>
+              <Slider value={[music.volume]} onValueChange={([v]) => music.setVolume(v)} max={100} step={1} className="w-full" />
+            </div>
+
+            {/* Playlist URL */}
+            <div className="space-y-1.5">
+              <Label className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">YouTube Playlist URL</Label>
+              <div className="flex gap-2">
+                <Input
+                  type="url"
+                  placeholder="https://www.youtube.com/playlist?list=..."
+                  value={playlistInput}
+                  onChange={(e) => setPlaylistInput(e.target.value)}
+                  className="h-10 border-2 border-foreground/20 focus:border-[hsl(270,76%,55%)] transition-colors flex-1"
+                />
+                <Button onClick={handleSavePlaylist} size="sm" variant="outline" className="font-mono uppercase tracking-wider text-[10px] border-2 border-foreground h-10 px-4">
+                  <Link className="w-3 h-3 mr-1" />
+                  Save
+                </Button>
+              </div>
+              <p className="text-[9px] font-mono text-muted-foreground">Paste a YouTube or YouTube Music playlist URL to play your music across the app.</p>
+            </div>
+          </div>
         </section>
 
         {/* Data Export */}
