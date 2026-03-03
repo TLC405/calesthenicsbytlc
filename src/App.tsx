@@ -4,6 +4,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider, useAuth } from "./providers/AuthProvider";
+import { MusicProvider } from "./providers/MusicProvider";
+import { MusicControl } from "./components/Music/MusicControl";
 import { MobileNav } from "./components/Layout/MobileNav";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -32,6 +34,7 @@ function AppContent() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+      <MusicControl />
       <MobileNav />
     </BrowserRouter>
   );
@@ -40,11 +43,13 @@ function AppContent() {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <AppContent />
-      </TooltipProvider>
+      <MusicProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <AppContent />
+        </TooltipProvider>
+      </MusicProvider>
     </AuthProvider>
   </QueryClientProvider>
 );

@@ -35,7 +35,9 @@ const categoryStyle: Record<string, { border: string; bg: string; text: string }
   'Legs': { border: 'border-l-green-500', bg: 'bg-green-500', text: 'text-green-500' },
   'Core': { border: 'border-l-orange-500', bg: 'bg-orange-500', text: 'text-orange-500' },
   'Skills': { border: 'border-l-purple-500', bg: 'bg-purple-500', text: 'text-purple-500' },
+  'Yoga': { border: 'border-l-pink-500', bg: 'bg-pink-500', text: 'text-pink-500' },
   'Mobility': { border: 'border-l-teal-500', bg: 'bg-teal-500', text: 'text-teal-500' },
+  'Flexibility': { border: 'border-l-amber-500', bg: 'bg-amber-500', text: 'text-amber-500' },
 };
 
 const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];

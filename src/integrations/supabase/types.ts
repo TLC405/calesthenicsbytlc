@@ -49,6 +49,8 @@ export type Database = {
       exercises: {
         Row: {
           category: string
+          chain_group: string | null
+          chain_order: number | null
           created_at: string
           created_by: string | null
           cues: Json | null
@@ -69,6 +71,8 @@ export type Database = {
         }
         Insert: {
           category: string
+          chain_group?: string | null
+          chain_order?: number | null
           created_at?: string
           created_by?: string | null
           cues?: Json | null
@@ -89,6 +93,8 @@ export type Database = {
         }
         Update: {
           category?: string
+          chain_group?: string | null
+          chain_order?: number | null
           created_at?: string
           created_by?: string | null
           cues?: Json | null
@@ -149,6 +155,8 @@ export type Database = {
           id: string
           last_workout_date: string | null
           level: number | null
+          music_enabled: boolean | null
+          music_playlist_url: string | null
           pin_hash: string | null
           pin_salt: string | null
           role: Database["public"]["Enums"]["app_role"]
@@ -163,6 +171,8 @@ export type Database = {
           id: string
           last_workout_date?: string | null
           level?: number | null
+          music_enabled?: boolean | null
+          music_playlist_url?: string | null
           pin_hash?: string | null
           pin_salt?: string | null
           role?: Database["public"]["Enums"]["app_role"]
@@ -177,6 +187,8 @@ export type Database = {
           id?: string
           last_workout_date?: string | null
           level?: number | null
+          music_enabled?: boolean | null
+          music_playlist_url?: string | null
           pin_hash?: string | null
           pin_salt?: string | null
           role?: Database["public"]["Enums"]["app_role"]

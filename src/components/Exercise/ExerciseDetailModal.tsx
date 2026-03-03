@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { VideoPlayer } from './VideoPlayer';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { DifficultyBadge } from './DifficultyBadge';
+import { ProgressionPathStrip } from './ProgressionPathStrip';
 import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -22,6 +23,8 @@ interface Exercise {
   youtube_url?: string | null;
   instagram_url?: string | null;
   image_url?: string | null;
+  chain_group?: string | null;
+  chain_order?: number | null;
 }
 
 interface Progression {
@@ -56,26 +59,40 @@ const levelColors: Record<number, string> = {
 
 export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }: ExerciseDetailModalProps) {
   const [progressions, setProgressions] = useState<Progression[]>([]);
+  const [currentExercise, setCurrentExercise] = useState<Exercise | null>(exercise);
 
   useEffect(() => {
-    if (exercise?.id && open) {
+    setCurrentExercise(exercise);
+  }, [exercise]);
+
+  useEffect(() => {
+    if (currentExercise?.id && open) {
       supabase
         .from('progressions')
         .select('*')
-        .eq('exercise_id', exercise.id)
+        .eq('exercise_id', currentExercise.id)
         .order('level')
         .then(({ data }) => setProgressions(data || []));
     } else {
       setProgressions([]);
     }
-  }, [exercise?.id, open]);
+  }, [currentExercise?.id, open]);
 
-  if (!exercise) return null;
+  const handleChainNavigate = async (exerciseId: string) => {
+    const { data } = await supabase
+      .from('exercises')
+      .select('*')
+      .eq('id', exerciseId)
+      .single();
+    if (data) setCurrentExercise(data as unknown as Exercise);
+  };
 
-  const cues = Array.isArray(exercise.cues) 
-    ? exercise.cues 
-    : typeof exercise.cues === 'string' 
-      ? JSON.parse(exercise.cues || '[]')
+  if (!currentExercise) return null;
+
+  const cues = Array.isArray(currentExercise.cues) 
+    ? currentExercise.cues 
+    : typeof currentExercise.cues === 'string' 
+      ? JSON.parse(currentExercise.cues || '[]')
       : [];
 
   return (
@@ -86,23 +103,30 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
             <DialogHeader>
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
-                  {exercise.category}
+                  {currentExercise.category}
                 </span>
-                {exercise.difficulty_level && (
+                {currentExercise.difficulty_level && (
                   <>
                     <span className="text-muted-foreground/30">·</span>
-                    <DifficultyBadge level={exercise.difficulty_level} size="sm" />
+                    <DifficultyBadge level={currentExercise.difficulty_level} size="sm" />
                   </>
                 )}
               </div>
-              <DialogTitle className="text-xl font-display">{exercise.name}</DialogTitle>
+              <DialogTitle className="text-xl font-display">{currentExercise.name}</DialogTitle>
             </DialogHeader>
+
+            {/* Progression Path Strip */}
+            <ProgressionPathStrip
+              exerciseId={currentExercise.id}
+              chainGroup={currentExercise.chain_group || null}
+              onNavigate={handleChainNavigate}
+            />
 
             {/* Video */}
             <VideoPlayer 
-              youtubeUrl={exercise.youtube_url} 
-              instagramUrl={exercise.instagram_url}
-              title={exercise.name}
+              youtubeUrl={currentExercise.youtube_url} 
+              instagramUrl={currentExercise.instagram_url}
+              title={currentExercise.name}
             />
 
             {/* Progression Ladder */}
@@ -151,7 +175,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
                   <h4 className="text-xs font-semibold uppercase tracking-wider">Primary</h4>
                 </div>
                 <div className="flex flex-wrap gap-1">
-                  {exercise.primary_muscles.map((muscle) => (
+                  {currentExercise.primary_muscles.map((muscle) => (
                     <Badge key={muscle} variant="secondary" className="text-[10px] capitalize">{muscle}</Badge>
                   ))}
                 </div>
@@ -163,8 +187,8 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
                   <h4 className="text-xs font-semibold uppercase tracking-wider">Secondary</h4>
                 </div>
                 <div className="flex flex-wrap gap-1">
-                  {exercise.secondary_muscles.length > 0 ? (
-                    exercise.secondary_muscles.map((muscle) => (
+                  {currentExercise.secondary_muscles.length > 0 ? (
+                    currentExercise.secondary_muscles.map((muscle) => (
                       <Badge key={muscle} variant="outline" className="text-[10px] capitalize">{muscle}</Badge>
                     ))
                   ) : (
@@ -175,14 +199,14 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
             </div>
 
             {/* Equipment */}
-            {exercise.equipment.length > 0 && (
+            {currentExercise.equipment.length > 0 && (
               <div className="rounded-lg border border-border p-4">
                 <div className="flex items-center gap-2 mb-2.5">
                   <Dumbbell className="w-3.5 h-3.5 text-foreground" />
                   <h4 className="text-xs font-semibold uppercase tracking-wider">Equipment</h4>
                 </div>
                 <div className="flex flex-wrap gap-1">
-                  {exercise.equipment.map((item) => (
+                  {currentExercise.equipment.map((item) => (
                     <Badge key={item} variant="outline" className="text-[10px] capitalize">{item}</Badge>
                   ))}
                 </div>
@@ -214,7 +238,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
               <Button 
                 className="w-full" 
                 size="lg"
-                onClick={() => { onAddToWorkout(exercise); onClose(); }}
+                onClick={() => { onAddToWorkout(currentExercise); onClose(); }}
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add to Today's Workout

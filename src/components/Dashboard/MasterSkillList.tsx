@@ -7,7 +7,9 @@ import {
   Target, 
   Sparkles, 
   Wind,
-  ArrowRight
+  ArrowRight,
+  Flower2,
+  StretchHorizontal
 } from 'lucide-react';
 
 const categories = [
@@ -16,7 +18,9 @@ const categories = [
   { name: 'Legs', icon: Footprints, description: 'Squats, lunges, pistols', color: 'bg-[hsl(142,71%,45%)]', hoverBg: 'hover:bg-[hsl(142,71%,45%)]/10' },
   { name: 'Core', icon: Target, description: 'Planks, L-sits, levers', color: 'bg-[hsl(25,95%,53%)]', hoverBg: 'hover:bg-[hsl(25,95%,53%)]/10' },
   { name: 'Skills', icon: Sparkles, description: 'Handstands, flags, planches', color: 'bg-[hsl(270,76%,55%)]', hoverBg: 'hover:bg-[hsl(270,76%,55%)]/10' },
-  { name: 'Mobility', icon: Wind, description: 'Stretches, flows, balance', color: 'bg-[hsl(174,72%,40%)]', hoverBg: 'hover:bg-[hsl(174,72%,40%)]/10' },
+  { name: 'Yoga', icon: Flower2, description: 'Poses, flows, balance', color: 'bg-[hsl(330,65%,55%)]', hoverBg: 'hover:bg-[hsl(330,65%,55%)]/10' },
+  { name: 'Mobility', icon: Wind, description: 'Dynamic drills, joint work', color: 'bg-[hsl(174,72%,40%)]', hoverBg: 'hover:bg-[hsl(174,72%,40%)]/10' },
+  { name: 'Flexibility', icon: StretchHorizontal, description: 'Splits, stretches, ROM', color: 'bg-[hsl(40,96%,50%)]', hoverBg: 'hover:bg-[hsl(40,96%,50%)]/10' },
 ];
 
 export function MasterSkillList() {
