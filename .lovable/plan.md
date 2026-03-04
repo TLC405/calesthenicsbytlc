@@ -1,147 +1,112 @@
 
-# I GOT THE POWA — Progression Paths, Category Reorganization, and Music System
 
-This is a large feature set covering 5 major areas. Here's the plan broken into phases:
+# Atomic UI/UX Overhaul + Music Fix + Loading Screen Replacement
 
----
+## Diagnosis Summary
 
-## Phase 1: Database — Category Reorganization and Progression Chains
+**What's broken:**
+1. **LoadingScreen** — still references the old uploaded photo and "TLC's Hybrid" branding. It's not actually used anywhere in `App.tsx` or `main.tsx` (never imported), so it's dead code but still exists.
+2. **Music doesn't play** — The YouTube iframe approach relies on `postMessage` to control playback via the YouTube IFrame API. However, the iframe is rendered with `enablejsapi=1` but never loads the YouTube IFrame Player API script (`https://www.youtube.com/iframe_api`). The `postMessage` JSON format used is incorrect — YouTube's IFrame API expects the iframe to be initialized through the API, not via raw postMessage. The iframe also gets re-created on every state change (since `embedSrc` changes when `isPlaying` toggles, causing React to unmount/remount the iframe).
+3. **Old uploaded photo** — Still referenced in `Auth.tsx`, `NotFound.tsx`, and `LoadingScreen.tsx`.
+4. **Settings page** — Works fine (verified code), but the music section only appears after login (Settings redirects to `/auth` if not logged in).
 
-### New Categories
-Currently: Push, Pull, Legs, Core, Skills, Mobility
+## Plan
 
-Change to: **Push, Pull, Legs, Core, Skills, Yoga, Mobility, Flexibility**
+### Phase 1: Fix Music System (Critical)
+**Problem**: The MusicProvider creates a hidden YouTube iframe and tries to control it via `postMessage`, but the YouTube IFrame Player API is never loaded. The iframe src also changes on play/pause, causing remounts.
 
-- **Yoga**: Move yoga-specific exercises out of Mobility (Downward Dog, Pigeon Pose, Cobra Pose, Bridge Pose, Cat-Cow Stretch) and add new ones (Warrior I, Warrior II, Tree Pose, Child's Pose, Triangle Pose, Chair Pose, etc.)
-- **Flexibility**: New category for static stretching and range-of-motion work (Splits progression, Pancake, Pike, Straddle, Shoulder flexibility drills)
-- **Mobility**: Keeps dynamic/active mobility drills (Thoracic Extension, Shoulder Dislocate, Wrist Circles, Deep Squat Hold, Jefferson Curl, World's Greatest Stretch, Frog Stretch)
+**Fix**:
+- Rewrite `MusicProvider.tsx` to use the **YouTube IFrame Player API** properly:
+  - Load the `https://www.youtube.com/iframe_api` script dynamically
+  - Create the player via `new YT.Player()` with event handlers
+  - Use `player.playVideo()`, `player.pauseVideo()`, `player.setVolume()` directly instead of postMessage
+  - Keep iframe stable (don't change src on play/pause)
+  - Store player ref and only create once
 
-### Progression Chain System
-Add a new `progression_order` column to the `exercises` table so exercises within the same category can be linked in a chain (before/after). For example in Push:
-```
-Wall Push-up (1) -> Incline Push-up (2) -> Pseudo Push-up (3) -> Push-up (4) -> Diamond Push-up (5) -> Archer Push-up (6) -> One Arm Push-up (7)
-```
+### Phase 2: Full Persistent Mini-Player Bar
+**Current**: Tiny 2-button floating control in bottom-right corner.
 
-Each category gets a `progression_chain` group identifier so multiple chains can exist per category (e.g., Push has a "push-up chain" and a "dip chain").
+**Upgrade to**: A full-width mini-player bar fixed above MobileNav with:
+- Play/Pause button with animated equalizer bars when playing
+- Track name display (or "I Got The Power" default)
+- Volume slider (collapsible)
+- On/Off toggle switch
+- Source indicator (YouTube icon)
+- Positioned `bottom-14` on mobile (above nav), `bottom-0` on desktop
 
-**New DB column on exercises:**
-- `chain_group` (text, nullable) — groups exercises into a progression chain (e.g., "pushup-chain", "lever-chain")
-- `chain_order` (integer, nullable) — position within that chain
+Rewrite `MusicControl.tsx` as a proper bar component.
 
-This lets us query: "What comes before and after this exercise?"
+### Phase 3: Replace Loading Screen
+**Current**: Dead component with old branding and uploaded photo.
 
-### Data Population
-- Define chain groups and ordering for all major movement patterns across Push, Pull, Legs, Core, Skills
-- Add missing standard calisthenics exercises to fill gaps in chains
-- Insert 10-15 yoga exercises and 8-10 flexibility exercises
+**Replace with**: A brutalist, on-brand loading screen used during auth initialization:
+- Black background with the Zap icon logo (matching Index page)
+- "I GOT THE POWA" text
+- Animated progress bar using category colors cycling through
+- "Loading..." in mono uppercase
+- Wire it into `App.tsx` — show while `AuthProvider.loading` is true
 
----
+### Phase 4: Remove Old Uploaded Photo References
+- `Auth.tsx` line 10: Replace `const logo = '/lovable-uploads/...'` with the Zap icon component (consistent with Index/Dashboard)
+- `NotFound.tsx` lines 17-22: Replace img with Zap icon in purple box
+- Delete or fully rewrite `LoadingScreen.tsx`
 
-## Phase 2: Clickable Progression Path UI
+### Phase 5: Landing Page Redesign
+**Current issues**: Functional but static. The progression paths and calendar preview are hardcoded and non-interactive.
 
-### Exercise Detail Modal Enhancement
-When viewing any exercise, show a **horizontal progression path** at the top:
+**Upgrades**:
+- Add animated entrance transitions using CSS keyframes (already defined in index.css)
+- Make the feature grid cards interactive with hover color fills matching category
+- Add a "Now Playing" indicator if music is active (visible on landing too)
+- Improve the CTA section with more visual weight
+- Add a "scroll down" indicator between hero and paths section
+- Make progression path steps animate in sequentially on scroll
 
-```text
-[Wall Push-up] -> [Incline Push-up] -> [>>PUSH-UP<<] -> [Diamond Push-up] -> [Archer Push-up]
-```
+### Phase 6: Colorful Brutalist Evolution Across All Pages
 
-- Current exercise is highlighted/enlarged
-- Each step in the path is **clickable** — tapping navigates to that exercise's detail modal
-- Shows difficulty level color-coding per step
-- If a user has progress data, show completed steps with a checkmark
+**Dashboard**:
+- Stats cards: Add subtle pulse animation on streak when active
+- Category grid: Add exercise count per category from DB
+- Quick actions: Add gradient color fills on hover instead of solid
 
-### New Component: `ProgressionPathStrip`
-- Horizontal scrollable strip
-- Fetches all exercises in the same `chain_group`, ordered by `chain_order`
-- Each node is a clickable pill/card showing exercise name and difficulty level
-- Active exercise is visually distinct (border, scale, color)
+**Library**:
+- Exercise cards: Larger thumbnails, better fallback with category-colored gradient backgrounds instead of plain gray
+- Search: Add live result count feedback
 
----
+**Auth page**:
+- Replace the logo img with Zap icon
+- Add category color accents to the left panel stats
 
-## Phase 3: Landing Page — Path Explorer and Calendar
+**AI Lab**:
+- Apply brutalist card styling to chat bubbles (borders instead of rounded)
+- Message input: brutalist border treatment
 
-### Landing Page Additions (for logged-out users)
-Add two new sections to the Index page between the feature grid and CTA:
+**Settings**:
+- Add the music section visual polish (playing indicator)
 
-1. **Path Explorer Preview**: Show 3-4 example progression paths (Push-up chain, Handstand chain, Lever chain, Muscle-up chain) as interactive horizontal strips. Visitors can see the journey from beginner to elite. Non-clickable but visually compelling.
+**All pages**:
+- Consistent header treatment with category accent strip
 
-2. **Calendar Preview**: A compact visual showing a sample training week with color-coded session blocks, demonstrating how the planner works.
+## Files to Create/Modify
 
----
+| File | Action |
+|------|--------|
+| `src/providers/MusicProvider.tsx` | Rewrite with YouTube IFrame Player API |
+| `src/components/Music/MusicControl.tsx` | Full mini-player bar |
+| `src/components/LoadingScreen.tsx` | Complete rewrite with brutalist splash |
+| `src/App.tsx` | Add loading screen during auth init |
+| `src/pages/Auth.tsx` | Remove uploaded photo, use Zap icon |
+| `src/pages/NotFound.tsx` | Remove uploaded photo, use Zap icon |
+| `src/pages/Index.tsx` | Enhanced animations and interactions |
+| `src/pages/Dashboard.tsx` | Category counts, animation polish |
+| `src/pages/Library.tsx` | Better card fallbacks, search UX |
+| `src/pages/AILab.tsx` | Brutalist chat styling |
+| `src/components/AILab/AILabChat.tsx` | Brutalist message bubbles |
 
-## Phase 4: Global Music Player
+## Technical Notes
 
-### Persistent Music Component
-Create a `MusicPlayer` provider/component that:
-- Persists across all page navigations (lives in App.tsx, outside Routes)
-- Shows a small floating control bar (bottom-right, above MobileNav) with play/pause and volume toggle
-- Stores music state in localStorage so preference survives refresh
-- Default track: "I Got The Power" via YouTube embed
-- On/off toggle visible on every page
+- **YouTube IFrame API** requires a global `onYouTubeIframeAPIReady` callback. The provider will set this up and create the player instance once.
+- The player div needs to be visible in DOM (not `display:none`) — use `position:absolute; width:0; height:0; overflow:hidden` instead of `className="hidden"`.
+- No new dependencies needed — the YouTube API is loaded via script tag.
+- Music state persists in localStorage + profiles table (already working).
 
-### Architecture
-- `MusicProvider` context wrapping the app
-- Hidden YouTube iframe managed by the provider
-- Floating `MusicControl` mini-bar component rendered globally
-- State: `isPlaying`, `isMuted`, `currentTrack`
-
----
-
-## Phase 5: YouTube Music Integration in Settings
-
-### Settings Page — Music Section
-Add a new "Music" section to Settings with:
-- Toggle for background music on/off
-- Input field for a YouTube playlist URL
-- "Connect YouTube" button that saves the playlist URL to the user's profile
-- Dropdown to select from saved playlists
-- Volume slider
-
-### Database Change
-Add to `profiles` table:
-- `music_playlist_url` (text, nullable) — user's YouTube playlist URL
-- `music_enabled` (boolean, default true)
-
-### How it Works
-- User pastes a YouTube Music/YouTube playlist URL
-- The app extracts the playlist ID and uses it in the YouTube embed iframe
-- The MusicProvider reads the user's saved playlist from their profile
-- Playback continues across pages via the persistent iframe
-
-**Note**: This won't be a full YouTube Music API integration (that would require OAuth and API keys). Instead, it uses YouTube's embed player with playlist support, which works without authentication and allows users to play their public/unlisted playlists.
-
----
-
-## Technical Summary
-
-### Database Migrations
-1. Add `chain_group` (text) and `chain_order` (integer) columns to `exercises`
-2. Add `music_playlist_url` (text) and `music_enabled` (boolean) columns to `profiles`
-
-### Data Inserts
-1. Update existing exercises with `chain_group` and `chain_order` values
-2. Re-categorize yoga exercises from Mobility to Yoga
-3. Insert new Yoga exercises (10-15)
-4. Insert new Flexibility exercises (8-10)
-
-### New Files
-- `src/providers/MusicProvider.tsx` — global music context
-- `src/components/Music/MusicControl.tsx` — floating play/pause bar
-- `src/components/Exercise/ProgressionPathStrip.tsx` — clickable chain strip
-
-### Modified Files
-- `src/App.tsx` — wrap with MusicProvider, add MusicControl
-- `src/pages/Index.tsx` — add path explorer preview and calendar preview
-- `src/pages/Settings.tsx` — add Music section
-- `src/components/Exercise/ExerciseDetailModal.tsx` — add ProgressionPathStrip
-- `src/components/Exercise/CategoryTabs.tsx` — add Yoga, Flexibility colors
-- `src/components/Exercise/ExerciseCard.tsx` — add Yoga, Flexibility color styles
-- `src/components/Dashboard/MasterSkillList.tsx` — add new categories
-- `src/components/Layout/MobileNav.tsx` — no structural changes needed
-
-### Estimated Scope
-- 3 new components/providers
-- 8-10 modified files
-- 2 DB migrations
-- ~50 data inserts/updates
