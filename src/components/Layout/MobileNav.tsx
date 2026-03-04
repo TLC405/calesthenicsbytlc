@@ -3,10 +3,10 @@ import { Dumbbell, Library, CalendarDays, Brain } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const tabs = [
-  { path: '/dashboard', icon: Dumbbell, label: 'Train', color: 'bg-[hsl(0,84%,60%)]' },
-  { path: '/library', icon: Library, label: 'Library', color: 'bg-[hsl(217,91%,60%)]' },
-  { path: '/planner', icon: CalendarDays, label: 'Plan', color: 'bg-[hsl(142,71%,45%)]' },
-  { path: '/ai-lab', icon: Brain, label: 'AI', color: 'bg-[hsl(270,76%,55%)]' },
+  { path: '/dashboard', icon: Dumbbell, label: 'Train', color: 'bg-[hsl(var(--cat-push))]' },
+  { path: '/library', icon: Library, label: 'Library', color: 'bg-[hsl(var(--cat-pull))]' },
+  { path: '/planner', icon: CalendarDays, label: 'Plan', color: 'bg-[hsl(var(--cat-legs))]' },
+  { path: '/ai-lab', icon: Brain, label: 'AI', color: 'bg-[hsl(var(--cat-skills))]' },
 ];
 
 export function MobileNav() {

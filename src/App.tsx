@@ -7,6 +7,7 @@ import { AuthProvider, useAuth } from "./providers/AuthProvider";
 import { MusicProvider } from "./providers/MusicProvider";
 import { MusicControl } from "./components/Music/MusicControl";
 import { MobileNav } from "./components/Layout/MobileNav";
+import { LoadingScreen } from "./components/LoadingScreen";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
@@ -20,9 +21,13 @@ import "./styles/neumorph.css";
 const queryClient = new QueryClient();
 
 function AppContent() {
+  const { loading } = useAuth();
+  
+  if (loading) return <LoadingScreen />;
+
   return (
     <BrowserRouter>
-      <div className="pb-16 md:pb-0">
+      <div className="pb-[6.5rem] md:pb-12">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
