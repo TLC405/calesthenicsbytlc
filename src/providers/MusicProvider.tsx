@@ -8,6 +8,7 @@ interface MusicContextType {
   volume: number;
   playlistUrl: string;
   musicEnabled: boolean;
+  isReady: boolean;
   togglePlay: () => void;
   toggleMute: () => void;
   setVolume: (v: number) => void;
@@ -23,7 +24,7 @@ export function useMusic() {
   return ctx;
 }
 
-const DEFAULT_VIDEO = 'nm6DO_7px1I';
+const DEFAULT_VIDEO = 'nm6DO_7px1I'; // I Got The Power
 
 function extractPlaylistId(url: string): string | null {
   const match = url.match(/[?&]list=([^&#]+)/);
@@ -35,14 +36,50 @@ function extractVideoId(url: string): string | null {
   return match ? match[1] : null;
 }
 
+// Declare YT types
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: (() => void) | undefined;
+  }
+}
+
+let apiLoaded = false;
+let apiReady = false;
+const apiReadyCallbacks: (() => void)[] = [];
+
+function loadYouTubeAPI(): Promise<void> {
+  return new Promise((resolve) => {
+    if (apiReady) { resolve(); return; }
+    apiReadyCallbacks.push(resolve);
+    if (apiLoaded) return; // script already loading
+    apiLoaded = true;
+    
+    const prev = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = () => {
+      apiReady = true;
+      prev?.();
+      apiReadyCallbacks.forEach(cb => cb());
+      apiReadyCallbacks.length = 0;
+    };
+    
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  });
+}
+
 export function MusicProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [isPlaying, setIsPlaying] = useState(() => localStorage.getItem('music_playing') === 'true');
+  const playerRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolumeState] = useState(50);
   const [playlistUrl, setPlaylistUrlState] = useState('');
   const [musicEnabled, setMusicEnabledState] = useState(() => localStorage.getItem('music_enabled') !== 'false');
+  const [isReady, setIsReady] = useState(false);
+  const initAttempted = useRef(false);
 
   // Load user prefs
   useEffect(() => {
@@ -51,36 +88,128 @@ export function MusicProvider({ children }: { children: ReactNode }) {
       .then(({ data }) => {
         if (data) {
           if (data.music_playlist_url) setPlaylistUrlState(data.music_playlist_url);
-          if (data.music_enabled !== null) setMusicEnabledState(data.music_enabled);
+          if (data.music_enabled !== null && data.music_enabled !== undefined) {
+            setMusicEnabledState(data.music_enabled);
+            localStorage.setItem('music_enabled', String(data.music_enabled));
+          }
         }
       });
   }, [user]);
 
-  const postCommand = useCallback((func: string) => {
-    iframeRef.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: 'command', func, args: '' }), '*'
-    );
-  }, []);
+  // Build video config
+  const getPlayerConfig = useCallback(() => {
+    const playlistId = playlistUrl ? extractPlaylistId(playlistUrl) : null;
+    const videoId = playlistUrl ? extractVideoId(playlistUrl) : null;
+    
+    if (playlistId) {
+      return { videoId: '', playerVars: { listType: 'playlist' as const, list: playlistId } };
+    }
+    return { videoId: videoId || DEFAULT_VIDEO, playerVars: {} };
+  }, [playlistUrl]);
+
+  // Initialize YouTube player
+  useEffect(() => {
+    if (!musicEnabled || initAttempted.current) return;
+    initAttempted.current = true;
+
+    const init = async () => {
+      await loadYouTubeAPI();
+      if (!containerRef.current || playerRef.current) return;
+
+      const config = getPlayerConfig();
+      
+      playerRef.current = new window.YT.Player(containerRef.current, {
+        height: '0',
+        width: '0',
+        videoId: config.videoId,
+        playerVars: {
+          autoplay: 0,
+          loop: 1,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          ...config.playerVars,
+        },
+        events: {
+          onReady: (event: any) => {
+            event.target.setVolume(volume);
+            setIsReady(true);
+          },
+          onStateChange: (event: any) => {
+            // YT.PlayerState.ENDED = 0
+            if (event.data === 0) {
+              // Loop: replay
+              event.target.playVideo();
+            }
+          },
+          onError: (event: any) => {
+            console.warn('YouTube Player error:', event.data);
+          },
+        },
+      });
+    };
+
+    init();
+
+    return () => {
+      if (playerRef.current?.destroy) {
+        try { playerRef.current.destroy(); } catch {}
+        playerRef.current = null;
+      }
+      initAttempted.current = false;
+      setIsReady(false);
+    };
+  }, [musicEnabled]); // Only re-init when enabled/disabled
+
+  // When playlist URL changes and player exists, load new content
+  useEffect(() => {
+    if (!playerRef.current || !isReady) return;
+    const config = getPlayerConfig();
+    try {
+      if (config.playerVars.list) {
+        playerRef.current.loadPlaylist({ list: config.playerVars.list, listType: 'playlist' });
+      } else {
+        playerRef.current.loadVideoById(config.videoId);
+      }
+      if (!isPlaying) {
+        // Pause after loading new content if not playing
+        setTimeout(() => playerRef.current?.pauseVideo(), 500);
+      }
+    } catch {}
+  }, [playlistUrl, isReady]);
 
   const togglePlay = useCallback(() => {
-    if (!musicEnabled) return;
-    const next = !isPlaying;
-    postCommand(next ? 'playVideo' : 'pauseVideo');
-    setIsPlaying(next);
-    localStorage.setItem('music_playing', String(next));
-  }, [isPlaying, musicEnabled, postCommand]);
+    if (!musicEnabled || !playerRef.current || !isReady) return;
+    try {
+      const state = playerRef.current.getPlayerState();
+      if (state === 1) { // playing
+        playerRef.current.pauseVideo();
+        setIsPlaying(false);
+      } else {
+        playerRef.current.playVideo();
+        setIsPlaying(true);
+      }
+    } catch {}
+  }, [musicEnabled, isReady]);
 
   const toggleMute = useCallback(() => {
-    const next = !isMuted;
-    postCommand(next ? 'mute' : 'unMute');
-    setIsMuted(next);
-  }, [isMuted, postCommand]);
+    if (!playerRef.current || !isReady) return;
+    try {
+      if (isMuted) {
+        playerRef.current.unMute();
+        setIsMuted(false);
+      } else {
+        playerRef.current.mute();
+        setIsMuted(true);
+      }
+    } catch {}
+  }, [isMuted, isReady]);
 
   const setVolume = useCallback((v: number) => {
     setVolumeState(v);
-    iframeRef.current?.contentWindow?.postMessage(
-      JSON.stringify({ event: 'command', func: 'setVolume', args: [v] }), '*'
-    );
+    try { playerRef.current?.setVolume(v); } catch {}
   }, []);
 
   const setPlaylistUrl = useCallback((url: string) => {
@@ -94,35 +223,24 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     setMusicEnabledState(enabled);
     localStorage.setItem('music_enabled', String(enabled));
     if (!enabled) {
-      postCommand('pauseVideo');
+      try { playerRef.current?.pauseVideo(); } catch {}
       setIsPlaying(false);
-      localStorage.setItem('music_playing', 'false');
     }
     if (user) {
       supabase.from('profiles').update({ music_enabled: enabled }).eq('id', user.id);
     }
-  }, [user, postCommand]);
-
-  // Build iframe src
-  const playlistId = playlistUrl ? extractPlaylistId(playlistUrl) : null;
-  const videoId = playlistUrl ? extractVideoId(playlistUrl) : null;
-  const embedSrc = playlistId
-    ? `https://www.youtube.com/embed/videoseries?list=${playlistId}&enablejsapi=1&autoplay=${isPlaying ? 1 : 0}&loop=1`
-    : `https://www.youtube.com/embed/${videoId || DEFAULT_VIDEO}?enablejsapi=1&autoplay=${isPlaying ? 1 : 0}&loop=1&playlist=${videoId || DEFAULT_VIDEO}`;
+  }, [user]);
 
   return (
     <MusicContext.Provider value={{
-      isPlaying, isMuted, volume, playlistUrl, musicEnabled,
+      isPlaying, isMuted, volume, playlistUrl, musicEnabled, isReady,
       togglePlay, toggleMute, setVolume, setPlaylistUrl, setMusicEnabled
     }}>
+      {/* YouTube player container — must be in DOM but invisible */}
       {musicEnabled && (
-        <iframe
-          ref={iframeRef}
-          src={embedSrc}
-          allow="autoplay"
-          className="hidden"
-          title="background music"
-        />
+        <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+          <div ref={containerRef} id="yt-music-player" />
+        </div>
       )}
       {children}
     </MusicContext.Provider>

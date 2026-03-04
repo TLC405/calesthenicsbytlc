@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, ArrowLeft } from 'lucide-react';
+import { Home, ArrowLeft, Zap } from 'lucide-react';
 
 const NotFound = () => {
   const location = useLocation();
@@ -14,12 +14,8 @@ const NotFound = () => {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="text-center space-y-6 max-w-sm">
-        <div className="w-14 h-14 border-2 border-foreground overflow-hidden mx-auto">
-          <img
-            src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png"
-            alt="I GOT THE POWA"
-            className="w-full h-full object-cover"
-          />
+        <div className="w-14 h-14 border-2 border-foreground bg-[hsl(var(--cat-skills))] flex items-center justify-center mx-auto">
+          <Zap className="w-7 h-7 text-background" />
         </div>
 
         <div>

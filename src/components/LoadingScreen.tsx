@@ -1,35 +1,59 @@
 import { useEffect, useState } from 'react';
+import { Zap } from 'lucide-react';
+
+const CATEGORY_COLORS = [
+  'hsl(0, 84%, 60%)',    // push
+  'hsl(217, 91%, 60%)',  // pull
+  'hsl(142, 71%, 45%)',  // legs
+  'hsl(25, 95%, 53%)',   // core
+  'hsl(270, 76%, 55%)',  // skills
+  'hsl(174, 72%, 40%)',  // mobility
+];
 
 export function LoadingScreen() {
-  const [dots, setDots] = useState('');
+  const [progress, setProgress] = useState(0);
+  const [colorIdx, setColorIdx] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setDots(prev => prev.length >= 3 ? '' : prev + '.');
-    }, 500);
-    return () => clearInterval(interval);
+    const prog = setInterval(() => {
+      setProgress(prev => Math.min(prev + 2, 95));
+    }, 40);
+    const col = setInterval(() => {
+      setColorIdx(prev => (prev + 1) % CATEGORY_COLORS.length);
+    }, 300);
+    return () => { clearInterval(prog); clearInterval(col); };
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-foreground flex items-center justify-center">
-      <div className="flex flex-col items-center gap-6">
-        <div className="w-16 h-16 rounded-2xl border border-background/10 overflow-hidden">
-          <img 
-            src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png" 
-            alt="TLC's Workout" 
-            className="w-full h-full object-cover"
-          />
+    <div className="fixed inset-0 bg-foreground flex items-center justify-center z-[9999]">
+      <div className="flex flex-col items-center gap-8">
+        {/* Logo */}
+        <div
+          className="w-20 h-20 border-4 flex items-center justify-center animate-scale-in"
+          style={{ borderColor: CATEGORY_COLORS[colorIdx] }}
+        >
+          <Zap className="w-10 h-10 text-background" />
         </div>
-        <div className="text-center">
-          <h1 className="font-display text-xl font-bold text-background mb-1">
-            TLC's Hybrid
+
+        {/* Brand */}
+        <div className="text-center space-y-2">
+          <h1 className="font-display text-3xl font-bold text-background uppercase tracking-tighter leading-none">
+            I GOT THE <span style={{ color: CATEGORY_COLORS[colorIdx] }}>POWA</span>
           </h1>
-          <p className="text-xs text-background/40 font-mono">
-            Loading{dots}
+          <p className="text-[10px] text-background/30 font-mono uppercase tracking-[0.4em]">
+            Loading...
           </p>
         </div>
-        <div className="w-32 h-0.5 bg-background/10 rounded-full overflow-hidden">
-          <div className="h-full w-full bg-background/40 animate-shimmer" style={{ backgroundSize: '200% 100%' }} />
+
+        {/* Progress bar */}
+        <div className="w-48 h-1 bg-background/10 overflow-hidden">
+          <div
+            className="h-full transition-all duration-100 ease-out"
+            style={{
+              width: `${progress}%`,
+              backgroundColor: CATEGORY_COLORS[colorIdx],
+            }}
+          />
         </div>
       </div>
     </div>

@@ -5,9 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Dumbbell, Lock, Mail, User } from 'lucide-react';
-
-const logo = '/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png';
+import { Dumbbell, Lock, Mail, User, Zap } from 'lucide-react';
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -49,8 +47,8 @@ export default function Auth() {
         
         <div className="relative z-10 flex flex-col justify-between p-10 w-full">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 border-2 border-background/20 overflow-hidden">
-              <img src={logo} alt="I GOT THE POWA" className="w-full h-full object-cover" />
+            <div className="w-10 h-10 border-2 border-background/20 bg-[hsl(var(--cat-skills))] flex items-center justify-center">
+              <Zap className="w-5 h-5 text-background" />
             </div>
             <p className="text-[9px] text-background/30 uppercase tracking-[0.3em] font-mono">I GOT THE POWA</p>
           </div>
@@ -64,13 +62,13 @@ export default function Auth() {
             
             <div className="flex gap-8">
               {[
-                { value: '120+', label: 'Exercises' },
-                { value: '6', label: 'Categories' },
-                { value: 'AI', label: 'Coach' },
+                { value: '150+', label: 'Exercises', color: 'hsl(var(--cat-push))' },
+                { value: '8', label: 'Categories', color: 'hsl(var(--cat-pull))' },
+                { value: 'AI', label: 'Coach', color: 'hsl(var(--cat-skills))' },
               ].map(stat => (
                 <div key={stat.label}>
                   <p className="font-display text-2xl font-bold text-background">{stat.value}</p>
-                  <p className="text-background/30 text-[9px] font-mono uppercase tracking-[0.2em]">{stat.label}</p>
+                  <p className="text-[9px] font-mono uppercase tracking-[0.2em]" style={{ color: stat.color }}>{stat.label}</p>
                 </div>
               ))}
             </div>
@@ -87,8 +85,8 @@ export default function Auth() {
         <div className="w-full max-w-sm space-y-8">
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 border-2 border-foreground overflow-hidden">
-              <img src={logo} alt="I GOT THE POWA" className="w-full h-full object-cover" />
+            <div className="w-10 h-10 border-2 border-foreground bg-[hsl(var(--cat-skills))] flex items-center justify-center">
+              <Zap className="w-5 h-5 text-background" />
             </div>
             <div>
               <h1 className="font-display text-sm font-bold uppercase tracking-wider">I GOT THE POWA</h1>
