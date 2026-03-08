@@ -16,6 +16,7 @@ import Library from "./pages/Library";
 import AILab from "./pages/AILab";
 import Settings from "./pages/Settings";
 import Train from "./pages/Train";
+import Anatomy from "./pages/Anatomy";
 import NotFound from "./pages/NotFound";
 import "./styles/neumorph.css";
 
