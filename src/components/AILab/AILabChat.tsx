@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Sparkles, Loader2, Plus, ExternalLink } from 'lucide-react';
+import { Send, Bot, User, Loader2, Plus, Play, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { DifficultyBadge } from '@/components/Exercise/DifficultyBadge';
+import { VideoPlayer } from '@/components/Exercise/VideoPlayer';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
@@ -22,17 +24,19 @@ interface SuggestedExercise {
   primary_muscles: string[];
   cues: string[];
   youtube_search: string;
+  youtube_url?: string;
 }
 
 export function AILabChat() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: "Hey! 👋 I'm your AI training assistant. Ask me about exercise progressions, workout techniques, or let me help you discover new movements.",
+      content: "Hey! 👋 I'm your AI training assistant. Ask me about exercise progressions, workout techniques, or let me help you discover new movements. I'll find tutorial videos for you too!",
     },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [videoPopup, setVideoPopup] = useState<{ url: string; title: string } | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -73,15 +77,27 @@ export function AILabChat() {
         return;
       }
       const slug = exercise.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      const youtubeUrl = exercise.youtube_url || `https://www.youtube.com/results?search_query=${encodeURIComponent(exercise.youtube_search)}`;
       const { error } = await supabase.from('exercises').insert({
         name: exercise.name, slug: `${slug}-${Date.now()}`, category: exercise.category,
         primary_muscles: exercise.primary_muscles, secondary_muscles: [], equipment: ['None (Bodyweight)'],
         cues: exercise.cues, difficulty_level: exercise.difficulty, created_by: userData.user.id,
+        youtube_url: exercise.youtube_url || null,
       });
       if (error) throw error;
       toast({ title: 'Exercise added!', description: `${exercise.name} is now in your library` });
     } catch (error: any) {
       toast({ title: 'Error adding exercise', description: error.message, variant: 'destructive' });
+    }
+  };
+
+  const playVideo = (exercise: SuggestedExercise) => {
+    if (exercise.youtube_url) {
+      setVideoPopup({ url: exercise.youtube_url, title: exercise.name });
+    } else {
+      // Open YouTube search in popup
+      const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(exercise.youtube_search + ' tutorial calisthenics')}`;
+      window.open(searchUrl, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -138,10 +154,13 @@ export function AILabChat() {
                             <Button size="sm" className="h-7 text-xs border-2 border-foreground" onClick={() => addExerciseToLibrary(exercise)}>
                               <Plus className="w-3 h-3 mr-1" />Add
                             </Button>
-                            <Button size="sm" variant="outline" className="h-7 text-xs border-2 border-foreground/30" asChild>
-                              <a href={`https://www.youtube.com/results?search_query=${encodeURIComponent(exercise.youtube_search)}`} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="w-3 h-3 mr-1" />Video
-                              </a>
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="h-7 text-xs border-2 border-foreground/30"
+                              onClick={() => playVideo(exercise)}
+                            >
+                              <Play className="w-3 h-3 mr-1" fill="currentColor" />Video
                             </Button>
                           </div>
                         </div>
@@ -187,9 +206,24 @@ export function AILabChat() {
           </Button>
         </form>
         <p className="text-[10px] text-center text-muted-foreground mt-2 font-mono uppercase tracking-wider">
-          Powered by AI
+          Powered by AI • Videos play in tlcTV
         </p>
       </div>
+
+      {/* Video Popup */}
+      <Dialog open={!!videoPopup} onOpenChange={(isOpen) => !isOpen && setVideoPopup(null)}>
+        <DialogContent className="max-w-3xl p-0 overflow-hidden border-2 border-foreground bg-background">
+          {videoPopup && (
+            <div>
+              <VideoPlayer 
+                youtubeUrl={videoPopup.url} 
+                title={videoPopup.title} 
+                thumbnailMode={false}
+              />
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

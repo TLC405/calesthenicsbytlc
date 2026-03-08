@@ -22,9 +22,9 @@ serve(async (req) => {
 
 When users ask about exercises, provide helpful suggestions with detailed information.
 
-IMPORTANT: When suggesting exercises, you MUST also call the suggest_exercises function with structured data for each exercise you recommend.
+IMPORTANT: When suggesting exercises, you MUST also call the suggest_exercises function with structured data for each exercise you recommend. For each exercise, provide a specific YouTube video URL if you know one, otherwise provide a good search query.
 
-Categories: Push, Pull, Legs, Core, Skills, Mobility
+Categories: Push, Pull, Legs, Core, Skills, Mobility, Rings, Yoga, Flexibility
 Difficulty levels: 1 (Beginner), 2 (Easy), 3 (Intermediate), 4 (Advanced), 5 (Master)
 
 Common muscle groups: Chest, Shoulders, Triceps, Biceps, Forearms, Lats, Traps, Rhomboids, Lower Back, Abs, Obliques, Hip Flexors, Glutes, Quads, Hamstrings, Calves
@@ -58,11 +58,12 @@ Be enthusiastic, encouraging, and provide practical coaching tips!`;
                       type: "object",
                       properties: {
                         name: { type: "string", description: "Exercise name" },
-                        category: { type: "string", enum: ["Push", "Pull", "Legs", "Core", "Skills", "Mobility"] },
+                        category: { type: "string", enum: ["Push", "Pull", "Legs", "Core", "Skills", "Mobility", "Rings", "Yoga", "Flexibility"] },
                         difficulty: { type: "number", minimum: 1, maximum: 5 },
                         primary_muscles: { type: "array", items: { type: "string" } },
                         cues: { type: "array", items: { type: "string" }, description: "Form cues and tips" },
                         youtube_search: { type: "string", description: "YouTube search query to find tutorial videos" },
+                        youtube_url: { type: "string", description: "Direct YouTube video URL if known (e.g. https://www.youtube.com/watch?v=VIDEO_ID)" },
                       },
                       required: ["name", "category", "difficulty", "primary_muscles", "cues", "youtube_search"],
                     },

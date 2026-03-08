@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Plus, Sparkles } from 'lucide-react';
+import { Search, Plus, Sparkles, Download } from 'lucide-react';
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
@@ -11,6 +11,7 @@ import { WorkoutModal } from '@/components/Workout/WorkoutModal';
 import { AddExerciseModal } from '@/components/Exercise/AddExerciseModal';
 import { ExerciseCardSkeletonGrid } from '@/components/Exercise/ExerciseCardSkeleton';
 import { useAuth } from '@/providers/AuthProvider';
+import { toast } from 'sonner';
 
 interface Exercise {
   id: string;
@@ -25,7 +26,16 @@ interface Exercise {
   instagram_url?: string | null;
   image_url?: string | null;
   difficulty_level?: number;
+  sets_reps?: string | null;
+  description?: string | null;
+  stabilizer_muscles?: string[] | null;
+  tendons_involved?: string[] | null;
+  recovery_muscle?: string | null;
+  recovery_tendon?: string | null;
+  recovery_nervous?: string | null;
 }
+
+const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];
 
 export default function Library() {
   const navigate = useNavigate();
@@ -74,6 +84,45 @@ export default function Library() {
     setWorkoutModalDate(new Date());
   };
 
+  const downloadExerciseList = () => {
+    const data = filteredExercises.map(e => ({
+      Name: e.name,
+      Category: e.category,
+      Difficulty: difficultyLabel[e.difficulty_level || 1],
+      'Primary Muscles': e.primary_muscles.join('; '),
+      'Secondary Muscles': e.secondary_muscles.join('; '),
+      Equipment: e.equipment.join('; '),
+      'Sets/Reps': e.sets_reps || '',
+      Description: e.description || '',
+      'Stabilizer Muscles': e.stabilizer_muscles?.join('; ') || '',
+      'Tendons Involved': e.tendons_involved?.join('; ') || '',
+      'Recovery (Muscle)': e.recovery_muscle || '',
+      'Recovery (Tendon)': e.recovery_tendon || '',
+      'Recovery (Nervous)': e.recovery_nervous || '',
+      'YouTube URL': e.youtube_url || '',
+    }));
+
+    const headers = Object.keys(data[0] || {});
+    const csvRows = [
+      headers.join(','),
+      ...data.map(row => 
+        headers.map(h => {
+          const val = String((row as any)[h] || '');
+          return `"${val.replace(/"/g, '""')}"`;
+        }).join(',')
+      )
+    ];
+    const csvString = csvRows.join('\n');
+    const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `tlc-exercises${activeCategory ? `-${activeCategory.toLowerCase()}` : ''}-${new Date().toISOString().slice(0, 10)}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+    toast.success(`Downloaded ${data.length} exercises`);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Brutalist header */}
@@ -88,6 +137,10 @@ export default function Library() {
               </div>
             </div>
             <div className="flex gap-1.5">
+              <Button variant="ghost" size="sm" onClick={downloadExerciseList} className="text-muted-foreground h-8 text-[10px] font-mono uppercase tracking-wider" disabled={filteredExercises.length === 0}>
+                <Download className="h-3.5 w-3.5 mr-1" />
+                <span className="hidden sm:inline">Export</span>
+              </Button>
               <Button variant="ghost" size="sm" onClick={() => navigate('/ai-lab')} className="text-muted-foreground h-8 text-[10px] font-mono uppercase tracking-wider">
                 <Sparkles className="h-3.5 w-3.5 mr-1" />
                 <span className="hidden sm:inline">AI</span>
@@ -146,7 +199,7 @@ export default function Library() {
       </main>
 
       <ExerciseDetailModal exercise={selectedExercise} open={!!selectedExercise} onClose={() => setSelectedExercise(null)} onAddToWorkout={handleAddToWorkout} />
-      <WorkoutModal date={workoutModalDate} open={!!workoutModalDate} onClose={() => setWorkoutModalDate(null)} onSave={() => {}} />
+      <WorkoutModal date={workoutModalDate} open={!!workoutModalDate} onClose={() => setWorkoutModalDate(null)} onSave={fetchExercises} />
       <AddExerciseModal open={showAddModal} onClose={() => setShowAddModal(false)} onSuccess={fetchExercises} />
     </div>
   );
