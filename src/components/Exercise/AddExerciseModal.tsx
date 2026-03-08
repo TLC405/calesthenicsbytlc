@@ -27,7 +27,7 @@ import { DifficultyBadge, getDifficultyLabel } from './DifficultyBadge';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-const categories = ['Push', 'Pull', 'Legs', 'Core', 'Skills', 'Mobility'];
+const categories = ['Push', 'Pull', 'Legs', 'Core', 'Skills', 'Mobility', 'Rings', 'Yoga', 'Flexibility'];
 
 const muscles = [
   'Chest', 'Shoulders', 'Triceps', 'Biceps', 'Forearms',

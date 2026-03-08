@@ -29,16 +29,16 @@ const getYouTubeVideoId = (url: string): string | null => {
   return match && match[2].length === 11 ? match[2] : null;
 };
 
-const categoryStyle: Record<string, { border: string; bg: string; text: string }> = {
-  'Push': { border: 'border-l-red-500', bg: 'bg-red-500', text: 'text-red-500' },
-  'Pull': { border: 'border-l-blue-500', bg: 'bg-blue-500', text: 'text-blue-500' },
-  'Legs': { border: 'border-l-green-500', bg: 'bg-green-500', text: 'text-green-500' },
-  'Core': { border: 'border-l-orange-500', bg: 'bg-orange-500', text: 'text-orange-500' },
-  'Skills': { border: 'border-l-purple-500', bg: 'bg-purple-500', text: 'text-purple-500' },
-  'Yoga': { border: 'border-l-pink-500', bg: 'bg-pink-500', text: 'text-pink-500' },
-  'Mobility': { border: 'border-l-teal-500', bg: 'bg-teal-500', text: 'text-teal-500' },
-  'Flexibility': { border: 'border-l-amber-500', bg: 'bg-amber-500', text: 'text-amber-500' },
-  'Rings': { border: 'border-l-yellow-600', bg: 'bg-yellow-600', text: 'text-yellow-600' },
+const categoryStyle: Record<string, { border: string; bg: string; text: string; color: string }> = {
+  'Push': { border: 'border-l-[hsl(var(--cat-push))]', bg: 'bg-[hsl(var(--cat-push))]', text: 'text-[hsl(var(--cat-push))]', color: 'hsl(var(--cat-push))' },
+  'Pull': { border: 'border-l-[hsl(var(--cat-pull))]', bg: 'bg-[hsl(var(--cat-pull))]', text: 'text-[hsl(var(--cat-pull))]', color: 'hsl(var(--cat-pull))' },
+  'Legs': { border: 'border-l-[hsl(var(--cat-legs))]', bg: 'bg-[hsl(var(--cat-legs))]', text: 'text-[hsl(var(--cat-legs))]', color: 'hsl(var(--cat-legs))' },
+  'Core': { border: 'border-l-[hsl(var(--cat-core))]', bg: 'bg-[hsl(var(--cat-core))]', text: 'text-[hsl(var(--cat-core))]', color: 'hsl(var(--cat-core))' },
+  'Skills': { border: 'border-l-[hsl(var(--cat-skills))]', bg: 'bg-[hsl(var(--cat-skills))]', text: 'text-[hsl(var(--cat-skills))]', color: 'hsl(var(--cat-skills))' },
+  'Yoga': { border: 'border-l-[hsl(330,65%,55%)]', bg: 'bg-[hsl(330,65%,55%)]', text: 'text-[hsl(330,65%,55%)]', color: 'hsl(330,65%,55%)' },
+  'Mobility': { border: 'border-l-[hsl(var(--cat-mobility))]', bg: 'bg-[hsl(var(--cat-mobility))]', text: 'text-[hsl(var(--cat-mobility))]', color: 'hsl(var(--cat-mobility))' },
+  'Flexibility': { border: 'border-l-[hsl(45,93%,47%)]', bg: 'bg-[hsl(45,93%,47%)]', text: 'text-[hsl(45,93%,47%)]', color: 'hsl(45,93%,47%)' },
+  'Rings': { border: 'border-l-[hsl(45,80%,40%)]', bg: 'bg-[hsl(45,80%,40%)]', text: 'text-[hsl(45,80%,40%)]', color: 'hsl(45,80%,40%)' },
 };
 
 const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];
