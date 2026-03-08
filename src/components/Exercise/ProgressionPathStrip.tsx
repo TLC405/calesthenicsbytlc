@@ -76,7 +76,7 @@ export function ProgressionPathStrip({ exerciseId, chainGroup, onNavigate }: Pro
           {chain.map((ex, i) => {
             const isActive = ex.id === exerciseId;
             const level = ex.difficulty_level || 1;
-            const color = difficultyColor[level] || 'bg-muted border-muted';
+            const color = difficultyColor[level] || 'bg-muted';
 
             return (
               <div key={ex.id} className="flex items-center">
