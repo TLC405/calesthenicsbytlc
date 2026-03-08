@@ -1,108 +1,112 @@
-# Mega Data Import + Exercise Enrichment + Architecture Upgrade
 
-Plus redesigned architect to your upgraded chice. Be super creative 
 
-The user has provided a comprehensive exercise data dump from their other repo (CONTROL by TLC) with rich anatomy data (tendons, recovery times, stabilizers, form cues), motor-learning principles, non-negotiables coaching cues, integrity blocks (mobility/yoga routines), skill progression trees, and a 4-day stacked training cycle. The goal is to merge all of this into the current app.
+# Atomic UI/UX Overhaul + Music Fix + Loading Screen Replacement
 
-## Current State
+## Diagnosis Summary
 
-- **99 exercises** across 8 categories (Push 18, Pull 12, Legs 12, Core 11, Skills 14, Yoga 15, Mobility 7, Flexibility 10)
-- **14 chain groups** with progression ordering
-- **44 progressions** in the progressions table
-- Music system, loading screen, settings all functional
-- Exercise detail modal shows progression path strip, video, muscles, equipment, cues
+**What's broken:**
+1. **LoadingScreen** — still references the old uploaded photo and "TLC's Hybrid" branding. It's not actually used anywhere in `App.tsx` or `main.tsx` (never imported), so it's dead code but still exists.
+2. **Music doesn't play** — The YouTube iframe approach relies on `postMessage` to control playback via the YouTube IFrame API. However, the iframe is rendered with `enablejsapi=1` but never loads the YouTube IFrame Player API script (`https://www.youtube.com/iframe_api`). The `postMessage` JSON format used is incorrect — YouTube's IFrame API expects the iframe to be initialized through the API, not via raw postMessage. The iframe also gets re-created on every state change (since `embedSrc` changes when `isPlaying` toggles, causing React to unmount/remount the iframe).
+3. **Old uploaded photo** — Still referenced in `Auth.tsx`, `NotFound.tsx`, and `LoadingScreen.tsx`.
+4. **Settings page** — Works fine (verified code), but the music section only appears after login (Settings redirects to `/auth` if not logged in).
 
-## What Needs to Happen
+## Plan
 
-### Phase 1: Database Schema Enrichment
+### Phase 1: Fix Music System (Critical)
+**Problem**: The MusicProvider creates a hidden YouTube iframe and tries to control it via `postMessage`, but the YouTube IFrame Player API is never loaded. The iframe src also changes on play/pause, causing remounts.
 
-Add new columns to `exercises` table for the rich anatomy data from the other repo:
+**Fix**:
+- Rewrite `MusicProvider.tsx` to use the **YouTube IFrame Player API** properly:
+  - Load the `https://www.youtube.com/iframe_api` script dynamically
+  - Create the player via `new YT.Player()` with event handlers
+  - Use `player.playVideo()`, `player.pauseVideo()`, `player.setVolume()` directly instead of postMessage
+  - Keep iframe stable (don't change src on play/pause)
+  - Store player ref and only create once
 
-- `stabilizer_muscles` (text[]) — e.g. "Deep Neck Flexors, Wrist Extensors"
-- `tendons_involved` (text[]) — e.g. "Supraspinatus Tendon, Biceps Long Head"
-- `recovery_muscle` (text) — e.g. "24-36h"
-- `recovery_tendon` (text) — e.g. "36-48h"  
-- `recovery_nervous` (text) — e.g. "18-24h"
-- `sets_reps` (text) — e.g. "3×5", "4×12", "5×20s"
-- `description` (text) — short description of the exercise
+### Phase 2: Full Persistent Mini-Player Bar
+**Current**: Tiny 2-button floating control in bottom-right corner.
 
-Create new tables:
+**Upgrade to**: A full-width mini-player bar fixed above MobileNav with:
+- Play/Pause button with animated equalizer bars when playing
+- Track name display (or "I Got The Power" default)
+- Volume slider (collapsible)
+- On/Off toggle switch
+- Source indicator (YouTube icon)
+- Positioned `bottom-14` on mobile (above nav), `bottom-0` on desktop
 
-- `learning_principles` — 8 motor-learning research principles (distributed practice, external focus, variability, etc.)
-- `non_negotiables` — 4 global coaching cues (Ribs Down, Glutes 30%, Shoulders Tall, Active Legs)
-- `integrity_blocks` — 5 mobility/yoga routines (wrist prep, thoracic, hip opening, pancake, ankle)
-- `training_days` — the 4-day stacked cycle definition (Day A-E with labels and emphasis)
+Rewrite `MusicControl.tsx` as a proper bar component.
 
-All new tables get public SELECT RLS policies (read-only for everyone, admin-managed).
+### Phase 3: Replace Loading Screen
+**Current**: Dead component with old branding and uploaded photo.
 
-### Phase 2: Data Population Migration
+**Replace with**: A brutalist, on-brand loading screen used during auth initialization:
+- Black background with the Zap icon logo (matching Index page)
+- "I GOT THE POWA" text
+- Animated progress bar using category colors cycling through
+- "Loading..." in mono uppercase
+- Wire it into `App.tsx` — show while `AuthProvider.loading` is true
 
-A single large migration that:
+### Phase 4: Remove Old Uploaded Photo References
+- `Auth.tsx` line 10: Replace `const logo = '/lovable-uploads/...'` with the Zap icon component (consistent with Index/Dashboard)
+- `NotFound.tsx` lines 17-22: Replace img with Zap icon in purple box
+- Delete or fully rewrite `LoadingScreen.tsx`
 
-1. Updates existing exercises with anatomy enrichment data (stabilizers, tendons, recovery times) for all exercises that match the provided data
-2. Inserts missing exercises from the dump (swimming, dynamic showstoppers, etc.)
-3. Populates the `learning_principles` table with all 8 principles
-4. Populates `non_negotiables` with the 4 coaching cues
-5. Populates `integrity_blocks` with the 5 routines
-6. Populates `training_days` with the 4+1 day cycle
+### Phase 5: Landing Page Redesign
+**Current issues**: Functional but static. The progression paths and calendar preview are hardcoded and non-interactive.
 
-### Phase 3: Enhanced Exercise Detail Modal
+**Upgrades**:
+- Add animated entrance transitions using CSS keyframes (already defined in index.css)
+- Make the feature grid cards interactive with hover color fills matching category
+- Add a "Now Playing" indicator if music is active (visible on landing too)
+- Improve the CTA section with more visual weight
+- Add a "scroll down" indicator between hero and paths section
+- Make progression path steps animate in sequentially on scroll
 
-Upgrade `ExerciseDetailModal.tsx` to show the new data:
+### Phase 6: Colorful Brutalist Evolution Across All Pages
 
-- **Recovery Times section**: Show muscle/tendon/nervous recovery as color-coded pills
-- **Tendons & Stabilizers section**: New collapsible section showing tendons involved and stabilizer muscles
-- **Recommended Sets/Reps**: Display the `sets_reps` field prominently
-- **Non-Negotiables**: Show relevant coaching cues based on the exercise category (e.g. "Ribs Down" for planche exercises)
-- **Learning Tips**: Show 1-2 relevant motor-learning principles as expandable cards
+**Dashboard**:
+- Stats cards: Add subtle pulse animation on streak when active
+- Category grid: Add exercise count per category from DB
+- Quick actions: Add gradient color fills on hover instead of solid
 
-### Phase 4: Training View (New Page)
+**Library**:
+- Exercise cards: Larger thumbnails, better fallback with category-colored gradient backgrounds instead of plain gray
+- Search: Add live result count feedback
 
-Create a new **Train** page (`/train`) that implements the 4-day stacked cycle:
+**Auth page**:
+- Replace the logo img with Zap icon
+- Add category color accents to the left panel stats
 
-- Auto-rotating day selection (A/B/C/D/E based on last workout)
-- Each day shows its exercise blocks with the exercises from that day's focus
-- Each exercise row is expandable with quick-log capability
-- Non-negotiables bar at the top of every training session
-- Link to integrity blocks relevant to the day
+**AI Lab**:
+- Apply brutalist card styling to chat bubbles (borders instead of rounded)
+- Message input: brutalist border treatment
 
-### Phase 5: Skill Tree / Progression Explorer
+**Settings**:
+- Add the music section visual polish (playing indicator)
 
-Create a new **Progressions** page or section (`/progressions` or integrated into Library):
-
-- Visual skill trees for the 6 full progression paths (Planche, Pull-up, Handstand, Core, Front Lever, Legs)
-- Each node shows name, level, sets/reps, hold time, weeks estimate, prerequisites
-- Clickable nodes open exercise detail
-- Current user progress indicated (if logged in)
-
-### Phase 6: Landing Page — Path Explorer Enhancement
-
-Update `Index.tsx` to use real progression data instead of hardcoded arrays. Add:
-
-- Non-Negotiables preview section
-- Training cycle preview (4-day rotation visual)
+**All pages**:
+- Consistent header treatment with category accent strip
 
 ## Files to Create/Modify
 
-
-| File                                              | Action                                                             |
-| ------------------------------------------------- | ------------------------------------------------------------------ |
-| Migration SQL                                     | Add columns to exercises + create 4 new tables + populate data     |
-| `src/components/Exercise/ExerciseDetailModal.tsx` | Add recovery, tendons, stabilizers, non-negotiables, learning tips |
-| `src/components/Exercise/RecoveryIndicator.tsx`   | New: recovery time pills component                                 |
-| `src/components/Training/TrainingView.tsx`        | New: 4-day cycle training page                                     |
-| `src/components/Training/NonNegotiablesBar.tsx`   | New: coaching cues sticky bar                                      |
-| `src/components/Training/IntegrityBlock.tsx`      | New: mobility/yoga routine component                               |
-| `src/components/Progression/SkillTreeView.tsx`    | New: visual progression tree                                       |
-| `src/pages/Train.tsx`                             | New: training page                                                 |
-| `src/App.tsx`                                     | Add /train route                                                   |
-| `src/components/Layout/MobileNav.tsx`             | Update nav to include Train tab                                    |
-| `src/pages/Index.tsx`                             | Enhanced previews with real data                                   |
-
+| File | Action |
+|------|--------|
+| `src/providers/MusicProvider.tsx` | Rewrite with YouTube IFrame Player API |
+| `src/components/Music/MusicControl.tsx` | Full mini-player bar |
+| `src/components/LoadingScreen.tsx` | Complete rewrite with brutalist splash |
+| `src/App.tsx` | Add loading screen during auth init |
+| `src/pages/Auth.tsx` | Remove uploaded photo, use Zap icon |
+| `src/pages/NotFound.tsx` | Remove uploaded photo, use Zap icon |
+| `src/pages/Index.tsx` | Enhanced animations and interactions |
+| `src/pages/Dashboard.tsx` | Category counts, animation polish |
+| `src/pages/Library.tsx` | Better card fallbacks, search UX |
+| `src/pages/AILab.tsx` | Brutalist chat styling |
+| `src/components/AILab/AILabChat.tsx` | Brutalist message bubbles |
 
 ## Technical Notes
 
-- The `exercises` table schema changes are additive (all nullable columns), so existing data is unaffected
-- New tables use simple structures with public SELECT policies
-- The training cycle is stored in DB but could also be client-side constants — DB gives flexibility for coach customization later
-- Motor-learning principles are displayed contextually per exercise, not as a separate section
+- **YouTube IFrame API** requires a global `onYouTubeIframeAPIReady` callback. The provider will set this up and create the player instance once.
+- The player div needs to be visible in DOM (not `display:none`) — use `position:absolute; width:0; height:0; overflow:hidden` instead of `className="hidden"`.
+- No new dependencies needed — the YouTube API is loaded via script tag.
+- Music state persists in localStorage + profiles table (already working).
+
