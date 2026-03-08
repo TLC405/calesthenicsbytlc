@@ -7,7 +7,8 @@ const tabs = [
   { path: '/train', icon: Flame, label: 'Train', color: 'bg-[hsl(var(--cat-core))]' },
   { path: '/library', icon: Library, label: 'Library', color: 'bg-[hsl(var(--cat-pull))]' },
   { path: '/planner', icon: CalendarDays, label: 'Plan', color: 'bg-[hsl(var(--cat-legs))]' },
-  { path: '/ai-lab', icon: Brain, label: 'AI', color: 'bg-[hsl(var(--cat-skills))]' },
+  { path: '/anatomy', icon: PersonStanding, label: 'Atlas', color: 'bg-[hsl(var(--cat-skills))]' },
+  { path: '/ai-lab', icon: Brain, label: 'AI', color: 'bg-[hsl(var(--cat-push))]' },
   { path: '/settings', icon: Settings, label: 'Settings', color: 'bg-muted-foreground' },
 ];
 
