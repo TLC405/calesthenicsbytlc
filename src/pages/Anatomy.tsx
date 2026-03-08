@@ -166,10 +166,30 @@ export default function Anatomy() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left: Body map */}
           <div className="relative">
-            <div className="text-center mb-2">
-              <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
-                {view === 'front' ? '— Front View —' : '— Back View —'}
-              </span>
+            {/* Front/Back toggle tabs directly on body map */}
+            <div className="flex items-center justify-center gap-0 mb-3">
+              <button
+                onClick={() => setView('front')}
+                className={cn(
+                  "px-4 py-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.2em] border-2 border-foreground transition-all",
+                  view === 'front'
+                    ? "bg-foreground text-background"
+                    : "bg-background text-foreground hover:bg-muted"
+                )}
+              >
+                ◉ Front View
+              </button>
+              <button
+                onClick={() => setView('back')}
+                className={cn(
+                  "px-4 py-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.2em] border-2 border-foreground border-l-0 transition-all",
+                  view === 'back'
+                    ? "bg-foreground text-background"
+                    : "bg-background text-foreground hover:bg-muted"
+                )}
+              >
+                ◉ Back View
+              </button>
             </div>
             <div className="border-2 border-foreground/20 rounded-lg p-4 bg-muted/30 flex items-center justify-center min-h-[55vh]">
               <MuscleMap
@@ -178,16 +198,19 @@ export default function Anatomy() {
                 view={view}
               />
             </div>
-            {/* Quick muscle pills */}
+            {/* ALL muscle pills — always visible */}
             <div className="flex flex-wrap gap-1.5 mt-3 justify-center">
-              {MUSCLE_GROUPS.filter(m =>
-                view === 'front'
-                  ? !['traps', 'lats', 'upper-back', 'lower-back', 'glutes', 'hamstrings'].includes(m.id)
-                  : !['chest', 'abs', 'adductors', 'serratus', 'tibialis', 'hip-flexors'].includes(m.id)
-              ).map(m => (
+              {MUSCLE_GROUPS.map(m => (
                 <button
                   key={m.id}
-                  onClick={() => setSelectedMuscle(selectedMuscle === m.id ? null : m.id)}
+                  onClick={() => {
+                    setSelectedMuscle(selectedMuscle === m.id ? null : m.id);
+                    // Auto-switch view if the muscle is primarily on the other side
+                    const backMuscles = ['traps', 'lats', 'upper-back', 'lower-back', 'glutes', 'hamstrings'];
+                    const frontMuscles = ['chest', 'abs', 'adductors', 'serratus', 'tibialis', 'hip-flexors'];
+                    if (backMuscles.includes(m.id)) setView('back');
+                    else if (frontMuscles.includes(m.id)) setView('front');
+                  }}
                   className={cn(
                     "px-2 py-0.5 text-[8px] font-mono uppercase tracking-wider border-2 rounded-sm transition-all",
                     selectedMuscle === m.id
