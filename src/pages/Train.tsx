@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
-import { Zap, ChevronRight, Play, Dumbbell, Plus } from 'lucide-react';
+import { Zap, ChevronRight, Play, Dumbbell, Plus, Save, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { NonNegotiablesBar } from '@/components/Training/NonNegotiablesBar';
 import { IntegrityBlock } from '@/components/Training/IntegrityBlock';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { ExercisePickerModal } from '@/components/Workout/ExercisePickerModal';
+import { SetTracker, type SetData } from '@/components/Workout/SetTracker';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 
 interface TrainingDay {
   id: string;
