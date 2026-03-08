@@ -1,0 +1,8 @@
+UPDATE exercises SET image_url = 'https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/deep-squat-hold.jpg' WHERE slug = 'deep-squat-hold';
+UPDATE exercises SET image_url = 'https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/frog-stretch.jpg' WHERE slug = 'frog-stretch';
+UPDATE exercises SET image_url = 'https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/jefferson-curl.jpg' WHERE slug = 'jefferson-curl';
+UPDATE exercises SET image_url = 'https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/shoulder-dislocate.jpg' WHERE slug = 'shoulder-dislocate';
+UPDATE exercises SET image_url = 'https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/swimming-freestyle.jpg' WHERE slug = 'swimming-freestyle';
+UPDATE exercises SET image_url = 'https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/thoracic-extension.jpg' WHERE slug = 'thoracic-extension';
+UPDATE exercises SET image_url = 'https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/worlds-greatest-stretch.jpg' WHERE slug = 'worlds-greatest-stretch';
+UPDATE exercises SET image_url = 'https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/wrist-circles.jpg' WHERE slug = 'wrist-circles';

@@ -1,0 +1,1 @@
+DELETE FROM exercises WHERE slug = 'sdfs' OR name = 'sdfs';
