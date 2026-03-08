@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Dumbbell, Library, CalendarDays, Brain, Flame, Settings } from 'lucide-react';
+import { Dumbbell, Library, CalendarDays, Brain, Flame, Settings, PersonStanding } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const tabs = [
@@ -7,7 +7,8 @@ const tabs = [
   { path: '/train', icon: Flame, label: 'Train', color: 'bg-[hsl(var(--cat-core))]' },
   { path: '/library', icon: Library, label: 'Library', color: 'bg-[hsl(var(--cat-pull))]' },
   { path: '/planner', icon: CalendarDays, label: 'Plan', color: 'bg-[hsl(var(--cat-legs))]' },
-  { path: '/ai-lab', icon: Brain, label: 'AI', color: 'bg-[hsl(var(--cat-skills))]' },
+  { path: '/anatomy', icon: PersonStanding, label: 'Atlas', color: 'bg-[hsl(var(--cat-skills))]' },
+  { path: '/ai-lab', icon: Brain, label: 'AI', color: 'bg-[hsl(var(--cat-push))]' },
   { path: '/settings', icon: Settings, label: 'Settings', color: 'bg-muted-foreground' },
 ];
 

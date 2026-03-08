@@ -16,6 +16,7 @@ import Library from "./pages/Library";
 import AILab from "./pages/AILab";
 import Settings from "./pages/Settings";
 import Train from "./pages/Train";
+import Anatomy from "./pages/Anatomy";
 import NotFound from "./pages/NotFound";
 import "./styles/neumorph.css";
 
@@ -37,6 +38,7 @@ function AppContent() {
           <Route path="/library" element={<Library />} />
           <Route path="/ai-lab" element={<AILab />} />
           <Route path="/train" element={<Train />} />
+          <Route path="/anatomy" element={<Anatomy />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
