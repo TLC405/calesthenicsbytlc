@@ -274,7 +274,7 @@ export default function Anatomy() {
                               <p className="text-foreground text-[11px]">{muscleInfo.caution}</p>
                             </div>
                           )}
-                      </div>
+                        </div>
                     )}
                   </div>
 
