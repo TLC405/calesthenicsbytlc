@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Dumbbell, Library, CalendarDays, Brain, Flame, Settings } from 'lucide-react';
+import { Dumbbell, Library, CalendarDays, Brain, Flame, Settings, PersonStanding } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const tabs = [
