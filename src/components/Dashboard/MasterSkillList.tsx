@@ -9,7 +9,8 @@ import {
   Wind,
   ArrowRight,
   Flower2,
-  StretchHorizontal
+  StretchHorizontal,
+  Circle
 } from 'lucide-react';
 
 const categories = [

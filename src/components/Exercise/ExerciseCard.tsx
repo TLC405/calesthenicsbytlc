@@ -38,6 +38,7 @@ const categoryStyle: Record<string, { border: string; bg: string; text: string }
   'Yoga': { border: 'border-l-pink-500', bg: 'bg-pink-500', text: 'text-pink-500' },
   'Mobility': { border: 'border-l-teal-500', bg: 'bg-teal-500', text: 'text-teal-500' },
   'Flexibility': { border: 'border-l-amber-500', bg: 'bg-amber-500', text: 'text-amber-500' },
+  'Rings': { border: 'border-l-yellow-600', bg: 'bg-yellow-600', text: 'text-yellow-600' },
 };
 
 const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];
