@@ -16,6 +16,7 @@ import {
   ChevronRight,
   RotateCcw,
   Info,
+  PersonStanding,
 } from 'lucide-react';
 
 interface Exercise {
@@ -106,36 +107,57 @@ export default function Anatomy() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-1.5 h-6 bg-foreground" />
+      {/* Epic Header */}
+      <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 md:px-8">
+          {/* Top row */}
+          <div className="h-14 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-1.5 h-8 bg-primary" />
+              <div>
+                <div className="flex items-center gap-2">
+                  <PersonStanding className="w-4 h-4 text-primary" />
+                  <h1 className="font-display text-sm font-black uppercase tracking-[0.15em]">
+                    Muscle Atlas
+                  </h1>
+                </div>
+                <p className="text-[7px] font-mono text-muted-foreground uppercase tracking-[0.25em] -mt-0.5">
+                  Interactive Anatomy · {exercises.length} Exercises Mapped
+                </p>
+              </div>
+            </div>
             <div className="flex items-center gap-2">
-              <Brain className="w-4 h-4" />
-              <h1 className="font-display text-sm font-bold uppercase tracking-wider">Muscle Atlas</h1>
+              <Button
+                variant="outline"
+                size="sm"
+                className="h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground/30 gap-1.5"
+                onClick={() => setView(v => v === 'front' ? 'back' : 'front')}
+              >
+                <ArrowLeftRight className="w-3.5 h-3.5" />
+                {view === 'front' ? 'Back' : 'Front'}
+              </Button>
+              {selectedMuscle && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-8 text-[10px] font-mono uppercase"
+                  onClick={() => setSelectedMuscle(null)}
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                </Button>
+              )}
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              className="h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground/30"
-              onClick={() => { setView(v => v === 'front' ? 'back' : 'front'); }}
-            >
-              <ArrowLeftRight className="w-3.5 h-3.5 mr-1.5" />
-              {view === 'front' ? 'Back' : 'Front'}
-            </Button>
-            {selectedMuscle && (
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-8 text-[10px] font-mono uppercase"
-                onClick={() => setSelectedMuscle(null)}
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-              </Button>
-            )}
+          {/* Sub-strip — context bar */}
+          <div className="flex items-center gap-3 pb-2 -mt-1">
+            <div className="flex items-center gap-1.5">
+              {['Push', 'Pull', 'Legs', 'Core', 'Skills', 'Mobility'].map(cat => (
+                <div key={cat} className={cn("w-4 h-1", categoryColors[cat])} title={cat} />
+              ))}
+            </div>
+            <span className="text-[7px] font-mono text-muted-foreground/60 uppercase tracking-[0.2em]">
+              Tap any muscle · Explore exercises · Train smarter
+            </span>
           </div>
         </div>
       </header>
