@@ -275,6 +275,7 @@ export default function Anatomy() {
                             </div>
                           )}
                         </div>
+                      </div>
                     )}
                   </div>
 
