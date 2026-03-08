@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
-import { Zap, ChevronRight, Play, Dumbbell, Plus } from 'lucide-react';
+import { Zap, ChevronRight, Play, Dumbbell, Plus, Save, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { NonNegotiablesBar } from '@/components/Training/NonNegotiablesBar';
 import { IntegrityBlock } from '@/components/Training/IntegrityBlock';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { ExercisePickerModal } from '@/components/Workout/ExercisePickerModal';
+import { SetTracker, type SetData } from '@/components/Workout/SetTracker';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 
 interface TrainingDay {
   id: string;
@@ -82,6 +84,9 @@ export default function Train() {
   const [loading, setLoading] = useState(true);
   const [showPicker, setShowPicker] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [exerciseSets, setExerciseSets] = useState<Record<string, SetData[]>>({});
+  const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
+  const [savingId, setSavingId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) { navigate('/auth'); return; }
@@ -125,9 +130,64 @@ export default function Train() {
   };
 
   const handlePickerSelect = (exercise: any) => {
-    // Navigate to detail modal for the picked exercise
     setSelectedExercise(exercise as Exercise);
   };
+
+  const getExerciseSets = (exId: string): SetData[] => {
+    return exerciseSets[exId] || [{ reps: 10 }];
+  };
+
+  const updateExerciseSets = (exId: string, sets: SetData[]) => {
+    setExerciseSets(prev => ({ ...prev, [exId]: sets }));
+    // Remove saved indicator when editing
+    setSavedIds(prev => { const n = new Set(prev); n.delete(exId); return n; });
+  };
+
+  const saveExerciseLog = useCallback(async (ex: Exercise) => {
+    if (!user) return;
+    setSavingId(ex.id);
+    const today = new Date().toISOString().slice(0, 10);
+    const sets = getExerciseSets(ex.id);
+
+    try {
+      // Check if a workout exists for today
+      const { data: existing } = await supabase
+        .from('workouts')
+        .select('id, entries')
+        .eq('user_id', user.id)
+        .eq('date', today)
+        .maybeSingle();
+
+      const newEntry = {
+        exercise_id: ex.id,
+        exercise_name: ex.name,
+        exercise_slug: ex.slug,
+        category: ex.category,
+        sets,
+      };
+
+      if (existing) {
+        // Merge: replace if same exercise_id exists, else append
+        const entries = (existing.entries as any[]) || [];
+        const idx = entries.findIndex((e: any) => e.exercise_id === ex.id);
+        if (idx >= 0) entries[idx] = newEntry; else entries.push(newEntry);
+        await supabase.from('workouts').update({ entries: entries as any, updated_at: new Date().toISOString() }).eq('id', existing.id);
+      } else {
+        await supabase.from('workouts').insert({
+          user_id: user.id,
+          date: today,
+          entries: [newEntry] as any,
+        });
+      }
+
+      setSavedIds(prev => new Set(prev).add(ex.id));
+      toast.success(`${ex.name} logged — ${sets.length} set${sets.length > 1 ? 's' : ''}`);
+    } catch (err) {
+      toast.error('Failed to save');
+    } finally {
+      setSavingId(null);
+    }
+  }, [user, exerciseSets]);
 
   const currentDay = days.find(d => d.day_key === activeDay);
   const dayIntegrity = integrityBlocks.filter(b =>
@@ -269,22 +329,41 @@ export default function Train() {
                     )} />
                   </button>
                   {isExpanded && (
-                    <div className="px-3 pb-3 pt-0 flex gap-2 border-t border-foreground/10">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="flex-1 h-8 text-[10px] font-mono uppercase tracking-wider"
-                        onClick={() => setSelectedExercise(ex)}
-                      >
-                        <Play className="w-3 h-3 mr-1" /> View Details
-                      </Button>
-                      <Button
-                        size="sm"
-                        className="flex-1 h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground"
-                        onClick={() => navigate('/planner')}
-                      >
-                        <Plus className="w-3 h-3 mr-1" /> Log Set
-                      </Button>
+                    <div className="px-3 pb-3 pt-1 border-t border-foreground/10 space-y-3">
+                      {/* Inline Set Tracker */}
+                      <SetTracker
+                        sets={getExerciseSets(ex.id)}
+                        onChange={(sets) => updateExerciseSets(ex.id, sets)}
+                        showWeight
+                      />
+                      {/* Action buttons */}
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="h-8 text-[10px] font-mono uppercase tracking-wider"
+                          onClick={() => setSelectedExercise(ex)}
+                        >
+                          <Play className="w-3 h-3 mr-1" /> Details
+                        </Button>
+                        <Button
+                          size="sm"
+                          className={cn(
+                            "flex-1 h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground transition-colors",
+                            savedIds.has(ex.id) && "bg-primary/80 hover:bg-primary text-primary-foreground border-primary"
+                          )}
+                          disabled={savingId === ex.id}
+                          onClick={() => saveExerciseLog(ex)}
+                        >
+                          {savingId === ex.id ? (
+                            <span className="animate-pulse">Saving...</span>
+                          ) : savedIds.has(ex.id) ? (
+                            <><Check className="w-3 h-3 mr-1" /> Saved</>
+                          ) : (
+                            <><Save className="w-3 h-3 mr-1" /> Save Sets</>
+                          )}
+                        </Button>
+                      </div>
                     </div>
                   )}
                 </div>
