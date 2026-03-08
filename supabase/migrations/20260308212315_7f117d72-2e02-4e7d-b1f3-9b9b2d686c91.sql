@@ -1,0 +1,15 @@
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=4yE-XGDWJPg' WHERE slug = 'band-assisted-pull-up' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=8FWdmFBUNP0' WHERE slug = 'scapular-pulls' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=9dPCJCF5pQE' WHERE slug = 'weighted-pull-up' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=EznLCDBAPIU' WHERE slug = 'ring-dip' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=eywCpp0p7lg' WHERE slug = 'ring-l-sit' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=EznLCDBAPIU' WHERE slug = 'ring-muscle-up' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=7FRwuB1_l7U' WHERE slug = 'ring-push-ups' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=VQn3aGSUorc' WHERE slug = 'ring-rows' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=KyvLK70-U-0' WHERE slug = 'ring-support-hold' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=yDTWZveniyw' WHERE slug = 'skin-the-cat' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=BVw3aBFypHA' WHERE slug = '360-pull' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=3EF6p9EFdZc' WHERE slug = 'handstand-walking' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=_fGgJmq-QPU' WHERE slug = 'kip-to-handstand' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=q_UNtDuRwsw' WHERE slug = 'wall-stomach-straddle-handstand' AND youtube_url IS NULL;
+UPDATE exercises SET youtube_url = 'https://www.youtube.com/watch?v=6_vXycbD2TM' WHERE slug = 'swimming-freestyle' AND youtube_url IS NULL;
