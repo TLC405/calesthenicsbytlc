@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { Settings, LogOut, Sparkles, ArrowRight, Library, Zap, TrendingUp, Calendar } from 'lucide-react';
+import { Settings, LogOut, Sparkles, ArrowRight, Library, Zap, TrendingUp, Calendar, Flame } from 'lucide-react';
 import { CalendarView } from '@/components/Calendar/CalendarView';
 import { MasterSkillList } from '@/components/Dashboard/MasterSkillList';
+import { SkillTreeView } from '@/components/Progression/SkillTreeView';
+import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { parseISO } from 'date-fns';
 import { cn } from '@/lib/utils';
 
