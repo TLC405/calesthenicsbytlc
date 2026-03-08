@@ -201,6 +201,15 @@ export default function Library() {
       <ExerciseDetailModal exercise={selectedExercise} open={!!selectedExercise} onClose={() => setSelectedExercise(null)} onAddToWorkout={handleAddToWorkout} />
       <WorkoutModal date={workoutModalDate} open={!!workoutModalDate} onClose={() => setWorkoutModalDate(null)} onSave={fetchExercises} />
       <AddExerciseModal open={showAddModal} onClose={() => setShowAddModal(false)} onSuccess={fetchExercises} />
+
+      {/* Mobile FAB — Start Training */}
+      <button
+        onClick={() => navigate('/train')}
+        className="fixed bottom-20 right-4 z-40 md:hidden w-14 h-14 rounded-full bg-primary text-primary-foreground border-2 border-foreground shadow-lg flex items-center justify-center active:scale-95 transition-transform"
+        aria-label="Start Training"
+      >
+        <Flame className="w-6 h-6" />
+      </button>
     </div>
   );
 }
