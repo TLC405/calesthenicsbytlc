@@ -276,8 +276,8 @@ export function VideoPlayer({
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
               <div className="absolute inset-0 grid place-items-center">
-                <div className="w-16 h-16 border-2 border-background/80 bg-foreground/80 backdrop-blur-sm flex items-center justify-center transition-all duration-200 group-hover/btn:scale-110 group-hover/btn:bg-primary">
-                  <Play className="w-6 h-6 text-background ml-0.5" fill="currentColor" />
+                <div className="transition-all duration-200 group-hover/btn:scale-110">
+                  <TlcPlayIcon category={exerciseData?.category} size="lg" />
                 </div>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/90 to-transparent">
