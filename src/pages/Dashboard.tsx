@@ -120,37 +120,52 @@ export default function Dashboard() {
           <MasterSkillList />
         </section>
 
+        {/* Progression Paths */}
+        <section>
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-1.5 h-4 bg-[hsl(var(--cat-push))]" />
+            <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em]">Progression Paths</h2>
+          </div>
+          <SkillTreeView onExerciseClick={async (id) => {
+            const { data } = await supabase.from('exercises').select('*').eq('id', id).single();
+            if (data) setSelectedExercise(data);
+          }} />
+        </section>
+
         {/* Quick Actions */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <button
-            onClick={() => navigate('/library')}
-            className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-[hsl(217,91%,60%)] hover:text-white transition-colors duration-150 text-left"
-          >
-            <div className="w-10 h-10 border-2 border-current flex items-center justify-center flex-shrink-0">
-              <Library className="h-4 w-4" />
-            </div>
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <button onClick={() => navigate('/train')} className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-[hsl(var(--cat-core))] hover:text-white transition-colors duration-150 text-left">
+            <div className="w-10 h-10 border-2 border-current flex items-center justify-center flex-shrink-0"><Flame className="h-4 w-4" /></div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-display font-bold text-sm uppercase tracking-wider">Exercise Library</h3>
-              <p className="text-[10px] font-mono opacity-60 mt-0.5">120+ exercises</p>
+              <h3 className="font-display font-bold text-sm uppercase tracking-wider">Train</h3>
+              <p className="text-[10px] font-mono opacity-60 mt-0.5">Stacked cycle</p>
             </div>
             <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
           </button>
-
-          <button
-            onClick={() => navigate('/ai-lab')}
-            className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-[hsl(270,76%,55%)] hover:text-white transition-colors duration-150 text-left"
-          >
-            <div className="w-10 h-10 border-2 border-current flex items-center justify-center flex-shrink-0">
-              <Sparkles className="h-4 w-4" />
+          <button onClick={() => navigate('/library')} className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-[hsl(var(--cat-pull))] hover:text-white transition-colors duration-150 text-left">
+            <div className="w-10 h-10 border-2 border-current flex items-center justify-center flex-shrink-0"><Library className="h-4 w-4" /></div>
+            <div className="flex-1 min-w-0">
+              <h3 className="font-display font-bold text-sm uppercase tracking-wider">Library</h3>
+              <p className="text-[10px] font-mono opacity-60 mt-0.5">All exercises</p>
             </div>
+            <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+          </button>
+          <button onClick={() => navigate('/ai-lab')} className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-[hsl(var(--cat-skills))] hover:text-white transition-colors duration-150 text-left">
+            <div className="w-10 h-10 border-2 border-current flex items-center justify-center flex-shrink-0"><Sparkles className="h-4 w-4" /></div>
             <div className="flex-1 min-w-0">
               <h3 className="font-display font-bold text-sm uppercase tracking-wider">AI Coach</h3>
-              <p className="text-[10px] font-mono opacity-60 mt-0.5">Intelligent guidance</p>
+              <p className="text-[10px] font-mono opacity-60 mt-0.5">Smart guidance</p>
             </div>
             <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
           </button>
         </section>
       </main>
+
+      <ExerciseDetailModal
+        exercise={selectedExercise}
+        open={!!selectedExercise}
+        onClose={() => setSelectedExercise(null)}
+      />
     </div>
   );
 }
