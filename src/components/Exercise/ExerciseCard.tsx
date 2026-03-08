@@ -82,8 +82,8 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
             />
             {videoId && (
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-200 flex items-center justify-center">
-                <div className="w-10 h-10 border-2 border-background bg-background/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <Play className="w-4 h-4 text-foreground ml-0.5" fill="currentColor" />
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <TlcPlayIcon category={exercise.category} size="md" />
                 </div>
               </div>
             )}

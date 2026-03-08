@@ -327,9 +327,7 @@ export function VideoPlayer({
       <div className={cn("relative w-full overflow-hidden bg-background", className)}>
         <HeaderBar title="" isLive={false} onMinimize={null} />
         <div className="aspect-video flex flex-col items-center justify-center gap-4 p-6 border-x-2 border-border">
-          <div className="w-14 h-14 border-2 border-foreground bg-foreground flex items-center justify-center">
-            <Play className="w-6 h-6 text-background ml-0.5" fill="currentColor" />
-          </div>
+          <TlcPlayIcon size="lg" />
           <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">External Tutorial</p>
           <a
             href={instagramUrl}
