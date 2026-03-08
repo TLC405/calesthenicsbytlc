@@ -171,12 +171,12 @@ export default function Train() {
         const entries = (existing.entries as any[]) || [];
         const idx = entries.findIndex((e: any) => e.exercise_id === ex.id);
         if (idx >= 0) entries[idx] = newEntry; else entries.push(newEntry);
-        await supabase.from('workouts').update({ entries, updated_at: new Date().toISOString() }).eq('id', existing.id);
+        await supabase.from('workouts').update({ entries: entries as any, updated_at: new Date().toISOString() }).eq('id', existing.id);
       } else {
         await supabase.from('workouts').insert({
           user_id: user.id,
           date: today,
-          entries: [newEntry],
+          entries: [newEntry] as any,
         });
       }
 
