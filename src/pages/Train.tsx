@@ -329,22 +329,41 @@ export default function Train() {
                     )} />
                   </button>
                   {isExpanded && (
-                    <div className="px-3 pb-3 pt-0 flex gap-2 border-t border-foreground/10">
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        className="flex-1 h-8 text-[10px] font-mono uppercase tracking-wider"
-                        onClick={() => setSelectedExercise(ex)}
-                      >
-                        <Play className="w-3 h-3 mr-1" /> View Details
-                      </Button>
-                      <Button
-                        size="sm"
-                        className="flex-1 h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground"
-                        onClick={() => navigate('/planner')}
-                      >
-                        <Plus className="w-3 h-3 mr-1" /> Log Set
-                      </Button>
+                    <div className="px-3 pb-3 pt-1 border-t border-foreground/10 space-y-3">
+                      {/* Inline Set Tracker */}
+                      <SetTracker
+                        sets={getExerciseSets(ex.id)}
+                        onChange={(sets) => updateExerciseSets(ex.id, sets)}
+                        showWeight
+                      />
+                      {/* Action buttons */}
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="h-8 text-[10px] font-mono uppercase tracking-wider"
+                          onClick={() => setSelectedExercise(ex)}
+                        >
+                          <Play className="w-3 h-3 mr-1" /> Details
+                        </Button>
+                        <Button
+                          size="sm"
+                          className={cn(
+                            "flex-1 h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground transition-colors",
+                            savedIds.has(ex.id) && "bg-green-600 hover:bg-green-700 text-white border-green-700"
+                          )}
+                          disabled={savingId === ex.id}
+                          onClick={() => saveExerciseLog(ex)}
+                        >
+                          {savingId === ex.id ? (
+                            <span className="animate-pulse">Saving...</span>
+                          ) : savedIds.has(ex.id) ? (
+                            <><Check className="w-3 h-3 mr-1" /> Saved</>
+                          ) : (
+                            <><Save className="w-3 h-3 mr-1" /> Save Sets</>
+                          )}
+                        </Button>
+                      </div>
                     </div>
                   )}
                 </div>
