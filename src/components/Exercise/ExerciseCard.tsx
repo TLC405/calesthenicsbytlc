@@ -46,7 +46,7 @@ const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'El
 export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: ExerciseCardProps) {
   const videoId = exercise.youtube_url ? getYouTubeVideoId(exercise.youtube_url) : null;
   const thumbnailUrl = videoId 
-    ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
+    ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
     : exercise.image_url || null;
   const style = categoryStyle[exercise.category] || { border: 'border-l-muted', bg: 'bg-muted', text: 'text-muted-foreground' };
   const level = exercise.difficulty_level || 1;
