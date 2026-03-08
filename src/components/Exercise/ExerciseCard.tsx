@@ -1,4 +1,5 @@
-import { Play, Plus, Zap, Dumbbell } from 'lucide-react';
+import { Plus, Dumbbell } from 'lucide-react';
+import { TlcPlayIcon } from './TlcPlayIcon';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
