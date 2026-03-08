@@ -1,112 +1,108 @@
 
 
-# Atomic UI/UX Overhaul + Music Fix + Loading Screen Replacement
+# Complete Visual Redesign — World-Class Component System
 
-## Diagnosis Summary
+## Problem
+The current UI feels flat and utilitarian. While the brutalist foundation is strong, the execution lacks visual depth, hierarchy, and polish. Cards feel boxy, typography lacks rhythm, spacing is inconsistent, and there's no visual "wow" factor. The app looks like a developer prototype, not a premium fitness product.
 
-**What's broken:**
-1. **LoadingScreen** — still references the old uploaded photo and "TLC's Hybrid" branding. It's not actually used anywhere in `App.tsx` or `main.tsx` (never imported), so it's dead code but still exists.
-2. **Music doesn't play** — The YouTube iframe approach relies on `postMessage` to control playback via the YouTube IFrame API. However, the iframe is rendered with `enablejsapi=1` but never loads the YouTube IFrame Player API script (`https://www.youtube.com/iframe_api`). The `postMessage` JSON format used is incorrect — YouTube's IFrame API expects the iframe to be initialized through the API, not via raw postMessage. The iframe also gets re-created on every state change (since `embedSrc` changes when `isPlaying` toggles, causing React to unmount/remount the iframe).
-3. **Old uploaded photo** — Still referenced in `Auth.tsx`, `NotFound.tsx`, and `LoadingScreen.tsx`.
-4. **Settings page** — Works fine (verified code), but the music section only appears after login (Settings redirects to `/auth` if not logged in).
+## Design Direction
+Evolve from "raw brutalist" to **"Premium Athletic Brutalism"** — keeping the sharp edges, mono typography, and category colors, but adding:
+- Layered depth via subtle gradients and micro-shadows
+- Better typographic hierarchy with size contrast
+- Breathing room through improved spacing
+- Visual rhythm with staggered layouts and asymmetry
+- Polished micro-interactions
+- A cohesive header system across all pages
 
-## Plan
+## Files to Change
 
-### Phase 1: Fix Music System (Critical)
-**Problem**: The MusicProvider creates a hidden YouTube iframe and tries to control it via `postMessage`, but the YouTube IFrame Player API is never loaded. The iframe src also changes on play/pause, causing remounts.
+### 1. `src/index.css` — Design Token Refresh
+- Soften the base: `--radius: 0.375rem` (subtle rounding, not flat boxes)
+- Add new tokens: `--surface`, `--surface-raised`, `--glow-primary`
+- Refine shadow system: add colored shadow variants per category
+- Add a subtle body texture/grain background
 
-**Fix**:
-- Rewrite `MusicProvider.tsx` to use the **YouTube IFrame Player API** properly:
-  - Load the `https://www.youtube.com/iframe_api` script dynamically
-  - Create the player via `new YT.Player()` with event handlers
-  - Use `player.playVideo()`, `player.pauseVideo()`, `player.setVolume()` directly instead of postMessage
-  - Keep iframe stable (don't change src on play/pause)
-  - Store player ref and only create once
+### 2. `src/components/Layout/MobileNav.tsx` — Premium Bottom Nav
+- Reduce to 5 tabs max (merge Atlas into Library, remove separate Settings tab — add settings gear to headers instead)
+- Tabs: Home, Train, Library, Atlas, AI
+- Active tab: filled icon + category color dot indicator (not background fill)
+- Larger touch targets, better icon sizing
+- Frosted glass backdrop effect (`backdrop-blur-xl bg-background/80`)
 
-### Phase 2: Full Persistent Mini-Player Bar
-**Current**: Tiny 2-button floating control in bottom-right corner.
+### 3. `src/pages/Dashboard.tsx` — Hero Dashboard
+- **Hero greeting section**: Large display name with time-of-day greeting, subtle gradient accent
+- **Stats row**: Redesign as horizontal scroll cards with icon + large number + sparkline placeholder, each with category border-left accent
+- **Calendar**: Keep but add subtle card elevation
+- **Categories grid**: Redesign `MasterSkillList` cards with icon backgrounds, better hover states, and a "featured" larger card for the most recent category
+- **Quick actions**: Redesign as full-width stacked action cards with left icon, description, and right arrow
 
-**Upgrade to**: A full-width mini-player bar fixed above MobileNav with:
-- Play/Pause button with animated equalizer bars when playing
-- Track name display (or "I Got The Power" default)
-- Volume slider (collapsible)
-- On/Off toggle switch
-- Source indicator (YouTube icon)
-- Positioned `bottom-14` on mobile (above nav), `bottom-0` on desktop
+### 4. `src/components/Dashboard/MasterSkillList.tsx` — Category Cards V2
+- Larger cards with gradient backgrounds (subtle)
+- Icon in a colored circle, not a colored square
+- Better hover: scale + shadow lift
+- Exercise count badge per category
 
-Rewrite `MusicControl.tsx` as a proper bar component.
+### 5. `src/components/Calendar/CalendarView.tsx` — Calendar Polish
+- Softer borders, better day cell styling
+- Active day: filled circle background instead of ring
+- Workout indicator: small colored dot below number, not a full-width bar
 
-### Phase 3: Replace Loading Screen
-**Current**: Dead component with old branding and uploaded photo.
+### 6. `src/components/Exercise/ExerciseCard.tsx` — Premium Exercise Cards
+- Add subtle hover elevation (translateY + shadow increase)
+- Better thumbnail overlay: gradient from bottom for text readability
+- Category pill: use filled badge with white text instead of bordered
+- Muscle tags: pill-shaped with subtle background
+- "Add to Workout" button: primary color fill, not outline
 
-**Replace with**: A brutalist, on-brand loading screen used during auth initialization:
-- Black background with the Zap icon logo (matching Index page)
-- "I GOT THE POWA" text
-- Animated progress bar using category colors cycling through
-- "Loading..." in mono uppercase
-- Wire it into `App.tsx` — show while `AuthProvider.loading` is true
+### 7. `src/pages/Library.tsx` — Library Page Polish
+- Sticky header with frosted glass effect
+- Search bar: larger, with subtle shadow focus state
+- Category tabs: pill-shaped with filled active state
+- Grid: increase gap, add staggered animation on scroll
 
-### Phase 4: Remove Old Uploaded Photo References
-- `Auth.tsx` line 10: Replace `const logo = '/lovable-uploads/...'` with the Zap icon component (consistent with Index/Dashboard)
-- `NotFound.tsx` lines 17-22: Replace img with Zap icon in purple box
-- Delete or fully rewrite `LoadingScreen.tsx`
+### 8. `src/pages/Train.tsx` — Training Page Overhaul
+- Day selector: horizontal scroll with card-style buttons, active day gets a thick bottom border + colored background
+- Current day info: hero card with large title, emphasis subtitle
+- Exercise list: cards with left color accent, thumbnail, better expand animation
+- Set tracker area: cleaner layout with better contrast
 
-### Phase 5: Landing Page Redesign
-**Current issues**: Functional but static. The progression paths and calendar preview are hardcoded and non-interactive.
+### 9. `src/pages/Index.tsx` — Landing Page Premium
+- Hero section: add a subtle radial gradient glow behind the logo
+- Feature cards: add glassmorphism effect
+- Path explorer: better visual connectors between steps
+- CTA button: add pulse/glow animation
 
-**Upgrades**:
-- Add animated entrance transitions using CSS keyframes (already defined in index.css)
-- Make the feature grid cards interactive with hover color fills matching category
-- Add a "Now Playing" indicator if music is active (visible on landing too)
-- Improve the CTA section with more visual weight
-- Add a "scroll down" indicator between hero and paths section
-- Make progression path steps animate in sequentially on scroll
+### 10. `src/pages/Auth.tsx` — Auth Page Polish
+- Left panel: add animated gradient or pattern
+- Form: softer inputs with better focus states
+- Submit button: add loading spinner, gradient background
 
-### Phase 6: Colorful Brutalist Evolution Across All Pages
+### 11. `src/pages/Anatomy.tsx` — Muscle Atlas Polish
+- Better panel layout on mobile
+- Muscle pills: rounded, larger touch targets
+- Detail panel: card elevation, better section dividers
 
-**Dashboard**:
-- Stats cards: Add subtle pulse animation on streak when active
-- Category grid: Add exercise count per category from DB
-- Quick actions: Add gradient color fills on hover instead of solid
+### 12. `src/pages/Settings.tsx` — Settings Cleanup
+- Section cards: softer borders, better spacing
+- Form elements: consistent styling
 
-**Library**:
-- Exercise cards: Larger thumbnails, better fallback with category-colored gradient backgrounds instead of plain gray
-- Search: Add live result count feedback
+### 13. `src/components/Exercise/ExerciseDetailModal.tsx` — Modal Redesign
+- Better header with category color accent
+- Cleaner section separation
+- Progression ladder: better visual timeline
 
-**Auth page**:
-- Replace the logo img with Zap icon
-- Add category color accents to the left panel stats
+### 14. `src/components/LoadingScreen.tsx` — Loading Screen
+- Add branded animation (pulsing logo with category colors cycling)
 
-**AI Lab**:
-- Apply brutalist card styling to chat bubbles (borders instead of rounded)
-- Message input: brutalist border treatment
+## Implementation Order
+1. CSS tokens and base styles (foundation)
+2. MobileNav (most visible, sets the tone)
+3. Dashboard + MasterSkillList + CalendarView (home screen impact)
+4. ExerciseCard + Library (content browsing)
+5. Train page (core workflow)
+6. Remaining pages (Index, Auth, Anatomy, Settings)
+7. Modals and loading screen
 
-**Settings**:
-- Add the music section visual polish (playing indicator)
-
-**All pages**:
-- Consistent header treatment with category accent strip
-
-## Files to Create/Modify
-
-| File | Action |
-|------|--------|
-| `src/providers/MusicProvider.tsx` | Rewrite with YouTube IFrame Player API |
-| `src/components/Music/MusicControl.tsx` | Full mini-player bar |
-| `src/components/LoadingScreen.tsx` | Complete rewrite with brutalist splash |
-| `src/App.tsx` | Add loading screen during auth init |
-| `src/pages/Auth.tsx` | Remove uploaded photo, use Zap icon |
-| `src/pages/NotFound.tsx` | Remove uploaded photo, use Zap icon |
-| `src/pages/Index.tsx` | Enhanced animations and interactions |
-| `src/pages/Dashboard.tsx` | Category counts, animation polish |
-| `src/pages/Library.tsx` | Better card fallbacks, search UX |
-| `src/pages/AILab.tsx` | Brutalist chat styling |
-| `src/components/AILab/AILabChat.tsx` | Brutalist message bubbles |
-
-## Technical Notes
-
-- **YouTube IFrame API** requires a global `onYouTubeIframeAPIReady` callback. The provider will set this up and create the player instance once.
-- The player div needs to be visible in DOM (not `display:none`) — use `position:absolute; width:0; height:0; overflow:hidden` instead of `className="hidden"`.
-- No new dependencies needed — the YouTube API is loaded via script tag.
-- Music state persists in localStorage + profiles table (already working).
+## Scope
+~14 files modified across 7 implementation steps. Each step produces a visually complete improvement. No backend/database changes needed — this is purely frontend styling and component restructuring.
 
