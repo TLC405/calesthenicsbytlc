@@ -21,6 +21,7 @@ const categories = [
   { name: 'Yoga', icon: Flower2, description: 'Poses, flows, balance', color: 'bg-[hsl(330,65%,55%)]', hoverBg: 'hover:bg-[hsl(330,65%,55%)]/10' },
   { name: 'Mobility', icon: Wind, description: 'Dynamic drills, joint work', color: 'bg-[hsl(174,72%,40%)]', hoverBg: 'hover:bg-[hsl(174,72%,40%)]/10' },
   { name: 'Flexibility', icon: StretchHorizontal, description: 'Splits, stretches, ROM', color: 'bg-[hsl(40,96%,50%)]', hoverBg: 'hover:bg-[hsl(40,96%,50%)]/10' },
+  { name: 'Rings', icon: Target, description: 'Supports, dips, muscle-ups', color: 'bg-[hsl(40,70%,40%)]', hoverBg: 'hover:bg-[hsl(40,70%,40%)]/10' },
 ];
 
 export function MasterSkillList() {
