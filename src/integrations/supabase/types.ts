@@ -54,6 +54,7 @@ export type Database = {
           created_at: string
           created_by: string | null
           cues: Json | null
+          description: string | null
           difficulty_level: number | null
           equipment: string[]
           id: string
@@ -63,8 +64,14 @@ export type Database = {
           name: string
           primary_muscles: string[]
           progression_parent_id: string | null
+          recovery_muscle: string | null
+          recovery_nervous: string | null
+          recovery_tendon: string | null
           secondary_muscles: string[]
+          sets_reps: string | null
           slug: string
+          stabilizer_muscles: string[] | null
+          tendons_involved: string[] | null
           updated_at: string
           video_verified: boolean | null
           youtube_url: string | null
@@ -76,6 +83,7 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           cues?: Json | null
+          description?: string | null
           difficulty_level?: number | null
           equipment?: string[]
           id?: string
@@ -85,8 +93,14 @@ export type Database = {
           name: string
           primary_muscles?: string[]
           progression_parent_id?: string | null
+          recovery_muscle?: string | null
+          recovery_nervous?: string | null
+          recovery_tendon?: string | null
           secondary_muscles?: string[]
+          sets_reps?: string | null
           slug: string
+          stabilizer_muscles?: string[] | null
+          tendons_involved?: string[] | null
           updated_at?: string
           video_verified?: boolean | null
           youtube_url?: string | null
@@ -98,6 +112,7 @@ export type Database = {
           created_at?: string
           created_by?: string | null
           cues?: Json | null
+          description?: string | null
           difficulty_level?: number | null
           equipment?: string[]
           id?: string
@@ -107,8 +122,14 @@ export type Database = {
           name?: string
           primary_muscles?: string[]
           progression_parent_id?: string | null
+          recovery_muscle?: string | null
+          recovery_nervous?: string | null
+          recovery_tendon?: string | null
           secondary_muscles?: string[]
+          sets_reps?: string | null
           slug?: string
+          stabilizer_muscles?: string[] | null
+          tendons_involved?: string[] | null
           updated_at?: string
           video_verified?: boolean | null
           youtube_url?: string | null
@@ -144,6 +165,111 @@ export type Database = {
           enabled?: boolean
           key?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      integrity_blocks: {
+        Row: {
+          applies_to_days: string[] | null
+          created_at: string
+          drills: string[] | null
+          duration: string
+          id: string
+          key_cues: string[] | null
+          slug: string
+          title: string
+        }
+        Insert: {
+          applies_to_days?: string[] | null
+          created_at?: string
+          drills?: string[] | null
+          duration: string
+          id?: string
+          key_cues?: string[] | null
+          slug: string
+          title: string
+        }
+        Update: {
+          applies_to_days?: string[] | null
+          created_at?: string
+          drills?: string[] | null
+          duration?: string
+          id?: string
+          key_cues?: string[] | null
+          slug?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      learning_principles: {
+        Row: {
+          caution: string | null
+          created_at: string
+          how_to_apply: string
+          id: string
+          micro_summary: string
+          slug: string
+          sources: string[] | null
+          title: string
+          when_to_use: string
+          why_it_works: string
+        }
+        Insert: {
+          caution?: string | null
+          created_at?: string
+          how_to_apply: string
+          id?: string
+          micro_summary: string
+          slug: string
+          sources?: string[] | null
+          title: string
+          when_to_use?: string
+          why_it_works: string
+        }
+        Update: {
+          caution?: string | null
+          created_at?: string
+          how_to_apply?: string
+          id?: string
+          micro_summary?: string
+          slug?: string
+          sources?: string[] | null
+          title?: string
+          when_to_use?: string
+          why_it_works?: string
+        }
+        Relationships: []
+      }
+      non_negotiables: {
+        Row: {
+          applies_to: string[] | null
+          created_at: string
+          fix: string
+          id: string
+          short_cue: string
+          slug: string
+          title: string
+          violations: string[] | null
+        }
+        Insert: {
+          applies_to?: string[] | null
+          created_at?: string
+          fix: string
+          id?: string
+          short_cue: string
+          slug: string
+          title: string
+          violations?: string[] | null
+        }
+        Update: {
+          applies_to?: string[] | null
+          created_at?: string
+          fix?: string
+          id?: string
+          short_cue?: string
+          slug?: string
+          title?: string
+          violations?: string[] | null
         }
         Relationships: []
       }
@@ -235,6 +361,42 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      training_days: {
+        Row: {
+          created_at: string
+          day_key: string
+          emphasis: string
+          exercise_categories: string[] | null
+          id: string
+          integrity_block_slugs: string[] | null
+          label: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          day_key: string
+          emphasis: string
+          exercise_categories?: string[] | null
+          id?: string
+          integrity_block_slugs?: string[] | null
+          label: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          day_key?: string
+          emphasis?: string
+          exercise_categories?: string[] | null
+          id?: string
+          integrity_block_slugs?: string[] | null
+          label?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
       }
       user_exercise_progress: {
         Row: {
