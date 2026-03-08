@@ -16,6 +16,7 @@ const categoryAccent: Record<string, string> = {
   'Yoga': 'data-[active=true]:bg-pink-500 data-[active=true]:text-white data-[active=true]:border-pink-500',
   'Mobility': 'data-[active=true]:bg-teal-500 data-[active=true]:text-white data-[active=true]:border-teal-500',
   'Flexibility': 'data-[active=true]:bg-amber-500 data-[active=true]:text-white data-[active=true]:border-amber-500',
+  'Rings': 'data-[active=true]:bg-yellow-600 data-[active=true]:text-white data-[active=true]:border-yellow-600',
 };
 
 export function CategoryTabs({ categories, activeCategory, onCategoryChange, counts }: CategoryTabsProps) {

@@ -27,6 +27,9 @@ const pathColors: Record<string, string> = {
   core: 'hsl(var(--cat-core))',
   legs: 'hsl(var(--cat-legs))',
   mobility: 'hsl(var(--cat-mobility))',
+  rings: 'hsl(40, 70%, 40%)',
+  flexibility: 'hsl(40, 96%, 50%)',
+  yoga: 'hsl(330, 65%, 55%)',
 };
 
 const difficultyLabels: Record<number, string> = {
