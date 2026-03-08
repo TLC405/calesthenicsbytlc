@@ -48,27 +48,27 @@ const categoryColors: Record<string, string> = {
   Yoga: 'bg-[hsl(var(--cat-skills))]',
 };
 
-const MUSCLE_INFO: Record<string, { description: string; function: string; tips: string }> = {
-  chest: { description: 'The pectoralis major/minor form the chest wall.', function: 'Horizontal pushing, adduction, internal rotation of the shoulder.', tips: 'Focus on full ROM — stretch at bottom, squeeze at top. Vary angles for complete development.' },
-  shoulders: { description: 'Three-headed deltoid muscle caps the shoulder.', function: 'Shoulder flexion, abduction, extension, and rotation.', tips: 'Train all 3 heads. Prioritize overhead stability and scapular health.' },
-  biceps: { description: 'Two-headed muscle on the upper arm front.', function: 'Elbow flexion, forearm supination.', tips: 'Supinated grip targets the long head. Don\'t neglect eccentric control.' },
-  triceps: { description: 'Three-headed muscle on the upper arm back.', function: 'Elbow extension, shoulder extension.', tips: 'Overhead work targets the long head. Push-ups and dips are king.' },
-  forearms: { description: 'Flexors and extensors of the wrist and fingers.', function: 'Grip strength, wrist flexion/extension.', tips: 'Dead hangs, farmer carries, and wrist curls build bulletproof forearms.' },
-  abs: { description: 'Rectus abdominis — the "six-pack" muscles.', function: 'Trunk flexion, anti-extension, breathing support.', tips: 'Train anti-extension (planks, hollow holds) before spinal flexion (crunches).' },
+const MUSCLE_INFO: Record<string, { description: string; function: string; tips: string; caution?: string }> = {
+  chest: { description: 'The pectoralis major/minor form the chest wall.', function: 'Horizontal pushing, adduction, internal rotation of the shoulder.', tips: 'Focus on full ROM — stretch at bottom, squeeze at top. Vary angles for complete development.', caution: 'Tight pecs pull shoulders forward — always balance with upper-back work. Avoid excessive dip depth with shoulder issues.' },
+  shoulders: { description: 'Three-headed deltoid muscle caps the shoulder.', function: 'Shoulder flexion, abduction, extension, and rotation.', tips: 'Train all 3 heads. Prioritize overhead stability and scapular health.', caution: 'Impingement risk with heavy overhead pressing if scapula isn\'t properly stabilized. Warm up rotator cuff before any pressing.' },
+  biceps: { description: 'Two-headed muscle on the upper arm front.', function: 'Elbow flexion, forearm supination.', tips: 'Supinated grip targets the long head. Don\'t neglect eccentric control.', caution: 'Biceps tendon strain common in ring work and muscle-ups. Ease into supinated pulling.' },
+  triceps: { description: 'Three-headed muscle on the upper arm back.', function: 'Elbow extension, shoulder extension.', tips: 'Overhead work targets the long head. Push-ups and dips are king.', caution: 'Elbow hyperextension risk during lockouts. Control the end range, especially on dips and HSPU.' },
+  forearms: { description: 'Flexors and extensors of the wrist and fingers.', function: 'Grip strength, wrist flexion/extension.', tips: 'Dead hangs, farmer carries, and wrist curls build bulletproof forearms.', caution: 'Wrist pain is common in handstand and planche training. Always warm up with wrist circles and loaded extensions.' },
+  abs: { description: 'Rectus abdominis — the "six-pack" muscles.', function: 'Trunk flexion, anti-extension, breathing support.', tips: 'Train anti-extension (planks, hollow holds) before spinal flexion (crunches).', caution: 'Repeated spinal flexion under load can stress lumbar discs. Prioritize hollow body and anti-extension work.' },
   obliques: { description: 'Lateral core muscles for rotation and side-bending.', function: 'Trunk rotation, lateral flexion, anti-rotation.', tips: 'Pallof presses and side planks build functional oblique strength.' },
-  quads: { description: 'Four-headed muscle group on the front thigh.', function: 'Knee extension, hip flexion (rectus femoris).', tips: 'Deep squats with full ROM. Don\'t skip sissy squats for VMO development.' },
-  adductors: { description: 'Inner thigh muscles that draw the leg inward.', function: 'Hip adduction, stabilization during movement.', tips: 'Copenhagen planks and cossack squats are excellent adductor builders.' },
+  quads: { description: 'Four-headed muscle group on the front thigh.', function: 'Knee extension, hip flexion (rectus femoris).', tips: 'Deep squats with full ROM. Don\'t skip sissy squats for VMO development.', caution: 'Patellar tendon stress in deep squats and pistol squats. Build up progressively — don\'t rush depth.' },
+  adductors: { description: 'Inner thigh muscles that draw the leg inward.', function: 'Hip adduction, stabilization during movement.', tips: 'Copenhagen planks and cossack squats are excellent adductor builders.', caution: 'High groin strain risk in pancake stretches and wide straddle work. Warm up thoroughly.' },
   calves: { description: 'Gastrocnemius and soleus muscles of the lower leg.', function: 'Ankle plantar flexion (pointing toes down).', tips: 'Train both bent-knee (soleus) and straight-knee (gastrocnemius) variations.' },
-  traps: { description: 'Large diamond-shaped muscle of the upper back.', function: 'Scapular elevation, retraction, depression.', tips: 'Shrugs hit upper traps; rows and face pulls hit mid/lower traps.' },
-  lats: { description: 'Broadest muscle of the back — creates the V-taper.', function: 'Shoulder extension, adduction, internal rotation.', tips: 'Pull-ups are the gold standard. Focus on initiating with the lats, not the arms.' },
+  traps: { description: 'Large diamond-shaped muscle of the upper back.', function: 'Scapular elevation, retraction, depression.', tips: 'Shrugs hit upper traps; rows and face pulls hit mid/lower traps.', caution: 'Overactive upper traps cause neck tension and headaches. Balance with lower trap work (Y-raises, prone shrugs).' },
+  lats: { description: 'Broadest muscle of the back — creates the V-taper.', function: 'Shoulder extension, adduction, internal rotation.', tips: 'Pull-ups are the gold standard. Focus on initiating with the lats, not the arms.', caution: 'Tight lats restrict overhead mobility. If handstand line is compromised, stretch lats with wall slides.' },
   'upper-back': { description: 'Rhomboids and rear delts between the shoulder blades.', function: 'Scapular retraction, posterior shoulder stability.', tips: 'Face pulls and band pull-aparts daily keep shoulders healthy.' },
-  'lower-back': { description: 'Erector spinae muscles along the spine.', function: 'Spinal extension, postural support, anti-flexion.', tips: 'Strengthen with back extensions and Jefferson curls. Never neglect this area.' },
-  glutes: { description: 'The largest muscle in the body — the gluteal complex.', function: 'Hip extension, abduction, external rotation.', tips: 'Bridges, thrusts, and deep squats. Activate glutes before heavy lifting.' },
-  hamstrings: { description: 'Three muscles on the posterior thigh.', function: 'Knee flexion, hip extension.', tips: 'Nordic curls are elite for hamstring strength and injury prevention.' },
-  'hip-flexors': { description: 'Iliopsoas and rectus femoris cross the hip joint.', function: 'Hip flexion, lumbar stabilization.', tips: 'Stretch if tight, but also strengthen! Hanging leg raises build hip flexor power.' },
-  neck: { description: 'Sternocleidomastoid and deep neck flexors/extensors.', function: 'Head rotation, flexion, extension.', tips: 'Neck curls and extensions with light resistance build resilience.' },
-  serratus: { description: 'Serratus anterior wraps the ribcage under the scapula.', function: 'Scapular protraction, upward rotation.', tips: 'Push-up plus and serratus punches. Essential for overhead stability.' },
-  tibialis: { description: 'Tibialis anterior runs along the shin.', function: 'Ankle dorsiflexion (pulling toes up).', tips: 'Tibialis raises prevent shin splints and improve squat depth.' },
+  'lower-back': { description: 'Erector spinae muscles along the spine.', function: 'Spinal extension, postural support, anti-flexion.', tips: 'Strengthen with back extensions and Jefferson curls. Never neglect this area.', caution: 'High compression during heavy deadlifts and back levers. Never train lower back fatigued — it protects your spine.' },
+  glutes: { description: 'The largest muscle in the body — the gluteal complex.', function: 'Hip extension, abduction, external rotation.', tips: 'Bridges, thrusts, and deep squats. Activate glutes before heavy lifting.', caution: 'Weak glutes force lower back to compensate. If you get low back pain in squats, your glutes may be underactive.' },
+  hamstrings: { description: 'Three muscles on the posterior thigh.', function: 'Knee flexion, hip extension.', tips: 'Nordic curls are elite for hamstring strength and injury prevention.', caution: 'Very high tear risk during explosive movements. Nordic curls are the #1 injury prevention exercise — do them weekly.' },
+  'hip-flexors': { description: 'Iliopsoas and rectus femoris cross the hip joint.', function: 'Hip flexion, lumbar stabilization.', tips: 'Stretch if tight, but also strengthen! Hanging leg raises build hip flexor power.', caution: 'Tight hip flexors cause anterior pelvic tilt and low back pain. Stretch daily if you sit for long periods.' },
+  neck: { description: 'Sternocleidomastoid and deep neck flexors/extensors.', function: 'Head rotation, flexion, extension.', tips: 'Neck curls and extensions with light resistance build resilience.', caution: '⚠️ HIGH PRESSURE in handstands, headstands, and neck bridges! Never load a cold neck. Build cervical endurance gradually. Compression injuries are serious and slow to heal.' },
+  serratus: { description: 'Serratus anterior wraps the ribcage under the scapula.', function: 'Scapular protraction, upward rotation.', tips: 'Push-up plus and serratus punches. Essential for overhead stability.', caution: 'Weak serratus = winging scapula. If your shoulder blade sticks out during push-ups, prioritize this muscle.' },
+  tibialis: { description: 'Tibialis anterior runs along the shin.', function: 'Ankle dorsiflexion (pulling toes up).', tips: 'Tibialis raises prevent shin splints and improve squat depth.', caution: 'Shin splints are caused by weak tibialis. 25 reps of tib raises daily fixes this for most people.' },
 };
 
 export default function Anatomy() {
@@ -166,10 +166,30 @@ export default function Anatomy() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left: Body map */}
           <div className="relative">
-            <div className="text-center mb-2">
-              <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
-                {view === 'front' ? '— Front View —' : '— Back View —'}
-              </span>
+            {/* Front/Back toggle tabs directly on body map */}
+            <div className="flex items-center justify-center gap-0 mb-3">
+              <button
+                onClick={() => setView('front')}
+                className={cn(
+                  "px-4 py-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.2em] border-2 border-foreground transition-all",
+                  view === 'front'
+                    ? "bg-foreground text-background"
+                    : "bg-background text-foreground hover:bg-muted"
+                )}
+              >
+                ◉ Front View
+              </button>
+              <button
+                onClick={() => setView('back')}
+                className={cn(
+                  "px-4 py-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.2em] border-2 border-foreground border-l-0 transition-all",
+                  view === 'back'
+                    ? "bg-foreground text-background"
+                    : "bg-background text-foreground hover:bg-muted"
+                )}
+              >
+                ◉ Back View
+              </button>
             </div>
             <div className="border-2 border-foreground/20 rounded-lg p-4 bg-muted/30 flex items-center justify-center min-h-[55vh]">
               <MuscleMap
@@ -178,16 +198,19 @@ export default function Anatomy() {
                 view={view}
               />
             </div>
-            {/* Quick muscle pills */}
+            {/* ALL muscle pills — always visible */}
             <div className="flex flex-wrap gap-1.5 mt-3 justify-center">
-              {MUSCLE_GROUPS.filter(m =>
-                view === 'front'
-                  ? !['traps', 'lats', 'upper-back', 'lower-back', 'glutes', 'hamstrings'].includes(m.id)
-                  : !['chest', 'abs', 'adductors', 'serratus', 'tibialis', 'hip-flexors'].includes(m.id)
-              ).map(m => (
+              {MUSCLE_GROUPS.map(m => (
                 <button
                   key={m.id}
-                  onClick={() => setSelectedMuscle(selectedMuscle === m.id ? null : m.id)}
+                  onClick={() => {
+                    setSelectedMuscle(selectedMuscle === m.id ? null : m.id);
+                    // Auto-switch view if the muscle is primarily on the other side
+                    const backMuscles = ['traps', 'lats', 'upper-back', 'lower-back', 'glutes', 'hamstrings'];
+                    const frontMuscles = ['chest', 'abs', 'adductors', 'serratus', 'tibialis', 'hip-flexors'];
+                    if (backMuscles.includes(m.id)) setView('back');
+                    else if (frontMuscles.includes(m.id)) setView('front');
+                  }}
                   className={cn(
                     "px-2 py-0.5 text-[8px] font-mono uppercase tracking-wider border-2 rounded-sm transition-all",
                     selectedMuscle === m.id
@@ -245,6 +268,12 @@ export default function Anatomy() {
                             <p className="text-[8px] font-mono uppercase tracking-wider text-primary mb-1">Pro Tip</p>
                             <p className="text-foreground text-[11px]">{muscleInfo.tips}</p>
                           </div>
+                          {muscleInfo.caution && (
+                            <div className="border-2 border-destructive/40 bg-destructive/5 rounded-sm p-2.5">
+                              <p className="text-[8px] font-mono uppercase tracking-wider text-destructive mb-1">⚠️ Caution</p>
+                              <p className="text-foreground text-[11px]">{muscleInfo.caution}</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                     )}
