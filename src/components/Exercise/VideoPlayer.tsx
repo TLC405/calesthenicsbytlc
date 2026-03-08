@@ -33,10 +33,10 @@ function buildEmbedSrc(youtubeId: string, startSec?: number, privacyEnhanced = t
     playsinline: "1",
     rel: "0",
     showinfo: "0",
-    controls: "0",
+    controls: "1",
     iv_load_policy: "3",
     disablekb: "0",
-    fs: "0",
+    fs: "1",
     cc_load_policy: "0",
   });
   
