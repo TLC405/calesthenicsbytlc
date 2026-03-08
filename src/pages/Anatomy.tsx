@@ -268,7 +268,12 @@ export default function Anatomy() {
                             <p className="text-[8px] font-mono uppercase tracking-wider text-primary mb-1">Pro Tip</p>
                             <p className="text-foreground text-[11px]">{muscleInfo.tips}</p>
                           </div>
-                        </div>
+                          {muscleInfo.caution && (
+                            <div className="border-2 border-destructive/40 bg-destructive/5 rounded-sm p-2.5">
+                              <p className="text-[8px] font-mono uppercase tracking-wider text-destructive mb-1">⚠️ Caution</p>
+                              <p className="text-foreground text-[11px]">{muscleInfo.caution}</p>
+                            </div>
+                          )}
                       </div>
                     )}
                   </div>
