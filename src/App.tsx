@@ -15,6 +15,7 @@ import Planner from "./pages/Planner";
 import Library from "./pages/Library";
 import AILab from "./pages/AILab";
 import Settings from "./pages/Settings";
+import Train from "./pages/Train";
 import NotFound from "./pages/NotFound";
 import "./styles/neumorph.css";
 
