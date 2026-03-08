@@ -16,6 +16,7 @@ import {
   ChevronRight,
   RotateCcw,
   Info,
+  PersonStanding,
 } from 'lucide-react';
 
 interface Exercise {
