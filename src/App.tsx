@@ -36,6 +36,7 @@ function AppContent() {
           <Route path="/planner" element={<Planner />} />
           <Route path="/library" element={<Library />} />
           <Route path="/ai-lab" element={<AILab />} />
+          <Route path="/train" element={<Train />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
