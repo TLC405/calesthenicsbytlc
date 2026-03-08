@@ -84,6 +84,9 @@ export default function Train() {
   const [loading, setLoading] = useState(true);
   const [showPicker, setShowPicker] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [exerciseSets, setExerciseSets] = useState<Record<string, SetData[]>>({});
+  const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
+  const [savingId, setSavingId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) { navigate('/auth'); return; }
