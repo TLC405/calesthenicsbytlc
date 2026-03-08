@@ -130,9 +130,64 @@ export default function Train() {
   };
 
   const handlePickerSelect = (exercise: any) => {
-    // Navigate to detail modal for the picked exercise
     setSelectedExercise(exercise as Exercise);
   };
+
+  const getExerciseSets = (exId: string): SetData[] => {
+    return exerciseSets[exId] || [{ reps: 10 }];
+  };
+
+  const updateExerciseSets = (exId: string, sets: SetData[]) => {
+    setExerciseSets(prev => ({ ...prev, [exId]: sets }));
+    // Remove saved indicator when editing
+    setSavedIds(prev => { const n = new Set(prev); n.delete(exId); return n; });
+  };
+
+  const saveExerciseLog = useCallback(async (ex: Exercise) => {
+    if (!user) return;
+    setSavingId(ex.id);
+    const today = new Date().toISOString().slice(0, 10);
+    const sets = getExerciseSets(ex.id);
+
+    try {
+      // Check if a workout exists for today
+      const { data: existing } = await supabase
+        .from('workouts')
+        .select('id, entries')
+        .eq('user_id', user.id)
+        .eq('date', today)
+        .maybeSingle();
+
+      const newEntry = {
+        exercise_id: ex.id,
+        exercise_name: ex.name,
+        exercise_slug: ex.slug,
+        category: ex.category,
+        sets,
+      };
+
+      if (existing) {
+        // Merge: replace if same exercise_id exists, else append
+        const entries = (existing.entries as any[]) || [];
+        const idx = entries.findIndex((e: any) => e.exercise_id === ex.id);
+        if (idx >= 0) entries[idx] = newEntry; else entries.push(newEntry);
+        await supabase.from('workouts').update({ entries, updated_at: new Date().toISOString() }).eq('id', existing.id);
+      } else {
+        await supabase.from('workouts').insert({
+          user_id: user.id,
+          date: today,
+          entries: [newEntry],
+        });
+      }
+
+      setSavedIds(prev => new Set(prev).add(ex.id));
+      toast.success(`${ex.name} logged — ${sets.length} set${sets.length > 1 ? 's' : ''}`);
+    } catch (err) {
+      toast.error('Failed to save');
+    } finally {
+      setSavingId(null);
+    }
+  }, [user, exerciseSets]);
 
   const currentDay = days.find(d => d.day_key === activeDay);
   const dayIntegrity = integrityBlocks.filter(b =>
