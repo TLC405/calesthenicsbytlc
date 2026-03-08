@@ -16,6 +16,8 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<any>(null);
   const [workoutDates, setWorkoutDates] = useState<Date[]>([]);
+  const [selectedExId, setSelectedExId] = useState<string | null>(null);
+  const [selectedExercise, setSelectedExercise] = useState<any>(null);
 
   useEffect(() => {
     const fetchData = async () => {
