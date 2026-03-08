@@ -350,7 +350,7 @@ export default function Train() {
                           size="sm"
                           className={cn(
                             "flex-1 h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground transition-colors",
-                            savedIds.has(ex.id) && "bg-green-600 hover:bg-green-700 text-white border-green-700"
+                            savedIds.has(ex.id) && "bg-primary/80 hover:bg-primary text-primary-foreground border-primary"
                           )}
                           disabled={savingId === ex.id}
                           onClick={() => saveExerciseLog(ex)}
