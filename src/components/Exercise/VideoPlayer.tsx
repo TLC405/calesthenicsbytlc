@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Play, Minimize2, Maximize2, Volume2, ChevronDown, ChevronUp, Target, Dumbbell, Shield, Info, Clock } from 'lucide-react';
+import { Minimize2, Maximize2, Volume2, ChevronDown, ChevronUp, Target, Dumbbell, Shield, Info, Clock } from 'lucide-react';
+import { TlcPlayIcon } from './TlcPlayIcon';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
