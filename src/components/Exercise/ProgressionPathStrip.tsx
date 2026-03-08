@@ -91,7 +91,7 @@ export function ProgressionPathStrip({ exerciseId, chainGroup, onNavigate }: Pro
                   )}
                 >
                   {/* Difficulty dot */}
-                  <div className={cn("w-2 h-2 rounded-full mb-1.5", isActive ? 'bg-background' : color.split(' ')[0])} />
+                  <div className={cn("w-2 h-2 rounded-full mb-1.5", isActive ? 'bg-background' : color)} />
                   
                   <span className={cn(
                     "text-[9px] font-display font-bold uppercase tracking-wider leading-tight text-center line-clamp-2",
