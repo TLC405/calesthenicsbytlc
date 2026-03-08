@@ -52,6 +52,10 @@ export default {
   			ring: 'hsl(var(--ring))',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+  			surface: {
+  				DEFAULT: 'hsl(var(--surface))',
+  				raised: 'hsl(var(--surface-raised))'
+  			},
   			gold: {
   				DEFAULT: 'hsl(var(--gold))',
   				light: 'hsl(var(--gold-light))'

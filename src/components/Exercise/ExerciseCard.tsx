@@ -30,16 +30,16 @@ const getYouTubeVideoId = (url: string): string | null => {
   return match && match[2].length === 11 ? match[2] : null;
 };
 
-const categoryStyle: Record<string, { border: string; bg: string; text: string; color: string }> = {
-  'Push': { border: 'border-l-[hsl(var(--cat-push))]', bg: 'bg-[hsl(var(--cat-push))]', text: 'text-[hsl(var(--cat-push))]', color: 'hsl(var(--cat-push))' },
-  'Pull': { border: 'border-l-[hsl(var(--cat-pull))]', bg: 'bg-[hsl(var(--cat-pull))]', text: 'text-[hsl(var(--cat-pull))]', color: 'hsl(var(--cat-pull))' },
-  'Legs': { border: 'border-l-[hsl(var(--cat-legs))]', bg: 'bg-[hsl(var(--cat-legs))]', text: 'text-[hsl(var(--cat-legs))]', color: 'hsl(var(--cat-legs))' },
-  'Core': { border: 'border-l-[hsl(var(--cat-core))]', bg: 'bg-[hsl(var(--cat-core))]', text: 'text-[hsl(var(--cat-core))]', color: 'hsl(var(--cat-core))' },
-  'Skills': { border: 'border-l-[hsl(var(--cat-skills))]', bg: 'bg-[hsl(var(--cat-skills))]', text: 'text-[hsl(var(--cat-skills))]', color: 'hsl(var(--cat-skills))' },
-  'Yoga': { border: 'border-l-[hsl(330,65%,55%)]', bg: 'bg-[hsl(330,65%,55%)]', text: 'text-[hsl(330,65%,55%)]', color: 'hsl(330,65%,55%)' },
-  'Mobility': { border: 'border-l-[hsl(var(--cat-mobility))]', bg: 'bg-[hsl(var(--cat-mobility))]', text: 'text-[hsl(var(--cat-mobility))]', color: 'hsl(var(--cat-mobility))' },
-  'Flexibility': { border: 'border-l-[hsl(45,93%,47%)]', bg: 'bg-[hsl(45,93%,47%)]', text: 'text-[hsl(45,93%,47%)]', color: 'hsl(45,93%,47%)' },
-  'Rings': { border: 'border-l-[hsl(45,80%,40%)]', bg: 'bg-[hsl(45,80%,40%)]', text: 'text-[hsl(45,80%,40%)]', color: 'hsl(45,80%,40%)' },
+const categoryStyle: Record<string, { bg: string; text: string; color: string }> = {
+  'Push': { bg: 'bg-[hsl(var(--cat-push))]', text: 'text-white', color: 'hsl(var(--cat-push))' },
+  'Pull': { bg: 'bg-[hsl(var(--cat-pull))]', text: 'text-white', color: 'hsl(var(--cat-pull))' },
+  'Legs': { bg: 'bg-[hsl(var(--cat-legs))]', text: 'text-white', color: 'hsl(var(--cat-legs))' },
+  'Core': { bg: 'bg-[hsl(var(--cat-core))]', text: 'text-white', color: 'hsl(var(--cat-core))' },
+  'Skills': { bg: 'bg-[hsl(var(--cat-skills))]', text: 'text-white', color: 'hsl(var(--cat-skills))' },
+  'Yoga': { bg: 'bg-[hsl(330,65%,55%)]', text: 'text-white', color: 'hsl(330,65%,55%)' },
+  'Mobility': { bg: 'bg-[hsl(var(--cat-mobility))]', text: 'text-white', color: 'hsl(var(--cat-mobility))' },
+  'Flexibility': { bg: 'bg-[hsl(45,93%,47%)]', text: 'text-white', color: 'hsl(45,93%,47%)' },
+  'Rings': { bg: 'bg-[hsl(45,80%,40%)]', text: 'text-white', color: 'hsl(45,80%,40%)' },
 };
 
 const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];
@@ -49,25 +49,22 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
   const thumbnailUrl = videoId 
     ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
     : exercise.image_url || null;
-  const style = categoryStyle[exercise.category] || { border: 'border-l-muted', bg: 'bg-muted', text: 'text-muted-foreground' };
+  const style = categoryStyle[exercise.category] || { bg: 'bg-muted', text: 'text-muted-foreground', color: 'hsl(var(--muted-foreground))' };
   const level = exercise.difficulty_level || 1;
 
   return (
     <div 
-      className={cn(
-        "group cursor-pointer border-2 border-foreground bg-card overflow-hidden transition-all duration-150 hover:-translate-y-0.5 hover:shadow-sm border-l-[5px]",
-        style.border
-      )}
+      className="group cursor-pointer rounded-xl border border-border bg-card overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
       onClick={() => onViewDetails(exercise)}
     >
       {/* Thumbnail */}
-      <div className="aspect-[16/10] bg-secondary relative overflow-hidden">
+      <div className="aspect-[16/10] bg-muted relative overflow-hidden">
         {thumbnailUrl ? (
           <>
             <img 
               src={thumbnailUrl} 
               alt={exercise.name}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
               onError={(e) => {
                 if (videoId) {
@@ -80,52 +77,56 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
                 }
               }}
             />
+            {/* Bottom gradient for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
             {videoId && (
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-200 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 scale-90 group-hover:scale-100">
                   <TlcPlayIcon category={exercise.category} size="md" />
                 </div>
               </div>
             )}
           </>
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-secondary relative">
+          <div className="w-full h-full flex items-center justify-center bg-muted relative">
             <span className="text-4xl font-display font-black text-muted-foreground/8 uppercase">
               {exercise.name.substring(0, 3)}
             </span>
-            <div className={cn("absolute top-0 left-0 w-full h-1", style.bg)} />
           </div>
         )}
         
         {/* Category pill */}
-        <div className="absolute top-2 left-2">
-          <span className={cn("text-[8px] font-mono font-bold uppercase tracking-[0.15em] px-1.5 py-0.5 bg-background/90 border border-foreground/20", style.text)}>
+        <div className="absolute top-2.5 left-2.5">
+          <span className={cn("text-[9px] font-mono font-bold uppercase tracking-[0.1em] px-2 py-1 rounded-md", style.bg, style.text)}>
             {exercise.category}
           </span>
         </div>
 
-        {/* Difficulty bar */}
-        <div className="absolute bottom-0 left-0 right-0 flex">
+        {/* Difficulty dots */}
+        <div className="absolute bottom-2.5 right-2.5 flex gap-0.5">
           {[1, 2, 3, 4, 5].map(i => (
-            <div key={i} className={cn("h-[3px] flex-1", i <= level ? style.bg : 'bg-foreground/10')} />
+            <div key={i} className={cn(
+              "w-1.5 h-1.5 rounded-full",
+              i <= level ? 'bg-white' : 'bg-white/25'
+            )} />
           ))}
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-3 space-y-1.5">
+      <div className="p-3.5 space-y-2">
         <div>
-          <h3 className="font-display font-bold text-sm uppercase tracking-wider leading-tight line-clamp-1">
+          <h3 className="font-display font-bold text-sm tracking-tight leading-tight line-clamp-1">
             {exercise.name}
           </h3>
           <div className="flex items-center gap-2 mt-0.5">
-            <span className="text-[8px] font-mono text-muted-foreground uppercase tracking-wider">
+            <span className="text-[9px] font-mono text-muted-foreground tracking-wide">
               {difficultyLabel[level]}
             </span>
             {exercise.equipment.length > 0 && exercise.equipment[0] !== 'None' && (
               <>
                 <span className="text-muted-foreground/30">·</span>
-                <span className="text-[8px] font-mono text-muted-foreground uppercase tracking-wider flex items-center gap-0.5">
+                <span className="text-[9px] font-mono text-muted-foreground tracking-wide flex items-center gap-0.5">
                   <Dumbbell className="w-2.5 h-2.5" />
                   {exercise.equipment[0]}
                 </span>
@@ -137,7 +138,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
         {/* Muscles */}
         <div className="flex flex-wrap gap-1">
           {exercise.primary_muscles.slice(0, 3).map((muscle) => (
-            <span key={muscle} className="text-[8px] px-1.5 py-0.5 border border-foreground/15 text-foreground font-mono uppercase tracking-wider bg-secondary/50">
+            <span key={muscle} className="text-[8px] px-1.5 py-0.5 rounded-md bg-accent text-accent-foreground font-mono">
               {muscle}
             </span>
           ))}
@@ -150,9 +151,8 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
 
         {onAddToWorkout && (
           <Button 
-            size="sm" 
-            variant="outline"
-            className="w-full h-7 text-[9px] font-mono uppercase tracking-wider border-2 border-foreground mt-1"
+            size="sm"
+            className="w-full h-8 text-[9px] font-mono uppercase tracking-wider rounded-lg mt-1"
             onClick={(e) => {
               e.stopPropagation();
               onAddToWorkout(exercise);

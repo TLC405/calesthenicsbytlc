@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { Settings, LogOut, Sparkles, ArrowRight, Library, Zap, TrendingUp, Calendar, Flame } from 'lucide-react';
+import { Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp, Target } from 'lucide-react';
 import { CalendarView } from '@/components/Calendar/CalendarView';
 import { MasterSkillList } from '@/components/Dashboard/MasterSkillList';
 import { SkillTreeView } from '@/components/Progression/SkillTreeView';
@@ -11,12 +11,19 @@ import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { parseISO } from 'date-fns';
 import { cn } from '@/lib/utils';
 
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 6) return 'Night owl';
+  if (h < 12) return 'Good morning';
+  if (h < 17) return 'Good afternoon';
+  return 'Good evening';
+}
+
 export default function Dashboard() {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<any>(null);
   const [workoutDates, setWorkoutDates] = useState<Date[]>([]);
-  const [selectedExId, setSelectedExId] = useState<string | null>(null);
   const [selectedExercise, setSelectedExercise] = useState<any>(null);
 
   useEffect(() => {
@@ -54,58 +61,65 @@ export default function Dashboard() {
   const streak = profile?.streak_days || 0;
   const totalXp = profile?.total_xp || 0;
   const level = profile?.level || 1;
+  const displayName = profile?.display_name || 'Athlete';
+
+  const stats = [
+    { label: 'Streak', value: `${streak}d`, icon: Flame, color: 'hsl(var(--cat-core))' },
+    { label: 'XP', value: totalXp.toLocaleString(), icon: Zap, color: 'hsl(var(--cat-skills))' },
+    { label: 'Level', value: level, icon: TrendingUp, color: 'hsl(var(--cat-pull))' },
+  ];
 
   return (
-    <div className="min-h-screen bg-background pb-20 md:pb-0">
+    <div className="min-h-screen bg-background pb-24 md:pb-0">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background">
+      <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 border-2 border-foreground bg-[hsl(270,76%,55%)] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[hsl(var(--cat-skills))] to-[hsl(var(--cat-pull))] flex items-center justify-center shadow-sm">
               <Zap className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h1 className="font-display text-sm font-bold uppercase tracking-wider leading-none">
-                {profile?.display_name || 'Athlete'}
+              <h1 className="font-display text-sm font-bold tracking-tight leading-none">
+                {getGreeting()}, <span className="text-foreground">{displayName}</span>
               </h1>
-              <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.2em]">
+              <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.15em] mt-0.5">
                 I GOT THE POWA
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-0.5">
-            <Button variant="ghost" size="icon" onClick={() => navigate('/settings')} className="text-muted-foreground hover:text-foreground h-8 w-8">
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" onClick={() => navigate('/settings')} className="text-muted-foreground hover:text-foreground h-9 w-9 rounded-xl">
               <Settings className="h-4 w-4" />
             </Button>
             {user ? (
-              <Button variant="ghost" size="icon" onClick={handleSignOut} className="text-muted-foreground hover:text-foreground h-8 w-8">
+              <Button variant="ghost" size="icon" onClick={handleSignOut} className="text-muted-foreground hover:text-foreground h-9 w-9 rounded-xl">
                 <LogOut className="h-4 w-4" />
               </Button>
             ) : (
-              <Button variant="ghost" size="sm" onClick={() => navigate('/auth')} className="text-xs font-mono uppercase">Sign In</Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/auth')} className="text-xs font-mono uppercase rounded-lg">Sign In</Button>
             )}
           </div>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-6 space-y-5">
+      <main className="max-w-6xl mx-auto px-4 md:px-8 py-6 space-y-6">
         {/* Stats Row */}
-        <div className="grid grid-cols-3 gap-2">
-          {[
-            { label: 'Streak', value: `${streak}d`, color: 'bg-[hsl(25,95%,53%)]', icon: '🔥' },
-            { label: 'XP', value: totalXp.toLocaleString(), color: 'bg-[hsl(270,76%,55%)]', icon: '⚡' },
-            { label: 'Level', value: level, color: 'bg-[hsl(217,91%,60%)]', icon: '🎯' },
-          ].map(stat => (
-            <div key={stat.label} className="border-2 border-foreground p-3 relative overflow-hidden">
-              <div className={cn("absolute top-0 left-0 w-full h-1", stat.color)} />
-              <div className="text-lg font-display font-black leading-none mt-1">
-                {stat.icon} {stat.value}
+        <div className="grid grid-cols-3 gap-3">
+          {stats.map(stat => {
+            const Icon = stat.icon;
+            return (
+              <div key={stat.label} className="relative overflow-hidden rounded-xl bg-card border border-border p-4 shadow-xs group hover:shadow-sm transition-shadow">
+                <div className="absolute top-0 left-0 w-1 h-full rounded-r-full" style={{ backgroundColor: stat.color }} />
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon className="w-3.5 h-3.5 text-muted-foreground" />
+                  <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.15em]">{stat.label}</span>
+                </div>
+                <div className="text-2xl font-display font-black leading-none tracking-tight">
+                  {stat.value}
+                </div>
               </div>
-              <div className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em] mt-1">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Calendar */}
@@ -113,18 +127,18 @@ export default function Dashboard() {
 
         {/* Categories */}
         <section>
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-1.5 h-4 bg-[hsl(270,76%,55%)]" />
-            <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em]">Categories</h2>
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-1 h-5 rounded-full bg-[hsl(var(--cat-skills))]" />
+            <h2 className="font-display text-sm font-bold tracking-tight">Categories</h2>
           </div>
           <MasterSkillList />
         </section>
 
         {/* Progression Paths */}
         <section>
-          <div className="flex items-center gap-2 mb-3">
-            <div className="w-1.5 h-4 bg-[hsl(var(--cat-push))]" />
-            <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em]">Progression Paths</h2>
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-1 h-5 rounded-full bg-[hsl(var(--cat-push))]" />
+            <h2 className="font-display text-sm font-bold tracking-tight">Progression Paths</h2>
           </div>
           <SkillTreeView onExerciseClick={async (id) => {
             const { data } = await supabase.from('exercises').select('*').eq('id', id).single();
@@ -133,31 +147,30 @@ export default function Dashboard() {
         </section>
 
         {/* Quick Actions */}
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <button onClick={() => navigate('/train')} className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-[hsl(var(--cat-core))] hover:text-white transition-colors duration-150 text-left">
-            <div className="w-10 h-10 border-2 border-current flex items-center justify-center flex-shrink-0"><Flame className="h-4 w-4" /></div>
-            <div className="flex-1 min-w-0">
-              <h3 className="font-display font-bold text-sm uppercase tracking-wider">Train</h3>
-              <p className="text-[10px] font-mono opacity-60 mt-0.5">Stacked cycle</p>
-            </div>
-            <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </button>
-          <button onClick={() => navigate('/library')} className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-[hsl(var(--cat-pull))] hover:text-white transition-colors duration-150 text-left">
-            <div className="w-10 h-10 border-2 border-current flex items-center justify-center flex-shrink-0"><Library className="h-4 w-4" /></div>
-            <div className="flex-1 min-w-0">
-              <h3 className="font-display font-bold text-sm uppercase tracking-wider">Library</h3>
-              <p className="text-[10px] font-mono opacity-60 mt-0.5">All exercises</p>
-            </div>
-            <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </button>
-          <button onClick={() => navigate('/ai-lab')} className="group flex items-center gap-4 p-4 border-2 border-foreground bg-card hover:bg-[hsl(var(--cat-skills))] hover:text-white transition-colors duration-150 text-left">
-            <div className="w-10 h-10 border-2 border-current flex items-center justify-center flex-shrink-0"><Sparkles className="h-4 w-4" /></div>
-            <div className="flex-1 min-w-0">
-              <h3 className="font-display font-bold text-sm uppercase tracking-wider">AI Coach</h3>
-              <p className="text-[10px] font-mono opacity-60 mt-0.5">Smart guidance</p>
-            </div>
-            <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </button>
+        <section className="space-y-2">
+          {[
+            { label: 'Start Training', desc: 'Stacked 4-day cycle', path: '/train', icon: Flame, color: 'hsl(var(--cat-core))' },
+            { label: 'Exercise Library', desc: 'Browse all exercises', path: '/library', icon: Library, color: 'hsl(var(--cat-pull))' },
+            { label: 'AI Coach', desc: 'Smart training guidance', path: '/ai-lab', icon: Sparkles, color: 'hsl(var(--cat-skills))' },
+          ].map(action => {
+            const Icon = action.icon;
+            return (
+              <button
+                key={action.path}
+                onClick={() => navigate(action.path)}
+                className="group w-full flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-border/80 hover:shadow-sm transition-all text-left"
+              >
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${action.color}` }}>
+                  <Icon className="h-4 w-4 text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-display font-bold text-sm tracking-tight">{action.label}</h3>
+                  <p className="text-[10px] font-mono text-muted-foreground mt-0.5">{action.desc}</p>
+                </div>
+                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-0.5 transition-transform" />
+              </button>
+            );
+          })}
         </section>
       </main>
 

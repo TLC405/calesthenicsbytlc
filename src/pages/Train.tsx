@@ -104,28 +104,18 @@ export default function Train() {
     ]);
     if (daysData) setDays(daysData as TrainingDay[]);
     if (blocksData) setIntegrityBlocks(blocksData as IntegrityData[]);
-
-    const { data: lastWorkout } = await supabase
-      .from('workouts')
-      .select('entries')
-      .eq('user_id', user!.id)
-      .order('date', { ascending: false })
-      .limit(1);
-
     setLoading(false);
   };
 
   const loadDayExercises = async () => {
     const day = days.find(d => d.day_key === activeDay);
     if (!day) return;
-
     const { data } = await supabase
       .from('exercises')
       .select('*')
       .in('category', day.exercise_categories)
       .order('difficulty_level')
       .order('name');
-
     if (data) setExercises(data as unknown as Exercise[]);
   };
 
@@ -139,7 +129,6 @@ export default function Train() {
 
   const updateExerciseSets = (exId: string, sets: SetData[]) => {
     setExerciseSets(prev => ({ ...prev, [exId]: sets }));
-    // Remove saved indicator when editing
     setSavedIds(prev => { const n = new Set(prev); n.delete(exId); return n; });
   };
 
@@ -150,7 +139,6 @@ export default function Train() {
     const sets = getExerciseSets(ex.id);
 
     try {
-      // Check if a workout exists for today
       const { data: existing } = await supabase
         .from('workouts')
         .select('id, entries')
@@ -167,7 +155,6 @@ export default function Train() {
       };
 
       if (existing) {
-        // Merge: replace if same exercise_id exists, else append
         const entries = (existing.entries as any[]) || [];
         const idx = entries.findIndex((e: any) => e.exercise_id === ex.id);
         if (idx >= 0) entries[idx] = newEntry; else entries.push(newEntry);
@@ -197,7 +184,7 @@ export default function Train() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-pulse text-muted-foreground font-mono text-xs uppercase tracking-widest">Loading cycle...</div>
+        <div className="animate-pulse text-muted-foreground font-mono text-xs">Loading cycle...</div>
       </div>
     );
   }
@@ -205,21 +192,21 @@ export default function Train() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background">
+      <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-xl">
         <div className="max-w-6xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 border-2 border-foreground bg-[hsl(var(--cat-skills))] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ backgroundColor: dayColors[activeDay] }}>
               <Zap className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h1 className="font-display text-sm font-bold uppercase tracking-wider leading-none">Stacked Cycle</h1>
-              <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.2em]">4-Day Auto-Rotating</p>
+              <h1 className="font-display text-sm font-bold tracking-tight leading-none">Stacked Cycle</h1>
+              <p className="text-[9px] font-mono text-muted-foreground mt-0.5">4-Day Auto-Rotating</p>
             </div>
           </div>
           <Button
             size="sm"
             onClick={() => setShowPicker(true)}
-            className="h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground"
+            className="h-8 text-[10px] font-mono uppercase tracking-wider rounded-lg"
           >
             <Plus className="h-3.5 w-3.5 mr-1" />
             <span className="hidden sm:inline">Add</span> Exercise
@@ -227,24 +214,22 @@ export default function Train() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-6 space-y-5">
+      <main className="max-w-6xl mx-auto px-4 md:px-8 py-6 space-y-5 pb-24 md:pb-6">
         {/* Day Selector */}
-        <div className="flex gap-1.5 overflow-x-auto pb-1">
+        <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
           {days.map(day => (
             <button
               key={day.day_key}
               onClick={() => setActiveDay(day.day_key)}
               className={cn(
-                "flex-1 min-w-[4rem] border-2 p-2.5 text-center transition-all duration-150 relative overflow-hidden",
+                "flex-1 min-w-[4.5rem] rounded-xl p-3 text-center transition-all duration-200 relative overflow-hidden border",
                 activeDay === day.day_key
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-foreground/30 hover:border-foreground"
+                  ? "border-transparent shadow-sm text-white"
+                  : "border-border bg-card hover:bg-accent"
               )}
+              style={activeDay === day.day_key ? { backgroundColor: dayColors[day.day_key] } : undefined}
             >
-              {activeDay === day.day_key && (
-                <div className="absolute top-0 left-0 w-full h-1" style={{ backgroundColor: dayColors[day.day_key] }} />
-              )}
-              <div className="text-lg leading-none mb-0.5">{dayEmojis[day.day_key]}</div>
+              <div className="text-lg leading-none mb-1">{dayEmojis[day.day_key]}</div>
               <div className="text-[9px] font-mono font-bold uppercase tracking-wider">{day.label}</div>
             </button>
           ))}
@@ -252,15 +237,15 @@ export default function Train() {
 
         {/* Current Day Info */}
         {currentDay && (
-          <div className="border-2 border-foreground p-4 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1.5" style={{ backgroundColor: dayColors[activeDay] }} />
-            <div className="flex items-center gap-2 mb-1 mt-1">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] px-2 py-0.5 text-white" style={{ backgroundColor: dayColors[activeDay] }}>
+          <div className="rounded-xl border border-border bg-card p-4 relative overflow-hidden shadow-xs">
+            <div className="absolute top-0 left-0 w-1 h-full rounded-r-full" style={{ backgroundColor: dayColors[activeDay] }} />
+            <div className="flex items-center gap-2 mb-1 ml-2">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.15em] px-2 py-0.5 rounded-md text-white" style={{ backgroundColor: dayColors[activeDay] }}>
                 Day {activeDay}
               </span>
-              <span className="font-display font-bold text-sm uppercase tracking-wider">{currentDay.title}</span>
+              <span className="font-display font-bold text-sm tracking-tight">{currentDay.title}</span>
             </div>
-            <p className="text-xs text-muted-foreground font-mono">{currentDay.emphasis}</p>
+            <p className="text-xs text-muted-foreground font-mono ml-2">{currentDay.emphasis}</p>
           </div>
         )}
 
@@ -271,8 +256,8 @@ export default function Train() {
         {dayIntegrity.length > 0 && (
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-4 bg-[hsl(var(--cat-mobility))]" />
-              <h2 className="text-[10px] font-mono font-bold uppercase tracking-[0.2em]">Warm-Up / Integrity</h2>
+              <div className="w-1 h-4 rounded-full bg-[hsl(var(--cat-mobility))]" />
+              <h2 className="text-[10px] font-mono font-bold uppercase tracking-[0.15em]">Warm-Up / Integrity</h2>
             </div>
             {dayIntegrity.map(block => (
               <IntegrityBlock
@@ -290,34 +275,37 @@ export default function Train() {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-1.5 h-4" style={{ backgroundColor: dayColors[activeDay] }} />
-              <h2 className="text-[10px] font-mono font-bold uppercase tracking-[0.2em]">Exercises</h2>
+              <div className="w-1 h-4 rounded-full" style={{ backgroundColor: dayColors[activeDay] }} />
+              <h2 className="text-[10px] font-mono font-bold uppercase tracking-[0.15em]">Exercises</h2>
               <span className="text-[9px] font-mono text-muted-foreground">{exercises.length}</span>
             </div>
           </div>
 
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             {exercises.map(ex => {
               const thumb = getYouTubeThumb(ex.youtube_url);
               const isExpanded = expandedId === ex.id;
               return (
-                <div key={ex.id} className="border border-foreground/20 bg-card hover:bg-secondary/50 transition-all">
+                <div key={ex.id} className={cn(
+                  "rounded-xl border bg-card transition-all duration-200",
+                  isExpanded ? "border-border shadow-sm" : "border-border/60 hover:border-border"
+                )}>
                   <button
                     onClick={() => setExpandedId(isExpanded ? null : ex.id)}
                     className="w-full flex items-center gap-3 p-3 text-left group"
                   >
                     {thumb ? (
-                      <img src={thumb} alt="" className="w-10 h-10 object-cover border border-foreground/20 flex-shrink-0" />
+                      <img src={thumb} alt="" className="w-10 h-10 rounded-lg object-cover flex-shrink-0" />
                     ) : (
                       <div
-                        className="w-10 h-10 border border-foreground/30 flex items-center justify-center flex-shrink-0"
+                        className="w-10 h-10 rounded-lg border border-border flex items-center justify-center flex-shrink-0"
                         style={{ borderLeftWidth: 3, borderLeftColor: dayColors[activeDay] }}
                       >
                         <Dumbbell className="w-3.5 h-3.5 text-muted-foreground" />
                       </div>
                     )}
                     <div className="flex-1 min-w-0">
-                      <div className="font-display font-semibold text-xs uppercase tracking-wider truncate">{ex.name}</div>
+                      <div className="font-display font-semibold text-xs tracking-tight truncate">{ex.name}</div>
                       <div className="text-[9px] font-mono text-muted-foreground mt-0.5">
                         {ex.sets_reps || `Level ${ex.difficulty_level || 1}`}
                         {ex.primary_muscles?.length > 0 && ` · ${ex.primary_muscles.slice(0, 2).join(', ')}`}
@@ -329,19 +317,17 @@ export default function Train() {
                     )} />
                   </button>
                   {isExpanded && (
-                    <div className="px-3 pb-3 pt-1 border-t border-foreground/10 space-y-3">
-                      {/* Inline Set Tracker */}
+                    <div className="px-3 pb-3 pt-1 border-t border-border space-y-3">
                       <SetTracker
                         sets={getExerciseSets(ex.id)}
                         onChange={(sets) => updateExerciseSets(ex.id, sets)}
                         showWeight
                       />
-                      {/* Action buttons */}
                       <div className="flex gap-2">
                         <Button
                           size="sm"
                           variant="outline"
-                          className="h-8 text-[10px] font-mono uppercase tracking-wider"
+                          className="h-8 text-[10px] font-mono uppercase tracking-wider rounded-lg"
                           onClick={() => setSelectedExercise(ex)}
                         >
                           <Play className="w-3 h-3 mr-1" /> Details
@@ -349,8 +335,8 @@ export default function Train() {
                         <Button
                           size="sm"
                           className={cn(
-                            "flex-1 h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground transition-colors",
-                            savedIds.has(ex.id) && "bg-primary/80 hover:bg-primary text-primary-foreground border-primary"
+                            "flex-1 h-8 text-[10px] font-mono uppercase tracking-wider rounded-lg transition-colors",
+                            savedIds.has(ex.id) && "bg-[hsl(var(--cat-legs))] hover:bg-[hsl(142,71%,40%)] text-white"
                           )}
                           disabled={savingId === ex.id}
                           onClick={() => saveExerciseLog(ex)}
@@ -372,8 +358,8 @@ export default function Train() {
           </div>
 
           {exercises.length === 0 && (
-            <div className="border-2 border-dashed border-foreground/20 p-8 text-center">
-              <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">No exercises for this day yet</p>
+            <div className="rounded-xl border border-dashed border-border p-8 text-center">
+              <p className="text-xs font-mono text-muted-foreground">No exercises for this day yet</p>
             </div>
           )}
         </div>
@@ -382,7 +368,7 @@ export default function Train() {
         <Button
           onClick={() => navigate('/planner')}
           size="lg"
-          className="w-full py-6 font-display font-bold uppercase tracking-wider text-sm border-2 border-foreground"
+          className="w-full py-6 font-display font-bold uppercase tracking-wider text-sm rounded-xl text-white shadow-sm"
           style={{ backgroundColor: dayColors[activeDay] }}
         >
           <Play className="w-4 h-4 mr-2" />

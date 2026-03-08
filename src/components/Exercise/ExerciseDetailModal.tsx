@@ -48,7 +48,26 @@ interface ExerciseDetailModalProps {
 }
 
 const levelLabels: Record<number, string> = { 1: 'Beginner', 2: 'Intermediate', 3: 'Advanced', 4: 'Expert', 5: 'Elite' };
-const levelColors: Record<number, string> = { 1: 'bg-green-500', 2: 'bg-blue-500', 3: 'bg-orange-500', 4: 'bg-red-500', 5: 'bg-purple-500' };
+
+const levelColors: Record<number, string> = {
+  1: 'bg-[hsl(var(--cat-legs))]',
+  2: 'bg-[hsl(var(--cat-pull))]',
+  3: 'bg-[hsl(var(--cat-core))]',
+  4: 'bg-[hsl(var(--cat-push))]',
+  5: 'bg-[hsl(var(--cat-skills))]',
+};
+
+const categoryAccent: Record<string, string> = {
+  Push: 'hsl(var(--cat-push))',
+  Pull: 'hsl(var(--cat-pull))',
+  Legs: 'hsl(var(--cat-legs))',
+  Core: 'hsl(var(--cat-core))',
+  Skills: 'hsl(var(--cat-skills))',
+  Mobility: 'hsl(var(--cat-mobility))',
+  Yoga: 'hsl(330,65%,55%)',
+  Flexibility: 'hsl(45,93%,47%)',
+  Rings: 'hsl(45,80%,40%)',
+};
 
 export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }: ExerciseDetailModalProps) {
   const [progressions, setProgressions] = useState<Progression[]>([]);
@@ -72,27 +91,30 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
 
   if (!currentExercise) return null;
 
+  const accent = categoryAccent[currentExercise.category] || 'hsl(var(--primary))';
+
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
-      <DialogContent className="max-w-2xl max-h-[90vh] p-0 overflow-hidden border-border">
+      <DialogContent className="max-w-2xl max-h-[90vh] p-0 overflow-hidden rounded-2xl border-border">
         <ScrollArea className="max-h-[90vh]">
-          <div className="p-4 space-y-4">
+          <div className="p-5 space-y-5">
+            {/* Header with accent */}
             <DialogHeader>
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: accent }} />
                 <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">{currentExercise.category}</span>
                 {currentExercise.difficulty_level && (
                   <><span className="text-muted-foreground/30">·</span><DifficultyBadge level={currentExercise.difficulty_level} size="sm" /></>
                 )}
               </div>
-              <DialogTitle className="text-xl font-display">{currentExercise.name}</DialogTitle>
+              <DialogTitle className="text-xl font-display font-bold tracking-tight">{currentExercise.name}</DialogTitle>
               {currentExercise.description && (
-                <p className="text-xs text-muted-foreground mt-1">{currentExercise.description}</p>
+                <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{currentExercise.description}</p>
               )}
             </DialogHeader>
 
             <ProgressionPathStrip exerciseId={currentExercise.id} chainGroup={currentExercise.chain_group || null} onNavigate={handleChainNavigate} />
 
-            {/* Video player with ALL exercise data embedded */}
             <VideoPlayer
               youtubeUrl={currentExercise.youtube_url}
               instagramUrl={currentExercise.instagram_url}
@@ -115,10 +137,10 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
 
             {/* Progression Ladder */}
             {progressions.length > 0 && (
-              <div className="border border-border p-4">
+              <div className="rounded-xl border border-border p-4 bg-accent/30">
                 <div className="flex items-center gap-2 mb-4">
                   <TrendingUp className="w-3.5 h-3.5 text-foreground" />
-                  <h4 className="text-xs font-semibold uppercase tracking-wider">Progression Ladder</h4>
+                  <h4 className="text-xs font-display font-bold tracking-tight">Progression Ladder</h4>
                 </div>
                 <div className="space-y-0">
                   {progressions.map((prog, i) => (
@@ -128,7 +150,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
                       <div className="pb-4 min-w-0">
                         <div className="flex items-center gap-2">
                           <span className="font-display font-semibold text-sm">{prog.name}</span>
-                          <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-wider">{levelLabels[prog.level]}</span>
+                          <span className="text-[9px] font-mono text-muted-foreground">{levelLabels[prog.level]}</span>
                         </div>
                         {prog.description && <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{prog.description}</p>}
                       </div>
@@ -139,7 +161,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
             )}
 
             {onAddToWorkout && (
-              <Button className="w-full" size="lg" onClick={() => { onAddToWorkout(currentExercise); onClose(); }}>
+              <Button className="w-full rounded-xl h-12 font-display font-bold uppercase tracking-wider" size="lg" onClick={() => { onAddToWorkout(currentExercise); onClose(); }}>
                 <Plus className="w-4 h-4 mr-2" />Add to Today's Workout
               </Button>
             )}

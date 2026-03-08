@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Dumbbell, Lock, Mail, User, Zap } from 'lucide-react';
+import { Dumbbell, Lock, Mail, User, Zap, Loader2 } from 'lucide-react';
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -41,40 +41,41 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Left Panel — Brutalist branding */}
-      <div className="hidden lg:flex lg:w-[45%] bg-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--background)/0.04)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--background)/0.04)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+      {/* Left Panel */}
+      <div className="hidden lg:flex lg:w-[45%] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--cat-skills))] via-[hsl(var(--cat-pull))] to-[hsl(var(--cat-push))]" />
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.3\'/%3E%3C/svg%3E")' }} />
         
-        <div className="relative z-10 flex flex-col justify-between p-10 w-full">
+        <div className="relative z-10 flex flex-col justify-between p-10 w-full text-white">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 border-2 border-background/20 bg-[hsl(var(--cat-skills))] flex items-center justify-center">
-              <Zap className="w-5 h-5 text-background" />
+            <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <Zap className="w-5 h-5" />
             </div>
-            <p className="text-[9px] text-background/30 uppercase tracking-[0.3em] font-mono">I GOT THE POWA</p>
+            <p className="text-[9px] text-white/50 uppercase tracking-[0.3em] font-mono">I GOT THE POWA</p>
           </div>
 
           <div className="space-y-8">
-            <h2 className="font-display text-5xl xl:text-6xl font-bold text-background leading-[0.9] uppercase tracking-tighter">
+            <h2 className="font-display text-5xl xl:text-6xl font-bold leading-[0.9] uppercase tracking-tighter">
               Train.<br />
               Track.<br />
-              <span className="text-destructive">Dominate.</span>
+              Dominate.
             </h2>
             
             <div className="flex gap-8">
               {[
-                { value: '150+', label: 'Exercises', color: 'hsl(var(--cat-push))' },
-                { value: '8', label: 'Categories', color: 'hsl(var(--cat-pull))' },
-                { value: 'AI', label: 'Coach', color: 'hsl(var(--cat-skills))' },
+                { value: '150+', label: 'Exercises' },
+                { value: '8', label: 'Categories' },
+                { value: 'AI', label: 'Coach' },
               ].map(stat => (
                 <div key={stat.label}>
-                  <p className="font-display text-2xl font-bold text-background">{stat.value}</p>
-                  <p className="text-[9px] font-mono uppercase tracking-[0.2em]" style={{ color: stat.color }}>{stat.label}</p>
+                  <p className="font-display text-2xl font-bold">{stat.value}</p>
+                  <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-white/60">{stat.label}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <p className="text-background/15 text-[9px] font-mono uppercase tracking-[0.2em]">
+          <p className="text-white/20 text-[9px] font-mono uppercase tracking-[0.2em]">
             © {new Date().getFullYear()} I GOT THE POWA
           </p>
         </div>
@@ -85,8 +86,8 @@ export default function Auth() {
         <div className="w-full max-w-sm space-y-8">
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 border-2 border-foreground bg-[hsl(var(--cat-skills))] flex items-center justify-center">
-              <Zap className="w-5 h-5 text-background" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[hsl(var(--cat-skills))] to-[hsl(var(--cat-pull))] flex items-center justify-center">
+              <Zap className="w-5 h-5 text-white" />
             </div>
             <div>
               <h1 className="font-display text-sm font-bold uppercase tracking-wider">I GOT THE POWA</h1>
@@ -94,10 +95,10 @@ export default function Auth() {
           </div>
 
           <div>
-            <h2 className="font-display text-2xl font-bold uppercase tracking-tight">
+            <h2 className="font-display text-2xl font-bold tracking-tight">
               {isSignUp ? 'Create Account' : 'Welcome Back'}
             </h2>
-            <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider mt-1">
+            <p className="text-sm text-muted-foreground mt-1">
               {isSignUp ? 'Start your journey' : 'Continue training'}
             </p>
           </div>
@@ -105,7 +106,7 @@ export default function Auth() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {isSignUp && (
               <div className="space-y-1.5">
-                <Label htmlFor="displayName" className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                <Label htmlFor="displayName" className="text-xs font-medium text-muted-foreground">
                   Name
                 </Label>
                 <div className="relative">
@@ -114,14 +115,14 @@ export default function Auth() {
                     id="displayName" type="text" value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
                     placeholder="Your name"
-                    className="h-11 pl-10 border-2 border-foreground/20 focus:border-foreground transition-colors"
+                    className="h-11 pl-10 rounded-xl border-border focus:border-ring focus:ring-1 focus:ring-ring transition-all"
                   />
                 </div>
               </div>
             )}
 
             <div className="space-y-1.5">
-              <Label htmlFor="email" className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              <Label htmlFor="email" className="text-xs font-medium text-muted-foreground">
                 Email
               </Label>
               <div className="relative">
@@ -130,13 +131,13 @@ export default function Auth() {
                   id="email" type="email" value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com" required
-                  className="h-11 pl-10 border-2 border-foreground/20 focus:border-foreground transition-colors"
+                  className="h-11 pl-10 rounded-xl border-border focus:border-ring focus:ring-1 focus:ring-ring transition-all"
                 />
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="password" className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-muted-foreground">
+              <Label htmlFor="password" className="text-xs font-medium text-muted-foreground">
                 Password
               </Label>
               <div className="relative">
@@ -145,15 +146,15 @@ export default function Auth() {
                   id="password" type="password" value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••" required minLength={6}
-                  className="h-11 pl-10 border-2 border-foreground/20 focus:border-foreground transition-colors"
+                  className="h-11 pl-10 rounded-xl border-border focus:border-ring focus:ring-1 focus:ring-ring transition-all"
                 />
               </div>
             </div>
 
-            <Button type="submit" disabled={loading} className="w-full h-12 font-display font-bold uppercase tracking-wider text-sm border-2 border-foreground">
+            <Button type="submit" disabled={loading} className="w-full h-12 font-display font-bold uppercase tracking-wider text-sm rounded-xl bg-gradient-to-r from-[hsl(var(--cat-skills))] to-[hsl(var(--cat-pull))] text-white hover:opacity-90 shadow-sm">
               {loading ? (
                 <span className="flex items-center gap-2">
-                  <Dumbbell className="w-4 h-4 animate-pulse" />
+                  <Loader2 className="w-4 h-4 animate-spin" />
                   Loading...
                 </span>
               ) : (
@@ -165,7 +166,7 @@ export default function Auth() {
           <div className="text-center">
             <button
               onClick={() => setIsSignUp(!isSignUp)}
-              className="text-xs text-muted-foreground hover:text-foreground transition-colors font-mono"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
             </button>
