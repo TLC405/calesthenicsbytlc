@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp, Target } from 'lucide-react';
+import { Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp } from 'lucide-react';
 import { CalendarView } from '@/components/Calendar/CalendarView';
 import { MasterSkillList } from '@/components/Dashboard/MasterSkillList';
 import { SkillTreeView } from '@/components/Progression/SkillTreeView';
@@ -30,33 +30,18 @@ export default function Dashboard() {
     const fetchData = async () => {
       if (user) {
         const { data: profileData } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', user.id)
-          .single();
+          .from('profiles').select('*').eq('id', user.id).single();
         setProfile(profileData);
-
         const { data: workoutsData } = await supabase
-          .from('workouts')
-          .select('date')
-          .eq('user_id', user.id);
-
-        if (workoutsData) {
-          setWorkoutDates(workoutsData.map(w => parseISO(w.date)));
-        }
+          .from('workouts').select('date').eq('user_id', user.id);
+        if (workoutsData) setWorkoutDates(workoutsData.map(w => parseISO(w.date)));
       }
     };
     fetchData();
   }, [user]);
 
-  const handleSignOut = async () => {
-    await signOut();
-    navigate('/auth');
-  };
-
-  const handleDateClick = (date: Date) => {
-    navigate('/planner', { state: { selectedDate: date } });
-  };
+  const handleSignOut = async () => { await signOut(); navigate('/auth'); };
+  const handleDateClick = (date: Date) => navigate('/planner', { state: { selectedDate: date } });
 
   const streak = profile?.streak_days || 0;
   const totalXp = profile?.total_xp || 0;
@@ -65,38 +50,38 @@ export default function Dashboard() {
 
   const stats = [
     { label: 'Streak', value: `${streak}d`, icon: Flame, color: 'hsl(var(--cat-core))' },
-    { label: 'XP', value: totalXp.toLocaleString(), icon: Zap, color: 'hsl(var(--cat-skills))' },
+    { label: 'XP', value: totalXp.toLocaleString(), icon: Zap, color: 'hsl(var(--electric))' },
     { label: 'Level', value: level, icon: TrendingUp, color: 'hsl(var(--cat-pull))' },
   ];
 
   return (
-    <div className="min-h-screen bg-background pb-24 md:pb-0">
+    <div className="min-h-screen bg-background pb-28 md:pb-0">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border/30">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[hsl(var(--cat-skills))] to-[hsl(var(--cat-pull))] flex items-center justify-center shadow-sm">
-              <Zap className="w-4 h-4 text-white" />
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[hsl(var(--electric))] to-[hsl(var(--cat-pull))] flex items-center justify-center" style={{ boxShadow: '0 0 20px hsl(var(--electric) / 0.2)' }}>
+              <Zap className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="font-display text-sm font-bold tracking-tight leading-none">
+              <h1 className="font-display text-base font-bold tracking-tight leading-none">
                 {getGreeting()}, <span className="text-foreground">{displayName}</span>
               </h1>
-              <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.15em] mt-0.5">
+              <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em] mt-0.5">
                 I GOT THE POWA
               </p>
             </div>
           </div>
           <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon" onClick={() => navigate('/settings')} className="text-muted-foreground hover:text-foreground h-9 w-9 rounded-xl">
+            <Button variant="ghost" size="icon" onClick={() => navigate('/settings')} className="text-muted-foreground hover:text-foreground h-10 w-10 rounded-xl">
               <Settings className="h-4 w-4" />
             </Button>
             {user ? (
-              <Button variant="ghost" size="icon" onClick={handleSignOut} className="text-muted-foreground hover:text-foreground h-9 w-9 rounded-xl">
+              <Button variant="ghost" size="icon" onClick={handleSignOut} className="text-muted-foreground hover:text-foreground h-10 w-10 rounded-xl">
                 <LogOut className="h-4 w-4" />
               </Button>
             ) : (
-              <Button variant="ghost" size="sm" onClick={() => navigate('/auth')} className="text-xs font-mono uppercase rounded-lg">Sign In</Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/auth')} className="text-xs font-mono uppercase">Sign In</Button>
             )}
           </div>
         </div>
@@ -108,13 +93,16 @@ export default function Dashboard() {
           {stats.map(stat => {
             const Icon = stat.icon;
             return (
-              <div key={stat.label} className="relative overflow-hidden rounded-xl bg-card border border-border p-4 shadow-xs group hover:shadow-sm transition-shadow">
-                <div className="absolute top-0 left-0 w-1 h-full rounded-r-full" style={{ backgroundColor: stat.color }} />
-                <div className="flex items-center gap-2 mb-2">
-                  <Icon className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.15em]">{stat.label}</span>
+              <div key={stat.label} className="relative overflow-hidden rounded-2xl bg-card border border-border/50 p-4 group hover:border-border transition-all duration-200">
+                {/* Top glow line */}
+                <div className="absolute top-0 left-3 right-3 h-[1px]" style={{ background: `linear-gradient(90deg, transparent, ${stat.color}, transparent)` }} />
+                <div className="flex items-center gap-2 mb-2.5">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${stat.color}20` }}>
+                    <Icon className="w-3.5 h-3.5" style={{ color: stat.color }} />
+                  </div>
+                  <span className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.15em]">{stat.label}</span>
                 </div>
-                <div className="text-2xl font-display font-black leading-none tracking-tight">
+                <div className="text-3xl font-display font-black leading-none tracking-tight">
                   {stat.value}
                 </div>
               </div>
@@ -128,7 +116,7 @@ export default function Dashboard() {
         {/* Categories */}
         <section>
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-1 h-5 rounded-full bg-[hsl(var(--cat-skills))]" />
+            <div className="w-1.5 h-5 rounded-full bg-[hsl(var(--electric))]" />
             <h2 className="font-display text-sm font-bold tracking-tight">Categories</h2>
           </div>
           <MasterSkillList />
@@ -137,7 +125,7 @@ export default function Dashboard() {
         {/* Progression Paths */}
         <section>
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-1 h-5 rounded-full bg-[hsl(var(--cat-push))]" />
+            <div className="w-1.5 h-5 rounded-full bg-[hsl(var(--cat-push))]" />
             <h2 className="font-display text-sm font-bold tracking-tight">Progression Paths</h2>
           </div>
           <SkillTreeView onExerciseClick={async (id) => {
@@ -151,23 +139,23 @@ export default function Dashboard() {
           {[
             { label: 'Start Training', desc: 'Stacked 4-day cycle', path: '/train', icon: Flame, color: 'hsl(var(--cat-core))' },
             { label: 'Exercise Library', desc: 'Browse all exercises', path: '/library', icon: Library, color: 'hsl(var(--cat-pull))' },
-            { label: 'AI Coach', desc: 'Smart training guidance', path: '/ai-lab', icon: Sparkles, color: 'hsl(var(--cat-skills))' },
+            { label: 'AI Coach', desc: 'Smart training guidance', path: '/ai-lab', icon: Sparkles, color: 'hsl(var(--electric))' },
           ].map(action => {
             const Icon = action.icon;
             return (
               <button
                 key={action.path}
                 onClick={() => navigate(action.path)}
-                className="group w-full flex items-center gap-4 p-4 rounded-xl bg-card border border-border hover:border-border/80 hover:shadow-sm transition-all text-left"
+                className="group w-full flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/50 hover:border-border hover:bg-accent/20 transition-all duration-200 text-left"
               >
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${action.color}` }}>
-                  <Icon className="h-4 w-4 text-white" />
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 border border-border/50" style={{ backgroundColor: `${action.color}15` }}>
+                  <Icon className="h-5 w-5" style={{ color: action.color }} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-display font-bold text-sm tracking-tight">{action.label}</h3>
                   <p className="text-[10px] font-mono text-muted-foreground mt-0.5">{action.desc}</p>
                 </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="h-4 w-4 text-muted-foreground/40 group-hover:text-muted-foreground group-hover:translate-x-0.5 transition-all" />
               </button>
             );
           })}

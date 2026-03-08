@@ -1,131 +1,131 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
-import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
-import { ArrowRight, Dumbbell, Brain, CalendarDays, Target, Zap, ChevronRight, ChevronDown, Flame, Star } from 'lucide-react';
+import { ArrowRight, Zap, ChevronRight, Flame } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-const examplePaths = [
-  { name: 'Push-up Path', color: 'hsl(var(--cat-push))', steps: ['Wall Push-up', 'Incline Push-up', 'Push-up', 'Diamond Push-up', 'Archer Push-up', 'One Arm Push-up'] },
-  { name: 'Pull-up Path', color: 'hsl(var(--cat-pull))', steps: ['Dead Hang', 'Australian Row', 'Chin-up', 'Pull-up', 'Archer Pull-up', 'One Arm Chin-up'] },
-  { name: 'Handstand Path', color: 'hsl(var(--cat-skills))', steps: ['Wall Handstand', 'Freestanding HS', 'HSPU', 'L-Sit to HS'] },
-  { name: 'Lever Path', color: 'hsl(var(--cat-core))', steps: ['Tuck Front Lever', 'Front Lever Raise', 'Front Lever', 'Iron Cross'] },
+const paths = [
+  { name: 'Push-up', color: 'hsl(var(--cat-push))', steps: ['Wall', 'Incline', 'Standard', 'Diamond', 'Archer', 'One Arm'] },
+  { name: 'Pull-up', color: 'hsl(var(--cat-pull))', steps: ['Dead Hang', 'Row', 'Chin-up', 'Pull-up', 'Archer', 'One Arm'] },
+  { name: 'Handstand', color: 'hsl(var(--cat-skills))', steps: ['Wall HS', 'Free HS', 'HSPU', 'L-Sit to HS'] },
+  { name: 'Lever', color: 'hsl(var(--cat-core))', steps: ['Tuck FL', 'FL Raise', 'Front Lever', 'Iron Cross'] },
 ];
 
-const sampleWeek = [
-  { day: 'Mon', label: 'Push', color: 'hsl(var(--cat-push))' },
-  { day: 'Tue', label: 'Pull', color: 'hsl(var(--cat-pull))' },
-  { day: 'Wed', label: 'Yoga', color: 'hsl(330, 65%, 55%)' },
-  { day: 'Thu', label: 'Legs', color: 'hsl(var(--cat-legs))' },
-  { day: 'Fri', label: 'Skills', color: 'hsl(var(--cat-skills))' },
-  { day: 'Sat', label: 'Core', color: 'hsl(var(--cat-core))' },
-  { day: 'Sun', label: 'Rest', color: 'hsl(var(--muted-foreground))' },
+const stats = [
+  { value: '150+', label: 'EXERCISES' },
+  { value: '8', label: 'CATEGORIES' },
+  { value: 'AI', label: 'COACH' },
+  { value: '∞', label: 'POTENTIAL' },
 ];
 
 export default function Index() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [loaded, setLoaded] = useState(false);
-  const [hoveredPath, setHoveredPath] = useState<number | null>(null);
 
-  useEffect(() => {
-    if (user) navigate('/dashboard');
-  }, [user, navigate]);
-
-  useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 50);
-    return () => clearTimeout(t);
-  }, []);
-
-  const features = [
-    { icon: Dumbbell, label: '150+', desc: 'EXERCISES', color: 'hsl(var(--cat-push))' },
-    { icon: CalendarDays, label: 'PLAN', desc: 'SESSIONS', color: 'hsl(var(--cat-pull))' },
-    { icon: Brain, label: 'AI', desc: 'COACH', color: 'hsl(var(--cat-skills))' },
-    { icon: Target, label: 'SKILL', desc: 'PROGRESS', color: 'hsl(var(--cat-legs))' },
-  ];
+  useEffect(() => { if (user) navigate('/dashboard'); }, [user, navigate]);
+  useEffect(() => { const t = setTimeout(() => setLoaded(true), 50); return () => clearTimeout(t); }, []);
 
   return (
     <div className="min-h-[100dvh] bg-background flex flex-col relative overflow-hidden select-none">
-      {/* Subtle radial glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full opacity-[0.06] pointer-events-none" style={{ background: 'radial-gradient(circle, hsl(var(--cat-skills)), transparent 70%)' }} />
+      {/* Background effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[-30%] left-[-10%] w-[80%] h-[80%] rounded-full opacity-[0.07]" style={{ background: 'radial-gradient(circle, hsl(var(--cat-skills)), transparent 60%)' }} />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full opacity-[0.05]" style={{ background: 'radial-gradient(circle, hsl(var(--cat-pull)), transparent 60%)' }} />
+        {/* Grid lines */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+      </div>
 
-      {/* Main content */}
-      <div className="flex-1 flex flex-col items-center px-4 sm:px-6 relative z-10 py-12 sm:py-16">
-        <div className="w-full max-w-lg text-center space-y-6 sm:space-y-8">
+      <div className="flex-1 flex flex-col items-center relative z-10">
+        {/* Top bar */}
+        <div className="w-full max-w-4xl px-6 pt-6 flex items-center justify-between transition-all duration-700" style={{ opacity: loaded ? 1 : 0 }}>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-[hsl(var(--cat-legs))] animate-pulse" />
+            <span className="text-[9px] font-mono text-muted-foreground tracking-[0.3em] uppercase">System Online</span>
+          </div>
+          <span className="text-[9px] font-mono text-muted-foreground tracking-[0.2em]">v2.0</span>
+        </div>
 
-          {/* Icon Logo */}
-          <div className="flex justify-center transition-all duration-300" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0) scale(1)' : 'translateY(-20px) scale(0.9)' }}>
-            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-[hsl(var(--cat-skills))] to-[hsl(var(--cat-pull))] flex items-center justify-center relative shadow-lg">
-              <Zap className="w-10 h-10 sm:w-14 sm:h-14 text-white" />
+        {/* Hero */}
+        <div className="flex-1 flex flex-col items-center justify-center px-6 pb-8 max-w-4xl w-full">
+          {/* Logo mark */}
+          <div className="mb-8 transition-all duration-500" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'scale(1)' : 'scale(0.8)' }}>
+            <div className="relative">
+              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-br from-[hsl(var(--electric))] to-[hsl(var(--cat-pull))] flex items-center justify-center shadow-2xl" style={{ boxShadow: '0 0 60px hsl(var(--electric) / 0.3), 0 0 120px hsl(var(--electric) / 0.1)' }}>
+                <Zap className="w-12 h-12 sm:w-14 sm:h-14 text-white drop-shadow-lg" />
+              </div>
+              {/* Orbiting dot */}
+              <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[hsl(var(--neon-green))]" style={{ boxShadow: '0 0 12px hsl(var(--neon-green) / 0.6)' }} />
             </div>
           </div>
 
           {/* Title */}
-          <div className="space-y-2 transition-all duration-500 delay-100" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(15px)' }}>
-            <h1 className="font-display text-5xl sm:text-7xl md:text-8xl font-bold text-foreground leading-[0.9] tracking-tighter uppercase">
-              I GOT<br />THE<br /><span className="gradient-text">POWA</span>
+          <div className="text-center space-y-3 mb-10 transition-all duration-700 delay-150" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(20px)' }}>
+            <h1 className="font-display text-6xl sm:text-8xl md:text-9xl font-black text-foreground leading-[0.85] tracking-[-0.04em] uppercase">
+              I GOT<br />THE <span className="gradient-text">POWA</span>
             </h1>
+            <p className="text-muted-foreground text-[10px] sm:text-xs font-mono uppercase tracking-[0.4em]">
+              Train · Track · Dominate
+            </p>
           </div>
 
-          <p className="text-muted-foreground text-xs sm:text-sm font-mono uppercase tracking-[0.3em] transition-all duration-500 delay-200" style={{ opacity: loaded ? 1 : 0 }}>
-            Train · Track · Dominate
-          </p>
-
-          {/* Feature grid */}
-          <div className="grid grid-cols-2 gap-2.5 sm:gap-3 transition-all duration-500 delay-300" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(10px)' }}>
-            {features.map(({ icon: Icon, label, desc, color }) => (
-              <div key={label} className="rounded-xl border border-border bg-card/80 backdrop-blur-sm p-3 sm:p-4 text-left hover:shadow-sm hover:border-border/60 transition-all duration-200 cursor-default relative overflow-hidden group">
-                <div className="absolute top-0 left-0 w-1 h-full rounded-r-full" style={{ backgroundColor: color }} />
-                <Icon className="w-4 h-4 sm:w-5 sm:h-5 mb-2 mt-1 ml-1" />
-                <div className="font-display font-bold text-lg sm:text-xl leading-none ml-1">{label}</div>
-                <div className="text-[10px] sm:text-xs font-mono tracking-wider mt-1 text-muted-foreground ml-1">{desc}</div>
+          {/* Stats strip */}
+          <div className="w-full max-w-md grid grid-cols-4 gap-0 mb-10 transition-all duration-700 delay-300" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(15px)' }}>
+            {stats.map(({ value, label }, i) => (
+              <div key={label} className={cn("text-center py-3", i < 3 && "border-r border-border")}>
+                <div className="font-display text-xl sm:text-2xl font-black tracking-tight text-foreground">{value}</div>
+                <div className="text-[7px] sm:text-[8px] font-mono text-muted-foreground tracking-[0.2em] mt-0.5">{label}</div>
               </div>
             ))}
           </div>
 
-          {/* Scroll indicator */}
-          <div className="transition-all duration-700 delay-500 flex flex-col items-center gap-1" style={{ opacity: loaded ? 0.4 : 0 }}>
-            <span className="text-[8px] font-mono uppercase tracking-[0.3em] text-muted-foreground">Explore</span>
-            <ChevronDown className="w-4 h-4 text-muted-foreground animate-pulse" />
+          {/* CTA */}
+          <div className="transition-all duration-700 delay-500 w-full max-w-xs" style={{ opacity: loaded ? 1 : 0 }}>
+            <Button
+              onClick={() => navigate('/auth')}
+              size="lg"
+              className="w-full h-14 sm:h-16 text-sm sm:text-base font-display font-bold uppercase tracking-[0.15em] rounded-2xl text-white relative overflow-hidden group"
+              style={{
+                background: 'linear-gradient(135deg, hsl(var(--electric)), hsl(var(--cat-pull)))',
+                boxShadow: '0 0 40px hsl(var(--electric) / 0.3), inset 0 1px 0 hsl(0 0% 100% / 0.1)',
+              }}
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Enter <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            </Button>
+            <p className="text-center text-muted-foreground text-[9px] font-mono uppercase tracking-[0.3em] mt-3">
+              Free · No credit card
+            </p>
           </div>
         </div>
 
-        {/* Path Explorer Preview */}
-        <div className="w-full max-w-2xl mt-10 sm:mt-14 transition-all duration-700 delay-500" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(20px)' }}>
-          <div className="rounded-xl border border-border bg-card p-4 sm:p-5 shadow-xs">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-1 h-5 rounded-full" style={{ backgroundColor: 'hsl(var(--cat-skills))' }} />
-              <h2 className="font-display text-xs sm:text-sm font-bold tracking-tight">Progression Paths</h2>
-              <Star className="w-3 h-3 text-muted-foreground/30 ml-auto" />
-              <span className="text-[9px] font-mono text-muted-foreground">Preview</span>
+        {/* Progression paths preview */}
+        <div className="w-full max-w-4xl px-6 pb-12 transition-all duration-700 delay-[600ms]" style={{ opacity: loaded ? 1 : 0 }}>
+          <div className="rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm p-5 sm:p-6">
+            <div className="flex items-center justify-between mb-5">
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-5 rounded-full bg-[hsl(var(--electric))]" />
+                <span className="text-xs font-display font-bold tracking-tight">Progression Paths</span>
+              </div>
+              <span className="text-[8px] font-mono text-muted-foreground/40 uppercase tracking-[0.2em]">Preview</span>
             </div>
-            <div className="space-y-3">
-              {examplePaths.map((path, pathIdx) => (
-                <div
-                  key={path.name}
-                  className="space-y-1.5 cursor-default"
-                  onMouseEnter={() => setHoveredPath(pathIdx)}
-                  onMouseLeave={() => setHoveredPath(null)}
-                >
+            <div className="space-y-4">
+              {paths.map(path => (
+                <div key={path.name} className="space-y-2">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: path.color }} />
-                    <span className="text-[9px] font-mono font-bold tracking-wide text-muted-foreground">{path.name}</span>
+                    <span className="text-[9px] font-mono font-bold tracking-[0.1em] text-muted-foreground uppercase">{path.name}</span>
                   </div>
-                  <div className="flex items-center gap-1 overflow-x-auto pb-1">
+                  <div className="flex items-center gap-1 overflow-x-auto scrollbar-none pb-1">
                     {path.steps.map((step, i) => (
                       <div key={step} className="flex items-center">
-                        <div
-                          className={cn(
-                            "px-2.5 py-1.5 rounded-lg border min-w-max transition-all duration-200",
-                            hoveredPath === pathIdx
-                              ? "border-border bg-accent"
-                              : "border-border/50 bg-muted/30"
-                          )}
-                          style={{ transitionDelay: `${i * 40}ms` }}
-                        >
-                          <span className="text-[8px] font-mono font-bold uppercase tracking-wider">{step}</span>
+                        <div className="px-2.5 py-1.5 rounded-lg border border-border/40 bg-accent/30 min-w-max">
+                          <span className="text-[7px] sm:text-[8px] font-mono font-bold uppercase tracking-wider text-muted-foreground">{step}</span>
                         </div>
-                        {i < path.steps.length - 1 && <ChevronRight className="w-3 h-3 text-muted-foreground/30 flex-shrink-0 mx-0.5" />}
+                        {i < path.steps.length - 1 && <ChevronRight className="w-3 h-3 text-border flex-shrink-0 mx-0.5" />}
                       </div>
                     ))}
                   </div>
@@ -135,45 +135,13 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Calendar Preview */}
-        <div className="w-full max-w-2xl mt-4 transition-all duration-700 delay-[600ms]" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(20px)' }}>
-          <div className="rounded-xl border border-border bg-card p-4 sm:p-5 shadow-xs">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-1 h-5 rounded-full" style={{ backgroundColor: 'hsl(var(--cat-pull))' }} />
-              <h2 className="font-display text-xs sm:text-sm font-bold tracking-tight">Sample Training Week</h2>
-            </div>
-            <div className="grid grid-cols-7 gap-1.5">
-              {sampleWeek.map(({ day, label, color }) => (
-                <div key={day} className="rounded-lg border border-border/50 p-2 text-center hover:border-border transition-colors">
-                  <div className="text-[8px] font-mono text-muted-foreground mb-1.5">{day}</div>
-                  <div className="h-1.5 rounded-full mb-1.5" style={{ backgroundColor: color }} />
-                  <div className="text-[8px] font-mono font-bold">{label}</div>
-                </div>
-              ))}
-            </div>
+        {/* Bottom */}
+        <div className="w-full border-t border-border/30 py-4 text-center">
+          <div className="flex items-center justify-center gap-3">
+            <Flame className="w-3 h-3 text-[hsl(var(--cat-push))]" />
+            <p className="text-muted-foreground/40 text-[8px] tracking-[0.4em] uppercase font-mono">Built for those who train with purpose</p>
+            <Flame className="w-3 h-3 text-[hsl(var(--cat-push))]" />
           </div>
-        </div>
-
-        {/* CTA */}
-        <div className="max-w-lg mt-8 sm:mt-10 space-y-3 transition-all duration-500 delay-700 text-center" style={{ opacity: loaded ? 1 : 0 }}>
-          <Button
-            onClick={() => navigate('/auth')}
-            size="lg"
-            className="w-full sm:w-auto bg-gradient-to-r from-[hsl(var(--cat-skills))] to-[hsl(var(--cat-pull))] text-white hover:opacity-90 text-sm sm:text-base px-10 sm:px-16 py-6 sm:py-7 font-display font-bold uppercase tracking-wider rounded-xl shadow-lg group animate-pulse-glow"
-          >
-            Enter
-            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <p className="text-muted-foreground text-[10px] font-mono uppercase tracking-widest">Free · No credit card</p>
-        </div>
-      </div>
-
-      {/* Bottom bar */}
-      <div className="border-t border-border py-3 sm:py-4 text-center relative z-10">
-        <div className="flex items-center justify-center gap-3">
-          <Flame className="w-3 h-3 text-[hsl(var(--cat-push))]" />
-          <p className="text-muted-foreground text-[9px] sm:text-[10px] tracking-[0.3em] uppercase font-mono">Built for those who train with purpose</p>
-          <Flame className="w-3 h-3 text-[hsl(var(--cat-push))]" />
         </div>
       </div>
     </div>
