@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
-import { Zap, ChevronRight, Play, Dumbbell } from 'lucide-react';
+import { Zap, ChevronRight, Play, Dumbbell, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { NonNegotiablesBar } from '@/components/Training/NonNegotiablesBar';
 import { IntegrityBlock } from '@/components/Training/IntegrityBlock';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
+import { ExercisePickerModal } from '@/components/Workout/ExercisePickerModal';
 import { cn } from '@/lib/utils';
 
 interface TrainingDay {
@@ -64,6 +65,12 @@ const dayEmojis: Record<string, string> = {
   A: '🔶', B: '🔵', C: '🟣', D: '🟢', E: '🟡'
 };
 
+function getYouTubeThumb(url?: string | null): string | null {
+  if (!url) return null;
+  const match = url.match(/(?:youtu\.be\/|v=|\/embed\/)([a-zA-Z0-9_-]{11})/);
+  return match ? `https://img.youtube.com/vi/${match[1]}/default.jpg` : null;
+}
+
 export default function Train() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -73,6 +80,8 @@ export default function Train() {
   const [integrityBlocks, setIntegrityBlocks] = useState<IntegrityData[]>([]);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showPicker, setShowPicker] = useState(false);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) { navigate('/auth'); return; }
@@ -91,7 +100,6 @@ export default function Train() {
     if (daysData) setDays(daysData as TrainingDay[]);
     if (blocksData) setIntegrityBlocks(blocksData as IntegrityData[]);
 
-    // Determine active day based on last workout
     const { data: lastWorkout } = await supabase
       .from('workouts')
       .select('entries')
@@ -99,7 +107,6 @@ export default function Train() {
       .order('date', { ascending: false })
       .limit(1);
 
-    // Simple rotation - default to A
     setLoading(false);
   };
 
@@ -117,6 +124,11 @@ export default function Train() {
     if (data) setExercises(data as unknown as Exercise[]);
   };
 
+  const handlePickerSelect = (exercise: any) => {
+    // Navigate to detail modal for the picked exercise
+    setSelectedExercise(exercise as Exercise);
+  };
+
   const currentDay = days.find(d => d.day_key === activeDay);
   const dayIntegrity = integrityBlocks.filter(b =>
     currentDay?.integrity_block_slugs?.includes(b.slug)
@@ -131,7 +143,7 @@ export default function Train() {
   }
 
   return (
-    <div className="min-h-screen bg-background pb-20 md:pb-0">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background">
         <div className="max-w-6xl mx-auto px-4 md:px-8 h-14 flex items-center justify-between">
@@ -144,6 +156,14 @@ export default function Train() {
               <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.2em]">4-Day Auto-Rotating</p>
             </div>
           </div>
+          <Button
+            size="sm"
+            onClick={() => setShowPicker(true)}
+            className="h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground"
+          >
+            <Plus className="h-3.5 w-3.5 mr-1" />
+            <span className="hidden sm:inline">Add</span> Exercise
+          </Button>
         </div>
       </header>
 
@@ -217,28 +237,59 @@ export default function Train() {
           </div>
 
           <div className="space-y-1">
-            {exercises.map(ex => (
-              <button
-                key={ex.id}
-                onClick={() => setSelectedExercise(ex)}
-                className="w-full flex items-center gap-3 p-3 border border-foreground/20 hover:border-foreground bg-card hover:bg-secondary/50 transition-all text-left group"
-              >
-                <div
-                  className="w-8 h-8 border border-foreground/30 flex items-center justify-center flex-shrink-0"
-                  style={{ borderLeftWidth: 3, borderLeftColor: dayColors[activeDay] }}
-                >
-                  <Dumbbell className="w-3.5 h-3.5 text-muted-foreground" />
+            {exercises.map(ex => {
+              const thumb = getYouTubeThumb(ex.youtube_url);
+              const isExpanded = expandedId === ex.id;
+              return (
+                <div key={ex.id} className="border border-foreground/20 bg-card hover:bg-secondary/50 transition-all">
+                  <button
+                    onClick={() => setExpandedId(isExpanded ? null : ex.id)}
+                    className="w-full flex items-center gap-3 p-3 text-left group"
+                  >
+                    {thumb ? (
+                      <img src={thumb} alt="" className="w-10 h-10 object-cover border border-foreground/20 flex-shrink-0" />
+                    ) : (
+                      <div
+                        className="w-10 h-10 border border-foreground/30 flex items-center justify-center flex-shrink-0"
+                        style={{ borderLeftWidth: 3, borderLeftColor: dayColors[activeDay] }}
+                      >
+                        <Dumbbell className="w-3.5 h-3.5 text-muted-foreground" />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="font-display font-semibold text-xs uppercase tracking-wider truncate">{ex.name}</div>
+                      <div className="text-[9px] font-mono text-muted-foreground mt-0.5">
+                        {ex.sets_reps || `Level ${ex.difficulty_level || 1}`}
+                        {ex.primary_muscles?.length > 0 && ` · ${ex.primary_muscles.slice(0, 2).join(', ')}`}
+                      </div>
+                    </div>
+                    <ChevronRight className={cn(
+                      "w-3.5 h-3.5 text-muted-foreground transition-transform",
+                      isExpanded && "rotate-90"
+                    )} />
+                  </button>
+                  {isExpanded && (
+                    <div className="px-3 pb-3 pt-0 flex gap-2 border-t border-foreground/10">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="flex-1 h-8 text-[10px] font-mono uppercase tracking-wider"
+                        onClick={() => setSelectedExercise(ex)}
+                      >
+                        <Play className="w-3 h-3 mr-1" /> View Details
+                      </Button>
+                      <Button
+                        size="sm"
+                        className="flex-1 h-8 text-[10px] font-mono uppercase tracking-wider border-2 border-foreground"
+                        onClick={() => navigate('/planner')}
+                      >
+                        <Plus className="w-3 h-3 mr-1" /> Log Set
+                      </Button>
+                    </div>
+                  )}
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="font-display font-semibold text-xs uppercase tracking-wider truncate">{ex.name}</div>
-                  <div className="text-[9px] font-mono text-muted-foreground mt-0.5">
-                    {ex.sets_reps || `Level ${ex.difficulty_level || 1}`}
-                    {ex.primary_muscles?.length > 0 && ` · ${ex.primary_muscles.slice(0, 2).join(', ')}`}
-                  </div>
-                </div>
-                <ChevronRight className="w-3.5 h-3.5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-              </button>
-            ))}
+              );
+            })}
           </div>
 
           {exercises.length === 0 && (
@@ -264,6 +315,12 @@ export default function Train() {
         exercise={selectedExercise}
         open={!!selectedExercise}
         onClose={() => setSelectedExercise(null)}
+      />
+
+      <ExercisePickerModal
+        open={showPicker}
+        onClose={() => setShowPicker(false)}
+        onSelectExercise={handlePickerSelect}
       />
     </div>
   );

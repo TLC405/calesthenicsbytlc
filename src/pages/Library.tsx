@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Plus, Sparkles, Download } from 'lucide-react';
+import { Search, Plus, Sparkles, Download, Flame } from 'lucide-react';
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';

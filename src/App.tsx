@@ -28,7 +28,7 @@ function AppContent() {
 
   return (
     <BrowserRouter>
-      <div className="pb-[6.5rem] md:pb-12">
+      <div className="pb-[7rem] md:pb-12">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
