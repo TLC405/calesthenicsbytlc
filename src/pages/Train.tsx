@@ -45,6 +45,11 @@ interface Exercise {
   chain_order?: number | null;
   sets_reps?: string | null;
   description?: string | null;
+  stabilizer_muscles?: string[] | null;
+  tendons_involved?: string[] | null;
+  recovery_muscle?: string | null;
+  recovery_tendon?: string | null;
+  recovery_nervous?: string | null;
 }
 
 const dayColors: Record<string, string> = {

@@ -41,9 +41,7 @@ const getStartTime = (url: string): number | undefined => {
 };
 
 function buildEmbedSrc(youtubeId: string, startSec?: number, privacyEnhanced = true, autoplay = false) {
-  const host = privacyEnhanced
-    ? "https://www.youtube-nocookie.com"
-    : "https://www.youtube.com";
+  const host = "https://www.youtube-nocookie.com";
 
   const params = new URLSearchParams({
     modestbranding: "1",
@@ -55,6 +53,7 @@ function buildEmbedSrc(youtubeId: string, startSec?: number, privacyEnhanced = t
     disablekb: "0",
     fs: "1",
     cc_load_policy: "0",
+    origin: typeof window !== 'undefined' ? window.location.origin : '',
   });
 
   if (autoplay) params.set("autoplay", "1");

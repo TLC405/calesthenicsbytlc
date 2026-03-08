@@ -20,11 +20,11 @@ interface ProgressionPathStripProps {
 }
 
 const difficultyColor: Record<number, string> = {
-  1: 'bg-green-500 border-green-500',
-  2: 'bg-blue-500 border-blue-500',
-  3: 'bg-orange-500 border-orange-500',
-  4: 'bg-red-500 border-red-500',
-  5: 'bg-purple-500 border-purple-500',
+  1: 'bg-[hsl(var(--cat-legs))]',
+  2: 'bg-[hsl(var(--cat-pull))]',
+  3: 'bg-[hsl(var(--cat-core))]',
+  4: 'bg-[hsl(var(--cat-push))]',
+  5: 'bg-[hsl(var(--cat-skills))]',
 };
 
 const difficultyLabel: Record<number, string> = {
@@ -76,7 +76,7 @@ export function ProgressionPathStrip({ exerciseId, chainGroup, onNavigate }: Pro
           {chain.map((ex, i) => {
             const isActive = ex.id === exerciseId;
             const level = ex.difficulty_level || 1;
-            const color = difficultyColor[level] || 'bg-muted border-muted';
+            const color = difficultyColor[level] || 'bg-muted';
 
             return (
               <div key={ex.id} className="flex items-center">
@@ -91,7 +91,7 @@ export function ProgressionPathStrip({ exerciseId, chainGroup, onNavigate }: Pro
                   )}
                 >
                   {/* Difficulty dot */}
-                  <div className={cn("w-2 h-2 rounded-full mb-1.5", isActive ? 'bg-background' : color.split(' ')[0])} />
+                  <div className={cn("w-2 h-2 rounded-full mb-1.5", isActive ? 'bg-background' : color)} />
                   
                   <span className={cn(
                     "text-[9px] font-display font-bold uppercase tracking-wider leading-tight text-center line-clamp-2",
