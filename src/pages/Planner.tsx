@@ -4,6 +4,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { CalendarView } from '@/components/Calendar/CalendarView';
 import { WorkoutModal } from '@/components/Workout/WorkoutModal';
+import { CalendarDays } from 'lucide-react';
 
 export default function Planner() {
   const { user } = useAuth();
@@ -28,13 +29,15 @@ export default function Planner() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Brutalist header */}
-      <header className="sticky top-0 z-50 border-b-2 border-foreground bg-background">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 h-14 flex items-center gap-3">
-          <div className="w-1.5 h-6 bg-foreground" />
+      {/* Frosted glass header */}
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border/30">
+        <div className="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-primary/10 border border-border/30 flex items-center justify-center">
+            <CalendarDays className="w-5 h-5 text-primary" />
+          </div>
           <div>
-            <h1 className="font-display text-sm font-bold uppercase tracking-wider leading-none">Planner</h1>
-            <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.2em]">Schedule training</p>
+            <h1 className="font-display text-base font-bold tracking-tight">Planner</h1>
+            <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em]">Schedule Training</p>
           </div>
         </div>
       </header>
