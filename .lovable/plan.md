@@ -1,90 +1,112 @@
 
 
-# Complete UI Overhaul — White Theme, Music Bar Fix, Exercise Navigation, Brand Themes
+# Atomic UI/UX Overhaul + Music Fix + Loading Screen Replacement
 
-## Issues Identified
+## Diagnosis Summary
 
-1. **Dark theme forced** — `html` has `@apply dark` hardcoded in CSS. Need to switch to light/white as default.
-2. **Music bar sinking under nav** — MusicControl is `z-40` at `bottom-14`, MobileNav is `z-50` at `bottom-0`. The music bar renders behind the nav. Also has redundant Power icon + Switch (two controls for on/off).
-3. **Exercise clicks in Anatomy navigate to `/library`** instead of opening the exercise detail modal in-place.
-4. **Pages missing the UI refresh**: Planner, AILab, Anatomy still use old brutalist `border-2 border-foreground` styling.
-5. **No theme system** — need a comprehensive theme switcher with 5 themes: Default (white), Vasa, Planet Fitness, YMCA, OKC Thunder.
+**What's broken:**
+1. **LoadingScreen** — still references the old uploaded photo and "TLC's Hybrid" branding. It's not actually used anywhere in `App.tsx` or `main.tsx` (never imported), so it's dead code but still exists.
+2. **Music doesn't play** — The YouTube iframe approach relies on `postMessage` to control playback via the YouTube IFrame API. However, the iframe is rendered with `enablejsapi=1` but never loads the YouTube IFrame Player API script (`https://www.youtube.com/iframe_api`). The `postMessage` JSON format used is incorrect — YouTube's IFrame API expects the iframe to be initialized through the API, not via raw postMessage. The iframe also gets re-created on every state change (since `embedSrc` changes when `isPlaying` toggles, causing React to unmount/remount the iframe).
+3. **Old uploaded photo** — Still referenced in `Auth.tsx`, `NotFound.tsx`, and `LoadingScreen.tsx`.
+4. **Settings page** — Works fine (verified code), but the music section only appears after login (Settings redirects to `/auth` if not logged in).
 
 ## Plan
 
-### 1. Switch to White/Light Theme Default (`src/index.css`)
-- Remove `html { @apply dark; }` — make light the default
-- Refine the `.light` / `:root` tokens so the white theme looks polished (current light tokens already exist)
-- Adjust body background to remove dark radial gradient, use clean white with subtle noise
+### Phase 1: Fix Music System (Critical)
+**Problem**: The MusicProvider creates a hidden YouTube iframe and tries to control it via `postMessage`, but the YouTube IFrame Player API is never loaded. The iframe src also changes on play/pause, causing remounts.
 
-### 2. Rebuild Music Bar (`src/components/Music/MusicControl.tsx`)
-- Remove the separate `Power` icon — keep only the `Switch` toggle (one control for on/off)
-- Move music bar **into the header area** of each page or make it a collapsible floating mini-player in the top-right corner (not competing with bottom nav)
-- Alternative: Place music bar **above** the mobile nav with proper z-indexing (`z-50`, `bottom-[4.5rem]`) so it doesn't overlap
-- Redesign to match the new rounded-2xl premium aesthetic — remove `border-2 border-foreground` brutalist style
+**Fix**:
+- Rewrite `MusicProvider.tsx` to use the **YouTube IFrame Player API** properly:
+  - Load the `https://www.youtube.com/iframe_api` script dynamically
+  - Create the player via `new YT.Player()` with event handlers
+  - Use `player.playVideo()`, `player.pauseVideo()`, `player.setVolume()` directly instead of postMessage
+  - Keep iframe stable (don't change src on play/pause)
+  - Store player ref and only create once
 
-### 3. Fix Exercise Click in Anatomy (`src/pages/Anatomy.tsx`)
-- Replace `onNavigate={() => navigate('/library')}` with opening `ExerciseDetailModal` in-place
-- Add `ExerciseDetailModal` import and state management to Anatomy page
-- `ExerciseRow` click loads full exercise data and opens the modal
+### Phase 2: Full Persistent Mini-Player Bar
+**Current**: Tiny 2-button floating control in bottom-right corner.
 
-### 4. Update Remaining Pages to Match New Design System
+**Upgrade to**: A full-width mini-player bar fixed above MobileNav with:
+- Play/Pause button with animated equalizer bars when playing
+- Track name display (or "I Got The Power" default)
+- Volume slider (collapsible)
+- On/Off toggle switch
+- Source indicator (YouTube icon)
+- Positioned `bottom-14` on mobile (above nav), `bottom-0` on desktop
 
-**Planner (`src/pages/Planner.tsx`)**:
-- Replace `border-b-2 border-foreground` header with frosted glass `bg-background/80 backdrop-blur-2xl border-b border-border/30`
-- Add rounded accent bar and proper typography
+Rewrite `MusicControl.tsx` as a proper bar component.
 
-**AILab (`src/pages/AILab.tsx`)**:
-- Same header treatment — frosted glass, rounded elements
-- Replace `border-2 border-foreground` cards with `rounded-2xl border border-border/50 bg-card`
-- Polish the unauthenticated state cards
+### Phase 3: Replace Loading Screen
+**Current**: Dead component with old branding and uploaded photo.
 
-**Anatomy (`src/pages/Anatomy.tsx`)**:
-- Replace `border-b-2 border-foreground` header with frosted glass header
-- Replace `border-2` cards/panels with `rounded-2xl border border-border/40 bg-card`
-- Update muscle pills from `border-2 rounded-sm` to `rounded-xl border border-border/40`
-- Update ExerciseRow from `border-2 rounded-lg` to `rounded-2xl border border-border/40`
+**Replace with**: A brutalist, on-brand loading screen used during auth initialization:
+- Black background with the Zap icon logo (matching Index page)
+- "I GOT THE POWA" text
+- Animated progress bar using category colors cycling through
+- "Loading..." in mono uppercase
+- Wire it into `App.tsx` — show while `AuthProvider.loading` is true
 
-### 5. Comprehensive Theme System — 5 Brand Themes
+### Phase 4: Remove Old Uploaded Photo References
+- `Auth.tsx` line 10: Replace `const logo = '/lovable-uploads/...'` with the Zap icon component (consistent with Index/Dashboard)
+- `NotFound.tsx` lines 17-22: Replace img with Zap icon in purple box
+- Delete or fully rewrite `LoadingScreen.tsx`
 
-Create `src/components/ThemeSwitcher.tsx` and add theme CSS variables.
+### Phase 5: Landing Page Redesign
+**Current issues**: Functional but static. The progression paths and calendar preview are hardcoded and non-interactive.
 
-**Theme definitions** (all as CSS custom property overrides on `<html>`):
+**Upgrades**:
+- Add animated entrance transitions using CSS keyframes (already defined in index.css)
+- Make the feature grid cards interactive with hover color fills matching category
+- Add a "Now Playing" indicator if music is active (visible on landing too)
+- Improve the CTA section with more visual weight
+- Add a "scroll down" indicator between hero and paths section
+- Make progression path steps animate in sequentially on scroll
 
-| Theme | Primary | Accent | Background | Card | Category Accent |
-|-------|---------|--------|------------|------|-----------------|
-| **Default** | Purple `270 100% 55%` | Electric blue | White `0 0% 98%` | White `0 0% 100%` | Current category colors |
-| **Vasa Fitness** | Orange `16 100% 50%` | Teal `170 87% 33%` | White `0 0% 98%` | White | Orange-teal accent system |
-| **Planet Fitness** | Purple `310 62% 40%` (#A4278D) | Yellow `59 95% 58%` (#F9F72E) | Black `0 0% 0%` | Dark gray | Purple-yellow pop |
-| **YMCA** | Red `346 100% 44%` (#E00034) | Navy `210 80% 25%` | White `0 0% 98%` | White | Red-blue classic |
-| **OKC Thunder** | Blue `204 100% 38%` (#007AC1) | Sunset `8 86% 54%` (#EF3B24) | Navy `214 100% 19%` (#002D62) | Dark navy | Blue-orange-yellow electric |
+### Phase 6: Colorful Brutalist Evolution Across All Pages
 
-**Implementation**:
-- Store theme choice in `localStorage` and optionally in Supabase `profiles.theme`
-- Each theme sets `data-theme="vasa|pf|ymca|thunder"` on `<html>`
-- CSS: `[data-theme="pf"] { --background: ...; --primary: ...; }` etc.
-- Theme switcher UI in Settings page with branded preview cards showing each theme's colors
-- Also accessible from Dashboard header via a palette icon
+**Dashboard**:
+- Stats cards: Add subtle pulse animation on streak when active
+- Category grid: Add exercise count per category from DB
+- Quick actions: Add gradient color fills on hover instead of solid
 
-### 6. Update `App.tsx`
-- Adjust `pb-[7rem]` padding to account for new music bar placement
-- Ensure z-index layering is correct
+**Library**:
+- Exercise cards: Larger thumbnails, better fallback with category-colored gradient backgrounds instead of plain gray
+- Search: Add live result count feedback
 
-## Files to Change
-1. `src/index.css` — light default, 5 theme definitions
-2. `src/components/Music/MusicControl.tsx` — rebuild, single toggle, proper placement
-3. `src/App.tsx` — adjust layout padding
-4. `src/pages/Anatomy.tsx` — exercise detail modal instead of navigate, UI refresh
-5. `src/pages/Planner.tsx` — frosted glass header, rounded cards
-6. `src/pages/AILab.tsx` — frosted glass header, rounded cards
-7. `src/components/ThemeSwitcher.tsx` — new theme picker component
-8. `src/pages/Settings.tsx` — add theme section with ThemeSwitcher
-9. `src/pages/Dashboard.tsx` — add theme icon in header
+**Auth page**:
+- Replace the logo img with Zap icon
+- Add category color accents to the left panel stats
 
-## Implementation Order
-1. CSS: white default + 5 theme definitions
-2. Music bar rebuild + z-index fix
-3. Anatomy exercise click fix
-4. Planner + AILab + Anatomy UI refresh
-5. Theme switcher component + Settings integration
+**AI Lab**:
+- Apply brutalist card styling to chat bubbles (borders instead of rounded)
+- Message input: brutalist border treatment
+
+**Settings**:
+- Add the music section visual polish (playing indicator)
+
+**All pages**:
+- Consistent header treatment with category accent strip
+
+## Files to Create/Modify
+
+| File | Action |
+|------|--------|
+| `src/providers/MusicProvider.tsx` | Rewrite with YouTube IFrame Player API |
+| `src/components/Music/MusicControl.tsx` | Full mini-player bar |
+| `src/components/LoadingScreen.tsx` | Complete rewrite with brutalist splash |
+| `src/App.tsx` | Add loading screen during auth init |
+| `src/pages/Auth.tsx` | Remove uploaded photo, use Zap icon |
+| `src/pages/NotFound.tsx` | Remove uploaded photo, use Zap icon |
+| `src/pages/Index.tsx` | Enhanced animations and interactions |
+| `src/pages/Dashboard.tsx` | Category counts, animation polish |
+| `src/pages/Library.tsx` | Better card fallbacks, search UX |
+| `src/pages/AILab.tsx` | Brutalist chat styling |
+| `src/components/AILab/AILabChat.tsx` | Brutalist message bubbles |
+
+## Technical Notes
+
+- **YouTube IFrame API** requires a global `onYouTubeIframeAPIReady` callback. The provider will set this up and create the player instance once.
+- The player div needs to be visible in DOM (not `display:none`) — use `position:absolute; width:0; height:0; overflow:hidden` instead of `className="hidden"`.
+- No new dependencies needed — the YouTube API is loaded via script tag.
+- Music state persists in localStorage + profiles table (already working).
 

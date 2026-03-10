@@ -9,7 +9,8 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
 import { useToast } from '@/hooks/use-toast';
-import { Download, LogOut, User, Shield, Music, Link } from 'lucide-react';
+import { ThemeSwitcher } from '@/components/ThemeSwitcher';
+import { Download, LogOut, User, Shield, Music, Link, Palette } from 'lucide-react';
 
 export default function Settings() {
   const { user, signOut } = useAuth();
@@ -68,6 +69,17 @@ export default function Settings() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 md:px-8 py-6 space-y-4">
+        {/* Theme */}
+        <section className="rounded-2xl border border-border/50 bg-card p-5">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-border/30 flex items-center justify-center">
+              <Palette className="w-4 h-4 text-primary" />
+            </div>
+            <h2 className="font-display text-sm font-bold tracking-tight">Theme</h2>
+          </div>
+          <ThemeSwitcher />
+        </section>
+
         {/* Profile */}
         <section className="rounded-2xl border border-border/50 bg-card p-5">
           <div className="flex items-center gap-3 mb-5">
@@ -92,10 +104,10 @@ export default function Settings() {
         </section>
 
         {/* Music */}
-        <section className="rounded-2xl border border-[hsl(var(--electric))]/30 bg-card p-5">
+        <section className="rounded-2xl border border-primary/20 bg-card p-5">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center border border-border/30" style={{ backgroundColor: 'hsl(var(--electric) / 0.1)' }}>
-              <Music className="w-4 h-4" style={{ color: 'hsl(var(--electric))' }} />
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-primary/10 border border-border/30">
+              <Music className="w-4 h-4 text-primary" />
             </div>
             <h2 className="font-display text-sm font-bold tracking-tight">Music</h2>
           </div>

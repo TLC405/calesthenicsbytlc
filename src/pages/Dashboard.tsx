@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp } from 'lucide-react';
+import { Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp, Palette } from 'lucide-react';
 import { CalendarView } from '@/components/Calendar/CalendarView';
 import { MasterSkillList } from '@/components/Dashboard/MasterSkillList';
 import { SkillTreeView } from '@/components/Progression/SkillTreeView';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
+import { useTheme } from '@/components/ThemeSwitcher';
 import { parseISO } from 'date-fns';
 import { cn } from '@/lib/utils';
 
@@ -25,6 +26,7 @@ export default function Dashboard() {
   const [profile, setProfile] = useState<any>(null);
   const [workoutDates, setWorkoutDates] = useState<Date[]>([]);
   const [selectedExercise, setSelectedExercise] = useState<any>(null);
+  const { theme, setTheme, themes } = useTheme();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,13 +56,20 @@ export default function Dashboard() {
     { label: 'Level', value: level, icon: TrendingUp, color: 'hsl(var(--cat-pull))' },
   ];
 
+  // Cycle through themes
+  const cycleTheme = () => {
+    const ids = themes.map(t => t.id);
+    const idx = ids.indexOf(theme);
+    setTheme(ids[(idx + 1) % ids.length]);
+  };
+
   return (
     <div className="min-h-screen bg-background pb-28 md:pb-0">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border/30">
         <div className="max-w-6xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[hsl(var(--electric))] to-[hsl(var(--cat-pull))] flex items-center justify-center" style={{ boxShadow: '0 0 20px hsl(var(--electric) / 0.2)' }}>
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[hsl(var(--electric))] to-[hsl(var(--cat-pull))] flex items-center justify-center shadow-sm">
               <Zap className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -73,6 +82,9 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex items-center gap-1">
+            <Button variant="ghost" size="icon" onClick={cycleTheme} className="text-muted-foreground hover:text-foreground h-10 w-10 rounded-xl">
+              <Palette className="h-4 w-4" />
+            </Button>
             <Button variant="ghost" size="icon" onClick={() => navigate('/settings')} className="text-muted-foreground hover:text-foreground h-10 w-10 rounded-xl">
               <Settings className="h-4 w-4" />
             </Button>
@@ -116,7 +128,7 @@ export default function Dashboard() {
         {/* Categories */}
         <section>
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-1.5 h-5 rounded-full bg-[hsl(var(--electric))]" />
+            <div className="w-1.5 h-5 rounded-full bg-primary" />
             <h2 className="font-display text-sm font-bold tracking-tight">Categories</h2>
           </div>
           <MasterSkillList />
@@ -146,9 +158,9 @@ export default function Dashboard() {
               <button
                 key={action.path}
                 onClick={() => navigate(action.path)}
-                className="group w-full flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/50 hover:border-border hover:bg-accent/20 transition-all duration-200 text-left"
+                className="group w-full flex items-center gap-4 p-4 rounded-2xl bg-card border border-border/50 hover:border-border hover:shadow-sm transition-all duration-200 text-left"
               >
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 border border-border/50" style={{ backgroundColor: `${action.color}15` }}>
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 border border-border/30" style={{ backgroundColor: `${action.color}15` }}>
                   <Icon className="h-5 w-5" style={{ color: action.color }} />
                 </div>
                 <div className="flex-1 min-w-0">

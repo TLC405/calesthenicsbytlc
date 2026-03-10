@@ -4,7 +4,8 @@
 
 /* ═══════════════════════════════════════════════
    I GOT THE POWA — Design System
-   Dark-dominant, high-energy athletic brutalism
+   White-first premium athletic brutalism
+   5 Brand Themes: Default, Vasa, Planet Fitness, YMCA, OKC Thunder
    All colors HSL
    ═══════════════════════════════════════════════ */
 
@@ -30,81 +31,8 @@
     --gradient-end: 217 100% 60%;
 
     --radius: 0.75rem;
-  }
 
-  /* ─── DARK MODE (Default) ─── */
-  .dark, :root {
-    --background: 240 10% 4%;
-    --foreground: 0 0% 95%;
-
-    --card: 240 6% 8%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 240 6% 8%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 270 100% 65%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 240 5% 14%;
-    --secondary-foreground: 0 0% 90%;
-
-    --muted: 240 5% 14%;
-    --muted-foreground: 240 5% 50%;
-
-    --accent: 240 5% 12%;
-    --accent-foreground: 0 0% 95%;
-
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 240 5% 16%;
-    --input: 240 5% 16%;
-    --ring: 270 100% 65%;
-
-    --surface: 240 8% 6%;
-    --surface-raised: 240 6% 10%;
-    --glow-primary: 270 100% 65%;
-
-    --shadow-light: 240 10% 12%;
-    --shadow-dark: 240 10% 2%;
-
-    --sidebar-background: 240 10% 4%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 270 100% 65%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 5% 12%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 240 5% 16%;
-    --sidebar-ring: 270 100% 65%;
-
-    --chart-1: 270 100% 65%;
-    --chart-2: 150 100% 50%;
-    --chart-3: 217 91% 60%;
-    --chart-4: 45 93% 47%;
-    --chart-5: 0 84% 60%;
-
-    --sidebar: 240 8% 6%;
-
-    --shadow-2xs: 0 1px 2px 0 hsl(0 0% 0% / 0.15);
-    --shadow-xs: 0 1px 3px 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.15);
-    --shadow-sm: 0 2px 8px 0 hsl(0 0% 0% / 0.25), 0 1px 3px -1px hsl(0 0% 0% / 0.2);
-    --shadow: 0 4px 16px -2px hsl(0 0% 0% / 0.3), 0 2px 6px -2px hsl(0 0% 0% / 0.2);
-    --shadow-md: 0 8px 30px -4px hsl(0 0% 0% / 0.4), 0 4px 12px -4px hsl(0 0% 0% / 0.2);
-    --shadow-lg: 0 16px 50px -8px hsl(0 0% 0% / 0.5), 0 8px 20px -8px hsl(0 0% 0% / 0.3);
-    --shadow-xl: 0 24px 60px -12px hsl(0 0% 0% / 0.6);
-    --shadow-2xl: 0 32px 80px -16px hsl(0 0% 0% / 0.7);
-
-    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-    --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
-
-    --spacing: 0.25rem;
-    --tracking-normal: 0em;
-  }
-
-  /* ─── LIGHT MODE ─── */
-  .light {
+    /* ─── LIGHT MODE (Default) ─── */
     --background: 0 0% 98%;
     --foreground: 240 10% 8%;
 
@@ -165,6 +93,210 @@
     --shadow-lg: 0 16px 40px -8px hsl(240 10% 8% / 0.12), 0 8px 16px -8px hsl(240 10% 8% / 0.08);
     --shadow-xl: 0 24px 56px -12px hsl(240 10% 8% / 0.15);
     --shadow-2xl: 0 32px 72px -16px hsl(240 10% 8% / 0.2);
+
+    --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+    --spacing: 0.25rem;
+    --tracking-normal: 0em;
+  }
+
+  /* ─── DARK MODE ─── */
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 95%;
+
+    --card: 240 6% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 6% 8%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 270 100% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5% 14%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 240 5% 14%;
+    --muted-foreground: 240 5% 50%;
+
+    --accent: 240 5% 12%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 5% 16%;
+    --input: 240 5% 16%;
+    --ring: 270 100% 65%;
+
+    --surface: 240 8% 6%;
+    --surface-raised: 240 6% 10%;
+    --glow-primary: 270 100% 65%;
+
+    --shadow-light: 240 10% 12%;
+    --shadow-dark: 240 10% 2%;
+
+    --sidebar-background: 240 10% 4%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 270 100% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 5% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 5% 16%;
+    --sidebar-ring: 270 100% 65%;
+
+    --chart-1: 270 100% 65%;
+    --chart-2: 150 100% 50%;
+    --chart-3: 217 91% 60%;
+    --chart-4: 45 93% 47%;
+    --chart-5: 0 84% 60%;
+
+    --sidebar: 240 8% 6%;
+
+    --shadow-2xs: 0 1px 2px 0 hsl(0 0% 0% / 0.15);
+    --shadow-xs: 0 1px 3px 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.15);
+    --shadow-sm: 0 2px 8px 0 hsl(0 0% 0% / 0.25), 0 1px 3px -1px hsl(0 0% 0% / 0.2);
+    --shadow: 0 4px 16px -2px hsl(0 0% 0% / 0.3), 0 2px 6px -2px hsl(0 0% 0% / 0.2);
+    --shadow-md: 0 8px 30px -4px hsl(0 0% 0% / 0.4), 0 4px 12px -4px hsl(0 0% 0% / 0.2);
+    --shadow-lg: 0 16px 50px -8px hsl(0 0% 0% / 0.5), 0 8px 20px -8px hsl(0 0% 0% / 0.3);
+    --shadow-xl: 0 24px 60px -12px hsl(0 0% 0% / 0.6);
+    --shadow-2xl: 0 32px 80px -16px hsl(0 0% 0% / 0.7);
+  }
+
+  /* ═══════════════════════════════════════════════
+     BRAND THEMES
+     ═══════════════════════════════════════════════ */
+
+  /* ─── VASA FITNESS ─── Orange/Teal Energy */
+  [data-theme="vasa"] {
+    --primary: 16 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --electric: 170 87% 33%;
+    --electric-glow: 170 87% 45%;
+    --ring: 16 100% 50%;
+    --gradient-start: 16 100% 50%;
+    --gradient-end: 170 87% 33%;
+    --cat-push: 16 100% 50%;
+    --cat-pull: 170 87% 33%;
+    --cat-legs: 16 80% 45%;
+    --cat-core: 30 100% 50%;
+    --cat-skills: 170 60% 45%;
+    --cat-mobility: 180 70% 35%;
+    --chart-1: 16 100% 50%;
+    --chart-2: 170 87% 33%;
+  }
+
+  /* ─── PLANET FITNESS ─── Purple/Yellow (Dark-first) */
+  [data-theme="planet-fitness"] {
+    --background: 280 20% 6%;
+    --foreground: 59 95% 58%;
+    --card: 280 15% 10%;
+    --card-foreground: 0 0% 92%;
+    --popover: 280 15% 10%;
+    --popover-foreground: 0 0% 92%;
+    --primary: 310 62% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 280 10% 15%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 280 10% 14%;
+    --muted-foreground: 280 10% 50%;
+    --accent: 280 10% 12%;
+    --accent-foreground: 59 95% 58%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 280 10% 18%;
+    --input: 280 10% 18%;
+    --ring: 59 95% 58%;
+    --electric: 59 95% 58%;
+    --electric-glow: 59 95% 68%;
+    --gradient-start: 310 62% 40%;
+    --gradient-end: 59 95% 58%;
+    --surface: 280 15% 8%;
+    --surface-raised: 280 12% 12%;
+    --glow-primary: 310 62% 40%;
+    --cat-push: 310 62% 45%;
+    --cat-pull: 59 95% 50%;
+    --cat-legs: 310 50% 55%;
+    --cat-core: 59 80% 45%;
+    --cat-skills: 280 60% 55%;
+    --cat-mobility: 59 70% 40%;
+    --chart-1: 310 62% 40%;
+    --chart-2: 59 95% 58%;
+    --shadow-2xs: 0 1px 2px 0 hsl(0 0% 0% / 0.15);
+    --shadow-xs: 0 1px 3px 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.15);
+    --shadow-sm: 0 2px 8px 0 hsl(0 0% 0% / 0.25), 0 1px 3px -1px hsl(0 0% 0% / 0.2);
+    --shadow: 0 4px 16px -2px hsl(0 0% 0% / 0.3), 0 2px 6px -2px hsl(0 0% 0% / 0.2);
+    --shadow-md: 0 8px 30px -4px hsl(0 0% 0% / 0.4), 0 4px 12px -4px hsl(0 0% 0% / 0.2);
+    --shadow-lg: 0 16px 50px -8px hsl(0 0% 0% / 0.5), 0 8px 20px -8px hsl(0 0% 0% / 0.3);
+  }
+
+  /* ─── YMCA ─── Red/Navy Classic */
+  [data-theme="ymca"] {
+    --primary: 346 100% 44%;
+    --primary-foreground: 0 0% 100%;
+    --electric: 210 80% 25%;
+    --electric-glow: 210 80% 40%;
+    --ring: 346 100% 44%;
+    --gradient-start: 346 100% 44%;
+    --gradient-end: 210 80% 25%;
+    --cat-push: 346 100% 44%;
+    --cat-pull: 210 80% 35%;
+    --cat-legs: 346 70% 50%;
+    --cat-core: 30 90% 50%;
+    --cat-skills: 210 60% 45%;
+    --cat-mobility: 180 60% 35%;
+    --chart-1: 346 100% 44%;
+    --chart-2: 210 80% 25%;
+  }
+
+  /* ─── OKC THUNDER ─── Blue/Orange/Navy (Dark-first) */
+  [data-theme="okc-thunder"] {
+    --background: 214 100% 12%;
+    --foreground: 0 0% 95%;
+    --card: 214 80% 16%;
+    --card-foreground: 0 0% 95%;
+    --popover: 214 80% 16%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 204 100% 38%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 214 60% 20%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 214 50% 18%;
+    --muted-foreground: 214 30% 55%;
+    --accent: 214 60% 15%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 8 86% 54%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 50% 22%;
+    --input: 214 50% 22%;
+    --ring: 204 100% 38%;
+    --electric: 8 86% 54%;
+    --electric-glow: 8 86% 65%;
+    --gradient-start: 204 100% 38%;
+    --gradient-end: 8 86% 54%;
+    --surface: 214 80% 14%;
+    --surface-raised: 214 70% 18%;
+    --glow-primary: 204 100% 38%;
+    --gold: 45 100% 50%;
+    --gold-light: 45 100% 60%;
+    --cat-push: 8 86% 54%;
+    --cat-pull: 204 100% 45%;
+    --cat-legs: 45 100% 50%;
+    --cat-core: 8 70% 50%;
+    --cat-skills: 204 80% 50%;
+    --cat-mobility: 170 60% 40%;
+    --chart-1: 204 100% 38%;
+    --chart-2: 8 86% 54%;
+    --chart-3: 45 100% 50%;
+    --shadow-2xs: 0 1px 2px 0 hsl(0 0% 0% / 0.2);
+    --shadow-xs: 0 1px 3px 0 hsl(0 0% 0% / 0.25), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
+    --shadow-sm: 0 2px 8px 0 hsl(0 0% 0% / 0.3), 0 1px 3px -1px hsl(0 0% 0% / 0.25);
+    --shadow: 0 4px 16px -2px hsl(0 0% 0% / 0.35), 0 2px 6px -2px hsl(0 0% 0% / 0.25);
+    --shadow-md: 0 8px 30px -4px hsl(0 0% 0% / 0.45), 0 4px 12px -4px hsl(0 0% 0% / 0.25);
+    --shadow-lg: 0 16px 50px -8px hsl(0 0% 0% / 0.55), 0 8px 20px -8px hsl(0 0% 0% / 0.35);
   }
 }
 
@@ -173,15 +305,10 @@
     @apply border-border;
   }
 
-  html {
-    @apply dark;
-  }
-
   body {
     @apply bg-background text-foreground font-sans antialiased;
     background-image:
-      radial-gradient(ellipse 80% 50% at 50% -20%, hsl(var(--electric) / 0.08), transparent),
-      url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.015'/%3E%3C/svg%3E");
   }
 
   h1, h2, h3, h4, h5, h6 {
