@@ -6,7 +6,7 @@ const tabs = [
   { path: '/dashboard', icon: Dumbbell, label: 'Home', color: 'hsl(var(--cat-pull))' },
   { path: '/train', icon: Flame, label: 'Train', color: 'hsl(var(--cat-core))' },
   { path: '/library', icon: Library, label: 'Library', color: 'hsl(var(--cat-push))' },
-  { path: '/anatomy', icon: PersonStanding, label: 'Atlas', color: 'hsl(var(--cat-skills))' },
+  { path: '/planner', icon: PersonStanding, label: 'Build', color: 'hsl(var(--cat-skills))' },
   { path: '/ai-lab', icon: Brain, label: 'AI', color: 'hsl(var(--cat-legs))' },
 ];
 

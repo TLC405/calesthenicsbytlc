@@ -81,7 +81,7 @@ export default function Auth() {
               <Zap className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="font-display text-sm font-bold uppercase tracking-wider">I GOT THE POWA</h1>
+              <h1 className="font-display text-sm font-bold uppercase tracking-wider">I GOT THE POWER</h1>
               <p className="text-[8px] font-mono text-muted-foreground tracking-[0.2em]">TRAINING SYSTEM</p>
             </div>
           </div>
