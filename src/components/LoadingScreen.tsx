@@ -39,7 +39,7 @@ export function LoadingScreen() {
 
         <div className="text-center space-y-2">
           <h1 className="font-display text-3xl font-black text-foreground uppercase tracking-[-0.03em] leading-none">
-            I GOT THE <span className="transition-colors duration-300" style={{ color }}>POWA</span>
+            I GOT THE <span className="transition-colors duration-300" style={{ color }}>POWER</span>
           </h1>
           <p className="text-[9px] text-muted-foreground font-mono uppercase tracking-[0.4em]">Initializing...</p>
         </div>
