@@ -16,7 +16,10 @@ import {
 interface Exercise {
   id: string; name: string; slug: string; category: string;
   primary_muscles: string[]; secondary_muscles: string[];
-  youtube_url?: string | null;
+  youtube_url?: string | null; equipment: string[];
+  cues: any; image_url?: string | null; difficulty_level?: number;
+  sets_reps?: string | null; description?: string | null;
+  instagram_url?: string | null;
 }
 
 interface WorkoutEntry {
