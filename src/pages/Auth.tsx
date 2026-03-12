@@ -69,7 +69,7 @@ export default function Auth() {
             </div>
           </div>
 
-          <p className="text-white/15 text-[8px] font-mono uppercase tracking-[0.2em]">© {new Date().getFullYear()} I GOT THE POWA</p>
+          <p className="text-white/15 text-[8px] font-mono uppercase tracking-[0.2em]">© {new Date().getFullYear()} I GOT THE POWER</p>
         </div>
       </div>
 
