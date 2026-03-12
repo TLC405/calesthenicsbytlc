@@ -1,7 +1,7 @@
 {
-  "name": "I GOT THE POWA",
-  "short_name": "POWA",
-  "description": "Raw power training. 120+ exercises, skill progressions, and AI coaching.",
+  "name": "I GOT THE POWER",
+  "short_name": "POWER",
+  "description": "Raw power training. 150+ exercises, skill progressions, and AI coaching.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",

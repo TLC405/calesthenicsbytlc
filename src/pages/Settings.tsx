@@ -10,7 +10,7 @@ import { Switch } from '@/components/ui/switch';
 import { Slider } from '@/components/ui/slider';
 import { useToast } from '@/hooks/use-toast';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
-import { Download, LogOut, User, Shield, Music, Link, Palette } from 'lucide-react';
+import { Download, LogOut, User, Shield, Music, Link, Palette, Settings as SettingsIcon, Image } from 'lucide-react';
 
 export default function Settings() {
   const { user, signOut } = useAuth();
@@ -21,14 +21,32 @@ export default function Settings() {
   const [displayName, setDisplayName] = useState('');
   const [loading, setLoading] = useState(false);
   const [playlistInput, setPlaylistInput] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [siteConfig, setSiteConfig] = useState<Record<string, string>>({});
+  const [configLoading, setConfigLoading] = useState(false);
 
-  useEffect(() => { if (!user) { navigate('/auth'); return; } fetchProfile(); }, [user, navigate]);
+  useEffect(() => { if (!user) { navigate('/auth'); return; } fetchProfile(); checkAdmin(); fetchSiteConfig(); }, [user, navigate]);
   useEffect(() => { setPlaylistInput(music.playlistUrl); }, [music.playlistUrl]);
 
   const fetchProfile = async () => {
     if (!user) return;
     const { data } = await supabase.from('profiles').select('*').eq('id', user.id).single();
     if (data) { setProfile(data); setDisplayName(data.display_name || ''); }
+  };
+
+  const checkAdmin = async () => {
+    if (!user) return;
+    const { data } = await supabase.from('user_roles').select('role').eq('user_id', user.id).eq('role', 'admin');
+    setIsAdmin(!!(data && data.length > 0));
+  };
+
+  const fetchSiteConfig = async () => {
+    const { data } = await supabase.from('site_config').select('*');
+    if (data) {
+      const config: Record<string, string> = {};
+      data.forEach((row: any) => { config[row.key] = row.value || ''; });
+      setSiteConfig(config);
+    }
   };
 
   const handleUpdateProfile = async (e: React.FormEvent) => {
@@ -49,7 +67,7 @@ export default function Settings() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'powa-training-data.json';
+    link.download = 'power-training-data.json';
     link.click();
     toast({ title: 'Exported', description: 'Training data downloaded.' });
   };
@@ -57,6 +75,17 @@ export default function Settings() {
   const handleSavePlaylist = () => {
     music.setPlaylistUrl(playlistInput);
     toast({ title: 'Saved', description: 'Playlist URL updated.' });
+  };
+
+  const updateSiteConfig = async (key: string, value: string) => {
+    setConfigLoading(true);
+    const { error } = await supabase.from('site_config').update({ value, updated_at: new Date().toISOString() }).eq('key', key);
+    if (error) toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    else {
+      setSiteConfig(prev => ({ ...prev, [key]: value }));
+      toast({ title: 'Updated', description: `${key} saved.` });
+    }
+    setConfigLoading(false);
   };
 
   return (
@@ -147,6 +176,73 @@ export default function Settings() {
             <Download className="w-3.5 h-3.5 mr-1.5" />Export
           </Button>
         </section>
+
+        {/* Admin Panel */}
+        {isAdmin && (
+          <section className="rounded-2xl border border-primary/30 bg-card p-5">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
+                <SettingsIcon className="w-4 h-4 text-primary" />
+              </div>
+              <div>
+                <h2 className="font-display text-sm font-bold tracking-tight">Admin Panel</h2>
+                <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-wider">App Configuration</p>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="space-y-1.5">
+                <Label className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
+                  <Image className="w-3 h-3" /> Loading Screen Image URL
+                </Label>
+                <div className="flex gap-2">
+                  <Input
+                    type="url"
+                    placeholder="https://example.com/image.jpg"
+                    value={siteConfig.loading_image_url || ''}
+                    onChange={e => setSiteConfig(prev => ({ ...prev, loading_image_url: e.target.value }))}
+                    className="h-11 rounded-xl border-border/50 bg-card focus:border-ring flex-1"
+                  />
+                  <Button onClick={() => updateSiteConfig('loading_image_url', siteConfig.loading_image_url || '')} size="sm" variant="outline" disabled={configLoading}
+                    className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border/50">
+                    Save
+                  </Button>
+                </div>
+              </div>
+              <div className="space-y-1.5">
+                <Label className="text-xs font-medium text-muted-foreground">Loading Screen Video URL</Label>
+                <div className="flex gap-2">
+                  <Input
+                    type="url"
+                    placeholder="https://example.com/video.mp4"
+                    value={siteConfig.loading_video_url || ''}
+                    onChange={e => setSiteConfig(prev => ({ ...prev, loading_video_url: e.target.value }))}
+                    className="h-11 rounded-xl border-border/50 bg-card focus:border-ring flex-1"
+                  />
+                  <Button onClick={() => updateSiteConfig('loading_video_url', siteConfig.loading_video_url || '')} size="sm" variant="outline" disabled={configLoading}
+                    className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border/50">
+                    Save
+                  </Button>
+                </div>
+              </div>
+              <div className="space-y-1.5">
+                <Label className="text-xs font-medium text-muted-foreground">App Tagline</Label>
+                <div className="flex gap-2">
+                  <Input
+                    type="text"
+                    placeholder="I GOT THE POWER"
+                    value={siteConfig.app_tagline || ''}
+                    onChange={e => setSiteConfig(prev => ({ ...prev, app_tagline: e.target.value }))}
+                    className="h-11 rounded-xl border-border/50 bg-card focus:border-ring flex-1"
+                  />
+                  <Button onClick={() => updateSiteConfig('app_tagline', siteConfig.app_tagline || '')} size="sm" variant="outline" disabled={configLoading}
+                    className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border/50">
+                    Save
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Account */}
         <section className="rounded-2xl border border-destructive/20 bg-card p-5">

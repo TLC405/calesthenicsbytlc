@@ -52,7 +52,7 @@ export default function Auth() {
             <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20">
               <Zap className="w-5 h-5" />
             </div>
-            <p className="text-[8px] text-white/40 uppercase tracking-[0.3em] font-mono">I GOT THE POWA</p>
+            <p className="text-[8px] text-white/40 uppercase tracking-[0.3em] font-mono">I GOT THE POWER</p>
           </div>
 
           <div className="space-y-8">
@@ -69,7 +69,7 @@ export default function Auth() {
             </div>
           </div>
 
-          <p className="text-white/15 text-[8px] font-mono uppercase tracking-[0.2em]">© {new Date().getFullYear()} I GOT THE POWA</p>
+          <p className="text-white/15 text-[8px] font-mono uppercase tracking-[0.2em]">© {new Date().getFullYear()} I GOT THE POWER</p>
         </div>
       </div>
 
@@ -81,7 +81,7 @@ export default function Auth() {
               <Zap className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="font-display text-sm font-bold uppercase tracking-wider">I GOT THE POWA</h1>
+              <h1 className="font-display text-sm font-bold uppercase tracking-wider">I GOT THE POWER</h1>
               <p className="text-[8px] font-mono text-muted-foreground tracking-[0.2em]">TRAINING SYSTEM</p>
             </div>
           </div>

@@ -63,7 +63,7 @@ export default function Index() {
           {/* Title */}
           <div className="text-center space-y-3 mb-10 transition-all duration-700 delay-150" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(20px)' }}>
             <h1 className="font-display text-6xl sm:text-8xl md:text-9xl font-black text-foreground leading-[0.85] tracking-[-0.04em] uppercase">
-              I GOT<br />THE <span className="gradient-text">POWA</span>
+              I GOT<br />THE <span className="gradient-text">POWER</span>
             </h1>
             <p className="text-muted-foreground text-[10px] sm:text-xs font-mono uppercase tracking-[0.4em]">
               Train · Track · Dominate

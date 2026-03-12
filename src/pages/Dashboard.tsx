@@ -77,7 +77,7 @@ export default function Dashboard() {
                 {getGreeting()}, <span className="text-foreground">{displayName}</span>
               </h1>
               <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em] mt-0.5">
-                I GOT THE POWA
+                I GOT THE POWER
               </p>
             </div>
           </div>
