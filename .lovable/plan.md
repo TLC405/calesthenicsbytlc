@@ -1,112 +1,96 @@
+# Workout Builder + AI Notepad + Library Simplification + Branding Fix
 
+## What You Asked For
 
-# Atomic UI/UX Overhaul + Music Fix + Loading Screen Replacement
-
-## Diagnosis Summary
-
-**What's broken:**
-1. **LoadingScreen** — still references the old uploaded photo and "TLC's Hybrid" branding. It's not actually used anywhere in `App.tsx` or `main.tsx` (never imported), so it's dead code but still exists.
-2. **Music doesn't play** — The YouTube iframe approach relies on `postMessage` to control playback via the YouTube IFrame API. However, the iframe is rendered with `enablejsapi=1` but never loads the YouTube IFrame Player API script (`https://www.youtube.com/iframe_api`). The `postMessage` JSON format used is incorrect — YouTube's IFrame API expects the iframe to be initialized through the API, not via raw postMessage. The iframe also gets re-created on every state change (since `embedSrc` changes when `isPlaying` toggles, causing React to unmount/remount the iframe).
-3. **Old uploaded photo** — Still referenced in `Auth.tsx`, `NotFound.tsx`, and `LoadingScreen.tsx`.
-4. **Settings page** — Works fine (verified code), but the music section only appears after login (Settings redirects to `/auth` if not logged in).
+1. **Workout Builder** (not calendar planner) — build workouts with Warm-up, Workout, Cool-down, Compression sections
+2. **AI Workout Notepad** — split screen: AI on one side, notepad/workout sheet on the other. AI can build the workout for you
+3. **Simplify Library** — too many category tabs, reduce visual clutter
+4. **Branding** — app should say "I Got The Power" everywhere (not "POWA")
+5. **Admin panel** — ability to change loading screen image/video and other features
+6. **Login code** — 73507
 
 ## Plan
 
-### Phase 1: Fix Music System (Critical)
-**Problem**: The MusicProvider creates a hidden YouTube iframe and tries to control it via `postMessage`, but the YouTube IFrame Player API is never loaded. The iframe src also changes on play/pause, causing remounts.
+### 1. Rename Planner → Workout Builder (`src/pages/Planner.tsx` — full rewrite)
 
-**Fix**:
-- Rewrite `MusicProvider.tsx` to use the **YouTube IFrame Player API** properly:
-  - Load the `https://www.youtube.com/iframe_api` script dynamically
-  - Create the player via `new YT.Player()` with event handlers
-  - Use `player.playVideo()`, `player.pauseVideo()`, `player.setVolume()` directly instead of postMessage
-  - Keep iframe stable (don't change src on play/pause)
-  - Store player ref and only create once
+Replace the calendar-only planner with a structured workout builder:
 
-### Phase 2: Full Persistent Mini-Player Bar
-**Current**: Tiny 2-button floating control in bottom-right corner.
+- **4-section notepad layout**: Warm-Up → Workout → Cool-Down → Compression
+- Each section is a collapsible card with a colored left accent
+- Users can add exercises to each section from a mini-picker
+- Each exercise row has inline set/rep tracker
+- "Save Workout" button persists to the `workouts` table
+- Name the workout, tag it (e.g. "Push Day", "Full Body")
+- Remove CalendarView from this page entirely
 
-**Upgrade to**: A full-width mini-player bar fixed above MobileNav with:
-- Play/Pause button with animated equalizer bars when playing
-- Track name display (or "I Got The Power" default)
-- Volume slider (collapsible)
-- On/Off toggle switch
-- Source indicator (YouTube icon)
-- Positioned `bottom-14` on mobile (above nav), `bottom-0` on desktop
+### 2. AI Workout Notepad (`src/pages/AILab.tsx` + `src/components/AILab/AILabChat.tsx` — redesign)
 
-Rewrite `MusicControl.tsx` as a proper bar component.
+Transform AI Lab into a split-pane workout builder:
 
-### Phase 3: Replace Loading Screen
-**Current**: Dead component with old branding and uploaded photo.
+- **Left side**: AI chat (simplified, clean rounded cards instead of `border-2` brutalist)
+- **Right side (desktop) / bottom sheet (mobile)**: Live workout notepad that AI populates
+- AI can suggest a full workout with warm-up/workout/cooldown/compression sections
+- User can drag exercises between sections or remove them
+- "Apply to Builder" button sends the AI-generated workout to the Planner/Builder
+- Update `AILabChat.tsx` to remove all `border-2 border-foreground` brutalist styling → use `rounded-2xl border border-border/50 bg-card`
 
-**Replace with**: A brutalist, on-brand loading screen used during auth initialization:
-- Black background with the Zap icon logo (matching Index page)
-- "I GOT THE POWA" text
-- Animated progress bar using category colors cycling through
-- "Loading..." in mono uppercase
-- Wire it into `App.tsx` — show while `AuthProvider.loading` is true
+### 3. Simplify Library (`src/pages/Library.tsx` + `src/components/Exercise/CategoryTabs.tsx`)
 
-### Phase 4: Remove Old Uploaded Photo References
-- `Auth.tsx` line 10: Replace `const logo = '/lovable-uploads/...'` with the Zap icon component (consistent with Index/Dashboard)
-- `NotFound.tsx` lines 17-22: Replace img with Zap icon in purple box
-- Delete or fully rewrite `LoadingScreen.tsx`
+- Reduce categories: group into **4 main tabs**: Strength (Push+Pull+Rings), Lower Body (Legs+Core), Skills (Skills+Yoga), Recovery (Mobility+Flexibility)
+- Show sub-categories as smaller pills within each main tab
+- Remove the `border-2` styling from CategoryTabs → use `rounded-xl` pill buttons
+- Cleaner card grid with less visual noise
 
-### Phase 5: Landing Page Redesign
-**Current issues**: Functional but static. The progression paths and calendar preview are hardcoded and non-interactive.
+### 4. Branding — "I Got The Power" (`src/pages/Index.tsx`, `src/pages/Dashboard.tsx`, `src/pages/Auth.tsx`, `src/components/LoadingScreen.tsx`, `public/manifest.json`)
 
-**Upgrades**:
-- Add animated entrance transitions using CSS keyframes (already defined in index.css)
-- Make the feature grid cards interactive with hover color fills matching category
-- Add a "Now Playing" indicator if music is active (visible on landing too)
-- Improve the CTA section with more visual weight
-- Add a "scroll down" indicator between hero and paths section
-- Make progression path steps animate in sequentially on scroll
+- Replace all instances of "POWA" with "POWER" and "I GOT THE POWA" with "I GOT THE POWER"
+- Update manifest.json name/short_name
+- Update the loading screen text
+- Update Index.tsx hero
+- Update Auth.tsx branding
+- Update Dashboard header subtitle
 
-### Phase 6: Colorful Brutalist Evolution Across All Pages
+### 5. Admin Panel — Loading Screen Config (`src/pages/Settings.tsx` + database)
 
-**Dashboard**:
-- Stats cards: Add subtle pulse animation on streak when active
-- Category grid: Add exercise count per category from DB
-- Quick actions: Add gradient color fills on hover instead of solid
+- Add an admin-only section in Settings (check `has_role(uid, 'admin')`)
+- Admin can set a custom loading screen image URL (stored in a `site_config` table)
+- Admin can toggle feature flags
+- Create `site_config` table with key/value pairs for: `loading_image_url`, `loading_video_url`, `app_tagline`
+- `LoadingScreen.tsx` reads from this config on mount
 
-**Library**:
-- Exercise cards: Larger thumbnails, better fallback with category-colored gradient backgrounds instead of plain gray
-- Search: Add live result count feedback
+### 6. Fix remaining brutalist styling in `AILabChat.tsx`
 
-**Auth page**:
-- Replace the logo img with Zap icon
-- Add category color accents to the left panel stats
+- Replace `border-2 border-foreground` on chat bubbles, input bar, exercise cards, and video dialog
+- Use consistent `rounded-2xl border border-border/50 bg-card` styling
 
-**AI Lab**:
-- Apply brutalist card styling to chat bubbles (borders instead of rounded)
-- Message input: brutalist border treatment
+## Database Changes
 
-**Settings**:
-- Add the music section visual polish (playing indicator)
+- Create `site_config` table: `key TEXT PRIMARY KEY`, `value TEXT`, `updated_at TIMESTAMPTZ`
+- RLS: Anyone can SELECT, only admins can UPDATE/INSERT/DELETE
+- Seed with default values for loading screen
 
-**All pages**:
-- Consistent header treatment with category accent strip
+## Files to Change
 
-## Files to Create/Modify
+1. `src/pages/Planner.tsx` — full rewrite as Workout Builder
+2. `src/pages/AILab.tsx` — split-pane AI + notepad layout
+3. `src/components/AILab/AILabChat.tsx` — remove brutalist styling, add workout generation
+4. `src/pages/Library.tsx` — simplify category grouping
+5. `src/components/Exercise/CategoryTabs.tsx` — grouped tabs with pill styling
+6. `src/pages/Index.tsx` — "POWER" branding
+7. `src/pages/Dashboard.tsx` — "POWER" branding
+8. `src/pages/Auth.tsx` — "POWER" branding
+9. `src/components/LoadingScreen.tsx` — "POWER" + dynamic image/video from site_config
+10. `public/manifest.json` — name update
+11. `src/pages/Settings.tsx` — admin panel section
+12. `src/components/Layout/MobileNav.tsx` — rename "AI" tab to "Build" or update icon
+13. Database migration for `site_config` table
 
-| File | Action |
-|------|--------|
-| `src/providers/MusicProvider.tsx` | Rewrite with YouTube IFrame Player API |
-| `src/components/Music/MusicControl.tsx` | Full mini-player bar |
-| `src/components/LoadingScreen.tsx` | Complete rewrite with brutalist splash |
-| `src/App.tsx` | Add loading screen during auth init |
-| `src/pages/Auth.tsx` | Remove uploaded photo, use Zap icon |
-| `src/pages/NotFound.tsx` | Remove uploaded photo, use Zap icon |
-| `src/pages/Index.tsx` | Enhanced animations and interactions |
-| `src/pages/Dashboard.tsx` | Category counts, animation polish |
-| `src/pages/Library.tsx` | Better card fallbacks, search UX |
-| `src/pages/AILab.tsx` | Brutalist chat styling |
-| `src/components/AILab/AILabChat.tsx` | Brutalist message bubbles |
+## Implementation Order
 
-## Technical Notes
-
-- **YouTube IFrame API** requires a global `onYouTubeIframeAPIReady` callback. The provider will set this up and create the player instance once.
-- The player div needs to be visible in DOM (not `display:none`) — use `position:absolute; width:0; height:0; overflow:hidden` instead of `className="hidden"`.
-- No new dependencies needed — the YouTube API is loaded via script tag.
-- Music state persists in localStorage + profiles table (already working).
-
+1. Database: create `site_config` table
+2. Branding: rename POWA → POWER across all files
+3. Workout Builder: rewrite Planner page
+4. AI Notepad: redesign AILab with split-pane
+5. Library simplification
+6. Admin panel in Settings with modern admin tools. Custom super agent 
+7. Loading screen dynamic config
