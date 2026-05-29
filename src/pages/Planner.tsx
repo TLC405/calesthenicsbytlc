@@ -43,15 +43,69 @@ const SECTION_DEFAULTS: Omit<WorkoutSection, 'entries' | 'open'>[] = [
   { key: 'compression', label: 'Compression', icon: Heart, color: 'hsl(var(--cat-push))' },
 ];
 
+const QUICK_TEMPLATES = [
+  { label: 'Push', tag: 'Push Day', categories: ['Push'] },
+  { label: 'Pull', tag: 'Pull Day', categories: ['Pull'] },
+  { label: 'Legs', tag: 'Leg Day', categories: ['Legs'] },
+  { label: 'Full', tag: 'Full Body', categories: ['Push', 'Pull', 'Legs'] },
+];
+
 export default function Planner() {
   const { user } = useAuth();
   const [workoutName, setWorkoutName] = useState('');
   const [notes, setNotes] = useState('');
   const [sections, setSections] = useState<WorkoutSection[]>(
-    SECTION_DEFAULTS.map(s => ({ ...s, entries: [], open: true }))
+    SECTION_DEFAULTS.map(s => ({ ...s, entries: [], open: s.key === 'workout' }))
   );
   const [pickerSection, setPickerSection] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+
+  // Consume AI Coach handoff (sessionStorage)
+  useEffect(() => {
+    const raw = sessionStorage.getItem('powa-builder-import');
+    if (!raw) return;
+    try {
+      const parsed = JSON.parse(raw) as { name?: string; items: { name: string; section: string; exercise?: Exercise }[] };
+      if (parsed.name) setWorkoutName(parsed.name);
+      setSections(prev => prev.map(s => {
+        const items = parsed.items.filter(i => i.section === s.key);
+        return {
+          ...s,
+          open: s.key === 'workout' || items.length > 0,
+          entries: [
+            ...s.entries,
+            ...items.map(i => ({
+              exercise: i.exercise || ({ id: i.name, name: i.name, slug: i.name, category: '', primary_muscles: [] } as Exercise),
+              sets: [{ reps: 10 }],
+            })),
+          ],
+        };
+      }));
+      sessionStorage.removeItem('powa-builder-import');
+      toast.success('Imported from AI Coach');
+    } catch {/* noop */}
+  }, []);
+
+  const loadTemplate = async (tpl: typeof QUICK_TEMPLATES[number]) => {
+    try {
+      const { data } = await supabase
+        .from('exercises')
+        .select('*')
+        .in('category', tpl.categories)
+        .limit(20);
+      if (!data || data.length === 0) { toast.error('No exercises found'); return; }
+      // Pick 4-6 random
+      const shuffled = [...data].sort(() => Math.random() - 0.5).slice(0, Math.min(6, data.length));
+      setWorkoutName(tpl.tag);
+      setSections(prev => prev.map(s => s.key === 'workout'
+        ? { ...s, open: true, entries: shuffled.map(e => ({ exercise: e as any, sets: [{ reps: 10 }, { reps: 10 }, { reps: 10 }] })) }
+        : s
+      ));
+      toast.success(`${tpl.tag} loaded`);
+    } catch (e: any) {
+      toast.error(e.message || 'Failed');
+    }
+  };
 
   const toggleSection = (key: string) => {
     setSections(prev => prev.map(s => s.key === key ? { ...s, open: !s.open } : s));
