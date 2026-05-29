@@ -205,6 +205,23 @@ export default function Planner() {
           className="h-12 rounded-xl border-border/50 bg-card font-display font-bold text-base placeholder:font-normal placeholder:text-muted-foreground"
         />
 
+        {/* Quick start templates */}
+        <div>
+          <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-2 px-1">Quick Start</p>
+          <div className="grid grid-cols-4 gap-2">
+            {QUICK_TEMPLATES.map(tpl => (
+              <button
+                key={tpl.label}
+                onClick={() => loadTemplate(tpl)}
+                className="h-11 rounded-xl border border-border/50 bg-card hover:border-border hover:-translate-y-0.5 hover:shadow-sm transition-all text-[10px] font-mono uppercase tracking-[0.15em] font-bold"
+              >
+                {tpl.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+
         {/* Sections */}
         {sections.map(section => {
           const Icon = section.icon;
