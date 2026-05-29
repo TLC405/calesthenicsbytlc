@@ -139,12 +139,12 @@ export default function Library() {
       <AddExerciseModal open={showAddModal} onClose={() => setShowAddModal(false)} onSuccess={fetchExercises} />
 
       <button
-        onClick={() => navigate('/train')}
+        onClick={() => navigate('/planner')}
         className="fixed bottom-28 right-4 z-40 md:hidden w-14 h-14 rounded-2xl text-white shadow-lg flex items-center justify-center active:scale-95 transition-transform"
-        style={{ backgroundColor: 'hsl(var(--cat-core))', boxShadow: '0 0 20px hsl(var(--cat-core) / 0.3)' }}
-        aria-label="Start Training"
+        style={{ backgroundColor: 'hsl(var(--cat-skills))', boxShadow: '0 0 20px hsl(var(--cat-skills) / 0.3)' }}
+        aria-label="Open Builder"
       >
-        <Flame className="w-6 h-6" />
+        <Plus className="w-6 h-6" />
       </button>
     </div>
   );
