@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Plus, Sparkles, Download, Flame } from 'lucide-react';
+import { Search, Plus, Sparkles, Download } from 'lucide-react';
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
@@ -72,7 +72,7 @@ export default function Library() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `powa-exercises${activeCategory ? `-${activeCategory.toLowerCase()}` : ''}-${new Date().toISOString().slice(0, 10)}.csv`;
+    link.download = `power-exercises${activeCategory ? `-${activeCategory.toLowerCase()}` : ''}-${new Date().toISOString().slice(0, 10)}.csv`;
     link.click();
     URL.revokeObjectURL(url);
     toast.success(`Downloaded ${data.length} exercises`);
@@ -139,12 +139,12 @@ export default function Library() {
       <AddExerciseModal open={showAddModal} onClose={() => setShowAddModal(false)} onSuccess={fetchExercises} />
 
       <button
-        onClick={() => navigate('/train')}
+        onClick={() => navigate('/planner')}
         className="fixed bottom-28 right-4 z-40 md:hidden w-14 h-14 rounded-2xl text-white shadow-lg flex items-center justify-center active:scale-95 transition-transform"
-        style={{ backgroundColor: 'hsl(var(--cat-core))', boxShadow: '0 0 20px hsl(var(--cat-core) / 0.3)' }}
-        aria-label="Start Training"
+        style={{ backgroundColor: 'hsl(var(--cat-skills))', boxShadow: '0 0 20px hsl(var(--cat-skills) / 0.3)' }}
+        aria-label="Open Builder"
       >
-        <Flame className="w-6 h-6" />
+        <Plus className="w-6 h-6" />
       </button>
     </div>
   );

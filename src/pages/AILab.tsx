@@ -67,14 +67,27 @@ export default function AILab() {
             );
           })}
 
-          <Button
-            onClick={() => navigate('/planner')}
-            size="sm"
-            className="w-full h-10 text-[10px] font-mono uppercase tracking-wider rounded-xl gap-1.5"
-          >
-            <ArrowRight className="w-3.5 h-3.5" />
-            Open in Builder
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              onClick={() => {
+                sessionStorage.setItem('powa-builder-import', JSON.stringify({ name: 'AI Workout', items: notepad }));
+                navigate('/planner');
+              }}
+              size="sm"
+              className="flex-1 h-10 text-[10px] font-mono uppercase tracking-wider rounded-xl gap-1.5"
+            >
+              <ArrowRight className="w-3.5 h-3.5" />
+              Open in Builder
+            </Button>
+            <Button
+              onClick={() => setNotepad([])}
+              size="sm"
+              variant="outline"
+              className="h-10 px-3 text-[10px] font-mono uppercase tracking-wider rounded-xl border-border/50"
+            >
+              Clear
+            </Button>
+          </div>
         </>
       )}
     </div>

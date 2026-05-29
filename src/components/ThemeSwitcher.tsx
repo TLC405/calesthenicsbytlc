@@ -62,7 +62,7 @@ const themes: ThemeOption[] = [
 
 export function useTheme() {
   const [theme, setThemeState] = useState<string>(() => {
-    return localStorage.getItem('powa-theme') || 'default';
+    return localStorage.getItem('power-theme') || 'default';
   });
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export function useTheme() {
     } else {
       root.setAttribute('data-theme', theme);
     }
-    localStorage.setItem('powa-theme', theme);
+    localStorage.setItem('power-theme', theme);
   }, [theme]);
 
   return { theme, setTheme: setThemeState, themes };

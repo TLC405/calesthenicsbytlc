@@ -215,7 +215,20 @@ export function AILabChat({ onAddToNotepad }: AILabChatProps) {
       </ScrollArea>
 
       {/* Input */}
-      <div className="border-t border-border/30 p-4">
+      <div className="border-t border-border/30 p-4 space-y-2">
+        <div className="max-w-2xl mx-auto flex gap-1.5 flex-wrap">
+          {['Build a push day', 'Mobility flow', '30-min full body', 'Cool-down stretch'].map(p => (
+            <button
+              key={p}
+              type="button"
+              onClick={() => setInput(p)}
+              disabled={isLoading}
+              className="px-2.5 py-1 rounded-full border border-border/50 bg-card hover:border-border text-[10px] font-mono text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {p}
+            </button>
+          ))}
+        </div>
         <form onSubmit={e => { e.preventDefault(); handleSend(); }} className="flex gap-2 max-w-2xl mx-auto">
           <Input
             value={input}
@@ -228,9 +241,6 @@ export function AILabChat({ onAddToNotepad }: AILabChatProps) {
             {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
           </Button>
         </form>
-        <p className="text-[10px] text-center text-muted-foreground mt-2 font-mono uppercase tracking-wider">
-          Powered by AI · I Got The Power
-        </p>
       </div>
 
       {/* Video Popup */}
