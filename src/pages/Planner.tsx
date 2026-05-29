@@ -159,7 +159,7 @@ export default function Planner() {
       if (error) throw error;
       toast.success('Workout saved!');
       // Reset
-      setSections(SECTION_DEFAULTS.map(s => ({ ...s, entries: [], open: true })));
+      setSections(SECTION_DEFAULTS.map(s => ({ ...s, entries: [], open: s.key === 'workout' })));
       setWorkoutName('');
       setNotes('');
     } catch (err: any) {
