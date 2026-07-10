@@ -189,11 +189,15 @@ export default function Dashboard() {
           )}
         </section>
 
-        {/* Quick links */}
+        {/* Quick links — every page reachable from home */}
         <section className="grid grid-cols-2 gap-3">
           {[
-            { label: 'Library', desc: 'Browse exercises', path: '/library', icon: Library, color: 'hsl(var(--cat-pull))' },
+            { label: 'Build', desc: 'Workout builder', path: '/planner', icon: FileText, color: 'hsl(var(--cat-skills))' },
             { label: 'AI Coach', desc: 'Plan with AI', path: '/ai-lab', icon: Sparkles, color: 'hsl(var(--electric))' },
+            { label: 'Library', desc: 'Browse exercises', path: '/library', icon: Library, color: 'hsl(var(--cat-pull))' },
+            { label: 'Train', desc: 'Start a session', path: '/train', icon: Flame, color: 'hsl(var(--cat-core))' },
+            { label: 'Anatomy', desc: 'Muscle atlas', path: '/anatomy', icon: TrendingUp, color: 'hsl(var(--cat-push))' },
+            { label: 'Settings', desc: 'Profile & admin', path: '/settings', icon: Settings, color: 'hsl(var(--cat-core))' },
           ].map(action => {
             const Icon = action.icon;
             return (
