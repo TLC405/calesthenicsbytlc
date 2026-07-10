@@ -283,8 +283,6 @@ export type Database = {
           level: number | null
           music_enabled: boolean | null
           music_playlist_url: string | null
-          pin_hash: string | null
-          pin_salt: string | null
           role: Database["public"]["Enums"]["app_role"]
           streak_days: number | null
           total_xp: number | null
@@ -299,8 +297,6 @@ export type Database = {
           level?: number | null
           music_enabled?: boolean | null
           music_playlist_url?: string | null
-          pin_hash?: string | null
-          pin_salt?: string | null
           role?: Database["public"]["Enums"]["app_role"]
           streak_days?: number | null
           total_xp?: number | null
@@ -315,8 +311,6 @@ export type Database = {
           level?: number | null
           music_enabled?: boolean | null
           music_playlist_url?: string | null
-          pin_hash?: string | null
-          pin_salt?: string | null
           role?: Database["public"]["Enums"]["app_role"]
           streak_days?: number | null
           total_xp?: number | null
