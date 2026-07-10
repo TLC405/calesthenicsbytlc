@@ -54,6 +54,7 @@ const QUICK_TEMPLATES = [
 
 export default function Planner() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [workoutName, setWorkoutName] = useState('');
   const [notes, setNotes] = useState('');
   const [sections, setSections] = useState<WorkoutSection[]>(
@@ -61,6 +62,54 @@ export default function Planner() {
   );
   const [pickerSection, setPickerSection] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [coachOpen, setCoachOpen] = useState(false);
+  const [coachPrompt, setCoachPrompt] = useState('');
+  const [coachLoading, setCoachLoading] = useState(false);
+
+  const runSuperCoach = async (prompt: string) => {
+    if (!prompt.trim()) return;
+    setCoachLoading(true);
+    try {
+      const res = await supabase.functions.invoke('discover-exercises', {
+        body: { query: `Build a complete workout with warm-up, main workout, cool-down and compression sections. Request: ${prompt}` },
+      });
+      if (res.error) throw new Error(res.error.message);
+      const exercises = res.data?.exercises || [];
+      if (!exercises.length) { toast.error('Coach returned no exercises'); return; }
+      const sectionFor = (cat: string): string => {
+        const c = (cat || '').toLowerCase();
+        if (['mobility', 'flexibility'].includes(c)) return 'warmup';
+        if (['yoga'].includes(c)) return 'cooldown';
+        return 'workout';
+      };
+      setWorkoutName(prev => prev || `Coach: ${prompt.slice(0, 40)}`);
+      setSections(prev => prev.map(s => {
+        const items = exercises.filter((e: any) => sectionFor(e.category) === s.key);
+        return {
+          ...s,
+          open: s.key === 'workout' || items.length > 0,
+          entries: [
+            ...s.entries,
+            ...items.map((e: any) => ({
+              exercise: {
+                id: e.name, name: e.name, slug: e.name, category: e.category,
+                primary_muscles: e.primary_muscles || [], cues: e.cues,
+                youtube_url: e.youtube_url || null, difficulty_level: e.difficulty,
+              } as Exercise,
+              sets: [{ reps: 10 }, { reps: 10 }, { reps: 10 }],
+            })),
+          ],
+        };
+      }));
+      toast.success(`Coach added ${exercises.length} exercises`);
+      setCoachOpen(false);
+      setCoachPrompt('');
+    } catch (err: any) {
+      toast.error(err.message || 'Coach failed');
+    } finally {
+      setCoachLoading(false);
+    }
+  };
 
   // Consume AI Coach handoff (sessionStorage)
   useEffect(() => {
