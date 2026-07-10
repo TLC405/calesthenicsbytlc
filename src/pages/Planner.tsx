@@ -223,29 +223,81 @@ export default function Planner() {
   return (
     <div className="min-h-screen bg-background pb-28 md:pb-0">
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border/30">
-        <div className="max-w-3xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-border/30 flex items-center justify-center">
+        <div className="max-w-3xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="h-10 w-10 rounded-xl flex-shrink-0" aria-label="Back to home">
+              <ArrowLeft className="w-4 h-4" />
+            </Button>
+            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-border/30 flex items-center justify-center flex-shrink-0">
               <FileText className="w-5 h-5 text-primary" />
             </div>
-            <div>
-              <h1 className="font-display text-base font-bold tracking-tight">Workout Builder</h1>
+            <div className="min-w-0">
+              <h1 className="font-display text-base font-bold tracking-tight truncate">Workout Builder</h1>
               <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em]">
                 {totalExercises} exercise{totalExercises !== 1 ? 's' : ''}
               </p>
             </div>
           </div>
-          <Button
-            onClick={saveWorkout}
-            disabled={saving || totalExercises === 0}
-            size="sm"
-            className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl gap-1.5"
-          >
-            <Save className="w-3.5 h-3.5" />
-            {saving ? 'Saving...' : 'Save'}
-          </Button>
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            <Button
+              onClick={() => setCoachOpen(true)}
+              size="sm"
+              variant="outline"
+              className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl gap-1.5"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[hsl(var(--electric))]" />
+              Coach
+            </Button>
+            <Button
+              onClick={saveWorkout}
+              disabled={saving || totalExercises === 0}
+              size="sm"
+              className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl gap-1.5"
+            >
+              <Save className="w-3.5 h-3.5" />
+              {saving ? 'Saving...' : 'Save'}
+            </Button>
+          </div>
         </div>
       </header>
+
+      <Dialog open={coachOpen} onOpenChange={setCoachOpen}>
+        <DialogContent className="max-w-md rounded-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 font-display">
+              <Sparkles className="w-4 h-4 text-[hsl(var(--electric))]" />
+              Super Coach
+            </DialogTitle>
+            <DialogDescription>
+              Describe your goal — Coach will build a full workout with warm-up, main sets, cool-down and compression.
+            </DialogDescription>
+          </DialogHeader>
+          <Textarea
+            placeholder="e.g. Push day focused on planche progressions, 45 minutes, intermediate"
+            value={coachPrompt}
+            onChange={e => setCoachPrompt(e.target.value)}
+            rows={4}
+            className="rounded-xl"
+          />
+          <div className="flex flex-wrap gap-1.5">
+            {['Full body 40min', 'Push + core', 'Pull day intermediate', 'Mobility flow', 'Beginner legs'].map(s => (
+              <button
+                key={s}
+                onClick={() => setCoachPrompt(s)}
+                className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-lg border border-border/60 hover:bg-accent/40"
+              >{s}</button>
+            ))}
+          </div>
+          <Button
+            onClick={() => runSuperCoach(coachPrompt)}
+            disabled={coachLoading || !coachPrompt.trim()}
+            className="w-full h-11 rounded-xl gap-2"
+          >
+            {coachLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+            {coachLoading ? 'Building...' : 'Build Workout'}
+          </Button>
+        </DialogContent>
+      </Dialog>
 
       <main className="max-w-3xl mx-auto px-4 md:px-8 py-5 space-y-4">
         {/* Workout name */}
