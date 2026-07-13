@@ -16,7 +16,10 @@ export function MusicControl() {
   } = useMusic();
   const [expanded, setExpanded] = useState(false);
   const [editingUrl, setEditingUrl] = useState(false);
+  const [showLibrary, setShowLibrary] = useState(false);
   const [draftUrl, setDraftUrl] = useState('');
+  const [draftTitle, setDraftTitle] = useState('');
+  const [searchQ, setSearchQ] = useState('');
   const location = useLocation();
 
   useEffect(() => { setDraftUrl(playlistUrl || ''); }, [playlistUrl, editingUrl]);
@@ -25,17 +28,37 @@ export function MusicControl() {
   if (hiddenPaths.includes(location.pathname)) return null;
 
   const isYtMusic = /music\.youtube\.com/i.test(playlistUrl);
+  const isYtUrl = (u: string) => /(youtu\.be|youtube\.com|music\.youtube\.com)/i.test(u);
 
   const saveUrl = () => {
     const trimmed = draftUrl.trim();
-    if (trimmed && !/(youtu\.be|youtube\.com|music\.youtube\.com)/i.test(trimmed)) {
-      toast({ title: 'Invalid URL', description: 'Paste a YouTube or YouTube Music link.', variant: 'destructive' });
+    if (trimmed && !isYtUrl(trimmed)) {
+      toast({ title: 'Invalid URL', description: 'Paste a YouTube or YT Music link.', variant: 'destructive' });
       return;
     }
     setPlaylistUrl(trimmed);
     setEditingUrl(false);
-    toast({ title: trimmed ? 'Playlist connected' : 'Reset to default' });
+    toast({ title: trimmed ? 'Now loading' : 'Reset to default' });
   };
+
+  const addAndPlay = () => {
+    const url = draftUrl.trim();
+    if (!isYtUrl(url)) {
+      toast({ title: 'Paste a YouTube link', variant: 'destructive' });
+      return;
+    }
+    addToLibrary(url, draftTitle.trim() || undefined);
+    playUrl(url);
+    setDraftUrl(''); setDraftTitle(''); setEditingUrl(false);
+    toast({ title: 'Added & playing' });
+  };
+
+  const openYouTubeSearch = () => {
+    const q = searchQ.trim() || currentTrack?.title || '';
+    if (!q) return;
+    window.open(`https://music.youtube.com/search?q=${encodeURIComponent(q)}`, '_blank', 'noopener');
+  };
+
 
   return (
     <div className="fixed right-3 bottom-[5.5rem] md:bottom-4 z-50">
