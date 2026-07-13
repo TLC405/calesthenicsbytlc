@@ -258,11 +258,33 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     try { playerRef.current?.previousVideo?.(); } catch {}
   }, []);
 
+  const playUrl = useCallback((url: string) => {
+    setPlaylistUrlState(url);
+    setTimeout(() => { try { playerRef.current?.playVideo?.(); } catch {} }, 700);
+  }, []);
+
+  const persistLibrary = (next: SavedTrack[]) => {
+    setLibrary(next);
+    localStorage.setItem('music_library', JSON.stringify(next));
+  };
+
+  const addToLibrary = useCallback((url: string, title?: string) => {
+    if (!url.trim()) return;
+    const id = crypto.randomUUID();
+    const clean = url.trim();
+    const label = (title?.trim()) || clean.replace(/^https?:\/\//, '').slice(0, 60);
+    persistLibrary([{ id, url: clean, title: label, addedAt: Date.now() }, ...library].slice(0, 50));
+  }, [library]);
+
+  const removeFromLibrary = useCallback((id: string) => {
+    persistLibrary(library.filter(t => t.id !== id));
+  }, [library]);
+
   return (
     <MusicContext.Provider value={{
-      isPlaying, isMuted, volume, playlistUrl, musicEnabled, isReady, currentTrack,
+      isPlaying, isMuted, volume, playlistUrl, musicEnabled, isReady, currentTrack, library,
       togglePlay, toggleMute, setVolume, setPlaylistUrl, setMusicEnabled,
-      nextTrack, prevTrack,
+      nextTrack, prevTrack, playUrl, addToLibrary, removeFromLibrary,
     }}>
       {/* YouTube player container — must be in DOM but invisible */}
       {musicEnabled && (
