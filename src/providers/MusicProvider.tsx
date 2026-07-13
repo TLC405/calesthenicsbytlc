@@ -83,6 +83,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   const [playlistUrl, setPlaylistUrlState] = useState('');
   const [musicEnabled, setMusicEnabledState] = useState(() => localStorage.getItem('music_enabled') !== 'false');
   const [isReady, setIsReady] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<TrackInfo | null>(null);
   const initAttempted = useRef(false);
 
   // Load user prefs
