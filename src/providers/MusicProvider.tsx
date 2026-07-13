@@ -243,10 +243,18 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     }
   }, [user]);
 
+  const nextTrack = useCallback(() => {
+    try { playerRef.current?.nextVideo?.(); } catch {}
+  }, []);
+  const prevTrack = useCallback(() => {
+    try { playerRef.current?.previousVideo?.(); } catch {}
+  }, []);
+
   return (
     <MusicContext.Provider value={{
-      isPlaying, isMuted, volume, playlistUrl, musicEnabled, isReady,
-      togglePlay, toggleMute, setVolume, setPlaylistUrl, setMusicEnabled
+      isPlaying, isMuted, volume, playlistUrl, musicEnabled, isReady, currentTrack,
+      togglePlay, toggleMute, setVolume, setPlaylistUrl, setMusicEnabled,
+      nextTrack, prevTrack,
     }}>
       {/* YouTube player container — must be in DOM but invisible */}
       {musicEnabled && (
