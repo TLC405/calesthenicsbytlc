@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useRef, useState, useCallback, Re
 import { useAuth } from './AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 
+interface TrackInfo { title?: string; author?: string; videoId?: string }
 interface MusicContextType {
   isPlaying: boolean;
   isMuted: boolean;
@@ -9,11 +10,14 @@ interface MusicContextType {
   playlistUrl: string;
   musicEnabled: boolean;
   isReady: boolean;
+  currentTrack: TrackInfo | null;
   togglePlay: () => void;
   toggleMute: () => void;
   setVolume: (v: number) => void;
   setPlaylistUrl: (url: string) => void;
   setMusicEnabled: (enabled: boolean) => void;
+  nextTrack: () => void;
+  prevTrack: () => void;
 }
 
 const MusicContext = createContext<MusicContextType | null>(null);
@@ -79,6 +83,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   const [playlistUrl, setPlaylistUrlState] = useState('');
   const [musicEnabled, setMusicEnabledState] = useState(() => localStorage.getItem('music_enabled') !== 'false');
   const [isReady, setIsReady] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<TrackInfo | null>(null);
   const initAttempted = useRef(false);
 
   // Load user prefs
@@ -136,13 +141,20 @@ export function MusicProvider({ children }: { children: ReactNode }) {
           onReady: (event: any) => {
             event.target.setVolume(volume);
             setIsReady(true);
+            try {
+              const d = event.target.getVideoData?.();
+              if (d) setCurrentTrack({ title: d.title, author: d.author, videoId: d.video_id });
+            } catch {}
           },
           onStateChange: (event: any) => {
-            // YT.PlayerState.ENDED = 0
-            if (event.data === 0) {
-              // Loop: replay
-              event.target.playVideo();
-            }
+            // 1 playing, 2 paused, 0 ended
+            if (event.data === 1) setIsPlaying(true);
+            if (event.data === 2) setIsPlaying(false);
+            if (event.data === 0) event.target.playVideo();
+            try {
+              const d = event.target.getVideoData?.();
+              if (d?.title) setCurrentTrack({ title: d.title, author: d.author, videoId: d.video_id });
+            } catch {}
           },
           onError: (event: any) => {
             console.warn('YouTube Player error:', event.data);
@@ -231,10 +243,18 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     }
   }, [user]);
 
+  const nextTrack = useCallback(() => {
+    try { playerRef.current?.nextVideo?.(); } catch {}
+  }, []);
+  const prevTrack = useCallback(() => {
+    try { playerRef.current?.previousVideo?.(); } catch {}
+  }, []);
+
   return (
     <MusicContext.Provider value={{
-      isPlaying, isMuted, volume, playlistUrl, musicEnabled, isReady,
-      togglePlay, toggleMute, setVolume, setPlaylistUrl, setMusicEnabled
+      isPlaying, isMuted, volume, playlistUrl, musicEnabled, isReady, currentTrack,
+      togglePlay, toggleMute, setVolume, setPlaylistUrl, setMusicEnabled,
+      nextTrack, prevTrack,
     }}>
       {/* YouTube player container — must be in DOM but invisible */}
       {musicEnabled && (
