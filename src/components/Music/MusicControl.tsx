@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMusic } from '@/providers/MusicProvider';
-import { Volume2, VolumeX, Play, Pause, Music, ChevronDown, SkipBack, SkipForward, Link2, Check, X } from 'lucide-react';
+import { Volume2, VolumeX, Play, Pause, Music, ChevronDown, SkipBack, SkipForward, Link2, Check, X, Plus, Search, Trash2, ListMusic } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { Input } from '@/components/ui/input';
@@ -10,9 +10,9 @@ import { toast } from '@/hooks/use-toast';
 
 export function MusicControl() {
   const {
-    isPlaying, isMuted, volume, musicEnabled, isReady, playlistUrl,
+    isPlaying, isMuted, volume, musicEnabled, isReady, playlistUrl, library,
     togglePlay, toggleMute, setVolume, setMusicEnabled, setPlaylistUrl,
-    nextTrack, prevTrack, currentTrack,
+    nextTrack, prevTrack, currentTrack, playUrl, addToLibrary, removeFromLibrary,
   } = useMusic();
   const [expanded, setExpanded] = useState(false);
   const [editingUrl, setEditingUrl] = useState(false);
