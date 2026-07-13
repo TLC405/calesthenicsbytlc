@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useRef, useState, useCallback, Re
 import { useAuth } from './AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 
+interface TrackInfo { title?: string; author?: string; videoId?: string }
 interface MusicContextType {
   isPlaying: boolean;
   isMuted: boolean;
@@ -9,11 +10,14 @@ interface MusicContextType {
   playlistUrl: string;
   musicEnabled: boolean;
   isReady: boolean;
+  currentTrack: TrackInfo | null;
   togglePlay: () => void;
   toggleMute: () => void;
   setVolume: (v: number) => void;
   setPlaylistUrl: (url: string) => void;
   setMusicEnabled: (enabled: boolean) => void;
+  nextTrack: () => void;
+  prevTrack: () => void;
 }
 
 const MusicContext = createContext<MusicContextType | null>(null);
