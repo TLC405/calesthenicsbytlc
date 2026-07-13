@@ -89,6 +89,9 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   const [musicEnabled, setMusicEnabledState] = useState(() => localStorage.getItem('music_enabled') !== 'false');
   const [isReady, setIsReady] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<TrackInfo | null>(null);
+  const [library, setLibrary] = useState<SavedTrack[]>(() => {
+    try { return JSON.parse(localStorage.getItem('music_library') || '[]'); } catch { return []; }
+  });
   const initAttempted = useRef(false);
 
   // Load user prefs
