@@ -141,13 +141,20 @@ export function MusicProvider({ children }: { children: ReactNode }) {
           onReady: (event: any) => {
             event.target.setVolume(volume);
             setIsReady(true);
+            try {
+              const d = event.target.getVideoData?.();
+              if (d) setCurrentTrack({ title: d.title, author: d.author, videoId: d.video_id });
+            } catch {}
           },
           onStateChange: (event: any) => {
-            // YT.PlayerState.ENDED = 0
-            if (event.data === 0) {
-              // Loop: replay
-              event.target.playVideo();
-            }
+            // 1 playing, 2 paused, 0 ended
+            if (event.data === 1) setIsPlaying(true);
+            if (event.data === 2) setIsPlaying(false);
+            if (event.data === 0) event.target.playVideo();
+            try {
+              const d = event.target.getVideoData?.();
+              if (d?.title) setCurrentTrack({ title: d.title, author: d.author, videoId: d.video_id });
+            } catch {}
           },
           onError: (event: any) => {
             console.warn('YouTube Player error:', event.data);
