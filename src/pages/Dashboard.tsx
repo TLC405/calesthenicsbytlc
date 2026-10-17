@@ -41,7 +41,7 @@ export default function Dashboard() {
     fetchData();
   }, [user]);
 
-  const handleSignOut = async () => { await signOut(); navigate('/auth'); };
+  const handleSignOut = async () => { await signOut(); navigate('/dashboard'); };
 
   const streak = profile?.streak_days || 0;
   const totalXp = profile?.total_xp || 0;
@@ -91,7 +91,7 @@ export default function Dashboard() {
                 <LogOut className="h-4 w-4" />
               </Button>
             ) : (
-              <Button variant="ghost" size="sm" onClick={() => navigate('/auth')} className="text-xs font-mono uppercase">Sign In</Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/library')} className="text-xs font-mono uppercase">Explore</Button>
             )}
           </div>
         </div>
