@@ -3,11 +3,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider, useAuth } from "./providers/AuthProvider";
+import { AuthProvider } from "./providers/AuthProvider";
 import { MusicProvider } from "./providers/MusicProvider";
 import { MusicControl } from "./components/Music/MusicControl";
 import { MobileNav } from "./components/Layout/MobileNav";
-import { LoadingScreen } from "./components/LoadingScreen";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
@@ -25,10 +24,6 @@ import "./styles/neumorph.css";
 const queryClient = new QueryClient();
 
 function AppContent() {
-  const { loading } = useAuth();
-  
-  if (loading) return <LoadingScreen />;
-
   return (
     <BrowserRouter>
       <div className="pb-[4.5rem] md:pb-0">
