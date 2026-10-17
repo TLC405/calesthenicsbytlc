@@ -141,9 +141,9 @@ export default function AILab() {
                 <Sparkles className="w-7 h-7 text-primary" />
               </div>
               <div>
-                <h2 className="font-display text-xl font-bold tracking-tight">{backendConfigured ? 'Unlock AI Coaching' : 'AI Coach · Setup Needed'}</h2>
+                <h2 className="font-display text-xl font-bold tracking-tight">AI coaching is temporarily unavailable</h2>
                 <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
-                  {backendConfigured ? 'Personalized exercise recommendations and workout building.' : 'Your own OpenAI key and Supabase project must be connected to enable AI. Explore 35 offline starter exercises in the meantime.'}
+                  Browse the video exercise library while AI access is being configured. No login is needed.
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-2">
@@ -158,8 +158,8 @@ export default function AILab() {
                   </div>
                 ))}
               </div>
-              <Button onClick={() => navigate(backendConfigured ? '/auth' : '/library')} className="w-full h-11 font-display font-bold uppercase tracking-wider text-sm rounded-xl">
-                {backendConfigured ? 'Sign In to Continue' : 'Explore Exercise Library'}
+              <Button onClick={() => navigate('/library')} className="w-full h-11 font-display font-bold uppercase tracking-wider text-sm rounded-xl">
+                Explore Exercise Library
               </Button>
             </div>
           </div>
