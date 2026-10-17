@@ -556,6 +556,130 @@ export type Database = {
           },
         ]
       }
+
+      messages: {
+        Row: {
+          id: string
+          author_id: string
+          author_name: string
+          body: string
+          like_count: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          author_id: string
+          author_name?: string
+          body: string
+          like_count?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          author_id?: string
+          author_name?: string
+          body?: string
+          like_count?: number
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      message_likes: {
+        Row: {
+          user_id: string
+          message_id: string
+          created_at: string
+        }
+        Insert: {
+          user_id: string
+          message_id: string
+          created_at?: string
+        }
+        Update: {
+          user_id?: string
+          message_id?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "message_likes_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "messages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "message_likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          id: string
+          recipient_id: string
+          actor_id: string
+          type: string
+          entity_id: string
+          message: string
+          is_read: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          recipient_id: string
+          actor_id: string
+          type: string
+          entity_id: string
+          message: string
+          is_read?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          recipient_id?: string
+          actor_id?: string
+          type?: string
+          entity_id?: string
+          message?: string
+          is_read?: boolean
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_recipient_id_fkey"
+            columns: ["recipient_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_entity_id_fkey"
+            columns: ["entity_id"]
+            isOneToOne: false
+            referencedRelation: "messages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
