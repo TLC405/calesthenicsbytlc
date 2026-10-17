@@ -6,7 +6,7 @@ import {
   Sparkles, TrendingUp, Users, Zap, Trash2, RefreshCw, Radio, Dumbbell,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, backendConfigured } from '@/integrations/supabase/client';
 import { useAuth } from '@/providers/AuthProvider';
 import type { Tables } from '@/integrations/supabase/types';
 import { Button } from '@/components/ui/button';
@@ -53,7 +53,7 @@ export default function Community() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const demo = new URLSearchParams(location.search).get('demo') === '1';
+  const demo = !backendConfigured || new URLSearchParams(location.search).get('demo') === '1';
   const viewerId = demo ? 'demo-user' : user?.id;
   const [posts, setPosts] = useState<Post[]>([]);
   const [demoPosts, setDemoPosts] = useState<Post[]>(initialDemoPosts);
