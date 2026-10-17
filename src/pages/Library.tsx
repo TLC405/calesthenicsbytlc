@@ -32,7 +32,8 @@ export default function Library() {
   const location = useLocation();
   const { user } = useAuth();
   const [exercises, setExercises] = useState<Exercise[]>([]);
-  const ownerId = backendConfigured ? user?.id : LOCAL_USER_ID;
+  const guestMode = !user;
+  const ownerId = user?.id ?? LOCAL_USER_ID;
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>((location.state as any)?.category || null);
@@ -54,7 +55,7 @@ export default function Library() {
     }
     const { data, error } = await supabase.from('exercises').select('*').order('category').order('name');
     if (error) toast.error('Could not load your exercise library');
-    setExercises(data || []);
+    setExercises(user ? (data || []) : [...getOfflineExercises(), ...(data || [])]);
     setLoading(false);
   };
 
@@ -75,8 +76,8 @@ export default function Library() {
 
   const deleteExercise = async (exercise: Exercise) => {
     if (!ownerId || exercise.created_by !== ownerId) return;
-    if (!window.confirm(`Delete "${exercise.name}"? ${backendConfigured ? 'Training history linked to it may also be removed.' : 'This cannot be undone without a local backup.'}`)) return;
-    if (!backendConfigured) {
+    if (!window.confirm(`Delete "${exercise.name}"? ${guestMode ? 'This cannot be undone without a local backup.' : 'Training history linked to it may also be removed.'}`)) return;
+    if (guestMode) {
       removeLocalExercise(exercise.id);
       toast.success('Removed from this device');
       void fetchExercises();
@@ -175,12 +176,12 @@ export default function Library() {
       </header>
 
       <main className="max-w-6xl mx-auto px-4 md:px-8 py-5 pb-28 md:pb-5">
-        {!backendConfigured && (
+        {guestMode && (
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/25 bg-primary/5 px-4 py-3">
             <div>
               <p className="text-sm font-bold">Guest training · saved on this device</p>
               <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
-                35 starter exercises. Custom exercises stay in this browser until you connect a cloud account. Export a backup before clearing browser data.
+                Explore the exercise catalog. Custom exercises stay in this browser until you sign in. Export a backup before clearing browser data.
               </p>
             </div>
             <Button type="button" variant="outline" size="sm" onClick={() => exportLocalExercises()}
