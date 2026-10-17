@@ -7,7 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { DifficultyBadge } from './DifficultyBadge';
 import { ProgressionPathStrip } from './ProgressionPathStrip';
 import { cn } from '@/lib/utils';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, backendConfigured } from '@/integrations/supabase/client';
 
 interface Exercise {
   id: string; name: string; slug: string; category: string;
@@ -37,13 +37,14 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
 
   useEffect(() => { setCurrentExercise(exercise); }, [exercise]);
   useEffect(() => {
-    if (currentExercise?.id && open) {
+    if (currentExercise?.id && open && backendConfigured) {
       supabase.from('progressions').select('*').eq('exercise_id', currentExercise.id).order('level')
         .then(({ data }) => setProgressions(data || []));
     } else setProgressions([]);
   }, [currentExercise?.id, open]);
 
   const handleChainNavigate = async (exerciseId: string) => {
+    if (!backendConfigured) return;
     const { data } = await supabase.from('exercises').select('*').eq('id', exerciseId).single();
     if (data) setCurrentExercise(data as unknown as Exercise);
   };
