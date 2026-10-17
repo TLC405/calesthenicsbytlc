@@ -1,1 +1,2 @@
-project_id = "ajcmyrhxmwwjkhlwylyu"
+# Local Supabase project; deploy with: supabase link --project-ref YOUR_OWN_PROJECT_REF
+project_id = "power-independent"
