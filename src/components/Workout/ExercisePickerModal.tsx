@@ -5,7 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, backendConfigured } from '@/integrations/supabase/client';
+import { getOfflineExercises } from '@/lib/offlineExercises';
 
 interface Exercise {
   id: string;
@@ -42,6 +43,11 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
 
   const fetchExercises = async () => {
     setLoading(true);
+    if (!backendConfigured) {
+      setExercises(getOfflineExercises());
+      setLoading(false);
+      return;
+    }
     const { data } = await supabase
       .from('exercises')
       .select('id, name, slug, category, primary_muscles, youtube_url')
