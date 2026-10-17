@@ -137,7 +137,20 @@ export default async function handler(req: ApiRequest, res: ServerResponse) {
       primary_muscles: item.primary_muscles.slice(0, 5),
       cues: item.cues.slice(0, 5),
     }));
-    return json(res, 200, { message: payload.message.slice(0, 5000), exercises });
+    // Ground suggested videos in the REAL exercise library instead of inventing links.
+    // Only exercises permitted by this member's Supabase RLS are considered.
+    const withVideos = await Promise.all(exercises.map(async exercise => {
+      const exactName = exercise.name.trim().replaceAll(',', ' ').slice(0, 120);
+      const { data: matches } = await supabase.from('exercises')
+        .select('name,youtube_url')
+        .ilike('name', exactName)
+        .not('youtube_url', 'is', null)
+        .limit(1);
+      const saved = matches?.find(row => row.name.toLowerCase() === exactName.toLowerCase());
+      const validUrl = saved?.youtube_url && /^https:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=[A-Za-z0-9_-]{11}|youtu\.be\/[A-Za-z0-9_-]{11})/.test(saved.youtube_url);
+      return { ...exercise, youtube_url: validUrl ? saved.youtube_url : '' };
+    }));
+    return json(res, 200, { message: payload.message.slice(0, 5000), exercises: withVideos });
   } catch (error) {
     console.error('Coach request failure:', error instanceof Error ? error.name : 'Unknown');
     return json(res, 502, { error: 'Coach could not complete the request. Please try again.' });
