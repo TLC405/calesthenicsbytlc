@@ -98,6 +98,18 @@ export default function Settings() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 md:px-8 py-6 space-y-4">
+        {isAdmin && (
+          <section className="rounded-2xl border border-primary/30 bg-primary/5 p-4">
+            <div className="flex items-center justify-between gap-3">
+              <div>
+                <p className="flex items-center gap-2 text-sm font-bold"><Shield className="h-4 w-4" /> POWER Admin</p>
+                <p className="mt-1 text-xs text-muted-foreground">Member activity, videos, and community metrics.</p>
+              </div>
+              <Button onClick={() => navigate('/admin')} className="rounded-xl">Open admin</Button>
+            </div>
+          </section>
+        )}
+
         {/* Theme */}
         <section className="rounded-2xl border border-border/50 bg-card p-5">
           <div className="flex items-center gap-3 mb-5">
