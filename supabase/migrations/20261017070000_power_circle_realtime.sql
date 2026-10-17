@@ -42,8 +42,11 @@ CREATE INDEX notifications_unread_idx ON public.notifications
 -- Keep the author display name server-owned, without exposing users' emails.
 CREATE FUNCTION public.prepare_community_message()
 RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER SET search_path = ''
-AS $$
+AS $
 BEGIN
+  -- Client-supplied like totals and timestamps must never be trusted.
+  NEW.like_count := 0;
+  NEW.created_at := now();
   NEW.author_name := coalesce(
     (SELECT nullif(left(btrim(p.display_name), 80), '')
        FROM public.profiles AS p WHERE p.id = NEW.author_id),
