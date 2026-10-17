@@ -122,10 +122,10 @@ export default function Library() {
               </div>
             </div>
             <div className="flex gap-1.5">
-              <Button variant="ghost" size="sm" onClick={downloadExerciseList} className="text-muted-foreground h-9 text-[10px] font-mono rounded-xl" disabled={filteredExercises.length === 0}>
+              <Button variant="ghost" size="sm" onClick={downloadExerciseList} className="hidden sm:inline-flex text-muted-foreground h-9 text-[10px] font-mono rounded-xl" disabled={filteredExercises.length === 0}>
                 <Download className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Export</span>
               </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/ai-lab')} className="text-muted-foreground h-9 text-[10px] font-mono rounded-xl">
+              <Button variant="ghost" size="sm" onClick={() => navigate('/ai-lab')} className="hidden sm:inline-flex text-muted-foreground h-9 text-[10px] font-mono rounded-xl">
                 <Sparkles className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">AI</span>
               </Button>
               {ownerId && (
