@@ -4,6 +4,7 @@ import { Sparkles, Brain, Dumbbell, Target, FileText, ArrowRight } from 'lucide-
 import { Button } from '@/components/ui/button';
 import { AILabChat } from '@/components/AILab/AILabChat';
 import { useAuth } from '@/providers/AuthProvider';
+import { backendConfigured } from '@/integrations/supabase/client';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -133,16 +134,16 @@ export default function AILab() {
       </header>
 
       <main className="flex-1 flex flex-col lg:flex-row">
-        {!user ? (
+        {!backendConfigured || !user ? (
           <div className="flex-1 flex items-center justify-center p-6">
             <div className="max-w-sm text-center space-y-6">
               <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-border/30 flex items-center justify-center mx-auto">
                 <Sparkles className="w-7 h-7 text-primary" />
               </div>
               <div>
-                <h2 className="font-display text-xl font-bold tracking-tight">Unlock AI Coaching</h2>
+                <h2 className="font-display text-xl font-bold tracking-tight">{backendConfigured ? 'Unlock AI Coaching' : 'AI Coach · Setup Needed'}</h2>
                 <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
-                  Personalized exercise recommendations and workout building.
+                  {backendConfigured ? 'Personalized exercise recommendations and workout building.' : 'Your own OpenAI key and Supabase project must be connected to enable AI. Explore 35 offline starter exercises in the meantime.'}
                 </p>
               </div>
               <div className="grid grid-cols-3 gap-2">
@@ -157,8 +158,8 @@ export default function AILab() {
                   </div>
                 ))}
               </div>
-              <Button onClick={() => navigate('/auth')} className="w-full h-11 font-display font-bold uppercase tracking-wider text-sm rounded-xl">
-                Sign In to Continue
+              <Button onClick={() => navigate(backendConfigured ? '/auth' : '/library')} className="w-full h-11 font-display font-bold uppercase tracking-wider text-sm rounded-xl">
+                {backendConfigured ? 'Sign In to Continue' : 'Explore Exercise Library'}
               </Button>
             </div>
           </div>
