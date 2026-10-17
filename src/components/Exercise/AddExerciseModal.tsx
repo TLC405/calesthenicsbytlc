@@ -151,7 +151,8 @@ export function AddExerciseModal({ open, onClose, onSuccess, initialExercise }: 
     setIsSubmitting(true);
 
     try {
-      if (!backendConfigured) {
+      const { data: currentUser } = backendConfigured ? await supabase.auth.getUser() : { data: { user: null } };
+      if (!currentUser.user) {
         const slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
         const exercise: OfflineExercise = {
           id: initialExercise?.id || crypto.randomUUID(),
