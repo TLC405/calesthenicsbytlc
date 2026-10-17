@@ -1,11 +1,12 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, Library as LibraryIcon, FileText, Sparkles, User } from 'lucide-react';
+import { Home, Library as LibraryIcon, FileText, Sparkles, User, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const tabs = [
   { path: '/dashboard', icon: Home, label: 'Home', color: 'hsl(var(--cat-pull))' },
   { path: '/library', icon: LibraryIcon, label: 'Library', color: 'hsl(var(--cat-push))' },
   { path: '/planner', icon: FileText, label: 'Build', color: 'hsl(var(--cat-skills))' },
+  { path: '/community', icon: Users, label: 'Circle', color: 'hsl(var(--cat-legs))' },
   { path: '/ai-lab', icon: Sparkles, label: 'Coach', color: 'hsl(var(--electric))' },
   { path: '/settings', icon: User, label: 'You', color: 'hsl(var(--cat-core))' },
 ];
