@@ -159,7 +159,7 @@ export function AILabChat({ onAddToNotepad }: AILabChatProps) {
                     {message.exercises.map((exercise, i) => (
                       <div key={i} className="overflow-hidden rounded-2xl border border-border/50 bg-card">
                         {exercise.youtube_url && (() => {
-                          const match = exercise.youtube_url.match(/(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/)([A-Za-z0-9_-]{11})/);
+                          const match = exercise.youtube_url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
                           return match ? (
                             <button type="button" onClick={() => playVideo(exercise)}
                               className="relative block aspect-video w-full overflow-hidden bg-muted"
