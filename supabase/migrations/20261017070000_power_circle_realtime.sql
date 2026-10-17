@@ -136,8 +136,8 @@ FOR INSERT TO authenticated WITH CHECK (auth.uid() = author_id);
 CREATE POLICY "Authors can delete their posts" ON public.messages
 FOR DELETE TO authenticated USING (auth.uid() = author_id);
 
-CREATE POLICY "Members can see community likes" ON public.message_likes
-FOR SELECT TO authenticated USING (true);
+CREATE POLICY "Members can see their own likes" ON public.message_likes
+FOR SELECT TO authenticated USING (auth.uid() = user_id);
 CREATE POLICY "Members can like posts once" ON public.message_likes
 FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);
 CREATE POLICY "Members can remove their own likes" ON public.message_likes
