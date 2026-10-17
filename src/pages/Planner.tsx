@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
+import { saveGuestWorkout } from '@/lib/offlineWorkouts';
+import { getOfflineExercises, type OfflineExercise } from '@/lib/offlineExercises';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -189,7 +191,6 @@ export default function Planner() {
   const totalExercises = sections.reduce((sum, s) => sum + s.entries.length, 0);
 
   const saveWorkout = async () => {
-    if (!user) { toast.error('Sign in to save workouts'); return; }
     if (totalExercises === 0) { toast.error('Add at least one exercise'); return; }
     setSaving(true);
     try {
@@ -201,6 +202,28 @@ export default function Planner() {
           sets: e.sets,
         }))
       );
+      if (!user) {
+        const library = getOfflineExercises();
+        saveGuestWorkout({
+          date: new Date().toISOString().slice(0, 10),
+          notes: `${workoutName ? workoutName + '\n' : ''}${notes}`,
+          entries: sections.flatMap(s => s.entries.map(e => ({
+            exercise_id: e.exercise.id,
+            exercise: (library.find(item => item.id === e.exercise.id) || {
+              ...e.exercise, created_by: null, visibility: 'public',
+              secondary_muscles: [], equipment: e.exercise.equipment || [],
+              cues: Array.isArray(e.exercise.cues) ? e.exercise.cues : [],
+              difficulty_level: e.exercise.difficulty_level || 2,
+            }) as OfflineExercise,
+            sets: e.sets,
+          }))),
+        });
+        toast.success('Workout saved on this device');
+        setSections(SECTION_DEFAULTS.map(s => ({ ...s, entries: [], open: s.key === 'workout' })));
+        setWorkoutName('');
+        setNotes('');
+        return;
+      }
       const { error } = await supabase.from('workouts').insert({
         user_id: user.id,
         date: new Date().toISOString().slice(0, 10),
