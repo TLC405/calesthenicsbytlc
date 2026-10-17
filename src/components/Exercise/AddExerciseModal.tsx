@@ -26,7 +26,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Switch } from '@/components/ui/switch';
 import { Globe2, LockKeyhole } from 'lucide-react';
 import { DifficultyBadge, getDifficultyLabel } from './DifficultyBadge';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, backendConfigured } from '@/integrations/supabase/client';
+import { LOCAL_USER_ID, saveLocalExercise, type OfflineExercise } from '@/lib/offlineExercises';
 import { useToast } from '@/hooks/use-toast';
 
 const categories = ['Push', 'Pull', 'Legs', 'Core', 'Skills', 'Mobility', 'Rings', 'Yoga', 'Flexibility'];
@@ -150,6 +151,36 @@ export function AddExerciseModal({ open, onClose, onSuccess, initialExercise }: 
     setIsSubmitting(true);
 
     try {
+      if (!backendConfigured) {
+        const slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        const exercise: OfflineExercise = {
+          id: initialExercise?.id || crypto.randomUUID(),
+          name: data.name.trim(),
+          slug,
+          category: data.category,
+          primary_muscles: selectedMuscles,
+          secondary_muscles: secondaryMuscles,
+          equipment: selectedEquipment.length ? selectedEquipment : ['None (Bodyweight)'],
+          cues: data.cues ? data.cues.split('\n').map(cue => cue.trim()).filter(Boolean) : [],
+          difficulty_level: difficultyLevel,
+          created_by: LOCAL_USER_ID,
+          visibility: isPublic ? 'public' : 'private',
+          youtube_url: data.youtube_url || null,
+          instagram_url: data.instagram_url || null,
+          image_url: data.image_url || null,
+        };
+        saveLocalExercise(exercise);
+        toast({ title: initialExercise ? 'Exercise updated' : 'Exercise saved on your phone', description: 'Stored on this device only. Export a backup from Library.' });
+        form.reset();
+        setSelectedMuscles([]);
+        setSecondaryMuscles([]);
+        setSelectedEquipment([]);
+        setDifficultyLevel(2);
+        setIsPublic(false);
+        onSuccess?.();
+        onClose();
+        return;
+      }
       const { data: userData } = await supabase.auth.getUser();
       if (!userData.user) {
         toast({
@@ -388,7 +419,7 @@ export function AddExerciseModal({ open, onClose, onSuccess, initialExercise }: 
                   <p className="text-sm font-semibold">{isPublic ? 'Share with the community' : 'Private to you'}</p>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                     {isPublic
-                      ? 'Other members can discover and use your exercise. You can switch it back to private.'
+                      ? (backendConfigured ? 'Other members can discover and use your exercise. You can switch it back to private.' : 'Marked shareable for when cloud accounts are connected; for now it remains on this device.')
                       : 'Only you can see this exercise. Turn on sharing when you want others to discover it.'}
                   </p>
                 </div>
