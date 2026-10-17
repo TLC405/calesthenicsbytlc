@@ -71,7 +71,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
 
             <ProgressionPathStrip exerciseId={currentExercise.id} chainGroup={currentExercise.chain_group || null} onNavigate={handleChainNavigate} />
 
-            <VideoPlayer youtubeUrl={currentExercise.youtube_url} instagramUrl={currentExercise.instagram_url} title={currentExercise.name}
+            <VideoPlayer thumbnailMode youtubeUrl={currentExercise.youtube_url} instagramUrl={currentExercise.instagram_url} title={currentExercise.name}
               exerciseData={{ recovery_muscle: currentExercise.recovery_muscle, recovery_tendon: currentExercise.recovery_tendon, recovery_nervous: currentExercise.recovery_nervous, primary_muscles: currentExercise.primary_muscles, secondary_muscles: currentExercise.secondary_muscles, stabilizer_muscles: currentExercise.stabilizer_muscles, tendons_involved: currentExercise.tendons_involved, equipment: currentExercise.equipment, cues: currentExercise.cues, sets_reps: currentExercise.sets_reps, difficulty_level: currentExercise.difficulty_level, category: currentExercise.category }} />
 
             {progressions.length > 0 && (
