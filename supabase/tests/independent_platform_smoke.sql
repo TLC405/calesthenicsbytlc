@@ -1,14 +1,14 @@
 \set ON_ERROR_STOP on
 
 -- Disposable PostgreSQL validation of the actual independence migration.
-DO $ BEGIN
+DO $test$ BEGIN
   IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'authenticated') THEN
     CREATE ROLE authenticated NOLOGIN;
   END IF;
   IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'anon') THEN
     CREATE ROLE anon NOLOGIN;
   END IF;
-END $;
+END $test$;
 CREATE SCHEMA auth;
 GRANT USAGE ON SCHEMA auth TO authenticated, anon;
 CREATE FUNCTION auth.uid() RETURNS uuid
