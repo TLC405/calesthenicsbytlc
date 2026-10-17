@@ -19,7 +19,9 @@ jobs:
       # Install from declared dependencies without mutating the committed lockfile.
       - run: npm install --package-lock=false --no-audit --no-fund --legacy-peer-deps
       - name: Typecheck
-        run: npx tsc --noEmit -p tsconfig.app.json
+        run: |
+          npx tsc --noEmit -p tsconfig.app.json
+          npx tsc --noEmit -p tsconfig.api.json
       - name: Production build
         run: npm run build
 
@@ -44,4 +46,7 @@ jobs:
       - name: Test database migration and security
         env:
           PGPASSWORD: postgres
-        run: psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -f supabase/tests/power_circle_smoke.sql
+        run: |
+          psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -f supabase/tests/power_circle_smoke.sql
+          psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'CREATE DATABASE independence_test;'
+          psql -h 127.0.0.1 -U postgres -d independence_test -v ON_ERROR_STOP=1 -f supabase/tests/independent_platform_smoke.sql
