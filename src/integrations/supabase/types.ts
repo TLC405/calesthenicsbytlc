@@ -53,6 +53,7 @@ export type Database = {
           chain_order: number | null
           created_at: string
           created_by: string | null
+          visibility: 'private' | 'public'
           cues: Json | null
           description: string | null
           difficulty_level: number | null
@@ -82,6 +83,7 @@ export type Database = {
           chain_order?: number | null
           created_at?: string
           created_by?: string | null
+          visibility?: 'private' | 'public'
           cues?: Json | null
           description?: string | null
           difficulty_level?: number | null
@@ -111,6 +113,7 @@ export type Database = {
           chain_order?: number | null
           created_at?: string
           created_by?: string | null
+          visibility?: 'private' | 'public'
           cues?: Json | null
           description?: string | null
           difficulty_level?: number | null
