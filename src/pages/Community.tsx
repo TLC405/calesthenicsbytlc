@@ -53,7 +53,7 @@ export default function Community() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const demo = !backendConfigured || new URLSearchParams(location.search).get('demo') === '1';
+  const demo = !user || !backendConfigured || new URLSearchParams(location.search).get('demo') === '1';
   const viewerId = demo ? 'demo-user' : user?.id;
   const [posts, setPosts] = useState<Post[]>([]);
   const [demoPosts, setDemoPosts] = useState<Post[]>(initialDemoPosts);
@@ -222,7 +222,7 @@ export default function Community() {
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
               <span className="inline-flex items-center gap-1.5"><Users className="h-3.5 w-3.5 text-primary" /> Athlete-first</span>
-              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-primary" /> Members only</span>
+              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-primary" /> No account needed to preview</span>
               <span className="inline-flex items-center gap-1.5"><Radio className="h-3.5 w-3.5 text-primary" /> Live reactions</span>
             </div>
           </div>
