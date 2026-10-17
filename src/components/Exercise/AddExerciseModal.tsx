@@ -184,7 +184,7 @@ export function AddExerciseModal({ open, onClose, onSuccess, initialExercise }: 
         equipment: selectedEquipment.length > 0 ? selectedEquipment : ['None (Bodyweight)'],
         cues: cuesArray,
         difficulty_level: difficultyLevel,
-        visibility: isPublic ? 'public' : 'private',
+        visibility: isPublic ? 'public' as const : 'private' as const,
       };
       const { error } = initialExercise
         ? await supabase.from('exercises').update(values)
