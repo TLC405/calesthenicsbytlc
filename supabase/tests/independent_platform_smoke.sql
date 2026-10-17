@@ -28,6 +28,8 @@ CREATE TABLE public.exercises (
   created_by uuid REFERENCES auth.users(id)
 );
 ALTER TABLE public.exercises ENABLE ROW LEVEL SECURITY;
+GRANT SELECT, INSERT, UPDATE, DELETE ON public.exercises TO authenticated;
+GRANT SELECT ON public.exercises TO anon;
 CREATE POLICY "Anyone can view exercises" ON public.exercises FOR SELECT USING (true);
 CREATE POLICY "Owner inserts" ON public.exercises FOR INSERT TO authenticated
   WITH CHECK (auth.uid() = created_by);
