@@ -688,6 +688,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_power_admin_overview: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
+      consume_ai_request: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
