@@ -83,7 +83,7 @@ export function NotificationBell({ userId, demo = false }: { userId?: string; de
           <DropdownMenuItem key={item.id}
             onSelect={() => {
               read(item.id);
-              navigate(`/community#post-${item.entity_id}`);
+              navigate(`/community${demo ? '?demo=1' : ''}#post-${item.entity_id}`);
             }}
             className={`my-1 flex items-start gap-3 rounded-xl p-3 cursor-pointer focus:bg-accent ${!item.is_read ? 'bg-primary/5' : 'opacity-75'}`}
           >
