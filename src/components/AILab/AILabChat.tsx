@@ -58,11 +58,19 @@ export function AILabChat({ onAddToNotepad }: AILabChatProps) {
     setIsLoading(true);
 
     try {
-      const response = await supabase.functions.invoke('discover-exercises', {
-        body: { query: userMessage },
+      const { data: sessionResult } = await supabase.auth.getSession();
+      const token = sessionResult.session?.access_token;
+      if (!token) throw new Error('Please sign in again to use your coach');
+      const response = await fetch('/api/discover-exercises', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ query: userMessage }),
       });
-      if (response.error) throw new Error(response.error.message || 'Failed to get response');
-      const data = response.data;
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Coach is temporarily unavailable');
       setMessages(prev => [...prev, { role: 'assistant', content: data.message || data.content, exercises: data.exercises }]);
     } catch (error: any) {
       console.error('AI Lab error:', error);
