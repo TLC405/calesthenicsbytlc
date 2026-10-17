@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, backendConfigured } from '@/integrations/supabase/client';
+import { LOCAL_USER_ID, getOfflineExercises, removeLocalExercise, exportLocalExercises } from '@/lib/offlineExercises';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, Plus, Sparkles, Download, Pencil, Trash2, LockKeyhole, Globe2, UserRound } from 'lucide-react';
@@ -31,6 +32,7 @@ export default function Library() {
   const location = useLocation();
   const { user } = useAuth();
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const ownerId = backendConfigured ? user?.id : LOCAL_USER_ID;
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>((location.state as any)?.category || null);
@@ -44,7 +46,13 @@ export default function Library() {
 
   const fetchExercises = async () => {
     setLoading(true);
-    const { data } = await supabase.from('exercises').select('*').order('category').order('name');
+    if (!backendConfigured) {
+      setExercises(getOfflineExercises());
+      setLoading(false);
+      return;
+    }
+    const { data, error } = await supabase.from('exercises').select('*').order('category').order('name');
+    if (error) toast.error('Could not load your exercise library');
     setExercises(data || []);
     setLoading(false);
   };
@@ -57,17 +65,23 @@ export default function Library() {
       exercise.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = !activeCategory || exercise.category === activeCategory;
-    const matchesOwner = !mineOnly || Boolean(user && exercise.created_by === user.id);
+    const matchesOwner = !mineOnly || exercise.created_by === ownerId;
     return matchesSearch && matchesCategory && matchesOwner;
   });
 
   const handleAddToWorkout = (exercise: Exercise) => setWorkoutModalDate(new Date());
 
   const deleteExercise = async (exercise: Exercise) => {
-    if (!user || exercise.created_by !== user.id) return;
-    if (!window.confirm(`Delete "${exercise.name}"? Training history linked to this exercise may also be removed.`)) return;
+    if (!ownerId || exercise.created_by !== ownerId) return;
+    if (!window.confirm(`Delete "${exercise.name}"? ${backendConfigured ? 'Training history linked to it may also be removed.' : 'This cannot be undone without a local backup.'}`)) return;
+    if (!backendConfigured) {
+      removeLocalExercise(exercise.id);
+      toast.success('Removed from this device');
+      void fetchExercises();
+      return;
+    }
     const { data, error } = await supabase.from('exercises')
-      .delete().eq('id', exercise.id).eq('created_by', user.id).select('id');
+      .delete().eq('id', exercise.id).eq('created_by', ownerId).select('id');
     if (error || !data?.length) {
       toast.error(error?.message || 'Could not delete your exercise');
       return;
@@ -114,7 +128,7 @@ export default function Library() {
               <Button variant="ghost" size="sm" onClick={() => navigate('/ai-lab')} className="text-muted-foreground h-9 text-[10px] font-mono rounded-xl">
                 <Sparkles className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">AI</span>
               </Button>
-              {user && (
+              {ownerId && (
                 <>
                   <Button type="button" variant={mineOnly ? 'default' : 'outline'} size="sm"
                     onClick={() => setMineOnly(prev => !prev)}
@@ -144,12 +158,26 @@ export default function Library() {
       </header>
 
       <main className="max-w-6xl mx-auto px-4 md:px-8 py-5 pb-28 md:pb-5">
+        {!backendConfigured && (
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/25 bg-primary/5 px-4 py-3">
+            <div>
+              <p className="text-sm font-bold">Guest training · saved on this device</p>
+              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+                35 starter exercises. Custom exercises stay in this browser until you connect a cloud account. Export a backup before clearing browser data.
+              </p>
+            </div>
+            <Button type="button" variant="outline" size="sm" onClick={() => exportLocalExercises()}
+              className="h-9 rounded-xl text-xs font-bold">
+              <Download className="mr-2 h-3.5 w-3.5" /> Backup mine
+            </Button>
+          </div>
+        )}
         {loading ? (
           <ExerciseCardSkeletonGrid count={9} />
         ) : filteredExercises.length === 0 ? (
           <div className="py-20 text-center">
             <p className="text-muted-foreground text-xs font-mono">{mineOnly ? 'You haven’t created any exercises yet.' : 'No exercises found.'}</p>
-            {user && mineOnly && (
+            {ownerId && mineOnly && (
               <Button className="mt-4 rounded-xl" onClick={() => { setEditingExercise(null); setShowAddModal(true); }}>
                 <Plus className="mr-2 h-4 w-4" /> Create your first exercise
               </Button>
@@ -160,7 +188,7 @@ export default function Library() {
             {filteredExercises.map(exercise => (
               <div key={exercise.id} className="relative">
                 <ExerciseCard exercise={exercise} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} />
-                {user && exercise.created_by === user.id && (
+                {ownerId && exercise.created_by === ownerId && (
                   <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5">
                     <span title={exercise.visibility === 'public' ? 'Shared with members' : 'Private exercise'}
                       className="flex h-8 items-center gap-1 rounded-lg bg-card/95 px-2 text-[9px] font-semibold shadow-lg backdrop-blur-md">
