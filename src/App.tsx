@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./providers/AuthProvider";
 import { MusicProvider } from "./providers/MusicProvider";
 import { MusicControl } from "./components/Music/MusicControl";
@@ -33,8 +33,9 @@ function AppContent() {
     <BrowserRouter>
       <div className="pb-[4.5rem] md:pb-0">
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/" element={<Navigate to="/library" replace />} />
+          <Route path="/auth" element={<Navigate to="/library" replace />} />
+          <Route path="/admin-login" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/planner" element={<Planner />} />
           <Route path="/library" element={<Library />} />
