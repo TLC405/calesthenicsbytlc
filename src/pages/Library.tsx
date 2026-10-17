@@ -4,7 +4,7 @@ import { supabase, backendConfigured } from '@/integrations/supabase/client';
 import { LOCAL_USER_ID, getOfflineExercises, removeLocalExercise, exportLocalExercises } from '@/lib/offlineExercises';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Plus, Sparkles, Download, Pencil, Trash2, LockKeyhole, Globe2, UserRound } from 'lucide-react';
+import { Search, Plus, Sparkles, Download, Pencil, Trash2, LockKeyhole, Globe2, UserRound, PlayCircle } from 'lucide-react';
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
@@ -41,6 +41,7 @@ export default function Library() {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
   const [mineOnly, setMineOnly] = useState(() => new URLSearchParams(location.search).get('mine') === '1');
+  const [videosOnly, setVideosOnly] = useState(false);
 
   useEffect(() => { fetchExercises(); }, []);
 
@@ -66,7 +67,8 @@ export default function Library() {
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = !activeCategory || exercise.category === activeCategory;
     const matchesOwner = !mineOnly || exercise.created_by === ownerId;
-    return matchesSearch && matchesCategory && matchesOwner;
+    const matchesVideo = !videosOnly || Boolean(exercise.youtube_url);
+    return matchesSearch && matchesCategory && matchesOwner && matchesVideo;
   });
 
   const handleAddToWorkout = (exercise: Exercise) => setWorkoutModalDate(new Date());
@@ -152,7 +154,22 @@ export default function Library() {
                 className="pl-10 h-11 rounded-xl border-border/50 bg-card focus:bg-card focus:border-ring focus:shadow-sm transition-all"
               />
             </div>
-            <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts} />
+            <div className="flex items-center justify-between gap-2">
+              <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts} />
+            </div>
+            <div className="flex items-center gap-2">
+              <Button type="button" variant={videosOnly ? 'default' : 'outline'} size="sm"
+                onClick={() => setVideosOnly(v => !v)}
+                className="h-9 gap-1.5 rounded-xl text-[10px] font-mono font-bold"
+                aria-pressed={videosOnly}>
+                <PlayCircle className="h-4 w-4" />
+                {videosOnly ? 'Video tutorials ✓' : 'Video tutorials'}
+                <span className="font-mono text-[9px] opacity-65">
+                  {exercises.filter(e => Boolean(e.youtube_url)).length}
+                </span>
+              </Button>
+              <span className="text-[10px] text-muted-foreground">Tap any exercise to play its tutorial.</span>
+            </div>
           </div>
         </div>
       </header>
