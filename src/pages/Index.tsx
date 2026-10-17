@@ -85,7 +85,7 @@ export default function Index() {
           {/* CTA */}
           <div className="transition-all duration-700 delay-500 w-full max-w-xs" style={{ opacity: loaded ? 1 : 0 }}>
             <Button
-              onClick={() => navigate(backendConfigured ? '/auth' : '/library')}
+              onClick={() => navigate('/library')}
               size="lg"
               className="w-full h-14 sm:h-16 text-sm sm:text-base font-display font-bold uppercase tracking-[0.15em] rounded-2xl text-white relative overflow-hidden group"
               style={{
@@ -94,12 +94,12 @@ export default function Index() {
               }}
             >
               <span className="relative z-10 flex items-center gap-2">
-                {backendConfigured ? 'Enter' : 'Explore training'} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                Explore training <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             </Button>
             <p className="text-center text-muted-foreground text-[9px] font-mono uppercase tracking-[0.3em] mt-3">
-              {backendConfigured ? 'Free · No credit card' : 'Free preview · Exercises saved on this device'}
+              Browse without signing in
             </p>
           </div>
         </div>
