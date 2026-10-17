@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, Zap, ChevronRight, Flame } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { InstallPowerApp } from '@/components/InstallPowerApp';
 
 const paths = [
   { name: 'Push-up', color: 'hsl(var(--cat-push))', steps: ['Wall', 'Incline', 'Standard', 'Diamond', 'Archer', 'One Arm'] },
@@ -44,7 +45,7 @@ export default function Index() {
             <div className="w-2 h-2 rounded-full bg-[hsl(var(--cat-legs))] animate-pulse" />
             <span className="text-[9px] font-mono text-muted-foreground tracking-[0.3em] uppercase">System Online</span>
           </div>
-          <span className="text-[9px] font-mono text-muted-foreground tracking-[0.2em]">v2.0</span>
+          <InstallPowerApp compact />
         </div>
 
         {/* Hero */}
