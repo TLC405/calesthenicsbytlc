@@ -18,6 +18,7 @@ import Settings from "./pages/Settings";
 import Train from "./pages/Train";
 import Anatomy from "./pages/Anatomy";
 import NotFound from "./pages/NotFound";
+import Community from "./pages/Community";
 import "./styles/neumorph.css";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ function AppContent() {
           <Route path="/ai-lab" element={<AILab />} />
           <Route path="/train" element={<Train />} />
           <Route path="/anatomy" element={<Anatomy />} />
+          <Route path="/community" element={<Community />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
