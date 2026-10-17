@@ -53,7 +53,7 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
 
   useEffect(() => {
-    if (open && date && (user || !backendConfigured)) {
+    if (open && date && (user || !user)) {
       loadWorkout();
     } else {
       resetState();
@@ -67,11 +67,11 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
   };
 
   const loadWorkout = async () => {
-    if (!date || (backendConfigured && !user)) return;
+    if (!date || false) return;
     
     setLoading(true);
     const dateStr = format(date, 'yyyy-MM-dd');
-    if (!backendConfigured) {
+    if (!user) {
       const saved = getGuestWorkout(dateStr);
       setEntries(saved?.entries || []);
       setNotes(saved?.notes || '');
