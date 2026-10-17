@@ -26,7 +26,7 @@ export default function Index() {
   const { user } = useAuth();
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => { if (user) navigate('/dashboard'); }, [user, navigate]);
+  useEffect(() => { navigate('/library', { replace: true }); }, [navigate]);
   useEffect(() => { const t = setTimeout(() => setLoaded(true), 50); return () => clearTimeout(t); }, []);
 
   return (
