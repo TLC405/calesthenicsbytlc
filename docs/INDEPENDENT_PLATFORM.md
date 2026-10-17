@@ -117,3 +117,44 @@ privacy patterns, not hard-coded service IDs.
 - [ ] Existing app URLs redirect only when independent site verified
 - [ ] Backups, monitoring, API alerts/budgets configured
 - [ ] Cancel Lovable plan only **after** the independent switch is verified
+
+## Public independent preview (guest-first, no cloud secrets)
+
+The Vercel project `tlc-power-independent` was created under the user's
+Vercel account. The public alias is:
+
+`https://tlc-power-independent-inspirelawton-8729s-projects.vercel.app`
+
+The independent preview does **not** use Lovable Cloud and intentionally
+contains **no inherited Supabase credentials or OpenAI API key**.
+
+Until an owner-controlled Supabase project is connected, the deployed app
+automatically offers an on-device experience:
+
+- **35 starter exercises** across bodyweight, rings, yoga and mobility
+- **Create, edit and delete personal exercises** saved in this browser's
+  localStorage, up to 200 records
+- **Log a workout** with sets and reps, stored on this browser only
+- **Power Circle demo** with illustrative posts and likes
+- Install to Android home screen or iOS home screen via PWA
+- Exercise CSV export and custom-exercise JSON backup
+
+Guest data is **not** shared across devices, not copied to Supabase,
+and may be lost when the user clears browser/site storage.
+A public exercise toggle in guest mode merely marks future shareability:
+it is **not actually published** to other people without cloud credentials.
+
+AI Coach, synchronized accounts, real community notifications,
+cloud workout history and multi-device sync require the independent
+Supabase project, the private OpenAI API key and a deployed migration.
+Nothing about a successful Vercel build confirms those capabilities.
+
+GitHub is not currently linked to this Vercel project for **automatic**
+deploy-on-push: the Vercel GitHub integration returned an empty namespace
+and no accessible repositories. Manual releases can still be created
+using an explicit `gitSource` commit through Vercel. Authorizing Vercel's
+GitHub integration for TLC405 enables future automatic deployments.
+
+The original Lovable website remains unchanged on the legacy `main`
+branch; do not merge this independence PR into it or cancel the old service
+until user data has been migrated and production cutover tested.
