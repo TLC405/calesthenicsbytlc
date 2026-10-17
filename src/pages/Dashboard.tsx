@@ -10,6 +10,7 @@ import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { useTheme } from '@/components/ThemeSwitcher';
 import { format, parseISO } from 'date-fns';
 import { NotificationBell } from '@/components/Community/NotificationBell';
+import { InstallPowerApp } from '@/components/InstallPowerApp';
 
 function getGreeting() {
   const h = new Date().getHours();
@@ -77,6 +78,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex items-center gap-0.5 flex-shrink-0">
+            <InstallPowerApp compact />
             <NotificationBell userId={user?.id} />
             <Button variant="ghost" size="icon" onClick={cycleTheme} className="text-muted-foreground hover:text-foreground h-10 w-10 rounded-xl">
               <Palette className="h-4 w-4" />
