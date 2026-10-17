@@ -2,7 +2,7 @@
   "name": "I GOT THE POWER",
   "short_name": "POWER",
   "description": "Training, personal exercise library, live athlete community and AI coaching. Independent by TLC.",
-  "start_url": "/",
+  "start_url": "/library",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
@@ -53,5 +53,6 @@
       "url": "/library?mine=1",
       "description": "Manage exercises you created"
     }
-  ]
+  ],
+  "id": "/power-independent-guest"
 }
