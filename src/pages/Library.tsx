@@ -3,12 +3,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Plus, Sparkles, Download } from 'lucide-react';
+import { Search, Plus, Sparkles, Download, Pencil, Trash2, LockKeyhole, Globe2, UserRound } from 'lucide-react';
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
 import { WorkoutModal } from '@/components/Workout/WorkoutModal';
-import { AddExerciseModal } from '@/components/Exercise/AddExerciseModal';
+import { AddExerciseModal, type EditableExercise } from '@/components/Exercise/AddExerciseModal';
 import { ExerciseCardSkeletonGrid } from '@/components/Exercise/ExerciseCardSkeleton';
 import { useAuth } from '@/providers/AuthProvider';
 import { toast } from 'sonner';
@@ -19,6 +19,7 @@ interface Exercise {
   cues: any; youtube_url?: string | null; instagram_url?: string | null;
   image_url?: string | null; difficulty_level?: number; sets_reps?: string | null;
   description?: string | null; stabilizer_muscles?: string[] | null;
+  created_by?: string | null; visibility?: 'private' | 'public';
   tendons_involved?: string[] | null; recovery_muscle?: string | null;
   recovery_tendon?: string | null; recovery_nervous?: string | null;
 }
@@ -36,6 +37,8 @@ export default function Library() {
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [workoutModalDate, setWorkoutModalDate] = useState<Date | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
+  const [mineOnly, setMineOnly] = useState(() => new URLSearchParams(location.search).get('mine') === '1');
 
   useEffect(() => { fetchExercises(); }, []);
 
@@ -54,10 +57,24 @@ export default function Library() {
       exercise.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = !activeCategory || exercise.category === activeCategory;
-    return matchesSearch && matchesCategory;
+    const matchesOwner = !mineOnly || Boolean(user && exercise.created_by === user.id);
+    return matchesSearch && matchesCategory && matchesOwner;
   });
 
   const handleAddToWorkout = (exercise: Exercise) => setWorkoutModalDate(new Date());
+
+  const deleteExercise = async (exercise: Exercise) => {
+    if (!user || exercise.created_by !== user.id) return;
+    if (!window.confirm(`Delete "${exercise.name}"? Training history linked to this exercise may also be removed.`)) return;
+    const { data, error } = await supabase.from('exercises')
+      .delete().eq('id', exercise.id).eq('created_by', user.id).select('id');
+    if (error || !data?.length) {
+      toast.error(error?.message || 'Could not delete your exercise');
+      return;
+    }
+    toast.success('Your exercise has been deleted');
+    void fetchExercises();
+  };
 
   const downloadExerciseList = () => {
     const data = filteredExercises.map(e => ({
@@ -98,9 +115,17 @@ export default function Library() {
                 <Sparkles className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">AI</span>
               </Button>
               {user && (
-                <Button size="sm" onClick={() => setShowAddModal(true)} className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl">
-                  <Plus className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Add</span>
-                </Button>
+                <>
+                  <Button type="button" variant={mineOnly ? 'default' : 'outline'} size="sm"
+                    onClick={() => setMineOnly(prev => !prev)}
+                    className="h-9 rounded-xl px-2.5 text-[10px] font-mono font-bold" aria-pressed={mineOnly}>
+                    <UserRound className="mr-1 h-3.5 w-3.5" /><span className="hidden sm:inline">My exercises</span><span className="sm:hidden">Mine</span>
+                  </Button>
+                  <Button size="sm" onClick={() => { setEditingExercise(null); setShowAddModal(true); }}
+                    className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl">
+                    <Plus className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Create</span><span className="sm:hidden">New</span>
+                  </Button>
+                </>
               )}
             </div>
           </div>
@@ -123,12 +148,38 @@ export default function Library() {
           <ExerciseCardSkeletonGrid count={9} />
         ) : filteredExercises.length === 0 ? (
           <div className="py-20 text-center">
-            <p className="text-muted-foreground text-xs font-mono">No exercises found</p>
+            <p className="text-muted-foreground text-xs font-mono">{mineOnly ? 'You haven’t created any exercises yet.' : 'No exercises found.'}</p>
+            {user && mineOnly && (
+              <Button className="mt-4 rounded-xl" onClick={() => { setEditingExercise(null); setShowAddModal(true); }}>
+                <Plus className="mr-2 h-4 w-4" /> Create your first exercise
+              </Button>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             {filteredExercises.map(exercise => (
-              <ExerciseCard key={exercise.id} exercise={exercise} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} />
+              <div key={exercise.id} className="relative">
+                <ExerciseCard exercise={exercise} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} />
+                {user && exercise.created_by === user.id && (
+                  <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5">
+                    <span title={exercise.visibility === 'public' ? 'Shared with members' : 'Private exercise'}
+                      className="flex h-8 items-center gap-1 rounded-lg bg-card/95 px-2 text-[9px] font-semibold shadow-lg backdrop-blur-md">
+                      {exercise.visibility === 'public' ? <Globe2 className="h-3.5 w-3.5" /> : <LockKeyhole className="h-3.5 w-3.5" />}
+                      <span className="hidden sm:inline">{exercise.visibility === 'public' ? 'Shared' : 'Private'}</span>
+                    </span>
+                    <button type="button" title="Edit your exercise" aria-label={`Edit ${exercise.name}`}
+                      onClick={e => { e.stopPropagation(); setEditingExercise(exercise); setShowAddModal(true); }}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg bg-card/95 text-foreground shadow-lg backdrop-blur-md hover:text-primary">
+                      <Pencil className="h-3.5 w-3.5" />
+                    </button>
+                    <button type="button" title="Delete your exercise" aria-label={`Delete ${exercise.name}`}
+                      onClick={e => { e.stopPropagation(); void deleteExercise(exercise); }}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg bg-card/95 text-foreground shadow-lg backdrop-blur-md hover:text-red-500">
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         )}
@@ -136,7 +187,10 @@ export default function Library() {
 
       <ExerciseDetailModal exercise={selectedExercise} open={!!selectedExercise} onClose={() => setSelectedExercise(null)} onAddToWorkout={handleAddToWorkout} />
       <WorkoutModal date={workoutModalDate} open={!!workoutModalDate} onClose={() => setWorkoutModalDate(null)} onSave={fetchExercises} />
-      <AddExerciseModal open={showAddModal} onClose={() => setShowAddModal(false)} onSuccess={fetchExercises} />
+      <AddExerciseModal open={showAddModal}
+        initialExercise={editingExercise as EditableExercise | null}
+        onClose={() => { setShowAddModal(false); setEditingExercise(null); }}
+        onSuccess={fetchExercises} />
 
       <button
         onClick={() => navigate('/planner')}
