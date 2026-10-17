@@ -272,7 +272,7 @@ export function VideoPlayer({
                 alt={title}
                 loading="lazy"
                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                onError={(e) => { (e.target as HTMLImageElement).src = fallbackThumbnail; }}
+                onError={(e) => { const img = e.currentTarget; if (!img.src.endsWith("/hqdefault.jpg")) img.src = fallbackThumbnail; else img.style.opacity = "0"; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
               <div className="absolute inset-0 grid place-items-center">
