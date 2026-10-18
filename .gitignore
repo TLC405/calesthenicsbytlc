@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Never commit runtime credentials, local auth state or deployment IDs.
+.env
+.env.*
+!.env.example
+.vercel/
+.supabase/

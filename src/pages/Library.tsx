@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, backendConfigured } from '@/integrations/supabase/client';
+import { LOCAL_USER_ID, getOfflineExercises, removeLocalExercise, exportLocalExercises } from '@/lib/offlineExercises';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Plus, Sparkles, Download } from 'lucide-react';
+import { Search, Plus, Sparkles, Download, Pencil, Trash2, LockKeyhole, Globe2, UserRound, PlayCircle } from 'lucide-react';
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
 import { WorkoutModal } from '@/components/Workout/WorkoutModal';
-import { AddExerciseModal } from '@/components/Exercise/AddExerciseModal';
+import { AddExerciseModal, type EditableExercise } from '@/components/Exercise/AddExerciseModal';
 import { ExerciseCardSkeletonGrid } from '@/components/Exercise/ExerciseCardSkeleton';
 import { useAuth } from '@/providers/AuthProvider';
 import { toast } from 'sonner';
@@ -19,6 +20,7 @@ interface Exercise {
   cues: any; youtube_url?: string | null; instagram_url?: string | null;
   image_url?: string | null; difficulty_level?: number; sets_reps?: string | null;
   description?: string | null; stabilizer_muscles?: string[] | null;
+  created_by?: string | null; visibility?: 'private' | 'public';
   tendons_involved?: string[] | null; recovery_muscle?: string | null;
   recovery_tendon?: string | null; recovery_nervous?: string | null;
 }
@@ -30,19 +32,30 @@ export default function Library() {
   const location = useLocation();
   const { user } = useAuth();
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const guestMode = !user;
+  const ownerId = user?.id ?? LOCAL_USER_ID;
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>((location.state as any)?.category || null);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [workoutModalDate, setWorkoutModalDate] = useState<Date | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
+  const [mineOnly, setMineOnly] = useState(() => new URLSearchParams(location.search).get('mine') === '1');
+  const [videosOnly, setVideosOnly] = useState(false);
 
   useEffect(() => { fetchExercises(); }, []);
 
   const fetchExercises = async () => {
     setLoading(true);
-    const { data } = await supabase.from('exercises').select('*').order('category').order('name');
-    setExercises(data || []);
+    if (!backendConfigured) {
+      setExercises(getOfflineExercises());
+      setLoading(false);
+      return;
+    }
+    const { data, error } = await supabase.from('exercises').select('*').order('category').order('name');
+    if (error) toast.error('Could not load your exercise library');
+    setExercises(user ? (data || []) : [...getOfflineExercises(), ...(data || [])]);
     setLoading(false);
   };
 
@@ -54,10 +67,31 @@ export default function Library() {
       exercise.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = !activeCategory || exercise.category === activeCategory;
-    return matchesSearch && matchesCategory;
+    const matchesOwner = !mineOnly || exercise.created_by === ownerId;
+    const matchesVideo = !videosOnly || Boolean(exercise.youtube_url);
+    return matchesSearch && matchesCategory && matchesOwner && matchesVideo;
   });
 
   const handleAddToWorkout = (exercise: Exercise) => setWorkoutModalDate(new Date());
+
+  const deleteExercise = async (exercise: Exercise) => {
+    if (!ownerId || exercise.created_by !== ownerId) return;
+    if (!window.confirm(`Delete "${exercise.name}"? ${guestMode ? 'This cannot be undone without a local backup.' : 'Training history linked to it may also be removed.'}`)) return;
+    if (guestMode) {
+      removeLocalExercise(exercise.id);
+      toast.success('Removed from this device');
+      void fetchExercises();
+      return;
+    }
+    const { data, error } = await supabase.from('exercises')
+      .delete().eq('id', exercise.id).eq('created_by', ownerId).select('id');
+    if (error || !data?.length) {
+      toast.error(error?.message || 'Could not delete your exercise');
+      return;
+    }
+    toast.success('Your exercise has been deleted');
+    void fetchExercises();
+  };
 
   const downloadExerciseList = () => {
     const data = filteredExercises.map(e => ({
@@ -91,16 +125,24 @@ export default function Library() {
               </div>
             </div>
             <div className="flex gap-1.5">
-              <Button variant="ghost" size="sm" onClick={downloadExerciseList} className="text-muted-foreground h-9 text-[10px] font-mono rounded-xl" disabled={filteredExercises.length === 0}>
+              <Button variant="ghost" size="sm" onClick={downloadExerciseList} className="hidden sm:inline-flex text-muted-foreground h-9 text-[10px] font-mono rounded-xl" disabled={filteredExercises.length === 0}>
                 <Download className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Export</span>
               </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/ai-lab')} className="text-muted-foreground h-9 text-[10px] font-mono rounded-xl">
+              <Button variant="ghost" size="sm" onClick={() => navigate('/ai-lab')} className="hidden sm:inline-flex text-muted-foreground h-9 text-[10px] font-mono rounded-xl">
                 <Sparkles className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">AI</span>
               </Button>
-              {user && (
-                <Button size="sm" onClick={() => setShowAddModal(true)} className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl">
-                  <Plus className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Add</span>
-                </Button>
+              {ownerId && (
+                <>
+                  <Button type="button" variant={mineOnly ? 'default' : 'outline'} size="sm"
+                    onClick={() => setMineOnly(prev => !prev)}
+                    className="h-9 rounded-xl px-2.5 text-[10px] font-mono font-bold" aria-pressed={mineOnly}>
+                    <UserRound className="mr-1 h-3.5 w-3.5" /><span className="hidden sm:inline">My exercises</span><span className="sm:hidden">Mine</span>
+                  </Button>
+                  <Button size="sm" onClick={() => { setEditingExercise(null); setShowAddModal(true); }}
+                    className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl">
+                    <Plus className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Create</span><span className="sm:hidden">New</span>
+                  </Button>
+                </>
               )}
             </div>
           </div>
@@ -113,22 +155,77 @@ export default function Library() {
                 className="pl-10 h-11 rounded-xl border-border/50 bg-card focus:bg-card focus:border-ring focus:shadow-sm transition-all"
               />
             </div>
-            <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts} />
+            <div className="flex items-center justify-between gap-2">
+              <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts} />
+            </div>
+            <div className="flex items-center gap-2">
+              <Button type="button" variant={videosOnly ? 'default' : 'outline'} size="sm"
+                onClick={() => setVideosOnly(v => !v)}
+                className="h-9 gap-1.5 rounded-xl text-[10px] font-mono font-bold"
+                aria-pressed={videosOnly}>
+                <PlayCircle className="h-4 w-4" />
+                {videosOnly ? 'Video tutorials ✓' : 'Video tutorials'}
+                <span className="font-mono text-[9px] opacity-65">
+                  {exercises.filter(e => Boolean(e.youtube_url)).length}
+                </span>
+              </Button>
+              <span className="text-[10px] text-muted-foreground">Tap any exercise to play its tutorial.</span>
+            </div>
           </div>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-4 md:px-8 py-5 pb-28 md:pb-5">
+        {guestMode && (
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/25 bg-primary/5 px-4 py-3">
+            <div>
+              <p className="text-sm font-bold">Guest training · saved on this device</p>
+              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+                Explore the exercise catalog. Custom exercises stay in this browser until you sign in. Export a backup before clearing browser data.
+              </p>
+            </div>
+            <Button type="button" variant="outline" size="sm" onClick={() => exportLocalExercises()}
+              className="h-9 rounded-xl text-xs font-bold">
+              <Download className="mr-2 h-3.5 w-3.5" /> Backup mine
+            </Button>
+          </div>
+        )}
         {loading ? (
           <ExerciseCardSkeletonGrid count={9} />
         ) : filteredExercises.length === 0 ? (
           <div className="py-20 text-center">
-            <p className="text-muted-foreground text-xs font-mono">No exercises found</p>
+            <p className="text-muted-foreground text-xs font-mono">{mineOnly ? 'You haven’t created any exercises yet.' : 'No exercises found.'}</p>
+            {ownerId && mineOnly && (
+              <Button className="mt-4 rounded-xl" onClick={() => { setEditingExercise(null); setShowAddModal(true); }}>
+                <Plus className="mr-2 h-4 w-4" /> Create your first exercise
+              </Button>
+            )}
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             {filteredExercises.map(exercise => (
-              <ExerciseCard key={exercise.id} exercise={exercise} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} />
+              <div key={exercise.id} className="relative">
+                <ExerciseCard exercise={exercise} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} />
+                {ownerId && exercise.created_by === ownerId && (
+                  <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5">
+                    <span title={exercise.visibility === 'public' ? 'Shared with members' : 'Private exercise'}
+                      className="flex h-8 items-center gap-1 rounded-lg bg-card/95 px-2 text-[9px] font-semibold shadow-lg backdrop-blur-md">
+                      {exercise.visibility === 'public' ? <Globe2 className="h-3.5 w-3.5" /> : <LockKeyhole className="h-3.5 w-3.5" />}
+                      <span className="hidden sm:inline">{exercise.visibility === 'public' ? 'Shared' : 'Private'}</span>
+                    </span>
+                    <button type="button" title="Edit your exercise" aria-label={`Edit ${exercise.name}`}
+                      onClick={e => { e.stopPropagation(); setEditingExercise(exercise); setShowAddModal(true); }}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg bg-card/95 text-foreground shadow-lg backdrop-blur-md hover:text-primary">
+                      <Pencil className="h-3.5 w-3.5" />
+                    </button>
+                    <button type="button" title="Delete your exercise" aria-label={`Delete ${exercise.name}`}
+                      onClick={e => { e.stopPropagation(); void deleteExercise(exercise); }}
+                      className="flex h-8 w-8 items-center justify-center rounded-lg bg-card/95 text-foreground shadow-lg backdrop-blur-md hover:text-red-500">
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         )}
@@ -136,7 +233,10 @@ export default function Library() {
 
       <ExerciseDetailModal exercise={selectedExercise} open={!!selectedExercise} onClose={() => setSelectedExercise(null)} onAddToWorkout={handleAddToWorkout} />
       <WorkoutModal date={workoutModalDate} open={!!workoutModalDate} onClose={() => setWorkoutModalDate(null)} onSave={fetchExercises} />
-      <AddExerciseModal open={showAddModal} onClose={() => setShowAddModal(false)} onSuccess={fetchExercises} />
+      <AddExerciseModal open={showAddModal}
+        initialExercise={editingExercise as EditableExercise | null}
+        onClose={() => { setShowAddModal(false); setEditingExercise(null); }}
+        onSuccess={fetchExercises} />
 
       <button
         onClick={() => navigate('/planner')}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -23,8 +23,11 @@ import {
 } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Switch } from '@/components/ui/switch';
+import { Globe2, LockKeyhole } from 'lucide-react';
 import { DifficultyBadge, getDifficultyLabel } from './DifficultyBadge';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, backendConfigured } from '@/integrations/supabase/client';
+import { LOCAL_USER_ID, saveLocalExercise, type OfflineExercise } from '@/lib/offlineExercises';
 import { useToast } from '@/hooks/use-toast';
 
 const categories = ['Push', 'Pull', 'Legs', 'Core', 'Skills', 'Mobility', 'Rings', 'Yoga', 'Flexibility'];
@@ -51,18 +54,36 @@ const exerciseSchema = z.object({
 
 type ExerciseFormData = z.infer<typeof exerciseSchema>;
 
+export interface EditableExercise {
+  id: string;
+  created_by?: string | null;
+  name: string;
+  category: string;
+  youtube_url?: string | null;
+  instagram_url?: string | null;
+  image_url?: string | null;
+  cues?: unknown;
+  primary_muscles: string[];
+  secondary_muscles: string[];
+  equipment: string[];
+  difficulty_level?: number | null;
+  visibility?: 'public' | 'private' | null;
+}
+
 interface AddExerciseModalProps {
   open: boolean;
   onClose: () => void;
   onSuccess?: () => void;
+  initialExercise?: EditableExercise | null;
 }
 
-export function AddExerciseModal({ open, onClose, onSuccess }: AddExerciseModalProps) {
+export function AddExerciseModal({ open, onClose, onSuccess, initialExercise }: AddExerciseModalProps) {
   const [difficultyLevel, setDifficultyLevel] = useState(2);
   const [selectedMuscles, setSelectedMuscles] = useState<string[]>([]);
   const [secondaryMuscles, setSecondaryMuscles] = useState<string[]>([]);
   const [selectedEquipment, setSelectedEquipment] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPublic, setIsPublic] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<ExerciseFormData>({
@@ -76,6 +97,26 @@ export function AddExerciseModal({ open, onClose, onSuccess }: AddExerciseModalP
       cues: '',
     },
   });
+
+  useEffect(() => {
+    if (!open) return;
+    const exercise = initialExercise;
+    form.reset({
+      name: exercise?.name || '',
+      category: exercise?.category || '',
+      youtube_url: exercise?.youtube_url || '',
+      instagram_url: exercise?.instagram_url || '',
+      image_url: exercise?.image_url || '',
+      cues: Array.isArray(exercise?.cues) ? exercise.cues.join('\n') : '',
+    });
+    setDifficultyLevel(exercise?.difficulty_level || 2);
+    setSelectedMuscles(exercise?.primary_muscles || []);
+    setSecondaryMuscles(exercise?.secondary_muscles || []);
+    setSelectedEquipment(exercise?.equipment || []);
+    setIsPublic(exercise?.visibility === 'public');
+  // Reinitialize only when the selected exercise changes or the modal opens.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, initialExercise?.id]);
 
   const toggleMuscle = (muscle: string, isPrimary: boolean) => {
     if (isPrimary) {
@@ -110,6 +151,37 @@ export function AddExerciseModal({ open, onClose, onSuccess }: AddExerciseModalP
     setIsSubmitting(true);
 
     try {
+      const { data: currentUser } = backendConfigured ? await supabase.auth.getUser() : { data: { user: null } };
+      if (!currentUser.user) {
+        const slug = data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        const exercise: OfflineExercise = {
+          id: initialExercise?.id || crypto.randomUUID(),
+          name: data.name.trim(),
+          slug,
+          category: data.category,
+          primary_muscles: selectedMuscles,
+          secondary_muscles: secondaryMuscles,
+          equipment: selectedEquipment.length ? selectedEquipment : ['None (Bodyweight)'],
+          cues: data.cues ? data.cues.split('\n').map(cue => cue.trim()).filter(Boolean) : [],
+          difficulty_level: difficultyLevel,
+          created_by: LOCAL_USER_ID,
+          visibility: isPublic ? 'public' : 'private',
+          youtube_url: data.youtube_url || null,
+          instagram_url: data.instagram_url || null,
+          image_url: data.image_url || null,
+        };
+        saveLocalExercise(exercise);
+        toast({ title: initialExercise ? 'Exercise updated' : 'Exercise saved on your phone', description: 'Stored on this device only. Export a backup from Library.' });
+        form.reset();
+        setSelectedMuscles([]);
+        setSecondaryMuscles([]);
+        setSelectedEquipment([]);
+        setDifficultyLevel(2);
+        setIsPublic(false);
+        onSuccess?.();
+        onClose();
+        return;
+      }
       const { data: userData } = await supabase.auth.getUser();
       if (!userData.user) {
         toast({
@@ -129,9 +201,12 @@ export function AddExerciseModal({ open, onClose, onSuccess }: AddExerciseModalP
         ? data.cues.split('\n').filter(c => c.trim())
         : [];
 
-      const { error } = await supabase.from('exercises').insert({
-        name: data.name,
-        slug: `${slug}-${Date.now()}`,
+      if (initialExercise && initialExercise.created_by !== userData.user.id) {
+        throw new Error('Only the exercise creator can edit this exercise');
+      }
+
+      const values = {
+        name: data.name.trim(),
         category: data.category,
         youtube_url: data.youtube_url || null,
         instagram_url: data.instagram_url || null,
@@ -141,14 +216,23 @@ export function AddExerciseModal({ open, onClose, onSuccess }: AddExerciseModalP
         equipment: selectedEquipment.length > 0 ? selectedEquipment : ['None (Bodyweight)'],
         cues: cuesArray,
         difficulty_level: difficultyLevel,
-        created_by: userData.user.id,
-      });
+        visibility: isPublic ? 'public' as const : 'private' as const,
+      };
+      const { error } = initialExercise
+        ? await supabase.from('exercises').update(values)
+            .eq('id', initialExercise.id).eq('created_by', userData.user.id)
+        : await supabase.from('exercises').insert({
+            ...values, slug: `${slug}-${crypto.randomUUID().slice(0, 8)}`,
+            created_by: userData.user.id,
+          });
 
       if (error) throw error;
 
       toast({
-        title: 'Exercise added! 💪',
-        description: `${data.name} is now in your library`,
+        title: initialExercise ? 'Exercise updated! 💪' : 'Exercise added! 💪',
+        description: isPublic
+          ? `${data.name} is shared with the community`
+          : `${data.name} is saved to your personal library`,
       });
 
       form.reset();
@@ -156,6 +240,7 @@ export function AddExerciseModal({ open, onClose, onSuccess }: AddExerciseModalP
       setSecondaryMuscles([]);
       setSelectedEquipment([]);
       setDifficultyLevel(2);
+      setIsPublic(false);
       onSuccess?.();
       onClose();
     } catch (error: any) {
@@ -175,7 +260,7 @@ export function AddExerciseModal({ open, onClose, onSuccess }: AddExerciseModalP
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-xl">
             <Plus className="w-5 h-5 text-primary" />
-            Add New Exercise
+            {initialExercise ? 'Edit Your Exercise' : 'Create Your Exercise'}
           </DialogTitle>
         </DialogHeader>
 
@@ -325,6 +410,24 @@ export function AddExerciseModal({ open, onClose, onSuccess }: AddExerciseModalP
               </div>
             </div>
 
+            {/* Visibility: a member's custom exercise is private by default. */}
+            <div className="flex items-center justify-between gap-4 rounded-2xl border border-border/60 bg-accent/30 p-4">
+              <div className="flex min-w-0 items-start gap-3">
+                <div className="rounded-xl bg-primary/10 p-2 text-primary">
+                  {isPublic ? <Globe2 className="h-4 w-4" /> : <LockKeyhole className="h-4 w-4" />}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">{isPublic ? 'Share with the community' : 'Private to you'}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    {isPublic
+                      ? (backendConfigured ? 'Other members can discover and use your exercise. You can switch it back to private.' : 'Marked shareable for when cloud accounts are connected; for now it remains on this device.')
+                      : 'Only you can see this exercise. Turn on sharing when you want others to discover it.'}
+                  </p>
+                </div>
+              </div>
+              <Switch checked={isPublic} onCheckedChange={setIsPublic} aria-label="Share exercise publicly" />
+            </div>
+
             {/* Form Cues */}
             <div className="space-y-2">
               <Label htmlFor="cues">Form Cues (one per line)</Label>
@@ -345,12 +448,12 @@ export function AddExerciseModal({ open, onClose, onSuccess }: AddExerciseModalP
                 {isSubmitting ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Adding...
+                    {initialExercise ? 'Saving...' : 'Adding...'}
                   </>
                 ) : (
                   <>
                     <Plus className="w-4 h-4 mr-2" />
-                    Add Exercise
+                    {initialExercise ? 'Save Exercise' : 'Create Exercise'}
                   </>
                 )}
               </Button>

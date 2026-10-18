@@ -58,11 +58,19 @@ export function AILabChat({ onAddToNotepad }: AILabChatProps) {
     setIsLoading(true);
 
     try {
-      const response = await supabase.functions.invoke('discover-exercises', {
-        body: { query: userMessage },
+      const { data: sessionResult } = await supabase.auth.getSession();
+      const token = sessionResult.session?.access_token;
+      if (!token) throw new Error('Please sign in again to use your coach');
+      const response = await fetch('/api/discover-exercises', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ query: userMessage }),
       });
-      if (response.error) throw new Error(response.error.message || 'Failed to get response');
-      const data = response.data;
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Coach is temporarily unavailable');
       setMessages(prev => [...prev, { role: 'assistant', content: data.message || data.content, exercises: data.exercises }]);
     } catch (error: any) {
       console.error('AI Lab error:', error);
@@ -149,8 +157,25 @@ export function AILabChat({ onAddToNotepad }: AILabChatProps) {
                     )}
 
                     {message.exercises.map((exercise, i) => (
-                      <div key={i} className="rounded-2xl border border-border/50 bg-card p-4">
-                        <div className="flex items-start justify-between gap-3">
+                      <div key={i} className="overflow-hidden rounded-2xl border border-border/50 bg-card">
+                        {exercise.youtube_url && (() => {
+                          const match = exercise.youtube_url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+                          return match ? (
+                            <button type="button" onClick={() => playVideo(exercise)}
+                              className="relative block aspect-video w-full overflow-hidden bg-muted"
+                              aria-label={`Watch ${exercise.name} tutorial`}>
+                              <img src={`https://i.ytimg.com/vi/${match[1]}/hqdefault.jpg`}
+                                className="h-full w-full object-cover" alt={`${exercise.name} tutorial thumbnail`}
+                                loading="lazy" />
+                              <span className="absolute inset-0 grid place-items-center bg-black/15">
+                                <span className="grid h-12 w-12 place-items-center rounded-full bg-primary text-primary-foreground shadow-xl">
+                                  <Play className="h-5 w-5" fill="currentColor" />
+                                </span>
+                              </span>
+                            </button>
+                          ) : null;
+                        })()}
+                        <div className="flex items-start justify-between gap-3 p-4">
                           <div className="space-y-2 flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
                               <h4 className="font-display font-semibold text-sm">{exercise.name}</h4>

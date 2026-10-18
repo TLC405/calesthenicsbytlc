@@ -1,5 +1,5 @@
-import { Plus, Dumbbell } from 'lucide-react';
-import { TlcPlayIcon } from './TlcPlayIcon';
+import { useState } from 'react';
+import { Plus, Dumbbell, X, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -44,6 +44,7 @@ const categoryStyle: Record<string, { color: string }> = {
 const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];
 
 export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: ExerciseCardProps) {
+  const [playing, setPlaying] = useState(false);
   const videoId = exercise.youtube_url ? getYouTubeVideoId(exercise.youtube_url) : null;
   const thumbnailUrl = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : exercise.image_url || null;
   const style = categoryStyle[exercise.category] || { color: 'hsl(var(--muted-foreground))' };
@@ -51,13 +52,30 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
 
   return (
     <div
-      className="group cursor-pointer rounded-2xl border border-border/40 bg-card overflow-hidden transition-all duration-300 hover:border-border hover:-translate-y-1 hover:shadow-lg"
-      onClick={() => onViewDetails(exercise)}
+      className="power-skeuo-card group cursor-pointer rounded-2xl border border-border/40 bg-card overflow-hidden transition-all duration-300 hover:border-border hover:shadow-lg"
+      onClick={() => { if (!playing) onViewDetails(exercise); }}
       style={{ '--glow-color': `${style.color}20` } as any}
     >
       {/* Thumbnail */}
-      <div className="aspect-[16/10] bg-muted/30 relative overflow-hidden">
-        {thumbnailUrl ? (
+      <div className="power-skeuo-screen aspect-[16/10] bg-muted/30 relative overflow-hidden">
+        {playing && videoId ? (
+          <div className="relative h-full w-full bg-black" onClick={(event) => event.stopPropagation()}>
+            <iframe
+              className="h-full w-full"
+              src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&playsinline=1&rel=0`}
+              title={`${exercise.name} video tutorial`}
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+            <button
+              type="button"
+              onClick={(event) => { event.stopPropagation(); setPlaying(false); }}
+              className="power-skeuo-button absolute right-2 top-2 z-20 grid h-9 w-9 place-items-center rounded-xl bg-black/80 text-white"
+              aria-label={`Close ${exercise.name} video`}
+            ><X className="h-4 w-4" /></button>
+          </div>
+        ) : thumbnailUrl ? (
           <>
             <img
               src={thumbnailUrl}
@@ -74,11 +92,16 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             {videoId && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-all duration-200 scale-90 group-hover:scale-100">
-                  <TlcPlayIcon category={exercise.category} size="md" />
-                </div>
-              </div>
+              <button
+                type="button"
+                aria-label={`Play ${exercise.name} tutorial here`}
+                className="absolute inset-0 z-10 flex items-center justify-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
+                onClick={(event) => { event.stopPropagation(); setPlaying(true); }}
+              >
+                <span className="power-skeuo-play flex h-16 w-16 items-center justify-center rounded-full text-white transition-transform group-hover:scale-105">
+                  <Play className="ml-1 h-7 w-7" fill="currentColor"/>
+                </span>
+              </button>
             )}
           </>
         ) : (

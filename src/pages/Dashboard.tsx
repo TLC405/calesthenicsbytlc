@@ -4,11 +4,13 @@ import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import {
-  Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp, Palette, FileText,
+  Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp, Palette, FileText, Users,
 } from 'lucide-react';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { useTheme } from '@/components/ThemeSwitcher';
 import { format, parseISO } from 'date-fns';
+import { NotificationBell } from '@/components/Community/NotificationBell';
+import { InstallPowerApp } from '@/components/InstallPowerApp';
 
 function getGreeting() {
   const h = new Date().getHours();
@@ -39,7 +41,7 @@ export default function Dashboard() {
     fetchData();
   }, [user]);
 
-  const handleSignOut = async () => { await signOut(); navigate('/auth'); };
+  const handleSignOut = async () => { await signOut(); navigate('/dashboard'); };
 
   const streak = profile?.streak_days || 0;
   const totalXp = profile?.total_xp || 0;
@@ -76,6 +78,8 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex items-center gap-0.5 flex-shrink-0">
+            <InstallPowerApp compact />
+            <NotificationBell userId={user?.id} />
             <Button variant="ghost" size="icon" onClick={cycleTheme} className="text-muted-foreground hover:text-foreground h-10 w-10 rounded-xl">
               <Palette className="h-4 w-4" />
             </Button>
@@ -87,7 +91,7 @@ export default function Dashboard() {
                 <LogOut className="h-4 w-4" />
               </Button>
             ) : (
-              <Button variant="ghost" size="sm" onClick={() => navigate('/auth')} className="text-xs font-mono uppercase">Sign In</Button>
+              <Button variant="ghost" size="sm" onClick={() => navigate('/library')} className="text-xs font-mono uppercase">Explore</Button>
             )}
           </div>
         </div>
@@ -196,6 +200,7 @@ export default function Dashboard() {
             { label: 'AI Coach', desc: 'Plan with AI', path: '/ai-lab', icon: Sparkles, color: 'hsl(var(--electric))' },
             { label: 'Library', desc: 'Browse exercises', path: '/library', icon: Library, color: 'hsl(var(--cat-pull))' },
             { label: 'Train', desc: 'Start a session', path: '/train', icon: Flame, color: 'hsl(var(--cat-core))' },
+            { label: 'Power Circle', desc: 'Post, like & connect', path: '/community', icon: Users, color: 'hsl(var(--cat-legs))' },
             { label: 'Anatomy', desc: 'Muscle atlas', path: '/anatomy', icon: TrendingUp, color: 'hsl(var(--cat-push))' },
             { label: 'Settings', desc: 'Profile & admin', path: '/settings', icon: Settings, color: 'hsl(var(--cat-core))' },
           ].map(action => {

@@ -16,7 +16,7 @@ export default function Auth() {
   const { signIn, signUp, user } = useAuth();
   const { toast } = useToast();
 
-  if (user) return <Navigate to="/dashboard" replace />;
+  if (user) return <Navigate to="/admin" replace />;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

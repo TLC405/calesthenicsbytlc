@@ -7,7 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { DifficultyBadge } from './DifficultyBadge';
 import { ProgressionPathStrip } from './ProgressionPathStrip';
 import { cn } from '@/lib/utils';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, backendConfigured } from '@/integrations/supabase/client';
 
 interface Exercise {
   id: string; name: string; slug: string; category: string;
@@ -37,13 +37,14 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
 
   useEffect(() => { setCurrentExercise(exercise); }, [exercise]);
   useEffect(() => {
-    if (currentExercise?.id && open) {
+    if (currentExercise?.id && open && backendConfigured) {
       supabase.from('progressions').select('*').eq('exercise_id', currentExercise.id).order('level')
         .then(({ data }) => setProgressions(data || []));
     } else setProgressions([]);
   }, [currentExercise?.id, open]);
 
   const handleChainNavigate = async (exerciseId: string) => {
+    if (!backendConfigured) return;
     const { data } = await supabase.from('exercises').select('*').eq('id', exerciseId).single();
     if (data) setCurrentExercise(data as unknown as Exercise);
   };
@@ -70,7 +71,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
 
             <ProgressionPathStrip exerciseId={currentExercise.id} chainGroup={currentExercise.chain_group || null} onNavigate={handleChainNavigate} />
 
-            <VideoPlayer youtubeUrl={currentExercise.youtube_url} instagramUrl={currentExercise.instagram_url} title={currentExercise.name}
+            <VideoPlayer thumbnailMode youtubeUrl={currentExercise.youtube_url} instagramUrl={currentExercise.instagram_url} title={currentExercise.name}
               exerciseData={{ recovery_muscle: currentExercise.recovery_muscle, recovery_tendon: currentExercise.recovery_tendon, recovery_nervous: currentExercise.recovery_nervous, primary_muscles: currentExercise.primary_muscles, secondary_muscles: currentExercise.secondary_muscles, stabilizer_muscles: currentExercise.stabilizer_muscles, tendons_involved: currentExercise.tendons_involved, equipment: currentExercise.equipment, cues: currentExercise.cues, sets_reps: currentExercise.sets_reps, difficulty_level: currentExercise.difficulty_level, category: currentExercise.category }} />
 
             {progressions.length > 0 && (
