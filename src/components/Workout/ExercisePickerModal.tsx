@@ -72,12 +72,12 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
-      <DialogContent className="max-w-lg max-h-[80vh] flex flex-col p-0">
-        <DialogHeader className="p-4 pb-0">
+      <DialogContent className="w-[calc(100vw-1rem)] max-w-lg max-h-[90dvh] flex flex-col min-h-0 overflow-hidden rounded-2xl p-0">
+        <DialogHeader className="p-3 sm:p-4 pb-0">
           <DialogTitle>Add Exercise</DialogTitle>
         </DialogHeader>
 
-        <div className="px-4 space-y-4">
+        <div className="px-3 sm:px-4 space-y-3">
           {/* Search */}
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -98,7 +98,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
         </div>
 
         {/* Exercise List */}
-        <ScrollArea className="flex-1 px-4 pb-4">
+        <ScrollArea className="flex-1 min-h-0 px-3 sm:px-4 pb-4">
           {loading ? (
             <div className="py-8 text-center text-muted-foreground">Loading exercises...</div>
           ) : filteredExercises.length === 0 ? (
@@ -116,7 +116,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
                       onSelectExercise(exercise);
                       onClose();
                     }}
-                    className="w-full flex items-center gap-3 p-2 rounded-lg neumorph-flat hover:bg-primary/5 transition-colors text-left"
+                    className="w-full flex min-h-14 items-center gap-3 p-2.5 rounded-xl power-elevated hover:bg-primary/5 transition-colors text-left"
                   >
                     <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
                       {thumbnailUrl ? (
