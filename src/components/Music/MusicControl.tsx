@@ -24,7 +24,7 @@ export function MusicControl() {
 
   useEffect(() => { setDraftUrl(playlistUrl || ''); }, [playlistUrl, editingUrl]);
 
-  const hiddenPaths = ['/', '/auth'];
+  const hiddenPaths = ['/', '/auth', '/admin-login'];
   if (hiddenPaths.includes(location.pathname)) return null;
 
   const isYtMusic = /music\.youtube\.com/i.test(playlistUrl);
@@ -61,9 +61,9 @@ export function MusicControl() {
 
 
   return (
-    <div className="fixed right-3 bottom-[5.5rem] md:bottom-4 z-50">
+    <div className="power-music-dock fixed left-3 bottom-[calc(5.4rem+env(safe-area-inset-bottom))] md:bottom-4 z-40">
       {expanded && (
-        <div className="mb-2 w-[min(88vw,20rem)] rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/50 shadow-xl p-4 space-y-3 animate-in slide-in-from-bottom-2 duration-200">
+        <div className="mb-2 w-[min(calc(100vw-1.5rem),21rem)] max-h-[min(72dvh,540px)] overflow-y-auto overscroll-contain rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/50 shadow-xl p-3 sm:p-4 space-y-3 animate-in slide-in-from-bottom-2 duration-200">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -248,12 +248,12 @@ export function MusicControl() {
       <button
         onClick={() => setExpanded(!expanded)}
         className={cn(
-          "w-14 h-14 md:w-12 md:h-12 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-200 border active:scale-95",
+          "w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-200 border active:scale-95",
           musicEnabled && isPlaying
             ? "bg-primary text-primary-foreground border-primary/50"
             : "bg-card text-muted-foreground border-border/50 hover:text-foreground hover:border-border"
         )}
-        aria-label="Toggle music controls">
+        aria-label="Toggle music controls" aria-expanded={expanded}>
         {expanded ? (
           <ChevronDown className="w-5 h-5" />
         ) : isPlaying ? (
