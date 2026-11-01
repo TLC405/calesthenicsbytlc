@@ -194,6 +194,7 @@ export default function Planner() {
 
   const totalExercises = sections.reduce((sum, s) => sum + s.entries.length, 0);
   const beginActiveWorkout = () => {
+    if (localStorage.getItem('power-active-workout-v2') && !window.confirm('Replace the unfinished workout? Choose Cancel to preserve it, then use Resume.')) return;
     const entries = sections.flatMap(section => section.entries.map(entry => ({
       section: section.key,
       exercise: entry.exercise,
@@ -361,6 +362,13 @@ export default function Planner() {
             ))}
           </div>
         </section>
+        {localStorage.getItem('power-active-workout-v2') && (
+          <Button type="button" variant="outline" className="power-elevated h-12 w-full rounded-2xl font-bold"
+            onClick={() => navigate('/workout')}>
+            Resume Unfinished Workout <ArrowLeft className="ml-2 h-4 w-4 rotate-180" />
+          </Button>
+        )}
+
         {/* Workout name */}
         <Input
           placeholder="Workout name (e.g. Push Day, Full Body)"
