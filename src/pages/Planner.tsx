@@ -64,6 +64,7 @@ export default function Planner() {
   );
   const [pickerSection, setPickerSection] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const [coachOpen, setCoachOpen] = useState(false);
   const [coachPrompt, setCoachPrompt] = useState('');
   const [coachLoading, setCoachLoading] = useState(false);
@@ -255,7 +256,7 @@ export default function Planner() {
               <FileText className="w-5 h-5 text-primary" />
             </div>
             <div className="min-w-0">
-              <h1 className="font-display text-base font-bold tracking-tight truncate">Workout Builder</h1>
+              <h1 className="font-display text-base font-bold tracking-tight truncate">Start Workout</h1>
               <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em]">
                 {totalExercises} exercise{totalExercises !== 1 ? 's' : ''}
               </p>
@@ -348,8 +349,17 @@ export default function Planner() {
         </div>
 
 
+        <Button type="button" size="lg" onClick={() => setPickerSection('workout')}
+          className="w-full h-14 rounded-2xl font-display font-black text-sm uppercase tracking-wide power-skeuo-button">
+          <Plus className="h-5 w-5 mr-2" /> Add an Exercise
+        </Button>
+        <button type="button" className="text-xs text-muted-foreground underline underline-offset-4"
+          onClick={() => setShowAdvanced(value => !value)}>
+          {showAdvanced ? 'Hide warm-up and recovery sections' : 'Add warm-up, mobility, or cool-down'}
+        </button>
+
         {/* Sections */}
-        {sections.map(section => {
+        {sections.filter(section => section.key === 'workout' || showAdvanced || section.entries.length > 0).map(section => {
           const Icon = section.icon;
           return (
             <div key={section.key} className="rounded-2xl border border-border/50 bg-card overflow-hidden">
