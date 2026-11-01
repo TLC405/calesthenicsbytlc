@@ -111,7 +111,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
                     className="w-full flex min-h-14 items-center gap-3 p-2.5 rounded-xl power-elevated hover:bg-primary/5 transition-colors text-left"
                   >
                     <div className="w-14 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
-                      <ExerciseArtwork title={exercise.name} category={exercise.category} youtubeUrl={exercise.youtube_url}/>
+                      <ExerciseArtwork compact title={exercise.name} category={exercise.category} youtubeUrl={exercise.youtube_url}/>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{exercise.name}</p>
