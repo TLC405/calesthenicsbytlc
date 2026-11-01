@@ -4,7 +4,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { saveGuestWorkout } from '@/lib/offlineWorkouts';
 import { getOfflineExercises, type OfflineExercise } from '@/lib/offlineExercises';
-import tlcUploadedExercises from '@/data/tlcUploadedExercises.json';
+import publicCatalog from '@/data/publicExerciseCatalog.json';
 import { useTheme } from '@/components/ThemeSwitcher';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -145,7 +145,7 @@ export default function Planner() {
 
   const loadTemplate = async (tpl: typeof QUICK_TEMPLATES[number]) => {
     // Templates must work for guests and during Supabase outages.
-    const builtIn = [...tlcUploadedExercises, ...getOfflineExercises()] as Exercise[];
+    const builtIn = [...publicCatalog, ...getOfflineExercises()] as Exercise[];
     let catalog: Exercise[] = builtIn;
     try {
       const { data } = await supabase.from('exercises').select('*')
