@@ -53,10 +53,13 @@ export function MusicControl() {
     toast({ title: 'Added & playing' });
   };
 
-  const openYouTubeSearch = () => {
-    const q = searchQ.trim() || currentTrack?.title || '';
-    if (!q) return;
-    window.open(`https://music.youtube.com/search?q=${encodeURIComponent(q)}`, '_blank', 'noopener');
+  const musicMatches = library.filter(track =>
+    !searchQ.trim() || track.title.toLowerCase().includes(searchQ.toLowerCase().trim())
+      || track.url.toLowerCase().includes(searchQ.toLowerCase().trim())
+  );
+  const searchSavedMusic = () => {
+    setShowLibrary(true);
+    if (!library.length) toast({ title: 'Your music library is empty', description: 'Paste a YouTube Music link to play it inside POWER.' });
   };
 
 
@@ -149,17 +152,17 @@ export function MusicControl() {
                 <Input
                   value={searchQ}
                   onChange={(e) => setSearchQ(e.target.value)}
-                  onKeyDown={(e) => { if (e.key === 'Enter') openYouTubeSearch(); }}
-                  placeholder="Search any song on YouTube…"
+                  onKeyDown={(e) => { if (e.key === 'Enter') searchSavedMusic(); }}
+                  placeholder="Search saved tracks…"
                   className="h-7 text-xs flex-1"
                 />
-                <button onClick={openYouTubeSearch}
+                <button onClick={searchSavedMusic}
                   className="h-7 px-2 rounded-lg bg-accent text-foreground text-[9px] font-mono uppercase tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors">
                   Go
                 </button>
               </div>
               <p className="text-[9px] text-muted-foreground/70 leading-snug -mt-1 pl-4">
-                Find a song → copy link → paste below to play here.
+                Find your saved tracks, or paste a YouTube link to play directly here.
               </p>
 
               {/* Add / paste URL */}
@@ -213,13 +216,13 @@ export function MusicControl() {
               {/* Library */}
               {showLibrary && (
                 <div className="max-h-52 overflow-y-auto rounded-xl border border-border/40 divide-y divide-border/40">
-                  {library.length === 0 ? (
+                  {musicMatches.length === 0 ? (
                     <div className="p-3 text-center">
                       <Music className="w-4 h-4 text-muted-foreground/50 mx-auto mb-1" />
-                      <p className="text-[10px] text-muted-foreground">Your library is empty.</p>
-                      <p className="text-[9px] text-muted-foreground/70 mt-0.5">Paste a link above to add songs.</p>
+                      <p className="text-[10px] text-muted-foreground">{library.length ? 'No matching tracks.' : 'Your library is empty.'}</p>
+                      <p className="text-[9px] text-muted-foreground/70 mt-0.5">{library.length ? 'Try a different search.' : 'Paste a link above to add songs.'}</p>
                     </div>
-                  ) : library.map(t => (
+                  ) : musicMatches.map(t => (
                     <div key={t.id} className="flex items-center gap-1 p-2 hover:bg-accent/40 transition-colors">
                       <button onClick={() => playUrl(t.url)}
                         className="w-7 h-7 rounded-lg flex items-center justify-center bg-primary/15 text-primary hover:bg-primary hover:text-primary-foreground transition-colors flex-shrink-0"
