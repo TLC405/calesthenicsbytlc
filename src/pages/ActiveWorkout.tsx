@@ -158,14 +158,14 @@ export default function ActiveWorkout() {
     </main>
   );
   return (
-    <main className="power-session min-h-screen pb-8">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-[max(1rem,env(safe-area-inset-top))] space-y-4">
+    <main className="power-session min-h-[100dvh] overflow-x-hidden pb-12">
+      <div className="max-w-2xl mx-auto px-2.5 min-[360px]:px-4 sm:px-6 pt-[max(0.75rem,env(safe-area-inset-top))] space-y-3 sm:space-y-4">
         <header className="flex items-center justify-between gap-3">
           <button type="button" onClick={leave} aria-label="Leave workout and save draft"
             className="power-hardware h-11 px-3 flex items-center gap-2 text-xs font-bold"><ArrowLeft className="h-4 w-4"/> Exit</button>
           <div className="text-center min-w-0">
             <p className="text-[10px] font-mono uppercase tracking-[.18em] text-muted-foreground">Active session</p>
-            <h1 className="text-sm font-black truncate">{draft.name}</h1>
+            <h1 className="text-xs sm:text-sm font-black truncate max-w-full">{draft.name}</h1>
           </div>
           <button type="button" className="power-hardware h-11 w-11 flex items-center justify-center" aria-label="Change gym colors"
             onClick={() => { const idx=themes.findIndex(t => t.id === theme); setTheme(themes[(idx + 1) % themes.length].id); }}>
@@ -188,7 +188,7 @@ export default function ActiveWorkout() {
               <p className="text-xs font-bold uppercase tracking-widest text-primary">{item.exercise.category}</p>
               <p className="text-xs font-mono text-muted-foreground"><Clock3 className="w-3 h-3 inline"/> {timeLabel(elapsed)}</p>
             </div>
-            <h2 className="mt-1 text-3xl font-display font-black leading-tight tracking-tight">{item.exercise.name}</h2>
+            <h2 className="mt-1 text-[clamp(1.45rem,6vw,2.25rem)] break-words font-display font-black leading-tight tracking-tight">{item.exercise.name}</h2>
             {!!item.exercise.primary_muscles?.length && <p className="mt-1 text-xs text-muted-foreground">{item.exercise.primary_muscles.join(' · ')}</p>}
           </div>
           {item.exercise.youtube_url ? (
@@ -208,18 +208,18 @@ export default function ActiveWorkout() {
             </details>
           )}
         </section>
-        <section className="power-elevated p-4 space-y-3" aria-label="Log your sets">
+        <section className="power-elevated p-2.5 sm:p-4 space-y-3" aria-label="Log your sets">
           <div className="flex items-center justify-between">
             <h3 className="font-display font-black text-base">Log your sets</h3>
             <span className="text-xs text-muted-foreground">{item.sets.filter(s => s.done).length} of {item.sets.length} done</span>
           </div>
           {item.sets.map((set,index) => (
-            <div key={index} className={`power-set-row grid grid-cols-[auto_1fr_auto] gap-3 items-center p-3 rounded-xl ${set.done?'is-done':''}`}>
-              <span className="w-7 text-xs font-mono font-bold text-muted-foreground">{index+1}</span>
-              <div className="flex justify-center items-center gap-2">
+            <div key={index} className={`power-set-row grid grid-cols-[1.15rem_minmax(0,1fr)_2.6rem] sm:grid-cols-[1.5rem_minmax(0,1fr)_3rem] gap-1.5 sm:gap-3 items-center p-2 sm:p-3 rounded-xl ${set.done?'is-done':''}`}>
+              <span className="w-5 text-xs font-mono font-bold text-muted-foreground">{index+1}</span>
+              <div className="flex min-w-0 justify-center items-center gap-1 sm:gap-2">
                 <button type="button" disabled={set.done} onClick={() => modifySet(index, s => ({ ...s, reps: Math.max(0, s.reps - 1) }))}
                   className="power-hardware power-rep-button" aria-label={`Decrease reps for set ${index+1}`}><Minus className="w-5 h-5"/></button>
-                <div className="text-center power-recessed rounded-xl px-3 py-1.5 min-w-[70px]">
+                <div className="text-center power-recessed rounded-xl px-1.5 py-1.5 min-w-[46px] sm:min-w-[70px]">
                   <span className="text-2xl font-black tabular-nums">{set.reps}</span>
                   <span className="block text-[9px] uppercase tracking-widest text-muted-foreground">reps</span>
                 </div>
@@ -239,13 +239,13 @@ export default function ActiveWorkout() {
             <Plus className="h-4 w-4"/> Add another set
           </button>
         </section>
-        <section className="power-elevated p-4 space-y-3">
-          <div className="flex items-center justify-between gap-2">
+        <section className="power-elevated p-3 sm:p-4 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="text-xs font-mono tracking-wider uppercase text-muted-foreground">Rest timer</p>
               <p className="font-display text-3xl font-black tabular-nums">{timeLabel(seconds)}</p>
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-1.5 items-center">
               <button type="button" className="power-hardware h-11 px-3 text-xs font-bold"
                 onClick={() => setRestDuration(v => v===60?90:v===90?120:60)} aria-label="Change rest duration">
                 {restDuration}s
@@ -262,10 +262,10 @@ export default function ActiveWorkout() {
           </div>
           <p className="text-[11px] text-muted-foreground">Automatically starts when you complete a set. Change rest to 60, 90, or 120 seconds.</p>
         </section>
-        <div className="grid grid-cols-3 gap-2 pb-[max(1rem,env(safe-area-inset-bottom))]">
+        <div className="sticky bottom-0 z-30 grid grid-cols-3 gap-2 rounded-t-2xl border-t border-border/60 bg-background/95 p-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-lg">
           <Button variant="outline" className="h-14 font-bold rounded-2xl" disabled={draft.index===0}
             onClick={() => changeExercise(draft.index-1)}><ChevronLeft className="h-5 w-5 mr-1"/> Back</Button>
-          <Button className="h-14 rounded-2xl font-black text-sm col-span-2"
+          <Button className="min-h-14 rounded-2xl px-2 font-black text-xs min-[360px]:text-sm col-span-2"
             onClick={draft.index===draft.entries.length-1 ? finishWorkout : () => changeExercise(draft.index+1)}
             disabled={saving}>
             {draft.index===draft.entries.length-1 ? (saving?'Saving…':'Finish & Save') : 'Next Exercise'}
