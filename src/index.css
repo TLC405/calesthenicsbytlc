@@ -602,7 +602,21 @@ body { overflow-x: clip; }
 .power-mobile-nav button:focus-visible, .power-music-dock button:focus-visible, .power-library-fab:focus-visible {
   outline: 3px solid hsl(var(--ring)); outline-offset: 2px;
 }
-.power-library-head { max-height: min(55dvh, 310px); overflow-x: clip; }
+.power-library-head { max-height: none; overflow: visible; }
+.power-library-results { overflow: visible; touch-action: pan-y; }
+.power-category-track {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--primary) / .45) transparent;
+  scroll-snap-type: x proximity;
+}
+.power-category-track > button { scroll-snap-align: start; }
+@media (max-width: 767px) {
+  /* Let the full exercise catalog scroll up instead of trapping the screen under a sticky toolbar. */
+  .power-library-head { position: relative !important; top: auto !important; }
+}
 .power-library-head button { touch-action: manipulation; }
 .power-music-dock { max-width: calc(100vw - 1.5rem); }
 .power-music-dock > div { scrollbar-width: thin; }
