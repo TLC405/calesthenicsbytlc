@@ -8,6 +8,7 @@ import { CategoryTabs, CATEGORY_GROUPS } from '@/components/Exercise/CategoryTab
 import { supabase, backendConfigured } from '@/integrations/supabase/client';
 import { getOfflineExercises } from '@/lib/offlineExercises';
 import tlcUploadedExercises from '@/data/tlcUploadedExercises.json';
+import { ExerciseArtwork } from '@/components/Exercise/ExerciseArtwork';
 
 interface Exercise {
   id: string;
@@ -23,12 +24,6 @@ interface ExercisePickerModalProps {
   onClose: () => void;
   onSelectExercise: (exercise: Exercise) => void;
 }
-
-const getYouTubeVideoId = (url: string): string | null => {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-  const match = url.match(regExp);
-  return match && match[2].length === 11 ? match[2] : null;
-};
 
 export function ExercisePickerModal({ open, onClose, onSelectExercise }: ExercisePickerModalProps) {
   const [exercises, setExercises] = useState<Exercise[]>([]);
@@ -106,9 +101,6 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
           ) : (
             <div className="space-y-2 pt-2">
               {filteredExercises.map((exercise) => {
-                const videoId = exercise.youtube_url ? getYouTubeVideoId(exercise.youtube_url) : null;
-                const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/default.jpg` : null;
-
                 return (
                   <button
                     key={exercise.id}
@@ -118,14 +110,8 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
                     }}
                     className="w-full flex min-h-14 items-center gap-3 p-2.5 rounded-xl power-elevated hover:bg-primary/5 transition-colors text-left"
                   >
-                    <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
-                      {thumbnailUrl ? (
-                        <img src={thumbnailUrl} alt={exercise.name} className="w-full h-full object-cover" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-sm font-bold text-muted-foreground">
-                          {exercise.name.charAt(0)}
-                        </div>
-                      )}
+                    <div className="w-14 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
+                      <ExerciseArtwork title={exercise.name} category={exercise.category} youtubeUrl={exercise.youtube_url}/>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{exercise.name}</p>
