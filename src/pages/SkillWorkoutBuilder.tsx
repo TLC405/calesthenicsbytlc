@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Check, ChevronDown, Clock3, Dumbbell, Play, RefreshCw, RotateCcw, ShieldCheck, Sparkles, Trash2, Video } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown, Dumbbell, Play, RefreshCw, RotateCcw, ShieldCheck, Trash2, Video } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { ExerciseArtwork } from '@/components/Exercise/ExerciseArtwork';
