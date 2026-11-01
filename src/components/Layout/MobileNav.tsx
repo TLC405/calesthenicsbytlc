@@ -12,7 +12,7 @@ export function MobileNav() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const hiddenPaths = ['/', '/auth', '/admin-login'];
+  const hiddenPaths = ['/', '/auth', '/admin-login', '/workout'];
   if (hiddenPaths.includes(location.pathname)) return null;
 
   return (
