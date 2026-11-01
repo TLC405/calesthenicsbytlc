@@ -16,7 +16,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import {
-  Flame, Dumbbell, Snowflake, Heart, Plus, Trash2, ChevronDown, ChevronUp, Save, FileText, GripVertical, ArrowLeft, Sparkles, Loader2,
+  Flame, Dumbbell, Snowflake, Heart, Plus, Trash2, ChevronDown, ChevronUp, Save, FileText, GripVertical, ArrowLeft, Sparkles, Loader2, Target, ArrowRight,
 } from 'lucide-react';
 
 interface Exercise {
@@ -389,6 +389,16 @@ export default function Planner() {
             Resume Unfinished Workout <ArrowLeft className="ml-2 h-4 w-4 rotate-180" />
           </Button>
         )}
+
+        <button type="button" onClick={()=>navigate('/build')}
+          className="power-skill-builder-cta power-elevated flex w-full items-center gap-3 p-3.5 text-left focus-visible:outline-4 focus-visible:outline-primary">
+          <span className="power-theme-emblem flex h-12 w-12 shrink-0 items-center justify-center"><Target className="h-6 w-6"/></span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-display text-base font-black">Build by Skill</span>
+            <span className="block text-[11px] leading-relaxed text-muted-foreground">Planche, Handstand, Rings + more · pick your time · start</span>
+          </span>
+          <ArrowRight className="h-5 w-5 shrink-0 text-primary"/>
+        </button>
 
         {/* Workout name */}
         <Input
