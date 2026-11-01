@@ -5,6 +5,17 @@ const browser = await chromium.launch({headless:true,args:['--no-sandbox']});
 let errors=0;
 const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 function verify(condition,message){if(!condition)throw Error(message);}
+async function fingerSwipe(page, x1, y1, x2, y2) {
+  const cdp=await page.context().newCDPSession(page);
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:x1,y:y1}]});
+  for(let i=1;i<=12;i++){
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x1+(x2-x1)*i/12,y:y1+(y2-y1)*i/12}]});
+    await wait(14);
+  }
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+  await cdp.detach();
+  await wait(220);
+}
 for(const width of [320,393]) {
   const context=await browser.newContext({viewport:{width,height:800},isMobile:true,hasTouch:true});
   const page=await context.newPage();
@@ -27,6 +38,11 @@ for(const width of [320,393]) {
     const after=await page.evaluate(()=>window.scrollY);
     verify(after>before+100,`Exercise list did not scroll (${before} -> ${after})`);
     await page.evaluate(()=>window.scrollTo(0,0));
+    await wait(100);
+    await fingerSwipe(page,Math.floor(width/2),625,Math.floor(width/2),260);
+    const touched=await page.evaluate(()=>window.scrollY);
+    verify(touched>60,`Finger swipe did not move the exercise catalog (scrollY=${touched})`);
+    await page.evaluate(()=>window.scrollTo(0,0));
   });
   await test('category strip horizontal scroll',async()=>{
     const track=page.locator('.power-category-track');
@@ -35,6 +51,11 @@ for(const width of [320,393]) {
     await track.evaluate(e=>e.scrollLeft=140);
     await wait(150);
     verify(await track.evaluate(e=>e.scrollLeft)>45,'Could not scroll category tabs');
+    await track.evaluate(e=>e.scrollLeft=0);
+    const box=await track.boundingBox();
+    await fingerSwipe(page,box.x+box.width*.88,box.y+box.height*.5,box.x+box.width*.15,box.y+box.height*.5);
+    const swiped=await track.evaluate(e=>e.scrollLeft);
+    verify(swiped>30,`Finger swipe did not move the category strip (scrollLeft=${swiped})`);
     await track.evaluate(e=>e.scrollLeft=0);
   });
   await test('category filter actions',async()=>{
@@ -76,7 +97,10 @@ for(const width of [320,393]) {
   });
   await test('music dock opens, closes without page navigation',async()=>{
     await page.getByRole('button',{name:'Toggle music controls'}).click();
-    verify(await page.getByText('YouTube',{exact:true}).count()>0,'Music controls not expanded');
+    verify(await page.getByPlaceholder('Search saved tracks…').count()===1,'Music controls not expanded');
+    await page.getByPlaceholder('Search saved tracks…').fill('training');
+    await page.getByPlaceholder('Search saved tracks…').press('Enter');
+    verify(new URL(page.url()).pathname==='/library','Music search left the app');
     await page.getByRole('button',{name:'Toggle music controls'}).click();
     verify(new URL(page.url()).pathname==='/library','Music dock navigated away unexpectedly');
   });
