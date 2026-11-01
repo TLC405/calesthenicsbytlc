@@ -126,7 +126,7 @@ export default function Library() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="power-library-head sticky top-0 z-30 bg-background/95 backdrop-blur-xl border-b border-border/50">
+      <header className="power-library-head relative md:sticky md:top-0 z-30 bg-background/95 backdrop-blur-xl border-b border-border/50">
         <div className="max-w-6xl mx-auto px-3 sm:px-4 md:px-8">
           <div className="min-h-14 flex items-center justify-between gap-2 py-2">
             <div className="flex items-center gap-2 min-w-0">
@@ -172,7 +172,7 @@ export default function Library() {
                 className="pl-10 h-11 rounded-xl border-border/50 bg-card focus:bg-card focus:border-ring focus:shadow-sm transition-all"
               />
             </div>
-            <div className="flex items-center justify-between gap-2">
+            <div className="w-full min-w-0">
               <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts} />
             </div>
             <div className="flex items-center min-w-0 gap-2 overflow-hidden">
@@ -192,7 +192,7 @@ export default function Library() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-3 sm:px-4 md:px-8 py-3 sm:py-5 pb-32 md:pb-5">
+      <main className="power-library-results max-w-6xl mx-auto px-3 sm:px-4 md:px-8 py-3 sm:py-5 pb-32 md:pb-5">
         {guestMode && (
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/25 bg-primary/5 px-4 py-3">
             <div>
