@@ -206,9 +206,10 @@ export function VideoPlayer({
 
   if (!youtubeUrl && !instagramUrl) {
     return (
-      <div className={cn("relative w-full overflow-hidden border-2 border-border bg-secondary", className)}>
-        <div className="aspect-video flex items-center justify-center">
-          <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">No video available</p>
+      <div className={cn("relative w-full overflow-hidden rounded-xl border-2 border-border bg-secondary", className)}>
+        <div className="aspect-video relative">
+          <ExerciseArtwork title={title} category={exerciseData?.category}/>
+          <span className="absolute right-2 top-2 rounded-lg bg-card/95 border border-border px-2 py-1 text-[10px] font-bold text-foreground">Tutorial not sourced</span>
         </div>
       </div>
     );
@@ -220,8 +221,9 @@ export function VideoPlayer({
     if (!videoId) {
       return (
         <div className={cn("relative w-full overflow-hidden border-2 border-border bg-secondary", className)}>
-          <div className="aspect-video flex items-center justify-center">
-            <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">Invalid video URL</p>
+          <div className="aspect-video relative">
+            <ExerciseArtwork title={title} category={exerciseData?.category}/>
+            <span className="absolute right-2 top-2 rounded-lg bg-card/95 px-2 py-1 text-[10px] font-bold">Video link needs repair</span>
           </div>
         </div>
       );
