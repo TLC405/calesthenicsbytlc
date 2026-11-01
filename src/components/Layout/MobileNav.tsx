@@ -16,26 +16,25 @@ export function MobileNav() {
   if (hiddenPaths.includes(location.pathname)) return null;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-      <div className="h-6 bg-gradient-to-t from-background to-transparent pointer-events-none" />
-      <div className="bg-background/90 backdrop-blur-2xl border-t border-border/40">
-        <div className="flex items-center justify-around h-[4.25rem] max-w-lg mx-auto px-3">
+    <nav className="power-mobile-nav fixed inset-x-0 bottom-0 z-40 md:hidden" aria-label="Primary navigation">
+      <div className="bg-card/95 backdrop-blur-xl border-t border-border/70">
+        <div className="flex items-stretch justify-around min-h-[4.25rem] max-w-lg mx-auto px-2 pt-1">
           {tabs.map(({ path, icon: Icon, label, color }) => {
             const isActive = location.pathname === path;
             return (
               <button
                 key={path}
                 onClick={() => navigate(path)}
-                className="flex flex-col items-center justify-center gap-1.5 flex-1 h-full relative group"
+                className="flex flex-col items-center justify-center gap-1 min-w-0 flex-1 min-h-[4.25rem] relative group rounded-xl" aria-current={isActive ? "page" : undefined}
               >
                 {isActive && (
                   <div
-                    className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full"
+                    className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-1 rounded-b-full"
                     style={{ backgroundColor: color, boxShadow: `0 0 12px ${color}` }}
                   />
                 )}
                 <div className={cn(
-                  "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200",
+                  "w-10 h-9 rounded-xl flex items-center justify-center transition-colors duration-150",
                   isActive
                     ? "bg-card border border-border/60 shadow-sm"
                     : "group-hover:bg-accent/50"
@@ -46,7 +45,7 @@ export function MobileNav() {
                   )} style={isActive ? { color } : undefined} />
                 </div>
                 <span className={cn(
-                  "text-[8px] font-mono uppercase tracking-[0.14em] transition-colors",
+                  "text-[10px] font-sans uppercase tracking-[0.05em] transition-colors",
                   isActive ? "text-foreground font-bold" : "text-muted-foreground font-medium"
                 )}>
                   {label}
