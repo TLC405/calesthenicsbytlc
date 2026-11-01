@@ -63,6 +63,10 @@ export default function SkillStudio() {
             <div className="rounded-xl border-l-4 border-primary bg-primary/5 px-3 py-2.5 text-xs leading-relaxed"><strong className="block mb-1">Technique focus</strong>{path.cue}</div>
             <p className="flex gap-2 text-xs leading-relaxed text-muted-foreground"><ShieldCheck className="w-4 h-4 shrink-0 text-primary"/>{path.safety}</p>
           </div>
+          <Button className="power-primary-action w-full min-h-14 rounded-xl font-display font-black" type="button"
+            onClick={()=>navigate(`/build?skill=${encodeURIComponent(path.id)}`)}>
+            <Play className="h-4 w-4 mr-2"/> Build a {path.title} Workout <ArrowRight className="h-4 w-4 ml-2"/>
+          </Button>
         </header>
         <nav className="flex gap-2 overflow-x-auto pb-2" aria-label="Choose a skill studio">
           {SKILL_PATHS.map(item=><Button key={item.id} variant={item.id===path.id?'default':'outline'}
