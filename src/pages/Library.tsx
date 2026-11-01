@@ -4,7 +4,7 @@ import { supabase, backendConfigured } from '@/integrations/supabase/client';
 import { LOCAL_USER_ID, getOfflineExercises, removeLocalExercise, exportLocalExercises } from '@/lib/offlineExercises';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, Plus, Sparkles, Download, Pencil, Trash2, LockKeyhole, Globe2, UserRound, PlayCircle } from 'lucide-react';
+import { Search, Plus, Sparkles, Download, Pencil, Trash2, LockKeyhole, Globe2, UserRound, PlayCircle, Dumbbell } from 'lucide-react';
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
@@ -145,6 +145,11 @@ export default function Library() {
                 </>
               )}
             </div>
+          </div>
+          <div className="pb-3">
+            <Button type="button" onClick={() => navigate('/planner')} className="power-skeuo-button w-full h-12 rounded-2xl font-display font-black uppercase tracking-wide text-sm">
+              <Dumbbell className="h-5 w-5 mr-2" /> Start Workout
+            </Button>
           </div>
           <div className="pb-3 space-y-3">
             <div className="relative">
