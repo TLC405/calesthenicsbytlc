@@ -6,7 +6,7 @@ import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { backendConfigured, supabase } from '@/integrations/supabase/client';
 import { getOfflineExercises } from '@/lib/offlineExercises';
-import tlcUploadedExercises from '@/data/tlcUploadedExercises.json';
+import publicCatalog from '@/data/publicExerciseCatalog.json';
 import { SKILL_PATHS, getSkillPath } from '@/data/skillPaths';
 
 interface Exercise {
@@ -20,13 +20,13 @@ export default function SkillStudio() {
   const { skillId } = useParams<{skillId: string}>();
   const path = getSkillPath(skillId);
   const navigate = useNavigate();
-  const [all, setAll] = useState<Exercise[]>([...tlcUploadedExercises, ...getOfflineExercises()] as Exercise[]);
+  const [all, setAll] = useState<Exercise[]>([...publicCatalog, ...getOfflineExercises()] as Exercise[]);
   const [selected, setSelected] = useState<Exercise | null>(null);
   useEffect(() => {
     if (!backendConfigured) return;
     let active = true;
     supabase.from('exercises').select('*').then(({data})=>{
-      if (active && data) setAll([...tlcUploadedExercises, ...data, ...getOfflineExercises()] as Exercise[]);
+      if (active && data) setAll([...publicCatalog, ...data, ...getOfflineExercises()] as Exercise[]);
     });
     return ()=>{active=false};
   }, []);
