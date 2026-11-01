@@ -15,12 +15,12 @@ interface ThemeOption {
 const themes: ThemeOption[] = [
   {
     id: 'default',
-    name: 'POWER Original',
-    tagline: 'Violet · Graphite · Ivory',
-    primary: '#7451A8',
-    accent: '#282636',
-    bg: '#F6F4F8',
-    text: '#1a1a2e',
+    name: 'I Got the Power',
+    tagline: 'Cobalt · Charcoal · Ember',
+    primary: '#2866CC',
+    accent: '#202B39',
+    bg: '#F3F5F8',
+    text: '#172334',
   },
   {
     id: 'vasa',
