@@ -29,6 +29,14 @@ export function getGuestWorkout(date: string): GuestWorkout | undefined {
 
 export function saveGuestWorkout(workout: GuestWorkout) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(workout.date)) throw new Error('Invalid workout date');
-  const current = readGuestWorkouts().filter(item => item.date !== workout.date);
-  localStorage.setItem(KEY, JSON.stringify([workout, ...current].slice(0, 366)));
+  // Preserve same-day sessions rather than silently replacing completed sets.
+  const existing = readGuestWorkouts();
+  const previous = existing.find(item => item.date === workout.date);
+  const day = previous ? {
+    date: workout.date,
+    notes: [previous.notes, workout.notes].filter(Boolean).join('\n\n'),
+    entries: [...previous.entries, ...workout.entries],
+  } : workout;
+  const current = existing.filter(item => item.date !== workout.date);
+  localStorage.setItem(KEY, JSON.stringify([day, ...current].slice(0, 366)));
 }
