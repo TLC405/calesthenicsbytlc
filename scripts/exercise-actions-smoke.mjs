@@ -8,6 +8,7 @@ function verify(condition,message){if(!condition)throw Error(message);}
 for(const width of [320,393]) {
   const context=await browser.newContext({viewport:{width,height:800},isMobile:true,hasTouch:true});
   const page=await context.newPage();
+  page.setDefaultTimeout(9000);
   page.on('pageerror',err=>{console.error(`JS ${width}: ${err.message}`);errors++;});
   const test=async(label,run)=>{
     try { await run();console.log(`PASS ${width}: ${label}`); }
@@ -83,7 +84,6 @@ for(const width of [320,393]) {
     await page.getByRole('button',{name:/Add to Workout/}).first().click();
     await page.waitForURL('**/planner',{timeout:5000});
     verify((await page.getByText('Workout',{exact:true}).count())>0,'Selected workout section missing');
-    verify(await page.locator('[aria-label="Add Exercise"]').count()===0||true,'');
   });
   await test('theme switching and persistence',async()=>{
     for(const theme of ['vasa','ymca','planet-fitness','okc-thunder','default']){
@@ -121,11 +121,11 @@ for(const width of [320,393]) {
     verify(saved.some(e=>e.entries?.length>0),'Guest workout not saved');
   });
   await test('bottom navigation three tabs',async()=>{
-    await page.getByRole('button',{name:'EXERCISES'}).click();
+    await page.locator('nav[aria-label="Primary navigation"]').getByRole('button',{name:'EXERCISES',exact:true}).click();
     await page.waitForURL('**/library');
-    await page.getByRole('button',{name:'MORE'}).click();
+    await page.locator('nav[aria-label="Primary navigation"]').getByRole('button',{name:'MORE',exact:true}).click();
     await page.waitForURL('**/dashboard');
-    await page.getByRole('button',{name:'TRAIN'}).click();
+    await page.locator('nav[aria-label="Primary navigation"]').getByRole('button',{name:'TRAIN',exact:true}).click();
     await page.waitForURL('**/planner');
   });
   await context.close();
