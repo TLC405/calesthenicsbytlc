@@ -31,7 +31,7 @@ function AppContent() {
     <BrowserRouter>
       <div className="power-app-shell min-w-0 md:pb-0">
         <Routes>
-          <Route path="/" element={<Navigate to="/library" replace />} />
+          <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Navigate to="/library" replace />} />
           <Route path="/admin-login" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
