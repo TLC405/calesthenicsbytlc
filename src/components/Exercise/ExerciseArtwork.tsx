@@ -24,25 +24,26 @@ interface ArtworkProps {
   imageUrl?: string | null;
   className?: string;
   showPlayHint?: boolean;
+  compact?: boolean;
 }
 
 /** YouTube preview -> user image -> branded nondeceptive placeholder. No invented exercise photograph. */
-export function ExerciseArtwork({ title, category = 'Training', youtubeUrl, imageUrl, className, showPlayHint = false }: ArtworkProps) {
+export function ExerciseArtwork({ title, category = 'Training', youtubeUrl, imageUrl, className, showPlayHint = false, compact = false }: ArtworkProps) {
   const id = getYouTubeId(youtubeUrl);
   const src = id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : imageUrl || null;
   const [imageFailed, setImageFailed] = useState(false);
   useEffect(() => setImageFailed(false), [src]);
   const fallback = !src || imageFailed;
   return (
-    <div className={cn('power-artwork relative h-full w-full overflow-hidden bg-secondary', className)}>
+    <div className={cn('power-artwork relative h-full w-full overflow-hidden bg-secondary', compact && 'is-compact', className)}>
       {fallback ? (
         <div className="power-artwork-fallback absolute inset-0 flex flex-col justify-between p-3 sm:p-4" role="img" aria-label={`${title}: preview image not available`}>
-          <span className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[.12em] text-primary">
+          <span className={cn('flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[.12em] text-primary', compact && 'hidden')}>
             <Dumbbell className="h-4 w-4" /> POWER / {category}
           </span>
-          <div className="flex items-end justify-between gap-2">
-            <span className="line-clamp-2 min-w-0 text-lg font-display font-black leading-tight sm:text-xl text-foreground">{title}</span>
-            <span className="power-artwork-emblem shrink-0 grid h-9 w-9 place-items-center rounded-xl" aria-hidden="true">
+          <div className={cn('flex items-end justify-between gap-2', compact && 'h-full items-center justify-center')}>
+            {!compact && <span className="line-clamp-2 min-w-0 text-lg font-display font-black leading-tight sm:text-xl text-foreground">{title}</span>}
+            <span className={cn('power-artwork-emblem shrink-0 grid h-9 w-9 place-items-center rounded-xl', compact && 'h-8 w-8')} aria-hidden="true">
               <Dumbbell className="h-5 w-5" />
             </span>
           </div>
