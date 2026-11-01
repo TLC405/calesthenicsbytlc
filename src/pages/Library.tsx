@@ -122,17 +122,17 @@ export default function Library() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border/30">
-        <div className="max-w-6xl mx-auto px-4 md:px-8">
-          <div className="h-16 flex items-center justify-between">
-            <div className="flex items-center gap-3">
+      <header className="power-library-head sticky top-0 z-30 bg-background/95 backdrop-blur-xl border-b border-border/50">
+        <div className="max-w-6xl mx-auto px-3 sm:px-4 md:px-8">
+          <div className="min-h-14 flex items-center justify-between gap-2 py-2">
+            <div className="flex items-center gap-2 min-w-0">
               <div className="w-1.5 h-6 rounded-full bg-[hsl(var(--cat-pull))]" />
               <div>
                 <h1 className="font-display text-base font-bold tracking-tight leading-none">Library</h1>
                 <p className="text-[8px] font-mono text-muted-foreground mt-0.5 tracking-wide">{exercises.length} exercises</p>
               </div>
             </div>
-            <div className="flex gap-1.5">
+            <div className="flex shrink-0 gap-1">
               <Button variant="ghost" size="sm" onClick={downloadExerciseList} className="hidden sm:inline-flex text-muted-foreground h-9 text-[10px] font-mono rounded-xl" disabled={filteredExercises.length === 0}>
                 <Download className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Export</span>
               </Button>
@@ -159,7 +159,7 @@ export default function Library() {
               <Dumbbell className="h-5 w-5 mr-2" /> Start Workout
             </Button>
           </div>
-          <div className="pb-3 space-y-3">
+          <div className="pb-3 space-y-2">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
@@ -171,10 +171,10 @@ export default function Library() {
             <div className="flex items-center justify-between gap-2">
               <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts} />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center min-w-0 gap-2 overflow-hidden">
               <Button type="button" variant={videosOnly ? 'default' : 'outline'} size="sm"
                 onClick={() => setVideosOnly(v => !v)}
-                className="h-9 gap-1.5 rounded-xl text-[10px] font-mono font-bold"
+                className="h-10 shrink-0 gap-1 rounded-xl text-[10px] font-mono font-bold"
                 aria-pressed={videosOnly}>
                 <PlayCircle className="h-4 w-4" />
                 {videosOnly ? 'Video tutorials ✓' : 'Video tutorials'}
@@ -182,13 +182,13 @@ export default function Library() {
                   {exercises.filter(e => Boolean(e.youtube_url)).length}
                 </span>
               </Button>
-              <span className="text-[10px] text-muted-foreground">Tap any exercise to play its tutorial.</span>
+              <span className="hidden md:inline text-[10px] text-muted-foreground">Tap Play on any video thumbnail.</span>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-5 pb-28 md:pb-5">
+      <main className="max-w-6xl mx-auto px-3 sm:px-4 md:px-8 py-3 sm:py-5 pb-32 md:pb-5">
         {guestMode && (
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/25 bg-primary/5 px-4 py-3">
             <div>
@@ -215,7 +215,7 @@ export default function Library() {
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 min-[390px]:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             {filteredExercises.map(exercise => (
               <div key={exercise.id} className="relative">
                 <ExerciseCard exercise={exercise} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} />
@@ -253,7 +253,7 @@ export default function Library() {
 
       <button
         onClick={() => navigate('/planner')}
-        className="fixed bottom-28 right-4 z-40 md:hidden w-14 h-14 rounded-2xl text-white shadow-lg flex items-center justify-center active:scale-95 transition-transform"
+        className="power-library-fab fixed bottom-[calc(5.4rem+env(safe-area-inset-bottom))] right-3 z-30 md:hidden w-12 h-12 rounded-2xl text-white shadow-lg flex items-center justify-center active:scale-95 transition-transform"
         style={{ backgroundColor: 'hsl(var(--cat-skills))', boxShadow: '0 0 20px hsl(var(--cat-skills) / 0.3)' }}
         aria-label="Open Builder"
       >
