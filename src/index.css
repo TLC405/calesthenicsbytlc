@@ -590,3 +590,41 @@
 @media (prefers-reduced-motion: reduce) {
   .power-hardware, .power-primary-action { transition: none; }
 }
+
+
+/* POWER 3.2 · Galaxy Fold and narrow-phone layout safeguards */
+html, body, #root { min-width: 0; max-width: 100%; }
+html { overflow-x: clip; -webkit-text-size-adjust: 100%; }
+body { overflow-x: clip; }
+.power-app-shell { min-height: 100dvh; min-width: 0; padding-bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)); }
+.power-mobile-nav { padding-bottom: env(safe-area-inset-bottom, 0px); box-shadow: 0 -8px 22px hsl(var(--background) / .22); }
+.power-mobile-nav button { touch-action: manipulation; }
+.power-mobile-nav button:focus-visible, .power-music-dock button:focus-visible, .power-library-fab:focus-visible {
+  outline: 3px solid hsl(var(--ring)); outline-offset: 2px;
+}
+.power-library-head { max-height: min(55dvh, 310px); overflow-x: clip; }
+.power-library-head button { touch-action: manipulation; }
+.power-music-dock { max-width: calc(100vw - 1.5rem); }
+.power-music-dock > div { scrollbar-width: thin; }
+.power-set-row { min-width: 0; }
+.power-set-row > * { min-width: 0; }
+.power-rep-button { width: 2.25rem; height: 2.5rem; }
+.power-elevated, .power-skeuo-card { min-width: 0; }
+.power-skeuo-card { box-shadow: inset 0 1px 0 hsl(var(--power-highlight) / .75), 0 3px 0 hsl(var(--power-metal) / .6), 0 12px 22px -16px hsl(var(--foreground) / .38); }
+.power-skeuo-card:active { transform: translateY(1px); }
+.power-skeuo-button:active { transform: translateY(1px); }
+@media (min-width: 400px) {
+  .power-rep-button { width: 2.75rem; height: 2.75rem; }
+}
+@media (max-width: 359px) {
+  .power-library-head .font-mono { letter-spacing: 0; }
+  .power-session .power-elevated { border-radius: 1rem; }
+  .power-session .power-hardware { border-radius: .7rem; }
+  .power-session .power-set-row { padding-left: .35rem; padding-right: .35rem; }
+}
+@media (min-width: 768px) {
+  .power-app-shell { padding-bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .power-skeuo-card, .power-skeuo-button, .power-rep-button { transition: none !important; }
+}
