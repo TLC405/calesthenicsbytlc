@@ -46,7 +46,7 @@ export const SKILL_GOALS: readonly SkillGoal[] = [
       advanced: ['advanced-tuck-planche','straddle-planche','full-planche'],
     },
     support: ['pseudo-planche-push-up','hollow-body-hold','push-up'],
-    cooldown: ['child-s-pose','wrist-circles','shoulder-cars'],
+    cooldown: ['child-s-pose','cat-cow','wrist-circles','shoulder-cars'],
   },
   {
     id: 'straddle-press', title: 'Straddle Press', detail: 'Compression into a handstand', equipment: 'Floor · wall · optional parallettes',
@@ -68,7 +68,7 @@ export const SKILL_GOALS: readonly SkillGoal[] = [
       advanced: ['freestanding-handstand','wall-pull-aways','handstand-heel-pull'],
     },
     support: ['pike-push-up','hollow-body-hold','wall-handstand-shoulder-taps'],
-    cooldown: ['child-s-pose','shoulder-cars','wrist-circles'],
+    cooldown: ['child-s-pose','cat-cow','shoulder-cars','wrist-circles'],
   },
   {
     id: 'front-lever', title: 'Front Lever', detail: 'Horizontal pulling and hollow tension', equipment: 'Pull-up bar · optional rings',
