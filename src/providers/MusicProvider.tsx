@@ -21,6 +21,8 @@ interface MusicContextType {
   nextTrack: () => void;
   prevTrack: () => void;
   playUrl: (url: string) => void;
+  playIntroAnthem: () => void;
+  playbackError: string | null;
   addToLibrary: (url: string, title?: string) => void;
   removeFromLibrary: (id: string) => void;
 }
@@ -33,7 +35,8 @@ export function useMusic() {
   return ctx;
 }
 
-const DEFAULT_VIDEO = 'nm6DO_7px1I'; // I Got The Power
+export const POWER_ANTHEM_VIDEO_ID = 'nm6DO_7px1I'; // SNAP! - The Power (official YouTube source)
+const DEFAULT_VIDEO = POWER_ANTHEM_VIDEO_ID;
 
 function extractPlaylistId(url: string): string | null {
   const match = url.match(/[?&]list=([^&#]+)/);
@@ -93,6 +96,8 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     try { return JSON.parse(localStorage.getItem('music_library') || '[]'); } catch { return []; }
   });
   const initAttempted = useRef(false);
+  const pendingIntroRef = useRef(false);
+  const [playbackError, setPlaybackError] = useState<string | null>(null);
 
   // Load user prefs
   useEffect(() => {
@@ -149,6 +154,14 @@ export function MusicProvider({ children }: { children: ReactNode }) {
           onReady: (event: any) => {
             event.target.setVolume(volume);
             setIsReady(true);
+            if (pendingIntroRef.current) {
+              try {
+                event.target.unMute();
+                event.target.setVolume(volume);
+                event.target.loadVideoById(DEFAULT_VIDEO);
+                event.target.playVideo();
+              } catch { setPlaybackError('The soundtrack could not start. Try Play in the music controls.'); }
+            }
             try {
               const d = event.target.getVideoData?.();
               if (d) setCurrentTrack({ title: d.title, author: d.author, videoId: d.video_id });
@@ -156,7 +169,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
           },
           onStateChange: (event: any) => {
             // 1 playing, 2 paused, 0 ended
-            if (event.data === 1) setIsPlaying(true);
+            if (event.data === 1) { setIsPlaying(true); pendingIntroRef.current = false; setPlaybackError(null); }
             if (event.data === 2) setIsPlaying(false);
             if (event.data === 0) event.target.playVideo();
             try {
@@ -166,6 +179,13 @@ export function MusicProvider({ children }: { children: ReactNode }) {
           },
           onError: (event: any) => {
             console.warn('YouTube Player error:', event.data);
+            pendingIntroRef.current = false;
+            setIsPlaying(false);
+            setPlaybackError('This YouTube video is unavailable for playback in POWER.');
+          },
+          onAutoplayBlocked: () => {
+            setIsPlaying(false);
+            setPlaybackError('Your browser blocked automatic audio. Tap Play in the music controls.');
           },
         },
       });
@@ -188,6 +208,11 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     if (!playerRef.current || !isReady) return;
     const config = getPlayerConfig();
     try {
+      if (pendingIntroRef.current) {
+        playerRef.current.loadVideoById(DEFAULT_VIDEO);
+        playerRef.current.playVideo();
+        return;
+      }
       if (config.playerVars.list) {
         playerRef.current.loadPlaylist({ list: config.playerVars.list, listType: 'playlist' });
       } else {
@@ -258,6 +283,24 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     try { playerRef.current?.previousVideo?.(); } catch {}
   }, []);
 
+  const playIntroAnthem = useCallback(() => {
+    pendingIntroRef.current = true;
+    setPlaybackError(null);
+    if (!musicEnabled) {
+      setMusicEnabledState(true);
+      localStorage.setItem('music_enabled', 'true');
+    }
+    setPlaylistUrlState(`https://www.youtube.com/watch?v=${DEFAULT_VIDEO}`);
+    if (playerRef.current && isReady) {
+      try {
+        playerRef.current.unMute();
+        playerRef.current.setVolume(volume);
+        playerRef.current.loadVideoById(DEFAULT_VIDEO);
+        playerRef.current.playVideo();
+      } catch { setPlaybackError('Soundtrack could not start. Try the music controls.'); }
+    }
+  }, [musicEnabled, isReady, volume]);
+
   const playUrl = useCallback((url: string) => {
     setPlaylistUrlState(url);
     setTimeout(() => { try { playerRef.current?.playVideo?.(); } catch {} }, 700);
@@ -284,7 +327,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     <MusicContext.Provider value={{
       isPlaying, isMuted, volume, playlistUrl, musicEnabled, isReady, currentTrack, library,
       togglePlay, toggleMute, setVolume, setPlaylistUrl, setMusicEnabled,
-      nextTrack, prevTrack, playUrl, addToLibrary, removeFromLibrary,
+      nextTrack, prevTrack, playUrl, playIntroAnthem, playbackError, addToLibrary, removeFromLibrary,
     }}>
       {/* YouTube player container — must be in DOM but invisible */}
       {musicEnabled && (
