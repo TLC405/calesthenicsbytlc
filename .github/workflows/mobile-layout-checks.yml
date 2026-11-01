@@ -6,6 +6,7 @@ on:
     paths:
       - 'src/**'
       - 'scripts/mobile-layout-smoke.mjs'
+      - 'scripts/exercise-actions-smoke.mjs'
       - '.github/workflows/mobile-layout-checks.yml'
   pull_request:
     branches: [main]
@@ -39,3 +40,4 @@ jobs:
             sleep 1
           done
           node scripts/mobile-layout-smoke.mjs
+          node scripts/exercise-actions-smoke.mjs
