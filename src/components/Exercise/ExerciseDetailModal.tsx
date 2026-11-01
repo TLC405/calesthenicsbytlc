@@ -54,9 +54,9 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
-      <DialogContent className="max-w-2xl max-h-[90vh] p-0 overflow-hidden rounded-2xl border-border/50 bg-card">
-        <ScrollArea className="max-h-[90vh]">
-          <div className="p-5 space-y-5">
+      <DialogContent className="w-[calc(100vw-1rem)] max-w-2xl max-h-[min(92dvh,920px)] p-0 overflow-hidden rounded-2xl border-border/50 bg-card">
+        <ScrollArea className="max-h-[min(90dvh,900px)]">
+          <div className="p-3 sm:p-5 space-y-4 sm:space-y-5">
             <DialogHeader>
               <div className="flex items-center gap-2 mb-1.5">
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: accent }} />
