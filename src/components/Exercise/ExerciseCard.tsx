@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Plus, Dumbbell, X, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { ExerciseArtwork, getYouTubeId } from './ExerciseArtwork';
 
 interface Exercise {
   id: string;
@@ -24,11 +25,6 @@ interface ExerciseCardProps {
   onAddToWorkout?: (exercise: Exercise) => void;
 }
 
-const getYouTubeVideoId = (url: string): string | null => {
-  const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
-  return match && match[2].length === 11 ? match[2] : null;
-};
-
 const categoryStyle: Record<string, { color: string }> = {
   Push: { color: 'hsl(var(--cat-push))' },
   Pull: { color: 'hsl(var(--cat-pull))' },
@@ -45,8 +41,7 @@ const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'El
 
 export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: ExerciseCardProps) {
   const [playing, setPlaying] = useState(false);
-  const videoId = exercise.youtube_url ? getYouTubeVideoId(exercise.youtube_url) : null;
-  const thumbnailUrl = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : exercise.image_url || null;
+  const videoId = getYouTubeId(exercise.youtube_url);
   const style = categoryStyle[exercise.category] || { color: 'hsl(var(--muted-foreground))' };
   const level = exercise.difficulty_level || 1;
 
@@ -75,47 +70,27 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
               aria-label={`Close ${exercise.name} video`}
             ><X className="h-4 w-4" /></button>
           </div>
-        ) : thumbnailUrl ? (
+        ) : (
           <>
-            <img
-              src={thumbnailUrl}
-              alt={exercise.name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
-              onError={(e) => {
-                if (videoId) {
-                  const target = e.target as HTMLImageElement;
-                  if (target.src.includes('mqdefault')) target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                  else target.style.display = 'none';
-                }
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <ExerciseArtwork title={exercise.name} category={exercise.category}
+              youtubeUrl={exercise.youtube_url} imageUrl={exercise.image_url}
+              className="absolute inset-0" />
             {videoId && (
-              <button
-                type="button"
-                aria-label={`Play ${exercise.name} tutorial here`}
-                className="absolute inset-0 z-10 flex items-center justify-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
-                onClick={(event) => { event.stopPropagation(); setPlaying(true); }}
-              >
-                <span className="power-skeuo-play flex h-14 w-14 min-[390px]:h-12 min-[480px]:h-16 min-[390px]:w-12 min-[480px]:w-16 items-center justify-center rounded-full text-white transition-transform group-hover:scale-105">
-                  <Play className="ml-1 h-7 w-7" fill="currentColor"/>
+              <button type="button" aria-label={`Play ${exercise.name} tutorial here`}
+                className="absolute inset-0 z-10 grid place-items-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
+                onClick={(event) => { event.stopPropagation(); setPlaying(true); }}>
+                <span className="power-skeuo-play flex h-14 w-14 items-center justify-center rounded-full text-white shadow-xl transition-transform group-hover:scale-105">
+                  <Play className="ml-1 h-7 w-7" fill="currentColor" />
                 </span>
               </button>
             )}
           </>
-        ) : (
-          <div className="w-full h-full flex items-center justify-center relative">
-            <span className="text-4xl font-display font-black text-muted-foreground/5 uppercase select-none">
-              {exercise.name.substring(0, 3)}
-            </span>
-          </div>
         )}
 
         {/* Category pill */}
         <div className="absolute top-2 left-2 sm:top-3 sm:left-3 pointer-events-none">
           <span
-            className="text-[8px] font-mono font-bold uppercase tracking-[0.12em] px-2 py-1 rounded-lg text-white backdrop-blur-sm"
+            className="text-[9px] font-mono font-bold uppercase tracking-[0.08em] px-2 py-1 rounded-lg text-white backdrop-blur-sm"
             style={{ backgroundColor: `${style.color}cc` }}
           >
             {exercise.category}
