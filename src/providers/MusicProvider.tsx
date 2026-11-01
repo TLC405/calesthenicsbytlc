@@ -23,6 +23,8 @@ interface MusicContextType {
   playUrl: (url: string) => void;
   playIntroAnthem: () => void;
   playbackError: string | null;
+  playerVisible: boolean;
+  dismissPlayer: () => void;
   addToLibrary: (url: string, title?: string) => void;
   removeFromLibrary: (id: string) => void;
 }
@@ -97,6 +99,8 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   });
   const initAttempted = useRef(false);
   const pendingIntroRef = useRef(false);
+  const pendingPlaybackRef = useRef(false);
+  const [playerVisible, setPlayerVisible] = useState(false);
   const [playbackError, setPlaybackError] = useState<string | null>(null);
 
   // Load user prefs
@@ -127,7 +131,8 @@ export function MusicProvider({ children }: { children: ReactNode }) {
 
   // Initialize YouTube player
   useEffect(() => {
-    if (!musicEnabled || initAttempted.current) return;
+    // The YouTube embed is created only when it can stay visibly displayed.
+    if (!musicEnabled || !playerVisible || initAttempted.current) return;
     initAttempted.current = true;
 
     const init = async () => {
@@ -137,16 +142,15 @@ export function MusicProvider({ children }: { children: ReactNode }) {
       const config = getPlayerConfig();
       
       playerRef.current = new window.YT.Player(containerRef.current, {
-        height: '0',
-        width: '0',
+        height: '224',
+        width: '224',
         videoId: config.videoId,
         playerVars: {
           autoplay: 0,
           loop: 1,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          modestbranding: 1,
+          controls: 1,
+          disablekb: 0,
+          fs: 1,
           playsinline: 1,
           ...config.playerVars,
         },
@@ -154,13 +158,14 @@ export function MusicProvider({ children }: { children: ReactNode }) {
           onReady: (event: any) => {
             event.target.setVolume(volume);
             setIsReady(true);
-            if (pendingIntroRef.current) {
+            if (pendingIntroRef.current || pendingPlaybackRef.current) {
               try {
-                event.target.unMute();
-                event.target.setVolume(volume);
-                event.target.loadVideoById(DEFAULT_VIDEO);
+                if (pendingIntroRef.current) {
+                  event.target.unMute();
+                  event.target.loadVideoById(DEFAULT_VIDEO);
+                }
                 event.target.playVideo();
-              } catch { setPlaybackError('The soundtrack could not start. Try Play in the music controls.'); }
+              } catch { setPlaybackError('Playback was blocked. Tap Play in the visible YouTube player.'); }
             }
             try {
               const d = event.target.getVideoData?.();
@@ -169,7 +174,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
           },
           onStateChange: (event: any) => {
             // 1 playing, 2 paused, 0 ended
-            if (event.data === 1) { setIsPlaying(true); pendingIntroRef.current = false; setPlaybackError(null); }
+            if (event.data === 1) { setIsPlaying(true); pendingIntroRef.current = false; pendingPlaybackRef.current = false; setPlaybackError(null); }
             if (event.data === 2) setIsPlaying(false);
             if (event.data === 0) event.target.playVideo();
             try {
@@ -185,7 +190,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
           },
           onAutoplayBlocked: () => {
             setIsPlaying(false);
-            setPlaybackError('Your browser blocked automatic audio. Tap Play in the music controls.');
+            setPlaybackError('Your browser blocked autoplay. Tap Play on the visible YouTube video.');
           },
         },
       });
@@ -201,7 +206,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
       initAttempted.current = false;
       setIsReady(false);
     };
-  }, [musicEnabled]); // Only re-init when enabled/disabled
+  }, [musicEnabled, playerVisible]); // Never create a hidden YouTube player
 
   // When playlist URL changes and player exists, load new content
   useEffect(() => {
@@ -210,33 +215,32 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     try {
       if (pendingIntroRef.current) {
         playerRef.current.loadVideoById(DEFAULT_VIDEO);
-        playerRef.current.playVideo();
-        return;
-      }
-      if (config.playerVars.list) {
-        playerRef.current.loadPlaylist({ list: config.playerVars.list, listType: 'playlist' });
+      } else if (config.playerVars.list) {
+        playerRef.current.cuePlaylist({ list: config.playerVars.list, listType: 'playlist' });
       } else {
-        playerRef.current.loadVideoById(config.videoId);
+        playerRef.current.cueVideoById(config.videoId);
       }
-      if (!isPlaying) {
-        // Pause after loading new content if not playing
-        setTimeout(() => playerRef.current?.pauseVideo(), 500);
+      if (pendingIntroRef.current || pendingPlaybackRef.current) {
+        playerRef.current.playVideo();
       }
     } catch {}
   }, [playlistUrl, isReady]);
 
   const togglePlay = useCallback(() => {
-    if (!musicEnabled || !playerRef.current || !isReady) return;
-    try {
-      const state = playerRef.current.getPlayerState();
-      if (state === 1) { // playing
-        playerRef.current.pauseVideo();
-        setIsPlaying(false);
-      } else {
-        playerRef.current.playVideo();
-        setIsPlaying(true);
-      }
-    } catch {}
+    if (playerRef.current && isReady && playerRef.current.getPlayerState?.() === 1) {
+      try { playerRef.current.pauseVideo(); setIsPlaying(false); } catch {}
+      return;
+    }
+    setPlaybackError(null);
+    pendingPlaybackRef.current = true;
+    if (!musicEnabled) {
+      setMusicEnabledState(true);
+      localStorage.setItem('music_enabled', 'true');
+    }
+    setPlayerVisible(true);
+    if (playerRef.current && isReady) {
+      try { playerRef.current.playVideo(); } catch { setPlaybackError('Tap Play in the visible player.'); }
+    }
   }, [musicEnabled, isReady]);
 
   const toggleMute = useCallback(() => {
@@ -270,6 +274,9 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     if (!enabled) {
       try { playerRef.current?.pauseVideo(); } catch {}
       setIsPlaying(false);
+      setPlayerVisible(false);
+      pendingPlaybackRef.current = false;
+      pendingIntroRef.current = false;
     }
     if (user) {
       supabase.from('profiles').update({ music_enabled: enabled }).eq('id', user.id);
@@ -285,7 +292,9 @@ export function MusicProvider({ children }: { children: ReactNode }) {
 
   const playIntroAnthem = useCallback(() => {
     pendingIntroRef.current = true;
+    pendingPlaybackRef.current = true;
     setPlaybackError(null);
+    setPlayerVisible(true);
     if (!musicEnabled) {
       setMusicEnabledState(true);
       localStorage.setItem('music_enabled', 'true');
@@ -302,8 +311,24 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   }, [musicEnabled, isReady, volume]);
 
   const playUrl = useCallback((url: string) => {
+    pendingIntroRef.current = false;
+    pendingPlaybackRef.current = true;
+    setPlaybackError(null);
+    setPlayerVisible(true);
+    if (!musicEnabled) {
+      setMusicEnabledState(true);
+      localStorage.setItem('music_enabled', 'true');
+    }
     setPlaylistUrlState(url);
-    setTimeout(() => { try { playerRef.current?.playVideo?.(); } catch {} }, 700);
+  }, [musicEnabled]);
+
+  const dismissPlayer = useCallback(() => {
+    try { playerRef.current?.pauseVideo?.(); } catch {}
+    pendingIntroRef.current = false;
+    pendingPlaybackRef.current = false;
+    setIsPlaying(false);
+    setPlaybackError(null);
+    setPlayerVisible(false);
   }, []);
 
   const persistLibrary = (next: SavedTrack[]) => {
@@ -327,13 +352,23 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     <MusicContext.Provider value={{
       isPlaying, isMuted, volume, playlistUrl, musicEnabled, isReady, currentTrack, library,
       togglePlay, toggleMute, setVolume, setPlaylistUrl, setMusicEnabled,
-      nextTrack, prevTrack, playUrl, playIntroAnthem, playbackError, addToLibrary, removeFromLibrary,
+      nextTrack, prevTrack, playUrl, playIntroAnthem, playbackError, playerVisible, dismissPlayer, addToLibrary, removeFromLibrary,
     }}>
-      {/* YouTube player container — must be in DOM but invisible */}
-      {musicEnabled && (
-        <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden', pointerEvents: 'none' }}>
-          <div ref={containerRef} id="yt-music-player" />
-        </div>
+      {/* Visible YouTube player: required viewport >= 200x200; closing also pauses it. */}
+      {musicEnabled && playerVisible && (
+        <section className="power-music-video" aria-label="POWER music video player">
+          <div className="power-music-video-header">
+            <span>POWER / NOW PLAYING</span>
+            <button type="button" aria-label="Close music video and stop playback" onClick={dismissPlayer}>
+              Close ×
+            </button>
+          </div>
+          <div className="power-music-video-screen">
+            <div ref={containerRef} id="yt-music-player" />
+          </div>
+          {playbackError && <p className="power-music-video-error" role="status">{playbackError}</p>}
+          <p className="power-music-video-credit">YouTube player · playback depends on creator permissions</p>
+        </section>
       )}
       {children}
     </MusicContext.Provider>
