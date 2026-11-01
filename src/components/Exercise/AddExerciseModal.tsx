@@ -256,7 +256,7 @@ export function AddExerciseModal({ open, onClose, onSuccess, initialExercise }: 
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh]">
+      <DialogContent className="w-[calc(100vw-1rem)] max-w-2xl max-h-[90dvh] flex flex-col min-h-0 overflow-hidden rounded-2xl p-3 sm:p-6">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-xl">
             <Plus className="w-5 h-5 text-primary" />
@@ -264,7 +264,7 @@ export function AddExerciseModal({ open, onClose, onSuccess, initialExercise }: 
           </DialogTitle>
         </DialogHeader>
 
-        <ScrollArea className="max-h-[70vh] pr-4">
+        <ScrollArea className="min-h-0 max-h-[min(72dvh,690px)] pr-2 sm:pr-4">
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {/* Basic Info */}
             <div className="grid grid-cols-2 gap-4">
