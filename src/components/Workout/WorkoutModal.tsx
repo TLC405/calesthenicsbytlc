@@ -228,7 +228,7 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
   return (
     <>
       <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
-        <DialogContent className="max-w-lg max-h-[90vh] flex flex-col p-0">
+        <DialogContent className="w-[calc(100vw-1rem)] max-w-lg max-h-[90dvh] flex flex-col min-h-0 overflow-hidden rounded-2xl p-0">
           <DialogHeader className="p-4 pb-0">
             <DialogTitle className="flex items-center gap-2">
               <Calendar className="w-5 h-5 text-primary" />
@@ -236,7 +236,7 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
             </DialogTitle>
           </DialogHeader>
 
-          <ScrollArea className="flex-1 px-4">
+          <ScrollArea className="flex-1 min-h-0 px-3 sm:px-4">
             {loading ? (
               <div className="py-8 text-center text-muted-foreground">Loading workout...</div>
             ) : (
