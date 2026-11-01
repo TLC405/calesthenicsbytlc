@@ -7,6 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
 import { supabase, backendConfigured } from '@/integrations/supabase/client';
 import { getOfflineExercises } from '@/lib/offlineExercises';
+import tlcUploadedExercises from '@/data/tlcUploadedExercises.json';
 
 interface Exercise {
   id: string;
@@ -44,7 +45,8 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
   const fetchExercises = async () => {
     setLoading(true);
     if (!backendConfigured) {
-      setExercises(getOfflineExercises());
+      const combined = [...tlcUploadedExercises, ...getOfflineExercises()];
+      setExercises([...new Map(combined.map(item => [item.slug,item])).values()]);
       setLoading(false);
       return;
     }
@@ -54,7 +56,8 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
       .order('category')
       .order('name');
     
-    setExercises(data || []);
+    const combined = [...tlcUploadedExercises, ...(data || []), ...getOfflineExercises()];
+    setExercises([...new Map(combined.map(item => [item.slug, item])).values()]);
     setLoading(false);
   };
 
