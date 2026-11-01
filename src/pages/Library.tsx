@@ -13,6 +13,8 @@ import { ExerciseCardSkeletonGrid } from '@/components/Exercise/ExerciseCardSkel
 import { useAuth } from '@/providers/AuthProvider';
 import { toast } from 'sonner';
 import tlcUploadedExercises from '@/data/tlcUploadedExercises.json';
+import { SKILL_PATHS } from '@/data/skillPaths';
+import { ArrowRight, Target } from 'lucide-react';
 
 interface Exercise {
   id: string; name: string; slug: string; category: string;
@@ -192,6 +194,22 @@ export default function Library() {
         </div>
       </header>
 
+      <section className="max-w-6xl mx-auto px-3 sm:px-4 md:px-8 pt-4" aria-label="Skill training studios">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-xs font-display font-black uppercase tracking-[.14em]"><Target className="h-4 w-4 text-primary inline mr-1"/> Skill Studios</h2>
+          <span className="text-[10px] text-muted-foreground">Separate progression tracks</span>
+        </div>
+        <div className="power-skill-rail flex gap-2 overflow-x-auto pb-2">
+          {SKILL_PATHS.map(item => (
+            <button key={item.id} type="button" className="power-skill-link power-elevated flex shrink-0 min-w-[170px] max-w-[210px] flex-col gap-1.5 rounded-xl p-3 text-left"
+              onClick={()=>navigate(`/skills/${item.id}`)}>
+              <span className="text-sm font-black leading-tight">{item.title}</span>
+              <span className="text-[11px] text-muted-foreground">{item.short}</span>
+              <span className="flex items-center gap-1 text-[10px] font-semibold text-primary">{item.slugs.length} movement stages <ArrowRight className="h-3 w-3"/></span>
+            </button>
+          ))}
+        </div>
+      </section>
       <main className="power-library-results max-w-6xl mx-auto px-3 sm:px-4 md:px-8 py-3 sm:py-5 pb-32 md:pb-5">
         {guestMode && (
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/25 bg-primary/5 px-4 py-3">
