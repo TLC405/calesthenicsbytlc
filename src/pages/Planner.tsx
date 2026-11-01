@@ -342,26 +342,47 @@ export default function Planner() {
       </Dialog>
 
       <main className="max-w-3xl mx-auto px-3 sm:px-4 md:px-8 py-4 space-y-4 pb-28 md:pb-8">
-        <section className="power-skeuo-card rounded-2xl p-4 space-y-3">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">POWER TRAINING</p>
-              <h2 className="font-display text-xl font-black">Pick. Train. Done.</h2>
-              <p className="text-xs text-muted-foreground">Select a routine, log your sets, save on this device.</p>
+        <section className="power-theme-stage power-elevated relative overflow-hidden p-4 sm:p-5 space-y-4">
+          <div className="relative z-10 flex items-start justify-between gap-3">
+            <div className="min-w-0 flex-1">
+              <p className="text-[10px] font-mono font-bold uppercase tracking-[.2em] text-primary">POWER / TRAINING STUDIO</p>
+              <h2 className="mt-1 font-display text-2xl sm:text-3xl font-black tracking-tight">Pick. Train. Done.</h2>
+              <p className="mt-2 max-w-sm text-xs sm:text-sm leading-relaxed text-muted-foreground">Choose your routine, follow your exercises, and track your progress without the clutter.</p>
             </div>
-            <Dumbbell className="h-7 w-7 text-primary flex-shrink-0" />
+            <span className="power-theme-emblem flex h-12 w-12 shrink-0 items-center justify-center" aria-hidden="true">
+              <Dumbbell className="h-6 w-6" />
+            </span>
           </div>
-          <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Gym color themes">
-            {themes.map(item => (
-              <button type="button" key={item.id} aria-pressed={theme === item.id}
-                onClick={() => setTheme(item.id)}
-                className={`shrink-0 rounded-xl border px-3 py-2 text-[10px] font-bold ${theme === item.id ? 'border-primary bg-primary/10' : 'border-border bg-card'}`}>
-                <span className="mr-1.5 inline-block h-2.5 w-2.5 rounded-full" style={{backgroundColor:item.primary}}/>
-                {item.name}
-              </button>
-            ))}
+          <div className="relative z-10 space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">Choose your gym atmosphere</p>
+              <span className="text-[10px] font-bold text-primary">{themes.find(item=>item.id===theme)?.name}</span>
+            </div>
+            <div className="power-theme-rail flex gap-2 overflow-x-auto pb-2" aria-label="Gym themes">
+              {themes.map(item => (
+                <button type="button" key={item.id} aria-pressed={theme === item.id}
+                  onClick={() => setTheme(item.id)}
+                  className={`power-theme-option flex shrink-0 min-w-[124px] flex-col gap-1.5 rounded-xl border px-3 py-2.5 text-left transition-[border-color,box-shadow] ${theme === item.id ? 'is-selected border-primary' : 'border-border bg-card'}`}>
+                  <span className="flex h-2.5 w-14 overflow-hidden rounded-full">
+                    <span className="h-full flex-[3]" style={{backgroundColor:item.primary}}/>
+                    <span className="h-full flex-[2]" style={{backgroundColor:item.accent}}/>
+                    <span className="h-full flex-1 border-l border-border/40" style={{backgroundColor:item.bg}}/>
+                  </span>
+                  <span className="text-xs font-bold whitespace-nowrap">{item.name}</span>
+                  <span className="text-[10px] text-muted-foreground whitespace-nowrap">{item.tagline.split(' · ').slice(0,2).join(' · ')}</span>
+                </button>
+              ))}
+            </div>
+            <p className="text-[11px] leading-relaxed text-muted-foreground">
+              {theme === 'vasa' ? 'Studio steel · racing-red performance markings · white instrument faces' :
+               theme === 'ymca' ? 'Blue-and-teal movement studio · rounded controls · welcoming light surfaces' :
+               theme === 'planet-fitness' ? 'Carbon-black equipment panels · rich violet · warm-gold highlights' :
+               theme === 'okc-thunder' ? 'Midnight-blue arena · court-line details · energetic orange trim' :
+               'Premium graphite equipment · violet inlays · soft ivory controls'}
+            </p>
           </div>
         </section>
+
         {localStorage.getItem('power-active-workout-v2') && (
           <Button type="button" variant="outline" className="power-elevated h-12 w-full rounded-2xl font-bold"
             onClick={() => navigate('/workout')}>
