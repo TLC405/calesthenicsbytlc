@@ -17,6 +17,7 @@ import Settings from "./pages/Settings";
 import Train from "./pages/Train";
 import ActiveWorkout from "./pages/ActiveWorkout";
 import SkillStudio from "./pages/SkillStudio";
+import SkillWorkoutBuilder from "./pages/SkillWorkoutBuilder";
 import Anatomy from "./pages/Anatomy";
 import NotFound from "./pages/NotFound";
 import Community from "./pages/Community";
@@ -40,6 +41,7 @@ function AppContent() {
           <Route path="/train" element={<Train />} />
           <Route path="/workout" element={<ActiveWorkout />} />
           <Route path="/skills/:skillId" element={<SkillStudio />} />
+          <Route path="/build" element={<SkillWorkoutBuilder />} />
           <Route path="/anatomy" element={<Anatomy />} />
           <Route path="/community" element={<Community />} />
           <Route path="/settings" element={<Settings />} />
