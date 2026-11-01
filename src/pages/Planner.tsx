@@ -4,6 +4,8 @@ import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { saveGuestWorkout } from '@/lib/offlineWorkouts';
 import { getOfflineExercises, type OfflineExercise } from '@/lib/offlineExercises';
+import tlcUploadedExercises from '@/data/tlcUploadedExercises.json';
+import { useTheme } from '@/components/ThemeSwitcher';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -56,6 +58,7 @@ const QUICK_TEMPLATES = [
 
 export default function Planner() {
   const { user } = useAuth();
+  const { theme, setTheme, themes } = useTheme();
   const navigate = useNavigate();
   const [workoutName, setWorkoutName] = useState('');
   const [notes, setNotes] = useState('');
@@ -141,24 +144,24 @@ export default function Planner() {
   }, []);
 
   const loadTemplate = async (tpl: typeof QUICK_TEMPLATES[number]) => {
+    // Templates must work for guests and during Supabase outages.
+    const builtIn = [...tlcUploadedExercises, ...getOfflineExercises()] as Exercise[];
+    let catalog: Exercise[] = builtIn;
     try {
-      const { data } = await supabase
-        .from('exercises')
-        .select('*')
-        .in('category', tpl.categories)
-        .limit(20);
-      if (!data || data.length === 0) { toast.error('No exercises found'); return; }
-      // Pick 4-6 random
-      const shuffled = [...data].sort(() => Math.random() - 0.5).slice(0, Math.min(6, data.length));
-      setWorkoutName(tpl.tag);
-      setSections(prev => prev.map(s => s.key === 'workout'
-        ? { ...s, open: true, entries: shuffled.map(e => ({ exercise: e as any, sets: [{ reps: 10 }, { reps: 10 }, { reps: 10 }] })) }
-        : s
-      ));
-      toast.success(`${tpl.tag} loaded`);
-    } catch (e: any) {
-      toast.error(e.message || 'Failed');
-    }
+      const { data } = await supabase.from('exercises').select('*')
+        .in('category', tpl.categories).order('name').limit(300);
+      if (data?.length) catalog = [...data as Exercise[], ...builtIn];
+    } catch { /* Keep locally bundled catalog usable. */ }
+    const matched = [...new Map(catalog.filter(e => tpl.categories.includes(e.category))
+      .map(e => [e.slug || e.name.toLowerCase(), e])).values()];
+    const chosen = matched.slice(0, Math.min(5, matched.length));
+    if (!chosen.length) { toast.error('No matching exercises found'); return; }
+    setWorkoutName(tpl.tag);
+    setSections(prev => prev.map(s => s.key === 'workout'
+      ? { ...s, open: true, entries: chosen.map(e => ({
+          exercise: e, sets: [{ reps: 10 }, { reps: 10 }, { reps: 10 }]
+        })) } : s));
+    toast.success(`${tpl.tag} ready · ${chosen.length} exercises`);
   };
 
   const toggleSection = (key: string) => {
@@ -324,6 +327,26 @@ export default function Planner() {
       </Dialog>
 
       <main className="max-w-3xl mx-auto px-4 md:px-8 py-5 space-y-4">
+        <section className="power-skeuo-card rounded-2xl p-4 space-y-3">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">POWER TRAINING</p>
+              <h2 className="font-display text-xl font-black">Pick. Train. Done.</h2>
+              <p className="text-xs text-muted-foreground">Select a routine, log your sets, save on this device.</p>
+            </div>
+            <Dumbbell className="h-7 w-7 text-primary flex-shrink-0" />
+          </div>
+          <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Gym color themes">
+            {themes.map(item => (
+              <button type="button" key={item.id} aria-pressed={theme === item.id}
+                onClick={() => setTheme(item.id)}
+                className={`shrink-0 rounded-xl border px-3 py-2 text-[10px] font-bold ${theme === item.id ? 'border-primary bg-primary/10' : 'border-border bg-card'}`}>
+                <span className="mr-1.5 inline-block h-2.5 w-2.5 rounded-full" style={{backgroundColor:item.primary}}/>
+                {item.name}
+              </button>
+            ))}
+          </div>
+        </section>
         {/* Workout name */}
         <Input
           placeholder="Workout name (e.g. Push Day, Full Body)"
