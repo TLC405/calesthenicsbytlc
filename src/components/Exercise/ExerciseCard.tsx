@@ -52,7 +52,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
 
   return (
     <div
-      className="power-skeuo-card group cursor-pointer rounded-2xl border border-border/40 bg-card overflow-hidden transition-all duration-300 hover:border-border hover:shadow-lg"
+      className="power-skeuo-card group relative min-w-0 cursor-pointer rounded-2xl border border-border/60 bg-card overflow-hidden transition-[border-color,box-shadow,transform] duration-200 hover:border-primary/40"
       onClick={() => { if (!playing) onViewDetails(exercise); }}
       style={{ '--glow-color': `${style.color}20` } as any}
     >
@@ -98,7 +98,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
                 className="absolute inset-0 z-10 flex items-center justify-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
                 onClick={(event) => { event.stopPropagation(); setPlaying(true); }}
               >
-                <span className="power-skeuo-play flex h-16 w-16 items-center justify-center rounded-full text-white transition-transform group-hover:scale-105">
+                <span className="power-skeuo-play flex h-14 w-14 min-[390px]:h-12 min-[480px]:h-16 min-[390px]:w-12 min-[480px]:w-16 items-center justify-center rounded-full text-white transition-transform group-hover:scale-105">
                   <Play className="ml-1 h-7 w-7" fill="currentColor"/>
                 </span>
               </button>
@@ -113,7 +113,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
         )}
 
         {/* Category pill */}
-        <div className="absolute top-3 left-3">
+        <div className="absolute top-2 left-2 sm:top-3 sm:left-3 pointer-events-none">
           <span
             className="text-[8px] font-mono font-bold uppercase tracking-[0.12em] px-2 py-1 rounded-lg text-white backdrop-blur-sm"
             style={{ backgroundColor: `${style.color}cc` }}
@@ -131,15 +131,15 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
       </div>
 
       {/* Content */}
-      <div className="p-3.5 space-y-2.5">
+      <div className="p-3 sm:p-3.5 space-y-2.5">
         <div>
-          <h3 className="font-display font-bold text-sm tracking-tight leading-tight line-clamp-1">{exercise.name}</h3>
-          <div className="flex items-center gap-2 mt-1">
+          <h3 className="font-display font-black text-sm sm:text-base tracking-tight leading-snug line-clamp-2 min-h-[2.4em]">{exercise.name}</h3>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-1">
             <span className="text-[9px] font-mono text-muted-foreground tracking-wide">{difficultyLabel[level]}</span>
-            {exercise.equipment.length > 0 && exercise.equipment[0] !== 'None' && (
+            {exercise.equipment?.length > 0 && exercise.equipment[0] !== 'None' && (
               <>
                 <span className="text-border">·</span>
-                <span className="text-[9px] font-mono text-muted-foreground tracking-wide flex items-center gap-0.5">
+                <span className="text-[9px] font-mono text-muted-foreground tracking-wide flex items-center gap-0.5 min-w-0 truncate">
                   <Dumbbell className="w-2.5 h-2.5" />{exercise.equipment[0]}
                 </span>
               </>
@@ -150,7 +150,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
         {/* Muscles */}
         <div className="flex flex-wrap gap-1">
           {exercise.primary_muscles.slice(0, 3).map(muscle => (
-            <span key={muscle} className="text-[7px] px-1.5 py-0.5 rounded-md bg-accent/60 text-muted-foreground font-mono border border-border/30">
+            <span key={muscle} className="text-[10px] px-1.5 py-0.5 rounded-md bg-accent/60 text-muted-foreground font-medium border border-border/30">
               {muscle}
             </span>
           ))}
@@ -162,11 +162,11 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
         {onAddToWorkout && (
           <Button
             size="sm"
-            className="w-full h-8 text-[8px] font-mono uppercase tracking-wider rounded-xl mt-1 bg-accent hover:bg-accent/80 text-foreground border border-border/50"
+            className="w-full min-h-11 text-[11px] font-sans font-bold rounded-xl mt-1 bg-primary/10 hover:bg-primary/20 text-foreground border border-primary/20"
             variant="ghost"
             onClick={(e) => { e.stopPropagation(); onAddToWorkout(exercise); }}
           >
-            <Plus className="w-3 h-3 mr-1" />Add to Workout
+            <Plus className="w-4 h-4 mr-1" />Add to Workout
           </Button>
         )}
       </div>
