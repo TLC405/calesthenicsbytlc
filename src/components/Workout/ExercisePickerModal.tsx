@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
+import { CategoryTabs, CATEGORY_GROUPS } from '@/components/Exercise/CategoryTabs';
 import { supabase, backendConfigured } from '@/integrations/supabase/client';
 import { getOfflineExercises } from '@/lib/offlineExercises';
 import tlcUploadedExercises from '@/data/tlcUploadedExercises.json';
@@ -66,7 +66,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
   const filteredExercises = exercises.filter(exercise => {
     const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesCategory = !activeCategory || exercise.category === activeCategory;
+    const matchesCategory = !activeCategory || (CATEGORY_GROUPS[activeCategory] ? CATEGORY_GROUPS[activeCategory].includes(exercise.category) : exercise.category === activeCategory);
     return matchesSearch && matchesCategory;
   });
 
