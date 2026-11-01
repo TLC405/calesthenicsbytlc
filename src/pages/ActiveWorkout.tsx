@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Check, CheckCircle2, ChevronLeft, Clock3, Dumbbell, Minus, Pause, Play, Plus, RotateCcw, ShieldCheck, SkipForward, TimerReset, Trophy, Video } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, CheckCircle2, ChevronLeft, Clock3, Dumbbell, Minus, Pause, Play, Plus, TimerReset, Trophy, Video } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { VideoPlayer } from '@/components/Exercise/VideoPlayer';
@@ -58,7 +58,6 @@ export default function ActiveWorkout() {
   const [now, setNow] = useState(Date.now());
   const [restDuration, setRestDuration] = useState(60);
   const [saving, setSaving] = useState(false);
-  const [showVideo, setShowVideo] = useState(false);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
@@ -97,7 +96,6 @@ export default function ActiveWorkout() {
     }
   }
   function changeExercise(next: number) {
-    setShowVideo(false);
     setDraft(old => old ? { ...old, index: Math.max(0, Math.min(old.entries.length - 1, next)), restEnd: null } : null);
   }
   function leave() {
@@ -110,7 +108,8 @@ export default function ActiveWorkout() {
     if (!doneCount) { toast.error('Complete at least one set before finishing.'); return; }
     setSaving(true);
     try {
-      const day = new Date().toLocaleDateString('en-CA');
+      const localNow = new Date();
+      const day = new Date(localNow.getTime() - localNow.getTimezoneOffset() * 60_000).toISOString().slice(0, 10);
       const entries = draft.entries.filter(e => e.sets.some(s => s.done));
       const notes = `${draft.name}\n${draft.notes}\nDuration: ${timeLabel(Math.floor((Date.now() - draft.startedAt) / 1000))}`;
       if (user) {
