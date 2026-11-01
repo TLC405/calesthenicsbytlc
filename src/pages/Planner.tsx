@@ -264,31 +264,31 @@ export default function Planner() {
 
   return (
     <div className="min-h-screen bg-background pb-28 md:pb-0">
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border/30">
-        <div className="max-w-3xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 min-w-0">
+      <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-lg border-b border-border/50">
+        <div className="max-w-3xl mx-auto px-3 sm:px-4 md:px-8 min-h-14 py-1 flex items-center justify-between gap-1.5">
+          <div className="flex items-center gap-1.5 min-w-0 flex-1">
             <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="h-10 w-10 rounded-xl flex-shrink-0" aria-label="Back to home">
               <ArrowLeft className="w-4 h-4" />
             </Button>
-            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-border/30 flex items-center justify-center flex-shrink-0">
+            <div className="hidden sm:flex w-10 h-10 rounded-xl bg-primary/10 border border-border/30 items-center justify-center flex-shrink-0">
               <FileText className="w-5 h-5 text-primary" />
             </div>
             <div className="min-w-0">
-              <h1 className="font-display text-base font-bold tracking-tight truncate">Start Workout</h1>
+              <h1 className="font-display text-sm sm:text-base font-bold tracking-tight truncate">Start Workout</h1>
               <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em]">
                 {totalExercises} exercise{totalExercises !== 1 ? 's' : ''}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 flex-shrink-0">
+          <div className="flex items-center gap-1 flex-shrink-0">
             <Button
               onClick={() => setCoachOpen(true)}
               size="sm"
               variant="outline"
-              className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl gap-1.5"
+              className="h-10 w-10 sm:w-auto sm:px-3 text-[10px] font-mono uppercase tracking-wider rounded-xl gap-1"
             >
               <Sparkles className="w-3.5 h-3.5 text-[hsl(var(--electric))]" />
-              Coach
+              <span className="hidden sm:inline">Coach</span>
             </Button>
             <Button
               onClick={saveWorkout}
@@ -297,14 +297,14 @@ export default function Planner() {
               className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl gap-1.5"
             >
               <Save className="w-3.5 h-3.5" />
-              {saving ? 'Saving...' : 'Save'}
+              <span className="hidden sm:inline">{saving ? 'Saving...' : 'Save'}</span>
             </Button>
           </div>
         </div>
       </header>
 
       <Dialog open={coachOpen} onOpenChange={setCoachOpen}>
-        <DialogContent className="max-w-md rounded-2xl">
+        <DialogContent className="w-[calc(100vw-1rem)] max-w-md max-h-[90dvh] overflow-y-auto rounded-2xl p-4 sm:p-6">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 font-display">
               <Sparkles className="w-4 h-4 text-[hsl(var(--electric))]" />
@@ -341,7 +341,7 @@ export default function Planner() {
         </DialogContent>
       </Dialog>
 
-      <main className="max-w-3xl mx-auto px-4 md:px-8 py-5 space-y-4">
+      <main className="max-w-3xl mx-auto px-3 sm:px-4 md:px-8 py-4 space-y-4 pb-28 md:pb-8">
         <section className="power-skeuo-card rounded-2xl p-4 space-y-3">
           <div className="flex items-center justify-between gap-3">
             <div>
@@ -405,8 +405,8 @@ export default function Planner() {
 
         {totalExercises > 0 && (
           <Button type="button" onClick={beginActiveWorkout}
-            className="power-primary-action sticky top-[4.5rem] z-20 w-full h-14 rounded-2xl text-sm font-display font-black tracking-wide uppercase">
-            <Dumbbell className="h-5 w-5 mr-2" /> Begin Guided Workout · {totalExercises} Exercises
+            className="power-primary-action sticky top-[4rem] z-20 w-full min-h-14 px-2 rounded-2xl text-xs sm:text-sm font-display font-black tracking-wide uppercase">
+            <Dumbbell className="h-5 w-5 mr-1 shrink-0" /> <span className="sm:hidden">Start Session · {totalExercises}</span><span className="hidden sm:inline">Begin Guided Workout · {totalExercises} Exercises</span>
           </Button>
         )}
 
