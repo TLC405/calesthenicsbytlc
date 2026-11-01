@@ -62,7 +62,7 @@ const themes: ThemeOption[] = [
 
 export function useTheme() {
   const [theme, setThemeState] = useState<string>(() => {
-    return localStorage.getItem('power-theme') || 'default';
+    return typeof localStorage !== 'undefined' ? localStorage.getItem('power-theme') || 'default' : 'default';
   });
 
   useEffect(() => {
@@ -73,8 +73,14 @@ export function useTheme() {
       root.setAttribute('data-theme', theme);
     }
     localStorage.setItem('power-theme', theme);
+    window.dispatchEvent(new CustomEvent('power-theme-changed', { detail: theme }));
   }, [theme]);
 
+  useEffect(() => {
+    const sync = (event: Event) => setThemeState((event as CustomEvent<string>).detail);
+    window.addEventListener('power-theme-changed', sync);
+    return () => window.removeEventListener('power-theme-changed', sync);
+  }, []);
   return { theme, setTheme: setThemeState, themes };
 }
 
