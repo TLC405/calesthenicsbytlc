@@ -12,7 +12,7 @@ import { AddExerciseModal, type EditableExercise } from '@/components/Exercise/A
 import { ExerciseCardSkeletonGrid } from '@/components/Exercise/ExerciseCardSkeleton';
 import { useAuth } from '@/providers/AuthProvider';
 import { toast } from 'sonner';
-import tlcUploadedExercises from '@/data/tlcUploadedExercises.json';
+import publicCatalog from '@/data/publicExerciseCatalog.json';
 import { SKILL_PATHS } from '@/data/skillPaths';
 import { ArrowRight, Target } from 'lucide-react';
 
@@ -48,7 +48,7 @@ export default function Library() {
   useEffect(() => { fetchExercises(); }, []);
 
   const mergedFallback = () => {
-    const records = [...getOfflineExercises(), ...tlcUploadedExercises] as Exercise[];
+    const records = [...publicCatalog, ...getOfflineExercises()] as Exercise[];
     return [...new Map(records.map(item => [item.slug, item])).values()];
   };
 
@@ -62,7 +62,7 @@ export default function Library() {
     const { data, error } = await supabase.from('exercises').select('*').order('category').order('name');
     if (error) toast.info('Showing your saved exercise collection while the library reconnects');
     const saved = user ? [] : getOfflineExercises();
-    const records = [...tlcUploadedExercises, ...(data || []), ...saved] as Exercise[];
+    const records = [...publicCatalog, ...(data || []), ...saved] as Exercise[];
     setExercises([...new Map(records.map(item => [item.slug, item])).values()]);
     setLoading(false);
   };
