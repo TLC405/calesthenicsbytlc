@@ -642,3 +642,93 @@ body { overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) {
   .power-skeuo-card, .power-skeuo-button, .power-rep-button { transition: none !important; }
 }
+
+
+/* POWER 3.3 — five genuinely different gym environments, no image downloads. */
+.power-theme-stage {
+  border-width: 1px;
+  border-top: 5px solid hsl(var(--primary));
+  background: hsl(var(--card));
+  box-shadow: inset 0 1px 0 hsl(var(--power-highlight) / .80), 0 5px 0 hsl(var(--power-metal) / .75), 0 20px 34px -28px hsl(var(--foreground) / .52);
+}
+.power-theme-emblem {
+  color: hsl(var(--primary));
+  background: hsl(var(--secondary));
+  border: 1px solid hsl(var(--border));
+  border-radius: .95rem;
+  box-shadow: inset 0 2px 4px hsl(var(--foreground) / .14), 0 2px 0 hsl(var(--power-metal));
+}
+.power-theme-rail {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scroll-snap-type: x proximity;
+}
+.power-theme-option { scroll-snap-align: start; min-height: 4.75rem; }
+.power-theme-option.is-selected {
+  background: hsl(var(--primary) / .09);
+  box-shadow: inset 0 0 0 1px hsl(var(--primary) / .52), 0 3px 0 hsl(var(--power-metal));
+}
+.power-theme-option:focus-visible { outline: 3px solid hsl(var(--ring)); outline-offset: 2px; }
+:root:not([data-theme]) .power-theme-stage {
+  border-radius: 1.5rem 1.5rem 1.15rem 1.15rem;
+  border-top-style: double;
+  border-top-width: 7px;
+}
+:root:not([data-theme]) .power-theme-emblem { border-radius: 1rem; }
+:root[data-theme="vasa"] .power-theme-stage {
+  border-radius: .6rem;
+  border-top: 6px solid hsl(var(--primary));
+  border-left: 6px solid hsl(218 8% 38%);
+  box-shadow: inset 0 1px 0 hsl(0 0% 100%), inset 0 0 0 1px hsl(218 7% 79%), 0 5px 0 hsl(218 7% 65%);
+}
+:root[data-theme="vasa"] .power-elevated,
+:root[data-theme="vasa"] .power-hardware { border-radius: .65rem; }
+:root[data-theme="vasa"] .power-theme-emblem {
+  color: hsl(0 0% 100%);
+  background: hsl(var(--primary));
+  border: 3px solid hsl(218 8% 40%);
+  border-radius: .4rem;
+}
+:root[data-theme="vasa"] .power-set-row { border-left: 4px solid hsl(var(--primary)); }
+:root[data-theme="ymca"] .power-theme-stage {
+  border-radius: 2rem;
+  border-top: 6px solid hsl(var(--electric));
+  border-bottom: 5px solid hsl(var(--primary) / .65);
+}
+:root[data-theme="ymca"] .power-elevated,
+:root[data-theme="ymca"] .power-hardware { border-radius: 1.6rem; }
+:root[data-theme="ymca"] .power-theme-emblem {
+  border-radius: 50%;
+  border: 3px solid hsl(var(--electric) / .65);
+}
+:root[data-theme="ymca"] .power-set-row { border-left: 4px solid hsl(var(--electric)); }
+:root[data-theme="planet-fitness"] .power-theme-stage {
+  border-top: 6px solid hsl(var(--electric));
+  border-right: 3px solid hsl(var(--primary));
+  border-radius: 1rem;
+  box-shadow: inset 0 1px 0 hsl(271 13% 32%), 0 5px 0 hsl(275 13% 6%), 0 15px 28px -18px hsl(0 0% 0% / .55);
+}
+:root[data-theme="planet-fitness"] .power-theme-emblem {
+  border-radius: .7rem;
+  color: hsl(var(--electric));
+  border: 2px solid hsl(var(--primary));
+  background: hsl(274 15% 19%);
+}
+:root[data-theme="planet-fitness"] .power-set-row { border-left: 4px solid hsl(var(--electric)); }
+:root[data-theme="okc-thunder"] .power-theme-stage {
+  border-top: 6px solid hsl(var(--electric));
+  border-bottom: 4px solid hsl(var(--primary));
+  border-radius: .7rem .7rem 1.6rem 1.6rem;
+}
+:root[data-theme="okc-thunder"] .power-theme-emblem {
+  border-radius: .45rem;
+  border: 2px solid hsl(var(--electric));
+  color: hsl(var(--electric));
+  background: hsl(215 70% 11%);
+}
+:root[data-theme="okc-thunder"] .power-set-row { border-left: 4px solid hsl(var(--electric)); }
+:root[data-theme="okc-thunder"] .power-hardware { border-radius: .6rem; }
+@media (prefers-reduced-motion: reduce) {
+  .power-theme-option { transition: none !important; }
+}
