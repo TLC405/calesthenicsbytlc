@@ -31,10 +31,7 @@ export function CategoryTabs({ categories, activeCategory, onCategoryChange, cou
     groupCounts[group] = cats.reduce((sum, c) => sum + (counts?.[c] || 0), 0);
   }
 
-  // Determine which group the active category belongs to
-  const activeGroup = activeCategory
-    ? Object.entries(CATEGORY_GROUPS).find(([_, cats]) => cats.includes(activeCategory))?.[0] || null
-    : null;
+  const visibleGroups = Object.keys(CATEGORY_GROUPS).filter(group => CATEGORY_GROUPS[group].some(cat => categories.includes(cat)));
 
   // Check if activeCategory is a group name (for group-level filtering)
   const isGroupActive = (group: string) => {
@@ -58,9 +55,8 @@ export function CategoryTabs({ categories, activeCategory, onCategoryChange, cou
       >
         All{totalCount !== null && <span className="ml-1 opacity-50">{totalCount}</span>}
       </button>
-      {Object.keys(CATEGORY_GROUPS).map((group) => {
+      {visibleGroups.map((group) => {
         const active = isGroupActive(group);
-        const subLabel = '';
         return (
           <button
             key={group}
