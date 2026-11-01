@@ -1,7 +1,7 @@
 /** One-device guest workout log; deliberately isolated from cloud user records. */
 import type { OfflineExercise } from './offlineExercises';
 
-export type GuestSet = { reps: number; weight?: number; rpe?: number };
+export type GuestSet = { reps: number; seconds?: number; weight?: number; rpe?: number };
 export type GuestWorkoutEntry = { exercise_id: string; exercise: OfflineExercise; sets: GuestSet[] };
 export type GuestWorkout = {
   date: string;
