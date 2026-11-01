@@ -1,14 +1,11 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, Library as LibraryIcon, FileText, Sparkles, User, Users } from 'lucide-react';
+import { Dumbbell, Library as LibraryIcon, LayoutGrid } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const tabs = [
-  { path: '/dashboard', icon: Home, label: 'Home', color: 'hsl(var(--cat-pull))' },
-  { path: '/library', icon: LibraryIcon, label: 'Library', color: 'hsl(var(--cat-push))' },
-  { path: '/planner', icon: FileText, label: 'Build', color: 'hsl(var(--cat-skills))' },
-  { path: '/community', icon: Users, label: 'Circle', color: 'hsl(var(--cat-legs))' },
-  { path: '/ai-lab', icon: Sparkles, label: 'Coach', color: 'hsl(var(--electric))' },
-  { path: '/settings', icon: User, label: 'You', color: 'hsl(var(--cat-core))' },
+  { path: '/planner', icon: Dumbbell, label: 'TRAIN', color: 'hsl(var(--cat-pull))' },
+  { path: '/library', icon: LibraryIcon, label: 'EXERCISES', color: 'hsl(var(--cat-push))' },
+  { path: '/dashboard', icon: LayoutGrid, label: 'MORE', color: 'hsl(var(--cat-skills))' },
 ];
 
 export function MobileNav() {
@@ -22,7 +19,7 @@ export function MobileNav() {
     <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
       <div className="h-6 bg-gradient-to-t from-background to-transparent pointer-events-none" />
       <div className="bg-background/90 backdrop-blur-2xl border-t border-border/40">
-        <div className="flex items-center justify-around h-[4.5rem] max-w-lg mx-auto px-1">
+        <div className="flex items-center justify-around h-[4.25rem] max-w-lg mx-auto px-3">
           {tabs.map(({ path, icon: Icon, label, color }) => {
             const isActive = location.pathname === path;
             return (
