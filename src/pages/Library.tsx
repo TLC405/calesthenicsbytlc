@@ -8,7 +8,6 @@ import { Search, Plus, Sparkles, Download, Pencil, Trash2, LockKeyhole, Globe2, 
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
-import { WorkoutModal } from '@/components/Workout/WorkoutModal';
 import { AddExerciseModal, type EditableExercise } from '@/components/Exercise/AddExerciseModal';
 import { ExerciseCardSkeletonGrid } from '@/components/Exercise/ExerciseCardSkeleton';
 import { useAuth } from '@/providers/AuthProvider';
@@ -39,7 +38,6 @@ export default function Library() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>((location.state as any)?.category || null);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
-  const [workoutModalDate, setWorkoutModalDate] = useState<Date | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
   const [mineOnly, setMineOnly] = useState(() => new URLSearchParams(location.search).get('mine') === '1');
@@ -80,7 +78,13 @@ export default function Library() {
     return matchesSearch && matchesCategory && matchesOwner && matchesVideo;
   });
 
-  const handleAddToWorkout = (exercise: Exercise) => setWorkoutModalDate(new Date());
+  const handleAddToWorkout = (exercise: Exercise) => {
+    // The exercise is carried into the actual builder, not an empty workout dialog.
+    sessionStorage.setItem('powa-builder-import', JSON.stringify({
+      items: [{ name: exercise.name, section: 'workout', exercise }]
+    }));
+    navigate('/planner');
+  };
 
   const deleteExercise = async (exercise: Exercise) => {
     if (!ownerId || exercise.created_by !== ownerId) return;
@@ -245,7 +249,6 @@ export default function Library() {
       </main>
 
       <ExerciseDetailModal exercise={selectedExercise} open={!!selectedExercise} onClose={() => setSelectedExercise(null)} onAddToWorkout={handleAddToWorkout} />
-      <WorkoutModal date={workoutModalDate} open={!!workoutModalDate} onClose={() => setWorkoutModalDate(null)} onSave={fetchExercises} />
       <AddExerciseModal open={showAddModal}
         initialExercise={editingExercise as EditableExercise | null}
         onClose={() => { setShowAddModal(false); setEditingExercise(null); }}
