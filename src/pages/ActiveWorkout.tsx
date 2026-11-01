@@ -25,8 +25,8 @@ interface ActiveExercise {
   cues?: unknown;
   difficulty_level?: number | null;
 }
-interface WorkoutSet { reps: number; weight?: number; rpe?: number; done: boolean }
-interface SessionEntry { section: string; exercise: ActiveExercise; sets: WorkoutSet[] }
+interface WorkoutSet { reps: number; seconds?: number; weight?: number; rpe?: number; done: boolean }
+interface SessionEntry { section: string; phaseLabel?: string; exercise: ActiveExercise; sets: WorkoutSet[] }
 interface SessionDraft { name: string; notes: string; entries: SessionEntry[]; index: number; restEnd: number | null; startedAt: number }
 
 function readDraft(): SessionDraft | null {
@@ -38,7 +38,7 @@ function readDraft(): SessionDraft | null {
     const entries = value.entries.filter(entry => entry.exercise && Array.isArray(entry.sets))
       .map(entry => ({
         ...entry,
-        sets: entry.sets.map(set => ({ reps: Math.max(0, Number(set.reps) || 0), weight: set.weight, rpe: set.rpe, done: Boolean(set.done) }))
+        sets: entry.sets.map(set => ({ reps: Math.max(0, Number(set.reps) || 0), seconds: typeof set.seconds === 'number' ? Math.max(0, set.seconds) : undefined, weight: set.weight, rpe: set.rpe, done: Boolean(set.done) }))
       }));
     if (!entries.length) return null;
     return { name: value.name || 'Workout', notes: value.notes || '', entries,
@@ -185,7 +185,7 @@ export default function ActiveWorkout() {
         <section className="space-y-3" aria-label="Current exercise">
           <div>
             <div className="flex items-center justify-between gap-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-primary">{item.exercise.category}</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-primary">{item.phaseLabel || item.exercise.category}</p>
               <p className="text-xs font-mono text-muted-foreground"><Clock3 className="w-3 h-3 inline"/> {timeLabel(elapsed)}</p>
             </div>
             <h2 className="mt-1 text-[clamp(1.45rem,6vw,2.25rem)] break-words font-display font-black leading-tight tracking-tight">{item.exercise.name}</h2>
@@ -217,14 +217,14 @@ export default function ActiveWorkout() {
             <div key={index} className={`power-set-row grid grid-cols-[1.15rem_minmax(0,1fr)_2.6rem] sm:grid-cols-[1.5rem_minmax(0,1fr)_3rem] gap-1.5 sm:gap-3 items-center p-2 sm:p-3 rounded-xl ${set.done?'is-done':''}`}>
               <span className="w-5 text-xs font-mono font-bold text-muted-foreground">{index+1}</span>
               <div className="flex min-w-0 justify-center items-center gap-1 sm:gap-2">
-                <button type="button" disabled={set.done} onClick={() => modifySet(index, s => ({ ...s, reps: Math.max(0, s.reps - 1) }))}
-                  className="power-hardware power-rep-button" aria-label={`Decrease reps for set ${index+1}`}><Minus className="w-5 h-5"/></button>
+                <button type="button" disabled={set.done} onClick={() => modifySet(index, s => s.seconds !== undefined ? { ...s, seconds: Math.max(1, s.seconds - 5) } : { ...s, reps: Math.max(0, s.reps - 1) })}
+                  className="power-hardware power-rep-button" aria-label={`Decrease ${set.seconds !== undefined ? 'seconds' : 'reps'} for set ${index+1}`}><Minus className="w-5 h-5"/></button>
                 <div className="text-center power-recessed rounded-xl px-1.5 py-1.5 min-w-[46px] sm:min-w-[70px]">
-                  <span className="text-2xl font-black tabular-nums">{set.reps}</span>
-                  <span className="block text-[9px] uppercase tracking-widest text-muted-foreground">reps</span>
+                  <span className="text-2xl font-black tabular-nums">{set.seconds !== undefined ? set.seconds : set.reps}</span>
+                  <span className="block text-[9px] uppercase tracking-widest text-muted-foreground">{set.seconds !== undefined ? 'seconds' : 'reps'}</span>
                 </div>
-                <button type="button" disabled={set.done} onClick={() => modifySet(index, s => ({ ...s, reps: Math.min(999, s.reps + 1) }))}
-                  className="power-hardware power-rep-button" aria-label={`Increase reps for set ${index+1}`}><Plus className="w-5 h-5"/></button>
+                <button type="button" disabled={set.done} onClick={() => modifySet(index, s => s.seconds !== undefined ? { ...s, seconds: Math.min(300, s.seconds + 5) } : { ...s, reps: Math.min(999, s.reps + 1) })}
+                  className="power-hardware power-rep-button" aria-label={`Increase ${set.seconds !== undefined ? 'seconds' : 'reps'} for set ${index+1}`}><Plus className="w-5 h-5"/></button>
               </div>
               <button type="button" onClick={() => finishSet(index)} aria-pressed={set.done}
                 className={`power-hardware h-12 w-12 grid place-items-center ${set.done ? 'power-done' : ''}`}
@@ -235,7 +235,7 @@ export default function ActiveWorkout() {
           ))}
           <button type="button" className="power-hardware min-h-11 w-full text-sm font-bold flex items-center justify-center gap-2"
             onClick={() => setDraft(old => old ? { ...old, entries: old.entries.map((e,i) =>
-              i === old.index ? { ...e, sets: [...e.sets, { reps: e.sets[e.sets.length-1]?.reps ?? 10, done: false }] } : e) } : null)}>
+              i === old.index ? { ...e, sets: [...e.sets, { reps: e.sets[e.sets.length-1]?.reps ?? 10, ...(e.sets[e.sets.length-1]?.seconds !== undefined ? {seconds:e.sets[e.sets.length-1].seconds} : {}), done: false }] } : e) } : null)}>
             <Plus className="h-4 w-4"/> Add another set
           </button>
         </section>
