@@ -193,6 +193,20 @@ export default function Planner() {
   };
 
   const totalExercises = sections.reduce((sum, s) => sum + s.entries.length, 0);
+  const beginActiveWorkout = () => {
+    const entries = sections.flatMap(section => section.entries.map(entry => ({
+      section: section.key,
+      exercise: entry.exercise,
+      sets: entry.sets.map(set => ({ ...set, done: false })),
+    })));
+    if (!entries.length) { toast.error('Choose a routine or add an exercise first'); return; }
+    localStorage.setItem('power-active-workout-v2', JSON.stringify({
+      name: workoutName.trim() || 'My Workout',
+      notes, entries, index: 0, restEnd: null, startedAt: Date.now(),
+    }));
+    navigate('/workout');
+  };
+
 
   const saveWorkout = async () => {
     if (totalExercises === 0) { toast.error('Add at least one exercise'); return; }
@@ -380,6 +394,13 @@ export default function Planner() {
           onClick={() => setShowAdvanced(value => !value)}>
           {showAdvanced ? 'Hide warm-up and recovery sections' : 'Add warm-up, mobility, or cool-down'}
         </button>
+
+        {totalExercises > 0 && (
+          <Button type="button" onClick={beginActiveWorkout}
+            className="power-primary-action sticky top-[4.5rem] z-20 w-full h-14 rounded-2xl text-sm font-display font-black tracking-wide uppercase">
+            <Dumbbell className="h-5 w-5 mr-2" /> Begin Guided Workout · {totalExercises} Exercises
+          </Button>
+        )}
 
         {/* Sections */}
         {sections.filter(section => section.key === 'workout' || showAdvanced || section.entries.length > 0).map(section => {
