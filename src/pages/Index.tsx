@@ -1,151 +1,146 @@
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/providers/AuthProvider';
 import { useEffect, useState } from 'react';
-import { ArrowRight, Zap, ChevronRight, Flame } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { backendConfigured } from '@/integrations/supabase/client';
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight, ArrowUpRight, Check, Dumbbell, Headphones, Library, MoveUpRight, Play, Target, Volume2, VolumeX, Zap } from 'lucide-react';
+import { useMusic, POWER_ANTHEM_VIDEO_ID } from '@/providers/MusicProvider';
 import { InstallPowerApp } from '@/components/InstallPowerApp';
 
-const paths = [
-  { name: 'Push-up', color: 'hsl(var(--cat-push))', steps: ['Wall', 'Incline', 'Standard', 'Diamond', 'Archer', 'One Arm'] },
-  { name: 'Pull-up', color: 'hsl(var(--cat-pull))', steps: ['Dead Hang', 'Row', 'Chin-up', 'Pull-up', 'Archer', 'One Arm'] },
-  { name: 'Handstand', color: 'hsl(var(--cat-skills))', steps: ['Wall HS', 'Free HS', 'HSPU', 'L-Sit to HS'] },
-  { name: 'Lever', color: 'hsl(var(--cat-core))', steps: ['Tuck FL', 'FL Raise', 'Front Lever', 'Iron Cross'] },
-];
-
-const stats = [
-  { value: '150+', label: 'EXERCISES' },
-  { value: '8', label: 'CATEGORIES' },
-  { value: 'AI', label: 'COACH' },
-  { value: '∞', label: 'POTENTIAL' },
-];
-
+/**
+ * POWER's opening stage. The official SNAP! video stays on YouTube.
+ * Sound starts from a real tap where the browser permits it; never bundle/copy the track.
+ */
 export default function Index() {
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const [loaded, setLoaded] = useState(false);
+  const { playIntroAnthem, playbackError, isPlaying, togglePlay } = useMusic();
+  const [soundOn, setSoundOn] = useState(() => localStorage.getItem('power-intro-sound') !== 'off');
+  const [musicRequested, setMusicRequested] = useState(false);
+  const [visible, setVisible] = useState(false);
 
-  useEffect(() => { navigate('/library', { replace: true }); }, [navigate]);
-  useEffect(() => { const t = setTimeout(() => setLoaded(true), 50); return () => clearTimeout(t); }, []);
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  function toggleSound() {
+    const next = !soundOn;
+    setSoundOn(next);
+    localStorage.setItem('power-intro-sound', next ? 'on' : 'off');
+    if (!next && isPlaying) togglePlay();
+  }
+  function startAnthem() {
+    setMusicRequested(true);
+    playIntroAnthem();
+  }
+  function enter(path: string) {
+    if (soundOn && !isPlaying) startAnthem();
+    if (!soundOn && isPlaying) togglePlay();
+    navigate(path);
+  }
 
   return (
-    <div className="min-h-[100dvh] bg-background flex flex-col relative overflow-hidden select-none">
-      {/* Background effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-30%] left-[-10%] w-[80%] h-[80%] rounded-full opacity-[0.07]" style={{ background: 'radial-gradient(circle, hsl(var(--cat-skills)), transparent 60%)' }} />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] rounded-full opacity-[0.05]" style={{ background: 'radial-gradient(circle, hsl(var(--cat-pull)), transparent 60%)' }} />
-        {/* Grid lines */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+    <main className="power-entry" aria-label="I Got the Power opening experience">
+      <div className="power-entry-frame" aria-hidden="true">
+        <span className="power-entry-rail power-entry-rail-one" />
+        <span className="power-entry-rail power-entry-rail-two" />
+        <span className="power-entry-cross power-entry-cross-top">+</span>
+        <span className="power-entry-cross power-entry-cross-bottom">+</span>
       </div>
 
-      <div className="flex-1 flex flex-col items-center relative z-10">
-        {/* Top bar */}
-        <div className="w-full max-w-4xl px-6 pt-6 flex items-center justify-between transition-all duration-700" style={{ opacity: loaded ? 1 : 0 }}>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-[hsl(var(--cat-legs))] animate-pulse" />
-            <span className="text-[9px] font-mono text-muted-foreground tracking-[0.3em] uppercase">System Online</span>
+      <div className={`power-entry-content ${visible ? 'is-visible' : ''}`}>
+        <header className="power-entry-top">
+          <div className="power-entry-brand">
+            <span className="power-entry-brandmark" aria-hidden="true"><Zap size={22} fill="currentColor"/></span>
+            <span className="power-entry-brand-text"><strong>POWER</strong><small>TRAINING SYSTEM / TLC</small></span>
           </div>
-          <InstallPowerApp compact />
-        </div>
+          <div className="power-entry-top-actions">
+            <InstallPowerApp compact />
+            <button type="button" aria-pressed={soundOn} onClick={toggleSound}
+              className="power-entry-audio-switch" aria-label={soundOn ? 'Turn intro music off' : 'Turn intro music on'}>
+              {soundOn ? <Volume2 size={17}/> : <VolumeX size={17}/>}
+              <span>{soundOn ? 'SOUND ON' : 'SOUND OFF'}</span>
+            </button>
+          </div>
+        </header>
 
-        {/* Hero */}
-        <div className="flex-1 flex flex-col items-center justify-center px-6 pb-8 max-w-4xl w-full">
-          {/* Logo mark */}
-          <div className="mb-8 transition-all duration-500" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'scale(1)' : 'scale(0.8)' }}>
-            <div className="relative">
-              <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-br from-[hsl(var(--electric))] to-[hsl(var(--cat-pull))] flex items-center justify-center shadow-2xl" style={{ boxShadow: '0 0 60px hsl(var(--electric) / 0.3), 0 0 120px hsl(var(--electric) / 0.1)' }}>
-                <Zap className="w-12 h-12 sm:w-14 sm:h-14 text-white drop-shadow-lg" />
-              </div>
-              {/* Orbiting dot */}
-              <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[hsl(var(--neon-green))]" style={{ boxShadow: '0 0 12px hsl(var(--neon-green) / 0.6)' }} />
+        <section className="power-entry-hero" aria-label="Master human strength">
+          <div className="power-entry-hero-copy">
+            <p className="power-entry-kicker"><span className="power-entry-live" aria-hidden="true" /> ENGINEERED HUMAN MOVEMENT <span className="power-entry-version">/ 001</span></p>
+            <div className="power-entry-wordmark">
+              <span className="power-entry-wordmark-top">I GOT THE</span>
+              <h1>POWER<span className="power-entry-stop">.</span></h1>
+            </div>
+            <div className="power-entry-message">
+              <span className="power-entry-message-bar" />
+              <p>MASTER <strong>HUMAN STRENGTH.</strong></p>
+              <p className="power-entry-message-alt">BUILD CONTROL. UNLOCK THE EXTRAORDINARY.</p>
+            </div>
+            <p className="power-entry-description">Real calisthenics. Real progressions. Your next rep starts here.</p>
+            <button type="button" onClick={() => enter('/planner')}
+              className="power-entry-primary">
+              <span className="power-entry-primary-icon"><Play size={21} fill="currentColor"/></span>
+              <span className="power-entry-primary-label"><strong>START WORKING OUT</strong><small>GO STRAIGHT TO TRAINING</small></span>
+              <ArrowUpRight className="power-entry-primary-arrow" size={22} aria-hidden="true"/>
+            </button>
+            <div className="power-entry-quiet-options">
+              <button type="button" onClick={() => enter('/build?skill=planche')}><Target size={17}/> Build by skill <ArrowRight size={15}/></button>
+              <button type="button" onClick={() => enter('/library')}><Library size={17}/> Browse 215 exercises <ArrowRight size={15}/></button>
             </div>
           </div>
 
-          {/* Title */}
-          <div className="text-center space-y-3 mb-10 transition-all duration-700 delay-150" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(20px)' }}>
-            <h1 className="font-display text-6xl sm:text-8xl md:text-9xl font-black text-foreground leading-[0.85] tracking-[-0.04em] uppercase">
-              I GOT<br />THE <span className="gradient-text">POWER</span>
-            </h1>
-            <p className="text-muted-foreground text-[10px] sm:text-xs font-mono uppercase tracking-[0.4em]">
-              Train · Track · Dominate
-            </p>
-          </div>
-
-          {/* Stats strip */}
-          <div className="w-full max-w-md grid grid-cols-4 gap-0 mb-10 transition-all duration-700 delay-300" style={{ opacity: loaded ? 1 : 0, transform: loaded ? 'translateY(0)' : 'translateY(15px)' }}>
-            {stats.map(({ value, label }, i) => (
-              <div key={label} className={cn("text-center py-3", i < 3 && "border-r border-border")}>
-                <div className="font-display text-xl sm:text-2xl font-black tracking-tight text-foreground">{value}</div>
-                <div className="text-[7px] sm:text-[8px] font-mono text-muted-foreground tracking-[0.2em] mt-0.5">{label}</div>
+          <div className="power-entry-visual" aria-hidden="true">
+            <div className="power-entry-instrument">
+              <span className="power-entry-instrument-title">HUMAN / POTENTIAL</span>
+              <div className="power-entry-orbit power-entry-orbit-outer" />
+              <div className="power-entry-orbit power-entry-orbit-inner" />
+              <div className="power-entry-instrument-axis power-entry-instrument-axis-x" />
+              <div className="power-entry-instrument-axis power-entry-instrument-axis-y" />
+              <div className="power-entry-instrument-core">
+                <Dumbbell className="power-entry-instrument-icon" strokeWidth={1.4} />
               </div>
-            ))}
+              <span className="power-entry-instrument-detail power-entry-detail-top">STRENGTH / CONTROL</span>
+              <span className="power-entry-instrument-detail power-entry-detail-bottom">BODYWEIGHT / TRAINING</span>
+              <div className="power-entry-signal"><span/><span/><span/><span/><span/><span/><span/><span/><span/></div>
+            </div>
           </div>
+        </section>
 
-          {/* CTA */}
-          <div className="transition-all duration-700 delay-500 w-full max-w-xs" style={{ opacity: loaded ? 1 : 0 }}>
-            <Button
-              onClick={() => navigate('/library')}
-              size="lg"
-              className="w-full h-14 sm:h-16 text-sm sm:text-base font-display font-bold uppercase tracking-[0.15em] rounded-2xl text-white relative overflow-hidden group"
-              style={{
-                background: 'linear-gradient(135deg, hsl(var(--electric)), hsl(var(--cat-pull)))',
-                boxShadow: '0 0 40px hsl(var(--electric) / 0.3), inset 0 1px 0 hsl(0 0% 100% / 0.1)',
-              }}
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                Explore training <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        <section className="power-entry-paths" aria-label="Pick your training focus">
+          <button type="button" className="power-entry-path" onClick={() => enter('/build?skill=planche')}>
+            <span className="power-entry-path-index">01 / STRENGTH</span>
+            <span className="power-entry-path-title">SUPERHUMAN <strong>STRENGTH</strong></span>
+            <span className="power-entry-path-desc">Planche & advanced bodyweight skills</span>
+            <MoveUpRight className="power-entry-path-icon" size={22} aria-hidden="true"/>
+          </button>
+          <button type="button" className="power-entry-path" onClick={() => enter('/build?skill=handstand')}>
+            <span className="power-entry-path-index">02 / MASTERY</span>
+            <span className="power-entry-path-title">MASTER <strong>HUMAN STRENGTH</strong></span>
+            <span className="power-entry-path-desc">Handstands, balance & control</span>
+            <MoveUpRight className="power-entry-path-icon" size={22} aria-hidden="true"/>
+          </button>
+        </section>
+
+        <footer className="power-entry-footer">
+          <div className="power-entry-soundtrack">
+            <button type="button" onClick={() => {
+              if (isPlaying) togglePlay();
+              else { setSoundOn(true); localStorage.setItem('power-intro-sound', 'on'); startAnthem(); }
+            }} className="power-entry-soundtrack-icon"
+              aria-label={isPlaying ? 'Pause I Got the Power anthem' : 'Play I Got the Power anthem'}>
+              {isPlaying ? <Headphones size={19}/> : <Play size={18} fill="currentColor"/>}
+            </button>
+            <div className="power-entry-soundtrack-copy">
+              <span className="power-entry-small-label">INTRO SOUNDTRACK / OFFICIAL YOUTUBE VIDEO</span>
+              <span className="power-entry-track">SNAP! — THE POWER</span>
+              <span className="power-entry-track-status" aria-live="polite">
+                {playbackError || (isPlaying ? 'Now playing in POWER' : musicRequested ? 'Starting… use the music controls if playback is blocked' : 'Tap play or enter with sound on')}
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-            </Button>
-            <p className="text-center text-muted-foreground text-[9px] font-mono uppercase tracking-[0.3em] mt-3">
-              Browse without signing in
-            </p>
-          </div>
-        </div>
-
-        {/* Progression paths preview */}
-        <div className="w-full max-w-4xl px-6 pb-12 transition-all duration-700 delay-[600ms]" style={{ opacity: loaded ? 1 : 0 }}>
-          <div className="rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm p-5 sm:p-6">
-            <div className="flex items-center justify-between mb-5">
-              <div className="flex items-center gap-2">
-                <div className="w-1.5 h-5 rounded-full bg-[hsl(var(--electric))]" />
-                <span className="text-xs font-display font-bold tracking-tight">Progression Paths</span>
-              </div>
-              <span className="text-[8px] font-mono text-muted-foreground/40 uppercase tracking-[0.2em]">Preview</span>
             </div>
-            <div className="space-y-4">
-              {paths.map(path => (
-                <div key={path.name} className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: path.color }} />
-                    <span className="text-[9px] font-mono font-bold tracking-[0.1em] text-muted-foreground uppercase">{path.name}</span>
-                  </div>
-                  <div className="flex items-center gap-1 overflow-x-auto scrollbar-none pb-1">
-                    {path.steps.map((step, i) => (
-                      <div key={step} className="flex items-center">
-                        <div className="px-2.5 py-1.5 rounded-lg border border-border/40 bg-accent/30 min-w-max">
-                          <span className="text-[7px] sm:text-[8px] font-mono font-bold uppercase tracking-wider text-muted-foreground">{step}</span>
-                        </div>
-                        {i < path.steps.length - 1 && <ChevronRight className="w-3 h-3 text-border flex-shrink-0 mx-0.5" />}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <div className="power-entry-equalizer" aria-hidden="true"><i/><i/><i/><i/><i/></div>
           </div>
-        </div>
+          <p className="power-entry-powered">POWERED BY <strong>TLC</strong><span className="power-entry-powered-dot">.</span></p>
+        </footer>
 
-        {/* Bottom */}
-        <div className="w-full border-t border-border/30 py-4 text-center">
-          <div className="flex items-center justify-center gap-3">
-            <Flame className="w-3 h-3 text-[hsl(var(--cat-push))]" />
-            <p className="text-muted-foreground/40 text-[8px] tracking-[0.4em] uppercase font-mono">Built for those who train with purpose</p>
-            <Flame className="w-3 h-3 text-[hsl(var(--cat-push))]" />
-          </div>
-        </div>
+        <p className="power-entry-legal">Embedded soundtrack: SNAP! — The Power. YouTube may restrict playback; sound usually requires a tap. <a href={`https://www.youtube.com/watch?v=${POWER_ANTHEM_VIDEO_ID}`} target="_blank" rel="noopener noreferrer">Official track <ArrowUpRight size={11} className="inline-block"/></a></p>
       </div>
-    </div>
+    </main>
   );
 }
