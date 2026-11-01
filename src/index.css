@@ -999,3 +999,30 @@ body { overflow-x: clip; }
   .power-entry-orbit, .power-entry-signal span, .power-entry-equalizer i { animation: none !important; }
   .power-entry-primary, .power-entry-path { transition: none; }
 }
+
+
+/* The original YouTube video is displayed, not stripped to an invisible audio stream. */
+.power-music-video {
+  position: fixed;
+  z-index: 65;
+  bottom: calc(5.4rem + env(safe-area-inset-bottom, 0px));
+  right: max(12px, env(safe-area-inset-right, 0px));
+  width: 246px;
+  max-width: calc(100vw - 24px);
+  padding: 9px 10px 10px;
+  color: #ecf3f7;
+  background: #101b25;
+  border: 1px solid #4b687d;
+  border-radius: 15px;
+  box-shadow: 0 7px 0 #07111a, 0 22px 40px #0009;
+}
+.power-music-video-header { display: flex; justify-content: space-between; gap: 8px; align-items: center; min-height: 37px; font: 800 10px monospace; letter-spacing: .04em; }
+.power-music-video-header button { min-height: 36px; padding-inline: 8px; border: 1px solid #667f95; border-radius: 9px; font: 800 12px system-ui; }
+.power-music-video-header button:focus-visible { outline: 2px solid #f58a49; outline-offset: 2px; }
+.power-music-video-screen, .power-music-video-screen > div, .power-music-video-screen iframe { width: 224px; height: 224px; max-width: none; display: block; }
+.power-music-video-screen { overflow: hidden; background: #090c10; }
+.power-music-video-error { margin-top: 8px; color: #f3b292; font-size: 11px; line-height: 1.4; }
+.power-music-video-credit { margin-top: 7px; font-size: 10px; color: #a4b3c0; }
+@media (min-width: 768px) {
+  .power-music-video { bottom: 18px; right: 18px; }
+}
