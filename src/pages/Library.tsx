@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Search, Plus, Sparkles, Download, Pencil, Trash2, LockKeyhole, Globe2, UserRound, PlayCircle, Dumbbell } from 'lucide-react';
 import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
-import { CategoryTabs } from '@/components/Exercise/CategoryTabs';
+import { CategoryTabs, CATEGORY_GROUPS } from '@/components/Exercise/CategoryTabs';
 import { AddExerciseModal, type EditableExercise } from '@/components/Exercise/AddExerciseModal';
 import { ExerciseCardSkeletonGrid } from '@/components/Exercise/ExerciseCardSkeleton';
 import { useAuth } from '@/providers/AuthProvider';
@@ -72,7 +72,7 @@ export default function Library() {
     const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exercise.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesCategory = !activeCategory || exercise.category === activeCategory;
+    const matchesCategory = !activeCategory || (CATEGORY_GROUPS[activeCategory] ? CATEGORY_GROUPS[activeCategory].includes(exercise.category) : exercise.category === activeCategory);
     const matchesOwner = !mineOnly || exercise.created_by === ownerId;
     const matchesVideo = !videosOnly || Boolean(exercise.youtube_url);
     return matchesSearch && matchesCategory && matchesOwner && matchesVideo;
