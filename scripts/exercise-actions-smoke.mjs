@@ -25,6 +25,28 @@ for(const width of [320,393]) {
     try { await run();console.log(`PASS ${width}: ${label}`); }
     catch(err){console.error(`FAIL ${width}: ${label} – ${err.message}`);errors++;}
   };
+  await test('POWER intro: accessible choices, optional sound and visible player',async()=>{
+    await page.goto('http://127.0.0.1:4173/',{waitUntil:'domcontentloaded'});
+    await page.getByRole('heading',{name:/POWER/i}).waitFor({timeout:10000});
+    verify(await page.getByText('MASTER HUMAN STRENGTH.',{exact:true}).count()>0,'Intro strength message missing');
+    await page.getByRole('button',{name:'Turn intro music off'}).click();
+    await page.getByRole('button',{name:/START WORKING OUT/}).click();
+    await page.waitForURL('**/planner');
+    verify(await page.locator('.power-music-video').count()===0,'Sound-off intro opened a player');
+    await page.goto('http://127.0.0.1:4173/',{waitUntil:'domcontentloaded'});
+    await page.getByRole('button',{name:'Turn intro music on'}).click();
+    await page.getByRole('button',{name:/SUPERHUMAN STRENGTH/}).click();
+    await page.waitForURL('**/build?skill=planche');
+    verify(await page.locator('.power-music-video').count()===1,'Intro music did not create a visible player');
+    const music=await page.locator('.power-music-video-screen').boundingBox();
+    verify(music && music.width>=200 && music.height>=200,'YouTube player must be >=200px by 200px');
+    await page.getByRole('button',{name:'Close music video and stop playback'}).click();
+    verify(await page.locator('.power-music-video').count()===0,'Closing music did not hide player');
+    await page.goto('http://127.0.0.1:4173/',{waitUntil:'domcontentloaded'});
+    await page.getByRole('button',{name:/MASTER HUMAN STRENGTH/}).click();
+    await page.waitForURL('**/build?skill=handstand');
+    await page.getByRole('button',{name:'Close music video and stop playback'}).click();
+  });
   await page.goto('http://127.0.0.1:4173/library');
   await page.getByPlaceholder('Search exercises...').waitFor({timeout:15000});
   await page.locator('.power-skeuo-card').first().waitFor({timeout:15000});
