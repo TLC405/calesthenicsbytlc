@@ -155,7 +155,7 @@ for(const width of [320,393]) {
     await page.getByRole('button',{name:/Straddle → Handstand/}).first().click();
     await page.waitForURL('**/skills/straddle-press');
     verify(await page.locator('.power-skeuo-card').count()>=5,'Straddle press drill ladder incomplete');
-    await page.getByRole('button',{name:/Handstand/,exact:true}).first().click();
+    await page.getByRole('button',{name:'Handstand',exact:true}).first().click();
     await page.waitForURL('**/skills/handstand');
     verify(await page.locator('.power-skeuo-card').count()>=5,'Handstand ladder incomplete');
     await page.getByRole('button',{name:/Library/}).first().click();
