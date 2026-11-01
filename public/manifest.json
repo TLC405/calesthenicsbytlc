@@ -2,10 +2,10 @@
   "name": "I GOT THE POWER",
   "short_name": "POWER",
   "description": "Training, personal exercise library, live athlete community and AI coaching. Independent by TLC.",
-  "start_url": "/library",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#0B141C",
+  "theme_color": "#0B141C",
   "orientation": "any",
   "icons": [
     {
@@ -31,7 +31,7 @@
     {
       "name": "Exercise Library",
       "url": "/library",
-      "description": "Browse 120+ exercises"
+      "description": "Browse 215 real exercises"
     },
     {
       "name": "AI Coach",
