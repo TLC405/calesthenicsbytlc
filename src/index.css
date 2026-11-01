@@ -732,3 +732,70 @@ body { overflow-x: clip; }
 @media (prefers-reduced-motion: reduce) {
   .power-theme-option { transition: none !important; }
 }
+
+
+/* I GOT THE POWER 3.4 — cobalt-steel gym instrument aesthetic (no purple, no neon). */
+:root:not([data-theme]):not(.dark) {
+  --background: 216 22% 96%;
+  --foreground: 217 35% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 217 35% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 217 35% 15%;
+  --primary: 218 67% 48%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 213 18% 90%;
+  --secondary-foreground: 216 29% 21%;
+  --muted: 213 15% 91%;
+  --muted-foreground: 216 14% 38%;
+  --accent: 213 18% 87%;
+  --accent-foreground: 217 35% 15%;
+  --border: 214 18% 76%;
+  --input: 214 18% 76%;
+  --ring: 218 67% 48%;
+  --electric: 19 78% 52%;
+  --electric-glow: 19 66% 52%;
+  --gradient-start: 218 67% 48%;
+  --gradient-end: 217 35% 18%;
+  --glow-primary: 218 67% 48%;
+  --surface: 214 17% 94%;
+  --surface-raised: 0 0% 100%;
+  --shadow-light: 0 0% 100%;
+  --shadow-dark: 215 19% 56%;
+  --power-metal: 214 11% 80%;
+  --power-highlight: 0 0% 100%;
+  --cat-push: 9 73% 48%;
+  --cat-pull: 218 67% 48%;
+  --cat-legs: 145 54% 36%;
+  --cat-core: 24 77% 47%;
+  --cat-skills: 200 70% 36%;
+  --cat-mobility: 175 56% 34%;
+}
+:root:not([data-theme]):not(.dark) .power-theme-stage,
+:root:not([data-theme]):not(.dark) .power-skill-hero {
+  border-top-color: hsl(var(--electric));
+  border-bottom: 3px solid hsl(var(--primary));
+}
+.power-artwork-fallback {
+  background: hsl(var(--secondary));
+  border: 1px solid hsl(var(--border) / .7);
+}
+.power-artwork-fallback::before {
+  content: "";
+  position: absolute;
+  inset: 12% 7%;
+  border: 1px solid hsl(var(--foreground) / .08);
+  border-radius: .75rem;
+  pointer-events: none;
+}
+.power-artwork-fallback > * { position: relative; z-index: 1; }
+.power-artwork-emblem {
+  background: hsl(var(--primary) / .12);
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / .28);
+  box-shadow: inset 0 1px 0 hsl(var(--power-highlight) / .6), 0 2px 0 hsl(var(--power-metal));
+}
+.power-skill-rail { -webkit-overflow-scrolling: touch; scrollbar-width: thin; touch-action: pan-x pan-y; }
+.power-skill-link { scroll-snap-align: start; }
+.power-skill-link:focus-visible { outline: 3px solid hsl(var(--ring)); outline-offset: 2px; }
+.power-skill-hero { border-top: 5px solid hsl(var(--primary)); }
