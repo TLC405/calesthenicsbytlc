@@ -43,7 +43,7 @@ export function CategoryTabs({ categories, activeCategory, onCategoryChange, cou
   };
 
   return (
-    <div className="flex max-w-full min-w-0 gap-2 overflow-x-auto whitespace-nowrap pb-1 overscroll-x-contain" aria-label="Exercise categories">
+    <div className="power-category-track flex w-full max-w-full min-w-0 gap-2 overflow-x-auto whitespace-nowrap pb-2 overscroll-x-contain" aria-label="Exercise categories">
       <button
         type="button" aria-pressed={activeCategory === null} data-active={activeCategory === null}
         onClick={() => onCategoryChange(null)}
