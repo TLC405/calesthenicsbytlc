@@ -144,6 +144,25 @@ for(const width of [320,393]) {
     const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem('tlc-power-workouts-v1')||'[]'));
     verify(saved.some(e=>e.entries?.length>0),'Guest workout not saved');
   });
+  await test('215 real exercises and independently navigable skill studios',async()=>{
+    await page.goto('http://127.0.0.1:4173/library',{waitUntil:'domcontentloaded'});
+    await page.locator('.power-skeuo-card').first().waitFor({timeout:10000});
+    verify(await page.locator('.power-skeuo-card').count()>=210,'Full curated exercise catalog missing');
+    await page.getByRole('button',{name:/Planche Straight-arm strength/}).click();
+    await page.waitForURL('**/skills/planche');
+    verify(await page.getByText('STAGE 1').count()>0,'Planche progressions missing');
+    verify(await page.locator('.power-skeuo-card').count()>=6,'Planche drill ladder incomplete');
+    await page.getByRole('button',{name:/Straddle → Handstand/}).first().click();
+    await page.waitForURL('**/skills/straddle-press');
+    verify(await page.locator('.power-skeuo-card').count()>=5,'Straddle press drill ladder incomplete');
+    await page.getByRole('button',{name:/Handstand/,exact:true}).first().click();
+    await page.waitForURL('**/skills/handstand');
+    verify(await page.locator('.power-skeuo-card').count()>=5,'Handstand ladder incomplete');
+    await page.getByRole('button',{name:/Library/}).first().click();
+    await page.waitForURL('**/library');
+    await page.locator('nav[aria-label="Primary navigation"]').getByRole('button',{name:'TRAIN',exact:true}).click();
+    await page.waitForURL('**/planner');
+  });
   await test('bottom navigation three tabs',async()=>{
     await page.locator('nav[aria-label="Primary navigation"]').getByRole('button',{name:'EXERCISES',exact:true}).click();
     await page.waitForURL('**/library');
