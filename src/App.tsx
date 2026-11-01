@@ -27,7 +27,7 @@ const queryClient = new QueryClient();
 function AppContent() {
   return (
     <BrowserRouter>
-      <div className="pb-[4.5rem] md:pb-0">
+      <div className="power-app-shell min-w-0 md:pb-0">
         <Routes>
           <Route path="/" element={<Navigate to="/library" replace />} />
           <Route path="/auth" element={<Navigate to="/library" replace />} />
