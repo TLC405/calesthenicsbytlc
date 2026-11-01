@@ -8,7 +8,7 @@ interface CategoryTabsProps {
 }
 
 // Group raw categories into simplified groups
-const CATEGORY_GROUPS: Record<string, string[]> = {
+export const CATEGORY_GROUPS: Record<string, string[]> = {
   'Strength': ['Push', 'Pull', 'Rings'],
   'Lower Body': ['Legs', 'Core'],
   'Skills': ['Skills', 'Yoga'],
@@ -38,37 +38,20 @@ export function CategoryTabs({ categories, activeCategory, onCategoryChange, cou
 
   // Check if activeCategory is a group name (for group-level filtering)
   const isGroupActive = (group: string) => {
-    if (!activeCategory) return false;
-    return CATEGORY_GROUPS[group]?.includes(activeCategory) || activeCategory === group;
+    return activeCategory === group || CATEGORY_GROUPS[group]?.includes(activeCategory || '') || false;
   };
 
   const handleGroupClick = (group: string) => {
-    const cats = CATEGORY_GROUPS[group];
-    // If clicking the already-active group, cycle through sub-categories then clear
-    if (isGroupActive(group)) {
-      if (cats.length > 1) {
-        const currentIdx = cats.indexOf(activeCategory || '');
-        if (currentIdx >= 0 && currentIdx < cats.length - 1) {
-          onCategoryChange(cats[currentIdx + 1]);
-        } else {
-          onCategoryChange(null);
-        }
-      } else {
-        onCategoryChange(null);
-      }
-    } else {
-      // Set to first sub-category of this group
-      onCategoryChange(cats[0]);
-    }
+    onCategoryChange(activeCategory === group ? null : group);
   };
 
   return (
-    <div className="flex flex-wrap gap-1.5">
+    <div className="flex max-w-full min-w-0 gap-2 overflow-x-auto whitespace-nowrap pb-1 overscroll-x-contain" aria-label="Exercise categories">
       <button
-        data-active={activeCategory === null}
+        type="button" aria-pressed={activeCategory === null} data-active={activeCategory === null}
         onClick={() => onCategoryChange(null)}
         className={cn(
-          "px-3 py-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.15em] transition-all duration-100 rounded-xl border",
+          "min-h-11 shrink-0 px-3 py-2 text-[11px] font-sans font-bold tracking-wide transition-colors duration-100 rounded-xl border",
           "border-border/40 bg-card text-muted-foreground hover:text-foreground hover:border-border",
           "data-[active=true]:bg-foreground data-[active=true]:text-background data-[active=true]:border-foreground"
         )}
@@ -77,19 +60,19 @@ export function CategoryTabs({ categories, activeCategory, onCategoryChange, cou
       </button>
       {Object.keys(CATEGORY_GROUPS).map((group) => {
         const active = isGroupActive(group);
-        const subLabel = active && activeCategory ? activeCategory : '';
+        const subLabel = '';
         return (
           <button
             key={group}
-            data-active={active}
+            type="button" aria-pressed={active} data-active={active}
             onClick={() => handleGroupClick(group)}
             className={cn(
-              "px-3 py-1.5 text-[9px] font-mono font-bold uppercase tracking-[0.15em] transition-all duration-100 rounded-xl border",
+              "min-h-11 shrink-0 px-3 py-2 text-[11px] font-sans font-bold tracking-wide transition-colors duration-100 rounded-xl border",
               "border-border/40 bg-card text-muted-foreground hover:text-foreground hover:border-border",
               groupColors[group] || "data-[active=true]:bg-foreground data-[active=true]:text-background"
             )}
           >
-            {active && subLabel !== group ? subLabel : group}
+            {group}
             {groupCounts[group] > 0 && <span className="ml-1 opacity-50">{groupCounts[group]}</span>}
           </button>
         );
