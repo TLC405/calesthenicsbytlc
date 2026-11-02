@@ -31,7 +31,7 @@ export default function Library() {
   const { user } = useAuth();
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState<string>((location.state as { search?: string } | null)?.search || '');
   const [activeCategory, setActiveCategory] = useState<string | null>((location.state as any)?.category || null);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [workoutModalDate, setWorkoutModalDate] = useState<Date | null>(null);
