@@ -29,6 +29,15 @@ for(const width of [320,393]) {
     await page.goto('http://127.0.0.1:4173/',{waitUntil:'domcontentloaded'});
     await page.getByRole('heading',{name:/POWER/i}).waitFor({timeout:10000});
     verify(await page.getByText('MASTER HUMAN STRENGTH.',{exact:true}).count()>0,'Intro strength message missing');
+    const mascot=page.locator('.power-entry-mascot');
+    verify(await mascot.count()===1,'Missing TLC cartoon character');
+    verify(await mascot.evaluate(img=>img.complete && img.naturalWidth>0),'Cartoon illustration failed to load');
+    const gold=await page.evaluate(()=>getComputedStyle(document.documentElement).getPropertyValue('--primary').trim());
+    verify(gold==='43 75% 58%',`POWER default theme was not black-and-gold: ${gold}`);
+    await page.getByRole('button',{name:'Play I Got the Power anthem'}).click();
+    await page.locator('#power-inline-youtube .power-music-video').waitFor({timeout:5000});
+    verify(await page.locator('.power-music-video').evaluate(el=>getComputedStyle(el).position)!=='fixed','Music is a floating popup, not embedded');
+    await page.getByRole('button',{name:'Close music video and stop playback'}).click();
     await page.getByRole('button',{name:'Turn intro music off'}).click();
     await page.getByRole('button',{name:/START WORKING OUT/}).click();
     await page.waitForURL('**/planner');
