@@ -9,7 +9,9 @@ import { ExerciseLogItem } from './ExerciseLogItem';
 import { ExercisePickerModal } from './ExercisePickerModal';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { SetData } from './SetTracker';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, backendConfigured } from '@/integrations/supabase/client';
+import { getGuestWorkout, saveGuestWorkout } from '@/lib/offlineWorkouts';
+import { getOfflineExercises, type OfflineExercise } from '@/lib/offlineExercises';
 import { useAuth } from '@/providers/AuthProvider';
 import { toast } from 'sonner';
 
@@ -51,7 +53,7 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
 
   useEffect(() => {
-    if (open && date && user) {
+    if (open && date) {
       loadWorkout();
     } else {
       resetState();
@@ -65,10 +67,17 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
   };
 
   const loadWorkout = async () => {
-    if (!date || !user) return;
+    if (!date) return;
     
     setLoading(true);
     const dateStr = format(date, 'yyyy-MM-dd');
+    if (!user) {
+      const saved = getGuestWorkout(dateStr);
+      setEntries(saved?.entries || []);
+      setNotes(saved?.notes || '');
+      setLoading(false);
+      return;
+    }
     
     // Load workout for this date
     const { data: workout } = await supabase
@@ -113,6 +122,13 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
   };
 
   const addExercise = async (exercise: Exercise) => {
+    if (!backendConfigured) {
+      const full = getOfflineExercises().find(item => item.id === exercise.id) || exercise;
+      setEntries(prev => [...prev, {
+        exercise_id: exercise.id, exercise: full, sets: [{ reps: 10 }],
+      }]);
+      return;
+    }
     // Fetch full exercise details
     const { data: fullExercise } = await supabase
       .from('exercises')
@@ -138,9 +154,31 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
   };
 
   const saveWorkout = async () => {
-    if (!date || !user) return;
+    if (!date || (backendConfigured && !user)) return;
     
     setSaving(true);
+    if (!backendConfigured) {
+      try {
+        const all = getOfflineExercises();
+        saveGuestWorkout({
+          date: format(date, 'yyyy-MM-dd'),
+          notes,
+          entries: entries.map(entry => ({
+            exercise_id: entry.exercise_id,
+            exercise: (all.find(item => item.id === entry.exercise_id) || entry.exercise) as OfflineExercise,
+            sets: entry.sets,
+          })),
+        });
+        toast.success('Workout saved to this device');
+        onSave();
+        onClose();
+      } catch (error) {
+        toast.error(error instanceof Error ? error.message : 'Could not save locally');
+      } finally {
+        setSaving(false);
+      }
+      return;
+    }
     const dateStr = format(date, 'yyyy-MM-dd');
     
     const entriesJson = entries.map(e => ({
@@ -190,7 +228,7 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
   return (
     <>
       <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
-        <DialogContent className="max-w-lg max-h-[90vh] flex flex-col p-0">
+        <DialogContent className="w-[calc(100vw-1rem)] max-w-lg max-h-[90dvh] flex flex-col min-h-0 overflow-hidden rounded-2xl p-0">
           <DialogHeader className="p-4 pb-0">
             <DialogTitle className="flex items-center gap-2">
               <Calendar className="w-5 h-5 text-primary" />
@@ -198,7 +236,7 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
             </DialogTitle>
           </DialogHeader>
 
-          <ScrollArea className="flex-1 px-4">
+          <ScrollArea className="flex-1 min-h-0 px-3 sm:px-4">
             {loading ? (
               <div className="py-8 text-center text-muted-foreground">Loading workout...</div>
             ) : (

@@ -24,7 +24,7 @@ export function MusicControl() {
 
   useEffect(() => { setDraftUrl(playlistUrl || ''); }, [playlistUrl, editingUrl]);
 
-  const hiddenPaths = ['/', '/auth'];
+  const hiddenPaths = ['/', '/auth', '/admin-login'];
   if (hiddenPaths.includes(location.pathname)) return null;
 
   const isYtMusic = /music\.youtube\.com/i.test(playlistUrl);
@@ -53,17 +53,20 @@ export function MusicControl() {
     toast({ title: 'Added & playing' });
   };
 
-  const openYouTubeSearch = () => {
-    const q = searchQ.trim() || currentTrack?.title || '';
-    if (!q) return;
-    window.open(`https://music.youtube.com/search?q=${encodeURIComponent(q)}`, '_blank', 'noopener');
+  const musicMatches = library.filter(track =>
+    !searchQ.trim() || track.title.toLowerCase().includes(searchQ.toLowerCase().trim())
+      || track.url.toLowerCase().includes(searchQ.toLowerCase().trim())
+  );
+  const searchSavedMusic = () => {
+    setShowLibrary(true);
+    if (!library.length) toast({ title: 'Your music library is empty', description: 'Paste a YouTube Music link to play it inside POWER.' });
   };
 
 
   return (
-    <div className="fixed right-3 bottom-[5.5rem] md:bottom-4 z-50">
+    <div className="power-music-dock fixed left-3 bottom-[calc(5.4rem+env(safe-area-inset-bottom))] md:bottom-4 z-40">
       {expanded && (
-        <div className="mb-2 w-[min(88vw,20rem)] rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/50 shadow-xl p-4 space-y-3 animate-in slide-in-from-bottom-2 duration-200">
+        <div className="mb-2 w-[min(calc(100vw-1.5rem),21rem)] max-h-[min(72dvh,540px)] overflow-y-auto overscroll-contain rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/50 shadow-xl p-3 sm:p-4 space-y-3 animate-in slide-in-from-bottom-2 duration-200">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -149,17 +152,17 @@ export function MusicControl() {
                 <Input
                   value={searchQ}
                   onChange={(e) => setSearchQ(e.target.value)}
-                  onKeyDown={(e) => { if (e.key === 'Enter') openYouTubeSearch(); }}
-                  placeholder="Search any song on YouTube…"
+                  onKeyDown={(e) => { if (e.key === 'Enter') searchSavedMusic(); }}
+                  placeholder="Search saved tracks…"
                   className="h-7 text-xs flex-1"
                 />
-                <button onClick={openYouTubeSearch}
+                <button onClick={searchSavedMusic}
                   className="h-7 px-2 rounded-lg bg-accent text-foreground text-[9px] font-mono uppercase tracking-wider hover:bg-primary hover:text-primary-foreground transition-colors">
                   Go
                 </button>
               </div>
               <p className="text-[9px] text-muted-foreground/70 leading-snug -mt-1 pl-4">
-                Find a song → copy link → paste below to play here.
+                Find your saved tracks, or paste a YouTube link to play directly here.
               </p>
 
               {/* Add / paste URL */}
@@ -213,13 +216,13 @@ export function MusicControl() {
               {/* Library */}
               {showLibrary && (
                 <div className="max-h-52 overflow-y-auto rounded-xl border border-border/40 divide-y divide-border/40">
-                  {library.length === 0 ? (
+                  {musicMatches.length === 0 ? (
                     <div className="p-3 text-center">
                       <Music className="w-4 h-4 text-muted-foreground/50 mx-auto mb-1" />
-                      <p className="text-[10px] text-muted-foreground">Your library is empty.</p>
-                      <p className="text-[9px] text-muted-foreground/70 mt-0.5">Paste a link above to add songs.</p>
+                      <p className="text-[10px] text-muted-foreground">{library.length ? 'No matching tracks.' : 'Your library is empty.'}</p>
+                      <p className="text-[9px] text-muted-foreground/70 mt-0.5">{library.length ? 'Try a different search.' : 'Paste a link above to add songs.'}</p>
                     </div>
-                  ) : library.map(t => (
+                  ) : musicMatches.map(t => (
                     <div key={t.id} className="flex items-center gap-1 p-2 hover:bg-accent/40 transition-colors">
                       <button onClick={() => playUrl(t.url)}
                         className="w-7 h-7 rounded-lg flex items-center justify-center bg-primary/15 text-primary hover:bg-primary hover:text-primary-foreground transition-colors flex-shrink-0"
@@ -248,12 +251,12 @@ export function MusicControl() {
       <button
         onClick={() => setExpanded(!expanded)}
         className={cn(
-          "w-14 h-14 md:w-12 md:h-12 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-200 border active:scale-95",
+          "w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-200 border active:scale-95",
           musicEnabled && isPlaying
             ? "bg-primary text-primary-foreground border-primary/50"
             : "bg-card text-muted-foreground border-border/50 hover:text-foreground hover:border-border"
         )}
-        aria-label="Toggle music controls">
+        aria-label="Toggle music controls" aria-expanded={expanded}>
         {expanded ? (
           <ChevronDown className="w-5 h-5" />
         ) : isPlaying ? (

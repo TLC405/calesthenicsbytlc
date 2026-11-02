@@ -3,6 +3,7 @@ import { Minimize2, Maximize2, Volume2, ChevronDown, ChevronUp, Target, Dumbbell
 import { TlcPlayIcon } from './TlcPlayIcon';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { ExerciseArtwork, getYouTubeId } from './ExerciseArtwork';
 
 interface ExerciseData {
   recovery_muscle?: string | null;
@@ -29,12 +30,6 @@ interface VideoPlayerProps {
   className?: string;
   exerciseData?: ExerciseData;
 }
-
-const getYouTubeVideoId = (url: string): string | null => {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-  const match = url.match(regExp);
-  return match && match[2].length === 11 ? match[2] : null;
-};
 
 const getStartTime = (url: string): number | undefined => {
   const match = url.match(/[?&]t=(\d+)/);
@@ -66,8 +61,12 @@ function buildEmbedSrc(youtubeId: string, startSec?: number, privacyEnhanced = t
 const diffLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];
 
 function DataSidebar({ data }: { data: ExerciseData }) {
-  const cues = Array.isArray(data.cues) ? data.cues
-    : typeof data.cues === 'string' ? JSON.parse(data.cues || '[]') : [];
+  const cues = (() => {
+    if (Array.isArray(data.cues)) return data.cues;
+    if (typeof data.cues !== 'string') return [];
+    try { const value = JSON.parse(data.cues); return Array.isArray(value) ? value : []; }
+    catch { return data.cues.split(/\\n|;/).map(s => s.trim()).filter(Boolean); }
+  })();
   const hasRecovery = data.recovery_muscle || data.recovery_tendon || data.recovery_nervous;
   const hasMuscles = (data.primary_muscles?.length || 0) > 0;
   const hasCues = cues.length > 0;
@@ -207,30 +206,30 @@ export function VideoPlayer({
 
   if (!youtubeUrl && !instagramUrl) {
     return (
-      <div className={cn("relative w-full overflow-hidden border-2 border-border bg-secondary", className)}>
-        <div className="aspect-video flex items-center justify-center">
-          <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">No video available</p>
+      <div className={cn("relative w-full overflow-hidden rounded-xl border-2 border-border bg-secondary", className)}>
+        <div className="aspect-video relative">
+          <ExerciseArtwork title={title} category={exerciseData?.category}/>
+          <span className="absolute right-2 top-2 rounded-lg bg-card/95 border border-border px-2 py-1 text-[10px] font-bold text-foreground">Tutorial not sourced</span>
         </div>
       </div>
     );
   }
 
   if (youtubeUrl) {
-    const videoId = getYouTubeVideoId(youtubeUrl);
+    const videoId = getYouTubeId(youtubeUrl);
 
     if (!videoId) {
       return (
         <div className={cn("relative w-full overflow-hidden border-2 border-border bg-secondary", className)}>
-          <div className="aspect-video flex items-center justify-center">
-            <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">Invalid video URL</p>
+          <div className="aspect-video relative">
+            <ExerciseArtwork title={title} category={exerciseData?.category}/>
+            <span className="absolute right-2 top-2 rounded-lg bg-card/95 px-2 py-1 text-[10px] font-bold">Video link needs repair</span>
           </div>
         </div>
       );
     }
 
     const effectiveStartSec = startSec ?? getStartTime(youtubeUrl);
-    const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
-    const fallbackThumbnail = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
     // Minimized bar
     if (isMinimized && isPlaying) {
@@ -267,13 +266,8 @@ export function VideoPlayer({
               className="group/btn relative h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label={`Play tutorial: ${title}`}
             >
-              <img
-                src={thumbnailUrl}
-                alt={title}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                onError={(e) => { (e.target as HTMLImageElement).src = fallbackThumbnail; }}
-              />
+              <ExerciseArtwork title={title} category={exerciseData?.category}
+                youtubeUrl={youtubeUrl} className="absolute inset-0"/>
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
               <div className="absolute inset-0 grid place-items-center">
                 <div className="transition-all duration-200 group-hover/btn:scale-110">

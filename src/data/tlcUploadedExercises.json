@@ -1,0 +1,2873 @@
+[
+  {
+    "id": "tlc-import-hollow-body-hold",
+    "slug": "hollow-body-hold",
+    "name": "Hollow Body Hold",
+    "category": "Core",
+    "primary_muscles": [
+      "Core",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Lower back glued to floor",
+      "Ribs pulled down",
+      "Arms by ears, biceps covering"
+    ],
+    "difficulty_level": 1,
+    "description": "The hollow body is the shape that transfers to handstands, levers, and planche. Master this first.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=44ScXWFaVBs",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-plank",
+    "slug": "plank",
+    "name": "Plank",
+    "category": "Core",
+    "primary_muscles": [
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Squeeze glutes",
+      "Pull elbows toward toes",
+      "Breathe behind the brace"
+    ],
+    "difficulty_level": 1,
+    "description": "Forearm plank with intent. Squeeze everything—this is practice for maintaining tension under load.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=ASdvN_XEl_c",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-l-sit",
+    "slug": "l-sit",
+    "name": "L-Sit",
+    "category": "Core",
+    "primary_muscles": [
+      "Core",
+      "Hip Flexors",
+      "Triceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor",
+      "parallettes"
+    ],
+    "cues": [
+      "Depress shoulders hard",
+      "Point toes",
+      "Push floor away"
+    ],
+    "difficulty_level": 3,
+    "description": "A fundamental static hold that develops incredible core strength and hip flexor endurance.",
+    "sets_reps": "4–5",
+    "youtube_url": "https://www.youtube.com/watch?v=cu0fHp8HCDo",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-dragon-flag",
+    "slug": "dragon-flag",
+    "name": "Dragon Flag",
+    "category": "Core",
+    "primary_muscles": [
+      "Core",
+      "Lats",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor",
+      "chair"
+    ],
+    "cues": [
+      "Grip bench behind head",
+      "Lower as one rigid line",
+      "Control the negative"
+    ],
+    "difficulty_level": 4,
+    "description": "Made famous by Bruce Lee. Keep the body as one unit—no bending at the hips.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=moyFIvRrS0s",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-hanging-leg-raise",
+    "slug": "hanging-leg-raise",
+    "name": "Hanging Leg Raise",
+    "category": "Core",
+    "primary_muscles": [
+      "Core",
+      "Hip Flexors",
+      "Grip"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar"
+    ],
+    "cues": [
+      "Dead hang start",
+      "Legs straight",
+      "Control the descent"
+    ],
+    "difficulty_level": 3,
+    "description": "Hang from a bar, raise straight legs to horizontal or above. No swinging.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=Pr1ieGZ5atk",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-bodyweight-squat",
+    "slug": "bodyweight-squat",
+    "name": "Bodyweight Squat",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Feet shoulder width",
+      "Knees track toes",
+      "Full depth"
+    ],
+    "difficulty_level": 1,
+    "description": "Full depth squat with control. Heels stay planted, chest stays tall.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=cB0cOX7gePg",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-bulgarian-split-squat",
+    "slug": "bulgarian-split-squat",
+    "name": "Bulgarian Split Squat",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor",
+      "chair"
+    ],
+    "cues": [
+      "Upright torso",
+      "Front knee over toes",
+      "Control the bottom"
+    ],
+    "difficulty_level": 1,
+    "description": "Rear foot elevated on a bench. Drop the back knee straight down.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=jWD8_iBkND0",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-calf-raise",
+    "slug": "calf-raise",
+    "name": "Calf Raise",
+    "category": "Legs",
+    "primary_muscles": [
+      "Calves"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Full range of motion",
+      "Pause at top",
+      "Slow negative"
+    ],
+    "difficulty_level": 1,
+    "description": "Single or double leg. Full range: heel below toes to max plantar flexion.",
+    "sets_reps": "3",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-nordic-curl",
+    "slug": "nordic-curl",
+    "name": "Nordic Curl",
+    "category": "Legs",
+    "primary_muscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hips extended throughout",
+      "Lower as slowly as possible",
+      "Catch yourself at the bottom"
+    ],
+    "difficulty_level": 3,
+    "description": "Kneel, anchor feet, lower your body forward under control. The negative is the exercise.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=6NCN6kOagfY",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-pistol-squat",
+    "slug": "pistol-squat",
+    "name": "Pistol Squat",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Arms forward for counterbalance",
+      "Heel stays planted",
+      "Stand up without wobble"
+    ],
+    "difficulty_level": 3,
+    "description": "The ultimate single-leg strength exercise that builds leg power, balance, and mobility.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=2YW5b4U7d2c",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-shrimp-squat",
+    "slug": "shrimp-squat",
+    "name": "Shrimp Squat",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hold rear foot",
+      "Stay upright",
+      "Knee touches floor gently"
+    ],
+    "difficulty_level": 4,
+    "description": "Grab rear foot behind you and squat on one leg. Demands quad strength and balance.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=2YW5b4U7d2c",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-bridge-pose",
+    "slug": "bridge-pose",
+    "name": "Bridge Pose",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Spine",
+      "Shoulders",
+      "Glutes"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Push through hands",
+      "Open chest",
+      "Breathe into the stretch"
+    ],
+    "difficulty_level": 1,
+    "description": "Glute bridge to full bridge progression. Open the front body safely.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=wPM8icPu6H8",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-cat-cow-stretch",
+    "slug": "cat-cow-stretch",
+    "name": "Cat-Cow Stretch",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Spine",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Inhale: arch",
+      "Exhale: round",
+      "Move one vertebra at a time"
+    ],
+    "difficulty_level": 1,
+    "description": "Flow between spinal flexion and extension. Breath-driven, slow.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=kqnua4rHVVA",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-cobra-pose",
+    "slug": "cobra-pose",
+    "name": "Cobra Pose",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Spine",
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hips stay on floor",
+      "Elbows slightly bent",
+      "Look forward, not up"
+    ],
+    "difficulty_level": 1,
+    "description": "Lie prone, press up through hands keeping hips grounded. Open the chest.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=n6jrC6WeF84",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-deep-squat-hold",
+    "slug": "deep-squat-hold",
+    "name": "Deep Squat Hold",
+    "category": "Mobility",
+    "primary_muscles": [
+      "Hips",
+      "Ankles",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Heels flat",
+      "Knees out",
+      "Chest tall"
+    ],
+    "difficulty_level": 1,
+    "description": "Sit in the bottom of a squat. Heels down, chest up. Breathe and explore the range.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=0wzrgyAurT8",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-downward-dog",
+    "slug": "downward-dog",
+    "name": "Downward Dog",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Shoulders",
+      "Hamstrings",
+      "Calves"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Push floor away",
+      "Externally rotate arms",
+      "Pedal heels"
+    ],
+    "difficulty_level": 1,
+    "description": "Inverted V shape. Push hips high, heels toward floor. Active shoulders.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=j97SSGsnCAQ",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-pigeon-pose",
+    "slug": "pigeon-pose",
+    "name": "Pigeon Pose",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Hips",
+      "Glutes",
+      "Piriformis"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Square hips",
+      "Fold forward slowly",
+      "Breathe into the stretch"
+    ],
+    "difficulty_level": 1,
+    "description": "Front leg bent, back leg extended. Fold forward for intensity. Breathe into the hip.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=0RQVD6viVXo",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-shoulder-dislocate",
+    "slug": "shoulder-dislocate",
+    "name": "Shoulder Dislocate",
+    "category": "Mobility",
+    "primary_muscles": [
+      "Shoulders",
+      "Chest"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "towel"
+    ],
+    "cues": [
+      "Wide grip to start",
+      "Straight arms throughout",
+      "Narrow grip as mobility improves"
+    ],
+    "difficulty_level": 1,
+    "description": "Wide grip on stick/towel, pass it over your head and behind your back. Gradual narrowing.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=vP8YmmRMz6I",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-worlds-greatest-stretch",
+    "slug": "worlds-greatest-stretch",
+    "name": "World's Greatest Stretch",
+    "category": "Mobility",
+    "primary_muscles": [
+      "Hips",
+      "Thoracic Spine",
+      "Hamstrings"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Deep lunge first",
+      "Rotate and reach to sky",
+      "Straighten front leg for hamstring"
+    ],
+    "difficulty_level": 1,
+    "description": "Lunge, rotate, reach. Hits hips, T-spine, hamstrings, and groin in a single sequence.",
+    "sets_reps": "2–3",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-needle",
+    "slug": "needle",
+    "name": "Needle",
+    "category": "Mobility",
+    "primary_muscles": [
+      "Hamstrings",
+      "Hip Flexors",
+      "Lower Back"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Stand on one leg",
+      "Raise back leg straight behind",
+      "Reach for standing ankle"
+    ],
+    "difficulty_level": 4,
+    "description": "An extreme flexibility skill showcasing total hamstring and hip mobility.",
+    "sets_reps": "3",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-australian-row",
+    "slug": "australian-row",
+    "name": "Australian Row",
+    "category": "Pull",
+    "primary_muscles": [
+      "Back",
+      "Biceps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar"
+    ],
+    "cues": [
+      "Body straight as a plank",
+      "Pull shoulder blades together",
+      "Chest to bar"
+    ],
+    "difficulty_level": 1,
+    "description": "Inverted row under a low bar. Body stays straight. Pull chest to bar.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=Fl0UMfdEzsE",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-chin-up",
+    "slug": "chin-up",
+    "name": "Chin-up",
+    "category": "Pull",
+    "primary_muscles": [
+      "Biceps",
+      "Back",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar"
+    ],
+    "cues": [
+      "Full dead hang start",
+      "Chin clears bar",
+      "Control the descent"
+    ],
+    "difficulty_level": 1,
+    "description": "Underhand grip. Pull chin over bar. Full dead hang at bottom.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=e1YSApl-QcM",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-pull-up",
+    "slug": "pull-up",
+    "name": "Pull-up",
+    "category": "Pull",
+    "primary_muscles": [
+      "Lats",
+      "Biceps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar"
+    ],
+    "cues": [
+      "Dead hang start",
+      "Pull elbows to hips",
+      "Chin clears bar"
+    ],
+    "difficulty_level": 3,
+    "description": "Overhand grip, dead hang to chin over bar. No kipping. Full ROM.",
+    "sets_reps": "3–5",
+    "youtube_url": "https://www.youtube.com/watch?v=eGo4IYlbE5g",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-archer-pull-up",
+    "slug": "archer-pull-up",
+    "name": "Archer Pull-up",
+    "category": "Pull",
+    "primary_muscles": [
+      "Lats",
+      "Biceps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar"
+    ],
+    "cues": [
+      "Pull to one hand",
+      "Other arm stays straight",
+      "Full dead hang between"
+    ],
+    "difficulty_level": 4,
+    "description": "Wide grip. Pull to one side while the other arm extends. Alternate sides.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=AcBYUhgk2_s",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-front-lever-raise",
+    "slug": "front-lever-raise",
+    "name": "Front Lever Raise",
+    "category": "Pull",
+    "primary_muscles": [
+      "Lats",
+      "Core",
+      "Biceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar"
+    ],
+    "cues": [
+      "Straight arms",
+      "Depress shoulders",
+      "Stop at horizontal"
+    ],
+    "difficulty_level": 4,
+    "description": "From dead hang, raise body to horizontal front lever position with straight arms.",
+    "sets_reps": "4–6",
+    "youtube_url": "https://www.youtube.com/watch?v=AGhb8V8M758",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-muscle-up",
+    "slug": "muscle-up",
+    "name": "Muscle-up",
+    "category": "Pull",
+    "primary_muscles": [
+      "Lats",
+      "Chest",
+      "Triceps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar",
+      "rings"
+    ],
+    "cues": [
+      "High pull",
+      "Fast transition",
+      "Lock out on top"
+    ],
+    "difficulty_level": 4,
+    "description": "Explosive pull-up that transitions into a dip above the bar or rings.",
+    "sets_reps": "3–5",
+    "youtube_url": "https://www.youtube.com/watch?v=NtS6MYnIYaw",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-skin-the-cat",
+    "slug": "skin-the-cat",
+    "name": "Skin The Cat",
+    "category": "Pull",
+    "primary_muscles": [
+      "Shoulders",
+      "Lats",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar",
+      "rings"
+    ],
+    "cues": [
+      "Tuck knees first",
+      "Roll through slowly",
+      "Control German hang"
+    ],
+    "difficulty_level": 3,
+    "description": "A dynamic shoulder mobility exercise that builds the foundation for advanced ring work.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=K9xHRYyoFe0",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-pullover",
+    "slug": "pullover",
+    "name": "Pullover",
+    "category": "Pull",
+    "primary_muscles": [
+      "Back",
+      "Biceps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar"
+    ],
+    "cues": [
+      "Pull high first",
+      "Stay close to bar",
+      "Control the roll"
+    ],
+    "difficulty_level": 3,
+    "description": "A fundamental bar transition skill that combines pulling strength with hip flexibility.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=eworH_YuaOM",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-push-up",
+    "slug": "push-up",
+    "name": "Push-up",
+    "category": "Push",
+    "primary_muscles": [
+      "Chest",
+      "Triceps",
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Body one straight line",
+      "Elbows ~45°",
+      "Full ROM"
+    ],
+    "difficulty_level": 1,
+    "description": "Hands shoulder-width, straight body, chest to floor and back up. Quality over quantity.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=IODxDxX7oi4",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-diamond-push-up",
+    "slug": "diamond-push-up",
+    "name": "Diamond Push-up",
+    "category": "Push",
+    "primary_muscles": [
+      "Triceps",
+      "Chest",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hands touching under chest",
+      "Elbows brush ribs",
+      "Full lockout"
+    ],
+    "difficulty_level": 1,
+    "description": "Hands together forming a diamond. Emphasizes triceps and inner chest.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=J0DnG1_S3lg",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-archer-push-up",
+    "slug": "archer-push-up",
+    "name": "Archer Push-up",
+    "category": "Push",
+    "primary_muscles": [
+      "Chest",
+      "Triceps",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Wide hand placement",
+      "Lower to working arm",
+      "Straight arm fully extends"
+    ],
+    "difficulty_level": 3,
+    "description": "Wide hands. Lower to one side while other arm extends straight. Alternate.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=hPJvnA6Z2pg",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-pike-push-up",
+    "slug": "pike-push-up",
+    "name": "Pike Push-up",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Triceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hips stay high",
+      "Head between arms",
+      "Full lockout"
+    ],
+    "difficulty_level": 1,
+    "description": "Hips high in an inverted V. Press straight down and up. Builds HSPU strength.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=sposDXWEB0A",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-handstand-push-up",
+    "slug": "handstand-push-up",
+    "name": "Handstand Push-up",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Triceps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Hands shoulder-width",
+      "Head touches floor",
+      "Full lockout at top"
+    ],
+    "difficulty_level": 4,
+    "description": "Wall-supported or freestanding. Head to floor and press back to full lockout.",
+    "sets_reps": "3–5",
+    "youtube_url": "https://www.youtube.com/watch?v=tQhrk6WMcKw",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-parallel-bar-dip",
+    "slug": "parallel-bar-dip",
+    "name": "Parallel Bar Dip",
+    "category": "Push",
+    "primary_muscles": [
+      "Chest",
+      "Triceps",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "chair",
+      "parallettes"
+    ],
+    "cues": [
+      "Lean slightly forward",
+      "Shoulders below elbows",
+      "Full lockout at top"
+    ],
+    "difficulty_level": 1,
+    "description": "Dip between parallel bars or chairs. Shoulders below elbows at the bottom.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=85u_8mz5lBA",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-tiger-bend-pushup",
+    "slug": "tiger-bend-pushup",
+    "name": "Tiger Bend Push Up",
+    "category": "Push",
+    "primary_muscles": [
+      "Triceps",
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Forearms to hands in one press",
+      "Body stays straight",
+      "Triceps do the work"
+    ],
+    "difficulty_level": 3,
+    "description": "An advanced push-up variation that builds tricep strength for planche and handstand push-ups.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=ozk8SOD3FCY",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-planche-lean",
+    "slug": "planche-lean",
+    "name": "Planche Lean",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Wrists",
+      "Serratus",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Elbows locked",
+      "Protract hard",
+      "Ribs to hips (hollow)"
+    ],
+    "difficulty_level": 1,
+    "description": "Hands slightly behind shoulders. Lock elbows. Push floor away and lean forward while staying hollow.",
+    "sets_reps": "5",
+    "youtube_url": "https://www.youtube.com/watch?v=ghNIgUG8_ZY",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-pseudo-planche-push-up",
+    "slug": "pseudo-planche-push-up",
+    "name": "Pseudo Planche Push-up",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Chest",
+      "Triceps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Lean forward THEN descend",
+      "Lock elbows at top",
+      "Protract at top"
+    ],
+    "difficulty_level": 3,
+    "description": "Hands slightly back. Lean forward before you descend. At the top: elbows lock + scap protraction + hollow stays tight.",
+    "sets_reps": "4",
+    "youtube_url": "https://www.youtube.com/watch?v=C-SML6xnVkI",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-planche-plank",
+    "slug": "planche-plank",
+    "name": "Planche Plank",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Triceps",
+      "Core",
+      "Serratus"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Elbows locked hard",
+      "Max protraction",
+      "Hollow body maintained"
+    ],
+    "difficulty_level": 3,
+    "description": "Elbows locked. Push floor away. Hollow body. Hold the line like you're freezing a screenshot.",
+    "sets_reps": "5",
+    "youtube_url": "https://www.youtube.com/watch?v=LeMk15TN0No",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-tuck-planche",
+    "slug": "tuck-planche",
+    "name": "Tuck Planche",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Triceps",
+      "Serratus"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Knees tight to chest",
+      "Elbows locked",
+      "Protract max"
+    ],
+    "difficulty_level": 3,
+    "description": "From a strong lean: tuck knees tight to chest, shoulders forward, elbows locked, protract hard.",
+    "sets_reps": "8–10",
+    "youtube_url": "https://www.youtube.com/watch?v=qvWvfZuUN4k",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-advanced-tuck-planche",
+    "slug": "advanced-tuck-planche",
+    "name": "Advanced Tuck Planche",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Triceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hips above shoulders",
+      "Extend knees slightly",
+      "Protract throughout"
+    ],
+    "difficulty_level": 4,
+    "description": "Tuck planche with hips raised higher and knees extending slightly. The bridge to straddle.",
+    "sets_reps": "6–8",
+    "youtube_url": "https://www.youtube.com/watch?v=LgPG0MZPI84",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-straddle-planche",
+    "slug": "straddle-planche",
+    "name": "Straddle Planche",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Triceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Spread legs wide",
+      "Protract hard",
+      "Elbows locked"
+    ],
+    "difficulty_level": 2,
+    "description": "Legs spread wide, body horizontal, straight arms. The culmination of months of work.",
+    "sets_reps": "5–8",
+    "youtube_url": "https://www.youtube.com/watch?v=LgPG0MZPI84",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-full-planche",
+    "slug": "full-planche",
+    "name": "Planche",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Triceps",
+      "Full Body"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Legs together",
+      "Full protraction",
+      "Elbows locked"
+    ],
+    "difficulty_level": 2,
+    "description": "Legs together, body perfectly horizontal, arms straight. Years of work distilled into one hold.",
+    "sets_reps": "5–8",
+    "youtube_url": "https://www.youtube.com/watch?v=LgPG0MZPI84",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-chest-to-wall-handstand",
+    "slug": "chest-to-wall-handstand",
+    "name": "Chest-to-Wall Handstand",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Wrists"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Fingers spread, grip floor",
+      "Push floor away (shrug)",
+      "Ribs in, butt squeezed"
+    ],
+    "difficulty_level": 1,
+    "description": "Face the wall, walk feet up. Chest close to wall. Build the vertical line and shoulder endurance.",
+    "sets_reps": "4–5",
+    "youtube_url": "https://www.youtube.com/watch?v=olA58oW-21A",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-hs-shrugs",
+    "slug": "hs-shrugs",
+    "name": "Handstand Shrugs",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Traps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Shrug UP hard",
+      "Depress with control",
+      "Stay aligned"
+    ],
+    "difficulty_level": 3,
+    "description": "In chest-to-wall HS, shrug up and depress down. Builds the active support.",
+    "sets_reps": "3–4",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-wall-pull-aways",
+    "slug": "wall-pull-aways",
+    "name": "Wall Pull-Aways",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Wrists"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Gentle toe-off",
+      "Fingertip pressure for balance",
+      "Return to wall with control"
+    ],
+    "difficulty_level": 3,
+    "description": "In chest-to-wall HS, gently pull feet off wall and balance for 2–5 seconds. Return to wall.",
+    "sets_reps": "5–8",
+    "youtube_url": "https://www.youtube.com/watch?v=aZZ5USlEA7s",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-freestanding-handstand",
+    "slug": "freestanding-handstand",
+    "name": "Freestanding Handstand",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Wrists",
+      "Triceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Push floor away",
+      "Fingers grip for balance",
+      "Breathe and stack"
+    ],
+    "difficulty_level": 4,
+    "description": "The king of bodyweight skills. A freestanding handstand demonstrates mastery of balance and body control.",
+    "sets_reps": "8–12 attempts",
+    "youtube_url": "https://www.youtube.com/watch?v=olA58oW-21A",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-headstand",
+    "slug": "headstand",
+    "name": "Headstand",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Neck"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Weight in forearms, not head",
+      "Core tight",
+      "Stack hips over shoulders"
+    ],
+    "difficulty_level": 1,
+    "description": "The gateway inversion that builds shoulder stability and body awareness for more advanced inversions.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=_ZTSkpBjhu0",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-ring-support-hold",
+    "slug": "ring-support-hold",
+    "name": "Ring Support Hold",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Triceps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "rings"
+    ],
+    "cues": [
+      "Lock elbows",
+      "Depress shoulders",
+      "Rings touch body"
+    ],
+    "difficulty_level": 1,
+    "description": "Hold yourself on top of rings with locked arms. Rings touching sides of body.",
+    "sets_reps": "4–5",
+    "youtube_url": "https://www.youtube.com/watch?v=9PKChU9Ozs8",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-rto-support-hold",
+    "slug": "rto-support-hold",
+    "name": "RTO Support Hold",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Biceps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "rings"
+    ],
+    "cues": [
+      "Turn rings out",
+      "Lock elbows",
+      "Stay tall"
+    ],
+    "difficulty_level": 3,
+    "description": "Support hold with rings turned out 45–90°. Builds biceps tendon resilience.",
+    "sets_reps": "4–5",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-ring-dip",
+    "slug": "ring-dip",
+    "name": "Ring Dip",
+    "category": "Push",
+    "primary_muscles": [
+      "Chest",
+      "Triceps",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "rings"
+    ],
+    "cues": [
+      "Turn rings out at top",
+      "Shoulders below elbows",
+      "Control the descent"
+    ],
+    "difficulty_level": 3,
+    "description": "Full dip on rings. Deeper range than bars, higher instability demand.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=RFODjZQos8E",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-ring-row",
+    "slug": "ring-row",
+    "name": "Ring Row",
+    "category": "Pull",
+    "primary_muscles": [
+      "Back",
+      "Biceps",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "rings"
+    ],
+    "cues": [
+      "Body straight",
+      "Pull rings to chest",
+      "Squeeze shoulder blades"
+    ],
+    "difficulty_level": 1,
+    "description": "Inverted row on rings. Body straight, pull rings to chest.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=3EFH7EEorOU",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-false-grip-hold",
+    "slug": "false-grip-hold",
+    "name": "False Grip Hold",
+    "category": "Skills",
+    "primary_muscles": [
+      "Forearms",
+      "Wrists",
+      "Grip"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "rings"
+    ],
+    "cues": [
+      "Wrist crease over ring",
+      "Grip hard",
+      "Depress shoulders"
+    ],
+    "difficulty_level": 3,
+    "description": "Hang from rings with wrists over the rings (false grip). Builds the grip for ring muscle-ups.",
+    "sets_reps": "4–6",
+    "youtube_url": "https://www.youtube.com/watch?v=Xz-6EI1abKo",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-tuck-sit",
+    "slug": "tuck-sit",
+    "name": "Tuck Sit",
+    "category": "Core",
+    "primary_muscles": [
+      "Core",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor",
+      "parallettes"
+    ],
+    "cues": [
+      "Depress shoulders",
+      "Knees to chest",
+      "Arms straight"
+    ],
+    "difficulty_level": 1,
+    "description": "Lift off floor with tucked knees. Shoulders depressed, arms straight.",
+    "sets_reps": "4–5",
+    "youtube_url": "https://www.youtube.com/watch?v=cu0fHp8HCDo",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-seated-straddle-lift",
+    "slug": "seated-straddle-lift",
+    "name": "Seated Straddle Lift",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip Flexors",
+      "Core",
+      "Adductors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hands between legs",
+      "Lift both feet",
+      "Keep chest tall"
+    ],
+    "difficulty_level": 3,
+    "description": "Sit in a straddle, hands on floor between legs, lift feet off floor. Hold.",
+    "sets_reps": "4–5",
+    "youtube_url": "https://www.youtube.com/watch?v=7MNNGqec0Dc",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-frog-stand",
+    "slug": "frog-stand",
+    "name": "Frog Stand",
+    "category": "Skills",
+    "primary_muscles": [
+      "Core",
+      "Shoulders",
+      "Wrists"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Knees on triceps",
+      "Lean forward slowly",
+      "Gaze slightly forward"
+    ],
+    "difficulty_level": 1,
+    "description": "The foundational balance skill that builds wrist strength and body awareness for advanced hand balancing.",
+    "sets_reps": "4–5",
+    "youtube_url": "https://www.youtube.com/watch?v=7MNNGqec0Dc",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-elbow-lever",
+    "slug": "elbow-lever",
+    "name": "Elbow Lever",
+    "category": "Skills",
+    "primary_muscles": [
+      "Core",
+      "Shoulders",
+      "Wrists"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Elbow in hip crease",
+      "Lean forward",
+      "Spread fingers wide"
+    ],
+    "difficulty_level": 3,
+    "description": "A horizontal balance hold that creates the illusion of defying gravity.",
+    "sets_reps": "4–5",
+    "youtube_url": "https://www.youtube.com/watch?v=MhEUfmRGr6g",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-single-arm-elbow-lever",
+    "slug": "single-arm-elbow-lever",
+    "name": "Single Arm Elbow Lever",
+    "category": "Skills",
+    "primary_muscles": [
+      "Core",
+      "Shoulder",
+      "Wrist"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Shift weight to one arm",
+      "Extend free arm",
+      "Full body tension"
+    ],
+    "difficulty_level": 4,
+    "description": "The ultimate elbow lever progression—balancing your entire body on one arm.",
+    "sets_reps": "4–6",
+    "youtube_url": "https://www.youtube.com/watch?v=MhEUfmRGr6g",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-back-lever",
+    "slug": "back-lever",
+    "name": "Back Lever",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Biceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar",
+      "rings"
+    ],
+    "cues": [
+      "Straight arms",
+      "Hollow body",
+      "Depress shoulders"
+    ],
+    "difficulty_level": 3,
+    "description": "Hang face-down with body horizontal. Arms straight, full body tension.",
+    "sets_reps": "4–6",
+    "youtube_url": "https://www.youtube.com/watch?v=PVDP_WVkJtI",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-front-lever",
+    "slug": "front-lever",
+    "name": "Front Lever",
+    "category": "Skills",
+    "primary_muscles": [
+      "Lats",
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar",
+      "rings"
+    ],
+    "cues": [
+      "Depress shoulders",
+      "Straight arms",
+      "Squeeze glutes"
+    ],
+    "difficulty_level": 4,
+    "description": "Hang face-up with body horizontal. Straight arms, extreme lat and core demand.",
+    "sets_reps": "5–8",
+    "youtube_url": "https://www.youtube.com/watch?v=K2uOvPYeMi4",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-human-flag",
+    "slug": "human-flag",
+    "name": "Human Flag",
+    "category": "Skills",
+    "primary_muscles": [
+      "Obliques",
+      "Shoulders",
+      "Lats",
+      "Grip"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar"
+    ],
+    "cues": [
+      "Bottom arm pushes",
+      "Top arm pulls",
+      "Full body straight"
+    ],
+    "difficulty_level": 4,
+    "description": "An impressive display of lateral core strength and shoulder stability.",
+    "sets_reps": "4–6",
+    "youtube_url": "https://www.youtube.com/watch?v=NWskCNO3rCo",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-clutch-flag",
+    "slug": "clutch-flag",
+    "name": "Clutch Flag",
+    "category": "Skills",
+    "primary_muscles": [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar"
+    ],
+    "cues": [
+      "Underhand top, overhand bottom",
+      "Pull + push simultaneously",
+      "Body straight"
+    ],
+    "difficulty_level": 4,
+    "description": "A horizontal flag variation performed on a vertical bar with a unique grip.",
+    "sets_reps": "4–6",
+    "youtube_url": "https://www.youtube.com/watch?v=hBaHx4wPMbA",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-bent-arm-handstand",
+    "slug": "bent-arm-handstand",
+    "name": "Bent Arm Handstand",
+    "category": "Skills",
+    "primary_muscles": [
+      "Triceps",
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Elbows bent 90°",
+      "Head close to ground",
+      "Balance through wrists"
+    ],
+    "difficulty_level": 4,
+    "description": "A crocodile-style handstand that requires tremendous tricep and shoulder strength.",
+    "sets_reps": "4–6",
+    "youtube_url": "https://www.youtube.com/watch?v=ozk8SOD3FCY",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-straddle-hs-kick-up",
+    "slug": "straddle-hs-kick-up",
+    "name": "Straddle Handstand Kick-Ups",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Straddle legs wide on kick",
+      "Hands shoulder-width",
+      "Stack hips over shoulders"
+    ],
+    "difficulty_level": 1,
+    "description": "A straddle-leg kick-up for controlled handstand entry. Develops coordination and reduces fear of inversion.",
+    "sets_reps": "5–8",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-handstand-bail",
+    "slug": "handstand-bail",
+    "name": "Handstand Exits / Bail-Outs",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Wrists"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Turn hand, step down to side",
+      "Keep arms straight during bail",
+      "Land on feet, not knees"
+    ],
+    "difficulty_level": 3,
+    "description": "Learn to safely exit a handstand via cartwheel turn-out or pirouette bail. Eliminates fear of falling and enables confident freestanding practice.",
+    "sets_reps": "5–8",
+    "youtube_url": "https://www.youtube.com/watch?v=nShYhQLCbgE",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-dolphin-pose",
+    "slug": "dolphin-pose",
+    "name": "Dolphin Pose",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Hamstrings"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Forearms parallel on floor",
+      "Push hips high",
+      "Head between arms"
+    ],
+    "difficulty_level": 1,
+    "description": "Forearm down-dog position. Builds the shoulder opening and scapular strength needed for forearm stand.",
+    "sets_reps": "3–4",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-forearm-stand-toe-pulls",
+    "slug": "forearm-stand-toe-pulls",
+    "name": "Forearm Stand Toe Pulls",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Traps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Elbows under shoulders",
+      "Gentle toe-off from wall",
+      "Press forearms into floor"
+    ],
+    "difficulty_level": 3,
+    "description": "In a wall-supported forearm stand, gently pull toes off the wall to train balance. Develops the shoulder and core control for freestanding Pincha.",
+    "sets_reps": "5–8",
+    "youtube_url": "https://www.youtube.com/watch?v=cjL0-4DbpYY",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-forearm-stand-line-hold",
+    "slug": "forearm-stand-line-hold",
+    "name": "Forearm Stand Line Holds",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Traps",
+      "Serratus"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Stack hips over shoulders",
+      "Push forearms into floor",
+      "Squeeze glutes to close the line"
+    ],
+    "difficulty_level": 4,
+    "description": "A straight-line forearm stand held away from the wall. The culmination of Pincha training—demands shoulder stability and refined balance.",
+    "sets_reps": "6–10 attempts",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-elbow-stand-wall-hold",
+    "slug": "elbow-stand-wall-hold",
+    "name": "Elbow Stand Wall Holds",
+    "category": "Skills",
+    "primary_muscles": [
+      "Triceps",
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Hands flat, elbows bent",
+      "Weight in palms and forearms",
+      "Core tight, ribs in"
+    ],
+    "difficulty_level": 1,
+    "description": "Practice an elbow stand against a wall to build the tricep strength and balance awareness needed for freestanding elbow stands.",
+    "sets_reps": "4–6",
+    "youtube_url": "https://www.youtube.com/watch?v=HXVtKWV_sKY",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-elbow-stand-straddle-entry",
+    "slug": "elbow-stand-straddle-entry",
+    "name": "Elbow Stand Straddle Entry",
+    "category": "Skills",
+    "primary_muscles": [
+      "Triceps",
+      "Shoulders",
+      "Core",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Straddle wide on kick",
+      "Press through palms",
+      "Stack hips then close legs"
+    ],
+    "difficulty_level": 3,
+    "description": "A straddle-leg entry into elbow stand that develops control and reduces the momentum needed compared to a straight-leg kick.",
+    "sets_reps": "5–8",
+    "youtube_url": "https://www.youtube.com/watch?v=FtTzceXNMPw",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-elbow-stand-exit",
+    "slug": "elbow-stand-exit",
+    "name": "Elbow Stand Exits",
+    "category": "Skills",
+    "primary_muscles": [
+      "Triceps",
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Tuck chin on exit",
+      "Roll through upper back",
+      "Control the descent speed"
+    ],
+    "difficulty_level": 3,
+    "description": "Learn to safely exit an elbow stand by rolling out or stepping down. Protects the face and neck and builds confidence for longer holds.",
+    "sets_reps": "5–8",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-dead-hang",
+    "slug": "dead-hang",
+    "name": "Dead Hang",
+    "category": "Pull",
+    "primary_muscles": [
+      "Grip",
+      "Forearms",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar"
+    ],
+    "cues": [
+      "Full grip around bar",
+      "Relax shoulders (passive) or depress (active)",
+      "Breathe normally"
+    ],
+    "difficulty_level": 1,
+    "description": "Hang from a bar with relaxed shoulders (passive) or depressed shoulders (active). Builds grip endurance and decompresses the spine.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=fq9gDvNZQ2c",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-towel-hang",
+    "slug": "towel-hang",
+    "name": "Towel Hang",
+    "category": "Pull",
+    "primary_muscles": [
+      "Grip",
+      "Forearms",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "pull-up bar",
+      "towel"
+    ],
+    "cues": [
+      "Grip towel tightly",
+      "Shoulders depressed",
+      "No swinging"
+    ],
+    "difficulty_level": 1,
+    "description": "Hang from a towel draped over a pull-up bar. The thick, pliable surface forces forearms to work significantly harder than a standard bar hang.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=UpP-77-GeLA",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-extensor-band",
+    "slug": "extensor-band",
+    "name": "Extensor Band Exercises",
+    "category": "Mobility",
+    "primary_muscles": [
+      "Forearm Extensors",
+      "Fingers"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "resistance band"
+    ],
+    "cues": [
+      "Spread fingers against band",
+      "Full extension each rep",
+      "Controlled tempo"
+    ],
+    "difficulty_level": 1,
+    "description": "Use finger extensor bands to strengthen the often-neglected forearm extensors. Prevents imbalances from heavy grip work and reduces elbow injury risk.",
+    "sets_reps": "2–3",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-seated-pike-lift",
+    "slug": "seated-pike-lift",
+    "name": "Seated Pike Compression Lifts",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip Flexors",
+      "Core",
+      "Quadriceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Knees locked straight",
+      "Chest tall, lean slightly forward",
+      "Lift from hip flexors"
+    ],
+    "difficulty_level": 1,
+    "description": "Seated with legs together and straight, lift both feet off the floor using hip flexors. Builds the active compression needed for L-sit and press handstand.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=3f6tRHAsjFo",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-lunge",
+    "slug": "lunge",
+    "name": "Lunges",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Step length allows 90° at both knees",
+      "Upright torso",
+      "Control the descent"
+    ],
+    "difficulty_level": 1,
+    "description": "Forward or reverse lunge with control. Develops single-leg strength, balance, and hip stability as a foundation for pistol and shrimp squat progressions.",
+    "sets_reps": "3",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-cossack-squat",
+    "slug": "cossack-squat",
+    "name": "Cossack Squat",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Adductors",
+      "Glutes",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Heel down on working leg",
+      "Chest up",
+      "Straight leg toes point up"
+    ],
+    "difficulty_level": 1,
+    "description": "A deep side-to-side squat that develops hip mobility, adductor flexibility, and single-leg strength. Essential for well-rounded lower body development.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=JaCbmoDqUc4",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-wall-compression-stretch",
+    "slug": "wall-compression-stretch",
+    "name": "Wall Compression Stretch",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip Flexors",
+      "Core",
+      "Hamstrings"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Chest to thighs",
+      "Straight legs against wall",
+      "Breathe into the fold"
+    ],
+    "difficulty_level": 1,
+    "description": "Face a wall, place feet up the wall and actively compress chest to thighs. Builds the deep pike compression needed for press to handstand.",
+    "sets_reps": "3–4",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-elevated-chair-compression",
+    "slug": "elevated-chair-compression",
+    "name": "Elevated Chair Compression Drill",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip Flexors",
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "chair"
+    ],
+    "cues": [
+      "Depress shoulders on blocks",
+      "Squeeze legs to chest",
+      "Lift hips above shoulders"
+    ],
+    "difficulty_level": 3,
+    "description": "Hands on a chair/blocks, actively compress and lift legs in pike or straddle. The elevated surface allows deeper compression range.",
+    "sets_reps": "3–4",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-crocodile-pose",
+    "slug": "crocodile-pose",
+    "name": "Crocodile Pose (One-Arm Balance)",
+    "category": "Skills",
+    "primary_muscles": [
+      "Core",
+      "Shoulders",
+      "Wrists",
+      "Obliques"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Elbow in hip crease",
+      "Extend legs back and to side",
+      "Lean until you float"
+    ],
+    "difficulty_level": 3,
+    "description": "A one-arm balance where the body extends laterally like a crocodile. Demands wrist strength, oblique engagement, and fearless lean.",
+    "sets_reps": "4–6",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-hspu-capacity-builder",
+    "slug": "hspu-capacity-builder",
+    "name": "HSPU Capacity Builder",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Triceps",
+      "Core",
+      "Traps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Slow eccentrics (3–5s down)",
+      "Pause at bottom",
+      "Press through full ROM"
+    ],
+    "difficulty_level": 3,
+    "description": "Wall-supported partial-range handstand push-up drills focusing on building pressing capacity. Eccentric-focused negatives and pause reps.",
+    "sets_reps": "4–5",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-band-assisted-progressions",
+    "slug": "band-assisted-progressions",
+    "name": "Band-Assisted Progressions",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Chest"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "resistance band",
+      "floor"
+    ],
+    "cues": [
+      "Band at hips for support",
+      "Maintain proper form despite assistance",
+      "Gradually reduce band tension"
+    ],
+    "difficulty_level": 1,
+    "description": "Resistance band assistance for planche leans, front lever attempts, and other advanced holds. Allows proper form practice before full bodyweight.",
+    "sets_reps": "3–5",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-straddle-press-to-hs",
+    "slug": "straddle-press-to-hs",
+    "name": "Straddle Press to Handstand",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Hip Flexors",
+      "Hamstrings"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Lean forward as hips rise",
+      "Straight arms throughout",
+      "Straddle legs until vertical then close"
+    ],
+    "difficulty_level": 4,
+    "description": "From standing straddle, fold forward, place hands, and press up through a straddle to handstand with straight arms. The ultimate compression strength demonstration.",
+    "sets_reps": "5–8",
+    "youtube_url": "https://www.youtube.com/watch?v=-xPx6-rbcfs",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-stalder-press-to-hs",
+    "slug": "stalder-press-to-hs",
+    "name": "Stalder Press to Handstand",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Hip Flexors",
+      "Adductors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Start from floor straddle",
+      "Lean hard forward",
+      "Compress and lift without momentum"
+    ],
+    "difficulty_level": 2,
+    "description": "From a seated straddle on the floor, press to handstand without jumping. Requires extreme compression strength and shoulder leverage. The pinnacle of press handstand mastery.",
+    "sets_reps": "5–8",
+    "youtube_url": "https://www.youtube.com/watch?v=S4QLsLT2wx8",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-childs-pose",
+    "slug": "childs-pose",
+    "name": "Child's Pose",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Spine",
+      "Hips",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Knees together or wide",
+      "Hips to heels",
+      "Forehead to floor"
+    ],
+    "difficulty_level": 1,
+    "description": "Kneel, sit back on heels, fold forward with arms extended. The universal rest and reset position.",
+    "sets_reps": "1–3",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-warrior-i",
+    "slug": "warrior-i",
+    "name": "Warrior I (Virabhadrasana I)",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Quadriceps",
+      "Hip Flexors",
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Back foot at 45°",
+      "Front knee over ankle",
+      "Arms reach high, shoulders down"
+    ],
+    "difficulty_level": 1,
+    "description": "Deep lunge with back foot angled, arms reaching overhead. Builds leg strength and hip flexibility.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=k4qaVoAbeHM",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-warrior-ii",
+    "slug": "warrior-ii",
+    "name": "Warrior II (Virabhadrasana II)",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Quadriceps",
+      "Hips",
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Front knee tracks over toes",
+      "Arms level, shoulders relaxed",
+      "Gaze past front hand"
+    ],
+    "difficulty_level": 1,
+    "description": "Wide stance, front knee bent, arms extended parallel to floor. Gaze over front fingers.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=QMr0JJfEgbM",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-warrior-iii",
+    "slug": "warrior-iii",
+    "name": "Warrior III (Virabhadrasana III)",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Hamstrings",
+      "Glutes",
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hips level and square",
+      "Back leg active",
+      "Core engaged, no arching"
+    ],
+    "difficulty_level": 3,
+    "description": "Standing on one leg, torso and back leg form a T-shape. Arms extend forward or alongside body.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=t-VgOxS9zRQ",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-tree-pose",
+    "slug": "tree-pose",
+    "name": "Tree Pose (Vrksasana)",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Core",
+      "Hips",
+      "Ankles",
+      "Glutes"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Foot presses into thigh, thigh presses back",
+      "Hips level",
+      "Gaze fixed on one point"
+    ],
+    "difficulty_level": 1,
+    "description": "Stand on one leg, place other foot on inner thigh or calf (never the knee). Hands at heart or overhead.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=yVE4XXFFO70",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-chair-pose",
+    "slug": "chair-pose",
+    "name": "Chair Pose (Utkatasana)",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes",
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Weight in heels",
+      "Knees behind toes",
+      "Arms by ears, shoulders down"
+    ],
+    "difficulty_level": 1,
+    "description": "Sit back as if into a chair, arms reaching overhead. Builds leg endurance and core stability.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=semq253gJOc",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-triangle-pose",
+    "slug": "triangle-pose",
+    "name": "Triangle Pose (Trikonasana)",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Hamstrings",
+      "Obliques",
+      "Hips",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hinge from hip, not waist",
+      "Both arms in one line",
+      "Gaze up at top hand"
+    ],
+    "difficulty_level": 1,
+    "description": "Wide stance, hinge at hip to reach one hand toward foot while other arm reaches skyward. Opens the entire side body.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=S6gB0QHbWFE",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-crow-pose",
+    "slug": "crow-pose",
+    "name": "Crow Pose (Bakasana)",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Core",
+      "Shoulders",
+      "Wrists",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Knees on backs of arms",
+      "Lean forward until feet lift",
+      "Gaze slightly forward"
+    ],
+    "difficulty_level": 3,
+    "description": "Squat, place hands on floor, lean forward and lift feet. The gateway arm balance that connects yoga to planche progression.",
+    "sets_reps": "4–6",
+    "youtube_url": "https://www.youtube.com/watch?v=Pu3KsHHM2II",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-half-moon-pose",
+    "slug": "half-moon-pose",
+    "name": "Half Moon Pose (Ardha Chandrasana)",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Glutes",
+      "Core",
+      "Hamstrings",
+      "Ankles"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Stack hips vertically",
+      "Flex lifted foot",
+      "Gaze up at top hand"
+    ],
+    "difficulty_level": 3,
+    "description": "Balance on one leg with torso and lifted leg parallel to floor, top arm reaching skyward. Demands balance, hip opening, and core stability.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=pMoBDGa_BT0",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-wheel-pose",
+    "slug": "wheel-pose",
+    "name": "Wheel Pose (Urdhva Dhanurasana)",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Spine",
+      "Shoulders",
+      "Glutes",
+      "Quadriceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Push through hands and feet",
+      "Straighten arms",
+      "Press chest through arms"
+    ],
+    "difficulty_level": 4,
+    "description": "Full back bridge pushing up from floor. Demands shoulder mobility, spinal extension, and hip flexor openness. The advanced expression of bridge pose.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=ViPnKbrc_bI",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-camel-pose",
+    "slug": "camel-pose",
+    "name": "Camel Pose (Ustrasana)",
+    "category": "Yoga",
+    "primary_muscles": [
+      "Spine",
+      "Hip Flexors",
+      "Chest",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Push hips forward over knees",
+      "Lift chest before arching",
+      "Head follows the arc naturally"
+    ],
+    "difficulty_level": 1,
+    "description": "Kneel, place hands on heels, and push hips forward while arching back. Opens the entire front body.",
+    "sets_reps": "2–3",
+    "youtube_url": "https://www.youtube.com/watch?v=VPp5n2MZO4c",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-press-hs-journey",
+    "slug": "press-hs-journey",
+    "name": "Press Handstand Journey Drills",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip Flexors",
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Focus on compression, not momentum",
+      "Straight arms always",
+      "Quality over quantity"
+    ],
+    "difficulty_level": 3,
+    "description": "A collection of drills combining pike compression, straddle lifts, and wall walks to build the specific strength for press to handstand.",
+    "sets_reps": "3–4",
+    "youtube_url": null,
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-pancake-stretch",
+    "slug": "pancake-stretch",
+    "name": "Pancake Stretch",
+    "category": "Mobility",
+    "primary_muscles": [
+      "Hamstrings",
+      "Adductors",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Wide straddle, toes up",
+      "Hinge from hips, not waist",
+      "Walk hands forward slowly"
+    ],
+    "difficulty_level": 3,
+    "description": "Sit in a wide straddle, fold chest to floor. The essential flexibility drill for straddle press, middle splits, and deep compression work.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=2nnhHj5YAIw",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-middle-split-hold",
+    "slug": "middle-split-hold",
+    "name": "Middle Split Hold",
+    "category": "Mobility",
+    "primary_muscles": [
+      "Adductors",
+      "Hamstrings",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Slide feet out gradually",
+      "Keep hips square",
+      "Breathe and relax into depth"
+    ],
+    "difficulty_level": 4,
+    "description": "Isometric hold in the full middle split position. Made iconic by Jean-Claude Van Damme. The pinnacle of hip adductor flexibility.",
+    "sets_reps": "3–4",
+    "youtube_url": "https://www.youtube.com/watch?v=0MJl4DjEMCE",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-releve",
+    "slug": "releve",
+    "name": "Relevé",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Calves",
+      "Ankles",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Weight over big toe",
+      "Squeeze inner thighs",
+      "Crown of head lifts"
+    ],
+    "difficulty_level": 1,
+    "description": "Stand tall, rise onto the balls of your feet with control, hold, and lower. Foundation for all ballet balance.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=unv8TS3JO6U",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-first-position-plie",
+    "slug": "first-position-plie",
+    "name": "First Position Plié",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Quads",
+      "Glutes",
+      "Inner Thighs",
+      "Calves"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Knees track over toes",
+      "Tailbone drops straight down",
+      "Heels stay grounded"
+    ],
+    "difficulty_level": 1,
+    "description": "Heels together, toes turned out. Bend knees over toes and rise with control. The most fundamental ballet movement.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=DrBhcopjDZQ",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-tendu",
+    "slug": "tendu",
+    "name": "Tendu",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Hip Flexors",
+      "Ankles",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Brush floor with toes",
+      "Keep hips square",
+      "Weight stays on standing leg"
+    ],
+    "difficulty_level": 1,
+    "description": "Slide foot along the floor extending to a fully pointed position and return. Builds foot articulation and turnout control.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=zeSVHYSMItg",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-grand-plie",
+    "slug": "grand-plie",
+    "name": "Grand Plié",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Quads",
+      "Glutes",
+      "Inner Thighs",
+      "Calves",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Descend slowly with control",
+      "Knees wide over toes",
+      "Rise without momentum"
+    ],
+    "difficulty_level": 1,
+    "description": "Full depth plié where heels may rise in first position. Develops deep hip mobility and leg endurance.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=k70uyYKlIU0",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-port-de-bras",
+    "slug": "port-de-bras",
+    "name": "Port de Bras",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Shoulders",
+      "Core",
+      "Lats"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Fingers lead the movement",
+      "Shoulders stay down",
+      "Breathe with each port"
+    ],
+    "difficulty_level": 1,
+    "description": "Flowing arm movements through ballet positions. Develops shoulder mobility, upper body coordination, and expressive movement quality.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=87qF6UGrG9o",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-passe-balance",
+    "slug": "passe-balance",
+    "name": "Passé Balance",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Glutes",
+      "Core",
+      "Ankles",
+      "Hip Flexors"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hips stay level",
+      "Standing leg straight",
+      "Spot a fixed point"
+    ],
+    "difficulty_level": 1,
+    "description": "Stand on one leg while the other foot draws up to the knee in turnout. Core balance and hip stability in action.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=TqAxGUXxesU",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-arabesque-hold",
+    "slug": "arabesque-hold",
+    "name": "Arabesque Hold",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Glutes",
+      "Hamstrings",
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hips square to front",
+      "Lift from the glute not the back",
+      "Long through the crown"
+    ],
+    "difficulty_level": 3,
+    "description": "Stand on one leg with the other extended behind, torso upright. Develops posterior chain strength, balance, and body line awareness.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=ACuVnmS7h9A",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-developpe",
+    "slug": "developpe",
+    "name": "Développé",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Hip Flexors",
+      "Quads",
+      "Core",
+      "Hamstrings"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Unfold slowly with control",
+      "Keep hips level",
+      "Extend through the heel"
+    ],
+    "difficulty_level": 3,
+    "description": "Draw foot up the standing leg to passé then unfold to full extension. Tests hip flexor strength and hamstring flexibility simultaneously.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=0oVrVwlpXAI",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-rond-de-jambe",
+    "slug": "rond-de-jambe",
+    "name": "Rond de Jambe",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Hip Flexors",
+      "Glutes",
+      "Core",
+      "Inner Thighs"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Maintain turnout throughout",
+      "Hips stay square",
+      "Smooth continuous arc"
+    ],
+    "difficulty_level": 3,
+    "description": "Trace a semi-circle on the floor with the working leg. Develops hip joint range of motion and standing leg stability.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=z-fYrgfn61o",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-grand-battement",
+    "slug": "grand-battement",
+    "name": "Grand Battement",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Hip Flexors",
+      "Hamstrings",
+      "Core",
+      "Quads"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Kick from the hip not the knee",
+      "Standing leg stays straight",
+      "Control the descent"
+    ],
+    "difficulty_level": 4,
+    "description": "Powerful controlled kick to maximum height while maintaining posture. Builds dynamic flexibility and hip power.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=CgKXn1Evj-o",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-attitude-hold",
+    "slug": "attitude-hold",
+    "name": "Attitude Hold",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Glutes",
+      "Core",
+      "Hip Flexors",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Lift knee to hip height",
+      "Square hips",
+      "Open chest, crown lifts"
+    ],
+    "difficulty_level": 4,
+    "description": "Stand on one leg with the other lifted behind, knee bent at 90°. A sculptural position that demands balance and posterior chain engagement.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=aLA1mUjgdeI",
+    "created_by": null,
+    "visibility": "public"
+  },
+  {
+    "id": "tlc-import-penche",
+    "slug": "penche",
+    "name": "Penché",
+    "category": "Flexibility",
+    "primary_muscles": [
+      "Hamstrings",
+      "Glutes",
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Hinge from the hip",
+      "Back leg drives up as torso lowers",
+      "One continuous line"
+    ],
+    "difficulty_level": 2,
+    "description": "Tilt forward from arabesque until the back leg reaches vertical. The pinnacle of ballet balance and hamstring flexibility combined.",
+    "sets_reps": "3",
+    "youtube_url": "https://www.youtube.com/watch?v=_T-qmjgBGx4",
+    "created_by": null,
+    "visibility": "public"
+  }
+]

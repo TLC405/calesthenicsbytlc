@@ -39,7 +39,7 @@ export default function Train() {
   const [savedIds, setSavedIds] = useState<Set<string>>(new Set());
   const [savingId, setSavingId] = useState<string | null>(null);
 
-  useEffect(() => { if (!user) { navigate('/auth'); return; } loadData(); }, [user]);
+  useEffect(() => { if (!user) { navigate('/library'); return; } loadData(); }, [user]);
   useEffect(() => { if (days.length > 0) loadDayExercises(); }, [activeDay, days]);
 
   const loadData = async () => {

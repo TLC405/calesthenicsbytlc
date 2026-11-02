@@ -15,44 +15,44 @@ interface ThemeOption {
 const themes: ThemeOption[] = [
   {
     id: 'default',
-    name: 'Default',
-    tagline: 'Premium Purple',
-    primary: '#8B5CF6',
-    accent: '#3B82F6',
-    bg: '#FAFAFA',
-    text: '#1a1a2e',
+    name: 'I Got the Power',
+    tagline: 'Obsidian · Gold · Onyx',
+    primary: '#D5AC48',
+    accent: '#101011',
+    bg: '#080809',
+    text: '#F8EED5',
   },
   {
     id: 'vasa',
-    name: 'Vasa Fitness',
-    tagline: 'Orange & Teal',
-    primary: '#FF6B00',
-    accent: '#0D9488',
-    bg: '#FAFAFA',
+    name: 'VASA Studio',
+    tagline: 'Graphite · Racing Red · White',
+    primary: '#BE2235',
+    accent: '#54575E',
+    bg: '#F6F7F8',
     text: '#1a1a2e',
   },
   {
     id: 'planet-fitness',
     name: 'Planet Fitness',
-    tagline: 'Purple & Yellow',
-    primary: '#A4278D',
-    accent: '#F9F72E',
-    bg: '#120818',
-    text: '#F9F72E',
+    tagline: 'Royal Purple · Gold · Carbon',
+    primary: '#8232A1',
+    accent: '#F2D23D',
+    bg: '#1B1324',
+    text: '#FAF7FF',
   },
   {
     id: 'ymca',
     name: 'YMCA',
-    tagline: 'Red & Navy',
-    primary: '#E00034',
-    accent: '#1A3A5C',
-    bg: '#FAFAFA',
+    tagline: 'Ocean Blue · Teal · Cloud',
+    primary: '#087BAC',
+    accent: '#00A2A2',
+    bg: '#F3FAFB',
     text: '#1a1a2e',
   },
   {
     id: 'okc-thunder',
     name: 'OKC Thunder',
-    tagline: 'Thunder Up',
+    tagline: 'Navy · Thunder Blue · Orange',
     primary: '#007AC1',
     accent: '#EF3B24',
     bg: '#002D62',
@@ -62,7 +62,7 @@ const themes: ThemeOption[] = [
 
 export function useTheme() {
   const [theme, setThemeState] = useState<string>(() => {
-    return localStorage.getItem('power-theme') || 'default';
+    return typeof localStorage !== 'undefined' ? localStorage.getItem('power-theme') || 'default' : 'default';
   });
 
   useEffect(() => {
@@ -73,8 +73,14 @@ export function useTheme() {
       root.setAttribute('data-theme', theme);
     }
     localStorage.setItem('power-theme', theme);
+    window.dispatchEvent(new CustomEvent('power-theme-changed', { detail: theme }));
   }, [theme]);
 
+  useEffect(() => {
+    const sync = (event: Event) => setThemeState((event as CustomEvent<string>).detail);
+    window.addEventListener('power-theme-changed', sync);
+    return () => window.removeEventListener('power-theme-changed', sync);
+  }, []);
   return { theme, setTheme: setThemeState, themes };
 }
 
@@ -90,7 +96,7 @@ export function ThemeSwitcher() {
             key={t.id}
             onClick={() => setTheme(t.id)}
             className={cn(
-              "relative flex items-center gap-3 p-3 rounded-2xl border transition-all duration-200 text-left group",
+              "power-elevated relative flex items-center gap-3 p-3 rounded-2xl border transition-all duration-200 text-left group",
               isActive
                 ? "border-primary bg-primary/5 shadow-sm"
                 : "border-border/50 bg-card hover:border-border hover:shadow-sm"
@@ -98,7 +104,7 @@ export function ThemeSwitcher() {
           >
             {/* Color preview */}
             <div
-              className="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden border border-border/30"
+              className="w-12 h-12 rounded-xl flex-shrink-0 flex items-center justify-center overflow-hidden border-2 border-border/30"
               style={{ backgroundColor: t.bg }}
             >
               <div className="flex gap-0.5">

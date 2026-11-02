@@ -35,7 +35,7 @@ export function SetTracker({ sets, onChange, showWeight = false }: SetTrackerPro
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium mb-1">
+      <div className="flex items-center gap-1 sm:gap-2 text-xs text-muted-foreground font-medium mb-1">
         <span className="w-8 text-center">Set</span>
         <span className="flex-1 text-center">Reps</span>
         {showWeight && <span className="flex-1 text-center">Weight</span>}
@@ -43,16 +43,16 @@ export function SetTracker({ sets, onChange, showWeight = false }: SetTrackerPro
       </div>
       
       {sets.map((set, index) => (
-        <div key={index} className="flex items-center gap-2">
+        <div key={index} className="flex items-center min-w-0 gap-1 sm:gap-2">
           <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-medium">
             {index + 1}
           </span>
           
-          <div className="flex-1 flex items-center gap-1">
+          <div className="flex-1 min-w-0 flex items-center justify-center gap-0.5 sm:gap-1">
             <Button 
               variant="ghost" 
               size="icon" 
-              className="h-8 w-8"
+              className="h-10 w-9 shrink-0"
               onClick={() => updateSet(index, 'reps', Math.max(1, set.reps - 1))}
             >
               <Minus className="w-3 h-3" />
@@ -61,7 +61,7 @@ export function SetTracker({ sets, onChange, showWeight = false }: SetTrackerPro
               type="number"
               value={set.reps}
               onChange={(e) => updateSet(index, 'reps', parseInt(e.target.value) || 0)}
-              className="h-8 w-14 text-center neumorph-inset"
+              className="h-10 w-11 sm:w-14 min-w-0 text-center neumorph-inset px-1"
               min={1}
             />
             <Button 
@@ -80,7 +80,7 @@ export function SetTracker({ sets, onChange, showWeight = false }: SetTrackerPro
                 type="number"
                 value={set.weight || ''}
                 onChange={(e) => updateSet(index, 'weight', parseInt(e.target.value) || 0)}
-                className="h-8 w-16 text-center neumorph-inset"
+                className="h-10 w-12 sm:w-16 min-w-0 text-center neumorph-inset px-1"
                 placeholder="kg"
               />
             </div>
@@ -89,7 +89,7 @@ export function SetTracker({ sets, onChange, showWeight = false }: SetTrackerPro
           <Button 
             variant="ghost" 
             size="icon" 
-            className="h-8 w-8 text-muted-foreground hover:text-destructive"
+            className="h-10 w-9 shrink-0 text-muted-foreground hover:text-destructive"
             onClick={() => removeSet(index)}
             disabled={sets.length <= 1}
           >
@@ -101,7 +101,7 @@ export function SetTracker({ sets, onChange, showWeight = false }: SetTrackerPro
       <Button 
         variant="outline" 
         size="sm" 
-        className="w-full mt-2 neumorph-flat"
+        className="w-full min-h-11 mt-2 neumorph-flat"
         onClick={addSet}
       >
         <Plus className="w-4 h-4 mr-1" />

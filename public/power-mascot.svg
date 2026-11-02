@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 750" role="img" aria-labelledby="title desc">
+<title id="title">POWER cartoon training mascot</title>
+<desc id="desc">Original illustrated superhero athlete with a black training suit, gold details, broad shoulders and crossed arms. Concept art, not a portrait of a real person.</desc>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="325" cy="346" r="264" stroke="#9e7432" stroke-width="2" opacity=".38"/>
+  <circle cx="325" cy="346" r="235" stroke="#e7b34f" stroke-width="8" opacity=".72"/>
+  <circle cx="325" cy="346" r="216" stroke="#8c6626" stroke-width="2" stroke-dasharray="11 19"/>
+  <path d="M52 380h65M533 380h65M325 49v52" stroke="#f3ca67" stroke-width="5"/>
+</g>
+<!-- powerful torso -->
+<path d="M224 337Q181 351 135 387Q94 445 78 598L108 710H543L573 599Q559 430 505 381Q459 348 420 338Z" fill="#0b0e0f" stroke="#050505" stroke-width="15"/>
+<path d="M190 370L227 352L323 404L424 351L460 376L468 710H179Z" fill="#21201a" stroke="#a47930" stroke-width="8"/>
+<path d="M228 405L323 453L423 405M196 534H454M217 613H437" fill="none" stroke="#b88c36" stroke-width="4" opacity=".6"/>
+<path d="M249 359L323 407L397 359" fill="none" stroke="#f5cf72" stroke-width="13"/>
+<path d="M259 465L323 486L387 465" fill="none" stroke="#b88830" stroke-width="7"/>
+<!-- neck -->
+<path d="M265 275L259 359Q276 394 325 401Q377 392 390 359L381 271Z" fill="#a66d42" stroke="#17120e" stroke-width="11"/>
+<path d="M287 329L326 357L362 329L360 377L326 390L287 377Z" fill="#ce925e"/>
+<!-- ears and head -->
+<path d="M242 205Q230 184 217 211Q211 244 242 252Z" fill="#b37b4e" stroke="#24150f" stroke-width="10"/>
+<path d="M410 205Q427 179 438 213Q441 245 409 254Z" fill="#b37b4e" stroke="#24150f" stroke-width="10"/>
+<path d="M239 189Q239 95 327 93Q412 95 418 188L406 282Q374 338 325 348Q272 340 246 287Z" fill="#c48a57" stroke="#1b140e" stroke-width="13"/>
+<path d="M244 194Q247 132 286 119Q304 112 326 114Q386 104 408 161L412 196Q372 178 346 164Q281 185 244 194Z" fill="#141415" stroke="#0a0a0b" stroke-width="12"/>
+<!-- sculptural face highlights -->
+<path d="M263 198L281 190M370 189L390 198" stroke="#e7b17b" stroke-width="9"/>
+<path d="M271 218Q292 203 308 218M345 218Q361 206 380 218" stroke="#1e1714" stroke-width="9" fill="none"/>
+<path d="M280 227H303M351 226H371" stroke="#f7e0bb" stroke-width="5"/>
+<path d="M324 221L311 265Q322 272 338 264" fill="none" stroke="#8a5537" stroke-width="7"/>
+<path d="M293 285Q322 304 359 286" stroke="#3f2920" stroke-width="9"/>
+<path d="M272 280Q287 318 325 323Q364 316 382 278Q378 321 345 341Q325 351 306 339Q269 328 272 280Z" fill="#1d1815"/>
+<path d="M287 301Q323 314 361 302" stroke="#ae774e" stroke-width="4"/>
+<!-- broad left shoulder -->
+<path d="M228 362Q154 348 116 402Q87 455 108 514Q135 552 211 532L268 470Z" fill="#c68a50" stroke="#1b140f" stroke-width="15"/>
+<path d="M131 426Q147 391 184 392M112 468Q125 503 164 508" stroke="#edb66b" stroke-width="11"/>
+<path d="M202 368Q178 400 183 449" stroke="#845629" stroke-width="8"/>
+<!-- broad right shoulder -->
+<path d="M425 361Q501 347 538 401Q565 452 549 514Q513 555 437 530L382 469Z" fill="#c88f55" stroke="#1b140f" stroke-width="15"/>
+<path d="M459 384Q510 388 531 433M489 506Q532 497 538 464" stroke="#f5c67a" stroke-width="10"/>
+<path d="M447 372Q468 410 458 454" stroke="#825126" stroke-width="8"/>
+<!-- crossed arms -->
+<path d="M135 500Q191 477 267 506L355 544Q390 550 436 526L488 496Q539 473 555 518Q568 559 518 587L423 636Q372 653 315 626L202 578Q150 579 118 554Q111 527 135 500Z" fill="#b97d48" stroke="#20150e" stroke-width="16"/>
+<path d="M512 500Q466 487 406 516L312 548Q266 551 220 528L171 501Q126 488 112 533Q110 569 153 591L245 637Q302 658 366 629L469 583Q523 585 545 550Q551 521 512 500Z" fill="#d59a5d" stroke="#24160e" stroke-width="16"/>
+<path d="M164 524Q207 530 260 556M479 527Q445 544 396 558M154 567Q193 600 249 603M499 556Q469 589 421 602" fill="none" stroke="#f0c078" stroke-width="10"/>
+<!-- forearm guards -->
+<path d="M256 615L296 634L343 616L320 562L276 552Z" fill="#121416" stroke="#d6a843" stroke-width="8"/>
+<path d="M362 619L406 600L388 554L343 569L335 609Z" fill="#121416" stroke="#d6a843" stroke-width="8"/>
+<path d="M289 588L316 598M360 588L386 579" stroke="#f4d27b" stroke-width="8"/>
+<!-- collar emblem -->
+<path d="M295 421L307 406L325 421L344 406L357 421L350 443H302Z" fill="#e7b64a" stroke="#654516" stroke-width="4"/>
+<text x="326" y="478" fill="#e8b946" font-family="Arial,Helvetica,sans-serif" font-weight="900" font-size="25" text-anchor="middle" letter-spacing="4">TLC</text>
+<path d="M142 696H508" stroke="#e7b64a" stroke-width="7" opacity=".9"/>
+</svg>

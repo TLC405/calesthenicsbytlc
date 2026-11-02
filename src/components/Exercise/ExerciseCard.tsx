@@ -1,7 +1,8 @@
-import { Plus, Dumbbell } from 'lucide-react';
-import { TlcPlayIcon } from './TlcPlayIcon';
+import { useState } from 'react';
+import { Plus, Dumbbell, X, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { ExerciseArtwork, getYouTubeId } from './ExerciseArtwork';
 
 interface Exercise {
   id: string;
@@ -24,11 +25,6 @@ interface ExerciseCardProps {
   onAddToWorkout?: (exercise: Exercise) => void;
 }
 
-const getYouTubeVideoId = (url: string): string | null => {
-  const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
-  return match && match[2].length === 11 ? match[2] : null;
-};
-
 const categoryStyle: Record<string, { color: string }> = {
   Push: { color: 'hsl(var(--cat-push))' },
   Pull: { color: 'hsl(var(--cat-pull))' },
@@ -44,55 +40,57 @@ const categoryStyle: Record<string, { color: string }> = {
 const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];
 
 export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: ExerciseCardProps) {
-  const videoId = exercise.youtube_url ? getYouTubeVideoId(exercise.youtube_url) : null;
-  const thumbnailUrl = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : exercise.image_url || null;
+  const [playing, setPlaying] = useState(false);
+  const videoId = getYouTubeId(exercise.youtube_url);
   const style = categoryStyle[exercise.category] || { color: 'hsl(var(--muted-foreground))' };
   const level = exercise.difficulty_level || 1;
 
   return (
     <div
-      className="group cursor-pointer rounded-2xl border border-border/40 bg-card overflow-hidden transition-all duration-300 hover:border-border hover:-translate-y-1 hover:shadow-lg"
-      onClick={() => onViewDetails(exercise)}
+      className="power-skeuo-card group relative min-w-0 cursor-pointer rounded-2xl border border-border/60 bg-card overflow-hidden transition-[border-color,box-shadow,transform] duration-200 hover:border-primary/40"
+      onClick={() => { if (!playing) onViewDetails(exercise); }}
       style={{ '--glow-color': `${style.color}20` } as any}
     >
       {/* Thumbnail */}
-      <div className="aspect-[16/10] bg-muted/30 relative overflow-hidden">
-        {thumbnailUrl ? (
-          <>
-            <img
-              src={thumbnailUrl}
-              alt={exercise.name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
-              onError={(e) => {
-                if (videoId) {
-                  const target = e.target as HTMLImageElement;
-                  if (target.src.includes('mqdefault')) target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                  else target.style.display = 'none';
-                }
-              }}
+      <div className="power-skeuo-screen aspect-[16/10] bg-muted/30 relative overflow-hidden">
+        {playing && videoId ? (
+          <div className="relative h-full w-full bg-black" onClick={(event) => event.stopPropagation()}>
+            <iframe
+              className="h-full w-full"
+              src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&playsinline=1&rel=0`}
+              title={`${exercise.name} video tutorial`}
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <button
+              type="button"
+              onClick={(event) => { event.stopPropagation(); setPlaying(false); }}
+              className="power-skeuo-button absolute right-2 top-2 z-20 grid h-9 w-9 place-items-center rounded-xl bg-black/80 text-white"
+              aria-label={`Close ${exercise.name} video`}
+            ><X className="h-4 w-4" /></button>
+          </div>
+        ) : (
+          <>
+            <ExerciseArtwork title={exercise.name} category={exercise.category}
+              youtubeUrl={exercise.youtube_url} imageUrl={exercise.image_url}
+              className="absolute inset-0" />
             {videoId && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 transition-all duration-200 scale-90 group-hover:scale-100">
-                  <TlcPlayIcon category={exercise.category} size="md" />
-                </div>
-              </div>
+              <button type="button" aria-label={`Play ${exercise.name} tutorial here`}
+                className="absolute inset-0 z-10 grid place-items-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
+                onClick={(event) => { event.stopPropagation(); setPlaying(true); }}>
+                <span className="power-skeuo-play flex h-14 w-14 items-center justify-center rounded-full text-white shadow-xl transition-transform group-hover:scale-105">
+                  <Play className="ml-1 h-7 w-7" fill="currentColor" />
+                </span>
+              </button>
             )}
           </>
-        ) : (
-          <div className="w-full h-full flex items-center justify-center relative">
-            <span className="text-4xl font-display font-black text-muted-foreground/5 uppercase select-none">
-              {exercise.name.substring(0, 3)}
-            </span>
-          </div>
         )}
 
         {/* Category pill */}
-        <div className="absolute top-3 left-3">
+        <div className="absolute top-2 left-2 sm:top-3 sm:left-3 pointer-events-none">
           <span
-            className="text-[8px] font-mono font-bold uppercase tracking-[0.12em] px-2 py-1 rounded-lg text-white backdrop-blur-sm"
+            className="text-[9px] font-mono font-bold uppercase tracking-[0.08em] px-2 py-1 rounded-lg text-white backdrop-blur-sm"
             style={{ backgroundColor: `${style.color}cc` }}
           >
             {exercise.category}
@@ -108,15 +106,15 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
       </div>
 
       {/* Content */}
-      <div className="p-3.5 space-y-2.5">
+      <div className="p-3 sm:p-3.5 space-y-2.5">
         <div>
-          <h3 className="font-display font-bold text-sm tracking-tight leading-tight line-clamp-1">{exercise.name}</h3>
-          <div className="flex items-center gap-2 mt-1">
+          <h3 className="font-display font-black text-sm sm:text-base tracking-tight leading-snug line-clamp-2 min-h-[2.4em]">{exercise.name}</h3>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-1">
             <span className="text-[9px] font-mono text-muted-foreground tracking-wide">{difficultyLabel[level]}</span>
-            {exercise.equipment.length > 0 && exercise.equipment[0] !== 'None' && (
+            {exercise.equipment?.length > 0 && exercise.equipment[0] !== 'None' && (
               <>
                 <span className="text-border">·</span>
-                <span className="text-[9px] font-mono text-muted-foreground tracking-wide flex items-center gap-0.5">
+                <span className="text-[9px] font-mono text-muted-foreground tracking-wide flex items-center gap-0.5 min-w-0 truncate">
                   <Dumbbell className="w-2.5 h-2.5" />{exercise.equipment[0]}
                 </span>
               </>
@@ -127,7 +125,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
         {/* Muscles */}
         <div className="flex flex-wrap gap-1">
           {exercise.primary_muscles.slice(0, 3).map(muscle => (
-            <span key={muscle} className="text-[7px] px-1.5 py-0.5 rounded-md bg-accent/60 text-muted-foreground font-mono border border-border/30">
+            <span key={muscle} className="text-[10px] px-1.5 py-0.5 rounded-md bg-accent/60 text-muted-foreground font-medium border border-border/30">
               {muscle}
             </span>
           ))}
@@ -139,11 +137,11 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
         {onAddToWorkout && (
           <Button
             size="sm"
-            className="w-full h-8 text-[8px] font-mono uppercase tracking-wider rounded-xl mt-1 bg-accent hover:bg-accent/80 text-foreground border border-border/50"
+            className="w-full min-h-11 text-[11px] font-sans font-bold rounded-xl mt-1 bg-primary/10 hover:bg-primary/20 text-foreground border border-primary/20"
             variant="ghost"
             onClick={(e) => { e.stopPropagation(); onAddToWorkout(exercise); }}
           >
-            <Plus className="w-3 h-3 mr-1" />Add to Workout
+            <Plus className="w-4 h-4 mr-1" />Add to Workout
           </Button>
         )}
       </div>

@@ -1,0 +1,43 @@
+name: POWER mobile layout checks
+
+on:
+  push:
+    branches: [feature/realtime-community-likes]
+    paths:
+      - 'src/**'
+      - 'scripts/mobile-layout-smoke.mjs'
+      - 'scripts/exercise-actions-smoke.mjs'
+      - '.github/workflows/mobile-layout-checks.yml'
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  mobile-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install dependencies
+        run: |
+          npm install --package-lock=false --no-audit --no-fund --legacy-peer-deps
+          npm install --no-save --package-lock=false --no-audit --no-fund playwright@1.56.1
+      - name: Install headless browser
+        run: npx playwright install --with-deps chromium
+      - name: Build guest app
+        run: npm run build
+      - name: Start real app and check mobile layouts
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/power-preview.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/library > /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/mobile-layout-smoke.mjs
+          node scripts/exercise-actions-smoke.mjs
