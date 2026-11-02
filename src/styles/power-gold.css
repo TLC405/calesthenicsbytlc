@@ -128,9 +128,9 @@
 .power-splash-main { flex:1; display:flex; flex-direction:column; justify-content:center; padding-block:20px 50px; }
 .power-splash-hero { min-height:480px; }
 .power-splash-hero .power-hero-content { width:65%; }
-.power-bottom-bar { border-top:1px solid rgba(233,188,104,.38) !important; background:#080a0b !important; }
-.power-bottom-tab-active { color:#e9bc68 !important; }
-.power-bottom-indicator { background:#e9bc68 !important; box-shadow:0 0 10px rgba(233,188,104,.3) !important; }
+[data-theme="power-gold"] .power-bottom-bar { border-top:1px solid rgba(233,188,104,.38) !important; background:#080a0b !important; }
+[data-theme="power-gold"] .power-bottom-tab-active { color:#e9bc68 !important; }
+[data-theme="power-gold"] .power-bottom-indicator { background:#e9bc68 !important; box-shadow:0 0 10px rgba(233,188,104,.3) !important; }
 @media(max-width:640px) {
  .power-container {width:calc(100% - 26px)}
  .power-topinner {min-height:61px}
