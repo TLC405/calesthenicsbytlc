@@ -16,11 +16,11 @@ const themes: ThemeOption[] = [
   {
     id: 'default',
     name: 'I Got the Power',
-    tagline: 'Cobalt · Charcoal · Ember',
-    primary: '#2866CC',
-    accent: '#202B39',
-    bg: '#F3F5F8',
-    text: '#172334',
+    tagline: 'Obsidian · Gold · Onyx',
+    primary: '#D5AC48',
+    accent: '#101011',
+    bg: '#080809',
+    text: '#F8EED5',
   },
   {
     id: 'vasa',
