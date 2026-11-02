@@ -101,9 +101,13 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   const initAttempted = useRef(false);
   const pendingIntroRef = useRef(false);
   const pendingPlaybackRef = useRef(false);
+  const appliedUrlRef = useRef<string | null>(null);
+  const transferRef = useRef<{ videoId: string; seconds: number; playing: boolean; index: number } | null>(null);
   const [playerVisible, setPlayerVisible] = useState(false);
   const [inlineTarget, setInlineTarget] = useState<HTMLElement | null>(null);
   const [playbackError, setPlaybackError] = useState<string | null>(null);
+  const placementRef = useRef({ musicEnabled, playerVisible, inlineTarget });
+  placementRef.current = { musicEnabled, playerVisible, inlineTarget };
 
   // Home intro supplies an inline mount point, keeping the YouTube embed in the page rather than a floating popup.
   useEffect(() => {
@@ -155,11 +159,12 @@ export function MusicProvider({ children }: { children: ReactNode }) {
       if (!containerRef.current || playerRef.current) return;
 
       const config = getPlayerConfig();
+      const transfer = transferRef.current;
       
       playerRef.current = new window.YT.Player(containerRef.current, {
         height: '224',
         width: '224',
-        videoId: config.videoId,
+        videoId: transfer?.videoId || config.videoId,
         playerVars: {
           autoplay: 0,
           loop: 1,
@@ -168,10 +173,17 @@ export function MusicProvider({ children }: { children: ReactNode }) {
           fs: 1,
           playsinline: 1,
           ...config.playerVars,
+          ...(transfer ? { start: Math.floor(transfer.seconds), index: transfer.index } : {}),
         },
         events: {
           onReady: (event: any) => {
             event.target.setVolume(volume);
+            appliedUrlRef.current = playlistUrl;
+            transferRef.current = null;
+            if (transfer) {
+              try { event.target.seekTo(transfer.seconds, true); } catch {}
+              if (transfer.playing) pendingPlaybackRef.current = true;
+            }
             setIsReady(true);
             if (pendingIntroRef.current || pendingPlaybackRef.current) {
               try {
@@ -216,17 +228,27 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled=true;
       if (playerRef.current?.destroy) {
+        const next = placementRef.current;
+        if (next.musicEnabled && next.playerVisible && next.inlineTarget !== inlineTarget) {
+          try {
+            const player = playerRef.current;
+            const videoId = player.getVideoData?.().video_id;
+            if (videoId) transferRef.current = { videoId, seconds: player.getCurrentTime?.() || 0, playing: player.getPlayerState?.() === 1, index: player.getPlaylistIndex?.() || 0 };
+          } catch {}
+        }
         try { playerRef.current.destroy(); } catch {}
         playerRef.current = null;
       }
       initAttempted.current = false;
       setIsReady(false);
+      setIsPlaying(false);
     };
   }, [musicEnabled, playerVisible, inlineTarget]); // Reattach safely if the intro mount unmounts
 
   // When playlist URL changes and player exists, load new content
   useEffect(() => {
-    if (!playerRef.current || !isReady) return;
+    if (!playerRef.current || !isReady || appliedUrlRef.current === playlistUrl) return;
+    appliedUrlRef.current = playlistUrl;
     const config = getPlayerConfig();
     try {
       if (pendingIntroRef.current) {
@@ -244,7 +266,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
 
   const togglePlay = useCallback(() => {
     if (playerRef.current && isReady && playerRef.current.getPlayerState?.() === 1) {
-      try { playerRef.current.pauseVideo(); setIsPlaying(false); } catch {}
+      try { pendingPlaybackRef.current = false; playerRef.current.pauseVideo(); setIsPlaying(false); } catch {}
       return;
     }
     setPlaybackError(null);
@@ -288,6 +310,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     setMusicEnabledState(enabled);
     localStorage.setItem('music_enabled', String(enabled));
     if (!enabled) {
+      transferRef.current = null;
       try { playerRef.current?.pauseVideo(); } catch {}
       setIsPlaying(false);
       setPlayerVisible(false);
@@ -307,6 +330,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const playIntroAnthem = useCallback(() => {
+    transferRef.current = null;
     pendingIntroRef.current = true;
     pendingPlaybackRef.current = true;
     setPlaybackError(null);
@@ -327,6 +351,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   }, [musicEnabled, isReady, volume]);
 
   const playUrl = useCallback((url: string) => {
+    transferRef.current = null;
     pendingIntroRef.current = false;
     pendingPlaybackRef.current = true;
     setPlaybackError(null);
@@ -339,6 +364,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   }, [musicEnabled]);
 
   const dismissPlayer = useCallback(() => {
+    transferRef.current = null;
     try { playerRef.current?.pauseVideo?.(); } catch {}
     pendingIntroRef.current = false;
     pendingPlaybackRef.current = false;

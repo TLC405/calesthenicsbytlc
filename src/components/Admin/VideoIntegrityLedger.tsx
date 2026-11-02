@@ -11,7 +11,7 @@ const statuses:ReviewStatus[]=['unverified','reachable','playable','movement_ver
 /** Human review evidence is separate from merely having a URL. This ledger is device-local. */
 export function VideoIntegrityLedger({owner}:{owner:string}) {
   const key=`power-video-reviews-v1:${owner}`;
-  const [reviews,setReviews]=useState<Review[]>(()=>{try{const x=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(x)?x:[];}catch{return[];}});
+  const [reviews,setReviews]=useState<Review[]>(()=>{try{const x=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(x)?x.filter((r:unknown):r is Review=>!!r&&typeof r==='object'&&typeof (r as Review).slug==='string'&&statuses.includes((r as Review).status)&&typeof (r as Review).checkedAt==='string'):[];}catch{return[];}});
   const [search,setSearch]=useState('');const [slug,setSlug]=useState(catalog[0].slug);
   const [status,setStatus]=useState<ReviewStatus>('unverified');
   const [creator,setCreator]=useState('');const [reason,setReason]=useState('');
