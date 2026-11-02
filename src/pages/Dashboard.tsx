@@ -1,222 +1,173 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
+import type { Database } from '@/integrations/supabase/types';
 import { useTheme } from '@/components/ThemeSwitcher';
 import { PowerAthleteArt } from '@/components/Brand/PowerAthleteArt';
+import { PowerDisciplineIcon, type PowerDiscipline } from '@/components/Brand/PowerDisciplineIcon';
 import { SkillTreeView } from '@/components/Progression/SkillTreeView';
+import { readGuestWorkouts } from '@/lib/offlineWorkouts';
 import {
-  Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp,
-  Palette, FileText, CircleDot, Hand, Dumbbell, Move, Shield, CalendarDays,
-  GitBranch, ChevronDown, ChevronUp, Users
+  Settings, LogOut, Sparkles, ArrowRight, ArrowUpRight, Library, Zap, Flame, TrendingUp,
+  Palette, FileText, CalendarDays, GitBranch, ChevronDown, ChevronUp, Users, Crown, Target,
 } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { NotificationBell } from '@/components/Community/NotificationBell';
 import { InstallPowerApp } from '@/components/InstallPowerApp';
 
-const disciplines = [
-  { label: 'Rings', search: 'rings', icon: CircleDot },
-  { label: 'Handstand', search: 'handstand', icon: Hand },
-  { label: 'Muscle-up', search: 'muscle-up', icon: Dumbbell },
-  { label: 'Mobility', search: 'mobility', icon: Move },
-  { label: 'Core', search: 'core', icon: Shield },
+type Profile = Pick<Database['public']['Tables']['profiles']['Row'], 'display_name' | 'streak_days' | 'total_xp' | 'level'>;
+type RecentWorkout = { id: string; date: string; notes: string | null; entries: unknown };
+const disciplines: { label: string; search: string; icon: PowerDiscipline }[] = [
+  { label: 'Planche', search: 'planche', icon: 'planche' },
+  { label: 'Handstand', search: 'handstand', icon: 'handstand' },
+  { label: 'Rings', search: 'rings', icon: 'rings' },
+  { label: 'Muscle-up', search: 'muscle-up', icon: 'muscle-up' },
+  { label: 'Mobility', search: 'mobility', icon: 'mobility' },
+  { label: 'Core', search: 'core', icon: 'core' },
 ];
-
 function greeting() {
   const hour = new Date().getHours();
-  if (hour < 6) return 'Good night';
-  if (hour < 12) return 'Good morning';
-  if (hour < 17) return 'Good afternoon';
-  return 'Good evening';
+  return hour < 6 ? 'Your next chapter starts here' : hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
 }
 
 export default function Dashboard() {
-  const { user, signOut } = useAuth();
+  const { user, signOut, loading: authLoading } = useAuth();
   const navigate = useNavigate();
-  const [profile, setProfile] = useState<any>(null);
-  const [recent, setRecent] = useState<any[]>([]);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [recent, setRecent] = useState<RecentWorkout[]>([]);
+  const [guestWorkouts, setGuestWorkouts] = useState(readGuestWorkouts);
   const [treeOpen, setTreeOpen] = useState(false);
   const [sevenDayWorkouts, setSevenDayWorkouts] = useState(0);
+  const [statsLoading, setStatsLoading] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const [reload, setReload] = useState(0);
   const { theme, setTheme, themes } = useTheme();
 
   useEffect(() => {
-    if (!user) return;
+    if (authLoading) return;
+    if (!user) {
+      const local = readGuestWorkouts();
+      setGuestWorkouts(local);
+      setProfile(null);
+      setRecent(local.slice(0, 5).map(workout => ({ ...workout, id: `local-${workout.date}` })));
+      setLoadError(false);
+      setStatsLoading(false);
+      return;
+    }
     let active = true;
+    setStatsLoading(true);
+    setLoadError(false);
     const load = async () => {
-      const weekStart = format(new Date(Date.now() - 6 * 86400000), 'yyyy-MM-dd');
-      const [{ data: profileData }, { data: workoutsData }, { count: weekTotal }] = await Promise.all([
-        supabase.from('profiles').select('*').eq('id', user.id).single(),
-        supabase.from('workouts').select('id, date, notes, entries').eq('user_id', user.id).order('date', { ascending: false }).limit(5),
-        supabase.from('workouts').select('id', { count: 'exact', head: true }).eq('user_id', user.id).gte('date', weekStart),
-      ]);
-      if (active) { setProfile(profileData); setRecent(workoutsData || []); setSevenDayWorkouts(weekTotal ?? 0); }
+      try {
+        const weekStart = format(new Date(Date.now() - 6 * 86400000), 'yyyy-MM-dd');
+        const [profileResult, workoutsResult, countResult] = await Promise.all([
+          supabase.from('profiles').select('display_name, streak_days, total_xp, level').eq('id', user.id).single(),
+          supabase.from('workouts').select('id, date, notes, entries').eq('user_id', user.id).order('date', { ascending: false }).limit(5),
+          supabase.from('workouts').select('id', { count: 'exact', head: true }).eq('user_id', user.id).gte('date', weekStart),
+        ]);
+        if (active) {
+          setProfile(profileResult.data);
+          setRecent(workoutsResult.data || []);
+          setSevenDayWorkouts(countResult.count ?? 0);
+          setLoadError(Boolean(profileResult.error || workoutsResult.error || countResult.error));
+        }
+      } catch {
+        if (active) { setLoadError(true); setProfile(null); setRecent([]); }
+      } finally {
+        if (active) setStatsLoading(false);
+      }
     };
-    load();
+    void load();
     return () => { active = false; };
-  }, [user]);
+  }, [user, authLoading, reload]);
 
-  const streak = profile?.streak_days ?? 0;
-  const xp = profile?.total_xp ?? 0;
-  const level = profile?.level ?? 1;
-  const name = profile?.display_name || 'Athlete';
-  const weekCount = sevenDayWorkouts;
-
+  const weekStart = format(new Date(Date.now() - 6 * 86400000), 'yyyy-MM-dd');
+  const guestWeekCount = guestWorkouts.filter(workout => workout.date >= weekStart).length;
+  const guestExerciseCount = guestWorkouts.reduce((sum, workout) => sum + workout.entries.length, 0);
+  const name = profile?.display_name;
+  const unavailable = authLoading || statsLoading || loadError;
+  const metrics = user ? [
+    { label: 'Day streak', value: `${profile?.streak_days ?? 0}`, unit: 'days', icon: Flame },
+    { label: 'Total XP', value: Number(profile?.total_xp ?? 0).toLocaleString(), unit: 'earned', icon: Zap },
+    { label: 'Last 7 days', value: `${sevenDayWorkouts}`, unit: 'sessions', icon: TrendingUp },
+  ] : [
+    { label: 'Training days', value: `${guestWorkouts.length}`, unit: 'logged', icon: CalendarDays },
+    { label: 'Exercises', value: `${guestExerciseCount}`, unit: 'logged', icon: Target },
+    { label: 'Last 7 days', value: `${guestWeekCount}`, unit: 'days trained', icon: TrendingUp },
+  ];
   const cycleTheme = () => {
-    const ids = themes.map(t => t.id);
+    const ids = themes.map(option => option.id);
     setTheme(ids[(ids.indexOf(theme) + 1) % ids.length]);
   };
-  const openLibrary = (search: string) => navigate('/library', { state: { search } });
 
-  return (
-    <div className="power-shell">
-      <header className="power-topbar">
-        <div className="power-container power-topinner">
-          <div className="power-brand">
-            <span className="power-mark">TLC</span>
-            <span className="power-brand-line" />
-            <div>
-              <div className="power-brand-label">Performance system</div>
-              <div className="power-smallprint" style={{ fontSize: 9 }}>{greeting()}, {name}</div>
-            </div>
-          </div>
-          <div className="flex items-center gap-1">
-            <InstallPowerApp compact />
-            <NotificationBell userId={user?.id} />
-            <button className="power-icon-button" aria-label="Change color theme" title="Change theme" onClick={cycleTheme}><Palette size={20} /></button>
-            <button className="power-icon-button" aria-label="Settings" onClick={() => navigate('/settings')}><Settings size={20} /></button>
-            {user ? (
-              <button className="power-icon-button" aria-label="Sign out" onClick={async () => { await signOut(); navigate('/dashboard'); }}><LogOut size={20} /></button>
-            ) : (
-              <button className="power-button power-button-outline" onClick={() => navigate('/library')}>Explore</button>
-            )}
+  return <div className="power-shell">
+    <a href="#power-main" className="power-skip-link">Skip to training</a>
+    <header className="power-topbar">
+      <div className="power-container power-topinner">
+        <Link to="/" className="power-brand" aria-label="POWER home">
+          <Crown className="power-brand-crown" size={27} strokeWidth={1.4} />
+          <span className="power-brand-wordmark"><small>I GOT THE</small><strong>POWER<span>.</span></strong></span>
+          <span className="power-brand-line" /><span className="power-brand-label">BY TLC</span>
+        </Link>
+        <nav className="power-desktop-nav" aria-label="Dashboard navigation">
+          <NavLink to="/dashboard">Overview</NavLink><NavLink to="/planner">Train</NavLink>
+          <NavLink to="/library">Library</NavLink><NavLink to="/community">Circle</NavLink>
+        </nav>
+        <div className="power-header-actions">
+          <InstallPowerApp compact />
+          {user && <NotificationBell userId={user.id} />}
+          <button className="power-icon-button" aria-label="Change color theme" title="Change theme" onClick={cycleTheme}><Palette size={18} /></button>
+          <Link className="power-icon-button" aria-label="Settings" to="/settings"><Settings size={18} /></Link>
+          {user && <button className="power-icon-button" aria-label="Sign out" onClick={async () => { await signOut(); navigate('/dashboard'); }}><LogOut size={18} /></button>}
+        </div>
+      </div>
+    </header>
+    <main id="power-main" className="power-container">
+      <div className="power-welcome"><p>{greeting()}{name ? `, ${name}` : ''}<span className="power-welcome-dot">.</span></p><span className="power-smallprint">YOUR BODY. YOUR POSSIBILITIES.</span></div>
+      <section className="power-hero" aria-labelledby="power-dashboard-title">
+        <PowerAthleteArt />
+        <div className="power-hero-content">
+          <p className="power-kicker">The calisthenics collection</p>
+          <h1 id="power-dashboard-title" className="power-hero-title"><span>Build</span><span>Your</span><span>Power<span className="power-title-stop">.</span></span></h1>
+          <p className="power-hero-copy"><span className="power-speed-mark" aria-hidden="true" />Train <i aria-hidden="true">/</i> Master <i aria-hidden="true">/</i> Evolve</p>
+          <p className="power-hero-description">Strength is a skill. Make it yours.</p>
+          <div className="power-hero-actions">
+            <Link className="power-button power-button-primary" to="/planner">Build workout <ArrowUpRight size={18} /></Link>
+            <Link className="power-button power-button-outline" to="/train">Start training <ArrowRight size={17} /></Link>
           </div>
         </div>
-      </header>
-
-      <main className="power-container">
-        <section className="power-hero" aria-labelledby="power-dashboard-title">
-          <PowerAthleteArt />
-          <div className="power-hero-content">
-            <p className="power-kicker">Calisthenics by TLC</p>
-            <h1 id="power-dashboard-title" className="power-hero-title"><span>Build</span><span>Your</span><span>Power</span></h1>
-            <p className="power-hero-copy">Train <span aria-hidden="true">·</span> Master <span aria-hidden="true">·</span> Evolve</p>
-            <div className="power-hero-actions">
-              <button className="power-button power-button-primary" onClick={() => navigate('/planner')}>
-                Build workout <ArrowRight size={18} />
-              </button>
-              <button className="power-button power-button-outline" onClick={() => navigate('/train')}>
-                Start training <Flame size={16} />
-              </button>
-            </div>
-          </div>
+        <span className="power-hero-side-label" aria-hidden="true">STRENGTH / CONTROL / MASTERY</span>
+        <span className="power-hero-corner power-hero-corner-top" aria-hidden="true" /><span className="power-hero-corner power-hero-corner-bottom" aria-hidden="true" />
+      </section>
+      <section className="power-rail" aria-label="Explore calisthenics disciplines">
+        <div className="power-rail-caption"><span>Find your focus</span><span>Explore the movements <ArrowUpRight size={12} /></span></div>
+        <div className="power-rail-grid">{disciplines.map(({ label, search, icon }) => <Link className="power-skill" key={label} to="/library" state={{ search }} title={`Browse ${label} exercises`}>
+          <span className="power-skill-icon"><PowerDisciplineIcon discipline={icon} /></span><span className="power-skill-name">{label}</span><span className="power-skill-underline" aria-hidden="true" />
+        </Link>)}</div>
+      </section>
+      <div className="power-main">
+        <div className="power-section-heading"><h2>Your training room</h2><span className="power-section-meta">Make your next move</span></div>
+        <section className="power-feature-grid" aria-label="Main features">
+          <Link className="power-feature" to="/train"><span className="power-feature-index">01 / TRAIN</span><CalendarDays className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Today's focus</span><span className="power-feature-desc">Step into your session</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
+          <button className="power-feature" onClick={() => setTreeOpen(value => !value)} aria-expanded={treeOpen} aria-controls="power-skill-tree"><span className="power-feature-index">02 / MASTER</span><GitBranch className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Skill tree</span><span className="power-feature-desc">See the path to your goal</span>{treeOpen ? <ChevronUp className="power-feature-arrow" size={18} /> : <ChevronDown className="power-feature-arrow" size={18} />}</button>
+          <Link className="power-feature" to="/ai-lab"><span className="power-feature-index">03 / EVOLVE</span><Sparkles className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">AI coach</span><span className="power-feature-desc">Find your next breakthrough</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
+          <Link className="power-feature" to="/community"><span className="power-feature-index">04 / CONNECT</span><Users className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Power Circle</span><span className="power-feature-desc">Progress is better together</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
         </section>
-
-        <section className="power-rail" aria-label="Explore calisthenics disciplines">
-          <p className="power-rail-label">Choose your discipline</p>
-          <div className="power-rail-grid">
-            {disciplines.map(({ label, search, icon: Icon }) => (
-              <button className="power-skill" key={label} onClick={() => openLibrary(search)} title={'Browse ' + label + ' exercises'}>
-                <span className="power-skill-icon"><Icon size={30} strokeWidth={1.6} /></span>
-                <span className="power-skill-name">{label}</span>
-                <span className="power-skill-underline" aria-hidden="true" />
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <div className="power-main">
-          <div className="power-section-heading">
-            <h2>Your performance</h2>
-            <span className="power-section-meta">Level {level}</span>
-          </div>
-          <section className="power-metrics" aria-label="Your actual performance stats">
-            {[
-              { label: 'Streak', value: String(streak) + 'd', icon: Flame },
-              { label: 'Total XP', value: Number(xp).toLocaleString(), icon: Zap },
-              { label: 'Last 7 days', value: String(weekCount), icon: TrendingUp },
-            ].map(({ label, value, icon: Icon }) => (
-              <div className="power-metric" key={label}>
-                <div className="power-metric-top"><Icon size={15} color="#E9BC68" /><span>{label}</span></div>
-                <div className="power-metric-number">{value}</div>
-              </div>
-            ))}
+        {treeOpen && <section id="power-skill-tree" className="power-tree-panel" aria-label="Skill progression tree"><div className="power-section-heading"><h2>Skill progressions</h2><button className="power-icon-button ml-auto" onClick={() => setTreeOpen(false)} aria-label="Close skill tree"><ChevronUp size={18} /></button></div><SkillTreeView onExerciseClick={() => navigate('/library')} /><Link className="power-text-link" to="/build">Build a workout around your skill <ArrowRight size={15} /></Link></section>}
+        <div className="power-training-grid">
+          <section className="power-progress-section" aria-labelledby="power-progress-title">
+            <div className="power-section-heading"><h2 id="power-progress-title">Your progress</h2><span className="power-section-meta">{user ? profile && !unavailable ? `LEVEL ${profile.level ?? 1}` : 'YOUR ACCOUNT' : 'ON THIS DEVICE'}</span></div>
+            <div className="power-metrics" aria-label="Your recorded performance" aria-busy={unavailable}>{metrics.map(({ label, value, unit, icon: Icon }) => <div className="power-metric" key={label}><div className="power-metric-top"><Icon size={15} /><span>{label}</span></div><div className="power-metric-number">{unavailable ? '—' : value}<span>{unit}</span></div></div>)}</div>
+            <p className="power-progress-note">{loadError ? 'Progress could not be loaded.' : user ? 'Built one session at a time.' : 'Your completed workouts stay on this device.'}{loadError && <button onClick={() => setReload(value => value + 1)}>Try again</button>}</p>
           </section>
-
-          <div className="power-section-heading">
-            <h2>Power controls</h2>
-            <span className="power-section-meta">Tap to explore</span>
-          </div>
-          <section className="power-feature-grid" aria-label="Main features">
-            <button className="power-feature" onClick={() => navigate('/train')}>
-              <CalendarDays className="power-feature-icon" size={31} strokeWidth={1.6} />
-              <span className="power-feature-title">Today's focus</span>
-              <span className="power-feature-desc">Open training session</span>
-              <ArrowRight className="power-feature-arrow" size={17} />
-            </button>
-            <button className="power-feature" onClick={() => setTreeOpen(v => !v)} aria-expanded={treeOpen} aria-controls="power-skill-tree">
-              <GitBranch className="power-feature-icon" size={31} strokeWidth={1.6} />
-              <span className="power-feature-title">Skill tree</span>
-              <span className="power-feature-desc">Real progression chains</span>
-              {treeOpen ? <ChevronUp className="power-feature-arrow" size={17} /> : <ChevronDown className="power-feature-arrow" size={17} />}
-            </button>
-            <button className="power-feature" onClick={() => navigate('/ai-lab')}>
-              <Sparkles className="power-feature-icon" size={31} strokeWidth={1.6} />
-              <span className="power-feature-title">AI coach</span>
-              <span className="power-feature-desc">Build with guidance</span>
-              <ArrowRight className="power-feature-arrow" size={17} />
-            </button>
-            <button className="power-feature" onClick={() => navigate('/community')}>
-              <Users className="power-feature-icon" size={31} strokeWidth={1.6} />
-              <span className="power-feature-title">Power Circle</span>
-              <span className="power-feature-desc">Post, like &amp; connect</span>
-              <ArrowRight className="power-feature-arrow" size={17} />
-            </button>
+          <section aria-labelledby="power-recent-title">
+            <div className="power-section-heading"><h2 id="power-recent-title">Recent training</h2><Link to="/library" className="power-text-link"><Library size={13} /> Library <ArrowUpRight size={13} /></Link></div>
+            {statsLoading || authLoading ? <div className="power-training-empty" role="status"><p>Loading your training…</p></div> : recent.length ? <div className="power-recent-list">{recent.map(workout => <Link key={workout.id} className="power-recent-row" to="/planner"><FileText size={20} /><span className="flex-1 min-w-0"><span className="block text-sm font-bold truncate">{workout.notes?.split('\n')[0] || 'Workout'}</span><span className="block power-smallprint">{workout.date ? format(parseISO(workout.date), 'MMM d') : 'Date unavailable'} · {Array.isArray(workout.entries) ? workout.entries.length : 0} exercises</span></span><ArrowUpRight size={16} /></Link>)}</div> : <div className="power-training-empty"><span className="power-empty-icon"><PowerDisciplineIcon discipline="rings" width={29} height={29} /></span><div><h3>{loadError ? 'Training is taking a moment' : 'Your story starts with a session.'}</h3><p>{loadError ? 'Try loading your progress again.' : 'Build a workout. Make your first mark.'}</p><Link to="/planner" className="power-text-link">Open workout builder <ArrowRight size={14} /></Link></div></div>}
           </section>
-
-          {treeOpen && (
-            <section id="power-skill-tree" className="power-tree-panel" aria-label="Skill progression tree">
-              <div className="power-section-heading">
-                <h2>Skill progressions</h2>
-                <button className="power-icon-button ml-auto" onClick={() => setTreeOpen(false)} aria-label="Close skill tree"><ChevronUp size={18}/></button>
-              </div>
-              <SkillTreeView onExerciseClick={() => navigate('/library')} />
-            </section>
-          )}
-
-          <div className="power-section-heading">
-            <h2>Recent training</h2>
-            <button onClick={() => navigate('/library')} className="power-smallprint ml-auto flex items-center gap-1 hover:underline">
-              <Library size={13}/> Library <ArrowRight size={13}/>
-            </button>
-          </div>
-          {recent.length ? (
-            <div className="power-recent-list">
-              {recent.map(workout => {
-                const entries = Array.isArray(workout.entries) ? workout.entries : [];
-                return (
-                  <button key={workout.id} className="power-recent-row" onClick={() => navigate('/planner')}>
-                    <FileText size={22} color="#E9BC68"/>
-                    <span className="flex-1 min-w-0">
-                      <span className="block text-sm font-bold truncate">{workout.notes?.split('\n')[0] || 'Workout'}</span>
-                      <span className="block power-smallprint">{workout.date ? format(parseISO(workout.date), 'MMM d') : 'Date unavailable'} · {entries.length} exercises</span>
-                    </span>
-                    <ArrowRight size={16} color="#E9BC68"/>
-                  </button>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="power-tree-panel">
-              <p className="power-smallprint mb-3">Your completed training sessions will appear here. Build your first session when you're ready.</p>
-              <button className="power-button power-button-outline" onClick={() => navigate('/planner')}><FileText size={15}/> Open builder</button>
-            </div>
-          )}
-          <div className="flex justify-between items-center mt-9 mb-5">
-            <p className="power-smallprint uppercase" style={{ letterSpacing: '.16em' }}>Truth · Love · Community</p>
-            <p className="power-smallprint">Powered by TLC</p>
-          </div>
         </div>
-      </main>
-    </div>
-  );
+        <footer className="power-footer"><span className="power-footer-tlc">TLC<span>TRUTH / LOVE / COMMUNITY</span></span><p>Built with purpose. <span>Powered by TLC.</span></p></footer>
+      </div>
+    </main>
+  </div>;
 }

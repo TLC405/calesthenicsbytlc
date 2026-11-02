@@ -95,8 +95,8 @@ export default function Index() {
 
           <div className="power-entry-visual">
             <div className="power-entry-mascot-stage">
-              <div className="power-entry-mascot-legend"><span>THE TLC ATHLETE</span><span>01 / CONCEPT</span></div>
-              <img src="/power-mascot.svg" alt="Original black-and-gold cartoon athlete mascot, a concept character rather than a portrait of you" className="power-entry-mascot" decoding="async" fetchPriority="high" />
+              <div className="power-entry-mascot-legend"><span>THE TLC ATHLETE</span><span>CONTROL / MASTERY</span></div>
+              <img src="/art/power-ring-athlete.webp" alt="Original illustrated calisthenics athlete holding a controlled support on gymnastics rings" width="1024" height="1536" className="power-entry-mascot" decoding="async" fetchPriority="high" />
               <div className="power-entry-mascot-caption"><Crown size={15}/> STRENGTH IS BUILT. <span>NOT BORN.</span></div>
             </div>
           </div>

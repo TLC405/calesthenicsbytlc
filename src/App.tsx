@@ -23,7 +23,6 @@ import NotFound from "./pages/NotFound";
 import Community from "./pages/Community";
 import Admin from "./pages/Admin";
 import "./styles/neumorph.css";
-import "./styles/power-gold.css";
 
 const queryClient = new QueryClient();
 

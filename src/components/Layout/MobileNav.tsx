@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 const tabs = [
   { path: '/planner', icon: Dumbbell, label: 'TRAIN', color: 'hsl(var(--cat-pull))' },
   { path: '/library', icon: LibraryIcon, label: 'EXERCISES', color: 'hsl(var(--cat-push))' },
-  { path: '/dashboard', icon: LayoutGrid, label: 'MORE', color: 'hsl(var(--cat-skills))' },
+  { path: '/dashboard', icon: LayoutGrid, label: 'HOME', color: 'hsl(var(--cat-skills))' },
 ];
 
 export function MobileNav() {
@@ -17,7 +17,7 @@ export function MobileNav() {
 
   return (
     <nav className="power-mobile-nav fixed inset-x-0 bottom-0 z-40 md:hidden" aria-label="Primary navigation">
-      <div className="bg-card/95 backdrop-blur-xl border-t border-border/70">
+      <div className="power-nav-surface bg-card/95 backdrop-blur-xl border-t border-border/70">
         <div className="flex items-stretch justify-around min-h-[4.25rem] max-w-lg mx-auto px-2 pt-1">
           {tabs.map(({ path, icon: Icon, label, color }) => {
             const isActive = location.pathname === path;
@@ -25,7 +25,7 @@ export function MobileNav() {
               <button
                 key={path}
                 onClick={() => navigate(path)}
-                className="flex flex-col items-center justify-center gap-1 min-w-0 flex-1 min-h-[4.25rem] relative group rounded-xl" aria-current={isActive ? "page" : undefined}
+                className="power-nav-item flex flex-col items-center justify-center gap-1 min-w-0 flex-1 min-h-[4.25rem] relative group rounded-xl" aria-current={isActive ? "page" : undefined}
               >
                 {isActive && (
                   <div
@@ -34,7 +34,7 @@ export function MobileNav() {
                   />
                 )}
                 <div className={cn(
-                  "w-10 h-9 rounded-xl flex items-center justify-center transition-colors duration-150",
+                  "power-nav-icon w-10 h-9 rounded-xl flex items-center justify-center transition-colors duration-150",
                   isActive
                     ? "bg-card border border-border/60 shadow-sm"
                     : "group-hover:bg-accent/50"
@@ -45,7 +45,7 @@ export function MobileNav() {
                   )} style={isActive ? { color } : undefined} />
                 </div>
                 <span className={cn(
-                  "text-[10px] font-sans uppercase tracking-[0.05em] transition-colors",
+                  "power-nav-label text-[10px] font-sans uppercase tracking-[0.05em] transition-colors",
                   isActive ? "text-foreground font-bold" : "text-muted-foreground font-medium"
                 )}>
                   {label}
