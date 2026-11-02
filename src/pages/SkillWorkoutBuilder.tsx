@@ -1,3 +1,4 @@
+import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ChevronDown, Dumbbell, Play, RefreshCw, RotateCcw, ShieldCheck, Trash2, Video } from 'lucide-react';
@@ -150,7 +151,7 @@ export default function SkillWorkoutBuilder() {
               {group.items.map(item=>(
                 <div key={item.key} className="power-builder-movement flex gap-3 items-center rounded-xl border border-border/50 bg-secondary/30 p-2">
                   <div className="h-[64px] w-[72px] shrink-0 overflow-hidden rounded-xl bg-secondary">
-                    <ExerciseArtwork compact title={item.exercise.name} category={item.exercise.category}
+                    <ExerciseArtwork compact title={item.exercise.name} category={exerciseLabel(item.exercise.slug,item.exercise.category)}
                       youtubeUrl={item.exercise.youtube_url} imageUrl={item.exercise.image_url}/>
                   </div>
                   <div className="min-w-0 flex-1 space-y-0.5">
@@ -158,7 +159,7 @@ export default function SkillWorkoutBuilder() {
                     <p className="text-[11px] text-muted-foreground">{item.sets} × {item.target} {item.metric==='seconds'?'sec':'reps'}</p>
                     <div className="flex gap-2 items-center">
                       {item.exercise.youtube_url && <span className="inline-flex gap-1 items-center text-[10px] text-primary"><Video className="h-3 w-3"/> Tutorial</span>}
-                      <span className="text-[10px] text-muted-foreground truncate">{item.exercise.category}</span>
+                      <span className="text-[10px] text-muted-foreground truncate">{exerciseLabel(item.exercise.slug,item.exercise.category)}</span>
                     </div>
                   </div>
                   <div className="flex flex-col shrink-0 gap-1">

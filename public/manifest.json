@@ -1,7 +1,7 @@
 {
   "name": "I GOT THE POWER",
   "short_name": "POWER",
-  "description": "Training, personal exercise library, live athlete community and AI coaching. Independent by TLC.",
+  "description": "Calisthenics skills, guided workouts and personal progress. Powered by TLC.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#070708",
@@ -29,29 +29,19 @@
   "screenshots": [],
   "shortcuts": [
     {
-      "name": "Exercise Library",
-      "url": "/library",
-      "description": "Browse 215 real exercises"
+      "name": "Skills",
+      "url": "/skills",
+      "description": "Choose a calisthenics progression"
     },
     {
-      "name": "AI Coach",
-      "url": "/ai-lab",
-      "description": "Intelligent training guidance"
+      "name": "Workout",
+      "url": "/build",
+      "description": "Build a workout around your skill"
     },
     {
-      "name": "Workout Planner",
-      "url": "/planner",
-      "description": "Plan your training sessions"
-    },
-    {
-      "name": "Power Circle",
-      "url": "/community",
-      "description": "Connect with athletes and share training milestones"
-    },
-    {
-      "name": "My Exercises",
-      "url": "/library?mine=1",
-      "description": "Manage exercises you created"
+      "name": "More",
+      "url": "/more",
+      "description": "Exercises, progress, music and appearance"
     }
   ],
   "id": "/power-independent-guest"

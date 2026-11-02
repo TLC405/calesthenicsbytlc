@@ -4,7 +4,7 @@ import { Target, Dumbbell, Menu } from 'lucide-react';
 /** One navigation bar. Secondary tools live on More, away from workout controls. */
 export function MobileNav() {
   const { pathname } = useLocation();
-  if (['/auth', '/admin-login', '/workout'].includes(pathname)) return null;
+  if (pathname === '/workout') return null;
   const items = [
     { path: '/skills', label: 'Skills', icon: Target, active: pathname === '/' || pathname.startsWith('/skills') },
     { path: '/build', label: 'Workout', icon: Dumbbell, active: ['/build', '/planner', '/train', '/routine-days'].includes(pathname) },

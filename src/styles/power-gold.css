@@ -263,13 +263,13 @@
 .power-simple-heading p:not(.power-simple-eyebrow) {font-size:14px;color:hsl(var(--muted-foreground));margin-top:9px;}
 .power-simple-eyebrow {display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.13em;color:hsl(var(--primary));}
 .power-skills-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
-.power-goal-card {min-width:0;padding:16px 13px;border:1px solid hsl(var(--border));border-radius:16px;background:linear-gradient(135deg,hsl(var(--primary) / .08),hsl(var(--card)) 65%);display:flex;flex-direction:column;min-height:193px;transition:border-color .15s;}
+.power-goal-card {min-width:0;padding:16px 13px;border:1px solid hsl(var(--border));border-radius:16px;background:linear-gradient(135deg,hsl(var(--primary) / .08),hsl(var(--card)) 65%);display:flex;flex-direction:column;min-height:177px;transition:border-color .15s;}
 .power-goal-card:hover {border-color:hsl(var(--primary));}
 .power-goal-card-top {display:flex;justify-content:space-between;align-items:center;color:hsl(var(--primary));gap:8px;}
 .power-goal-card-top>span {font:500 10px monospace;color:hsl(var(--muted-foreground));}
-.power-goal-card h2 {font:700 clamp(15px,3.8vw,20px)/1.25 'Space Grotesk',sans-serif;margin-top:15px;overflow-wrap:anywhere;}
+.power-goal-card h2 {font:700 clamp(15px,3.8vw,20px)/1.25 'Space Grotesk',sans-serif;margin-top:12px;overflow-wrap:anywhere;}
 .power-goal-card p {font-size:11px;line-height:1.5;color:hsl(var(--muted-foreground));margin-top:6px;}
-.power-goal-card-footer {display:flex;align-items:center;justify-content:space-between;gap:5px;margin-top:auto;padding-top:17px;font-size:10px;color:hsl(var(--primary));}
+.power-goal-card-footer {display:flex;align-items:center;justify-content:space-between;gap:5px;margin-top:auto;padding-top:12px;font-size:10px;color:hsl(var(--primary));}
 .power-simple-resume,.power-simple-secondary {display:flex;align-items:center;gap:12px;min-height:52px;border:1px solid hsl(var(--primary) / .4);border-radius:12px;padding:12px;margin-bottom:16px;font-size:13px;font-weight:700;}
 .power-simple-resume>span {flex:1;}
 .power-simple-secondary {margin-top:20px;justify-content:space-between;}
@@ -300,7 +300,6 @@
  .power-goal-card{padding:14px 11px;}
 }
 @media(max-width:767px){
- body:has(input:not([type="checkbox"]):focus,textarea:focus,select:focus) .power-simple-nav{display:none;}
- input,textarea,select{font-size:16px;}
+ input,textarea,select{font-size:16px;scroll-margin-bottom:calc(var(--power-nav-space) + 24px);}
  .power-simple-page,.power-app-shell{scroll-padding-bottom:var(--power-nav-space);}
 }

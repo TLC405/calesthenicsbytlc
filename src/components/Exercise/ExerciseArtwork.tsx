@@ -39,7 +39,7 @@ export function ExerciseArtwork({ title, category = 'Training', youtubeUrl, imag
       {fallback ? (
         <div className="power-artwork-fallback absolute inset-0 flex flex-col justify-between p-3 sm:p-4" role="img" aria-label={`${title}: preview image not available`}>
           <span className={cn('flex items-center gap-1.5 text-[10px] font-black uppercase tracking-[.12em] text-primary', compact && 'hidden')}>
-            <Dumbbell className="h-4 w-4" /> POWER / {category}
+            <Dumbbell className="h-4 w-4" /> POWER / {category==='Push'||category==='Pull'?'Strength foundations':category}
           </span>
           <div className={cn('flex items-end justify-between gap-2', compact && 'h-full items-center justify-center')}>
             {!compact && <span className="line-clamp-2 min-w-0 text-lg font-display font-black leading-tight sm:text-xl text-foreground">{title}</span>}

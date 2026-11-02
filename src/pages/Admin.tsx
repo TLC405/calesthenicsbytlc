@@ -43,7 +43,7 @@ export default function Admin() {
     if (!authLoading && user) void refresh();
     if (!authLoading && !user) setAccess('denied');
   }, [user?.id, authLoading]);
-  if (authLoading || access === 'loading') return <div className="min-h-screen grid place-items-center text-sm text-muted-foreground">Verifying administrator access…</div>;
+  if (authLoading || (user && access === 'loading')) return <div className="min-h-screen grid place-items-center text-sm text-muted-foreground">Verifying administrator access…</div>;
   if (!user) return <Navigate to="/admin-login" replace />;
   if (access === 'denied') return (
     <main className="min-h-screen bg-background px-5 py-14 text-center">

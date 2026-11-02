@@ -1,3 +1,4 @@
+import { exerciseLabel } from '@/lib/exerciseLabels';
 import * as React from 'react';
 import { Minimize2, Maximize2, Volume2, ChevronDown, ChevronUp, Target, Dumbbell, Shield, Info, Clock } from 'lucide-react';
 import { TlcPlayIcon } from './TlcPlayIcon';
@@ -87,7 +88,7 @@ function DataSidebar({ data }: { data: ExerciseData }) {
         )}
         {data.category && (
           <span className="px-2 py-1 bg-secondary border border-border text-muted-foreground font-mono text-[9px] uppercase tracking-wider">
-            {data.category}
+            {exerciseLabel('',data.category || 'Training')}
           </span>
         )}
       </div>

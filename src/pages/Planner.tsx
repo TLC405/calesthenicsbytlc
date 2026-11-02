@@ -283,6 +283,7 @@ export default function Planner() {
           <div className="flex items-center gap-1 flex-shrink-0">
             <Button
               onClick={() => setCoachOpen(true)}
+              aria-label="Open workout coach"
               size="sm"
               variant="outline"
               className="h-10 w-10 sm:w-auto sm:px-3 text-[10px] font-mono uppercase tracking-wider rounded-xl gap-1"
@@ -292,6 +293,7 @@ export default function Planner() {
             </Button>
             <Button
               onClick={saveWorkout}
+              aria-label="Save custom workout"
               disabled={saving || totalExercises === 0}
               size="sm"
               className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl gap-1.5"
@@ -375,10 +377,6 @@ export default function Planner() {
           </div>
         </details>
 
-        <Button type="button" size="lg" onClick={() => setPickerSection('workout')}
-          className="w-full h-14 rounded-2xl font-display font-black text-sm uppercase tracking-wide power-skeuo-button">
-          <Plus className="h-5 w-5 mr-2" /> Add an Exercise
-        </Button>
         <button type="button" className="text-xs text-muted-foreground underline underline-offset-4"
           onClick={() => setShowAdvanced(value => !value)}>
           {showAdvanced ? 'Hide warm-up and recovery sections' : 'Add warm-up, mobility, or cool-down'}

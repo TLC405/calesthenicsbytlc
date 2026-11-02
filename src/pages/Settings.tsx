@@ -13,7 +13,7 @@ import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { Download, LogOut, User, Shield, Music, Link, Palette, Settings as SettingsIcon, Image } from 'lucide-react';
 
 export default function Settings() {
-  const { user, signOut } = useAuth();
+  const { user, signOut, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const music = useMusic();
@@ -25,7 +25,7 @@ export default function Settings() {
   const [siteConfig, setSiteConfig] = useState<Record<string, string>>({});
   const [configLoading, setConfigLoading] = useState(false);
 
-  useEffect(() => { if (!user) { navigate('/more', { replace: true }); return; } fetchProfile(); checkAdmin(); fetchSiteConfig(); }, [user, navigate]);
+  useEffect(() => { if (authLoading) return; if (!user) { navigate('/more', { replace: true }); return; } fetchProfile(); checkAdmin(); fetchSiteConfig(); }, [user, authLoading, navigate]);
   useEffect(() => { setPlaylistInput(music.playlistUrl); }, [music.playlistUrl]);
 
   const fetchProfile = async () => {
