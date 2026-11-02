@@ -27,7 +27,7 @@ for(const width of [320,393]) {
   };
   await test('POWER intro: accessible choices, optional sound and visible player',async()=>{
     await page.goto('http://127.0.0.1:4173/',{waitUntil:'domcontentloaded'});
-    await page.getByRole('heading',{name:/POWER/i}).waitFor({timeout:10000});
+    await page.getByRole('heading',{name:/POWER/i,level:1}).waitFor({timeout:10000});
     verify(await page.getByText('MASTER HUMAN STRENGTH.',{exact:true}).count()>0,'Intro strength message missing');
     const mascot=page.locator('.power-entry-mascot');
     verify(await mascot.count()===1,'Missing TLC cartoon character');
