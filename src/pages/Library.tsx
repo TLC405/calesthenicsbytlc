@@ -37,7 +37,7 @@ export default function Library() {
   const guestMode = !user;
   const ownerId = user?.id ?? LOCAL_USER_ID;
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState<string>((location.state as { search?: string } | null)?.search || '');
   const [activeCategory, setActiveCategory] = useState<string | null>((location.state as any)?.category || null);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
