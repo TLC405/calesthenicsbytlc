@@ -1,20 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import type { Database } from '@/integrations/supabase/types';
-import { useTheme } from '@/components/ThemeSwitcher';
 import { PowerAthleteArt } from '@/components/Brand/PowerAthleteArt';
 import { PowerDisciplineIcon, type PowerDiscipline } from '@/components/Brand/PowerDisciplineIcon';
-import { SKILL_PATHS } from '@/data/skillPaths';
 import { readGuestWorkouts } from '@/lib/offlineWorkouts';
 import {
   Settings, LogOut, Sparkles, ArrowRight, ArrowUpRight, Library, Zap, Flame, TrendingUp,
   Palette, FileText, CalendarDays, GitBranch, ChevronDown, ChevronUp, Users, Crown, Target,
 } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
-import { NotificationBell } from '@/components/Community/NotificationBell';
-import { InstallPowerApp } from '@/components/InstallPowerApp';
 
 type Profile = Pick<Database['public']['Tables']['profiles']['Row'], 'display_name' | 'streak_days' | 'total_xp' | 'level'>;
 type RecentWorkout = { id: string; date: string; notes: string | null; entries: unknown };
@@ -32,17 +28,14 @@ function greeting() {
 }
 
 export default function Dashboard() {
-  const { user, signOut, loading: authLoading } = useAuth();
-  const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [recent, setRecent] = useState<RecentWorkout[]>([]);
   const [guestWorkouts, setGuestWorkouts] = useState(readGuestWorkouts);
-  const [treeOpen, setTreeOpen] = useState(false);
   const [sevenDayWorkouts, setSevenDayWorkouts] = useState(0);
   const [statsLoading, setStatsLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
   const [reload, setReload] = useState(0);
-  const { theme, setTheme, themes } = useTheme();
 
   useEffect(() => {
     if (authLoading) return;
@@ -96,10 +89,7 @@ export default function Dashboard() {
     { label: 'Exercises', value: `${guestExerciseCount}`, unit: 'logged', icon: Target },
     { label: 'Last 7 days', value: `${guestWeekCount}`, unit: 'days trained', icon: TrendingUp },
   ];
-  const cycleTheme = () => {
-    const ids = themes.map(option => option.id);
-    setTheme(ids[(ids.indexOf(theme) + 1) % ids.length]);
-  };
+
 
   return <div className="power-shell">
     <a href="#power-main" className="power-skip-link">Skip to training</a>
@@ -110,17 +100,7 @@ export default function Dashboard() {
           <span className="power-brand-wordmark"><small>I GOT THE</small><strong>POWER<span>.</span></strong></span>
           <span className="power-brand-line" /><span className="power-brand-label">BY TLC</span>
         </Link>
-        <nav className="power-desktop-nav" aria-label="Dashboard navigation">
-          <NavLink to="/dashboard">Overview</NavLink><NavLink to="/planner">Train</NavLink>
-          <NavLink to="/library">Library</NavLink><NavLink to="/community">Circle</NavLink>
-        </nav>
-        <div className="power-header-actions">
-          <InstallPowerApp compact />
-          {user && <NotificationBell userId={user.id} />}
-          <button className="power-icon-button" aria-label="Change color theme" title="Change theme" onClick={cycleTheme}><Palette size={18} /></button>
-          <Link className="power-icon-button" aria-label="Settings" to="/settings"><Settings size={18} /></Link>
-          {user && <button className="power-icon-button" aria-label="Sign out" onClick={async () => { await signOut(); navigate('/dashboard'); }}><LogOut size={18} /></button>}
-        </div>
+        <Link className="power-icon-button" to="/more" aria-label="More tools"><Settings size={20}/></Link>
       </div>
     </header>
     <main id="power-main" className="power-container">
@@ -133,8 +113,8 @@ export default function Dashboard() {
           <p className="power-hero-copy"><span className="power-speed-mark" aria-hidden="true" />Train <i aria-hidden="true">/</i> Master <i aria-hidden="true">/</i> Evolve</p>
           <p className="power-hero-description">Strength is a skill. Make it yours.</p>
           <div className="power-hero-actions">
-            <Link className="power-button power-button-primary" to="/planner">Build workout <ArrowUpRight size={18} /></Link>
-            <Link className="power-button power-button-outline" to="/train">Start training <ArrowRight size={17} /></Link>
+            <Link className="power-button power-button-primary" to="/skills">Choose a skill <ArrowUpRight size={18} /></Link>
+            <Link className="power-button power-button-outline" to="/build">Build workout <ArrowRight size={17} /></Link>
           </div>
         </div>
         <span className="power-hero-side-label" aria-hidden="true">STRENGTH / CONTROL / MASTERY</span>
@@ -149,12 +129,12 @@ export default function Dashboard() {
       <div className="power-main">
         <div className="power-section-heading"><h2>Your training room</h2><span className="power-section-meta">Make your next move</span></div>
         <section className="power-feature-grid" aria-label="Main features">
-          <Link className="power-feature" to="/train"><span className="power-feature-index">01 / TRAIN</span><CalendarDays className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Today's focus</span><span className="power-feature-desc">Step into your session</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
-          <button className="power-feature" onClick={() => setTreeOpen(value => !value)} aria-expanded={treeOpen} aria-controls="power-skill-tree"><span className="power-feature-index">02 / MASTER</span><GitBranch className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Skill tree</span><span className="power-feature-desc">See the path to your goal</span>{treeOpen ? <ChevronUp className="power-feature-arrow" size={18} /> : <ChevronDown className="power-feature-arrow" size={18} />}</button>
+          <Link className="power-feature" to="/build"><span className="power-feature-index">01 / TRAIN</span><CalendarDays className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Today's focus</span><span className="power-feature-desc">Step into your session</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
+          <Link className="power-feature" to="/skills"><span className="power-feature-index">02 / MASTER</span><GitBranch className="power-feature-icon" size={27} strokeWidth={1.4}/><span className="power-feature-title">Skills</span><span className="power-feature-desc">Choose your progression</span><ArrowRight className="power-feature-arrow" size={18}/></Link>
           <Link className="power-feature" to="/ai-lab"><span className="power-feature-index">03 / EVOLVE</span><Sparkles className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">AI coach</span><span className="power-feature-desc">Find your next breakthrough</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
           <Link className="power-feature" to="/community"><span className="power-feature-index">04 / CONNECT</span><Users className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Power Circle</span><span className="power-feature-desc">Progress is better together</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
         </section>
-        {treeOpen && <section id="power-skill-tree" className="power-tree-panel" aria-label="Skill progression tree"><div className="power-section-heading"><h2>Skill progressions</h2><button className="power-icon-button ml-auto" onClick={() => setTreeOpen(false)} aria-label="Close skill tree"><ChevronUp size={18} /></button></div><div className="grid grid-cols-1 sm:grid-cols-2 gap-3">{SKILL_PATHS.map(path => <Link key={path.id} to={`/skills/${path.id}`} className="min-h-20 border border-border rounded-xl p-4 flex items-center justify-between text-sm"><span>{path.title}<small className="block text-muted-foreground mt-1">{path.short}</small></span><ArrowRight size={18}/></Link>)}</div><Link className="power-text-link" to="/build">Build a workout around your skill <ArrowRight size={15} /></Link></section>}
+
         <div className="power-training-grid">
           <section className="power-progress-section" aria-labelledby="power-progress-title">
             <div className="power-section-heading"><h2 id="power-progress-title">Your progress</h2><span className="power-section-meta">{user ? profile && !unavailable ? `LEVEL ${profile.level ?? 1}` : 'YOUR ACCOUNT' : 'ON THIS DEVICE'}</span></div>

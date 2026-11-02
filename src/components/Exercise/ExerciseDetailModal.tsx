@@ -1,3 +1,4 @@
+import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useEffect, useState } from 'react';
 import { Plus, TrendingUp } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -60,7 +61,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
             <DialogHeader>
               <div className="flex items-center gap-2 mb-1.5">
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: accent }} />
-                <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-wider">{currentExercise.category}</span>
+                <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-wider">{exerciseLabel(currentExercise.slug,currentExercise.category)}</span>
                 {currentExercise.difficulty_level && (
                   <><span className="text-border">·</span><DifficultyBadge level={currentExercise.difficulty_level} size="sm" /></>
                 )}

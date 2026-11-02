@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Plus, Dumbbell, X, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { exerciseLabel } from '@/lib/exerciseLabels';
 import { ExerciseArtwork, getYouTubeId } from './ExerciseArtwork';
 
 interface Exercise {
@@ -72,7 +73,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
           </div>
         ) : (
           <>
-            <ExerciseArtwork title={exercise.name} category={exercise.category}
+            <ExerciseArtwork title={exercise.name} category={exerciseLabel(exercise.slug,exercise.category)}
               youtubeUrl={exercise.youtube_url} imageUrl={exercise.image_url}
               className="absolute inset-0" />
             {videoId && (
@@ -93,7 +94,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
             className="text-[9px] font-mono font-bold uppercase tracking-[0.08em] px-2 py-1 rounded-lg text-white backdrop-blur-sm"
             style={{ backgroundColor: `${style.color}cc` }}
           >
-            {exercise.category}
+            {exerciseLabel(exercise.slug,exercise.category)}
           </span>
         </div>
 

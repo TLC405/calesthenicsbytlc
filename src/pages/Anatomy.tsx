@@ -1,3 +1,4 @@
+import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { MuscleMap, MUSCLE_GROUPS } from '@/components/Anatomy/MuscleMap';
@@ -346,7 +347,7 @@ function ExerciseRow({ exercise, secondary, onClick }: { exercise: Exercise; sec
         <p className="text-xs font-bold truncate">{exercise.name}</p>
         <div className="flex items-center gap-2 mt-0.5">
           <Badge variant="outline" className="text-[7px] px-1.5 py-0 h-4 font-mono uppercase rounded-md">
-            {exercise.category}
+            {exerciseLabel(exercise.slug,exercise.category)}
           </Badge>
           {exercise.difficulty_level && (
             <span className="text-[8px] font-mono text-muted-foreground">

@@ -1,3 +1,4 @@
+import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, CheckCircle2, ChevronLeft, Clock3, Dumbbell, Minus, Pause, Play, Plus, TimerReset, Trophy, Video } from 'lucide-react';
@@ -187,7 +188,7 @@ export default function ActiveWorkout() {
         <Dumbbell className="mx-auto h-12 w-12 text-primary" />
         <h1 className="text-2xl font-display font-black">Ready when you are.</h1>
         <p className="text-sm text-muted-foreground">Choose a routine or add an exercise to start training.</p>
-        <Button className="h-12 w-full" onClick={() => navigate('/planner')}>Choose a workout <ArrowRight className="ml-2 h-4 w-4"/></Button>
+        <Button className="h-12 w-full" onClick={() => navigate('/build')}>Choose a workout <ArrowRight className="ml-2 h-4 w-4"/></Button>
       </div>
     </main>
   );
@@ -196,12 +197,12 @@ export default function ActiveWorkout() {
       <div className="max-w-2xl mx-auto px-2.5 min-[360px]:px-4 sm:px-6 pt-[max(0.75rem,env(safe-area-inset-top))] space-y-3 sm:space-y-4">
         <header className="flex items-center justify-between gap-3">
           <button type="button" onClick={leave} aria-label="Leave workout and save draft"
-            className="power-hardware h-11 px-3 flex items-center gap-2 text-xs font-bold"><ArrowLeft className="h-4 w-4"/> Exit</button>
-          <div className="text-center min-w-0">
+            className="power-hardware shrink-0 h-11 px-3 flex items-center gap-2 text-xs font-bold"><ArrowLeft className="h-4 w-4"/> Exit</button>
+          <div className="text-center min-w-0 flex-1">
             <p className="text-[10px] font-mono uppercase tracking-[.18em] text-muted-foreground">Active session</p>
             <h1 className="text-xs sm:text-sm font-black truncate max-w-full">{draft.name}</h1>
           </div>
-          <button type="button" className="power-hardware h-11 w-11 flex items-center justify-center" aria-label="Change gym colors"
+          <button type="button" className="power-hardware shrink-0 h-11 w-11 flex items-center justify-center" aria-label="Change gym colors"
             onClick={() => { const idx=themes.findIndex(t => t.id === theme); setTheme(themes[(idx + 1) % themes.length].id); }}>
             <span className="h-5 w-5 rounded-full border-2 border-card" style={{ background: themes.find(t => t.id === theme)?.primary }} />
           </button>
@@ -219,7 +220,7 @@ export default function ActiveWorkout() {
         <section id="power-current-exercise" className="space-y-3" aria-label="Current exercise">
           <div>
             <div className="flex items-center justify-between gap-2">
-              <p className="text-xs font-bold uppercase tracking-widest text-primary">{item.phaseLabel || item.exercise.category}</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-primary">{item.phaseLabel || exerciseLabel(item.exercise.slug,item.exercise.category)}</p>
               <p className="text-xs font-mono text-muted-foreground"><Clock3 className="w-3 h-3 inline"/> {timeLabel(elapsed)}</p>
             </div>
             <h2 className="mt-1 text-[clamp(1.45rem,6vw,2.25rem)] break-words font-display font-black leading-tight tracking-tight">{item.exercise.name}</h2>

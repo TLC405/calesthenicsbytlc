@@ -64,9 +64,10 @@ export function MusicControl() {
 
 
   return (
-    <div className="power-music-dock fixed left-3 bottom-[calc(5.4rem+env(safe-area-inset-bottom))] md:bottom-4 z-40">
+    <section className="power-more-section power-music-settings" aria-label="Music and playlists">
+      <button type="button" onClick={() => setExpanded(!expanded)} aria-expanded={expanded} className="flex w-full min-h-12 items-center gap-3 text-left font-bold text-sm"><Music size={20}/>Music and playlists<ChevronDown size={18} className="ml-auto"/></button>
       {expanded && (
-        <div className="mb-2 w-[min(calc(100vw-1.5rem),21rem)] max-h-[min(72dvh,540px)] overflow-y-auto overscroll-contain rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/50 shadow-xl p-3 sm:p-4 space-y-3 animate-in slide-in-from-bottom-2 duration-200">
+        <div className="mt-3 w-full rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/50 shadow-xl p-3 sm:p-4 space-y-3 animate-in slide-in-from-bottom-2 duration-200">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -247,29 +248,6 @@ export function MusicControl() {
         </div>
       )}
 
-      {/* FAB */}
-      <button
-        onClick={() => setExpanded(!expanded)}
-        className={cn(
-          "w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-200 border active:scale-95",
-          musicEnabled && isPlaying
-            ? "bg-primary text-primary-foreground border-primary/50"
-            : "bg-card text-muted-foreground border-border/50 hover:text-foreground hover:border-border"
-        )}
-        aria-label="Toggle music controls" aria-expanded={expanded}>
-        {expanded ? (
-          <ChevronDown className="w-5 h-5" />
-        ) : isPlaying ? (
-          <div className="flex items-end gap-[2px] h-4">
-            {[6, 10, 4, 8].map((h, i) => (
-              <div key={i} className="w-[2px] rounded-full bg-current animate-pulse"
-                style={{ height: `${h}px`, animationDelay: `${i * 120}ms`, animationDuration: '0.6s' }} />
-            ))}
-          </div>
-        ) : (
-          <Music className="w-5 h-5" />
-        )}
-      </button>
-    </div>
+    </section>
   );
 }

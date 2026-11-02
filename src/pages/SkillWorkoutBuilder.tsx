@@ -92,8 +92,8 @@ export default function SkillWorkoutBuilder() {
     <main className="power-skill-builder min-h-[100dvh] pb-32">
       <div className="mx-auto max-w-3xl px-3 sm:px-5 pt-3 sm:pt-7 space-y-4">
         <header className="flex items-center justify-between gap-2">
-          <Button variant="outline" type="button" onClick={()=>navigate('/planner')} className="min-h-11 rounded-xl">
-            <ArrowLeft className="h-4 w-4 mr-1.5"/> Train
+          <Button variant="outline" type="button" onClick={()=>navigate('/skills')} className="min-h-11 rounded-xl">
+            <ArrowLeft className="h-4 w-4 mr-1.5"/> Skills
           </Button>
           <span className="text-[10px] uppercase font-black tracking-[.17em] text-primary">POWER / SKILL BUILDER</span>
         </header>
@@ -103,23 +103,7 @@ export default function SkillWorkoutBuilder() {
           <p className="text-sm text-muted-foreground leading-relaxed">No complicated programming. POWER selects real drills for your skill, from warm-up to cool-down.</p>
         </div>
 
-        <section className="space-y-2" aria-label="Choose a training skill">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-black">1 · Choose your skill</h2>
-            <span className="text-[10px] text-muted-foreground">Swipe for more →</span>
-          </div>
-          <div className="power-builder-goals flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Skill goals">
-            {SKILL_GOALS.map(option=>(
-              <button key={option.id} type="button" aria-pressed={goalId===option.id}
-                onClick={()=>regenerate(option.id,level,minutes)}
-                className={`power-builder-goal shrink-0 w-[156px] min-h-[86px] rounded-2xl border p-3 text-left flex flex-col justify-between gap-2 ${goalId===option.id?'is-active border-primary':'border-border bg-card'}`}>
-                <span className="text-sm font-black leading-tight">{option.title}</span>
-                <span className="text-[11px] leading-snug text-muted-foreground">{option.detail}</span>
-              </button>
-            ))}
-          </div>
-          <p className="text-[11px] text-muted-foreground"><Dumbbell className="h-3.5 w-3.5 inline mr-1 text-primary"/>{goal.equipment}</p>
-        </section>
+        <section className="space-y-2" aria-label="Choose a training skill"><label className="block text-sm font-bold" htmlFor="workout-skill">1 · Your skill</label><select id="workout-skill" className="h-14 w-full rounded-xl border bg-card px-3 font-bold" value={goalId} onChange={e=>regenerate(e.target.value,level,minutes)}>{SKILL_GOALS.map(option=><option key={option.id} value={option.id}>{option.title}</option>)}</select><p className="text-xs text-muted-foreground">{goal.detail} · {goal.equipment}</p></section>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <section className="space-y-2">
             <h2 className="text-sm font-black">2 · Time available</h2>
@@ -216,10 +200,10 @@ export default function SkillWorkoutBuilder() {
           </div>
         </section>
         <section className="power-elevated p-4 space-y-3" aria-label="Skill training readiness"><h2 className="font-bold">Before you train</h2><p className="text-xs text-muted-foreground">Confirm the equipment and current comfort for this session.</p><div className="flex flex-wrap gap-2">{(['floor','wall','rings','bar','parallettes','bands'] as TrainingEquipment[]).map(option=><button key={option} aria-pressed={trainingProfile.equipment.includes(option)} onClick={()=>updateTraining({...trainingProfile,equipment:trainingProfile.equipment.includes(option)?trainingProfile.equipment.filter(x=>x!==option):[...trainingProfile.equipment,option]})} className={`min-h-12 px-3 rounded-xl border text-xs capitalize ${trainingProfile.equipment.includes(option)?'border-primary text-primary bg-primary/10':''}`}>{option}</button>)}</div><label className="min-h-12 flex gap-3 items-center text-xs"><input className="h-5 w-5" type="checkbox" checked={trainingProfile.safeExit} onChange={e=>updateTraining({...trainingProfile,safeExit:e.target.checked})}/>I can safely enter and exit the inversions in this session.</label><label className="min-h-12 flex gap-3 items-center text-xs"><input className="h-5 w-5" type="checkbox" checked={comfortable} onChange={e=>setComfortable(e.target.checked)}/>These variations are comfortable today, without joint pain.</label>{blockers.map(reason=><p key={reason} className="text-xs text-muted-foreground">• {reason}</p>)}</section>
-        <div className="power-builder-launch sticky z-30 bottom-[calc(4.6rem+env(safe-area-inset-bottom))] md:bottom-0 rounded-2xl border border-border/70 bg-card/95 p-2 shadow-xl backdrop-blur-lg">
+        <div className="power-builder-launch relative rounded-2xl border border-border/70 bg-card/95 p-2 shadow-xl backdrop-blur-lg">
           <Button type="button" onClick={startWorkout} disabled={!items.length||blockers.length>0}
             className="power-primary-action min-h-[55px] w-full rounded-xl font-display font-black text-sm">
-            <Play className="h-5 w-5 mr-2" fill="currentColor"/> Start This Skill Workout <ArrowRight className="h-5 w-5 ml-2"/>
+            <Play className="h-5 w-5 mr-2" fill="currentColor"/> Start workout <ArrowRight className="h-5 w-5 ml-2"/>
           </Button>
         </div>
       </div>

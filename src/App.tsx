@@ -6,7 +6,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./providers/AuthProvider";
 import { MusicProvider } from "./providers/MusicProvider";
 import { InlineSoundtrackSlot } from "./components/Music/InlineSoundtrackSlot";
-import { MusicControl } from "./components/Music/MusicControl";
+import Skills from "./pages/Skills";
+import More from "./pages/More";
 import { MobileNav } from "./components/Layout/MobileNav";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -39,7 +40,10 @@ function AppContent() {
           <Route path="/planner" element={<Planner />} />
           <Route path="/library" element={<Library />} />
           <Route path="/ai-lab" element={<AILab />} />
-          <Route path="/train" element={<Train />} />
+          <Route path="/train" element={<Navigate to="/build" replace />} />
+          <Route path="/routine-days" element={<Train />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/more" element={<More />} />
           <Route path="/workout" element={<ActiveWorkout />} />
           <Route path="/skills/:skillId" element={<SkillStudio />} />
           <Route path="/build" element={<SkillWorkoutBuilder />} />
@@ -49,9 +53,8 @@ function AppContent() {
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <InlineSoundtrackSlot />
       </div>
-      <InlineSoundtrackSlot />
-      <MusicControl />
       <MobileNav />
     </BrowserRouter>
   );

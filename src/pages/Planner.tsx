@@ -267,14 +267,14 @@ export default function Planner() {
       <header className="sticky top-0 z-30 bg-background/95 backdrop-blur-lg border-b border-border/50">
         <div className="max-w-3xl mx-auto px-3 sm:px-4 md:px-8 min-h-14 py-1 flex items-center justify-between gap-1.5">
           <div className="flex items-center gap-1.5 min-w-0 flex-1">
-            <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="h-10 w-10 rounded-xl flex-shrink-0" aria-label="Back to home">
+            <Button variant="ghost" size="icon" onClick={() => navigate('/skills')} className="h-10 w-10 rounded-xl flex-shrink-0" aria-label="Back to skills">
               <ArrowLeft className="w-4 h-4" />
             </Button>
             <div className="hidden sm:flex w-10 h-10 rounded-xl bg-primary/10 border border-border/30 items-center justify-center flex-shrink-0">
               <FileText className="w-5 h-5 text-primary" />
             </div>
             <div className="min-w-0">
-              <h1 className="font-display text-sm sm:text-base font-bold tracking-tight truncate">Start Workout</h1>
+              <h1 className="font-display text-sm sm:text-base font-bold tracking-tight truncate">Custom workout</h1>
               <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em]">
                 {totalExercises} exercise{totalExercises !== 1 ? 's' : ''}
               </p>
@@ -315,14 +315,14 @@ export default function Planner() {
             </DialogDescription>
           </DialogHeader>
           <Textarea
-            placeholder="e.g. Push day focused on planche progressions, 45 minutes, intermediate"
+            placeholder="e.g. Planche practice, 25 minutes, intermediate"
             value={coachPrompt}
             onChange={e => setCoachPrompt(e.target.value)}
             rows={4}
             className="rounded-xl"
           />
           <div className="flex flex-wrap gap-1.5">
-            {['Full body 40min', 'Push + core', 'Pull day intermediate', 'Mobility flow', 'Beginner legs'].map(s => (
+            {['Planche practice', 'Handstand balance', 'Rings foundation', 'Mobility flow', 'Beginner legs'].map(s => (
               <button
                 key={s}
                 onClick={() => setCoachPrompt(s)}
@@ -342,46 +342,7 @@ export default function Planner() {
       </Dialog>
 
       <main className="max-w-3xl mx-auto px-3 sm:px-4 md:px-8 py-4 space-y-4 pb-28 md:pb-8">
-        <section className="power-theme-stage power-elevated relative overflow-hidden p-4 sm:p-5 space-y-4">
-          <div className="relative z-10 flex items-start justify-between gap-3">
-            <div className="min-w-0 flex-1">
-              <p className="text-[10px] font-mono font-bold uppercase tracking-[.2em] text-primary">POWER / TRAINING STUDIO</p>
-              <h2 className="mt-1 font-display text-2xl sm:text-3xl font-black tracking-tight">Pick. Train. Done.</h2>
-              <p className="mt-2 max-w-sm text-xs sm:text-sm leading-relaxed text-muted-foreground">Choose your routine, follow your exercises, and track your progress without the clutter.</p>
-            </div>
-            <span className="power-theme-emblem flex h-12 w-12 shrink-0 items-center justify-center" aria-hidden="true">
-              <Dumbbell className="h-6 w-6" />
-            </span>
-          </div>
-          <div className="relative z-10 space-y-2">
-            <div className="flex items-center justify-between gap-2">
-              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-muted-foreground">Choose your gym atmosphere</p>
-              <span className="text-[10px] font-bold text-primary">{themes.find(item=>item.id===theme)?.name}</span>
-            </div>
-            <div className="power-theme-rail flex gap-2 overflow-x-auto pb-2" aria-label="Gym themes">
-              {themes.map(item => (
-                <button type="button" key={item.id} aria-pressed={theme === item.id}
-                  onClick={() => setTheme(item.id)}
-                  className={`power-theme-option flex shrink-0 min-w-[124px] flex-col gap-1.5 rounded-xl border px-3 py-2.5 text-left transition-[border-color,box-shadow] ${theme === item.id ? 'is-selected border-primary' : 'border-border bg-card'}`}>
-                  <span className="flex h-2.5 w-14 overflow-hidden rounded-full">
-                    <span className="h-full flex-[3]" style={{backgroundColor:item.primary}}/>
-                    <span className="h-full flex-[2]" style={{backgroundColor:item.accent}}/>
-                    <span className="h-full flex-1 border-l border-border/40" style={{backgroundColor:item.bg}}/>
-                  </span>
-                  <span className="text-xs font-bold whitespace-nowrap">{item.name}</span>
-                  <span className="text-[10px] text-muted-foreground whitespace-nowrap">{item.tagline.split(' · ').slice(0,2).join(' · ')}</span>
-                </button>
-              ))}
-            </div>
-            <p className="text-[11px] leading-relaxed text-muted-foreground">
-              {theme === 'vasa' ? 'Studio steel · racing-red performance markings · white instrument faces' :
-               theme === 'ymca' ? 'Blue-and-teal movement studio · rounded controls · welcoming light surfaces' :
-               theme === 'planet-fitness' ? 'Carbon-black equipment panels · rich violet · warm-gold highlights' :
-               theme === 'okc-thunder' ? 'Midnight-blue arena · court-line details · energetic orange trim' :
-               'Obsidian training hardware · metallic-gold controls · dark premium surfaces'}
-            </p>
-          </div>
-        </section>
+        <div className="rounded-2xl border bg-card p-4"><p className="font-bold text-lg">Build your own session</p><p className="text-sm text-muted-foreground mt-2">Add movements below, or choose a guided skill workout.</p><Button variant="outline" className="min-h-12 mt-4" onClick={()=>navigate('/build')}>Choose a skill workout <ArrowRight className="w-4 h-4 ml-2"/></Button></div>
 
         {localStorage.getItem('power-active-workout-v2') && (
           <Button type="button" variant="outline" className="power-elevated h-12 w-full rounded-2xl font-bold"
@@ -390,27 +351,16 @@ export default function Planner() {
           </Button>
         )}
 
-        <button type="button" onClick={()=>navigate('/build')}
-          className="power-skill-builder-cta power-elevated flex w-full items-center gap-3 p-3.5 text-left focus-visible:outline-4 focus-visible:outline-primary">
-          <span className="power-theme-emblem flex h-12 w-12 shrink-0 items-center justify-center"><Target className="h-6 w-6"/></span>
-          <span className="min-w-0 flex-1">
-            <span className="block font-display text-base font-black">Build by Skill</span>
-            <span className="block text-[11px] leading-relaxed text-muted-foreground">Planche, Handstand, Rings + more · pick your time · start</span>
-          </span>
-          <ArrowRight className="h-5 w-5 shrink-0 text-primary"/>
-        </button>
-
         {/* Workout name */}
         <Input
-          placeholder="Workout name (e.g. Push Day, Full Body)"
+          placeholder="Name your workout"
           value={workoutName}
           onChange={e => setWorkoutName(e.target.value)}
           className="h-12 rounded-xl border-border/50 bg-card font-display font-bold text-base placeholder:font-normal placeholder:text-muted-foreground"
         />
 
-        {/* Quick start templates */}
-        <div>
-          <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-2 px-1">Quick Start</p>
+        <details className="rounded-xl border p-3"><summary className="min-h-12 font-bold text-sm cursor-pointer">Strength templates (optional)</summary>
+          <div className="pt-3">
           <div className="grid grid-cols-4 gap-2">
             {QUICK_TEMPLATES.map(tpl => (
               <button
@@ -422,8 +372,8 @@ export default function Planner() {
               </button>
             ))}
           </div>
-        </div>
-
+          </div>
+        </details>
 
         <Button type="button" size="lg" onClick={() => setPickerSection('workout')}
           className="w-full h-14 rounded-2xl font-display font-black text-sm uppercase tracking-wide power-skeuo-button">
@@ -436,7 +386,7 @@ export default function Planner() {
 
         {totalExercises > 0 && (
           <Button type="button" onClick={beginActiveWorkout}
-            className="power-primary-action sticky top-[4rem] z-20 w-full min-h-14 px-2 rounded-2xl text-xs sm:text-sm font-display font-black tracking-wide uppercase">
+            className="power-primary-action w-full min-h-14 px-2 rounded-2xl text-xs sm:text-sm font-display font-black tracking-wide uppercase">
             <Dumbbell className="h-5 w-5 mr-1 shrink-0" /> <span className="sm:hidden">Start Session · {totalExercises}</span><span className="hidden sm:inline">Begin Guided Workout · {totalExercises} Exercises</span>
           </Button>
         )}

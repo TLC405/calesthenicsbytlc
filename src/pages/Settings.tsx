@@ -25,7 +25,7 @@ export default function Settings() {
   const [siteConfig, setSiteConfig] = useState<Record<string, string>>({});
   const [configLoading, setConfigLoading] = useState(false);
 
-  useEffect(() => { if (!user) { navigate('/library'); return; } fetchProfile(); checkAdmin(); fetchSiteConfig(); }, [user, navigate]);
+  useEffect(() => { if (!user) { navigate('/more', { replace: true }); return; } fetchProfile(); checkAdmin(); fetchSiteConfig(); }, [user, navigate]);
   useEffect(() => { setPlaylistInput(music.playlistUrl); }, [music.playlistUrl]);
 
   const fetchProfile = async () => {

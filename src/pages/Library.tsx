@@ -154,88 +154,17 @@ export default function Library() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="power-library-head relative md:sticky md:top-0 z-30 bg-background/95 backdrop-blur-xl border-b border-border/50">
-        <div className="max-w-6xl mx-auto px-3 sm:px-4 md:px-8">
-          <div className="min-h-14 flex items-center justify-between gap-2 py-2">
-            <div className="flex items-center gap-2 min-w-0">
-              <div className="w-1.5 h-6 rounded-full bg-[hsl(var(--cat-pull))]" />
-              <div>
-                <h1 className="font-display text-base font-bold tracking-tight leading-none">Library</h1>
-                <p className="text-[8px] font-mono text-muted-foreground mt-0.5 tracking-wide">{exercises.length} exercises</p>
-              </div>
-            </div>
-            <div className="flex shrink-0 gap-1">
-              <Button variant="ghost" size="sm" onClick={downloadExerciseList} className="hidden sm:inline-flex text-muted-foreground h-9 text-[10px] font-mono rounded-xl" disabled={filteredExercises.length === 0}>
-                <Download className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Export</span>
-              </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/ai-lab')} className="hidden sm:inline-flex text-muted-foreground h-9 text-[10px] font-mono rounded-xl">
-                <Sparkles className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">AI</span>
-              </Button>
-              {ownerId && (
-                <>
-                  <Button type="button" variant={mineOnly ? 'default' : 'outline'} size="sm"
-                    onClick={() => setMineOnly(prev => !prev)}
-                    className="h-9 rounded-xl px-2.5 text-[10px] font-mono font-bold" aria-pressed={mineOnly}>
-                    <UserRound className="mr-1 h-3.5 w-3.5" /><span className="hidden sm:inline">My exercises</span><span className="sm:hidden">Mine</span>
-                  </Button>
-                  <Button size="sm" onClick={() => { setEditingExercise(null); setShowAddModal(true); }}
-                    className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl">
-                    <Plus className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Create</span><span className="sm:hidden">New</span>
-                  </Button>
-                </>
-              )}
-            </div>
-          </div>
-          <div className="pb-3">
-            <Button type="button" onClick={() => navigate('/planner')} className="power-skeuo-button w-full h-12 rounded-2xl font-display font-black uppercase tracking-wide text-sm">
-              <Dumbbell className="h-5 w-5 mr-2" /> Start Workout
-            </Button>
-          </div>
-          <div className="pb-3 space-y-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="text" placeholder="Search exercises..." value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 h-11 rounded-xl border-border/50 bg-card focus:bg-card focus:border-ring focus:shadow-sm transition-all"
-              />
-            </div>
-            <div className="w-full min-w-0">
-              <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts} />
-            </div>
-            <div className="flex items-center min-w-0 gap-2 overflow-hidden">
-              <Button type="button" variant={videosOnly ? 'default' : 'outline'} size="sm"
-                onClick={() => setVideosOnly(v => !v)}
-                className="h-10 shrink-0 gap-1 rounded-xl text-[10px] font-mono font-bold"
-                aria-pressed={videosOnly}>
-                <PlayCircle className="h-4 w-4" />
-                {videosOnly ? 'Video tutorials ✓' : 'Video tutorials'}
-                <span className="font-mono text-[9px] opacity-65">
-                  {exercises.filter(e => Boolean(e.youtube_url)).length}
-                </span>
-              </Button>
-              <span className="hidden md:inline text-[10px] text-muted-foreground">Tap Play on any video thumbnail.</span>
-            </div>
-          </div>
+      <header className="power-library-head relative bg-background border-b border-border/50">
+        <div className="max-w-6xl mx-auto px-4 py-5 space-y-4">
+          <div className="flex items-center justify-between gap-3"><div className="min-w-0"><h1 className="font-display text-2xl font-bold">All exercises</h1><p className="text-xs text-muted-foreground mt-1">{exercises.length} movements</p></div><Button variant="outline" className="min-h-12 shrink-0" onClick={()=>navigate('/skills')}><Target className="w-4 h-4 mr-2"/>Skills</Button></div>
+          <div className="relative"><Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"/><Input aria-label="Search exercises" placeholder="Search exercises…" value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} className="pl-10 h-12 rounded-xl"/></div>
+          <details className="power-library-tools"><summary className="min-h-12 flex items-center cursor-pointer font-bold text-sm">Filters and tools</summary><div className="space-y-3 pt-3">
+            <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts}/>
+            <div className="flex flex-wrap gap-2"><Button variant={videosOnly?'default':'outline'} className="min-h-12" aria-pressed={videosOnly} onClick={()=>setVideosOnly(v=>!v)}><PlayCircle className="h-4 w-4 mr-2"/>Video tutorials</Button><Button variant={mineOnly?'default':'outline'} className="min-h-12" aria-pressed={mineOnly} onClick={()=>setMineOnly(v=>!v)}>My exercises</Button><Button variant="outline" className="min-h-12" onClick={()=>{setEditingExercise(null);setShowAddModal(true);}}><Plus className="h-4 w-4 mr-2"/>New movement</Button><Button variant="outline" className="min-h-12" disabled={!filteredExercises.length} onClick={downloadExerciseList}><Download className="h-4 w-4 mr-2"/>Export</Button></div>
+            {(activeCategory||mineOnly||videosOnly)&&<Button variant="ghost" className="min-h-12" onClick={()=>{setActiveCategory(null);setMineOnly(false);setVideosOnly(false);}}>Clear filters</Button>}
+          </div></details>
         </div>
       </header>
-
-      <section className="max-w-6xl mx-auto px-3 sm:px-4 md:px-8 pt-4" aria-label="Skill training studios">
-        <div className="flex items-center justify-between mb-2">
-          <h2 className="text-xs font-display font-black uppercase tracking-[.14em]"><Target className="h-4 w-4 text-primary inline mr-1"/> Skill Studios</h2>
-          <span className="text-[10px] text-muted-foreground">Separate progression tracks</span>
-        </div>
-        <div className="power-skill-rail flex gap-2 overflow-x-auto pb-2">
-          {SKILL_PATHS.map(item => (
-            <button key={item.id} type="button" className="power-skill-link power-elevated flex shrink-0 min-w-[170px] max-w-[210px] flex-col gap-1.5 rounded-xl p-3 text-left"
-              onClick={()=>navigate(`/skills/${item.id}`)}>
-              <span className="text-sm font-black leading-tight">{item.title}</span>
-              <span className="text-[11px] text-muted-foreground">{item.short}</span>
-              <span className="flex items-center gap-1 text-[10px] font-semibold text-primary">{item.slugs.length} movement stages <ArrowRight className="h-3 w-3"/></span>
-            </button>
-          ))}
-        </div>
-      </section>
       <main className="power-library-results max-w-6xl mx-auto px-3 sm:px-4 md:px-8 py-3 sm:py-5 pb-32 md:pb-5">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground" role="status" aria-live="polite">
           <span>{syncState === 'refreshing' ? 'Library ready · refreshing saved exercises…' : syncState === 'error' ? 'Saved collection is taking longer to connect. Your available exercises are shown below.' : syncState === 'offline' ? 'Showing the included library and exercises saved on this device.' : 'Saved library connected.'}</span>
@@ -302,14 +231,6 @@ export default function Library() {
         onClose={() => { setShowAddModal(false); setEditingExercise(null); }}
         onSuccess={fetchExercises} />
 
-      <button
-        onClick={() => navigate('/planner')}
-        className="power-library-fab fixed bottom-[calc(5.4rem+env(safe-area-inset-bottom))] right-3 z-30 md:hidden w-12 h-12 rounded-2xl text-white shadow-lg flex items-center justify-center active:scale-95 transition-transform"
-        style={{ backgroundColor: 'hsl(var(--cat-skills))', boxShadow: '0 0 20px hsl(var(--cat-skills) / 0.3)' }}
-        aria-label="Open Builder"
-      >
-        <Plus className="w-6 h-6" />
-      </button>
     </div>
   );
 }

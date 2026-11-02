@@ -82,13 +82,13 @@ export default function Index() {
               <p className="power-entry-message-alt">BUILD CONTROL. UNLOCK THE EXTRAORDINARY.</p>
             </div>
             <p className="power-entry-description">Train like the version of yourself you're becoming. Real calisthenics. Real progressions. Powered by TLC.</p>
-            <button type="button" onClick={() => enter('/planner')} className="power-entry-primary">
+            <button type="button" onClick={() => enter('/skills')} className="power-entry-primary">
               <span className="power-entry-primary-icon"><Play size={21} fill="currentColor"/></span>
-              <span className="power-entry-primary-label"><strong>START WORKING OUT</strong><small>GO STRAIGHT TO TRAINING</small></span>
+              <span className="power-entry-primary-label"><strong>CHOOSE YOUR SKILL</strong><small>PLANCHE · HANDSTAND · RINGS</small></span>
               <ArrowUpRight className="power-entry-primary-arrow" size={22} aria-hidden="true"/>
             </button>
             <div className="power-entry-quiet-options">
-              <button type="button" onClick={() => enter('/build?skill=planche')}><Target size={17}/> Build by skill <ArrowRight size={15}/></button>
+              <button type="button" onClick={() => enter('/build')}><Target size={17}/> Build a workout <ArrowRight size={15}/></button>
               <button type="button" onClick={() => enter('/library')}><Library size={17}/> Browse exercise library <ArrowRight size={15}/></button>
             </div>
           </div>
@@ -144,11 +144,6 @@ export default function Index() {
         </section>
 
         <footer className="power-entry-footer">
-          <div className="power-entry-footer-links">
-            <button type="button" onClick={() => navigate('/library')}><Dumbbell size={16}/> Exercises</button>
-            <button type="button" onClick={() => navigate('/build')}><Target size={16}/> Skill Tree</button>
-            <button type="button" onClick={() => navigate('/dashboard')}><MapPin size={16}/> More</button>
-          </div>
           <p className="power-entry-powered">POWERED BY <strong>TLC</strong><span className="power-entry-powered-dot">.</span></p>
         </footer>
       </div>

@@ -21,7 +21,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     id: 'straddle-press',
-    title: 'Straddle → Handstand',
+    title: 'Straddle Press',
     short: 'Compression-to-balance studio',
     focus: 'Straddle mobility • active compression • controlled pressing',
     equipment: 'Floor, wall and optional parallettes',
@@ -47,7 +47,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
     slugs: ['incline-ring-row','ring-row','assisted-ring-support-hold','ring-support-hold','assisted-ring-dip','ring-dip','ring-turnout-support-hold'],
   },
   {
-    id: 'hspu', title: 'Vertical Press / HSPU', short: 'Pressing strength and range',
+    id: 'hspu', title: 'Handstand Push-Up', short: 'Pressing strength and range',
     focus: 'Shoulder elevation • controlled range • stable overhead support', equipment: 'Floor and wall',
     cue: 'Use a pike variation you control. Build wall support and safe exits before inverted pressing.',
     safety: 'A pike push-up is a supported starting point. Advanced inverted pressing requires prior control.',
