@@ -111,7 +111,7 @@
 .power-metric { border:1px solid var(--pg-line); background:#101213; padding:17px 20px; min-width:0; }
 .power-metric-top { color:var(--pg-quiet); display:flex; align-items:center; gap:9px; font:700 9px 'JetBrains Mono',monospace; letter-spacing:.14em; text-transform:uppercase; }
 .power-metric-number { color:var(--pg-cream); font:900 clamp(23px,4vw,38px)/1.2 'Space Grotesk',sans-serif; margin-top:8px; overflow-wrap:anywhere; }
-.power-feature-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:27px; }
+.power-feature-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-bottom:27px; }
 .power-feature { position:relative; background:#101213; border:1px solid var(--pg-line); min-height:143px; padding:20px; text-align:left; color:var(--pg-cream); cursor:pointer; transition:.2s ease; display:flex; flex-direction:column; align-items:flex-start; }
 .power-feature:hover { background:#1c1a15; transform:translateY(-3px); border-color:var(--pg-gold); }
 .power-feature-icon { color:var(--pg-gold); margin-bottom:16px; }
@@ -151,7 +151,7 @@
  .power-metric {padding:12px 9px}
  .power-metric-top {font-size:8px;gap:5px;letter-spacing:0}
  .power-metric-number {font-size:22px}
- .power-feature-grid {gap:8px}
+ .power-feature-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
  .power-feature {min-height:130px;padding:12px}
  .power-feature-icon {margin-bottom:17px}
  .power-feature-title {font-size:11px}
