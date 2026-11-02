@@ -378,7 +378,7 @@ export default function Planner() {
                theme === 'ymca' ? 'Blue-and-teal movement studio · rounded controls · welcoming light surfaces' :
                theme === 'planet-fitness' ? 'Carbon-black equipment panels · rich violet · warm-gold highlights' :
                theme === 'okc-thunder' ? 'Midnight-blue arena · court-line details · energetic orange trim' :
-               'Premium graphite equipment · violet inlays · soft ivory controls'}
+               'Obsidian training hardware · metallic-gold controls · dark premium surfaces'}
             </p>
           </div>
         </section>
