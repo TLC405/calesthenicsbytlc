@@ -1,43 +1,51 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Check, Dumbbell, Headphones, Library, MoveUpRight, Play, Target, Volume2, VolumeX, Zap } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Dumbbell, Headphones, Library, MapPin, Play, Target, Volume2, VolumeX, Zap, Crown, Video } from 'lucide-react';
 import { useMusic, POWER_ANTHEM_VIDEO_ID } from '@/providers/MusicProvider';
 import { InstallPowerApp } from '@/components/InstallPowerApp';
 
 /**
- * POWER's opening stage. The official SNAP! video stays on YouTube.
- * Sound starts from a real tap where the browser permits it; never bundle/copy the track.
+ * An original TLC cartoon mascot and black/gold entrance. No unverifiable personal photograph.
+ * The third-party official music video is embedded IN the page, not a floating player.
  */
 export default function Index() {
   const navigate = useNavigate();
-  const { playIntroAnthem, playbackError, isPlaying, togglePlay } = useMusic();
+  const { playIntroAnthem, playbackError, isPlaying, playerVisible, togglePlay, dismissPlayer } = useMusic();
   const [soundOn, setSoundOn] = useState(() => localStorage.getItem('power-intro-sound') !== 'off');
-  const [musicRequested, setMusicRequested] = useState(false);
+  const [requested, setRequested] = useState(false);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    window.dispatchEvent(new CustomEvent('power-music-inline-target', {
+      detail: document.getElementById('power-inline-youtube'),
+    }));
     const frame = requestAnimationFrame(() => setVisible(true));
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.dispatchEvent(new CustomEvent('power-music-inline-target', { detail: null }));
+    };
   }, []);
 
   function toggleSound() {
     const next = !soundOn;
     setSoundOn(next);
     localStorage.setItem('power-intro-sound', next ? 'on' : 'off');
-    if (!next && isPlaying) togglePlay();
+    if (!next && playerVisible) dismissPlayer();
   }
   function startAnthem() {
-    setMusicRequested(true);
+    setRequested(true);
+    setSoundOn(true);
+    localStorage.setItem('power-intro-sound', 'on');
     playIntroAnthem();
   }
   function enter(path: string) {
-    if (soundOn && !isPlaying) startAnthem();
-    if (!soundOn && isPlaying) togglePlay();
+    // Initiated from a user tap: browser may allow playback, but never silently claim success.
+    if (soundOn && !playerVisible) startAnthem();
     navigate(path);
   }
 
   return (
-    <main className="power-entry" aria-label="I Got the Power opening experience">
+    <main className="power-entry power-entry-gold" aria-label="I Got the Power opening experience">
       <div className="power-entry-frame" aria-hidden="true">
         <span className="power-entry-rail power-entry-rail-one" />
         <span className="power-entry-rail power-entry-rail-two" />
@@ -49,7 +57,7 @@ export default function Index() {
         <header className="power-entry-top">
           <div className="power-entry-brand">
             <span className="power-entry-brandmark" aria-hidden="true"><Zap size={22} fill="currentColor"/></span>
-            <span className="power-entry-brand-text"><strong>POWER</strong><small>TRAINING SYSTEM / TLC</small></span>
+            <span className="power-entry-brand-text"><strong>POWER</strong><small>CALISTHENICS TRAINING / TLC</small></span>
           </div>
           <div className="power-entry-top-actions">
             <InstallPowerApp compact />
@@ -73,9 +81,8 @@ export default function Index() {
               <p>MASTER <strong>HUMAN STRENGTH.</strong></p>
               <p className="power-entry-message-alt">BUILD CONTROL. UNLOCK THE EXTRAORDINARY.</p>
             </div>
-            <p className="power-entry-description">Real calisthenics. Real progressions. Your next rep starts here.</p>
-            <button type="button" onClick={() => enter('/planner')}
-              className="power-entry-primary">
+            <p className="power-entry-description">Train like the version of yourself you're becoming. Real calisthenics. Real progressions. Powered by TLC.</p>
+            <button type="button" onClick={() => enter('/planner')} className="power-entry-primary">
               <span className="power-entry-primary-icon"><Play size={21} fill="currentColor"/></span>
               <span className="power-entry-primary-label"><strong>START WORKING OUT</strong><small>GO STRAIGHT TO TRAINING</small></span>
               <ArrowUpRight className="power-entry-primary-arrow" size={22} aria-hidden="true"/>
@@ -86,60 +93,64 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="power-entry-visual" aria-hidden="true">
-            <div className="power-entry-instrument">
-              <span className="power-entry-instrument-title">HUMAN / POTENTIAL</span>
-              <div className="power-entry-orbit power-entry-orbit-outer" />
-              <div className="power-entry-orbit power-entry-orbit-inner" />
-              <div className="power-entry-instrument-axis power-entry-instrument-axis-x" />
-              <div className="power-entry-instrument-axis power-entry-instrument-axis-y" />
-              <div className="power-entry-instrument-core">
-                <Dumbbell className="power-entry-instrument-icon" strokeWidth={1.4} />
-              </div>
-              <span className="power-entry-instrument-detail power-entry-detail-top">STRENGTH / CONTROL</span>
-              <span className="power-entry-instrument-detail power-entry-detail-bottom">BODYWEIGHT / TRAINING</span>
-              <div className="power-entry-signal"><span/><span/><span/><span/><span/><span/><span/><span/><span/></div>
+          <div className="power-entry-visual">
+            <div className="power-entry-mascot-stage">
+              <div className="power-entry-mascot-legend"><span>THE TLC ATHLETE</span><span>01 / CONCEPT</span></div>
+              <img src="/power-mascot.svg" alt="Original black-and-gold cartoon athlete mascot, a concept character rather than a portrait of you" className="power-entry-mascot" decoding="async" fetchPriority="high" />
+              <div className="power-entry-mascot-caption"><Crown size={15}/> STRENGTH IS BUILT. <span>NOT BORN.</span></div>
             </div>
           </div>
         </section>
 
-        <section className="power-entry-paths" aria-label="Pick your training focus">
+        <section className="power-entry-paths" aria-label="Choose your training focus">
           <button type="button" className="power-entry-path" onClick={() => enter('/build?skill=planche')}>
-            <span className="power-entry-path-index">01 / STRENGTH</span>
+            <span className="power-entry-path-index">01 / POWER</span>
             <span className="power-entry-path-title">SUPERHUMAN <strong>STRENGTH</strong></span>
-            <span className="power-entry-path-desc">Planche & advanced bodyweight skills</span>
-            <MoveUpRight className="power-entry-path-icon" size={22} aria-hidden="true"/>
+            <span className="power-entry-path-desc">Planche & elite bodyweight progressions</span>
+            <Zap className="power-entry-path-icon" size={22} aria-hidden="true"/>
           </button>
           <button type="button" className="power-entry-path" onClick={() => enter('/build?skill=handstand')}>
             <span className="power-entry-path-index">02 / MASTERY</span>
             <span className="power-entry-path-title">MASTER <strong>HUMAN STRENGTH</strong></span>
-            <span className="power-entry-path-desc">Handstands, balance & control</span>
-            <MoveUpRight className="power-entry-path-icon" size={22} aria-hidden="true"/>
+            <span className="power-entry-path-desc">Handstands, balance & body control</span>
+            <Crown className="power-entry-path-icon" size={22} aria-hidden="true"/>
           </button>
         </section>
 
-        <footer className="power-entry-footer">
-          <div className="power-entry-soundtrack">
-            <button type="button" onClick={() => {
-              if (isPlaying) togglePlay();
-              else { setSoundOn(true); localStorage.setItem('power-intro-sound', 'on'); startAnthem(); }
-            }} className="power-entry-soundtrack-icon"
-              aria-label={isPlaying ? 'Pause I Got the Power anthem' : 'Play I Got the Power anthem'}>
-              {isPlaying ? <Headphones size={19}/> : <Play size={18} fill="currentColor"/>}
-            </button>
-            <div className="power-entry-soundtrack-copy">
-              <span className="power-entry-small-label">INTRO SOUNDTRACK / OFFICIAL YOUTUBE VIDEO</span>
-              <span className="power-entry-track">SNAP! — THE POWER</span>
-              <span className="power-entry-track-status" aria-live="polite">
-                {playbackError || (isPlaying ? 'Now playing in POWER' : musicRequested ? 'Starting… use the music controls if playback is blocked' : 'Tap play or enter with sound on')}
-              </span>
+        <section className="power-entry-music-panel" aria-label="Embedded POWER soundtrack">
+          <div className="power-entry-music-details">
+            <div className="power-entry-music-meta">
+              <span className="power-entry-small-label">OFFICIAL SONG / EMBEDDED VIDEO</span>
+              <h2 className="power-entry-track">SNAP! — THE POWER</h2>
+              <p className="power-entry-track-status" aria-live="polite">
+                {playbackError || (isPlaying ? 'Now playing through the official YouTube embed.' : requested ? 'If sound is blocked, tap Play in the embedded video.' : 'Tap below to play the anthem. Audio needs a gesture on most phones.')}
+              </p>
             </div>
-            <div className="power-entry-equalizer" aria-hidden="true"><i/><i/><i/><i/><i/></div>
+            <div className="power-entry-music-actions">
+              <button type="button" className="power-entry-soundtrack-icon" onClick={() => {
+                if (isPlaying) togglePlay(); else startAnthem();
+              }} aria-label={isPlaying ? 'Pause I Got the Power anthem' : 'Play I Got the Power anthem'}>
+                {isPlaying ? <Headphones size={18}/> : <Play size={18} fill="currentColor"/>}
+                <span>{isPlaying ? 'PAUSE ANTHEM' : 'PLAY ANTHEM'}</span>
+              </button>
+              {playerVisible && <button type="button" className="power-entry-music-stop" onClick={dismissPlayer}>Stop / Close</button>}
+            </div>
+            <p className="power-entry-music-note">The original commercial song is not copied or hidden as background audio. YouTube requires visible playback; the integrated player appears right here.</p>
+            <p className="power-entry-music-source">Playback courtesy of <a href={`https://www.youtube.com/watch?v=${POWER_ANTHEM_VIDEO_ID}`} target="_blank" rel="noopener noreferrer">the official YouTube source</a>.</p>
+          </div>
+          <div className="power-entry-inline-youtube" id="power-inline-youtube">
+            {!playerVisible && <div className="power-entry-audio-placeholder"><Video size={30}/><span>IN-APP VIDEO PLAYER</span><small>Press Play Anthem to start</small></div>}
+          </div>
+        </section>
+
+        <footer className="power-entry-footer">
+          <div className="power-entry-footer-links">
+            <button type="button" onClick={() => navigate('/library')}><Dumbbell size={16}/> Exercises</button>
+            <button type="button" onClick={() => navigate('/build')}><Target size={16}/> Skill Tree</button>
+            <button type="button" onClick={() => navigate('/dashboard')}><MapPin size={16}/> More</button>
           </div>
           <p className="power-entry-powered">POWERED BY <strong>TLC</strong><span className="power-entry-powered-dot">.</span></p>
         </footer>
-
-        <p className="power-entry-legal">Embedded soundtrack: SNAP! — The Power. YouTube may restrict playback; sound usually requires a tap. <a href={`https://www.youtube.com/watch?v=${POWER_ANTHEM_VIDEO_ID}`} target="_blank" rel="noopener noreferrer">Official track <ArrowUpRight size={11} className="inline-block"/></a></p>
       </div>
     </main>
   );
