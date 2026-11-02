@@ -8,6 +8,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { saveGuestWorkout } from '@/lib/offlineWorkouts';
 import { getOfflineExercises, type OfflineExercise } from '@/lib/offlineExercises';
+import { deviceSkillProgress, exerciseBySlug, nodeDose, regressionFor, saveAttempt, removeAttempt } from '@/lib/skillGraph';
 import { useTheme } from '@/components/ThemeSwitcher';
 
 export const ACTIVE_WORKOUT_KEY = 'power-active-workout-v2';
@@ -25,8 +26,8 @@ interface ActiveExercise {
   cues?: unknown;
   difficulty_level?: number | null;
 }
-interface WorkoutSet { reps: number; seconds?: number; weight?: number; rpe?: number; done: boolean }
-interface SessionEntry { section: string; phaseLabel?: string; exercise: ActiveExercise; sets: WorkoutSet[] }
+interface WorkoutSet { progressId?: string; reps: number; seconds?: number; weight?: number; rpe?: number; done: boolean }
+interface SessionEntry { restSeconds?: number; section: string; phaseLabel?: string; exercise: ActiveExercise; sets: WorkoutSet[] }
 interface SessionDraft { name: string; notes: string; entries: SessionEntry[]; index: number; restEnd: number | null; startedAt: number }
 
 function readDraft(): SessionDraft | null {
@@ -38,7 +39,7 @@ function readDraft(): SessionDraft | null {
     const entries = value.entries.filter(entry => entry.exercise && Array.isArray(entry.sets))
       .map(entry => ({
         ...entry,
-        sets: entry.sets.map(set => ({ reps: Math.max(0, Number(set.reps) || 0), seconds: typeof set.seconds === 'number' ? Math.max(0, set.seconds) : undefined, weight: set.weight, rpe: set.rpe, done: Boolean(set.done) }))
+        sets: entry.sets.map((set, setIndex) => ({ progressId: set.progressId || `${value.startedAt}:${entry.exercise.slug}:${setIndex}`, reps: Math.max(0, Number(set.reps) || 0), seconds: typeof set.seconds === 'number' ? Math.max(0, set.seconds) : undefined, weight: set.weight, rpe: set.rpe, done: Boolean(set.done) }))
       }));
     if (!entries.length) return null;
     return { name: value.name || 'Workout', notes: value.notes || '', entries,
@@ -58,6 +59,7 @@ export default function ActiveWorkout() {
   const [now, setNow] = useState(Date.now());
   const [restDuration, setRestDuration] = useState(60);
   const [saving, setSaving] = useState(false);
+  const [techniqueQuality, setTechniqueQuality] = useState<number | null>(null);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
@@ -67,6 +69,11 @@ export default function ActiveWorkout() {
     if (draft) localStorage.setItem(ACTIVE_WORKOUT_KEY, JSON.stringify(draft));
   }, [draft]);
   const item = draft?.entries[draft.index];
+  useEffect(() => {
+    if(item) setRestDuration(item.restSeconds || nodeDose(item.exercise.slug).restSeconds);
+    setTechniqueQuality(null);
+  }, [item?.exercise.slug]);
+  const progressOwner=user?.id || 'guest';
   const setCount = draft?.entries.reduce((sum, entry) => sum + entry.sets.length, 0) || 0;
   const completed = draft?.entries.reduce((sum, entry) => sum + entry.sets.filter(set => set.done).length, 0) || 0;
   const seconds = draft?.restEnd ? Math.max(0, Math.ceil((draft.restEnd - now) / 1000)) : 0;
@@ -90,10 +97,37 @@ export default function ActiveWorkout() {
   }
   function finishSet(setIndex: number) {
     const wasDone = Boolean(item?.sets[setIndex]?.done);
+    if(item&&draft) {
+      const id=item.sets[setIndex].progressId || `${draft.startedAt}:${item.exercise.slug}:${setIndex}`;
+      try {
+        if(wasDone) removeAttempt(progressOwner,id);
+        else if(techniqueQuality!==null) {
+          const set=item.sets[setIndex];
+          saveAttempt(progressOwner,{id,nodeId:item.exercise.slug,sessionId:String(draft.startedAt),at:new Date().toISOString(),metric:set.seconds!==undefined?'seconds':'reps',value:set.seconds??set.reps,target:set.seconds??set.reps,quality:techniqueQuality});
+        }
+      } catch {toast.error('Skill progress could not be saved. Workout controls still work.');}
+    }
     modifySet(setIndex, set => ({ ...set, done: !set.done }));
     if (!wasDone) {
       setDraft(old => old ? { ...old, restEnd: Date.now() + restDuration * 1000 } : old);
     }
+  }
+  function regressMovement() {
+    if(!draft||!item)return;
+    const slug=regressionFor(item.exercise.slug);
+    const easier=slug?exerciseBySlug.get(slug):null;
+    if(!easier){toast.info('No mapped regression is available for this movement.');return;}
+    const dose=nodeDose(easier.slug);
+    try {saveAttempt(progressOwner,{id:crypto.randomUUID(),nodeId:item.exercise.slug,sessionId:String(draft.startedAt),at:new Date().toISOString(),metric:nodeDose(item.exercise.slug).metric,value:0,target:nodeDose(item.exercise.slug).target,quality:2});} catch {}
+    const remaining=Math.max(1,item.sets.filter(s=>!s.done).length);
+    const replacement:SessionEntry={section:item.section,phaseLabel:'Regression / preserve technique',exercise:easier,restSeconds:dose.restSeconds,sets:Array.from({length:remaining},()=>({progressId:crypto.randomUUID(),reps:dose.metric==='reps'?dose.target:0,...(dose.metric==='seconds'?{seconds:dose.target}:{}),done:false}))};
+    setDraft(old=>{
+      if(!old)return old;
+      const entries=old.entries.map((entry,i)=>i===old.index?{...entry,sets:entry.sets.filter(set=>set.done)}:entry);
+      entries.splice(old.index+1,0,replacement);
+      return {...old,entries,index:old.index+1,restEnd:null};
+    });
+    toast.info(`Switched to ${easier.name}. Completed sets are preserved.`);
   }
   function changeExercise(next: number) {
     setDraft(old => old ? { ...old, index: Math.max(0, Math.min(old.entries.length - 1, next)), restEnd: null } : null);
@@ -182,7 +216,7 @@ export default function ActiveWorkout() {
             <div className="h-full bg-primary transition-[width] duration-300" style={{ width: `${percentage}%` }} />
           </div>
         </div>
-        <section className="space-y-3" aria-label="Current exercise">
+        <section id="power-current-exercise" className="space-y-3" aria-label="Current exercise">
           <div>
             <div className="flex items-center justify-between gap-2">
               <p className="text-xs font-bold uppercase tracking-widest text-primary">{item.phaseLabel || item.exercise.category}</p>
@@ -213,6 +247,8 @@ export default function ActiveWorkout() {
             <h3 className="font-display font-black text-base">Log your sets</h3>
             <span className="text-xs text-muted-foreground">{item.sets.filter(s => s.done).length} of {item.sets.length} done</span>
           </div>
+          <details className="border rounded-xl p-3"><summary className="text-xs font-bold cursor-pointer">Technique quality · optional progress logging</summary><label className="text-xs block mt-3">Your quality for these attempts<select className="h-12 w-full bg-card border rounded-lg mt-1 px-2" value={techniqueQuality??''} onChange={e=>setTechniqueQuality(e.target.value?Number(e.target.value):null)}><option value="">Not assessed · workout only</option>{[1,2,3,4,5].map(n=><option key={n} value={n}>{n}/5 · {n<3?'lost control':n===3?'mixed quality':'controlled technique'}</option>)}</select></label><p className="text-[11px] text-muted-foreground mt-2">Only your explicit quality rating contributes to skill consistency. Stop when form deteriorates.</p></details>
+          <div className="grid grid-cols-2 gap-2"><Button variant="outline" className="min-h-12 text-xs" disabled={!regressionFor(item.exercise.slug)} onClick={regressMovement}>Failed / use regression</Button><a className="border rounded-xl min-h-12 grid place-items-center text-xs text-primary" href="#power-current-exercise">Technique / video</a></div>
           {item.sets.map((set,index) => (
             <div key={index} className={`power-set-row grid grid-cols-[1.15rem_minmax(0,1fr)_2.6rem] sm:grid-cols-[1.5rem_minmax(0,1fr)_3rem] gap-1.5 sm:gap-3 items-center p-2 sm:p-3 rounded-xl ${set.done?'is-done':''}`}>
               <span className="w-5 text-xs font-mono font-bold text-muted-foreground">{index+1}</span>
@@ -235,7 +271,7 @@ export default function ActiveWorkout() {
           ))}
           <button type="button" className="power-hardware min-h-11 w-full text-sm font-bold flex items-center justify-center gap-2"
             onClick={() => setDraft(old => old ? { ...old, entries: old.entries.map((e,i) =>
-              i === old.index ? { ...e, sets: [...e.sets, { reps: e.sets[e.sets.length-1]?.reps ?? 10, ...(e.sets[e.sets.length-1]?.seconds !== undefined ? {seconds:e.sets[e.sets.length-1].seconds} : {}), done: false }] } : e) } : null)}>
+              i === old.index ? { ...e, sets: [...e.sets, { progressId: crypto.randomUUID(), reps: e.sets[e.sets.length-1]?.reps ?? 10, ...(e.sets[e.sets.length-1]?.seconds !== undefined ? {seconds:e.sets[e.sets.length-1].seconds} : {}), done: false }] } : e) } : null)}>
             <Plus className="h-4 w-4"/> Add another set
           </button>
         </section>
@@ -247,7 +283,7 @@ export default function ActiveWorkout() {
             </div>
             <div className="flex gap-1.5 items-center">
               <button type="button" className="power-hardware h-11 px-3 text-xs font-bold"
-                onClick={() => setRestDuration(v => v===60?90:v===90?120:60)} aria-label="Change rest duration">
+                onClick={() => setRestDuration(v => v===60?90:v===90?120:v===120?150:v===150?180:60)} aria-label="Change rest duration">
                 {restDuration}s
               </button>
               <button type="button" className="power-hardware h-11 w-11 grid place-items-center"
@@ -260,7 +296,7 @@ export default function ActiveWorkout() {
                 aria-label="Restart rest timer"><TimerReset className="h-5 w-5"/></button>
             </div>
           </div>
-          <p className="text-[11px] text-muted-foreground">Automatically starts when you complete a set. Change rest to 60, 90, or 120 seconds.</p>
+          <p className="text-[11px] text-muted-foreground">Automatically starts when you complete a set. Skill-specific starting rest; adjust between 60 and 180 seconds.</p>
         </section>
         <div className="sticky bottom-0 z-30 grid grid-cols-3 gap-2 rounded-t-2xl border-t border-border/60 bg-background/95 p-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-lg">
           <Button variant="outline" className="h-14 font-bold rounded-2xl" disabled={draft.index===0}

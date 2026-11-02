@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { Activity, ArrowLeft, BarChart3, BrainCircuit, Dumbbell, Film, Heart, MessageSquare, RefreshCw, ShieldCheck, Users, Zap } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/providers/AuthProvider';
+import { VideoIntegrityLedger } from '@/components/Admin/VideoIntegrityLedger';
 import { Button } from '@/components/ui/button';
 
 type Overview = Record<string, number>;
@@ -74,6 +75,7 @@ export default function Admin() {
             <p className="mt-1 text-xs text-muted-foreground">{label}</p>
           </div>)}
         </div>
+        <VideoIntegrityLedger owner={user.id} />
         <section className="mt-6 grid gap-3 sm:grid-cols-2">
           <button type="button" onClick={() => navigate('/library')} className="rounded-2xl border bg-card p-5 text-left hover:border-primary/40">
             <div className="flex items-center gap-2 font-semibold"><Film className="h-5 w-5 text-primary"/> Exercise and video library</div>

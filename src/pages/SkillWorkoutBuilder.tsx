@@ -8,6 +8,7 @@ import {
   SKILL_GOALS, PHASE_LABELS, buildSkillWorkout, findSkillGoal, getCandidates, toSessionEntries,
   type SkillLevel, type SkillMinutes, type SkillWorkoutItem, type WorkoutPhase
 } from '@/lib/skillWorkoutBuilder';
+import { exerciseBySlug, nodeDose, readTrainingProfile, writeTrainingProfile, trainingBlockers, type SkillTrainingProfile, type TrainingEquipment } from '@/lib/skillGraph';
 import { ACTIVE_WORKOUT_KEY } from '@/pages/ActiveWorkout';
 
 const MINUTES: SkillMinutes[] = [15,25,40];
@@ -22,11 +23,27 @@ export default function SkillWorkoutBuilder() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const initialGoal = findSkillGoal(params.get('skill') || '')?.id || 'planche';
+  const focusSlug = params.get('node');
+  function routine(goal: string, stage: SkillLevel, time: SkillMinutes): SkillWorkoutItem[] {
+    const built=buildSkillWorkout(goal,stage,time);
+    const focus=goal===initialGoal&&focusSlug?exerciseBySlug.get(focusSlug):null;
+    if(!focus)return built;
+    const dose=nodeDose(focus.slug);
+    let replaced=false;
+    const focused:SkillWorkoutItem={key:`skill-${focus.slug}`,phase:'skill',exercise:focus,sets:dose.sets,target:dose.target,metric:dose.metric};
+    const next=built.flatMap(item=>{if(item.phase==='skill'&&!replaced){replaced=true;return[focused];}return item.exercise.slug===focus.slug?[]:[item];});
+    if(!replaced)next.push(focused);
+    return next;
+  }
   const [goalId,setGoalId] = useState(initialGoal);
   const [minutes,setMinutes] = useState<SkillMinutes>(25);
   const [level,setLevel] = useState<SkillLevel>('foundation');
-  const [items,setItems] = useState<SkillWorkoutItem[]>(() => buildSkillWorkout(initialGoal,'foundation',25));
+  const [items,setItems] = useState<SkillWorkoutItem[]>(() => routine(initialGoal,'foundation',25));
   const [showAdjust,setShowAdjust] = useState(false);
+  const [trainingProfile,setTrainingProfile]=useState<SkillTrainingProfile>(readTrainingProfile);
+  const [comfortable,setComfortable]=useState(false);
+  const blockers=[...new Set(items.flatMap(item=>trainingBlockers(item.exercise.slug,trainingProfile,comfortable)))];
+  function updateTraining(next:SkillTrainingProfile){setTrainingProfile(next);writeTrainingProfile(next);}
   const goal = findSkillGoal(goalId) || SKILL_GOALS[0];
   const exerciseCount = items.length;
   const totalSets = useMemo(()=>items.reduce((n,i)=>n+i.sets,0),[items]);
@@ -36,7 +53,7 @@ export default function SkillWorkoutBuilder() {
     setGoalId(nextGoal);
     setLevel(nextLevel);
     setMinutes(nextMinutes);
-    setItems(buildSkillWorkout(nextGoal,nextLevel,nextMinutes));
+    setItems(routine(nextGoal,nextLevel,nextMinutes));
   }
   function nextAlternative(item:SkillWorkoutItem): boolean {
     const options = getCandidates(goalId,level,item.phase);
@@ -58,6 +75,7 @@ export default function SkillWorkoutBuilder() {
   }
   function startWorkout() {
     if (!items.length) {toast.error('Add a skill routine first');return;}
+    if(blockers.length){toast.info(blockers[0]);return;}
     if (localStorage.getItem(ACTIVE_WORKOUT_KEY)) {
       if (!window.confirm('An unfinished workout is saved. Replace it with this skill workout? Cancel keeps your previous workout.')) return;
     }
@@ -197,8 +215,9 @@ export default function SkillWorkoutBuilder() {
             <p>Starting, Building, and Advanced are choices—not medical clearance. Skill work comes before fatiguing strength work. Choose a comfortable variation and stop when technique deteriorates or pain appears.</p>
           </div>
         </section>
+        <section className="power-elevated p-4 space-y-3" aria-label="Skill training readiness"><h2 className="font-bold">Before you train</h2><p className="text-xs text-muted-foreground">Confirm the equipment and current comfort for this session.</p><div className="flex flex-wrap gap-2">{(['floor','wall','rings','bar','parallettes','bands'] as TrainingEquipment[]).map(option=><button key={option} aria-pressed={trainingProfile.equipment.includes(option)} onClick={()=>updateTraining({...trainingProfile,equipment:trainingProfile.equipment.includes(option)?trainingProfile.equipment.filter(x=>x!==option):[...trainingProfile.equipment,option]})} className={`min-h-12 px-3 rounded-xl border text-xs capitalize ${trainingProfile.equipment.includes(option)?'border-primary text-primary bg-primary/10':''}`}>{option}</button>)}</div><label className="min-h-12 flex gap-3 items-center text-xs"><input className="h-5 w-5" type="checkbox" checked={trainingProfile.safeExit} onChange={e=>updateTraining({...trainingProfile,safeExit:e.target.checked})}/>I can safely enter and exit the inversions in this session.</label><label className="min-h-12 flex gap-3 items-center text-xs"><input className="h-5 w-5" type="checkbox" checked={comfortable} onChange={e=>setComfortable(e.target.checked)}/>These variations are comfortable today, without joint pain.</label>{blockers.map(reason=><p key={reason} className="text-xs text-muted-foreground">• {reason}</p>)}</section>
         <div className="power-builder-launch sticky z-30 bottom-[calc(4.6rem+env(safe-area-inset-bottom))] md:bottom-0 rounded-2xl border border-border/70 bg-card/95 p-2 shadow-xl backdrop-blur-lg">
-          <Button type="button" onClick={startWorkout} disabled={!items.length}
+          <Button type="button" onClick={startWorkout} disabled={!items.length||blockers.length>0}
             className="power-primary-action min-h-[55px] w-full rounded-xl font-display font-black text-sm">
             <Play className="h-5 w-5 mr-2" fill="currentColor"/> Start This Skill Workout <ArrowRight className="h-5 w-5 ml-2"/>
           </Button>

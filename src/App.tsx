@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./providers/AuthProvider";
 import { MusicProvider } from "./providers/MusicProvider";
+import { InlineSoundtrackSlot } from "./components/Music/InlineSoundtrackSlot";
 import { MusicControl } from "./components/Music/MusicControl";
 import { MobileNav } from "./components/Layout/MobileNav";
 import Index from "./pages/Index";
@@ -49,6 +50,7 @@ function AppContent() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+      <InlineSoundtrackSlot />
       <MusicControl />
       <MobileNav />
     </BrowserRouter>

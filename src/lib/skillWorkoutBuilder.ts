@@ -1,4 +1,5 @@
 import publicCatalog from '@/data/publicExerciseCatalog.json';
+import { nodeDose } from '@/lib/skillGraph';
 
 /** Real catalog only. Workout presets are editorial suggestions, not athlete assessments. */
 export type SkillLevel = 'foundation' | 'building' | 'advanced';
@@ -80,6 +81,12 @@ export const SKILL_GOALS: readonly SkillGoal[] = [
     },
     support: ['pull-up','hollow-body-hold','ring-row'],
     cooldown: ['child-s-pose','shoulder-cars','cat-cow'],
+  },
+  {
+    id: 'rings', title: 'Ring Foundation', detail: 'Support, rows and controlled dips', equipment: 'Gymnastic rings',
+    warmup: ['shoulder-cars','wrist-circles','ring-scapular-row'],
+    main: { foundation: ['incline-ring-row','assisted-ring-support-hold','ring-push-up'], building: ['ring-row','ring-support-hold','assisted-ring-dip'], advanced: ['ring-turnout-support-hold','ring-dip','ring-push-up-turnout'] },
+    support: ['ring-scapular-depression','ring-row','hollow-body-hold'], cooldown: ['child-s-pose','shoulder-cars','cat-cow'],
   },
   {
     id: 'ring-muscle-up', title: 'Ring Muscle-Up', detail: 'False grip, transition, dip', equipment: 'Gymnastic rings',
@@ -186,6 +193,7 @@ export function toSessionEntries(items: SkillWorkoutItem[]) {
   return items.map(item => ({
     section: item.phase === 'skill' ? 'workout' : item.phase === 'support' ? 'compression' : item.phase,
     phaseLabel: PHASE_LABELS[item.phase],
+    restSeconds: nodeDose(item.exercise.slug).restSeconds,
     exercise: item.exercise,
     sets: Array.from({length:item.sets},()=>({
       reps: item.metric === 'seconds' ? 0 : item.target,

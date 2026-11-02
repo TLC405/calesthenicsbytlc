@@ -235,3 +235,16 @@
 @media (prefers-reduced-motion: reduce) {
   .power-shell *, .power-entry-gold .power-entry-mascot { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+/* Research-backed navigation: cover-screen path, Fold inner-screen detail cockpit. */
+.power-studio-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 28px; }
+.power-studio-node { position: relative; }
+.power-studio-detail { min-width: 0; align-self: start; }
+@media(min-width:768px) {
+  .power-studio-grid {grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
+  .power-studio-detail {position:sticky;top:20px;max-height:calc(100dvh - 40px);overflow-y:auto}
+  .power-session > div {max-width:1100px}
+  .power-session section[aria-label="Current exercise"] {float:left;width:calc(50% - 18px);position:sticky;top:20px}
+  .power-session section[aria-label="Log your sets"], .power-session section[aria-label="Log your sets"] + section {margin-left:calc(50% + 18px)}
+  .power-session > div > .sticky {clear:both}
+}
+@media(max-width:767px){.power-skill-studio input,.power-skill-studio select{font-size:16px}}

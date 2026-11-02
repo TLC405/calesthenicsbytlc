@@ -145,8 +145,13 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     if (!musicEnabled || !playerVisible || initAttempted.current) return;
     initAttempted.current = true;
 
+    let cancelled = false;
     const init = async () => {
-      await loadYouTubeAPI();
+      let timeout: ReturnType<typeof setTimeout> | undefined;
+      try {
+        await Promise.race([loadYouTubeAPI(),new Promise<never>((_,reject)=>{timeout=setTimeout(()=>reject(new Error('YouTube did not connect. Close the player and try again.')),12000);})]);
+      } finally { if(timeout)clearTimeout(timeout); }
+      if(cancelled)return;
       if (!containerRef.current || playerRef.current) return;
 
       const config = getPlayerConfig();
@@ -206,9 +211,10 @@ export function MusicProvider({ children }: { children: ReactNode }) {
       });
     };
 
-    init();
+    void init().catch(error=>{if(!cancelled){setIsPlaying(false);setPlaybackError(error instanceof Error?error.message:'YouTube could not load.');}});
 
     return () => {
+      cancelled=true;
       if (playerRef.current?.destroy) {
         try { playerRef.current.destroy(); } catch {}
         playerRef.current = null;
