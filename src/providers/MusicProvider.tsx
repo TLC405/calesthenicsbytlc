@@ -109,6 +109,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const handle = (event: Event) => setInlineTarget((event as CustomEvent<HTMLElement | null>).detail);
     window.addEventListener('power-music-inline-target', handle);
+    setInlineTarget(document.getElementById('power-inline-youtube'));
     return () => window.removeEventListener('power-music-inline-target', handle);
   }, []);
 
