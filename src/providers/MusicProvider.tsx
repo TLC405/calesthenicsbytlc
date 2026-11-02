@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState, useCallback, ReactNode } from 'react';
 import { useAuth } from './AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
+import { createPortal } from 'react-dom';
 
 interface TrackInfo { title?: string; author?: string; videoId?: string }
 export interface SavedTrack { id: string; url: string; title: string; addedAt: number }
@@ -101,7 +102,15 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   const pendingIntroRef = useRef(false);
   const pendingPlaybackRef = useRef(false);
   const [playerVisible, setPlayerVisible] = useState(false);
+  const [inlineTarget, setInlineTarget] = useState<HTMLElement | null>(null);
   const [playbackError, setPlaybackError] = useState<string | null>(null);
+
+  // Home intro supplies an inline mount point, keeping the YouTube embed in the page rather than a floating popup.
+  useEffect(() => {
+    const handle = (event: Event) => setInlineTarget((event as CustomEvent<HTMLElement | null>).detail);
+    window.addEventListener('power-music-inline-target', handle);
+    return () => window.removeEventListener('power-music-inline-target', handle);
+  }, []);
 
   // Load user prefs
   useEffect(() => {
@@ -206,7 +215,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
       initAttempted.current = false;
       setIsReady(false);
     };
-  }, [musicEnabled, playerVisible]); // Never create a hidden YouTube player
+  }, [musicEnabled, playerVisible, inlineTarget]); // Reattach safely if the intro mount unmounts
 
   // When playlist URL changes and player exists, load new content
   useEffect(() => {
@@ -354,23 +363,27 @@ export function MusicProvider({ children }: { children: ReactNode }) {
       togglePlay, toggleMute, setVolume, setPlaylistUrl, setMusicEnabled,
       nextTrack, prevTrack, playUrl, playIntroAnthem, playbackError, playerVisible, dismissPlayer, addToLibrary, removeFromLibrary,
     }}>
-      {/* Visible YouTube player: required viewport >= 200x200; closing also pauses it. */}
-      {musicEnabled && playerVisible && (
-        <section className="power-music-video" aria-label="POWER music video player">
-          <div className="power-music-video-header">
-            <span>POWER / NOW PLAYING</span>
-            <button type="button" aria-label="Close music video and stop playback" onClick={dismissPlayer}>
-              Close ×
-            </button>
-          </div>
-          <div className="power-music-video-screen">
-            <div ref={containerRef} id="yt-music-player" />
-          </div>
-          {playbackError && <p className="power-music-video-error" role="status">{playbackError}</p>}
-          <p className="power-music-video-credit">YouTube player · playback depends on creator permissions</p>
-        </section>
-      )}
       {children}
+      {/* The player is embedded in the intro. On other routes it lives in the normal page flow,
+          not in a floating pop-up. The third-party iframe is always >= 200px. */}
+      {musicEnabled && playerVisible && (() => {
+        const player = (
+          <section className="power-music-video" aria-label="POWER music video player">
+            <div className="power-music-video-header">
+              <span>POWER / MUSIC</span>
+              <button type="button" aria-label="Close music video and stop playback" onClick={dismissPlayer}>
+                Close ×
+              </button>
+            </div>
+            <div className="power-music-video-screen">
+              <div ref={containerRef} id="yt-music-player" />
+            </div>
+            {playbackError && <p className="power-music-video-error" role="status">{playbackError}</p>}
+            <p className="power-music-video-credit">Official YouTube embed · plays when allowed · visible controls</p>
+          </section>
+        );
+        return inlineTarget ? createPortal(player, inlineTarget) : player;
+      })()}
     </MusicContext.Provider>
   );
 }
