@@ -1030,7 +1030,8 @@ body { overflow-x: clip; }
 
 /* POWER 3.6 / BLACK & GOLD. Applies only to the I Got the Power theme,
    never overwrites the VASA / YMCA / Thunder / Planet Fitness alternatives. */
-:root:not([data-theme]) {
+:root:not([data-theme]):not(.dark),
+:root:not([data-theme]).dark {
   color-scheme: dark;
   --background: 240 5% 3%;
   --foreground: 43 26% 94%;
