@@ -2,21 +2,31 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
-import { Button } from '@/components/ui/button';
-import {
-  Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp, Palette, FileText, Users,
-} from 'lucide-react';
-import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { useTheme } from '@/components/ThemeSwitcher';
+import { PowerAthleteArt } from '@/components/Brand/PowerAthleteArt';
+import { SkillTreeView } from '@/components/Progression/SkillTreeView';
+import {
+  Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp,
+  Palette, FileText, CircleDot, Hand, Dumbbell, Move, Shield, CalendarDays,
+  GitBranch, ChevronDown, ChevronUp, Users
+} from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { NotificationBell } from '@/components/Community/NotificationBell';
 import { InstallPowerApp } from '@/components/InstallPowerApp';
 
-function getGreeting() {
-  const h = new Date().getHours();
-  if (h < 6) return 'Night owl';
-  if (h < 12) return 'Good morning';
-  if (h < 17) return 'Good afternoon';
+const disciplines = [
+  { label: 'Rings', search: 'rings', icon: CircleDot },
+  { label: 'Handstand', search: 'handstand', icon: Hand },
+  { label: 'Muscle-up', search: 'muscle-up', icon: Dumbbell },
+  { label: 'Mobility', search: 'mobility', icon: Move },
+  { label: 'Core', search: 'core', icon: Shield },
+];
+
+function greeting() {
+  const hour = new Date().getHours();
+  if (hour < 6) return 'Good night';
+  if (hour < 12) return 'Good morning';
+  if (hour < 17) return 'Good afternoon';
   return 'Good evening';
 }
 
@@ -25,210 +35,188 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<any>(null);
   const [recent, setRecent] = useState<any[]>([]);
-  const [selectedExercise, setSelectedExercise] = useState<any>(null);
+  const [treeOpen, setTreeOpen] = useState(false);
+  const [sevenDayWorkouts, setSevenDayWorkouts] = useState(0);
   const { theme, setTheme, themes } = useTheme();
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!user) return;
-      const [{ data: profileData }, { data: workoutsData }] = await Promise.all([
+    if (!user) return;
+    let active = true;
+    const load = async () => {
+      const weekStart = format(new Date(Date.now() - 6 * 86400000), 'yyyy-MM-dd');
+      const [{ data: profileData }, { data: workoutsData }, { count: weekTotal }] = await Promise.all([
         supabase.from('profiles').select('*').eq('id', user.id).single(),
         supabase.from('workouts').select('id, date, notes, entries').eq('user_id', user.id).order('date', { ascending: false }).limit(5),
+        supabase.from('workouts').select('id', { count: 'exact', head: true }).eq('user_id', user.id).gte('date', weekStart),
       ]);
-      setProfile(profileData);
-      setRecent(workoutsData || []);
+      if (active) { setProfile(profileData); setRecent(workoutsData || []); setSevenDayWorkouts(weekTotal ?? 0); }
     };
-    fetchData();
+    load();
+    return () => { active = false; };
   }, [user]);
 
-  const handleSignOut = async () => { await signOut(); navigate('/dashboard'); };
-
-  const streak = profile?.streak_days || 0;
-  const totalXp = profile?.total_xp || 0;
-  const level = profile?.level || 1;
-  const displayName = profile?.display_name || 'Athlete';
-  const weekCount = recent.filter(w => {
-    const d = parseISO(w.date);
-    const now = new Date();
-    const diff = (now.getTime() - d.getTime()) / (1000 * 60 * 60 * 24);
-    return diff <= 7;
-  }).length;
+  const streak = profile?.streak_days ?? 0;
+  const xp = profile?.total_xp ?? 0;
+  const level = profile?.level ?? 1;
+  const name = profile?.display_name || 'Athlete';
+  const weekCount = sevenDayWorkouts;
 
   const cycleTheme = () => {
     const ids = themes.map(t => t.id);
-    const idx = ids.indexOf(theme);
-    setTheme(ids[(idx + 1) % ids.length]);
+    setTheme(ids[(ids.indexOf(theme) + 1) % ids.length]);
   };
+  const openLibrary = (search: string) => navigate('/library', { state: { search } });
 
   return (
-    <div className="min-h-screen bg-background pb-28 md:pb-0">
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border/30">
-        <div className="max-w-3xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[hsl(var(--electric))] to-[hsl(var(--cat-pull))] flex items-center justify-center shadow-sm flex-shrink-0">
-              <Zap className="w-5 h-5 text-white" />
-            </div>
-            <div className="min-w-0">
-              <h1 className="font-display text-base font-bold tracking-tight leading-none truncate">
-                {getGreeting()}, {displayName}
-              </h1>
-              <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em] mt-1">
-                I Got The Power
-              </p>
+    <div className="power-shell">
+      <header className="power-topbar">
+        <div className="power-container power-topinner">
+          <div className="power-brand">
+            <span className="power-mark">TLC</span>
+            <span className="power-brand-line" />
+            <div>
+              <div className="power-brand-label">Performance system</div>
+              <div className="power-smallprint" style={{ fontSize: 9 }}>{greeting()}, {name}</div>
             </div>
           </div>
-          <div className="flex items-center gap-0.5 flex-shrink-0">
+          <div className="flex items-center gap-1">
             <InstallPowerApp compact />
             <NotificationBell userId={user?.id} />
-            <Button variant="ghost" size="icon" onClick={cycleTheme} className="text-muted-foreground hover:text-foreground h-10 w-10 rounded-xl">
-              <Palette className="h-4 w-4" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={() => navigate('/settings')} className="text-muted-foreground hover:text-foreground h-10 w-10 rounded-xl">
-              <Settings className="h-4 w-4" />
-            </Button>
+            <button className="power-icon-button" aria-label="Change color theme" title="Change theme" onClick={cycleTheme}><Palette size={20} /></button>
+            <button className="power-icon-button" aria-label="Settings" onClick={() => navigate('/settings')}><Settings size={20} /></button>
             {user ? (
-              <Button variant="ghost" size="icon" onClick={handleSignOut} className="text-muted-foreground hover:text-foreground h-10 w-10 rounded-xl">
-                <LogOut className="h-4 w-4" />
-              </Button>
+              <button className="power-icon-button" aria-label="Sign out" onClick={async () => { await signOut(); navigate('/dashboard'); }}><LogOut size={20} /></button>
             ) : (
-              <Button variant="ghost" size="sm" onClick={() => navigate('/library')} className="text-xs font-mono uppercase">Explore</Button>
+              <button className="power-button power-button-outline" onClick={() => navigate('/library')}>Explore</button>
             )}
           </div>
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 md:px-8 py-6 space-y-5">
-        {/* Hero CTA */}
-        <section className="relative overflow-hidden rounded-3xl border border-border/50 bg-card p-6 shadow-sm">
-          <div className="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-[hsl(var(--electric))]/10 blur-3xl pointer-events-none" />
-          <p className="text-[9px] font-mono uppercase tracking-[0.25em] text-muted-foreground">Today</p>
-          <h2 className="font-display text-2xl font-black tracking-tight mt-2 leading-tight">
-            Build today's <span className="gradient-text">workout</span>.
-          </h2>
-          <p className="text-xs text-muted-foreground mt-2 max-w-md leading-relaxed">
-            Stack warm-up, work, cool-down, and compression in one clean sheet.
-          </p>
-          <div className="flex gap-2 mt-5">
-            <Button
-              onClick={() => navigate('/planner')}
-              className="h-11 px-5 rounded-xl font-display font-bold uppercase tracking-wider text-xs gap-2"
-            >
-              <FileText className="w-4 h-4" />
-              Open Builder
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => navigate('/ai-lab')}
-              className="h-11 px-4 rounded-xl border-border/50 font-mono uppercase tracking-wider text-[10px] gap-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5" />
-              Ask Coach
-            </Button>
-          </div>
-        </section>
-
-        {/* Stat strip */}
-        <section className="grid grid-cols-3 gap-3">
-          {[
-            { label: 'Streak', value: `${streak}d`, icon: Flame, color: 'hsl(var(--cat-core))' },
-            { label: 'XP', value: totalXp.toLocaleString(), icon: Zap, color: 'hsl(var(--electric))' },
-            { label: 'This Week', value: `${weekCount}`, icon: TrendingUp, color: 'hsl(var(--cat-pull))' },
-          ].map(stat => {
-            const Icon = stat.icon;
-            return (
-              <div key={stat.label} className="relative overflow-hidden rounded-2xl bg-card border border-border/50 p-4">
-                <div className="absolute top-0 left-3 right-3 h-[1px]" style={{ background: `linear-gradient(90deg, transparent, ${stat.color}, transparent)` }} />
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${stat.color}20` }}>
-                    <Icon className="w-3 h-3" style={{ color: stat.color }} />
-                  </div>
-                  <span className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.15em]">{stat.label}</span>
-                </div>
-                <div className="text-2xl font-display font-black leading-none tracking-tight font-stats">
-                  {stat.value}
-                </div>
-              </div>
-            );
-          })}
-        </section>
-
-        {/* Recent activity */}
-        <section>
-          <div className="flex items-center gap-2 mb-3 px-1">
-            <div className="w-1.5 h-5 rounded-full bg-[hsl(var(--cat-pull))]" />
-            <h2 className="font-display text-sm font-bold tracking-tight">Recent</h2>
-            <span className="text-[9px] font-mono text-muted-foreground ml-auto">Lvl {level}</span>
-          </div>
-          {recent.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-border/50 p-6 text-center">
-              <p className="text-xs text-muted-foreground">No workouts yet — build your first one.</p>
+      <main className="power-container">
+        <section className="power-hero" aria-labelledby="power-dashboard-title">
+          <PowerAthleteArt />
+          <div className="power-hero-content">
+            <p className="power-kicker">Calisthenics by TLC</p>
+            <h1 id="power-dashboard-title" className="power-hero-title"><span>Build</span><span>Your</span><span>Power</span></h1>
+            <p className="power-hero-copy">Train <span aria-hidden="true">·</span> Master <span aria-hidden="true">·</span> Evolve</p>
+            <div className="power-hero-actions">
+              <button className="power-button power-button-primary" onClick={() => navigate('/planner')}>
+                Build workout <ArrowRight size={18} />
+              </button>
+              <button className="power-button power-button-outline" onClick={() => navigate('/train')}>
+                Start training <Flame size={16} />
+              </button>
             </div>
-          ) : (
-            <div className="rounded-2xl border border-border/50 bg-card divide-y divide-border/40 overflow-hidden">
-              {recent.map(w => {
-                const entries = Array.isArray(w.entries) ? w.entries : [];
+          </div>
+        </section>
+
+        <section className="power-rail" aria-label="Explore calisthenics disciplines">
+          <p className="power-rail-label">Choose your discipline</p>
+          <div className="power-rail-grid">
+            {disciplines.map(({ label, search, icon: Icon }) => (
+              <button className="power-skill" key={label} onClick={() => openLibrary(search)} title={'Browse ' + label + ' exercises'}>
+                <span className="power-skill-icon"><Icon size={30} strokeWidth={1.6} /></span>
+                <span className="power-skill-name">{label}</span>
+                <span className="power-skill-underline" aria-hidden="true" />
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <div className="power-main">
+          <div className="power-section-heading">
+            <h2>Your performance</h2>
+            <span className="power-section-meta">Level {level}</span>
+          </div>
+          <section className="power-metrics" aria-label="Your actual performance stats">
+            {[
+              { label: 'Streak', value: String(streak) + 'd', icon: Flame },
+              { label: 'Total XP', value: Number(xp).toLocaleString(), icon: Zap },
+              { label: 'Last 7 days', value: String(weekCount), icon: TrendingUp },
+            ].map(({ label, value, icon: Icon }) => (
+              <div className="power-metric" key={label}>
+                <div className="power-metric-top"><Icon size={15} color="#E9BC68" /><span>{label}</span></div>
+                <div className="power-metric-number">{value}</div>
+              </div>
+            ))}
+          </section>
+
+          <div className="power-section-heading">
+            <h2>Power controls</h2>
+            <span className="power-section-meta">Tap to explore</span>
+          </div>
+          <section className="power-feature-grid" aria-label="Main features">
+            <button className="power-feature" onClick={() => navigate('/train')}>
+              <CalendarDays className="power-feature-icon" size={31} strokeWidth={1.6} />
+              <span className="power-feature-title">Today's focus</span>
+              <span className="power-feature-desc">Open training session</span>
+              <ArrowRight className="power-feature-arrow" size={17} />
+            </button>
+            <button className="power-feature" onClick={() => setTreeOpen(v => !v)} aria-expanded={treeOpen} aria-controls="power-skill-tree">
+              <GitBranch className="power-feature-icon" size={31} strokeWidth={1.6} />
+              <span className="power-feature-title">Skill tree</span>
+              <span className="power-feature-desc">Real progression chains</span>
+              {treeOpen ? <ChevronUp className="power-feature-arrow" size={17} /> : <ChevronDown className="power-feature-arrow" size={17} />}
+            </button>
+            <button className="power-feature" onClick={() => navigate('/ai-lab')}>
+              <Sparkles className="power-feature-icon" size={31} strokeWidth={1.6} />
+              <span className="power-feature-title">AI coach</span>
+              <span className="power-feature-desc">Build with guidance</span>
+              <ArrowRight className="power-feature-arrow" size={17} />
+            </button>
+            <button className="power-feature" onClick={() => navigate('/community')}>
+              <Users className="power-feature-icon" size={31} strokeWidth={1.6} />
+              <span className="power-feature-title">Power Circle</span>
+              <span className="power-feature-desc">Post, like &amp; connect</span>
+              <ArrowRight className="power-feature-arrow" size={17} />
+            </button>
+          </section>
+
+          {treeOpen && (
+            <section id="power-skill-tree" className="power-tree-panel" aria-label="Skill progression tree">
+              <div className="power-section-heading">
+                <h2>Skill progressions</h2>
+                <button className="power-icon-button ml-auto" onClick={() => setTreeOpen(false)} aria-label="Close skill tree"><ChevronUp size={18}/></button>
+              </div>
+              <SkillTreeView onExerciseClick={() => navigate('/library')} />
+            </section>
+          )}
+
+          <div className="power-section-heading">
+            <h2>Recent training</h2>
+            <button onClick={() => navigate('/library')} className="power-smallprint ml-auto flex items-center gap-1 hover:underline">
+              <Library size={13}/> Library <ArrowRight size={13}/>
+            </button>
+          </div>
+          {recent.length ? (
+            <div className="power-recent-list">
+              {recent.map(workout => {
+                const entries = Array.isArray(workout.entries) ? workout.entries : [];
                 return (
-                  <button
-                    key={w.id}
-                    onClick={() => navigate('/planner')}
-                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-accent/30 transition-colors text-left"
-                  >
-                    <div className="w-9 h-9 rounded-xl bg-accent/50 border border-border/30 flex items-center justify-center flex-shrink-0">
-                      <FileText className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold truncate">
-                        {w.notes?.split('\n')[0] || 'Workout'}
-                      </p>
-                      <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-wider mt-0.5">
-                        {format(parseISO(w.date), 'MMM d')} · {entries.length} exercises
-                      </p>
-                    </div>
-                    <ArrowRight className="w-3.5 h-3.5 text-muted-foreground/40 flex-shrink-0" />
+                  <button key={workout.id} className="power-recent-row" onClick={() => navigate('/planner')}>
+                    <FileText size={22} color="#E9BC68"/>
+                    <span className="flex-1 min-w-0">
+                      <span className="block text-sm font-bold truncate">{workout.notes?.split('\n')[0] || 'Workout'}</span>
+                      <span className="block power-smallprint">{workout.date ? format(parseISO(workout.date), 'MMM d') : 'Date unavailable'} · {entries.length} exercises</span>
+                    </span>
+                    <ArrowRight size={16} color="#E9BC68"/>
                   </button>
                 );
               })}
             </div>
+          ) : (
+            <div className="power-tree-panel">
+              <p className="power-smallprint mb-3">Your completed training sessions will appear here. Build your first session when you're ready.</p>
+              <button className="power-button power-button-outline" onClick={() => navigate('/planner')}><FileText size={15}/> Open builder</button>
+            </div>
           )}
-        </section>
-
-        {/* Quick links — every page reachable from home */}
-        <section className="grid grid-cols-2 gap-3">
-          {[
-            { label: 'Build', desc: 'Workout builder', path: '/planner', icon: FileText, color: 'hsl(var(--cat-skills))' },
-            { label: 'AI Coach', desc: 'Plan with AI', path: '/ai-lab', icon: Sparkles, color: 'hsl(var(--electric))' },
-            { label: 'Library', desc: 'Browse exercises', path: '/library', icon: Library, color: 'hsl(var(--cat-pull))' },
-            { label: 'Train', desc: 'Start a session', path: '/train', icon: Flame, color: 'hsl(var(--cat-core))' },
-            { label: 'Power Circle', desc: 'Post, like & connect', path: '/community', icon: Users, color: 'hsl(var(--cat-legs))' },
-            { label: 'Anatomy', desc: 'Muscle atlas', path: '/anatomy', icon: TrendingUp, color: 'hsl(var(--cat-push))' },
-            { label: 'Settings', desc: 'Profile & admin', path: '/settings', icon: Settings, color: 'hsl(var(--cat-core))' },
-          ].map(action => {
-            const Icon = action.icon;
-            return (
-              <button
-                key={action.path}
-                onClick={() => navigate(action.path)}
-                className="group flex flex-col gap-3 p-4 rounded-2xl bg-card border border-border/50 hover:border-border hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 text-left"
-              >
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center border border-border/30" style={{ backgroundColor: `${action.color}15` }}>
-                  <Icon className="h-4 w-4" style={{ color: action.color }} />
-                </div>
-                <div>
-                  <h3 className="font-display font-bold text-sm tracking-tight">{action.label}</h3>
-                  <p className="text-[10px] font-mono text-muted-foreground mt-0.5">{action.desc}</p>
-                </div>
-              </button>
-            );
-          })}
-        </section>
+          <div className="flex justify-between items-center mt-9 mb-5">
+            <p className="power-smallprint uppercase" style={{ letterSpacing: '.16em' }}>Truth · Love · Community</p>
+            <p className="power-smallprint">Powered by TLC</p>
+          </div>
+        </div>
       </main>
-
-      <ExerciseDetailModal
-        exercise={selectedExercise}
-        open={!!selectedExercise}
-        onClose={() => setSelectedExercise(null)}
-      />
     </div>
   );
 }
