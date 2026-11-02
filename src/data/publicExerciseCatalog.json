@@ -1874,7 +1874,7 @@
     "difficulty_level": 2,
     "youtube_url": "https://www.youtube.com/watch?v=0wzrgyAurT8",
     "instagram_url": null,
-    "image_url": null,
+    "image_url": "https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/deep-squat-hold.jpg",
     "description": "Sit in the bottom of a squat. Heels down, chest up. Breathe and explore the range.",
     "sets_reps": null,
     "chain_group": null,
@@ -1934,7 +1934,7 @@
     "difficulty_level": 1,
     "youtube_url": "https://www.youtube.com/watch?v=yq9MtXJb2Q4",
     "instagram_url": null,
-    "image_url": null,
+    "image_url": "https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/frog-stretch.jpg",
     "description": null,
     "sets_reps": null,
     "chain_group": null,
@@ -1966,7 +1966,7 @@
     "difficulty_level": 2,
     "youtube_url": "https://www.youtube.com/watch?v=nYS0R4c3qCA",
     "instagram_url": null,
-    "image_url": null,
+    "image_url": "https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/jefferson-curl.jpg",
     "description": null,
     "sets_reps": null,
     "chain_group": null,
@@ -2112,7 +2112,7 @@
     "difficulty_level": 1,
     "youtube_url": "https://www.youtube.com/watch?v=vP8YmmRMz6I",
     "instagram_url": null,
-    "image_url": null,
+    "image_url": "https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/shoulder-dislocate.jpg",
     "description": "Wide grip on stick/towel, pass it over your head and behind your back. Gradual narrowing.",
     "sets_reps": null,
     "chain_group": null,
@@ -2143,7 +2143,7 @@
     "difficulty_level": 1,
     "youtube_url": "https://www.youtube.com/watch?v=LT_dFRnmdGs",
     "instagram_url": null,
-    "image_url": null,
+    "image_url": "https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/thoracic-extension.jpg",
     "description": null,
     "sets_reps": null,
     "chain_group": null,
@@ -2254,7 +2254,7 @@
     "difficulty_level": 1,
     "youtube_url": "https://www.youtube.com/watch?v=-CiWQ2IvY34",
     "instagram_url": null,
-    "image_url": null,
+    "image_url": "https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/worlds-greatest-stretch.jpg",
     "description": "Lunge, rotate, reach. Hits hips, T-spine, hamstrings, and groin in a single sequence.",
     "sets_reps": null,
     "chain_group": null,
@@ -2281,7 +2281,7 @@
     "difficulty_level": 1,
     "youtube_url": "https://www.youtube.com/watch?v=mSZWSQSSEjE",
     "instagram_url": null,
-    "image_url": null,
+    "image_url": "https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/wrist-circles.jpg",
     "description": null,
     "sets_reps": null,
     "chain_group": null,
@@ -6378,6 +6378,622 @@
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "305d51c6-59e5-4a60-a378-c25db7e5525d",
+    "slug": "seated-pike-leg-lifts-1773317360868",
+    "name": "Seated Pike Leg Lifts",
+    "category": "Core",
+    "primary_muscles": [
+      "Abs",
+      "Hip Flexors",
+      "Quads"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "None (Bodyweight)"
+    ],
+    "cues": [
+      "Sit on the floor with legs straight out in front.",
+      "Place hands on the floor near your knees (or shins for more difficulty).",
+      "Keep legs perfectly straight and toes pointed.",
+      "Lift both feet off the ground simultaneously without leaning back.",
+      "Control the descent; do not let your feet 'thud' on the floor."
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": null,
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "70e5c949-6613-495c-9980-9878b5fb5d66",
+    "slug": "seated-pike-leg-lifts-1773317361818",
+    "name": "Seated Pike Leg Lifts",
+    "category": "Core",
+    "primary_muscles": [
+      "Abs",
+      "Hip Flexors",
+      "Quads"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "None (Bodyweight)"
+    ],
+    "cues": [
+      "Sit on the floor with legs straight out in front.",
+      "Place hands on the floor near your knees (or shins for more difficulty).",
+      "Keep legs perfectly straight and toes pointed.",
+      "Lift both feet off the ground simultaneously without leaning back.",
+      "Control the descent; do not let your feet 'thud' on the floor."
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": null,
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "a9bd2560-424d-474f-884d-af0f68ecdacc",
+    "slug": "tuck-planche-1768085453845",
+    "name": "Tuck Planche",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Chest",
+      "Core",
+      "Biceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "None (Bodyweight)"
+    ],
+    "cues": [
+      "Start in a tuck position with knees to chest",
+      "Push down hard into the floor to lift hips to shoulder height",
+      "Ensure elbows are locked out completely",
+      "Maintain a rounded upper back (protraction)"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": "https://www.youtube.com/watch?v=bn-HZm7bpy0",
+    "instagram_url": null,
+    "image_url": null,
+    "description": null,
+    "sets_reps": null,
+    "chain_group": "planche-chain",
+    "chain_order": 2,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "d86b5243-238c-4e35-8780-e10e2d480b61",
+    "slug": "band-assisted-pull-up",
+    "name": "Band-Assisted Pull-up",
+    "category": "Pull",
+    "primary_muscles": [
+      "Latissimus Dorsi",
+      "Biceps Brachii",
+      "Brachialis"
+    ],
+    "secondary_muscles": [
+      "Posterior Deltoid",
+      "Rhomboids",
+      "Trapezius"
+    ],
+    "equipment": [
+      "Pull-up Bar",
+      "Resistance Band"
+    ],
+    "cues": [
+      "Full dead hang start",
+      "Chin over bar",
+      "Controlled 3s negative",
+      "Core engaged"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": "https://www.youtube.com/watch?v=4yE-XGDWJPg",
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Band-assisted pull-up for building toward strict pull-ups.",
+    "sets_reps": "3×8-12",
+    "chain_group": "pullup-chain",
+    "chain_order": 3,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "842c7947-4877-469e-a0bf-44f7a1d92770",
+    "slug": "360-pull",
+    "name": "360 Pull",
+    "category": "Skills",
+    "primary_muscles": [
+      "Full Body Rotational"
+    ],
+    "secondary_muscles": [
+      "Latissimus Dorsi",
+      "Core",
+      "Deltoids"
+    ],
+    "equipment": [
+      "Pull-up Bar"
+    ],
+    "cues": [
+      "Maximum pull height first",
+      "Initiate rotation early",
+      "Spot the bar",
+      "Controlled landing"
+    ],
+    "difficulty_level": 5,
+    "youtube_url": "https://www.youtube.com/watch?v=BVw3aBFypHA",
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Elite dynamic rotational pull around the bar.",
+    "sets_reps": "3×1",
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "5d522a5c-f53d-43c7-9609-b1982b391e8d",
+    "slug": "ring-l-sit",
+    "name": "Ring L-Sit",
+    "category": "Rings",
+    "primary_muscles": [
+      "Rectus Abdominis",
+      "Hip Flexors",
+      "Triceps"
+    ],
+    "secondary_muscles": [
+      "Serratus Anterior",
+      "Quadriceps",
+      "Anterior Deltoid"
+    ],
+    "equipment": [
+      "Rings"
+    ],
+    "cues": [
+      "Lock elbows fully",
+      "Compress hip angle",
+      "Point toes",
+      "Depress shoulders"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": "https://www.youtube.com/watch?v=eywCpp0p7lg",
+    "instagram_url": null,
+    "image_url": null,
+    "description": "L-Sit on rings adds instability challenge. Lock elbows, compress hard, point toes.",
+    "sets_reps": "4×15s",
+    "chain_group": "ring-chain",
+    "chain_order": 7,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "b7569ef5-aa15-4270-9bdf-7b0d5ec17a6d",
+    "slug": "ring-dips",
+    "name": "Ring Dips",
+    "category": "Rings",
+    "primary_muscles": [
+      "Pectoralis Major",
+      "Triceps",
+      "Anterior Deltoid"
+    ],
+    "secondary_muscles": [
+      "Serratus Anterior",
+      "Core",
+      "Biceps"
+    ],
+    "equipment": [
+      "Rings"
+    ],
+    "cues": [
+      "Controlled descent",
+      "Elbows back not flared",
+      "RTO at top",
+      "Full lockout"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Deep ring dip builds pressing power and shoulder stability. Elbows back not flared, RTO at top.",
+    "sets_reps": "4×8",
+    "chain_group": "ring-chain",
+    "chain_order": 4,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "63e7ca8d-f577-4d96-8902-db235c81deea",
+    "slug": "ring-push-ups",
+    "name": "Ring Push-ups",
+    "category": "Rings",
+    "primary_muscles": [
+      "Pectoralis Major",
+      "Anterior Deltoid",
+      "Triceps"
+    ],
+    "secondary_muscles": [
+      "Serratus Anterior",
+      "Core",
+      "Biceps"
+    ],
+    "equipment": [
+      "Rings"
+    ],
+    "cues": [
+      "Rings turned out at top",
+      "Controlled descent",
+      "Core tight throughout",
+      "Full ROM"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": "https://www.youtube.com/watch?v=7FRwuB1_l7U",
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Push-up on unstable rings builds deep stabilizer strength. RTO at top, controlled descent.",
+    "sets_reps": "4×10",
+    "chain_group": "ring-chain",
+    "chain_order": 3,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "1ea63246-190a-408e-813a-4a017dbafb3d",
+    "slug": "planche-lean-1768085452113",
+    "name": "Planche Lean",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Forearms",
+      "Core",
+      "Serratus Anterior"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "None (Bodyweight)"
+    ],
+    "cues": [
+      "Keep arms completely locked straight",
+      "Lean forward until your shoulders are past your wrists",
+      "Protract your shoulder blades (push the floor away) Building a 'hollow' chest",
+      "Squeeze your glutes and core to keep a straight line from head to heels"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": "https://www.youtube.com/watch?v=wKV5zVJTYBo",
+    "instagram_url": null,
+    "image_url": null,
+    "description": null,
+    "sets_reps": null,
+    "chain_group": "planche-chain",
+    "chain_order": 1,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "1b46f13e-a1c5-49e6-95b7-2c15cc2bd1a8",
+    "slug": "advanced-tuck-planche-1768085455793",
+    "name": "Advanced Tuck Planche",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Lower Back",
+      "Core",
+      "Triceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "None (Bodyweight)"
+    ],
+    "cues": [
+      "From a tuck position, move your knees away from your chest until your back is flat",
+      "Keep your hips level with your shoulders",
+      "Maintain maximum shoulder protraction and straight arms"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": "https://www.youtube.com/watch?v=bn-HZm7bpy0",
+    "instagram_url": null,
+    "image_url": null,
+    "description": null,
+    "sets_reps": null,
+    "chain_group": "planche-chain",
+    "chain_order": 3,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "2c7c6453-ee52-452f-90c1-67a4ae81e497",
+    "slug": "straddle-planche-1768085457054",
+    "name": "Straddle Planche",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Glutes",
+      "Lower Back",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "None (Bodyweight)"
+    ],
+    "cues": [
+      "Spread legs as wide as possible to reduce the lever length",
+      "Squeeze glutes and lower back to keep legs parallel to the ground",
+      "Point your toes and lock your knees straight",
+      "Lean further forward than the tuck versions to balance the weight of the legs"
+    ],
+    "difficulty_level": 5,
+    "youtube_url": "https://www.youtube.com/watch?v=V9LWMkorWoc",
+    "instagram_url": null,
+    "image_url": null,
+    "description": null,
+    "sets_reps": null,
+    "chain_group": "planche-chain",
+    "chain_order": 4,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "46063deb-8972-41bc-9572-4e863a475230",
+    "slug": "swimming-freestyle",
+    "name": "Swimming Freestyle",
+    "category": "Mobility",
+    "primary_muscles": [
+      "Latissimus Dorsi",
+      "Deltoids",
+      "Quadriceps",
+      "Core"
+    ],
+    "secondary_muscles": [
+      "Triceps",
+      "Pectorals",
+      "Hamstrings",
+      "Calves"
+    ],
+    "equipment": [
+      "Pool"
+    ],
+    "cues": [
+      "High elbow catch",
+      "Rotate from core",
+      "Consistent bilateral breathing",
+      "Streamlined kick"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": "https://www.youtube.com/watch?v=6_vXycbD2TM",
+    "instagram_url": null,
+    "image_url": "https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/swimming-freestyle.jpg",
+    "description": "Freestyle swimming for active recovery and cardio.",
+    "sets_reps": "20×25m",
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "aefb5aba-b4f5-4898-8f1b-2ef78003e0e1",
+    "slug": "scapular-pulls",
+    "name": "Scapular Pulls",
+    "category": "Pull",
+    "primary_muscles": [
+      "Lower Trapezius",
+      "Rhomboids",
+      "Latissimus Dorsi"
+    ],
+    "secondary_muscles": [
+      "Posterior Deltoid",
+      "Serratus Anterior"
+    ],
+    "equipment": [
+      "Pull-up Bar"
+    ],
+    "cues": [
+      "Dead hang start",
+      "Pull shoulder blades down and back",
+      "No arm bend",
+      "Hold top briefly"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": "https://www.youtube.com/watch?v=8FWdmFBUNP0",
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Dead hang to active hang — pure scapular movement. Foundation for all pulling.",
+    "sets_reps": "3×10-15",
+    "chain_group": "pullup-chain",
+    "chain_order": 2,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c7d97a1f-5bd3-42bf-922d-ae071de58c0e",
+    "slug": "weighted-pull-up",
+    "name": "Weighted Pull-up",
+    "category": "Pull",
+    "primary_muscles": [
+      "Latissimus Dorsi",
+      "Biceps",
+      "Brachialis",
+      "Posterior Deltoid"
+    ],
+    "secondary_muscles": [
+      "Trapezius",
+      "Rhomboids",
+      "Core"
+    ],
+    "equipment": [
+      "Pull-up Bar",
+      "Weight Belt"
+    ],
+    "cues": [
+      "Hollow body position",
+      "No kipping",
+      "Full ROM",
+      "Controlled negative"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": "https://www.youtube.com/watch?v=9dPCJCF5pQE",
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Weighted pull-ups for maximal pulling strength.",
+    "sets_reps": "4×3-5",
+    "chain_group": "pullup-chain",
+    "chain_order": 7,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "bf8c983e-c7e7-4740-ab13-6eab604256f6",
+    "slug": "ring-rows",
+    "name": "Ring Rows",
+    "category": "Rings",
+    "primary_muscles": [
+      "Latissimus Dorsi",
+      "Rhomboids",
+      "Posterior Deltoid"
+    ],
+    "secondary_muscles": [
+      "Biceps Brachii",
+      "Core",
+      "Trapezius"
+    ],
+    "equipment": [
+      "Rings"
+    ],
+    "cues": [
+      "Body straight like a plank",
+      "Pull chest to rings",
+      "Squeeze shoulder blades at top",
+      "Control the negative"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": "https://www.youtube.com/watch?v=VQn3aGSUorc",
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Adjustable-angle horizontal pull on rings. Body straight, pull chest to rings, squeeze shoulder blades.",
+    "sets_reps": "4×12",
+    "chain_group": "ring-chain",
+    "chain_order": 2,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "a9b6afdf-1b81-414a-8113-82408135d2b9",
+    "slug": "handstand-walking",
+    "name": "Handstand Walking",
+    "category": "Skills",
+    "primary_muscles": [
+      "Anterior Deltoid",
+      "Serratus Anterior",
+      "Triceps",
+      "Core"
+    ],
+    "secondary_muscles": [
+      "Trapezius",
+      "Obliques",
+      "Hip Flexors"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "cues": [
+      "Weight shift side to side",
+      "Look at hands",
+      "Controlled small steps",
+      "Open shoulders"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": "https://www.youtube.com/watch?v=3EF6p9EFdZc",
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Walking on hands. Weight shift side to side, controlled steps.",
+    "sets_reps": "3×10m",
+    "chain_group": "handstand-chain",
+    "chain_order": 5,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "7ad331df-a4b3-4a46-966e-ac13a529e8af",
+    "slug": "kip-to-handstand",
+    "name": "Kip to Handstand",
+    "category": "Skills",
+    "primary_muscles": [
+      "Hip Flexors",
+      "Core",
+      "Deltoids"
+    ],
+    "secondary_muscles": [
+      "Triceps",
+      "Serratus Anterior",
+      "Trapezius"
+    ],
+    "equipment": [
+      "None"
+    ],
+    "cues": [
+      "Explosive hip extension",
+      "Stack shoulders over wrists",
+      "Squeeze glutes at top",
+      "Control the finish"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": "https://www.youtube.com/watch?v=_fGgJmq-QPU",
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Dynamic kip from standing to handstand.",
+    "sets_reps": "3×3",
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "e548961c-9555-42c6-ba32-455807685ccc",
+    "slug": "wall-stomach-straddle-handstand",
+    "name": "Wall Stomach Straddle Handstand",
+    "category": "Skills",
+    "primary_muscles": [
+      "Anterior Deltoid",
+      "Posterior Deltoid",
+      "Serratus Anterior",
+      "Rectus Abdominis"
+    ],
+    "secondary_muscles": [
+      "Triceps Brachii",
+      "Trapezius",
+      "Rhomboids",
+      "Latissimus Dorsi"
+    ],
+    "equipment": [
+      "Wall"
+    ],
+    "cues": [
+      "Belly to wall",
+      "Push floor away",
+      "Squeeze glutes",
+      "Toes pointed"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": "https://www.youtube.com/watch?v=q_UNtDuRwsw",
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Belly-to-wall straddle handstand for alignment practice.",
+    "sets_reps": "3×5",
+    "chain_group": "handstand-chain",
+    "chain_order": 2,
     "visibility": "public",
     "created_by": null
   }

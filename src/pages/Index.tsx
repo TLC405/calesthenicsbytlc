@@ -89,7 +89,7 @@ export default function Index() {
             </button>
             <div className="power-entry-quiet-options">
               <button type="button" onClick={() => enter('/build?skill=planche')}><Target size={17}/> Build by skill <ArrowRight size={15}/></button>
-              <button type="button" onClick={() => enter('/library')}><Library size={17}/> Browse 215 exercises <ArrowRight size={15}/></button>
+              <button type="button" onClick={() => enter('/library')}><Library size={17}/> Browse exercise library <ArrowRight size={15}/></button>
             </div>
           </div>
 

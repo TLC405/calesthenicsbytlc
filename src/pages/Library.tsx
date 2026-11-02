@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase, backendConfigured } from '@/integrations/supabase/client';
-import { LOCAL_USER_ID, getOfflineExercises, removeLocalExercise, exportLocalExercises } from '@/lib/offlineExercises';
+import { LOCAL_USER_ID, starterExercises, getLocalCustomExercises, removeLocalExercise, exportLocalExercises } from '@/lib/offlineExercises';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, Plus, Sparkles, Download, Pencil, Trash2, LockKeyhole, Globe2, UserRound, PlayCircle, Dumbbell } from 'lucide-react';
@@ -9,7 +9,6 @@ import { ExerciseCard } from '@/components/Exercise/ExerciseCard';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { CategoryTabs, CATEGORY_GROUPS } from '@/components/Exercise/CategoryTabs';
 import { AddExerciseModal, type EditableExercise } from '@/components/Exercise/AddExerciseModal';
-import { ExerciseCardSkeletonGrid } from '@/components/Exercise/ExerciseCardSkeleton';
 import { useAuth } from '@/providers/AuthProvider';
 import { toast } from 'sonner';
 import publicCatalog from '@/data/publicExerciseCatalog.json';
@@ -29,14 +28,32 @@ interface Exercise {
 
 const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];
 
+function mergeCatalog(remote: Exercise[] = [], includeLocal = true): Exercise[] {
+  // Rich media from the catalog/cloud must not be overwritten by starter placeholders.
+  const records = [...starterExercises, ...publicCatalog, ...remote,
+    ...(includeLocal ? getLocalCustomExercises() : [])] as Exercise[];
+  const bySlug = new Map<string, Exercise>();
+  for (const item of records) {
+    const previous = bySlug.get(item.slug);
+    bySlug.set(item.slug, { ...previous, ...item,
+      image_url: item.image_url || previous?.image_url || null,
+      youtube_url: item.youtube_url || previous?.youtube_url || null,
+      instagram_url: item.instagram_url || previous?.instagram_url || null,
+    });
+  }
+  return [...bySlug.values()];
+}
+
 export default function Library() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
-  const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [exercises, setExercises] = useState<Exercise[]>(() => mergeCatalog());
   const guestMode = !user;
   const ownerId = user?.id ?? LOCAL_USER_ID;
-  const [loading, setLoading] = useState(true);
+  const [syncState, setSyncState] = useState<'refreshing' | 'ready' | 'offline' | 'error'>('refreshing');
+  const requestId = useRef(0);
+  const requestController = useRef<AbortController | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>((location.state as { search?: string } | null)?.search || '');
   const [activeCategory, setActiveCategory] = useState<string | null>((location.state as any)?.category || null);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
@@ -45,27 +62,36 @@ export default function Library() {
   const [mineOnly, setMineOnly] = useState(() => new URLSearchParams(location.search).get('mine') === '1');
   const [videosOnly, setVideosOnly] = useState(false);
 
-  useEffect(() => { fetchExercises(); }, []);
-
-  const mergedFallback = () => {
-    const records = [...publicCatalog, ...getOfflineExercises()] as Exercise[];
-    return [...new Map(records.map(item => [item.slug, item])).values()];
-  };
-
-  const fetchExercises = async () => {
-    setLoading(true);
+  const fetchExercises = useCallback(async () => {
+    const currentRequest = ++requestId.current;
+    requestController.current?.abort();
+    setExercises(mergeCatalog([], !user));
     if (!backendConfigured) {
-      setExercises(mergedFallback());
-      setLoading(false);
+      setSyncState('offline');
       return;
     }
-    const { data, error } = await supabase.from('exercises').select('*').order('category').order('name');
-    if (error) toast.info('Showing your saved exercise collection while the library reconnects');
-    const saved = user ? [] : getOfflineExercises();
-    const records = [...publicCatalog, ...(data || []), ...saved] as Exercise[];
-    setExercises([...new Map(records.map(item => [item.slug, item])).values()]);
-    setLoading(false);
-  };
+    setSyncState('refreshing');
+    const controller = new AbortController();
+    requestController.current = controller;
+    const timeout = window.setTimeout(() => controller.abort(), 8000);
+    try {
+      const { data, error } = await supabase.from('exercises').select('*')
+        .order('category').order('name').abortSignal(controller.signal);
+      if (currentRequest !== requestId.current) return;
+      if (error) { setSyncState('error'); return; }
+      setExercises(mergeCatalog((data || []) as Exercise[], !user));
+      setSyncState('ready');
+    } catch {
+      if (currentRequest === requestId.current) setSyncState('error');
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  }, [user?.id]);
+
+  useEffect(() => {
+    void fetchExercises();
+    return () => { ++requestId.current; requestController.current?.abort(); };
+  }, [fetchExercises]);
 
   const categories = [...new Set(exercises.map(e => e.category))];
   const categoryCounts = exercises.reduce((acc, e) => { acc[e.category] = (acc[e.category] || 0) + 1; return acc; }, {} as Record<string, number>);
@@ -211,6 +237,10 @@ export default function Library() {
         </div>
       </section>
       <main className="power-library-results max-w-6xl mx-auto px-3 sm:px-4 md:px-8 py-3 sm:py-5 pb-32 md:pb-5">
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground" role="status" aria-live="polite">
+          <span>{syncState === 'refreshing' ? 'Library ready · refreshing saved exercises…' : syncState === 'error' ? 'Saved collection is taking longer to connect. Your available exercises are shown below.' : syncState === 'offline' ? 'Showing the included library and exercises saved on this device.' : 'Saved library connected.'}</span>
+          {syncState === 'error' && <Button type="button" variant="outline" size="sm" onClick={() => void fetchExercises()}>Reconnect library</Button>}
+        </div>
         {guestMode && (
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/25 bg-primary/5 px-4 py-3">
             <div>
@@ -225,11 +255,11 @@ export default function Library() {
             </Button>
           </div>
         )}
-        {loading ? (
-          <ExerciseCardSkeletonGrid count={9} />
-        ) : filteredExercises.length === 0 ? (
+        {filteredExercises.length === 0 ? (
           <div className="py-20 text-center">
-            <p className="text-muted-foreground text-xs font-mono">{mineOnly ? 'You haven’t created any exercises yet.' : 'No exercises found.'}</p>
+            <p className="text-muted-foreground text-xs font-mono">{mineOnly ? 'No personal exercises are available for this session.' : 'No exercises match these filters.'}</p>
+            {mineOnly && guestMode && <p className="mx-auto mt-3 max-w-md text-xs leading-relaxed text-muted-foreground">Personal exercises saved at another app address do not automatically appear here. This view shows items saved in this browser at this address.</p>}
+            <Button className="mt-4 mx-2 rounded-xl" variant="outline" onClick={() => { setSearchTerm(''); setActiveCategory(null); setVideosOnly(false); setMineOnly(false); navigate('/library', { replace: true, state: null }); }}>Show all exercises</Button>
             {ownerId && mineOnly && (
               <Button className="mt-4 rounded-xl" onClick={() => { setEditingExercise(null); setShowAddModal(true); }}>
                 <Plus className="mr-2 h-4 w-4" /> Create your first exercise
