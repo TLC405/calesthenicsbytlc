@@ -19,6 +19,7 @@ import Train from "./pages/Train";
 import Anatomy from "./pages/Anatomy";
 import NotFound from "./pages/NotFound";
 import "./styles/neumorph.css";
+import "./styles/power-gold.css";
 
 const queryClient = new QueryClient();
 
