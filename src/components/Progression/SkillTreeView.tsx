@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { backendConfigured, supabase } from '@/integrations/supabase/client';
+import publicCatalog from '@/data/publicExerciseCatalog.json';
 import { ChevronRight, Star, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -37,50 +38,38 @@ const difficultyLabels: Record<number, string> = {
 };
 
 interface SkillTreeViewProps {
-  onExerciseClick?: (exerciseId: string) => void;
+  onExerciseClick?: (exerciseId: string, exerciseName?: string) => void;
+}
+
+const bundledChains = publicCatalog.filter(exercise => exercise.chain_group) as ChainExercise[];
+
+function groupPaths(records: ChainExercise[]): SkillPath[] {
+  const unique = [...new Map(records.map(exercise => [exercise.slug, exercise])).values()];
+  const groups: Record<string, ChainExercise[]> = {};
+  for (const exercise of unique) {
+    if (!exercise.chain_group) continue;
+    (groups[exercise.chain_group] ??= []).push(exercise);
+  }
+  return Object.entries(groups)
+    .filter(([, exercises]) => exercises.length >= 3)
+    .sort((a, b) => b[1].length - a[1].length)
+    .map(([group, exercises]) => ({ group, exercises: exercises.sort((a, b) => (a.chain_order ?? 0) - (b.chain_order ?? 0)) }));
 }
 
 export function SkillTreeView({ onExerciseClick }: SkillTreeViewProps) {
-  const [paths, setPaths] = useState<SkillPath[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [paths, setPaths] = useState<SkillPath[]>(() => groupPaths(bundledChains));
 
   useEffect(() => {
-    loadPaths();
-  }, []);
-
-  const loadPaths = async () => {
-    const { data } = await supabase
-      .from('exercises')
+    if (!backendConfigured) return;
+    let active = true;
+    void supabase.from('exercises')
       .select('id, name, slug, chain_group, chain_order, difficulty_level, category, sets_reps')
-      .not('chain_group', 'is', null)
-      .order('chain_order');
-
-    if (data) {
-      const groups: Record<string, ChainExercise[]> = {};
-      (data as ChainExercise[]).forEach(ex => {
-        if (!groups[ex.chain_group]) groups[ex.chain_group] = [];
-        groups[ex.chain_group].push(ex);
+      .not('chain_group', 'is', null).order('chain_order')
+      .then(({ data }) => {
+        if (active && data?.length) setPaths(groupPaths([...bundledChains, ...data as ChainExercise[]]));
       });
-
-      const sorted = Object.entries(groups)
-        .filter(([, exs]) => exs.length >= 3)
-        .sort((a, b) => b[1].length - a[1].length)
-        .map(([group, exercises]) => ({ group, exercises }));
-
-      setPaths(sorted);
-    }
-    setLoading(false);
-  };
-
-  if (loading) {
-    return (
-      <div className="space-y-3">
-        {[1, 2, 3].map(i => (
-          <div key={i} className="h-24 border border-foreground/10 animate-pulse bg-secondary/30" />
-        ))}
-      </div>
-    );
-  }
+    return () => { active = false; };
+  }, []);
 
   return (
     <div className="space-y-3">
@@ -101,7 +90,7 @@ export function SkillTreeView({ onExerciseClick }: SkillTreeViewProps) {
                 {path.exercises.map((ex, i) => (
                   <div key={ex.id} className="flex items-center">
                     <button
-                      onClick={() => onExerciseClick?.(ex.id)}
+                      onClick={() => onExerciseClick?.(ex.id, ex.name)}
                       className={cn(
                         "min-w-max px-3 py-2 border transition-all duration-150 hover:bg-foreground/5 cursor-pointer text-left",
                         "border-foreground/20 hover:border-foreground/50"

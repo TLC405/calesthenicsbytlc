@@ -18,13 +18,13 @@ import { InstallPowerApp } from '@/components/InstallPowerApp';
 
 type Profile = Pick<Database['public']['Tables']['profiles']['Row'], 'display_name' | 'streak_days' | 'total_xp' | 'level'>;
 type RecentWorkout = { id: string; date: string; notes: string | null; entries: unknown };
-const disciplines: { label: string; search: string; icon: PowerDiscipline }[] = [
+const disciplines: { label: string; search: string; icon: PowerDiscipline; category?: string }[] = [
   { label: 'Planche', search: 'planche', icon: 'planche' },
   { label: 'Handstand', search: 'handstand', icon: 'handstand' },
-  { label: 'Rings', search: 'rings', icon: 'rings' },
+  { label: 'Rings', search: '', category: 'Rings', icon: 'rings' },
   { label: 'Muscle-up', search: 'muscle-up', icon: 'muscle-up' },
-  { label: 'Mobility', search: 'mobility', icon: 'mobility' },
-  { label: 'Core', search: 'core', icon: 'core' },
+  { label: 'Mobility', search: '', category: 'Mobility', icon: 'mobility' },
+  { label: 'Core', search: '', category: 'Core', icon: 'core' },
 ];
 function greeting() {
   const hour = new Date().getHours();
@@ -142,7 +142,7 @@ export default function Dashboard() {
       </section>
       <section className="power-rail" aria-label="Explore calisthenics disciplines">
         <div className="power-rail-caption"><span>Find your focus</span><span>Explore the movements <ArrowUpRight size={12} /></span></div>
-        <div className="power-rail-grid">{disciplines.map(({ label, search, icon }) => <Link className="power-skill" key={label} to="/library" state={{ search }} title={`Browse ${label} exercises`}>
+        <div className="power-rail-grid">{disciplines.map(({ label, search, category, icon }) => <Link className="power-skill" key={label} to="/library" state={{ search, category }} title={`Browse ${label} exercises`}>
           <span className="power-skill-icon"><PowerDisciplineIcon discipline={icon} /></span><span className="power-skill-name">{label}</span><span className="power-skill-underline" aria-hidden="true" />
         </Link>)}</div>
       </section>
@@ -154,7 +154,7 @@ export default function Dashboard() {
           <Link className="power-feature" to="/ai-lab"><span className="power-feature-index">03 / EVOLVE</span><Sparkles className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">AI coach</span><span className="power-feature-desc">Find your next breakthrough</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
           <Link className="power-feature" to="/community"><span className="power-feature-index">04 / CONNECT</span><Users className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Power Circle</span><span className="power-feature-desc">Progress is better together</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
         </section>
-        {treeOpen && <section id="power-skill-tree" className="power-tree-panel" aria-label="Skill progression tree"><div className="power-section-heading"><h2>Skill progressions</h2><button className="power-icon-button ml-auto" onClick={() => setTreeOpen(false)} aria-label="Close skill tree"><ChevronUp size={18} /></button></div><SkillTreeView onExerciseClick={() => navigate('/library')} /><Link className="power-text-link" to="/build">Build a workout around your skill <ArrowRight size={15} /></Link></section>}
+        {treeOpen && <section id="power-skill-tree" className="power-tree-panel" aria-label="Skill progression tree"><div className="power-section-heading"><h2>Skill progressions</h2><button className="power-icon-button ml-auto" onClick={() => setTreeOpen(false)} aria-label="Close skill tree"><ChevronUp size={18} /></button></div><SkillTreeView onExerciseClick={(_id, name) => navigate('/library', { state: { search: name || '' } })} /><Link className="power-text-link" to="/build">Build a workout around your skill <ArrowRight size={15} /></Link></section>}
         <div className="power-training-grid">
           <section className="power-progress-section" aria-labelledby="power-progress-title">
             <div className="power-section-heading"><h2 id="power-progress-title">Your progress</h2><span className="power-section-meta">{user ? profile && !unavailable ? `LEVEL ${profile.level ?? 1}` : 'YOUR ACCOUNT' : 'ON THIS DEVICE'}</span></div>
