@@ -4,8 +4,8 @@
   "description": "Training, personal exercise library, live athlete community and AI coaching. Independent by TLC.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0B141C",
-  "theme_color": "#0B141C",
+  "background_color": "#070708",
+  "theme_color": "#070708",
   "orientation": "any",
   "icons": [
     {
