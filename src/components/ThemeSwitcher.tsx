@@ -14,6 +14,15 @@ interface ThemeOption {
 
 const themes: ThemeOption[] = [
   {
+    id: 'power-gold',
+    name: 'TLC Black & Gold',
+    tagline: 'Performance Edition',
+    primary: '#E9BC68',
+    accent: '#FFDF9B',
+    bg: '#090B0C',
+    text: '#F3E9D6',
+  },
+  {
     id: 'default',
     name: 'Default',
     tagline: 'Premium Purple',
@@ -62,7 +71,7 @@ const themes: ThemeOption[] = [
 
 export function useTheme() {
   const [theme, setThemeState] = useState<string>(() => {
-    return localStorage.getItem('power-theme') || 'default';
+    return localStorage.getItem('power-theme') || 'power-gold';
   });
 
   useEffect(() => {
