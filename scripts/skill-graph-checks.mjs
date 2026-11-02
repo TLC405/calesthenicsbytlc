@@ -29,6 +29,9 @@ try {
  assert.equal(graph.recommendedNode('planche',[]),'planche-lean');
  assert.equal(graph.nodeDose('handstand-push-up').metric,'reps');
  assert.equal(graph.nodeDose('ring-support-hold').metric,'seconds');
+ assert.equal(graph.nodeDose('tuck-front-lever').metric,'seconds');
+ assert(graph.trainingBlockers('pull-up',{equipment:['floor'],safeExit:false},true).some(x=>x.includes('bar')));
+ assert(graph.trainingBlockers('wall-handstand',{equipment:['floor','wall'],safeExit:false},true).some(x=>x.includes('exit')));
  const builderFile=path.join(dir,'builder.mjs');
  await build({entryPoints:['src/lib/skillWorkoutBuilder.ts'],outfile:builderFile,bundle:true,platform:'node',format:'esm',alias:{'@':path.resolve('src')},logLevel:'silent'});
  const builder=await import(pathToFileURL(builderFile));

@@ -70,7 +70,7 @@ export function readTrainingProfile(): SkillTrainingProfile {
 }
 export function writeTrainingProfile(profile:SkillTrainingProfile){localStorage.setItem('power-training-profile-v1',JSON.stringify(profile));}
 export function nodeDose(slug:string) {
-  const timed=/planche|hold|hang|stand$|l-sit|frog-stand/.test(slug)&&!/(push-up|kick-up|bail|dip|lift|transition)/.test(slug);
+  const timed=/planche|hold|hang|stand$|l-sit|frog-stand|lever/.test(slug)&&!/(push-up|kick-up|bail|dip|lift|transition|raise|row)/.test(slug);
   return {metric:timed?'seconds' as const:'reps' as const,target:slug==='ring-muscle-up'?1:slug==='handstand-push-up'?3:timed?8:5,sets:slug==='freestanding-handstand'?8:/muscle-up|handstand-push-up|ring-dip/.test(slug)?3:4,restSeconds:slug==='ring-muscle-up'?180:slug==='handstand-push-up'?150:/planche|muscle-up|push-up/.test(slug)?120:60,stopRule:'End the attempt when technique deteriorates or pain appears.'};
 }
 export function nodeProgress(slug:string,attempts:SkillAttempt[]) {
@@ -88,10 +88,12 @@ export function regressionFor(slug:string) {
 export function trainingBlockers(slug:string,profile:SkillTrainingProfile,comfortable:boolean) {
   const reasons:string[]=[];
   if(!comfortable)reasons.push('Confirm a comfortable, pain-free variation before starting.');
+  const equipment = (exerciseBySlug.get(slug)?.equipment || []).map(e=>e.toLowerCase());
+  if(equipment.some(e=>/pull.?up bar|horizontal bar/.test(e))&&!profile.equipment.includes('bar'))reasons.push('A pull-up bar is required for this variation.');
   if(/ring|false-grip/.test(slug)&&!profile.equipment.includes('rings'))reasons.push('Gymnastic rings are required.');
   if(/parallette/.test(slug)&&!profile.equipment.includes('parallettes'))reasons.push('Parallettes are required for this variation.');
   if(/wall|chest-to-wall/.test(slug)&&!profile.equipment.includes('wall'))reasons.push('A clear wall is required.');
-  if(/freestanding|press-to-hs|hs-kick-up|handstand-push-up|stalder/.test(slug)&&!profile.safeExit)reasons.push('Confirm that you can safely enter and exit the inversion.');
+  if(/handstand|press-to-hs|hs-kick-up|stalder/.test(slug)&&!/bail|prep|mobility/.test(slug)&&!profile.safeExit)reasons.push('Confirm that you can safely enter and exit the inversion.');
   return reasons;
 }
 export function recommendedNode(pathId:string,attempts:SkillAttempt[]) {
