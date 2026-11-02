@@ -1,9 +1,14 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLayoutEffect } from 'react';
+import { Link, useLocation, useNavigationType } from 'react-router-dom';
 import { Target, Dumbbell, Menu } from 'lucide-react';
 
 /** One navigation bar. Secondary tools live on More, away from workout controls. */
 export function MobileNav() {
-  const { pathname } = useLocation();
+  const { pathname, key } = useLocation();
+  const navigationType=useNavigationType();
+  useLayoutEffect(()=>{
+    if(navigationType!=='POP')window.scrollTo(0,0);
+  },[key,navigationType]);
   if (pathname === '/workout') return null;
   const items = [
     { path: '/skills', label: 'Skills', icon: Target, active: pathname === '/' || pathname.startsWith('/skills') },
