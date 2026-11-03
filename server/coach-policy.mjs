@@ -8312,6 +8312,16 @@ var FOUNDATION_DAYS = [
 // src/lib/trainingPolicy.ts
 var CAPABILITIES = [{ id: "push-base", label: "Controlled basic push-ups" }, { id: "pull-base", label: "Controlled pulling and hanging" }, { id: "support-base", label: "Stable straight-arm support" }, { id: "inversion-control", label: "Controlled handstand entry and exit" }, { id: "compression-control", label: "Controlled straight-leg compression lifts" }, { id: "straight-arm-base", label: "Comfortable planche lean with straight elbows" }];
 var RULES = {
+  "diamond-push-up": { tier: 3, requires: ["push-base"], regression: "push-up" },
+  "bulgarian-split-squat": { tier: 3, regression: "split-squat" },
+  "cossack-squat": { tier: 3, regression: "bodyweight-squat" },
+  "headstand": { tier: 3, requires: ["inversion-control"] },
+  "ring-push-ups": { tier: 3, requires: ["push-base"], regression: "incline-push-up" },
+  "skin-the-cat": { tier: 4, requires: ["pull-base", "support-base"] },
+  "band-assisted-pull-up": { tier: 2, regression: "australian-row" },
+  "child-s-pose": { tier: 1, metric: "seconds" },
+  "childs-pose": { tier: 1, metric: "seconds" },
+  "standing-pike": { tier: 2, metric: "seconds" },
   "kneeling-planche-plank": { tier: 1, metric: "seconds" },
   "pike-support-hold": { tier: 1, metric: "seconds" },
   "wall-toe-taps": { tier: 3, requires: ["inversion-control"], regression: "pike-support-hold" },
@@ -8444,7 +8454,7 @@ function coachContext(profile, progress = [], equipment = ["floor"]) {
   const gear = Array.isArray(equipment) ? equipment.filter((e) => typeof e === "string" && ["floor", "wall", "rings", "bar", "parallettes", "bands", "bench", "pole"].includes(e)) : ["floor"];
   const allowed = publicExerciseCatalog_default.filter((e) => allowedAtLevel(e.slug, ready) && !equipmentReasons(e.slug, gear).length);
   const records = Array.isArray(progress) ? progress.filter((p) => p && typeof p === "object" && known.has(p.nodeId) && Number.isFinite(p.value) && Number.isInteger(p.quality)).slice(-12).map((p) => ({ nodeId: p.nodeId, value: p.value, metric: p.metric === "seconds" ? "seconds" : "reps", quality: Math.max(1, Math.min(5, p.quality)) })) : [];
-  return { profile: ready, equipment: gear, progress: records, goals: [...SKILL_PATHS, ...FOUNDATION_DAYS].map((g) => ({ id: g.id, title: g.title })), allowedExercises: allowed.map((e) => ({ slug: e.slug, name: e.name, minimumLevel: minimumTier(e.slug), equipment: e.equipment })) };
+  return { profile: ready, equipment: gear, progress: records, goals: [...SKILL_PATHS, ...FOUNDATION_DAYS].map((g) => ({ id: g.id, title: g.title, nodes: "slugs" in g ? g.slugs : g.main })), allowedExercises: allowed.map((e) => ({ slug: e.slug, name: e.name, minimumLevel: minimumTier(e.slug), equipment: e.equipment, readiness: RULES[e.slug]?.requires || [], regression: RULES[e.slug]?.regression || null, cues: Array.isArray(e.cues) ? e.cues.slice(0, 3) : [] })) };
 }
 function validateCoachSelection(value, profile) {
   const raw = value && typeof value === "object" ? value : {};

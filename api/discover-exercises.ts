@@ -114,6 +114,7 @@ export default async function handler(req: ApiRequest, res: ServerResponse) {
       choices?: { message?: { content?: string } }[];
     };
     const payload=JSON.parse(result.choices?.[0]?.message?.content||'{}');
+    if(typeof payload.message!=='string'||typeof payload.goal_id!=='string'||!Array.isArray(payload.exercise_slugs))throw new Error('Malformed model response');
     const selection=validateCoachSelection(payload,profile);
     return json(res,200,{...selection,profile,source:'ai',message:selection.message});
   } catch (error) {

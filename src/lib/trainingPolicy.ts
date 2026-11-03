@@ -6,6 +6,8 @@ export type Capability=typeof CAPABILITIES[number]['id'];
 export type TrainingReadiness={tier?:TrainingTier;capabilities?:Capability[];equipment?:readonly string[]};
 type Rule={tier?:TrainingTier;requires?:Capability[];regression?:string;metric?:'seconds'|'reps';target?:number};
 export const RULES:Record<string,Rule>={
+ 'diamond-push-up':{tier:3,requires:['push-base'],regression:'push-up'},'bulgarian-split-squat':{tier:3,regression:'split-squat'},'cossack-squat':{tier:3,regression:'bodyweight-squat'},'headstand':{tier:3,requires:['inversion-control']},'ring-push-ups':{tier:3,requires:['push-base'],regression:'incline-push-up'},'skin-the-cat':{tier:4,requires:['pull-base','support-base']},'band-assisted-pull-up':{tier:2,regression:'australian-row'},
+ 'child-s-pose':{tier:1,metric:'seconds'},'childs-pose':{tier:1,metric:'seconds'},'standing-pike':{tier:2,metric:'seconds'},
  'kneeling-planche-plank':{tier:1,metric:'seconds'},'pike-support-hold':{tier:1,metric:'seconds'},'wall-toe-taps':{tier:3,requires:['inversion-control'],regression:'pike-support-hold'},
  'push-up':{tier:2,regression:'incline-push-up'},'incline-push-up':{tier:1,regression:'wall-push-up'},'bodyweight-squat':{tier:1},
  'one-arm-push-up':{tier:5,requires:['push-base','support-base'],regression:'incline-one-arm-push-up'},'one-arm-chin-up':{tier:5,requires:['pull-base'],regression:'archer-pull-up'},

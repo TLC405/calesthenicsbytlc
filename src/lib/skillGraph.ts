@@ -83,7 +83,7 @@ export function nodeProgress(slug:string,attempts:SkillAttempt[]) {
   const consistent=good.length>=3&&sessions>=2&&confidence>=.8&&!logs.slice(-2).some(a=>a.discomfort||a.quality<3);
   return {logs,good,confidence,sessions,consistent,state:consistent?'Consistent':logs.length?'Practicing':'Untried'};
 }
-export function relatedNodes(slug:string){return skillEdges.filter(e=>e.to===slug||e.from===slug&&e.type==='alternative');}
+export function relatedNodes(slug:string){const unique=new Map<string,SkillEdge>();for(const edge of skillEdges.filter(e=>e.to===slug||e.from===slug&&e.type==='alternative')){const key=edge.from+'>'+edge.to;if(!unique.has(key)||edge.type==='prerequisite')unique.set(key,edge);}return [...unique.values()];}
 export function regressionFor(slug:string) {
   if(RULES[slug]?.regression)return RULES[slug].regression;
   return [...skillEdges].reverse().find(e=>e.to===slug&&e.type==='prerequisite'&&SKILL_PATHS.some(p=>p.slugs.includes(e.from)&&p.slugs.includes(slug)))?.from || null;
@@ -99,9 +99,9 @@ export function recommendedNode(pathId:string,attempts:SkillAttempt[],profile:Tr
   const path=SKILL_PATHS.find(p=>p.id===pathId);
   if(!path)return null;
   for(const slug of path.slugs) {
-    if(!allowedAtLevel(slug,profile)||nodeProgress(slug,attempts).consistent)continue;
+    if(!allowedAtLevel(slug,profile)||(profile.equipment&&equipmentReasons(slug,profile.equipment).length)||nodeProgress(slug,attempts).consistent)continue;
     const dependencies=skillEdges.filter(e=>e.to===slug&&e.type==='prerequisite');
-    return dependencies.find(e=>allowedAtLevel(e.from,profile)&&!nodeProgress(e.from,attempts).consistent)?.from || slug;
+    return dependencies.find(e=>allowedAtLevel(e.from,profile)&&(!profile.equipment||!equipmentReasons(e.from,profile.equipment).length)&&!nodeProgress(e.from,attempts).consistent)?.from || slug;
   }
-  return [...path.slugs].reverse().find(slug=>allowedAtLevel(slug,profile))||null;
+  return [...path.slugs].reverse().find(slug=>allowedAtLevel(slug,profile)&&(!profile.equipment||!equipmentReasons(slug,profile.equipment).length))||null;
 }

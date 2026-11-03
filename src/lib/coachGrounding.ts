@@ -1,14 +1,14 @@
 import catalog from '../data/publicExerciseCatalog.json';
 import { SKILL_PATHS } from '../data/skillPaths';
 import { FOUNDATION_DAYS } from '../data/foundationProgram';
-import { safeProfile, equipmentReasons, allowedAtLevel, minimumTier, approvedRegression, type TrainingReadiness } from './trainingPolicy';
+import { RULES, safeProfile, equipmentReasons, allowedAtLevel, minimumTier, approvedRegression, type TrainingReadiness } from './trainingPolicy';
 const known=new Map(catalog.map(e=>[e.slug,e]));
 export function coachContext(profile:TrainingReadiness,progress:unknown=[],equipment:unknown=['floor']){
  const ready=safeProfile(profile);
  const gear=Array.isArray(equipment)?equipment.filter((e):e is string=>typeof e==='string'&&['floor','wall','rings','bar','parallettes','bands','bench','pole'].includes(e)):['floor'];
  const allowed=catalog.filter(e=>allowedAtLevel(e.slug,ready)&&!equipmentReasons(e.slug,gear).length);
  const records=Array.isArray(progress)?progress.filter(p=>p&&typeof p==='object'&&known.has(p.nodeId)&&Number.isFinite(p.value)&&Number.isInteger(p.quality)).slice(-12).map(p=>({nodeId:p.nodeId,value:p.value,metric:p.metric==='seconds'?'seconds':'reps',quality:Math.max(1,Math.min(5,p.quality))})):[];
- return {profile:ready,equipment:gear,progress:records,goals:[...SKILL_PATHS,...FOUNDATION_DAYS].map(g=>({id:g.id,title:g.title})),allowedExercises:allowed.map(e=>({slug:e.slug,name:e.name,minimumLevel:minimumTier(e.slug),equipment:e.equipment}))};
+ return {profile:ready,equipment:gear,progress:records,goals:[...SKILL_PATHS,...FOUNDATION_DAYS].map(g=>({id:g.id,title:g.title,nodes:'slugs' in g?g.slugs:g.main})),allowedExercises:allowed.map(e=>({slug:e.slug,name:e.name,minimumLevel:minimumTier(e.slug),equipment:e.equipment,readiness:RULES[e.slug]?.requires||[],regression:RULES[e.slug]?.regression||null,cues:Array.isArray(e.cues)?e.cues.slice(0,3):[]}))};
 }
 export function validateCoachSelection(value:unknown,profile:TrainingReadiness){
  const raw=value&&typeof value==='object'?value as Record<string,unknown>:{};

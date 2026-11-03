@@ -1,3 +1,4 @@
+import { minimumTier } from '@/lib/trainingPolicy';
 import { useState } from 'react';
 import { Plus, Dumbbell, X, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -38,13 +39,13 @@ const categoryStyle: Record<string, { color: string }> = {
   Rings: { color: 'hsl(45,80%,40%)' },
 };
 
-const difficultyLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];
+const difficultyLabel = ['', 'L1 · Starting', 'L2 · Foundation', 'L3 · Building', 'L4 · Advanced', 'L5 · Elite'];
 
 export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: ExerciseCardProps) {
   const [playing, setPlaying] = useState(false);
   const videoId = getYouTubeId(exercise.youtube_url);
   const style = categoryStyle[exercise.category] || { color: 'hsl(var(--muted-foreground))' };
-  const level = exercise.difficulty_level || 1;
+  const level = minimumTier(exercise.slug);
 
   return (
     <div
