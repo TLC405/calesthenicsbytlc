@@ -11,6 +11,8 @@ import {
   GitBranch, ChevronDown, ChevronUp
 } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
+import { NotificationBell } from '@/components/NotificationBell';
+import { MessageCircle } from 'lucide-react';
 
 const disciplines = [
   { label: 'Rings', search: 'rings', icon: CircleDot },
@@ -80,6 +82,8 @@ export default function Dashboard() {
           </div>
           <div className="flex items-center gap-1">
             <button className="power-icon-button" aria-label="Change color theme" title="Change theme" onClick={cycleTheme}><Palette size={20} /></button>
+            <NotificationBell />
+            <button className="power-icon-button" aria-label="Community" onClick={() => navigate('/community')}><MessageCircle size={20} /></button>
             <button className="power-icon-button" aria-label="Settings" onClick={() => navigate('/settings')}><Settings size={20} /></button>
             {user ? (
               <button className="power-icon-button" aria-label="Sign out" onClick={async () => { await signOut(); navigate('/auth'); }}><LogOut size={20} /></button>
