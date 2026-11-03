@@ -27,6 +27,6 @@ try{
  assert(context.allowedExercises.every(e=>e.minimumLevel===1));
  const foundation=builder.buildSkillWorkout('foundation-inversion','foundation',25,{tier:1});assert(!foundation.some(i=>i.exercise.slug==='wall-toe-taps'||i.exercise.slug==='chest-to-wall-handstand'));
  const api=await load('endpoint','api/discover-exercises.ts');let status,body;const response={setHeader(){},set statusCode(v){status=v;},end(s){body=JSON.parse(s);}};
- await api.default({method:'GET'},response);assert.equal(status,200);assert.equal(body.authenticationRequired,true);
+ await api.default({method:'GET',headers:{}},response);assert.equal(status,200);assert.equal(body.authenticationRequired,true);
  console.log(`PASS: ${cases} goal/level/readiness/duration plans, all swap pools, beginner exclusions, AI selection validation, equipment context and API bundling.`);
 }finally{await rm(dir,{recursive:true,force:true});}
