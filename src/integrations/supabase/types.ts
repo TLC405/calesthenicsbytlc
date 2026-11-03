@@ -240,6 +240,59 @@ export type Database = {
         }
         Relationships: []
       }
+      message_likes: {
+        Row: {
+          created_at: string
+          id: string
+          message_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "message_likes_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "messages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          author_name: string
+          content: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          author_name?: string
+          content: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          author_name?: string
+          content?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       non_negotiables: {
         Row: {
           applies_to: string[] | null
@@ -272,6 +325,50 @@ export type Database = {
           violations?: string[] | null
         }
         Relationships: []
+      }
+      notifications: {
+        Row: {
+          actor_id: string | null
+          body: string | null
+          created_at: string
+          id: string
+          kind: string
+          message_id: string | null
+          read: boolean
+          title: string
+          user_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          body?: string | null
+          created_at?: string
+          id?: string
+          kind?: string
+          message_id?: string | null
+          read?: boolean
+          title: string
+          user_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          body?: string | null
+          created_at?: string
+          id?: string
+          kind?: string
+          message_id?: string | null
+          read?: boolean
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_message_id_fkey"
+            columns: ["message_id"]
+            isOneToOne: false
+            referencedRelation: "messages"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -567,6 +664,10 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      notify_message_likers: {
+        Args: { _body: string; _message_id: string; _title: string }
+        Returns: number
       }
     }
     Enums: {

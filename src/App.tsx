@@ -15,6 +15,7 @@ import Planner from "./pages/Planner";
 import Library from "./pages/Library";
 import AILab from "./pages/AILab";
 import Settings from "./pages/Settings";
+import Community from "./pages/Community";
 import Train from "./pages/Train";
 import Anatomy from "./pages/Anatomy";
 import NotFound from "./pages/NotFound";
@@ -41,6 +42,7 @@ function AppContent() {
           <Route path="/train" element={<Train />} />
           <Route path="/anatomy" element={<Anatomy />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/community" element={<Community />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
