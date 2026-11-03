@@ -22,11 +22,11 @@ try {
  graph.saveAttempt('test',entry);graph.saveAttempt('test',entry);
  assert.equal(graph.deviceSkillProgress.read('test').length,1,'Re-saving one set must not inflate progress');
  graph.removeAttempt('test',entry.id);assert.equal(graph.deviceSkillProgress.read('test').length,0);
- assert.equal(graph.regressionFor('tuck-planche'),'frog-stand');
+ assert.equal(graph.regressionFor('tuck-planche'),'planche-lean');
  assert(graph.trainingBlockers('ring-dip',{equipment:['floor'],safeExit:false},true).some(x=>x.includes('rings')));
  assert(graph.trainingBlockers('freestanding-handstand',{equipment:['floor'],safeExit:false},true).some(x=>x.includes('exit')));
- assert.deepEqual(graph.trainingBlockers('planche-lean',{equipment:['floor'],safeExit:false},true),[]);
- assert.equal(graph.recommendedNode('planche',[]),'planche-lean');
+ assert.deepEqual(graph.trainingBlockers('planche-lean',{tier:2,equipment:['floor'],safeExit:false},true),[]);
+ assert.equal(graph.recommendedNode('planche',[]),'quadruped-planche-lean');
  assert.equal(graph.nodeDose('handstand-push-up').metric,'reps');
  assert.equal(graph.nodeDose('ring-support-hold').metric,'seconds');
  assert.equal(graph.nodeDose('tuck-front-lever').metric,'seconds');

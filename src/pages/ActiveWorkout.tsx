@@ -1,3 +1,6 @@
+import { exerciseReadinessReasons, approvedRegression } from '@/lib/trainingPolicy';
+import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
+import { readTrainingProfile, writeTrainingProfile } from '@/lib/skillGraph';
 import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -54,6 +57,7 @@ const timeLabel = (seconds: number) => `${Math.floor(seconds / 60).toString().pa
 
 export default function ActiveWorkout() {
   const navigate = useNavigate();
+  const [readiness,setReadiness]=useState(readTrainingProfile);
   const { user } = useAuth();
   const { theme, setTheme, themes } = useTheme();
   const [draft, setDraft] = useState<SessionDraft | null>(readDraft);
@@ -97,6 +101,7 @@ export default function ActiveWorkout() {
     });
   }
   function finishSet(setIndex: number) {
+    if(item&&!item.sets[setIndex]?.done){const reasons=exerciseReadinessReasons(item.exercise,readiness);if(reasons.length){toast.info(reasons[0]);return;}}
     const wasDone = Boolean(item?.sets[setIndex]?.done);
     if(item&&draft) {
       const id=item.sets[setIndex].progressId || `${draft.startedAt}:${item.exercise.slug}:${setIndex}`;
@@ -115,11 +120,11 @@ export default function ActiveWorkout() {
   }
   function regressMovement() {
     if(!draft||!item)return;
-    const slug=regressionFor(item.exercise.slug);
+    const slug=approvedRegression(item.exercise.slug,readiness);
     const easier=slug?exerciseBySlug.get(slug):null;
-    if(!easier){toast.info('No mapped regression is available for this movement.');return;}
+    if(!easier){toast.info('Choose an appropriate movement in the builder, or review your level and readiness.');return;}
     const dose=nodeDose(easier.slug);
-    try {saveAttempt(progressOwner,{id:crypto.randomUUID(),nodeId:item.exercise.slug,sessionId:String(draft.startedAt),at:new Date().toISOString(),metric:nodeDose(item.exercise.slug).metric,value:0,target:nodeDose(item.exercise.slug).target,quality:2});} catch {}
+    if(!exerciseReadinessReasons(item.exercise,readiness).length){try {saveAttempt(progressOwner,{id:crypto.randomUUID(),nodeId:item.exercise.slug,sessionId:String(draft.startedAt),at:new Date().toISOString(),metric:nodeDose(item.exercise.slug).metric,value:0,target:nodeDose(item.exercise.slug).target,quality:2});} catch {}}
     const remaining=Math.max(1,item.sets.filter(s=>!s.done).length);
     const replacement:SessionEntry={section:item.section,phaseLabel:'Regression / preserve technique',exercise:easier,restSeconds:dose.restSeconds,sets:Array.from({length:remaining},()=>({progressId:crypto.randomUUID(),reps:dose.metric==='reps'?dose.target:0,...(dose.metric==='seconds'?{seconds:dose.target}:{}),done:false}))};
     setDraft(old=>{
@@ -217,6 +222,8 @@ export default function ActiveWorkout() {
             <div className="h-full bg-primary transition-[width] duration-300" style={{ width: `${percentage}%` }} />
           </div>
         </div>
+        <details className="rounded-xl border p-3"><summary className="text-xs font-bold cursor-pointer min-h-10 flex items-center">Level and readiness · L{readiness.tier||1}</summary><TrainingLevelControls profile={readiness} onChange={next=>{setReadiness(next);writeTrainingProfile(next);}}/></details>
+        {exerciseReadinessReasons(item.exercise,readiness).length>0&&<section className="rounded-xl border border-primary p-4 text-sm" role="status"><p className="font-bold">Use a suitable preparation first</p>{exerciseReadinessReasons(item.exercise,readiness).map(r=><p key={r} className="text-xs mt-2">{r}</p>)}<Button className="min-h-12 mt-3" variant="outline" onClick={regressMovement}>Choose a suitable regression</Button></section>}
         <section id="power-current-exercise" className="space-y-3" aria-label="Current exercise">
           <div>
             <div className="flex items-center justify-between gap-2">

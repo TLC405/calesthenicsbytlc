@@ -1,3 +1,8 @@
+import { askCoach } from '@/lib/coachClient';
+import { matchCoachGoal } from '@/lib/coachGrounding';
+import { exerciseReadinessReasons } from '@/lib/trainingPolicy';
+import { readTrainingProfile } from '@/lib/skillGraph';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
@@ -71,50 +76,14 @@ export default function Planner() {
   const [coachOpen, setCoachOpen] = useState(false);
   const [coachPrompt, setCoachPrompt] = useState('');
   const [coachLoading, setCoachLoading] = useState(false);
+  const [coachResult,setCoachResult]=useState<{goalId:string;focusSlug?:string|null;message:string;source:string}|null>(null);
 
-  const runSuperCoach = async (prompt: string) => {
-    if (!prompt.trim()) return;
-    setCoachLoading(true);
-    try {
-      const res = await supabase.functions.invoke('discover-exercises', {
-        body: { query: `Build a complete workout with warm-up, main workout, cool-down and compression sections. Request: ${prompt}` },
-      });
-      if (res.error) throw new Error(res.error.message);
-      const exercises = res.data?.exercises || [];
-      if (!exercises.length) { toast.error('Coach returned no exercises'); return; }
-      const sectionFor = (cat: string): string => {
-        const c = (cat || '').toLowerCase();
-        if (['mobility', 'flexibility'].includes(c)) return 'warmup';
-        if (['yoga'].includes(c)) return 'cooldown';
-        return 'workout';
-      };
-      setWorkoutName(prev => prev || `Coach: ${prompt.slice(0, 40)}`);
-      setSections(prev => prev.map(s => {
-        const items = exercises.filter((e: any) => sectionFor(e.category) === s.key);
-        return {
-          ...s,
-          open: s.key === 'workout' || items.length > 0,
-          entries: [
-            ...s.entries,
-            ...items.map((e: any) => ({
-              exercise: {
-                id: e.name, name: e.name, slug: e.name, category: e.category,
-                primary_muscles: e.primary_muscles || [], cues: e.cues,
-                youtube_url: e.youtube_url || null, difficulty_level: e.difficulty,
-              } as Exercise,
-              sets: [{ reps: 10 }, { reps: 10 }, { reps: 10 }],
-            })),
-          ],
-        };
-      }));
-      toast.success(`Coach added ${exercises.length} exercises`);
-      setCoachOpen(false);
-      setCoachPrompt('');
-    } catch (err: any) {
-      toast.error(err.message || 'Coach failed');
-    } finally {
-      setCoachLoading(false);
-    }
+  const runSuperCoach=async(prompt:string)=>{
+    if(!prompt.trim())return;setCoachLoading(true);try{
+      const status=await fetch('/api/discover-exercises').then(r=>r.json()).catch(()=>({configured:false}));
+      if(status.configured&&user){const result=await askCoach(prompt,user.id);setCoachResult({...result,source:'AI coach'});}
+      else setCoachResult({goalId:matchCoachGoal(prompt),message:'Uses your current level and readiness. The AI provider is not connected or you are not signed in.',source:'Rule-based planner'});
+    }catch(e){toast.error(e instanceof Error?e.message:'Coach could not connect.');}finally{setCoachLoading(false);}
   };
 
   // Consume AI Coach handoff (sessionStorage)
@@ -125,7 +94,7 @@ export default function Planner() {
       const parsed = JSON.parse(raw) as { name?: string; items: { name: string; section: string; exercise?: Exercise }[] };
       if (parsed.name) setWorkoutName(parsed.name);
       setSections(prev => prev.map(s => {
-        const items = parsed.items.filter(i => i.section === s.key);
+        const items = parsed.items.filter(i => i.section === s.key && i.exercise && !exerciseReadinessReasons(i.exercise,readTrainingProfile()).length);
         return {
           ...s,
           open: s.key === 'workout' || items.length > 0,
@@ -169,6 +138,7 @@ export default function Planner() {
   };
 
   const addExercise = (sectionKey: string, exercise: Exercise) => {
+    const reasons=exerciseReadinessReasons(exercise,readTrainingProfile());if(reasons.length){toast.info(reasons[0]);return;}
     setSections(prev => prev.map(s =>
       s.key === sectionKey
         ? { ...s, entries: [...s.entries, { exercise, sets: [{ reps: 10 }] }] }
@@ -194,6 +164,7 @@ export default function Planner() {
 
   const totalExercises = sections.reduce((sum, s) => sum + s.entries.length, 0);
   const beginActiveWorkout = () => {
+    const reasons=sections.flatMap(s=>s.entries.flatMap(e=>exerciseReadinessReasons(e.exercise,readTrainingProfile())));if(reasons.length){toast.info(reasons[0]);return;}
     if (localStorage.getItem('power-active-workout-v2') && !window.confirm('Replace the unfinished workout? Choose Cancel to preserve it, then use Resume.')) return;
     const entries = sections.flatMap(section => section.entries.map(entry => ({
       section: section.key,
@@ -340,6 +311,7 @@ export default function Planner() {
             {coachLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
             {coachLoading ? 'Building...' : 'Build Workout'}
           </Button>
+          {coachResult&&<div className="rounded-xl border p-3 space-y-3"><p className="text-xs text-primary">{coachResult.source}</p><p className="text-sm">{coachResult.message}</p><Link className="flex min-h-12 items-center justify-center rounded-lg border font-bold text-sm" to={`/build?skill=${coachResult.goalId}${coachResult.focusSlug?'&node='+encodeURIComponent(coachResult.focusSlug):''}`}>Review guided workout</Link></div>}
         </DialogContent>
       </Dialog>
 

@@ -1,6 +1,8 @@
+import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
+import { allowedAtLevel, equipmentReasons, approvedRegression, type TrainingTier } from '@/lib/trainingPolicy';
 import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useMemo, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ChevronDown, Dumbbell, Play, RefreshCw, RotateCcw, ShieldCheck, Trash2, Video } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -23,28 +25,31 @@ const PHASE_ORDER: WorkoutPhase[] = ['warmup','skill','support','cooldown'];
 export default function SkillWorkoutBuilder() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const initialGoal = findSkillGoal(params.get('skill') || '')?.id || 'planche';
+  const initialGoal = findSkillGoal(params.get('skill') || '')?.id || ((readTrainingProfile().tier||1)<=2?'foundation-push':'planche');
   const focusSlug = params.get('node');
-  function routine(goal: string, stage: SkillLevel, time: SkillMinutes): SkillWorkoutItem[] {
-    const built=buildSkillWorkout(goal,stage,time);
-    const focus=goal===initialGoal&&focusSlug?exerciseBySlug.get(focusSlug):null;
+  const [trainingProfile,setTrainingProfile]=useState<SkillTrainingProfile>(readTrainingProfile);
+  const stageFor=(tier:number):SkillLevel=>tier>=4?'advanced':tier>=3?'building':'foundation';
+  function routine(goal: string, stage: SkillLevel, time: SkillMinutes, profile=trainingProfile): SkillWorkoutItem[] {
+    const built=buildSkillWorkout(goal,stage,time,profile);
+    const requested=goal===initialGoal&&focusSlug?focusSlug:null;
+    const safeFocus=requested?(allowedAtLevel(requested,profile)?requested:approvedRegression(requested,profile)):null;
+    const focus=safeFocus&&!equipmentReasons(safeFocus,profile.equipment).length?exerciseBySlug.get(safeFocus):null;
     if(!focus)return built;
     const dose=nodeDose(focus.slug);
     let replaced=false;
-    const focused:SkillWorkoutItem={key:`skill-${focus.slug}`,phase:'skill',exercise:focus,sets:dose.sets,target:dose.target,metric:dose.metric};
+    const focused:SkillWorkoutItem={key:`skill-${focus.slug}`,phase:'skill',exercise:focus,sets:(profile.tier||1)===1?2:dose.sets,target:(profile.tier||1)===1&&dose.metric==='reps'?4:dose.target,metric:dose.metric};
     const next=built.flatMap(item=>{if(item.phase==='skill'&&!replaced){replaced=true;return[focused];}return item.exercise.slug===focus.slug?[]:[item];});
     if(!replaced)next.push(focused);
     return next;
   }
   const [goalId,setGoalId] = useState(initialGoal);
   const [minutes,setMinutes] = useState<SkillMinutes>(25);
-  const [level,setLevel] = useState<SkillLevel>('foundation');
-  const [items,setItems] = useState<SkillWorkoutItem[]>(() => routine(initialGoal,'foundation',25));
+  const [level,setLevel] = useState<SkillLevel>(stageFor(trainingProfile.tier||1));
+  const [items,setItems] = useState<SkillWorkoutItem[]>(() => routine(initialGoal,stageFor(trainingProfile.tier||1),25));
   const [showAdjust,setShowAdjust] = useState(false);
-  const [trainingProfile,setTrainingProfile]=useState<SkillTrainingProfile>(readTrainingProfile);
   const [comfortable,setComfortable]=useState(false);
-  const blockers=[...new Set(items.flatMap(item=>trainingBlockers(item.exercise.slug,trainingProfile,comfortable)))];
-  function updateTraining(next:SkillTrainingProfile){setTrainingProfile(next);writeTrainingProfile(next);}
+  const blockers=[...new Set([...(items.some(i=>i.phase==='skill')?[]:['No suitable practice drill for this level and equipment. Add the required equipment or choose Foundation.']),...items.flatMap(item=>trainingBlockers(item.exercise.slug,trainingProfile,comfortable))])];
+  function updateTraining(next:SkillTrainingProfile){setTrainingProfile(next);writeTrainingProfile(next);const stage=stageFor(next.tier||1);setLevel(stage);setItems(routine(goalId,stage,minutes,next));}
   const goal = findSkillGoal(goalId) || SKILL_GOALS[0];
   const exerciseCount = items.length;
   const totalSets = useMemo(()=>items.reduce((n,i)=>n+i.sets,0),[items]);
@@ -57,17 +62,17 @@ export default function SkillWorkoutBuilder() {
     setItems(routine(nextGoal,nextLevel,nextMinutes));
   }
   function nextAlternative(item:SkillWorkoutItem): boolean {
-    const options = getCandidates(goalId,level,item.phase);
+    const options = getCandidates(goalId,level,item.phase,trainingProfile);
     return options.some(e=>e.slug !== item.exercise.slug && !items.some(other=>other.key!==item.key && other.exercise.slug===e.slug));
   }
   function swap(item:SkillWorkoutItem) {
-    const options = getCandidates(goalId,level,item.phase);
+    const options = getCandidates(goalId,level,item.phase,trainingProfile);
     const index = options.findIndex(e=>e.slug===item.exercise.slug);
     const replacement = Array.from({length:options.length},(_,i)=>options[(index+i+1)%options.length])
       .find(e=>e.slug!==item.exercise.slug && !items.some(other=>other.key!==item.key && other.exercise.slug===e.slug));
     if (!replacement) { toast.info('No other matching drill in this skill phase'); return; }
     setItems(old=>old.map(x=>x.key===item.key
-      ? {...x,key:`${x.phase}-${replacement.slug}`,exercise:replacement} : x));
+      ? {...x,key:`${x.phase}-${replacement.slug}`,exercise:replacement,metric:nodeDose(replacement.slug).metric,target:nodeDose(replacement.slug).target} : x));
   }
   function adjust(key:string,field:'sets'|'target',delta:number) {
     setItems(old=>old.map(item=>item.key===key?{...item,
@@ -101,7 +106,7 @@ export default function SkillWorkoutBuilder() {
         <div className="power-elevated relative overflow-hidden p-4 sm:p-6 space-y-2">
           <p className="text-[10px] font-mono font-bold tracking-[.17em] uppercase text-primary">Your goal, your workout</p>
           <h1 className="font-display text-[clamp(1.6rem,6vw,2.35rem)] font-black leading-tight">Pick a skill. Press play.</h1>
-          <p className="text-sm text-muted-foreground leading-relaxed">No complicated programming. POWER selects real drills for your skill, from warm-up to cool-down.</p>
+          <p className="text-sm text-muted-foreground leading-relaxed">POWER chooses drills for your working level, equipment and readiness.</p><Link className="inline-flex min-h-11 items-center text-sm text-primary underline" to="/ai-lab">Let the coach help choose</Link>
         </div>
 
         <section className="space-y-2" aria-label="Choose a training skill"><label className="block text-sm font-bold" htmlFor="workout-skill">1 · Your skill</label><select id="workout-skill" className="h-14 w-full rounded-xl border bg-card px-3 font-bold" value={goalId} onChange={e=>regenerate(e.target.value,level,minutes)}>{SKILL_GOALS.map(option=><option key={option.id} value={option.id}>{option.title}</option>)}</select><p className="text-xs text-muted-foreground">{goal.detail} · {goal.equipment}</p></section>
@@ -118,18 +123,7 @@ export default function SkillWorkoutBuilder() {
               ))}
             </div>
           </section>
-          <section className="space-y-2">
-            <h2 className="text-sm font-black">3 · Where are you now?</h2>
-            <div className="power-elevated flex gap-1 p-1.5">
-              {LEVELS.map(option=>(
-                <button type="button" key={option.id} aria-pressed={level===option.id}
-                  title={option.note} onClick={()=>regenerate(goalId,option.id,minutes)}
-                  className={`power-builder-choice min-h-11 flex-1 rounded-xl text-[11px] font-black ${level===option.id?'is-active':''}`}>
-                  {option.name}
-                </button>
-              ))}
-            </div>
-          </section>
+          <TrainingLevelControls profile={trainingProfile} onChange={updateTraining}/>
         </div>
         <section aria-label="Suggested skill workout" className="space-y-3">
           <div className="flex items-center justify-between gap-2">
@@ -159,7 +153,7 @@ export default function SkillWorkoutBuilder() {
                     <p className="text-[11px] text-muted-foreground">{item.sets} × {item.target} {item.metric==='seconds'?'sec':'reps'}</p>
                     <div className="flex gap-2 items-center">
                       {item.exercise.youtube_url && <span className="inline-flex gap-1 items-center text-[10px] text-primary"><Video className="h-3 w-3"/> Tutorial</span>}
-                      <span className="text-[10px] text-muted-foreground truncate">{exerciseLabel(item.exercise.slug,item.exercise.category)}</span>
+                      <span className="text-[10px] text-muted-foreground truncate">{exerciseLabel(item.exercise.slug,item.exercise.category)}{item.perSide?' · each side':''}</span>
                     </div>
                   </div>
                   <div className="flex flex-col shrink-0 gap-1">
@@ -197,10 +191,10 @@ export default function SkillWorkoutBuilder() {
           </div>}
           <div className="flex gap-2 items-start rounded-xl border-l-4 border-primary bg-primary/5 p-3 text-xs text-muted-foreground">
             <ShieldCheck className="h-4 w-4 shrink-0 text-primary"/>
-            <p>Starting, Building, and Advanced are choices—not medical clearance. Skill work comes before fatiguing strength work. Choose a comfortable variation and stop when technique deteriorates or pain appears.</p>
+            <p>Levels and readiness checks are self-reported training guides. Graduation targets are separate from this starting dose. Skill work comes before fatiguing strength work. Choose a comfortable variation and stop when technique deteriorates or pain appears.</p>
           </div>
         </section>
-        <section className="power-elevated p-4 space-y-3" aria-label="Skill training readiness"><h2 className="font-bold">Before you train</h2><p className="text-xs text-muted-foreground">Confirm the equipment and current comfort for this session.</p><div className="flex flex-wrap gap-2">{(['floor','wall','rings','bar','parallettes','bands'] as TrainingEquipment[]).map(option=><button key={option} aria-pressed={trainingProfile.equipment.includes(option)} onClick={()=>updateTraining({...trainingProfile,equipment:trainingProfile.equipment.includes(option)?trainingProfile.equipment.filter(x=>x!==option):[...trainingProfile.equipment,option]})} className={`min-h-12 px-3 rounded-xl border text-xs capitalize ${trainingProfile.equipment.includes(option)?'border-primary text-primary bg-primary/10':''}`}>{option}</button>)}</div><label className="min-h-12 flex gap-3 items-center text-xs"><input className="h-5 w-5" type="checkbox" checked={trainingProfile.safeExit} onChange={e=>updateTraining({...trainingProfile,safeExit:e.target.checked})}/>I can safely enter and exit the inversions in this session.</label><label className="min-h-12 flex gap-3 items-center text-xs"><input className="h-5 w-5" type="checkbox" checked={comfortable} onChange={e=>setComfortable(e.target.checked)}/>These variations are comfortable today, without joint pain.</label>{blockers.map(reason=><p key={reason} className="text-xs text-muted-foreground">• {reason}</p>)}</section>
+        <section className="power-elevated p-4 space-y-3" aria-label="Skill training readiness"><h2 className="font-bold">Before you train</h2><p className="text-xs text-muted-foreground">Confirm the equipment and current comfort for this session.</p><div className="flex flex-wrap gap-2">{(['floor','wall','rings','bar','parallettes','bands','bench','pole'] as TrainingEquipment[]).map(option=><button key={option} aria-pressed={trainingProfile.equipment.includes(option)} onClick={()=>updateTraining({...trainingProfile,equipment:trainingProfile.equipment.includes(option)?trainingProfile.equipment.filter(x=>x!==option):[...trainingProfile.equipment,option]})} className={`min-h-12 px-3 rounded-xl border text-xs capitalize ${trainingProfile.equipment.includes(option)?'border-primary text-primary bg-primary/10':''}`}>{option}</button>)}</div><label className="min-h-12 flex gap-3 items-center text-xs"><input className="h-5 w-5" type="checkbox" checked={trainingProfile.safeExit} onChange={e=>updateTraining({...trainingProfile,safeExit:e.target.checked})}/>I can safely enter and exit the inversions in this session.</label><label className="min-h-12 flex gap-3 items-center text-xs"><input className="h-5 w-5" type="checkbox" checked={comfortable} onChange={e=>setComfortable(e.target.checked)}/>These variations are comfortable today, without joint pain.</label>{blockers.map(reason=><p key={reason} className="text-xs text-muted-foreground">• {reason}</p>)}</section>
         <div className="power-builder-launch relative rounded-2xl border border-border/70 bg-card/95 p-2 shadow-xl backdrop-blur-lg">
           <Button type="button" onClick={startWorkout} disabled={!items.length||blockers.length>0}
             className="power-primary-action min-h-[55px] w-full rounded-xl font-display font-black text-sm">

@@ -1,3 +1,5 @@
+import { exerciseReadinessReasons } from '@/lib/trainingPolicy';
+import { readTrainingProfile } from '@/lib/skillGraph';
 import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useState, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
@@ -46,20 +48,21 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
     return()=>{controller.abort();window.clearTimeout(timeout);};
   },[open]);
 
+  const profile=readTrainingProfile();
   const categories = [...new Set(exercises.map(e => e.category))];
 
   const filteredExercises = exercises.filter(exercise => {
     const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = !activeCategory || (CATEGORY_GROUPS[activeCategory] ? CATEGORY_GROUPS[activeCategory].includes(exercise.category) : exercise.category === activeCategory);
-    return matchesSearch && matchesCategory;
+    return matchesSearch && matchesCategory && !exerciseReadinessReasons(exercise,profile).length;
   });
 
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <DialogContent className="w-[calc(100vw-1rem)] max-w-lg max-h-[90dvh] flex flex-col min-h-0 overflow-hidden rounded-2xl p-0">
         <DialogHeader className="p-3 sm:p-4 pb-0">
-          <DialogTitle>Add Exercise</DialogTitle>
+          <DialogTitle>Add Exercise</DialogTitle><p className="text-xs text-muted-foreground">Showing movements for L{profile.tier||1} and your readiness checks.</p>
         </DialogHeader>
 
         <div className="px-3 sm:px-4 space-y-3">

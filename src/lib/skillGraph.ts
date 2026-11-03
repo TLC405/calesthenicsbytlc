@@ -1,5 +1,6 @@
-import catalog from '@/data/publicExerciseCatalog.json';
-import { SKILL_PATHS } from '@/data/skillPaths';
+import { RULES, equipmentReasons, readinessReasons, safeProfile, allowedAtLevel, type TrainingReadiness } from './trainingPolicy';
+import catalog from '../data/publicExerciseCatalog.json';
+import { SKILL_PATHS } from '../data/skillPaths';
 
 export type EdgeType = 'prerequisite' | 'supports' | 'mobility_dependency' | 'alternative';
 export type SkillEdge = { from: string; to: string; type: EdgeType; hardGate: boolean };
@@ -10,8 +11,8 @@ export type SkillAttempt = {
   assistance?: 'none' | 'feet' | 'wall' | 'band'; rom?: 'partial' | 'full';
   elbowLocked?: boolean; scapularControl?: boolean; discomfort?: string;
 };
-export type TrainingEquipment = 'floor' | 'wall' | 'rings' | 'bar' | 'parallettes' | 'bands';
-export type SkillTrainingProfile = { equipment: TrainingEquipment[]; safeExit: boolean };
+export type TrainingEquipment = 'floor' | 'wall' | 'rings' | 'bar' | 'parallettes' | 'bands' | 'bench' | 'pole';
+export type SkillTrainingProfile = Omit<TrainingReadiness,'equipment'> & { equipment: TrainingEquipment[]; safeExit: boolean };
 export interface SkillProgressAdapter {
   read(owner: string): SkillAttempt[];
   write(owner: string, attempts: SkillAttempt[]): void;
@@ -21,7 +22,7 @@ const known = new Set(catalog.map(e => e.slug));
 export const exerciseBySlug = new Map(catalog.map(e => [e.slug,e]));
 export const skillEdges: SkillEdge[] = [];
 for (const path of SKILL_PATHS) {
-  for (let i=1;i<path.slugs.length;i++) skillEdges.push({from:path.slugs[i-1],to:path.slugs[i],type:path.id==='hspu'&&i<3?'supports':'prerequisite',hardGate:false});
+  for (let i=1;i<path.slugs.length;i++) skillEdges.push({from:path.slugs[i-1],to:path.slugs[i],type:'supports',hardGate:false});
 }
 const cross: [string,string,EdgeType][] = [
   ['wrist-circles','planche-lean','supports'],['wrist-circles','wall-handstand','supports'],
@@ -36,6 +37,7 @@ const cross: [string,string,EdgeType][] = [
   ['tuck-planche','parallette-tuck-planche','alternative'],
 ];
 for(const [from,to,type] of cross) skillEdges.push({from,to,type,hardGate:false});
+for(const [to,rule] of Object.entries(RULES))if(rule.regression)skillEdges.push({from:rule.regression,to,type:'prerequisite',hardGate:false});
 export function graphProblems() {
   const problems=skillEdges.filter(e=>!known.has(e.from)||!known.has(e.to)).map(e=>`Missing catalog node: ${e.from} → ${e.to}`);
   const visited=new Set<string>(), active=new Set<string>();
@@ -64,14 +66,14 @@ export function saveAttempt(owner:string,attempt:SkillAttempt) {
 export function removeAttempt(owner:string,id:string) {deviceSkillProgress.write(owner,deviceSkillProgress.read(owner).filter(x=>x.id!==id));}
 export function readTrainingProfile(): SkillTrainingProfile {
   try {const x=JSON.parse(localStorage.getItem('power-training-profile-v1')||'null');
-    if(x&&Array.isArray(x.equipment))return {equipment:x.equipment.filter((v:string)=>['floor','wall','rings','bar','parallettes','bands'].includes(v)),safeExit:x.safeExit===true};
+    if(x&&Array.isArray(x.equipment))return {...safeProfile(x),equipment:x.equipment.filter((v:string)=>['floor','wall','rings','bar','parallettes','bands','bench','pole'].includes(v)),safeExit:x.safeExit===true};
   } catch {}
-  return {equipment:['floor'],safeExit:false};
+  return {tier:1,capabilities:[],equipment:['floor'],safeExit:false};
 }
 export function writeTrainingProfile(profile:SkillTrainingProfile){localStorage.setItem('power-training-profile-v1',JSON.stringify(profile));}
 export function nodeDose(slug:string) {
-  const timed=/planche|hold|hang|stand$|l-sit|frog-stand|lever/.test(slug)&&!/(push-up|kick-up|bail|dip|lift|transition|raise|row)/.test(slug);
-  return {metric:timed?'seconds' as const:'reps' as const,target:slug==='ring-muscle-up'?1:slug==='handstand-push-up'?3:timed?8:5,sets:slug==='freestanding-handstand'?8:/muscle-up|handstand-push-up|ring-dip/.test(slug)?3:4,restSeconds:slug==='ring-muscle-up'?180:slug==='handstand-push-up'?150:/planche|muscle-up|push-up/.test(slug)?120:60,stopRule:'End the attempt when technique deteriorates or pain appears.'};
+ const timed=RULES[slug]?.metric==='seconds'||(!RULES[slug]?.metric&&/hold|hang|stand$|planche$|planche-lean|planche-plank|l-sit|tuck-sit|stretch|forward-fold|lever|plank$/.test(slug)&&!/(push-up|kick-up|bail|dip|lift|transition|raise|row)/.test(slug));
+ return {metric:timed?'seconds' as const:'reps' as const,target:RULES[slug]?.target||(slug==='ring-muscle-up'?1:slug==='handstand-push-up'?3:timed?8:5),sets:3,restSeconds:/planche|press|hspu|muscle-up/.test(slug)?120:60,stopRule:'End the attempt when technique deteriorates or joint pain appears.'};
 }
 export function nodeProgress(slug:string,attempts:SkillAttempt[]) {
   const logs=attempts.filter(a=>a.nodeId===slug).sort((a,b)=>a.at.localeCompare(b.at)).slice(-20);
@@ -83,26 +85,23 @@ export function nodeProgress(slug:string,attempts:SkillAttempt[]) {
 }
 export function relatedNodes(slug:string){return skillEdges.filter(e=>e.to===slug||e.from===slug&&e.type==='alternative');}
 export function regressionFor(slug:string) {
+  if(RULES[slug]?.regression)return RULES[slug].regression;
   return [...skillEdges].reverse().find(e=>e.to===slug&&e.type==='prerequisite'&&SKILL_PATHS.some(p=>p.slugs.includes(e.from)&&p.slugs.includes(slug)))?.from || null;
 }
 export function trainingBlockers(slug:string,profile:SkillTrainingProfile,comfortable:boolean) {
-  const reasons:string[]=[];
+  const reasons:string[]=readinessReasons(slug,profile);
   if(!comfortable)reasons.push('Confirm a comfortable, pain-free variation before starting.');
-  const equipment = (exerciseBySlug.get(slug)?.equipment || []).map(e=>e.toLowerCase());
-  if(equipment.some(e=>/pull.?up bar|horizontal bar/.test(e))&&!profile.equipment.includes('bar'))reasons.push('A pull-up bar is required for this variation.');
-  if(/ring|false-grip/.test(slug)&&!profile.equipment.includes('rings'))reasons.push('Gymnastic rings are required.');
-  if(/parallette/.test(slug)&&!profile.equipment.includes('parallettes'))reasons.push('Parallettes are required for this variation.');
-  if(/wall|chest-to-wall/.test(slug)&&!profile.equipment.includes('wall'))reasons.push('A clear wall is required.');
-  if(/handstand|press-to-hs|hs-kick-up|stalder/.test(slug)&&!/bail|prep|mobility/.test(slug)&&!profile.safeExit)reasons.push('Confirm that you can safely enter and exit the inversion.');
+  reasons.push(...equipmentReasons(slug,profile.equipment));
+  if(/handstand|press-to-hs|hs-kick-up|stalder-negative|wall-toe-taps/.test(slug)&&!/bail|prep|mobility/.test(slug)&&!profile.safeExit)reasons.push('Confirm that you can safely enter and exit the inversion.');
   return reasons;
 }
-export function recommendedNode(pathId:string,attempts:SkillAttempt[]) {
+export function recommendedNode(pathId:string,attempts:SkillAttempt[],profile:TrainingReadiness={tier:1}) {
   const path=SKILL_PATHS.find(p=>p.id===pathId);
   if(!path)return null;
   for(const slug of path.slugs) {
-    if(nodeProgress(slug,attempts).consistent)continue;
+    if(!allowedAtLevel(slug,profile)||nodeProgress(slug,attempts).consistent)continue;
     const dependencies=skillEdges.filter(e=>e.to===slug&&e.type==='prerequisite');
-    return dependencies.find(e=>!nodeProgress(e.from,attempts).consistent)?.from || slug;
+    return dependencies.find(e=>allowedAtLevel(e.from,profile)&&!nodeProgress(e.from,attempts).consistent)?.from || slug;
   }
-  return path.slugs[path.slugs.length-1];
+  return [...path.slugs].reverse().find(slug=>allowedAtLevel(slug,profile))||null;
 }

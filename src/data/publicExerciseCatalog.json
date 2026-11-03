@@ -50,7 +50,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=moyFIvRrS0s",
     "instagram_url": null,
     "image_url": null,
-    "description": "Made famous by Bruce Lee. Keep the body as one unit—no bending at the hips.",
+    "description": "Made famous by Bruce Lee. Keep the body as one unit\u2014no bending at the hips.",
     "sets_reps": null,
     "chain_group": "lever-core-chain",
     "chain_order": 4,
@@ -258,7 +258,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=ASdvN_XEl_c",
     "instagram_url": null,
     "image_url": null,
-    "description": "Forearm plank with intent. Squeeze everything—this is practice for maintaining tension under load.",
+    "description": "Forearm plank with intent. Squeeze everything\u2014this is practice for maintaining tension under load.",
     "sets_reps": null,
     "chain_group": "plank-chain",
     "chain_order": 1,
@@ -596,7 +596,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=aLA1mUjgdeI",
     "instagram_url": null,
     "image_url": null,
-    "description": "Stand on one leg with the other lifted behind, knee bent at 90°. A sculptural position that demands balance and posterior chain engagement.",
+    "description": "Stand on one leg with the other lifted behind, knee bent at 90\u00b0. A sculptural position that demands balance and posterior chain engagement.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -639,7 +639,7 @@
   {
     "id": "b332a1e5-5624-4e6f-b0ff-340a9d701f0a",
     "slug": "developpe",
-    "name": "Développé",
+    "name": "D\u00e9velopp\u00e9",
     "category": "Flexibility",
     "primary_muscles": [
       "Hip Flexors",
@@ -660,7 +660,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=0oVrVwlpXAI",
     "instagram_url": null,
     "image_url": null,
-    "description": "Draw foot up the standing leg to passé then unfold to full extension. Tests hip flexor strength and hamstring flexibility simultaneously.",
+    "description": "Draw foot up the standing leg to pass\u00e9 then unfold to full extension. Tests hip flexor strength and hamstring flexibility simultaneously.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -670,7 +670,7 @@
   {
     "id": "497ee99f-32a1-41f4-a431-e05a1925c420",
     "slug": "first-position-plie",
-    "name": "First Position Plié",
+    "name": "First Position Pli\u00e9",
     "category": "Flexibility",
     "primary_muscles": [
       "Quads",
@@ -827,7 +827,7 @@
   {
     "id": "373513e9-23c2-4ca7-8376-999945265fe1",
     "slug": "grand-plie",
-    "name": "Grand Plié",
+    "name": "Grand Pli\u00e9",
     "category": "Flexibility",
     "primary_muscles": [
       "Quads",
@@ -849,7 +849,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=k70uyYKlIU0",
     "instagram_url": null,
     "image_url": null,
-    "description": "Full depth plié where heels may rise in first position. Develops deep hip mobility and leg endurance.",
+    "description": "Full depth pli\u00e9 where heels may rise in first position. Develops deep hip mobility and leg endurance.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -954,7 +954,7 @@
   {
     "id": "5338bace-60d1-4f65-bc6b-5be2b898bccf",
     "slug": "passe-balance",
-    "name": "Passé Balance",
+    "name": "Pass\u00e9 Balance",
     "category": "Flexibility",
     "primary_muscles": [
       "Glutes",
@@ -985,7 +985,7 @@
   {
     "id": "e422ec69-0d69-4b80-94d7-71b10895aece",
     "slug": "penche",
-    "name": "Penché",
+    "name": "Pench\u00e9",
     "category": "Flexibility",
     "primary_muscles": [
       "Hamstrings",
@@ -1077,7 +1077,7 @@
   {
     "id": "c08ba021-7f9a-48e2-ada9-b9454e2ecd9b",
     "slug": "releve",
-    "name": "Relevé",
+    "name": "Relev\u00e9",
     "category": "Flexibility",
     "primary_muscles": [
       "Calves",
@@ -1545,7 +1545,7 @@
       "floor"
     ],
     "cues": [
-      "Step length allows 90° at both knees",
+      "Step length allows 90\u00b0 at both knees",
       "Upright torso",
       "Control the descent"
     ],
@@ -3002,7 +3002,7 @@
       "wall"
     ],
     "cues": [
-      "Slow eccentrics (3–5s down)",
+      "Slow eccentrics (3\u20135s down)",
       "Pause at bottom",
       "Press through full ROM"
     ],
@@ -3273,7 +3273,7 @@
     ],
     "cues": [
       "Body one straight line",
-      "Elbows ~45°",
+      "Elbows ~45\u00b0",
       "Full ROM"
     ],
     "difficulty_level": 2,
@@ -4516,7 +4516,7 @@
       "floor"
     ],
     "cues": [
-      "Elbows bent 90°",
+      "Elbows bent 90\u00b0",
       "Head close to ground",
       "Balance through wrists"
     ],
@@ -4824,7 +4824,7 @@
     "youtube_url": null,
     "instagram_url": null,
     "image_url": null,
-    "description": "A straight-line forearm stand held away from the wall. The culmination of Pincha training—demands shoulder stability and refined balance.",
+    "description": "A straight-line forearm stand held away from the wall. The culmination of Pincha training\u2014demands shoulder stability and refined balance.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -5469,7 +5469,7 @@
     "youtube_url": null,
     "instagram_url": null,
     "image_url": null,
-    "description": "Support hold with rings turned out 45–90°. Builds biceps tendon resilience.",
+    "description": "Support hold with rings turned out 45\u201390\u00b0. Builds biceps tendon resilience.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -5499,7 +5499,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=MhEUfmRGr6g",
     "instagram_url": null,
     "image_url": null,
-    "description": "The ultimate elbow lever progression—balancing your entire body on one arm.",
+    "description": "The ultimate elbow lever progression\u2014balancing your entire body on one arm.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -5734,7 +5734,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=aZZ5USlEA7s",
     "instagram_url": null,
     "image_url": null,
-    "description": "In chest-to-wall HS, gently pull feet off wall and balance for 2–5 seconds. Return to wall.",
+    "description": "In chest-to-wall HS, gently pull feet off wall and balance for 2\u20135 seconds. Return to wall.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -6273,7 +6273,7 @@
       "floor"
     ],
     "cues": [
-      "Back foot at 45°",
+      "Back foot at 45\u00b0",
       "Front knee over ankle",
       "Arms reach high, shoulders down"
     ],
@@ -6507,7 +6507,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Band-assisted pull-up for building toward strict pull-ups.",
-    "sets_reps": "3×8-12",
+    "sets_reps": "3\u00d78-12",
     "chain_group": "pullup-chain",
     "chain_order": 3,
     "visibility": "public",
@@ -6540,7 +6540,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Elite dynamic rotational pull around the bar.",
-    "sets_reps": "3×1",
+    "sets_reps": "3\u00d71",
     "chain_group": null,
     "chain_order": null,
     "visibility": "public",
@@ -6575,7 +6575,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "L-Sit on rings adds instability challenge. Lock elbows, compress hard, point toes.",
-    "sets_reps": "4×15s",
+    "sets_reps": "4\u00d715s",
     "chain_group": "ring-chain",
     "chain_order": 7,
     "visibility": "public",
@@ -6610,7 +6610,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Deep ring dip builds pressing power and shoulder stability. Elbows back not flared, RTO at top.",
-    "sets_reps": "4×8",
+    "sets_reps": "4\u00d78",
     "chain_group": "ring-chain",
     "chain_order": 4,
     "visibility": "public",
@@ -6645,7 +6645,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Push-up on unstable rings builds deep stabilizer strength. RTO at top, controlled descent.",
-    "sets_reps": "4×10",
+    "sets_reps": "4\u00d710",
     "chain_group": "ring-chain",
     "chain_order": 3,
     "visibility": "public",
@@ -6777,7 +6777,7 @@
     "instagram_url": null,
     "image_url": "https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/swimming-freestyle.jpg",
     "description": "Freestyle swimming for active recovery and cardio.",
-    "sets_reps": "20×25m",
+    "sets_reps": "20\u00d725m",
     "chain_group": null,
     "chain_order": null,
     "visibility": "public",
@@ -6810,8 +6810,8 @@
     "youtube_url": "https://www.youtube.com/watch?v=8FWdmFBUNP0",
     "instagram_url": null,
     "image_url": null,
-    "description": "Dead hang to active hang — pure scapular movement. Foundation for all pulling.",
-    "sets_reps": "3×10-15",
+    "description": "Dead hang to active hang \u2014 pure scapular movement. Foundation for all pulling.",
+    "sets_reps": "3\u00d710-15",
     "chain_group": "pullup-chain",
     "chain_order": 2,
     "visibility": "public",
@@ -6848,7 +6848,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Weighted pull-ups for maximal pulling strength.",
-    "sets_reps": "4×3-5",
+    "sets_reps": "4\u00d73-5",
     "chain_group": "pullup-chain",
     "chain_order": 7,
     "visibility": "public",
@@ -6883,7 +6883,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Adjustable-angle horizontal pull on rings. Body straight, pull chest to rings, squeeze shoulder blades.",
-    "sets_reps": "4×12",
+    "sets_reps": "4\u00d712",
     "chain_group": "ring-chain",
     "chain_order": 2,
     "visibility": "public",
@@ -6919,7 +6919,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Walking on hands. Weight shift side to side, controlled steps.",
-    "sets_reps": "3×10m",
+    "sets_reps": "3\u00d710m",
     "chain_group": "handstand-chain",
     "chain_order": 5,
     "visibility": "public",
@@ -6954,7 +6954,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Dynamic kip from standing to handstand.",
-    "sets_reps": "3×3",
+    "sets_reps": "3\u00d73",
     "chain_group": null,
     "chain_order": null,
     "visibility": "public",
@@ -6991,9 +6991,879 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Belly-to-wall straddle handstand for alignment practice.",
-    "sets_reps": "3×5",
+    "sets_reps": "3\u00d75",
     "chain_group": "handstand-chain",
     "chain_order": 2,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "1eb77a64-311b-5e8d-8582-244407cc2ba7",
+    "slug": "bent-knee-compression-lift",
+    "name": "Bent-Knee Compression Lift",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip flexors",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Sit tall; hands beside thighs",
+      "Exhale and lift the thigh; lower slowly"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Lift one bent knee at a time without rocking backward.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "b4881314-a21c-5d10-b10c-103fc7d90ae3",
+    "slug": "single-leg-pike-lift",
+    "name": "Single-Leg Pike Lift",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip flexors",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Keep the working knee straight",
+      "Use a comfortable pike range"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "From a seated pike, lift one straight leg at a time.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "0ef1a86d-d92e-5a40-ac36-1e47be9727d4",
+    "slug": "pike-compression-hold",
+    "name": "Pike Compression Hold",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip flexors",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Press hands down",
+      "Lift from the hips without leaning back"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Hold both heels clear of the floor in a seated pike.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "3c7acf83-faae-59ce-85a9-de3f8f8e9e28",
+    "slug": "bent-knee-straddle-lift",
+    "name": "Bent-Knee Straddle Lift",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip flexors",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Sit upright",
+      "Reduce the straddle if your back rounds"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Begin with bent knees in a comfortable straddle; lift one thigh at a time.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "35bac4c1-ce6b-5a51-b522-8d38d62989ff",
+    "slug": "straddle-compression-hold",
+    "name": "Straddle Compression Hold",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip flexors",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Press into the floor",
+      "Lift only as high as controlled"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Hold the heels just above the floor in an active seated straddle.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "685a37cb-cd6d-58b3-9fb2-31135ebbf950",
+    "slug": "hip-lift-setup",
+    "name": "Hip-Lift Setup",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Keep feet in contact",
+      "Push tall with straight elbows"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Set hands down and shift the hips above the hands with feet supported.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "705274a9-3b5a-5c1f-a509-9f6ce0f954fc",
+    "slug": "slow-frogger-toe-pull",
+    "name": "Slow Frogger Toe Pull",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Keep toes available for support",
+      "Move slowly; avoid jumping"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Use a slow frogger weight shift with toe support to practice lifting the hips.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "ae336a3e-e8d0-57df-859d-6b9130835f50",
+    "slug": "straight-leg-frogger",
+    "name": "Straight-Leg Frogger",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Keep arm drive",
+      "Straighten only within available compression"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Practice the frogger hip lift while progressively straightening the knees.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "b3107dc2-4926-5b91-b541-bc45c5fd50f5",
+    "slug": "wall-press-negative",
+    "name": "Wall Press Negative",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Use a known safe exit",
+      "Lower slowly; stop before control is lost"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "From a controlled wall handstand, lower toward a straddle with foot support as needed.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "6f9d5b2b-df9b-5a44-9e62-091811f639e1",
+    "slug": "elevated-straddle-press",
+    "name": "Elevated Straddle Press",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor",
+      "chair"
+    ],
+    "cues": [
+      "Use a stable surface",
+      "Push tall and bring hips over hands"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Practice a straddle press from a stable raised foot surface.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "7fcd1de3-5f8d-5532-8745-1d287771dcb1",
+    "slug": "stalder-feet-assisted-hip-lift",
+    "name": "Stalder Feet-Assisted Hip Lift",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Press down with straight arms",
+      "Keep foot contact to scale the load"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "From a seated straddle, practice support and hip lift while the feet remain assisted.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "a83ef77f-7245-5e4c-9f39-a124c0f87fa8",
+    "slug": "stalder-toe-assisted-press",
+    "name": "Stalder Toe-Assisted Press",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Move hips up before closing legs",
+      "Keep elbows straight; retain foot assistance"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Use toe assistance through the low straddle support into the hip-lift phase.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "0c530d0c-863c-5912-96d4-8e1705ce9661",
+    "slug": "stalder-negative",
+    "name": "Stalder Negative",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Use only with controlled handstand exits",
+      "Lower in a range you can own"
+    ],
+    "difficulty_level": 5,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "From a controlled handstand, lower through straddle toward a low support.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "7930fff5-c817-5c94-bd30-ffdcc746c435",
+    "slug": "quadruped-planche-lean",
+    "name": "Quadruped Planche Lean",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Straight elbows; push the floor away",
+      "Use a small comfortable shift"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Keep knees down while shifting the shoulders slightly forward over the hands.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "d881f551-2efe-55dd-ae53-4c6dd2877f34",
+    "slug": "scapular-push-up",
+    "name": "Scapular Push-Up",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Keep elbows straight",
+      "Spread shoulder blades at the top"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "With knees down if needed, move the shoulder blades while the elbows stay straight.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "d17026ca-468f-5c94-b8fa-695425fb49b2",
+    "slug": "planche-scapular-pulse",
+    "name": "Planche Lean Scapular Pulse",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Keep feet down",
+      "Use a small lean and avoid elbow bending"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "In a light feet-supported lean, maintain straight arms while controlling scapular protraction.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "4b32d9e2-b6b0-50cd-8b96-9bb776ece895",
+    "slug": "band-assisted-tuck-planche",
+    "name": "Band-Assisted Tuck Planche",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor",
+      "resistance band"
+    ],
+    "cues": [
+      "Check anchor stability",
+      "Keep elbows straight and shoulders active"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Use a securely anchored appropriate band to scale a tuck planche hold.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "ed2dff22-e5d7-5ea0-b13b-aa4af9e525f1",
+    "slug": "incline-pike-push-up",
+    "name": "Incline Pike Push-Up",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "chair"
+    ],
+    "cues": [
+      "Use a stable support",
+      "Control the head path and comfortable depth"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Press in a pike position with the hands elevated on a stable support.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "d364fe8d-d3d9-51eb-aefe-e496b80b562d",
+    "slug": "elevated-pike-push-up",
+    "name": "Feet-Elevated Pike Push-Up",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "chair"
+    ],
+    "cues": [
+      "Stack hips toward shoulders",
+      "Control depth; avoid dropping onto the head"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Elevate the feet on a stable support to increase vertical pressing demand.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "f37e01e4-5ffb-5158-ab2c-5a27d0cd0117",
+    "slug": "wall-hspu-negative",
+    "name": "Wall Handstand Push-Up Negative",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Lower slowly into a controlled range",
+      "Do not rest bodyweight on the head"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Use a controlled eccentric wall handstand push-up with a safe exit.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "56627b58-98b6-52df-83bb-7449845f0e4b",
+    "slug": "partial-rom-wall-hspu",
+    "name": "Partial-Range Wall Handstand Push-Up",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Use a stable wall setup",
+      "Expand range gradually; keep shoulders active"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Practice wall pressing in a limited range that can be controlled.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "535081da-1f36-55ad-8417-191d959aa26e",
+    "slug": "one-leg-l-sit",
+    "name": "One-Leg L-Sit",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip flexors",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Push down and stay tall",
+      "Alternate the straight leg"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Hold a tuck support and extend one leg while keeping shoulders depressed.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "b439e715-e5ed-53fe-8851-d63ff1544bdb",
+    "slug": "v-sit-preparation",
+    "name": "V-Sit Preparation",
+    "category": "Core",
+    "primary_muscles": [
+      "Hip flexors",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "parallettes"
+    ],
+    "cues": [
+      "Press down through straight arms",
+      "Lift through active compression"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Use a controlled L-sit support to practice lifting the straight legs higher.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "63f2cfe6-1835-589f-936c-4cfc33414d1b",
+    "slug": "supported-crow-balance",
+    "name": "Supported Crow Balance",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Lean gradually",
+      "Keep foot support until balance is controlled"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Practice crow positioning with toes kept on the ground for assistance.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "74e8bce3-43e9-5689-b0fa-4e7fa2e6fdd9",
+    "slug": "assisted-elbow-lever",
+    "name": "Assisted Elbow Lever",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Set elbows comfortably against the trunk",
+      "Keep feet down to scale load"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Practice the elbow lever shape with feet supported and a small forward weight shift.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "f7f9f2b3-d80e-53d7-8295-5467dfead0e2",
+    "slug": "incline-one-arm-push-up",
+    "name": "Incline One-Arm Push-Up",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "chair"
+    ],
+    "cues": [
+      "Use a high stable surface",
+      "Limit rotation and keep the working shoulder controlled"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Practice one-arm pressing on a stable elevated support.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "bd9b8016-6918-5930-9739-021cd8b9a603",
+    "slug": "wall-support-shrug",
+    "name": "Wall Support Scapular Shrug",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Keep arms straight",
+      "Use light pressure and controlled movement"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "With feet on the floor and hands on the wall, move shoulder blades through a comfortable range.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "62e9c6da-937a-526e-a480-70b3b037c672",
+    "slug": "kneeling-planche-plank",
+    "name": "Kneeling Planche Plank",
+    "category": "Push",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Keep knees down and elbows straight",
+      "Push the floor away; use a comfortable wrist angle"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Practice the assisted variation within a comfortable, controlled range.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "e9a7616f-8137-5f81-b85e-6bcd3d861e4d",
+    "slug": "pike-support-hold",
+    "name": "Pike Support Hold",
+    "category": "Core",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "floor"
+    ],
+    "cues": [
+      "Push through hands with straight elbows",
+      "Use bent knees and a comfortable shoulder angle"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Practice the assisted variation within a comfortable, controlled range.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "33fd208c-36b4-5d57-af6e-8d48e9429572",
+    "slug": "wall-toe-taps",
+    "name": "Wall Toe Taps",
+    "category": "Skills",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "wall"
+    ],
+    "cues": [
+      "Begin from a controlled wall handstand",
+      "Move one leg with a quiet torso; use a known safe exit"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Practice the assisted variation within a comfortable, controlled range.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "622270ac-ddb1-54a0-ab29-d1583ab0e5be",
+    "slug": "assisted-box-pistol-sit",
+    "name": "Assisted Box Pistol Sit",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quads",
+      "Glutes"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "chair"
+    ],
+    "cues": [
+      "Use a high stable box and assistance as needed",
+      "Lower for three seconds; keep the supporting heel planted"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Practice the assisted variation within a comfortable, controlled range.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
     "visibility": "public",
     "created_by": null
   }

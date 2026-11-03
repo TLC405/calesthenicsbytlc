@@ -1,3 +1,5 @@
+import { exerciseReadinessReasons } from '@/lib/trainingPolicy';
+import { readTrainingProfile } from '@/lib/skillGraph';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase, backendConfigured } from '@/integrations/supabase/client';
@@ -107,6 +109,7 @@ export default function Library() {
   });
 
   const handleAddToWorkout = (exercise: Exercise) => {
+    const reasons=exerciseReadinessReasons(exercise,readTrainingProfile());if(reasons.length){toast.info(reasons[0]+' Review your working level in Skills.');return;}
     // The exercise is carried into the actual builder, not an empty workout dialog.
     sessionStorage.setItem('powa-builder-import', JSON.stringify({
       items: [{ name: exercise.name, section: 'workout', exercise }]

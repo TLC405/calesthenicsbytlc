@@ -1,3 +1,6 @@
+import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
+import { FoundationProgram } from '@/components/Progression/FoundationProgram';
+import { minimumTier, readinessReasons } from '@/lib/trainingPolicy';
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, GitBranch, Play, RotateCcw, Save, Target } from 'lucide-react';
@@ -15,7 +18,7 @@ import {
   type SkillAttempt, type SkillTrainingProfile, type TrainingEquipment,
 } from '@/lib/skillGraph';
 
-const equipmentOptions:TrainingEquipment[]=['floor','wall','rings','bar','parallettes','bands'];
+const equipmentOptions:TrainingEquipment[]=['floor','wall','rings','bar','parallettes','bands','bench','pole'];
 const research:Record<string,string>={planche:'https://gmb.io/planche/',handstand:'https://gmb.io/handstand/','straddle-press':'https://gmb.io/press-handstand/',rings:'https://gmb.io/muscle-up/','ring-muscle-up':'https://gmb.io/muscle-up/'};
 export default function SkillStudio() {
   const {skillId}=useParams<{skillId:string}>();
@@ -44,7 +47,7 @@ export default function SkillStudio() {
   if(!path)return <main className="p-6"><h1>Choose a skill studio</h1><Link to="/library">Return to library</Link></main>;
   const exercise=exerciseBySlug.get(selected);
   const dose=nodeDose(selected); const progress=nodeProgress(selected,attempts);
-  const recommendation=recommendedNode(path.id,attempts);
+  const recommendation=recommendedNode(path.id,attempts,profile);
   const recommended=exerciseBySlug.get(recommendation||'');
   const blockers=trainingBlockers(selected,profile,comfortable&&!discomfort);
   const incoming=relatedNodes(selected);
@@ -68,7 +71,8 @@ export default function SkillStudio() {
   const detail=exercise&&<div className="space-y-4">
     <div className="flex items-start justify-between gap-3"><div><p className="text-xs uppercase tracking-widest text-primary">{progress.state} · {dose.metric}</p><h2 className="font-display text-2xl font-bold mt-1">{exercise.name}</h2></div><GitBranch className="text-primary h-6 w-6 shrink-0"/></div>
     <VideoPlayer key={selected} youtubeUrl={exercise.youtube_url} title={exercise.name} thumbnailMode />
-    <p className="text-xs text-muted-foreground">{exercise.youtube_url?'Tutorial link available · movement verification pending':'No tutorial mapped. Use the documented cues; no substitute video is marked verified.'}</p>
+    <ul className="text-xs text-muted-foreground space-y-2">{(Array.isArray(exercise.cues)?exercise.cues:[]).map((cue,i)=><li key={i}>• {cue}</li>)}</ul>
+    <p className="text-xs text-muted-foreground">{exercise.youtube_url?'Tutorial link available · movement verification pending':'No tutorial mapped. Follow the movement cues below; this drill is not marked video verified.'}</p>
     <div className="grid grid-cols-3 gap-2 text-center text-xs"><div className="rounded-xl border p-3"><strong className="block text-lg">{progress.logs.length}</strong>Attempts</div><div className="rounded-xl border p-3"><strong className="block text-lg">{progress.sessions}</strong>Quality sessions</div><div className="rounded-xl border p-3"><strong className="block text-lg">{progress.logs.length?Math.round(progress.confidence*100)+'%':'—'}</strong>Consistency estimate</div></div>
     <p className="text-[11px] text-muted-foreground">Based on your logs. Consistency needs repeated quality attempts across separate sessions; this is not a coach assessment.</p>
     <section className="rounded-xl border p-3 space-y-2"><h3 className="font-bold text-sm">What supports this movement?</h3>
@@ -97,7 +101,8 @@ export default function SkillStudio() {
     <section className="power-elevated p-5 sm:p-7"><p className="text-primary text-xs uppercase tracking-widest">POWER / Skill navigation</p><h1 className="font-display text-3xl sm:text-4xl font-bold mt-2">{path.title}</h1><p className="mt-3 text-sm text-muted-foreground">{path.focus}</p><p className="mt-3 text-xs text-muted-foreground">{consistent} consistent / {path.slugs.length} movements · Progress saved on this device for {user?'your account':'guest training'}.</p></section>
 
     <section className="rounded-xl border border-primary/40 bg-primary/5 p-4 flex flex-wrap justify-between items-center gap-3"><div><p className="text-xs text-primary uppercase tracking-wider">Practice next</p><h2 className="font-bold mt-1">{recommended?.name||path.title}</h2><p className="text-xs text-muted-foreground mt-1">Based on recorded prerequisites. Unlogged movements remain unassessed.</p></div><Button className="min-h-12" onClick={()=>recommendation&&choose(recommendation)}>See why <ArrowRight className="h-4 w-4 ml-2"/></Button></section>
-    <div className="power-studio-grid"><section aria-label="Skill progression" className="space-y-3"><h2 className="font-bold text-lg">Your path and connections</h2>{path.slugs.map((slug,index)=>{const e=exerciseBySlug.get(slug);const status=nodeProgress(slug,attempts);return e&&<button key={slug} onClick={()=>choose(slug)} aria-pressed={slug===selected} className={`power-studio-node w-full p-4 min-h-24 flex items-center gap-4 rounded-xl border text-left ${slug===selected?'border-primary bg-primary/5':'bg-card'}`}><span className="h-10 w-10 rounded-full border border-primary/40 text-primary grid place-items-center shrink-0">{status.consistent?<Check className="h-5 w-5"/>:String(index+1).padStart(2,'0')}</span><span className="min-w-0 flex-1"><strong className="block text-sm">{e.name}</strong><small className="block text-muted-foreground mt-1">{status.state} · {status.logs.length} attempts · {relatedNodes(slug).length} connections</small></span><ArrowRight className="w-4 h-4 shrink-0 text-primary"/></button>;})}<p className="text-xs leading-relaxed text-muted-foreground">{path.safety} These paths are guidance, not universal medical or coaching clearance.</p></section>{!mobile&&<aside className="power-elevated power-studio-detail p-5">{detail}</aside>}</div>
+    <TrainingLevelControls profile={profile} onChange={updateProfile}/>{path.id==='foundation'&&<FoundationProgram attempts={attempts}/>}
+    <div className="power-studio-grid"><section aria-label="Skill progression" className="space-y-3"><h2 className="font-bold text-lg">Your path and connections</h2>{path.slugs.map((slug,index)=>{const e=exerciseBySlug.get(slug);const status=nodeProgress(slug,attempts);return e&&<button key={slug} onClick={()=>choose(slug)} aria-pressed={slug===selected} className={`power-studio-node w-full p-4 min-h-24 flex items-center gap-4 rounded-xl border text-left ${slug===selected?'border-primary bg-primary/5':'bg-card'}`}><span className="h-10 w-10 rounded-full border border-primary/40 text-primary grid place-items-center shrink-0">{status.consistent?<Check className="h-5 w-5"/>:String(index+1).padStart(2,'0')}</span><span className="min-w-0 flex-1"><strong className="block text-sm">{e.name}</strong><small className="block text-muted-foreground mt-1">L{minimumTier(slug)} · {readinessReasons(slug,profile).length?'Prep first':status.state} · {status.logs.length} attempts · {relatedNodes(slug).length} connections</small></span><ArrowRight className="w-4 h-4 shrink-0 text-primary"/></button>;})}<p className="text-xs leading-relaxed text-muted-foreground">{path.safety} These paths are guidance, not universal medical or coaching clearance.</p></section>{!mobile&&<aside className="power-elevated power-studio-detail p-5">{detail}</aside>}</div>
     {mobile&&<Sheet open={detailOpen} onOpenChange={setDetailOpen}><SheetContent side="bottom" className="h-[88dvh] overflow-y-auto rounded-t-2xl px-4 pt-14 pb-12"><SheetTitle className="sr-only">{exercise?.name||path.title} movement details</SheetTitle><SheetDescription className="sr-only">Technique, dependencies, training checks and actual performance logs.</SheetDescription>{detail}</SheetContent></Sheet>}
   </div></main>;
 }
