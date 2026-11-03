@@ -27,7 +27,8 @@ async function readBody(req: ApiRequest): Promise<unknown> {
 
 export default async function handler(req: ApiRequest, res: ServerResponse) {
   const directKey=process.env.OPENAI_API_KEY;
-  const gatewayKey=process.env.AI_GATEWAY_API_KEY||process.env.VERCEL_OIDC_TOKEN;
+  const requestIdentity=req.headers["x-vercel-oidc-token"];
+  const gatewayKey=process.env.AI_GATEWAY_API_KEY||(typeof requestIdentity==="string"?requestIdentity:undefined)||process.env.VERCEL_OIDC_TOKEN;
   if(req.method==='GET')return json(res,200,{configured:Boolean((directKey||gatewayKey)&&process.env.SUPABASE_URL&&process.env.SUPABASE_PUBLISHABLE_KEY),authenticationRequired:true});
   if (req.method !== 'POST') return json(res, 405, { error: 'POST required' });
   const key = directKey || gatewayKey;
@@ -53,7 +54,7 @@ export default async function handler(req: ApiRequest, res: ServerResponse) {
 
   const contextBody=body as {profile?:unknown;progress?:unknown};
   const profile=safeProfile(contextBody.profile);
-  const context=coachContext(profile,contextBody.progress,(contextBody.profile as {equipment?:unknown})?.equipment);
+  const context=coachContext(profile,Array.isArray(contextBody.progress)?contextBody.progress:[],Array.isArray((contextBody.profile as {equipment?:unknown})?.equipment)?(contextBody.profile as {equipment:string[]}).equipment:["floor"]);
   try {
     const supabase = createClient(backendUrl, backendPublishableKey, {
       auth: { persistSession: false, autoRefreshToken: false },
