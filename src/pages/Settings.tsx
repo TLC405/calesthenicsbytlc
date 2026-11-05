@@ -90,7 +90,7 @@ export default function Settings() {
 
   return (
     <div className="min-h-screen bg-background pb-28 md:pb-0">
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border/30">
+      <header className="page-header sticky top-0 z-40">
         <div className="max-w-2xl mx-auto px-4 md:px-8 h-16 flex items-center gap-3">
           <div className="w-1.5 h-6 rounded-full bg-foreground" />
           <h1 className="font-display text-base font-bold tracking-tight">Settings</h1>
@@ -99,9 +99,9 @@ export default function Settings() {
 
       <main className="max-w-2xl mx-auto px-4 md:px-8 py-6 space-y-4">
         {/* Theme */}
-        <section className="rounded-2xl border border-border/50 bg-card p-5">
+        <section className="border-b border-border py-5">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-border/30 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-border flex items-center justify-center">
               <Palette className="w-4 h-4 text-primary" />
             </div>
             <h2 className="font-display text-sm font-bold tracking-tight">Theme</h2>
@@ -110,9 +110,9 @@ export default function Settings() {
         </section>
 
         {/* Profile */}
-        <section className="rounded-2xl border border-border/50 bg-card p-5">
+        <section className="border-b border-border py-5">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-10 h-10 rounded-xl bg-accent/60 border border-border/30 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-accent/60 border border-border flex items-center justify-center">
               <User className="w-4 h-4 text-muted-foreground" />
             </div>
             <h2 className="font-display text-sm font-bold tracking-tight">Profile</h2>
@@ -120,11 +120,11 @@ export default function Settings() {
           <form onSubmit={handleUpdateProfile} className="space-y-4">
             <div className="space-y-1.5">
               <Label htmlFor="email" className="text-xs font-medium text-muted-foreground">Email</Label>
-              <Input id="email" type="email" value={user?.email || ''} disabled className="h-11 rounded-xl bg-accent/30 border-border/30 text-muted-foreground" />
+              <Input id="email" type="email" value={user?.email || ''} disabled className="h-11 rounded-xl bg-accent/30 border-border text-muted-foreground" />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="displayName" className="text-xs font-medium text-muted-foreground">Display Name</Label>
-              <Input id="displayName" type="text" value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="h-11 rounded-xl border-border/50 bg-card focus:border-ring" />
+              <Input id="displayName" type="text" value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="h-11 rounded-xl border-border bg-card focus:border-ring" />
             </div>
             <Button type="submit" disabled={loading} size="sm" className="font-mono uppercase tracking-wider text-[10px] rounded-xl">
               {loading ? 'Saving...' : 'Save Changes'}
@@ -133,9 +133,9 @@ export default function Settings() {
         </section>
 
         {/* Music */}
-        <section className="rounded-2xl border border-primary/20 bg-card p-5">
+        <section className="border-b border-border py-5">
           <div className="flex items-center gap-3 mb-5">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-primary/10 border border-border/30">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-primary/10 border border-border">
               <Music className="w-4 h-4 text-primary" />
             </div>
             <h2 className="font-display text-sm font-bold tracking-tight">Music</h2>
@@ -153,40 +153,40 @@ export default function Settings() {
               <Label className="text-xs font-medium text-muted-foreground">YouTube Playlist URL</Label>
               <div className="flex gap-2">
                 <Input type="url" placeholder="https://www.youtube.com/playlist?list=..." value={playlistInput} onChange={(e) => setPlaylistInput(e.target.value)}
-                  className="h-11 rounded-xl border-border/50 bg-card focus:border-ring flex-1" />
-                <Button onClick={handleSavePlaylist} size="sm" variant="outline" className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border/50">
+                  className="h-11 rounded-xl border-border bg-card focus:border-ring flex-1 min-w-0" />
+                <Button onClick={handleSavePlaylist} size="sm" variant="outline" className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border">
                   <Link className="w-3 h-3 mr-1" />Save
                 </Button>
               </div>
-              <p className="text-[8px] font-mono text-muted-foreground">Paste a YouTube Music playlist URL.</p>
+              <p className="text-xs text-muted-foreground">Paste a YouTube Music playlist URL.</p>
             </div>
           </div>
         </section>
 
         {/* Data Export */}
-        <section className="rounded-2xl border border-border/50 bg-card p-5">
+        <section className="border-b border-border py-5">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-accent/60 border border-border/30 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-accent/60 border border-border flex items-center justify-center">
               <Download className="w-4 h-4 text-muted-foreground" />
             </div>
             <h2 className="font-display text-sm font-bold tracking-tight">Data Export</h2>
           </div>
           <p className="text-xs text-muted-foreground mb-4">Download your training data as JSON.</p>
-          <Button onClick={handleExportData} variant="outline" size="sm" className="font-mono uppercase tracking-wider text-[10px] rounded-xl border-border/50">
+          <Button onClick={handleExportData} variant="outline" size="sm" className="font-mono uppercase tracking-wider text-[10px] rounded-xl border-border">
             <Download className="w-3.5 h-3.5 mr-1.5" />Export
           </Button>
         </section>
 
         {/* Admin Panel */}
         {isAdmin && (
-          <section className="rounded-2xl border border-primary/30 bg-card p-5">
+          <section className="border-b border-border py-5">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
                 <SettingsIcon className="w-4 h-4 text-primary" />
               </div>
               <div>
                 <h2 className="font-display text-sm font-bold tracking-tight">Admin Panel</h2>
-                <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-wider">App Configuration</p>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">App Configuration</p>
               </div>
             </div>
             <div className="space-y-4">
@@ -200,10 +200,10 @@ export default function Settings() {
                     placeholder="https://example.com/image.jpg"
                     value={siteConfig.loading_image_url || ''}
                     onChange={e => setSiteConfig(prev => ({ ...prev, loading_image_url: e.target.value }))}
-                    className="h-11 rounded-xl border-border/50 bg-card focus:border-ring flex-1"
+                    className="h-11 rounded-xl border-border bg-card focus:border-ring flex-1 min-w-0"
                   />
                   <Button onClick={() => updateSiteConfig('loading_image_url', siteConfig.loading_image_url || '')} size="sm" variant="outline" disabled={configLoading}
-                    className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border/50">
+                    className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border">
                     Save
                   </Button>
                 </div>
@@ -216,10 +216,10 @@ export default function Settings() {
                     placeholder="https://example.com/video.mp4"
                     value={siteConfig.loading_video_url || ''}
                     onChange={e => setSiteConfig(prev => ({ ...prev, loading_video_url: e.target.value }))}
-                    className="h-11 rounded-xl border-border/50 bg-card focus:border-ring flex-1"
+                    className="h-11 rounded-xl border-border bg-card focus:border-ring flex-1 min-w-0"
                   />
                   <Button onClick={() => updateSiteConfig('loading_video_url', siteConfig.loading_video_url || '')} size="sm" variant="outline" disabled={configLoading}
-                    className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border/50">
+                    className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border">
                     Save
                   </Button>
                 </div>
@@ -232,10 +232,10 @@ export default function Settings() {
                     placeholder="I GOT THE POWER"
                     value={siteConfig.app_tagline || ''}
                     onChange={e => setSiteConfig(prev => ({ ...prev, app_tagline: e.target.value }))}
-                    className="h-11 rounded-xl border-border/50 bg-card focus:border-ring flex-1"
+                    className="h-11 rounded-xl border-border bg-card focus:border-ring flex-1 min-w-0"
                   />
                   <Button onClick={() => updateSiteConfig('app_tagline', siteConfig.app_tagline || '')} size="sm" variant="outline" disabled={configLoading}
-                    className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border/50">
+                    className="font-mono uppercase tracking-wider text-[10px] h-11 px-4 rounded-xl border-border">
                     Save
                   </Button>
                 </div>
@@ -245,7 +245,7 @@ export default function Settings() {
         )}
 
         {/* Account */}
-        <section className="rounded-2xl border border-destructive/20 bg-card p-5">
+        <section className="border-b border-border py-5">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-xl bg-destructive/10 border border-destructive/20 flex items-center justify-center">
               <Shield className="w-4 h-4 text-destructive" />

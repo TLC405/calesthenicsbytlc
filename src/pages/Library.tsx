@@ -80,25 +80,25 @@ export default function Library() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border/30">
+      <header className="page-header sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4 md:px-8">
           <div className="h-16 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-6 rounded-full bg-[hsl(var(--cat-pull))]" />
               <div>
                 <h1 className="font-display text-base font-bold tracking-tight leading-none">Library</h1>
-                <p className="text-[8px] font-mono text-muted-foreground mt-0.5 tracking-wide">{exercises.length} exercises</p>
+                <p className="text-xs text-muted-foreground mt-0.5 tracking-wide">{exercises.length} exercises</p>
               </div>
             </div>
             <div className="flex gap-1.5">
-              <Button variant="ghost" size="sm" onClick={downloadExerciseList} className="text-muted-foreground h-9 text-[10px] font-mono rounded-xl" disabled={filteredExercises.length === 0}>
+              <Button variant="ghost" size="sm" aria-label="Export exercises" onClick={downloadExerciseList} className="text-muted-foreground h-9 text-[10px] font-mono rounded-xl" disabled={filteredExercises.length === 0}>
                 <Download className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Export</span>
               </Button>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/ai-lab')} className="text-muted-foreground h-9 text-[10px] font-mono rounded-xl">
+              <Button variant="ghost" size="sm" aria-label="Open AI coach" onClick={() => navigate('/ai-lab')} className="text-muted-foreground h-9 text-[10px] font-mono rounded-xl">
                 <Sparkles className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">AI</span>
               </Button>
               {user && (
-                <Button size="sm" onClick={() => setShowAddModal(true)} className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl">
+                <Button size="sm" aria-label="Add exercise" onClick={() => setShowAddModal(true)} className="h-9 text-[10px] font-mono uppercase tracking-wider rounded-xl">
                   <Plus className="h-3.5 w-3.5 mr-1" /><span className="hidden sm:inline">Add</span>
                 </Button>
               )}
@@ -126,7 +126,7 @@ export default function Library() {
             <p className="text-muted-foreground text-xs font-mono">No exercises found</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 min-[380px]:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             {filteredExercises.map(exercise => (
               <ExerciseCard key={exercise.id} exercise={exercise} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} />
             ))}
@@ -138,14 +138,6 @@ export default function Library() {
       <WorkoutModal date={workoutModalDate} open={!!workoutModalDate} onClose={() => setWorkoutModalDate(null)} onSave={fetchExercises} />
       <AddExerciseModal open={showAddModal} onClose={() => setShowAddModal(false)} onSuccess={fetchExercises} />
 
-      <button
-        onClick={() => navigate('/planner')}
-        className="fixed bottom-28 right-4 z-40 md:hidden w-14 h-14 rounded-2xl text-white shadow-lg flex items-center justify-center active:scale-95 transition-transform"
-        style={{ backgroundColor: 'hsl(var(--cat-skills))', boxShadow: '0 0 20px hsl(var(--cat-skills) / 0.3)' }}
-        aria-label="Open Builder"
-      >
-        <Plus className="w-6 h-6" />
-      </button>
     </div>
   );
 }

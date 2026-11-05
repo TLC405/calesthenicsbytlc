@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./providers/AuthProvider";
 import { MusicProvider } from "./providers/MusicProvider";
 import { MusicControl } from "./components/Music/MusicControl";
@@ -19,12 +19,14 @@ import Community from "./pages/Community";
 import Train from "./pages/Train";
 import Anatomy from "./pages/Anatomy";
 import NotFound from "./pages/NotFound";
+import { useTheme } from "./components/ThemeSwitcher";
 import "./styles/neumorph.css";
 import "./styles/power-gold.css";
 
 const queryClient = new QueryClient();
 
 function AppContent() {
+  useTheme();
   const { loading } = useAuth();
   
   if (loading) return <LoadingScreen />;
@@ -34,6 +36,7 @@ function AppContent() {
       <div className="pb-[4.5rem] md:pb-0">
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/index" element={<Navigate to="/" replace />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/planner" element={<Planner />} />
