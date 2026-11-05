@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
-import { PowerAthleteArt } from '@/components/Brand/PowerAthleteArt';
+import { Button } from '@/components/ui/button';
 import {
   ArrowRight, CircleDot, Hand, Dumbbell, Move, Shield, Sparkles,
   FileText, GitBranch, Zap
@@ -26,31 +26,31 @@ export default function Index() {
       <header className="power-topbar">
         <div className="power-container power-topinner">
           <div className="power-brand">
-            <span className="power-mark">TLC</span>
+            <img className="w-9 h-9 object-contain" src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png" alt="I Got the Power" />
             <span className="power-brand-line"/>
-            <span className="power-brand-label">Performance system</span>
+            <span className="power-brand-label">I Got the Power</span>
           </div>
-          <button className="power-icon-button" onClick={() => navigate('/auth')} aria-label="Sign in">
-            <span className="power-smallprint uppercase" style={{ color: '#E9BC68', fontWeight: 800 }}>Sign in</span>
+          <Button variant="ghost" className="power-icon-button" onClick={() => navigate('/auth')} aria-label="Sign in">
+            <span className="power-smallprint uppercase" >Sign in</span>
             <ArrowRight size={16} />
-          </button>
+          </Button>
         </div>
       </header>
 
       <main className="power-container power-splash-main">
         <section className="power-hero power-splash-hero" aria-labelledby="landing-title">
-          <PowerAthleteArt/>
+          
           <div className="power-hero-content">
             <p className="power-kicker">I got the power</p>
-            <h1 id="landing-title" className="power-hero-title"><span>Build</span><span>Your</span><span>Power</span></h1>
+            <h1 id="landing-title" className="power-hero-title">I Got the Power</h1>
             <p className="power-hero-copy">Calisthenics by TLC <span aria-hidden="true">·</span> Train <span aria-hidden="true">·</span> Master <span aria-hidden="true">·</span> Evolve</p>
             <div className="power-hero-actions">
-              <button onClick={() => navigate('/auth')} className="power-button power-button-primary">
+              <Button variant="ghost" onClick={() => navigate('/auth')} className="power-button power-button-primary">
                 Enter the system <ArrowRight size={19}/>
-              </button>
-              <button onClick={() => navigate('/library')} className="power-button power-button-outline">
+              </Button>
+              <Button variant="ghost" onClick={() => navigate('/library')} className="power-button power-button-outline">
                 Explore skills <GitBranch size={17}/>
-              </button>
+              </Button>
             </div>
           </div>
         </section>
@@ -59,11 +59,11 @@ export default function Index() {
           <p className="power-rail-label">Master your movement</p>
           <div className="power-rail-grid">
             {disciplines.map(({ name, search, icon: Icon }) => (
-              <button key={name} className="power-skill" onClick={() => navigate('/library', { state: { search } })} title={'Browse ' + name}>
+              <Button variant="ghost" key={name} className="power-skill" onClick={() => navigate('/library', { state: { search } })} title={'Browse ' + name}>
                 <span className="power-skill-icon"><Icon size={30} strokeWidth={1.6}/></span>
                 <span className="power-skill-name">{name}</span>
                 <span className="power-skill-underline" aria-hidden="true"/>
-              </button>
+              </Button>
             ))}
           </div>
         </section>
@@ -71,26 +71,26 @@ export default function Index() {
         <section className="power-main">
           <div className="power-section-heading"><h2>Inside the system</h2></div>
           <div className="power-feature-grid">
-            <button className="power-feature" onClick={() => navigate('/auth')}>
+            <Button variant="ghost" className="power-feature" onClick={() => navigate('/auth')}>
               <FileText size={31} strokeWidth={1.6} className="power-feature-icon"/>
               <span className="power-feature-title">Build workouts</span>
               <span className="power-feature-desc">Your training, your way</span>
               <ArrowRight className="power-feature-arrow" size={16}/>
-            </button>
-            <button className="power-feature" onClick={() => navigate('/library')}>
+            </Button>
+            <Button variant="ghost" className="power-feature" onClick={() => navigate('/library')}>
               <Zap size={31} strokeWidth={1.6} className="power-feature-icon"/>
               <span className="power-feature-title">Skill paths</span>
               <span className="power-feature-desc">Explore progressions</span>
               <ArrowRight className="power-feature-arrow" size={16}/>
-            </button>
-            <button className="power-feature" onClick={() => navigate('/auth')}>
+            </Button>
+            <Button variant="ghost" className="power-feature" onClick={() => navigate('/auth')}>
               <Sparkles size={31} strokeWidth={1.6} className="power-feature-icon"/>
               <span className="power-feature-title">AI coach</span>
               <span className="power-feature-desc">Plan with guidance</span>
               <ArrowRight className="power-feature-arrow" size={16}/>
-            </button>
+            </Button>
           </div>
-          <div className="flex items-center justify-between py-4" style={{ borderTop: '1px solid rgba(233,188,104,.3)' }}>
+          <div className="flex items-center justify-between py-4" >
             <span className="power-smallprint uppercase">Strong moves. Clear progress.</span>
             <span className="power-smallprint uppercase">Powered by TLC</span>
           </div>

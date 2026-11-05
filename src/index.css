@@ -12,12 +12,12 @@
 @layer base {
   :root {
     /* Category Colors — the soul of the brand */
-    --cat-push: 0 84% 60%;
-    --cat-pull: 217 91% 60%;
-    --cat-legs: 142 71% 45%;
-    --cat-core: 25 95% 53%;
+    --cat-push: 0 72% 42%;
+    --cat-pull: 217 80% 40%;
+    --cat-legs: 142 65% 28%;
+    --cat-core: 25 90% 34%;
     --cat-skills: 270 76% 55%;
-    --cat-mobility: 174 72% 40%;
+    --cat-mobility: 174 70% 27%;
 
     /* Brand Accent */
     --electric: 270 100% 65%;
@@ -42,14 +42,14 @@
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 8%;
 
-    --primary: 270 100% 55%;
+    --primary: 240 10% 12%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 240 5% 94%;
     --secondary-foreground: 240 10% 8%;
 
     --muted: 240 5% 93%;
-    --muted-foreground: 240 5% 45%;
+    --muted-foreground: 240 6% 35%;
 
     --accent: 240 5% 91%;
     --accent-foreground: 240 10% 8%;
@@ -57,9 +57,9 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 5% 87%;
-    --input: 240 5% 87%;
-    --ring: 270 100% 55%;
+    --border: 240 5% 78%;
+    --input: 240 5% 72%;
+    --ring: 240 10% 12%;
 
     --surface: 0 0% 96%;
     --surface-raised: 0 0% 100%;
@@ -120,7 +120,7 @@
     --secondary-foreground: 0 0% 90%;
 
     --muted: 240 5% 14%;
-    --muted-foreground: 240 5% 50%;
+    --muted-foreground: 240 5% 70%;
 
     --accent: 240 5% 12%;
     --accent-foreground: 0 0% 95%;
@@ -172,14 +172,14 @@
 
   /* ─── VASA FITNESS ─── Orange/Teal Energy */
   [data-theme="vasa"] {
-    --primary: 16 100% 50%;
+    --primary: 350 80% 39%;
     --primary-foreground: 0 0% 100%;
     --electric: 170 87% 33%;
     --electric-glow: 170 87% 45%;
-    --ring: 16 100% 50%;
+    --ring: 350 80% 39%;
     --gradient-start: 16 100% 50%;
     --gradient-end: 170 87% 33%;
-    --cat-push: 16 100% 50%;
+    --cat-push: 350 80% 39%;
     --cat-pull: 170 87% 33%;
     --cat-legs: 16 80% 45%;
     --cat-core: 30 100% 50%;
@@ -189,48 +189,25 @@
     --chart-2: 170 87% 33%;
   }
 
-  /* ─── PLANET FITNESS ─── Purple/Yellow (Dark-first) */
+  /* Planet Fitness — white training surfaces, purple and gold accents */
   [data-theme="planet-fitness"] {
-    --background: 280 20% 6%;
-    --foreground: 59 95% 58%;
-    --card: 280 15% 10%;
-    --card-foreground: 0 0% 92%;
-    --popover: 280 15% 10%;
-    --popover-foreground: 0 0% 92%;
-    --primary: 310 62% 40%;
+    --primary: 280 60% 34%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 280 10% 15%;
-    --secondary-foreground: 0 0% 90%;
-    --muted: 280 10% 14%;
-    --muted-foreground: 280 10% 50%;
-    --accent: 280 10% 12%;
-    --accent-foreground: 59 95% 58%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 280 10% 18%;
-    --input: 280 10% 18%;
-    --ring: 59 95% 58%;
-    --electric: 59 95% 58%;
-    --electric-glow: 59 95% 68%;
-    --gradient-start: 310 62% 40%;
-    --gradient-end: 59 95% 58%;
-    --surface: 280 15% 8%;
-    --surface-raised: 280 12% 12%;
-    --glow-primary: 310 62% 40%;
-    --cat-push: 310 62% 45%;
-    --cat-pull: 59 95% 50%;
-    --cat-legs: 310 50% 55%;
-    --cat-core: 59 80% 45%;
-    --cat-skills: 280 60% 55%;
-    --cat-mobility: 59 70% 40%;
-    --chart-1: 310 62% 40%;
-    --chart-2: 59 95% 58%;
-    --shadow-2xs: 0 1px 2px 0 hsl(0 0% 0% / 0.15);
-    --shadow-xs: 0 1px 3px 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.15);
-    --shadow-sm: 0 2px 8px 0 hsl(0 0% 0% / 0.25), 0 1px 3px -1px hsl(0 0% 0% / 0.2);
-    --shadow: 0 4px 16px -2px hsl(0 0% 0% / 0.3), 0 2px 6px -2px hsl(0 0% 0% / 0.2);
-    --shadow-md: 0 8px 30px -4px hsl(0 0% 0% / 0.4), 0 4px 12px -4px hsl(0 0% 0% / 0.2);
-    --shadow-lg: 0 16px 50px -8px hsl(0 0% 0% / 0.5), 0 8px 20px -8px hsl(0 0% 0% / 0.3);
+    --ring: 280 60% 34%;
+    --electric: 280 60% 34%;
+    --electric-glow: 280 60% 50%;
+    --gold: 48 95% 42%;
+    --gold-light: 48 95% 60%;
+    --gradient-start: 280 60% 34%;
+    --gradient-end: 48 95% 42%;
+    --cat-push: 280 60% 34%;
+    --cat-pull: 280 50% 38%;
+    --cat-legs: 142 65% 28%;
+    --cat-core: 36 90% 32%;
+    --cat-skills: 280 60% 34%;
+    --cat-mobility: 174 70% 27%;
+    --chart-1: 280 60% 34%;
+    --chart-2: 48 95% 42%;
   }
 
   /* ─── YMCA ─── Red/Navy Classic */
@@ -252,52 +229,25 @@
     --chart-2: 210 80% 25%;
   }
 
-  /* ─── OKC THUNDER ─── Blue/Orange/Navy (Dark-first) */
+  /* OKC Thunder — blue and orange accents on white */
   [data-theme="okc-thunder"] {
-    --background: 214 100% 12%;
-    --foreground: 0 0% 95%;
-    --card: 214 80% 16%;
-    --card-foreground: 0 0% 95%;
-    --popover: 214 80% 16%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 204 100% 38%;
+    --primary: 204 100% 33%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 214 60% 20%;
-    --secondary-foreground: 0 0% 90%;
-    --muted: 214 50% 18%;
-    --muted-foreground: 214 30% 55%;
-    --accent: 214 60% 15%;
-    --accent-foreground: 0 0% 95%;
-    --destructive: 8 86% 54%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 214 50% 22%;
-    --input: 214 50% 22%;
-    --ring: 204 100% 38%;
-    --electric: 8 86% 54%;
-    --electric-glow: 8 86% 65%;
-    --gradient-start: 204 100% 38%;
-    --gradient-end: 8 86% 54%;
-    --surface: 214 80% 14%;
-    --surface-raised: 214 70% 18%;
-    --glow-primary: 204 100% 38%;
-    --gold: 45 100% 50%;
-    --gold-light: 45 100% 60%;
-    --cat-push: 8 86% 54%;
-    --cat-pull: 204 100% 45%;
-    --cat-legs: 45 100% 50%;
-    --cat-core: 8 70% 50%;
-    --cat-skills: 204 80% 50%;
-    --cat-mobility: 170 60% 40%;
-    --chart-1: 204 100% 38%;
-    --chart-2: 8 86% 54%;
-    --chart-3: 45 100% 50%;
-    --shadow-2xs: 0 1px 2px 0 hsl(0 0% 0% / 0.2);
-    --shadow-xs: 0 1px 3px 0 hsl(0 0% 0% / 0.25), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
-    --shadow-sm: 0 2px 8px 0 hsl(0 0% 0% / 0.3), 0 1px 3px -1px hsl(0 0% 0% / 0.25);
-    --shadow: 0 4px 16px -2px hsl(0 0% 0% / 0.35), 0 2px 6px -2px hsl(0 0% 0% / 0.25);
-    --shadow-md: 0 8px 30px -4px hsl(0 0% 0% / 0.45), 0 4px 12px -4px hsl(0 0% 0% / 0.25);
-    --shadow-lg: 0 16px 50px -8px hsl(0 0% 0% / 0.55), 0 8px 20px -8px hsl(0 0% 0% / 0.35);
+    --ring: 204 100% 33%;
+    --electric: 8 80% 40%;
+    --electric-glow: 8 80% 55%;
+    --gradient-start: 204 100% 33%;
+    --gradient-end: 8 80% 40%;
+    --cat-push: 8 80% 40%;
+    --cat-pull: 204 100% 33%;
+    --cat-legs: 142 65% 28%;
+    --cat-core: 30 90% 32%;
+    --cat-skills: 214 80% 30%;
+    --cat-mobility: 174 70% 27%;
+    --chart-1: 204 100% 33%;
+    --chart-2: 8 80% 40%;
   }
+
 }
 
 @layer base {
@@ -319,8 +269,8 @@
 @layer components {
   /* Glass Surface */
   .glass {
-    @apply backdrop-blur-2xl border border-border/40;
-    background: hsl(var(--card) / 0.6);
+    @apply backdrop-blur-2xl border border-border;
+    background: hsl(var(--card) / 0.94);
   }
 
   .glass-heavy {
@@ -415,4 +365,27 @@
 @keyframes borderGlow {
   0%, 100% { border-color: hsl(var(--electric) / 0.3); }
   50% { border-color: hsl(var(--electric) / 0.7); }
+}
+
+/* Shared page clarity. Keep brand color in accents, not in body text. */
+@layer base {
+  :root { --nav-height: 4.5rem; color-scheme: light; }
+  body { background-image: none; }
+  h1, h2, h3, h4, h5, h6 { letter-spacing: 0; }
+  input, textarea { min-width: 0; }
+}
+@layer components {
+  .page-header { background: hsl(var(--card) / .96); border-bottom: 1px solid hsl(var(--border)); backdrop-filter: blur(24px); }
+  .theme-swatch { background: hsl(var(--swatch-surface)); }
+  .theme-swatch-primary { background: hsl(var(--swatch-primary)); }
+  .theme-swatch-accent { background: hsl(var(--swatch-accent)); }
+  .theme-option-default { --swatch-surface: 0 0% 98%; --swatch-primary: 240 10% 12%; --swatch-accent: 45 85% 43%; }
+  .theme-option-power-gold { --swatch-surface: 220 12% 4%; --swatch-primary: 41 72% 65%; --swatch-accent: 42 83% 78%; }
+  .theme-option-vasa { --swatch-surface: 0 0% 98%; --swatch-primary: 350 80% 39%; --swatch-accent: 170 70% 28%; }
+  .theme-option-planet-fitness { --swatch-surface: 0 0% 98%; --swatch-primary: 280 60% 34%; --swatch-accent: 48 95% 50%; }
+  .theme-option-ymca { --swatch-surface: 0 0% 98%; --swatch-primary: 346 100% 40%; --swatch-accent: 210 80% 25%; }
+  .theme-option-okc-thunder { --swatch-surface: 0 0% 98%; --swatch-primary: 204 100% 33%; --swatch-accent: 8 80% 45%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }

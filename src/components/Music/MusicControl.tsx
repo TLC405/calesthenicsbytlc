@@ -61,15 +61,15 @@ export function MusicControl() {
 
 
   return (
-    <div className="fixed right-3 bottom-[5.5rem] md:bottom-4 z-50">
+    <div className="fixed right-3 bottom-[calc(5.5rem+env(safe-area-inset-bottom))] md:bottom-4 z-[60]">
       {expanded && (
-        <div className="mb-2 w-[min(88vw,20rem)] rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/50 shadow-xl p-4 space-y-3 animate-in slide-in-from-bottom-2 duration-200">
+        <div className="mb-2 max-h-[calc(100dvh-12rem)] overflow-y-auto w-[min(88vw,20rem)] rounded-2xl bg-card/95 backdrop-blur-2xl border border-border/50 shadow-xl p-4 space-y-3 animate-in slide-in-from-bottom-2 duration-200">
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className={cn(
                 "w-6 h-6 rounded-lg flex items-center justify-center",
-                isYtMusic ? "bg-red-500/15 text-red-500" : "bg-primary/15 text-primary"
+                isYtMusic ? "bg-destructive/15 text-destructive" : "bg-primary/15 text-primary"
               )}>
                 <Music className="w-3.5 h-3.5" />
               </div>

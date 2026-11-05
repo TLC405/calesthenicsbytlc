@@ -222,18 +222,18 @@ export default function Planner() {
 
   return (
     <div className="min-h-screen bg-background pb-28 md:pb-0">
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border/30">
-        <div className="max-w-3xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between gap-2">
+      <header className="page-header sticky top-0 z-40">
+        <div className="max-w-3xl mx-auto px-3 sm:px-4 md:px-8 h-16 flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 min-w-0">
             <Button variant="ghost" size="icon" onClick={() => navigate('/dashboard')} className="h-10 w-10 rounded-xl flex-shrink-0" aria-label="Back to home">
               <ArrowLeft className="w-4 h-4" />
             </Button>
-            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-border/30 flex items-center justify-center flex-shrink-0">
+            <div className="hidden sm:flex w-10 h-10 rounded-xl bg-primary/10 border border-border/30 flex items-center justify-center flex-shrink-0">
               <FileText className="w-5 h-5 text-primary" />
             </div>
             <div className="min-w-0">
-              <h1 className="font-display text-base font-bold tracking-tight truncate">Workout Builder</h1>
-              <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em]">
+              <h1 className="font-display text-base font-bold tracking-tight truncate">Build workout</h1>
+              <p className="text-xs text-muted-foreground">
                 {totalExercises} exercise{totalExercises !== 1 ? 's' : ''}
               </p>
             </div>
@@ -281,11 +281,11 @@ export default function Planner() {
           />
           <div className="flex flex-wrap gap-1.5">
             {['Full body 40min', 'Push + core', 'Pull day intermediate', 'Mobility flow', 'Beginner legs'].map(s => (
-              <button
+              <Button variant="ghost"
                 key={s}
                 onClick={() => setCoachPrompt(s)}
                 className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-lg border border-border/60 hover:bg-accent/40"
-              >{s}</button>
+              >{s}</Button>
             ))}
           </div>
           <Button
@@ -302,24 +302,24 @@ export default function Planner() {
       <main className="max-w-3xl mx-auto px-4 md:px-8 py-5 space-y-4">
         {/* Workout name */}
         <Input
-          placeholder="Workout name (e.g. Push Day, Full Body)"
+          aria-label="Workout name" placeholder="Workout name"
           value={workoutName}
           onChange={e => setWorkoutName(e.target.value)}
-          className="h-12 rounded-xl border-border/50 bg-card font-display font-bold text-base placeholder:font-normal placeholder:text-muted-foreground"
+          className="h-12 rounded-xl border-border bg-card font-display font-bold text-base placeholder:font-normal placeholder:text-muted-foreground"
         />
 
         {/* Quick start templates */}
         <div>
-          <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-muted-foreground mb-2 px-1">Quick Start</p>
+          <p className="text-xs font-semibold text-muted-foreground mb-2 px-1">Quick Start</p>
           <div className="grid grid-cols-4 gap-2">
             {QUICK_TEMPLATES.map(tpl => (
-              <button
+              <Button variant="ghost"
                 key={tpl.label}
                 onClick={() => loadTemplate(tpl)}
-                className="h-11 rounded-xl border border-border/50 bg-card hover:border-border hover:-translate-y-0.5 hover:shadow-sm transition-all text-[10px] font-mono uppercase tracking-[0.15em] font-bold"
+                className="h-11 rounded-xl border border-border bg-card hover:border-border hover:-translate-y-0.5 hover:shadow-sm transition-all text-[10px] font-mono uppercase tracking-[0.15em] font-bold"
               >
                 {tpl.label}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -329,41 +329,39 @@ export default function Planner() {
         {sections.map(section => {
           const Icon = section.icon;
           return (
-            <div key={section.key} className="rounded-2xl border border-border/50 bg-card overflow-hidden">
+            <div key={section.key} className="border-b border-border bg-card overflow-hidden">
               {/* Section header */}
-              <button
+              <Button variant="ghost"
                 onClick={() => toggleSection(section.key)}
-                className="w-full flex items-center gap-3 p-4 text-left hover:bg-accent/30 transition-colors"
+                aria-expanded={section.open}
+                className="h-auto w-full justify-start flex items-center gap-3 p-4 text-left hover:bg-accent/30 transition-colors"
               >
-                <div
-                  className="w-1.5 h-10 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: section.color }}
-                />
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${section.color}20` }}>
+                
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" >
                   <Icon className="w-4 h-4" style={{ color: section.color }} />
                 </div>
                 <div className="flex-1">
                   <p className="font-display text-sm font-bold tracking-tight">{section.label}</p>
-                  <p className="text-[9px] font-mono text-muted-foreground">
+                  <p className="text-xs text-muted-foreground">
                     {section.entries.length} exercise{section.entries.length !== 1 ? 's' : ''}
                   </p>
                 </div>
                 {section.open ? <ChevronUp className="w-4 h-4 text-muted-foreground" /> : <ChevronDown className="w-4 h-4 text-muted-foreground" />}
-              </button>
+              </Button>
 
               {/* Section content */}
               {section.open && (
                 <div className="px-4 pb-4 space-y-2">
                   {section.entries.map((entry, idx) => (
-                    <div key={idx} className="rounded-xl border border-border/40 bg-accent/10 p-3">
+                    <div key={idx} className="rounded-xl border border-border bg-accent/10 p-3">
                       <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
                           <GripVertical className="w-3 h-3 text-muted-foreground/40" />
                           <p className="text-xs font-bold truncate">{entry.exercise.name}</p>
                         </div>
-                        <button onClick={() => removeEntry(section.key, idx)} className="text-muted-foreground hover:text-destructive transition-colors">
+                        <Button variant="ghost" onClick={() => removeEntry(section.key, idx)} size="icon" aria-label={`Remove ${entry.exercise.name}`} className="shrink-0 text-muted-foreground hover:text-destructive transition-colors">
                           <Trash2 className="w-3.5 h-3.5" />
-                        </button>
+                        </Button>
                       </div>
                       <SetTracker
                         sets={entry.sets}
@@ -372,13 +370,13 @@ export default function Planner() {
                     </div>
                   ))}
 
-                  <button
+                  <Button variant="ghost"
                     onClick={() => setPickerSection(section.key)}
-                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-border/50 text-muted-foreground hover:text-foreground hover:border-border transition-all text-xs font-mono"
+                    className="h-12 w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-dashed border-border text-muted-foreground hover:text-foreground hover:border-border transition-all text-xs font-mono"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     Add Exercise
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>
@@ -386,13 +384,13 @@ export default function Planner() {
         })}
 
         {/* Notes */}
-        <div className="rounded-2xl border border-border/50 bg-card p-4">
+        <div className="rounded-2xl border border-border bg-card p-4">
           <p className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground mb-2">Notes</p>
           <Textarea
             placeholder="Workout notes, how you felt, etc..."
             value={notes}
             onChange={e => setNotes(e.target.value)}
-            className="min-h-[80px] rounded-xl border-border/40 bg-accent/10 text-sm"
+            className="min-h-[80px] rounded-xl border-border bg-accent/10 text-sm"
           />
         </div>
       </main>
