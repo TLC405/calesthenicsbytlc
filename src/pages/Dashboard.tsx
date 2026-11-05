@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { useTheme } from '@/components/ThemeSwitcher';
-import { PowerAthleteArt } from '@/components/Brand/PowerAthleteArt';
+import { Button } from '@/components/ui/button';
 import { SkillTreeView } from '@/components/Progression/SkillTreeView';
 import {
   Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp,
@@ -73,41 +73,36 @@ export default function Dashboard() {
       <header className="power-topbar">
         <div className="power-container power-topinner">
           <div className="power-brand">
-            <span className="power-mark">TLC</span>
+            <img className="w-9 h-9 shrink-0 object-contain" src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png" alt="I Got the Power" />
             <span className="power-brand-line" />
             <div>
-              <div className="power-brand-label">Performance system</div>
-              <div className="power-smallprint" style={{ fontSize: 9 }}>{greeting()}, {name}</div>
+              <div className="power-brand-label">I Got the Power</div>
+              <div className="power-smallprint" >{greeting()}, {name}</div>
             </div>
           </div>
           <div className="flex items-center gap-1">
-            <button className="power-icon-button" aria-label="Change color theme" title="Change theme" onClick={cycleTheme}><Palette size={20} /></button>
+            <Button variant="ghost" className="power-icon-button" aria-label="Change color theme" title="Change theme" onClick={cycleTheme}><Palette size={20} /></Button>
             <NotificationBell />
-            <button className="power-icon-button" aria-label="Community" onClick={() => navigate('/community')}><MessageCircle size={20} /></button>
-            <button className="power-icon-button" aria-label="Settings" onClick={() => navigate('/settings')}><Settings size={20} /></button>
-            {user ? (
-              <button className="power-icon-button" aria-label="Sign out" onClick={async () => { await signOut(); navigate('/auth'); }}><LogOut size={20} /></button>
-            ) : (
-              <button className="power-button power-button-outline" onClick={() => navigate('/auth')}>Sign in</button>
-            )}
+            <Button variant="ghost" className="power-icon-button" aria-label="Community" onClick={() => navigate('/community')}><MessageCircle size={20} /></Button>
+
+            {!user && <Button variant="outline" onClick={() => navigate('/auth')}>Sign in</Button>}
           </div>
         </div>
       </header>
 
       <main className="power-container">
         <section className="power-hero" aria-labelledby="power-dashboard-title">
-          <PowerAthleteArt />
           <div className="power-hero-content">
-            <p className="power-kicker">Calisthenics by TLC</p>
-            <h1 id="power-dashboard-title" className="power-hero-title"><span>Build</span><span>Your</span><span>Power</span></h1>
-            <p className="power-hero-copy">Train <span aria-hidden="true">·</span> Master <span aria-hidden="true">·</span> Evolve</p>
+            <p className="power-kicker">Your training studio</p>
+            <h1 id="power-dashboard-title" className="power-hero-title">Ready to train?</h1>
+            <p className="power-hero-copy">{greeting()}, {name}. Make this session count.</p>
             <div className="power-hero-actions">
-              <button className="power-button power-button-primary" onClick={() => navigate('/planner')}>
+              <Button variant="ghost" className="power-button power-button-primary" onClick={() => navigate('/planner')}>
                 Build workout <ArrowRight size={18} />
-              </button>
-              <button className="power-button power-button-outline" onClick={() => navigate('/train')}>
+              </Button>
+              <Button variant="ghost" className="power-button power-button-outline" onClick={() => navigate('/train')}>
                 Start training <Flame size={16} />
-              </button>
+              </Button>
             </div>
           </div>
         </section>
@@ -116,11 +111,11 @@ export default function Dashboard() {
           <p className="power-rail-label">Choose your discipline</p>
           <div className="power-rail-grid">
             {disciplines.map(({ label, search, icon: Icon }) => (
-              <button className="power-skill" key={label} onClick={() => openLibrary(search)} title={'Browse ' + label + ' exercises'}>
+              <Button variant="ghost" className="power-skill" key={label} onClick={() => openLibrary(search)} title={'Browse ' + label + ' exercises'}>
                 <span className="power-skill-icon"><Icon size={30} strokeWidth={1.6} /></span>
                 <span className="power-skill-name">{label}</span>
                 <span className="power-skill-underline" aria-hidden="true" />
-              </button>
+              </Button>
             ))}
           </div>
         </section>
@@ -137,42 +132,54 @@ export default function Dashboard() {
               { label: 'Last 7 days', value: String(weekCount), icon: TrendingUp },
             ].map(({ label, value, icon: Icon }) => (
               <div className="power-metric" key={label}>
-                <div className="power-metric-top"><Icon size={15} color="#E9BC68" /><span>{label}</span></div>
+                <div className="power-metric-top"><Icon size={15} className="text-primary" /><span>{label}</span></div>
                 <div className="power-metric-number">{value}</div>
               </div>
             ))}
           </section>
 
           <div className="power-section-heading">
-            <h2>Power controls</h2>
-            <span className="power-section-meta">Tap to explore</span>
+            <h2>Your tools</h2>
+            
           </div>
           <section className="power-feature-grid" aria-label="Main features">
-            <button className="power-feature" onClick={() => navigate('/train')}>
+            <Button variant="ghost" className="power-feature" onClick={() => navigate('/train')}>
               <CalendarDays className="power-feature-icon" size={31} strokeWidth={1.6} />
               <span className="power-feature-title">Today's focus</span>
               <span className="power-feature-desc">Open training session</span>
               <ArrowRight className="power-feature-arrow" size={17} />
-            </button>
-            <button className="power-feature" onClick={() => setTreeOpen(v => !v)} aria-expanded={treeOpen} aria-controls="power-skill-tree">
+            </Button>
+            <Button variant="ghost" className="power-feature" onClick={() => setTreeOpen(v => !v)} aria-expanded={treeOpen} aria-controls="power-skill-tree">
               <GitBranch className="power-feature-icon" size={31} strokeWidth={1.6} />
               <span className="power-feature-title">Skill tree</span>
               <span className="power-feature-desc">Real progression chains</span>
               {treeOpen ? <ChevronUp className="power-feature-arrow" size={17} /> : <ChevronDown className="power-feature-arrow" size={17} />}
-            </button>
-            <button className="power-feature" onClick={() => navigate('/ai-lab')}>
+            </Button>
+            <Button variant="ghost" className="power-feature" onClick={() => navigate('/ai-lab')}>
               <Sparkles className="power-feature-icon" size={31} strokeWidth={1.6} />
               <span className="power-feature-title">AI coach</span>
               <span className="power-feature-desc">Build with guidance</span>
               <ArrowRight className="power-feature-arrow" size={17} />
-            </button>
+            </Button>
+            <Button variant="ghost" className="power-feature" onClick={() => navigate('/library')}>
+              <Library className="power-feature-icon" size={28} /><span className="power-feature-title">Exercise library</span>
+              <span className="power-feature-desc">Movements & tutorials</span><ArrowRight className="power-feature-arrow" size={17} />
+            </Button>
+            <Button variant="ghost" className="power-feature" onClick={() => navigate('/anatomy')}>
+              <Move className="power-feature-icon" size={28} /><span className="power-feature-title">Body atlas</span>
+              <span className="power-feature-desc">Muscles & recovery</span><ArrowRight className="power-feature-arrow" size={17} />
+            </Button>
+            <Button variant="ghost" className="power-feature" onClick={() => navigate('/community')}>
+              <MessageCircle className="power-feature-icon" size={28} /><span className="power-feature-title">Community</span>
+              <span className="power-feature-desc">Messages & updates</span><ArrowRight className="power-feature-arrow" size={17} />
+            </Button>
           </section>
 
           {treeOpen && (
             <section id="power-skill-tree" className="power-tree-panel" aria-label="Skill progression tree">
               <div className="power-section-heading">
                 <h2>Skill progressions</h2>
-                <button className="power-icon-button ml-auto" onClick={() => setTreeOpen(false)} aria-label="Close skill tree"><ChevronUp size={18}/></button>
+                <Button variant="ghost" className="power-icon-button ml-auto" onClick={() => setTreeOpen(false)} aria-label="Close skill tree"><ChevronUp size={18}/></Button>
               </div>
               <SkillTreeView onExerciseClick={() => navigate('/library')} />
             </section>
@@ -180,34 +187,34 @@ export default function Dashboard() {
 
           <div className="power-section-heading">
             <h2>Recent training</h2>
-            <button onClick={() => navigate('/library')} className="power-smallprint ml-auto flex items-center gap-1 hover:underline">
+            <Button variant="ghost" onClick={() => navigate('/library')} className="power-smallprint ml-auto flex items-center gap-1 hover:underline">
               <Library size={13}/> Library <ArrowRight size={13}/>
-            </button>
+            </Button>
           </div>
           {recent.length ? (
             <div className="power-recent-list">
               {recent.map(workout => {
                 const entries = Array.isArray(workout.entries) ? workout.entries : [];
                 return (
-                  <button key={workout.id} className="power-recent-row" onClick={() => navigate('/planner')}>
-                    <FileText size={22} color="#E9BC68"/>
+                  <Button variant="ghost" key={workout.id} className="power-recent-row" onClick={() => navigate('/planner')}>
+                    <FileText size={22} className="text-primary"/>
                     <span className="flex-1 min-w-0">
                       <span className="block text-sm font-bold truncate">{workout.notes?.split('\n')[0] || 'Workout'}</span>
                       <span className="block power-smallprint">{workout.date ? format(parseISO(workout.date), 'MMM d') : 'Date unavailable'} · {entries.length} exercises</span>
                     </span>
-                    <ArrowRight size={16} color="#E9BC68"/>
-                  </button>
+                    <ArrowRight size={16} className="text-primary"/>
+                  </Button>
                 );
               })}
             </div>
           ) : (
             <div className="power-tree-panel">
               <p className="power-smallprint mb-3">Your completed training sessions will appear here. Build your first session when you're ready.</p>
-              <button className="power-button power-button-outline" onClick={() => navigate('/planner')}><FileText size={15}/> Open builder</button>
+              <Button variant="ghost" className="power-button power-button-outline" onClick={() => navigate('/planner')}><FileText size={15}/> Open builder</Button>
             </div>
           )}
           <div className="flex justify-between items-center mt-9 mb-5">
-            <p className="power-smallprint uppercase" style={{ letterSpacing: '.16em' }}>Truth · Love · Community</p>
+            <p className="power-smallprint">Truth · Love · Community</p>
             <p className="power-smallprint">Powered by TLC</p>
           </div>
         </div>

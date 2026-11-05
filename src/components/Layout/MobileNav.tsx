@@ -1,62 +1,32 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, CircleDot, Dumbbell, Sparkles, User } from 'lucide-react';
+import { Home, Library, Dumbbell, Sparkles, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
+import { Button } from '@/components/ui/button';
 const tabs = [
-  { path: '/dashboard', icon: Home, label: 'Home', color: 'hsl(var(--cat-pull))' },
-  { path: '/library', icon: CircleDot, label: 'Skills', color: 'hsl(var(--cat-push))' },
-  { path: '/planner', icon: Dumbbell, label: 'Build', color: 'hsl(var(--cat-skills))' },
-  { path: '/ai-lab', icon: Sparkles, label: 'Coach', color: 'hsl(var(--electric))' },
-  { path: '/settings', icon: User, label: 'You', color: 'hsl(var(--cat-core))' },
+  { path: '/dashboard', icon: Home, label: 'Home' },
+  { path: '/library', icon: Library, label: 'Library' },
+  { path: '/planner', icon: Dumbbell, label: 'Build' },
+  { path: '/ai-lab', icon: Sparkles, label: 'Coach' },
+  { path: '/settings', icon: User, label: 'You' },
 ];
-
 export function MobileNav() {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const hiddenPaths = ['/', '/auth'];
-  if (hiddenPaths.includes(location.pathname)) return null;
-
+  if (['/', '/index', '/auth'].includes(location.pathname)) return null;
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-      <div className="h-6 bg-gradient-to-t from-background to-transparent pointer-events-none" />
-      <div className="power-bottom-bar bg-background/90 backdrop-blur-2xl border-t border-border/40">
-        <div className="flex items-center justify-around h-[4.5rem] max-w-lg mx-auto px-1">
-          {tabs.map(({ path, icon: Icon, label, color }) => {
-            const isActive = location.pathname === path;
-            return (
-              <button
-                key={path}
-                onClick={() => navigate(path)}
-                className="flex flex-col items-center justify-center gap-1.5 flex-1 h-full relative group"
-              >
-                {isActive && (
-                  <div
-                    className="power-bottom-indicator absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full"
-                    style={{ backgroundColor: color, boxShadow: `0 0 12px ${color}` }}
-                  />
-                )}
-                <div className={cn(
-                  "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200",
-                  isActive
-                    ? "bg-card border border-border/60 shadow-sm"
-                    : "group-hover:bg-accent/50"
-                )}>
-                  <Icon className={cn(
-                    "w-[18px] h-[18px] transition-colors duration-200",
-                    isActive ? "" : "text-muted-foreground group-hover:text-foreground/70"
-                  )} style={isActive ? { color } : undefined} />
-                </div>
-                <span className={cn(
-                  "text-[8px] font-mono uppercase tracking-[0.14em] transition-colors", isActive && "power-bottom-tab-active",
-                  isActive ? "text-foreground font-bold" : "text-muted-foreground font-medium"
-                )}>
-                  {label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+    <nav aria-label="Main navigation" className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-card border-t border-border pb-[env(safe-area-inset-bottom)]">
+      <div className="grid grid-cols-5 h-[4.5rem] max-w-lg mx-auto px-1">
+        {tabs.map(({ path, icon: Icon, label }) => {
+          const active = location.pathname === path;
+          return (
+            <Button key={path} variant="ghost" onClick={() => navigate(path)} aria-current={active ? 'page' : undefined}
+              className={cn('h-full rounded-none flex-col gap-1 px-1 relative text-muted-foreground', active && 'text-primary bg-accent')}>
+              {active && <span className="absolute top-0 h-0.5 w-8 bg-primary" />}
+              <Icon className="h-5 w-5" />
+              <span className={cn('text-[11px]', active ? 'font-bold' : 'font-medium')}>{label}</span>
+            </Button>
+          );
+        })}
       </div>
     </nav>
   );
