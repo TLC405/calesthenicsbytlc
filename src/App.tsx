@@ -30,6 +30,7 @@ import Community from "./pages/Community";
 import Admin from "./pages/Admin";
 import "./styles/neumorph.css";
 import "./styles/focus-training.css";
+import "./styles/movement-learning.css";
 import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();

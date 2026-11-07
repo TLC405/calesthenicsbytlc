@@ -1,3 +1,4 @@
+import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
 import { SKILL_PATHS } from '@/data/skillPaths';
 import { matchesProgression, canonicalSlug } from '@/lib/exerciseProgressions';
 import { equipmentReasons, exerciseReadinessReasons } from '@/lib/trainingPolicy';
@@ -13,7 +14,6 @@ import { CategoryTabs, CATEGORY_GROUPS } from '@/components/Exercise/CategoryTab
 import { supabase, backendConfigured } from '@/integrations/supabase/client';
 import { getOfflineExercises } from '@/lib/offlineExercises';
 import publicCatalog from '@/data/publicExerciseCatalog.json';
-import { ExerciseArtwork } from '@/components/Exercise/ExerciseArtwork';
 
 interface Exercise {
   id: string;
@@ -104,9 +104,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
                     }}
                     className="w-full flex min-h-14 items-center gap-3 p-2.5 rounded-xl power-elevated hover:bg-primary/5 transition-colors text-left"
                   >
-                    <div className="w-14 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
-                      <ExerciseArtwork compact title={exercise.name} category={exerciseLabel(exercise.slug,exercise.category)} youtubeUrl={exercise.youtube_url}/>
-                    </div>
+                    <MovementThumbnail exercise={exercise} className="is-small"/>
                     <div className="flex-1 min-w-0">
                       <p className="font-medium truncate">{exercise.name}</p>
                       <p className="text-xs text-muted-foreground truncate">

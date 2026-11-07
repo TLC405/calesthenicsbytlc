@@ -8,7 +8,7 @@ export type SkillMinutes=15|25|40;
 export type WorkoutPhase='warmup'|'skill'|'support'|'cooldown';
 export type SkillMetric='reps'|'seconds';
 export interface SkillExercise {id:string;slug:string;name:string;category:string;primary_muscles:string[];secondary_muscles?:string[];equipment?:string[];cues?:unknown;youtube_url?:string|null;image_url?:string|null;difficulty_level?:number|null;}
-export interface SkillWorkoutItem {key:string;phase:WorkoutPhase;exercise:SkillExercise;sets:number;target:number;metric:SkillMetric;perSide?:boolean;}
+export interface SkillWorkoutItem {key:string;phase:WorkoutPhase;exercise:SkillExercise;sets:number;target:number;metric:SkillMetric;perSide?:boolean;targetReason?:string;}
 interface SkillGoal {id:string;title:string;detail:string;equipment:string;warmup:readonly string[];main:Record<SkillLevel,readonly string[]>;support:readonly string[];cooldown:readonly string[];}
 const baseWarm=['wrist-circles','cat-cow','shoulder-cars'];
 const supportFor=(id:string)=>/yoga|ballet|splits|mobility|recovery/.test(id)?['cat-cow','glute-bridge','wall-ankle-dorsiflexion']:/core/.test(id)?['dead-bug','hollow-body-hold']:/compression|stalder|straddle|l-sit/.test(id)?['bent-knee-compression-lift','bent-knee-straddle-lift','single-leg-pike-lift','stalder-feet-assisted-hip-lift','seated-pike-lift','hollow-body-hold']:/pull|lever|rings|dip|muscle-up/.test(id)?['incline-ring-row','australian-row','assisted-ring-support-hold','scapular-pull-up','dead-bug']:/pistol|legs/.test(id)?['glute-bridge','bodyweight-squat','split-squat','wall-ankle-dorsiflexion']:['scapular-push-up','kneeling-planche-plank','wall-support-shrug','dead-bug','hollow-body-hold'];

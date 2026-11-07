@@ -36,6 +36,18 @@ const labels:Record<Exclude<FocusId,'auto'>,string>={compression:'Compression fi
 const capNames:Record<Capability,string>={'compression-control':'straight-leg compression','inversion-control':'controlled inversion','support-base':'stable support','straight-arm-base':'straight-arm lean','push-base':'basic pressing','pull-base':'controlled pulling'};
 export function usableFocusHistory(attempts:SkillAttempt[],now:number){return attempts.filter(a=>{const date=Date.parse(a.at);return Number.isFinite(date)&&date<=now&&date>=now-60*86400000&&Number.isFinite(a.value)&&a.value>=0&&Number.isFinite(a.target)&&a.target>0&&Number.isInteger(a.quality)&&a.quality>=1&&a.quality<=5;}).map(a=>({...a,nodeId:canonicalSlug(a.nodeId)})).sort((a,b)=>a.at.localeCompare(b.at));}
 export function estimateFocusMinutes(items:readonly SkillWorkoutItem[]){return Math.ceil(items.reduce((sum,item)=>sum+item.sets*(item.metric==='seconds'?item.target:item.target*4)+Math.max(0,item.sets-1)*nodeDose(item.exercise.slug).restSeconds+30,0)/60);}
+/** Modest target changes need repeatable, comparable results; never changes working level. */
+export function suggestedMovementTarget(slug:string,history:SkillAttempt[],base:number,light=false){
+ const dose=nodeDose(slug);const cap=dose.metric==='seconds'?20:12;
+ const logs=history.filter(a=>a.nodeId===slug&&a.metric===dose.metric);const last=logs[logs.length-1];
+ if(last&&(last.quality<3||last.value<last.target||last.discomfort))return {target:Math.max(1,Math.min(base,Math.floor(last.value*.8))),reason:'Reduced after your latest difficult attempt. Keep the variation controlled.'};
+ const setup=(a:SkillAttempt)=>JSON.stringify([a.assistance||'none',a.rom||'full',a.assistanceKg||0,a.leanCm??null]);
+ const comparable=last?logs.filter(a=>setup(a)===setup(last)&&a.target===last.target).slice(-3):[];
+ const repeated=!light&&last&&comparable.length===3&&comparable.every(a=>a.quality>=4&&a.value>=a.target&&!a.discomfort)&&new Set(comparable.map(a=>a.sessionId)).size>=2&&new Set(comparable.map(a=>a.at.slice(0,10))).size>=2;
+ const retained=Math.min(cap,Math.max(base,last?.target||base));
+ const target=light?Math.min(base,retained):repeated?Math.min(cap,retained+(dose.metric==='seconds'?2:1)):retained;
+ return {target,reason:light?'Conservative target for a lighter practice day.':repeated&&target>retained?'Small increase after 3 controlled logs across at least 2 sessions and days, with matching setup.':last?'Repeat your recent target with control before adding more.':'Starting target; repeated controlled logs will inform the next suggestion.'};
+}
 export function buildFocusPlan(preferences:FocusPreferences,profile:SkillTrainingProfile,attempts:SkillAttempt[],options:{now?:number;recentPathId?:string;targetSlug?:string}={}){
  const prefs=sanitizeFocusPreferences(preferences);const now=options.now??Date.now();const history=usableFocusHistory(attempts,now);
  const recentPath=getSkillPath(options.recentPathId);const last=history[history.length-1];
@@ -70,10 +82,9 @@ export function buildFocusPlan(preferences:FocusPreferences,profile:SkillTrainin
   if(!safe(slug))return;
   if(seen.has(slug)){if(phase!=='skill')return;const previous=items.findIndex(i=>i.exercise.slug===slug);if(previous>=0)items.splice(previous,1);seen.delete(slug);}
   const exercise=exerciseBySlug.get(slug)!;const dose=nodeDose(slug);const prep=phase==='warmup'||phase==='cooldown';
-  const logs=history.filter(a=>a.nodeId===slug&&a.metric===dose.metric);const result=logs[logs.length-1];
   const starting=dose.metric==='seconds'?8:(profile.tier||1)===1?4:dose.target;
-  const reduced=poor&&result&&result.value<starting?Math.max(1,Math.floor(result.value*.8)):starting;
-  items.push({key:`${phase}-${slug}`,phase,exercise,sets:prep?1:prefs.energy==='light'?1:(profile.tier||1)<=2?2:3,target:prep?(dose.metric==='seconds'?15:5):Math.min(dose.metric==='seconds'?12:8,reduced),metric:dose.metric,perSide:/split-squat|pistol|single-leg|one-leg/.test(slug)});seen.add(slug);
+  const suggestion=suggestedMovementTarget(slug,history,starting,prefs.energy==='light');
+  items.push({key:`${phase}-${slug}`,phase,exercise,sets:prep?1:prefs.energy==='light'?1:(profile.tier||1)<=2?2:3,target:prep?(dose.metric==='seconds'?15:5):suggestion.target,targetReason:prep?undefined:suggestion.reason,metric:dose.metric,perSide:/split-squat|pistol|single-leg|one-leg/.test(slug)});seen.add(slug);
  };
  const warm=base.filter(i=>i.phase==='warmup');warm.slice(0,prefs.minutes===15?1:2).forEach(i=>add(i.exercise.slug,'warmup'));
  if(chosen)add(chosen,'skill');

@@ -1,3 +1,4 @@
+import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
 import { readTrainingProfile, writeTrainingProfile, trainingBlockers, type TrainingEquipment } from '@/lib/skillGraph';
 import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
 import { WorkoutCoach } from '@/components/Workout/WorkoutCoach';
@@ -318,8 +319,8 @@ function PlannerEditor({owner}:{owner:string}) {
                     <div key={idx} className="rounded-xl border border-border/40 bg-accent/10 p-3">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex min-w-0 items-center gap-2">
-                          <GripVertical className="w-3 h-3 text-muted-foreground/40" />
-                          <p className="text-xs font-bold truncate">{entry.exercise.name}</p>
+                          <MovementThumbnail exercise={entry.exercise} className="is-small"/>
+                          <p className="text-xs font-bold break-words">{entry.exercise.name}</p>
                         </div>
                         <button onClick={() => removeEntry(section.key, idx)} aria-label={`Remove ${entry.exercise.name}`} className="h-11 w-11 shrink-0 grid place-items-center text-muted-foreground hover:text-destructive transition-colors">
                           <Trash2 className="w-3.5 h-3.5" />

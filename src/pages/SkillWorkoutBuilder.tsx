@@ -1,3 +1,4 @@
+import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
 import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
 import { allowedAtLevel, equipmentReasons, approvedRegression, type TrainingTier } from '@/lib/trainingPolicy';
 import { exerciseLabel } from '@/lib/exerciseLabels';
@@ -6,7 +7,6 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ChevronDown, Dumbbell, Play, RefreshCw, RotateCcw, ShieldCheck, Trash2, Video } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { ExerciseArtwork } from '@/components/Exercise/ExerciseArtwork';
 import {
   SKILL_GOALS, PHASE_LABELS, buildSkillWorkout, findSkillGoal, getCandidates, toSessionEntries,
   type SkillLevel, type SkillMinutes, type SkillWorkoutItem, type WorkoutPhase
@@ -144,10 +144,7 @@ export default function SkillWorkoutBuilder() {
               </div>
               {group.items.map(item=>(
                 <div key={item.key} className="power-builder-movement flex gap-3 items-center rounded-xl border border-border/50 bg-secondary/30 p-2">
-                  <div className="h-[64px] w-[72px] shrink-0 overflow-hidden rounded-xl bg-secondary">
-                    <ExerciseArtwork compact title={item.exercise.name} category={exerciseLabel(item.exercise.slug,item.exercise.category)}
-                      youtubeUrl={item.exercise.youtube_url} imageUrl={item.exercise.image_url}/>
-                  </div>
+                  <MovementThumbnail exercise={item.exercise}/>
                   <div className="min-w-0 flex-1 space-y-0.5">
                     <p className="font-bold text-[13px] leading-snug break-words">{item.exercise.name}</p>
                     <p className="text-[11px] text-muted-foreground">{item.sets} × {item.target} {item.metric==='seconds'?'sec':'reps'}</p>
