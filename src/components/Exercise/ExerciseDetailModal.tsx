@@ -1,4 +1,6 @@
-import { minimumTier } from '@/lib/trainingPolicy';
+import { MovementOverview } from './MovementOverview';
+import { MovementVideo } from './MovementVideo';
+import { minimumTier, TRAINING_LEVELS } from '@/lib/trainingPolicy';
 import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useEffect, useState } from 'react';
 import { Plus, TrendingUp } from 'lucide-react';
@@ -25,7 +27,7 @@ interface Exercise {
 interface Progression { id: string; name: string; level: number; description: string | null; }
 interface ExerciseDetailModalProps { exercise: Exercise | null; open: boolean; onClose: () => void; onAddToWorkout?: (exercise: Exercise) => void; }
 
-const levelLabels: Record<number, string> = { 1: 'Beginner', 2: 'Intermediate', 3: 'Advanced', 4: 'Expert', 5: 'Elite' };
+const levelLabels=Object.fromEntries(TRAINING_LEVELS.map(level=>[level.id,level.label]));
 const levelColors: Record<number, string> = { 1: 'bg-[hsl(var(--cat-legs))]', 2: 'bg-[hsl(var(--cat-pull))]', 3: 'bg-[hsl(var(--cat-core))]', 4: 'bg-[hsl(var(--cat-push))]', 5: 'bg-[hsl(var(--cat-skills))]' };
 const categoryAccent: Record<string, string> = {
   Push: 'hsl(var(--cat-push))', Pull: 'hsl(var(--cat-pull))', Legs: 'hsl(var(--cat-legs))',
@@ -68,13 +70,13 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
                 )}
               </div>
               <DialogTitle className="text-xl font-display font-bold tracking-tight">{currentExercise.name}</DialogTitle>
-              {currentExercise.description && <p className="text-sm text-muted-foreground mt-1 leading-relaxed">{currentExercise.description}</p>}
+
             </DialogHeader>
 
             <ProgressionPathStrip exerciseId={currentExercise.id} chainGroup={currentExercise.chain_group || null} onNavigate={handleChainNavigate} />
 
-            <VideoPlayer thumbnailMode youtubeUrl={currentExercise.youtube_url} instagramUrl={currentExercise.instagram_url} title={currentExercise.name}
-              exerciseData={{ recovery_muscle: currentExercise.recovery_muscle, recovery_tendon: currentExercise.recovery_tendon, recovery_nervous: currentExercise.recovery_nervous, primary_muscles: currentExercise.primary_muscles, secondary_muscles: currentExercise.secondary_muscles, stabilizer_muscles: currentExercise.stabilizer_muscles, tendons_involved: currentExercise.tendons_involved, equipment: currentExercise.equipment, cues: currentExercise.cues, sets_reps: currentExercise.sets_reps, difficulty_level: minimumTier(currentExercise.slug), category: currentExercise.category }} />
+            <MovementOverview exercise={currentExercise}/>
+            <details className="power-learn-section"><summary>Watch tutorial</summary><MovementVideo exercise={currentExercise}/></details>
 
             {progressions.length > 0 && (
               <div className="rounded-2xl border border-border/40 p-4 bg-accent/20">
@@ -104,7 +106,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
               <Button className="w-full rounded-2xl h-12 font-display font-bold uppercase tracking-wider" size="lg"
                 style={{ background: `linear-gradient(135deg, ${accent}, hsl(var(--electric)))` }}
                 onClick={() => { onAddToWorkout(currentExercise); onClose(); }}>
-                <Plus className="w-4 h-4 mr-2" />Add to Today's Workout
+                <Plus className="w-4 h-4 mr-2" />Add to workout
               </Button>
             )}
           </div>

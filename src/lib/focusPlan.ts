@@ -14,12 +14,12 @@ export const FOCUS_CHOICES=[
  {id:'control',title:'Technique & consistency',detail:'Repeat the current step with better control'},
 ] as const;
 export type FocusId=typeof FOCUS_CHOICES[number]['id'];
-export type FocusPreferences={goalId:string;focus:FocusId;minutes:SkillMinutes;energy:'normal'|'light'};
+export type FocusPreferences={goalId:string;focus:FocusId;minutes:SkillMinutes;energy:'normal'|'light';warmup?:'yoga'|'mobility'};
 export const DEFAULT_FOCUS:FocusPreferences={goalId:'auto',focus:'auto',minutes:25,energy:'normal'};
 const validGoal=(id:string)=>id==='auto'||SKILL_PATHS.some(p=>p.id===id);
 export function sanitizeFocusPreferences(value:unknown):FocusPreferences {
  const x=value&&typeof value==='object'?value as Partial<FocusPreferences>:{};
- return {goalId:typeof x.goalId==='string'&&validGoal(x.goalId)?x.goalId:'auto',focus:FOCUS_CHOICES.some(f=>f.id===x.focus)?x.focus!:'auto',minutes:x.minutes===15||x.minutes===40?x.minutes:25,energy:x.energy==='light'?'light':'normal'};
+ return {goalId:typeof x.goalId==='string'&&validGoal(x.goalId)?x.goalId:'auto',focus:FOCUS_CHOICES.some(f=>f.id===x.focus)?x.focus!:'auto',minutes:x.minutes===15||x.minutes===40?x.minutes:25,energy:x.energy==='light'?'light':'normal',...(x.warmup==='yoga'||x.warmup==='mobility'?{warmup:x.warmup}:{})};
 }
 export function readFocusPreferences(owner:string){try{return sanitizeFocusPreferences(JSON.parse(localStorage.getItem(`power-focus-plan-v1:${owner}`)||'null'));}catch{return {...DEFAULT_FOCUS};}}
 export function writeFocusPreferences(owner:string,preferences:FocusPreferences){localStorage.setItem(`power-focus-plan-v1:${owner}`,JSON.stringify(sanitizeFocusPreferences(preferences)));}
@@ -87,6 +87,7 @@ export function buildFocusPlan(preferences:FocusPreferences,profile:SkillTrainin
   items.push({key:`${phase}-${slug}`,phase,exercise,sets:prep?1:prefs.energy==='light'?1:(profile.tier||1)<=2?2:3,target:prep?(dose.metric==='seconds'?15:5):suggestion.target,targetReason:prep?undefined:suggestion.reason,metric:dose.metric,perSide:/split-squat|pistol|single-leg|one-leg/.test(slug)});seen.add(slug);
  };
  const warm=base.filter(i=>i.phase==='warmup');warm.slice(0,prefs.minutes===15?1:2).forEach(i=>add(i.exercise.slug,'warmup'));
+ if(prefs.warmup!=='mobility')add('cat-cow','warmup');
  if(chosen)add(chosen,'skill');
  if(prefs.minutes>=25&&primary&&safe(primary))add(primary,'skill');
  const supportPool=[...(componentFocus?candidates:[]),...getCandidates(goal.id,stage,'support',profile).map(e=>e.slug)];

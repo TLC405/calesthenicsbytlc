@@ -1,3 +1,4 @@
+import thumbnailCache from '@/data/thumbnailCache.json';
 import { useEffect, useState } from 'react';
 import { Dumbbell, Play } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -20,10 +21,12 @@ interface ArtworkProps {
 export function ExerciseArtwork({ title, category = 'Training', youtubeUrl, imageUrl, className, showPlayHint = false, compact = false }: ArtworkProps) {
   const media = tutorialState(youtubeUrl,title);
   const id = media.blocked ? null : media.id;
-  const src = id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : imageUrl || null;
-  const [imageFailed, setImageFailed] = useState(false);
-  useEffect(() => setImageFailed(false), [src]);
-  const fallback = !src || imageFailed;
+  const [sourceIndex,setSourceIndex]=useState(0);
+  const signature=`${id||''}:${imageUrl||''}`;
+  useEffect(()=>setSourceIndex(0),[signature]);
+  const candidates=[id&&id in thumbnailCache?`/movement-previews/${id}.jpg`:null,id?`https://i.ytimg.com/vi/${id}/hqdefault.jpg`:null,imageUrl].filter(Boolean);
+  const src=candidates[sourceIndex];
+  const fallback=!src;
   return (
     <div className={cn('power-artwork relative h-full w-full overflow-hidden bg-secondary', compact && 'is-compact', className)}>
       {fallback ? (
@@ -39,13 +42,13 @@ export function ExerciseArtwork({ title, category = 'Training', youtubeUrl, imag
           </div>
         </div>
       ) : (
-        <img src={src} alt={`${title} tutorial preview`} loading="lazy" decoding="async"
+        <img src={src||undefined} alt={`${title} tutorial preview`} loading="lazy" decoding="async"
           className="h-full w-full object-cover"
-          onError={() => setImageFailed(true)}
+          onError={() => setSourceIndex(index=>index+1)}
           onLoad={event => {
             const img = event.currentTarget;
             // YouTube sometimes serves an empty 120x90 placeholder with HTTP 200.
-            if (id && (img.naturalWidth <= 120 || img.naturalHeight <= 90)) setImageFailed(true);
+            if (id && (img.naturalWidth <= 120 || img.naturalHeight <= 90)) setSourceIndex(index=>index+1);
           }}
         />
       )}

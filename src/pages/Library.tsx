@@ -48,7 +48,7 @@ function mergeCatalog(remote: Exercise[] = [], includeLocal = true): Exercise[] 
   return [...bySlug.values()].map(e=>({...e,youtube_url:resolveTutorialUrl(e.slug,e.youtube_url)}));
 }
 
-export default function Library() {
+export default function Library({embedded=false}:{embedded?:boolean}) {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
@@ -160,10 +160,10 @@ export default function Library() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`power-movement-library ${embedded?'is-embedded':''}`}>
       <header className="power-library-head relative bg-background border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 py-5 space-y-4">
-          <div className="flex items-center justify-between gap-3"><div className="min-w-0"><h1 className="font-display text-2xl font-bold">All exercises</h1><p className="text-xs text-muted-foreground mt-1">{exercises.length} movements</p></div><Button variant="outline" className="min-h-12 shrink-0" onClick={()=>navigate('/skills')}><Target className="w-4 h-4 mr-2"/>Skills</Button></div>
+          {!embedded&&<div className="flex items-center justify-between gap-3"><div className="min-w-0"><h1 className="font-display text-2xl font-bold">All exercises</h1><p className="text-xs text-muted-foreground mt-1">{exercises.length} movements</p></div><Button variant="outline" className="min-h-12 shrink-0" onClick={()=>navigate('/skills')}><Target className="w-4 h-4 mr-2"/>Skills</Button></div>}
           <div className="relative"><Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"/><Input aria-label="Search exercises" placeholder="Search exercises…" value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} className="pl-10 h-12 rounded-xl"/></div>
           <details className="power-library-tools"><summary className="min-h-12 flex items-center cursor-pointer font-bold text-sm">Filters and tools</summary><div className="space-y-3 pt-3">
             <label className="block text-xs font-bold mb-3">Progression<select className="w-full h-12 border rounded-xl bg-card px-3 mt-2" value={pathId} onChange={e=>setPathId(e.target.value)}><option value="">All progression families</option>{SKILL_PATHS.map(path=><option key={path.id} value={path.id}>{path.title}</option>)}</select></label>
@@ -179,7 +179,7 @@ export default function Library() {
           <span>{syncState === 'refreshing' ? 'Library ready · refreshing saved exercises…' : syncState === 'error' ? 'Saved collection is taking longer to connect. Your available exercises are shown below.' : syncState === 'offline' ? 'Showing the included library and exercises saved on this device.' : 'Saved library connected.'}</span>
           {syncState === 'error' && <Button type="button" variant="outline" size="sm" onClick={() => void fetchExercises()}>Reconnect library</Button>}
         </div>
-        {guestMode && (
+        {guestMode && !embedded && (
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/25 bg-primary/5 px-4 py-3">
             <div>
               <p className="text-sm font-bold">Guest training · saved on this device</p>
@@ -205,7 +205,7 @@ export default function Library() {
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 min-[390px]:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+          <div className="power-exercise-rows">
             {filteredExercises.map(exercise => (
               <div key={exercise.id} className="relative">
                 <ExerciseCard exercise={exercise} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} />

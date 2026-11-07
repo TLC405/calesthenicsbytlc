@@ -19,11 +19,14 @@ import Dashboard from "./pages/Dashboard";
 import Planner from "./pages/Planner";
 import Library from "./pages/Library";
 import AILab from "./pages/AILab";
-import Settings from "./pages/Settings";
+import AccountSettings from "./pages/Settings";
+import Settings from "./pages/TrainingSettings";
+import { AppControls } from "./components/Layout/AppControls";
+import { TrainingEntry } from "./components/Layout/TrainingEntry";
+import { LaunchHome } from "./components/Layout/LaunchHome";
 import Train from "./pages/Train";
 import ActiveWorkout from "./pages/ActiveWorkout";
 import SkillStudio from "./pages/SkillStudio";
-import SkillWorkoutBuilder from "./pages/SkillWorkoutBuilder";
 import Anatomy from "./pages/Anatomy";
 import NotFound from "./pages/NotFound";
 import Community from "./pages/Community";
@@ -39,18 +42,20 @@ function AppContent() {
   useTheme();
   return (
     <BrowserRouter>
+      <LaunchHome />
+      <AppControls />
       <div className="power-app-shell min-w-0 md:pb-0">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/intro" element={<PowerIntro />} />
-          <Route path="/auth" element={<Navigate to="/library" replace />} />
+          <Route path="/auth" element={<Navigate to="/" replace />} />
           <Route path="/admin-login" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/today" element={<FocusPlanner />} />
           <Route path="/planner" element={<Planner />} />
           <Route path="/library" element={<Library />} />
           <Route path="/ai-lab" element={<AILab />} />
-          <Route path="/train" element={<Navigate to="/build" replace />} />
+          <Route path="/train" element={<TrainingEntry />} />
           <Route path="/routine-days" element={<Train />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/assessment" element={<LevelAssessment />} />
@@ -58,10 +63,11 @@ function AppContent() {
           <Route path="/more" element={<More />} />
           <Route path="/workout" element={<ActiveWorkout />} />
           <Route path="/skills/:skillId" element={<SkillStudio />} />
-          <Route path="/build" element={<SkillWorkoutBuilder />} />
+          <Route path="/build" element={<TrainingEntry />} />
           <Route path="/anatomy" element={<Anatomy />} />
           <Route path="/community" element={<Community />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/account-settings" element={<AccountSettings />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

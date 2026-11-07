@@ -2,7 +2,7 @@
   "name": "I GOT THE POWER",
   "short_name": "POWER",
   "description": "Calisthenics skills, guided workouts and personal progress. Powered by TLC.",
-  "start_url": "/",
+  "start_url": "/?launch=home",
   "display": "standalone",
   "background_color": "#070708",
   "theme_color": "#070708",
@@ -29,20 +29,21 @@
   "screenshots": [],
   "shortcuts": [
     {
-      "name": "Skills",
+      "name": "Home",
+      "url": "/",
+      "description": "Open POWER home"
+    },
+    {
+      "name": "Movements",
       "url": "/skills",
-      "description": "Choose a calisthenics progression"
+      "description": "Rings, straight-arm strength, yoga and more"
     },
     {
-      "name": "Workout",
-      "url": "/build",
-      "description": "Build a workout around your skill"
-    },
-    {
-      "name": "More",
-      "url": "/more",
-      "description": "Exercises, progress, music and appearance"
+      "name": "Train",
+      "url": "/today",
+      "description": "Build a focused session"
     }
   ],
-  "id": "/power-independent-guest"
+  "id": "/power-independent-guest",
+  "scope": "/"
 }

@@ -1,3 +1,7 @@
+import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
+import { MovementVideo } from '@/components/Exercise/MovementVideo';
+import { MovementOverview } from '@/components/Exercise/MovementOverview';
+import { minimumTier, TRAINING_LEVELS } from '@/lib/trainingPolicy';
 import { exerciseReadinessReasons, approvedRegression } from '@/lib/trainingPolicy';
 import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
 import { readTrainingProfile, writeTrainingProfile } from '@/lib/skillGraph';
@@ -59,6 +63,7 @@ export default function ActiveWorkout() {
   const navigate = useNavigate();
   const [readiness,setReadiness]=useState(readTrainingProfile);
   const { user } = useAuth();
+  useEffect(()=>{const sync=()=>setReadiness(readTrainingProfile());window.addEventListener('power-training-profile',sync);return()=>window.removeEventListener('power-training-profile',sync);},[]);
   const { theme, setTheme, themes } = useTheme();
   const [draft, setDraft] = useState<SessionDraft | null>(readDraft);
   const [now, setNow] = useState(Date.now());
@@ -207,10 +212,6 @@ export default function ActiveWorkout() {
             <p className="text-[10px] font-mono uppercase tracking-[.18em] text-muted-foreground">Active session</p>
             <h1 className="text-xs sm:text-sm font-black truncate max-w-full">{draft.name}</h1>
           </div>
-          <button type="button" className="power-hardware shrink-0 h-11 w-11 flex items-center justify-center" aria-label="Change gym colors"
-            onClick={() => { const idx=themes.findIndex(t => t.id === theme); setTheme(themes[(idx + 1) % themes.length].id); }}>
-            <span className="h-5 w-5 rounded-full border-2 border-card" style={{ background: themes.find(t => t.id === theme)?.primary }} />
-          </button>
         </header>
         <div className="power-elevated p-4 space-y-2">
           <div className="flex justify-between items-center text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
@@ -222,7 +223,7 @@ export default function ActiveWorkout() {
             <div className="h-full bg-primary transition-[width] duration-300" style={{ width: `${percentage}%` }} />
           </div>
         </div>
-        <details className="rounded-xl border p-3"><summary className="text-xs font-bold cursor-pointer min-h-10 flex items-center">Level and readiness · L{readiness.tier||1}</summary><TrainingLevelControls profile={readiness} onChange={next=>{setReadiness(next);writeTrainingProfile(next);}}/></details>
+
         {exerciseReadinessReasons(item.exercise,readiness).length>0&&<section className="rounded-xl border border-primary p-4 text-sm" role="status"><p className="font-bold">Use a suitable preparation first</p>{exerciseReadinessReasons(item.exercise,readiness).map(r=><p key={r} className="text-xs mt-2">{r}</p>)}<Button className="min-h-12 mt-3" variant="outline" onClick={regressMovement}>Choose a suitable regression</Button></section>}
         <div className="power-training-cockpit">
         <section id="power-current-exercise" className="space-y-3" aria-label="Current exercise">
@@ -231,25 +232,10 @@ export default function ActiveWorkout() {
               <p className="text-xs font-bold uppercase tracking-widest text-primary">{item.phaseLabel || exerciseLabel(item.exercise.slug,item.exercise.category)}</p>
               <p className="text-xs font-mono text-muted-foreground"><Clock3 className="w-3 h-3 inline"/> {timeLabel(elapsed)}</p>
             </div>
-            <h2 className="mt-1 text-[clamp(1.45rem,6vw,2.25rem)] break-words font-display font-black leading-tight tracking-tight">{item.exercise.name}</h2>
-            {!!item.exercise.primary_muscles?.length && <p className="mt-1 text-xs text-muted-foreground">{item.exercise.primary_muscles.join(' · ')}</p>}
+            <div className="power-active-movement-title"><MovementThumbnail exercise={item.exercise}/><div><h2>{item.exercise.name}</h2><p>{TRAINING_LEVELS[minimumTier(item.exercise.slug)-1].label}</p></div></div>
           </div>
-          {item.exercise.youtube_url ? (
-            <div className="power-recessed overflow-hidden rounded-2xl border-4 border-secondary">
-              <VideoPlayer key={item.exercise.id} thumbnailMode youtubeUrl={item.exercise.youtube_url}
-                title={item.exercise.name} className="border-0 rounded-none"/>
-            </div>
-          ) : (
-            <div className="power-recessed rounded-2xl p-5 flex gap-3 items-center text-muted-foreground text-sm">
-              <Video className="h-5 w-5 shrink-0"/> Tutorial unavailable; form cues and logging still work.
-            </div>
-          )}
-          {cues.length > 0 && (
-            <details className="power-elevated rounded-2xl p-3">
-              <summary className="cursor-pointer font-bold text-xs uppercase tracking-wider">Form cues · tap for guidance</summary>
-              <ol className="mt-3 space-y-2">{cues.map((cue,i)=><li key={i} className="text-xs text-muted-foreground">{i+1}. {cue}</li>)}</ol>
-            </details>
-          )}
+          <details className="power-learn-section"><summary>Watch tutorial</summary><MovementVideo key={item.exercise.id} exercise={item.exercise}/></details>
+          <details className="power-learn-section"><summary>How to perform this movement</summary><MovementOverview exercise={item.exercise}/></details>
         </section>
         <section className="power-elevated p-2.5 sm:p-4 space-y-3" aria-label="Log your sets">
           <div className="flex items-center justify-between">

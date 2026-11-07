@@ -1,45 +1,18 @@
-import { readProgressionFocus } from '@/lib/progressionFocus';
-import { useAuth } from '@/providers/AuthProvider';
-import { exerciseBySlug } from '@/lib/skillGraph';
 import { useState } from 'react';
-import { TrainingLevelControls, LevelProgressReview } from '@/components/Progression/TrainingLevelControls';
-import { readTrainingProfile, writeTrainingProfile } from '@/lib/skillGraph';
-import { minimumTier } from '@/lib/trainingPolicy';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Dumbbell, Crown, Target } from 'lucide-react';
+import { ArrowRight, Search } from 'lucide-react';
 import { SKILL_PATHS } from '@/data/skillPaths';
-import { PowerDisciplineIcon, type PowerDiscipline } from '@/components/Brand/PowerDisciplineIcon';
-
-const icons: Record<string, PowerDiscipline> = {planche:'planche',handstand:'handstand',rings:'rings','ring-muscle-up':'muscle-up','straddle-press':'handstand',hspu:'handstand'};
-export default function Skills() {
-  const [params]=useSearchParams();
-  const [showAll,setShowAll]=useState(false);
-  const assessed=Boolean(localStorage.getItem('power-starting-assessment-v1'));
-  const {user}=useAuth();const focus=readProgressionFocus(user?.id||'guest');
-  const [search,setSearch]=useState('');const [group,setGroup]=useState(params.get('group')||'All');const [profile,setProfile]=useState(readTrainingProfile);
-  const groups=['All',...new Set(SKILL_PATHS.map(p=>p.group))];
-  const visible=SKILL_PATHS.filter(p=>(group==='All'||p.group===group)&&`${p.title} ${p.short} ${[...p.slugs,...(p.accessories||[])].map(slug=>exerciseBySlug.get(slug)?.name).join(' ')}`.toLowerCase().includes(search.toLowerCase()));
-  const featured=['foundation','planche','pike-compression','straddle-press','handstand','rings','yoga-foundation','ballet-barre'];
-  const displayed=group==='All'&&!search&&!showAll?visible.filter(p=>featured.includes(p.id)):visible;
-  const unfinished = Boolean(localStorage.getItem('power-active-workout-v2'));
-  return <main className="power-simple-page" aria-labelledby="skills-title">
-    <header className="power-simple-heading"><div><p className="power-simple-eyebrow"><Crown size={15}/> POWER / TLC</p><h1 id="skills-title">Skills</h1><p>Build control. Choose your progression.</p></div></header>
-    <Link className="focus-skills-cta" to="/today"><span><strong>What should I train today?</strong><small>Turn a goal into a focused, level-appropriate session.</small></span><ArrowRight size={22}/></Link>
-    {unfinished && <Link className="power-simple-resume" to="/workout"><Dumbbell size={19}/><span>Resume your workout</span><ArrowRight size={18}/></Link>}
-    {focus&&<Link className="power-simple-resume" to={`/skills/${focus.pathId}`}><Target size={19}/><span><strong className="block">Continue your progression</strong><small className="block mt-1 text-muted-foreground">{exerciseBySlug.get(focus.slug)?.name}</small></span><ArrowRight size={18}/></Link>}
-    {!assessed&&<Link className="power-simple-secondary power-starting-link" to="/assessment"><span><strong className="block">Find my starting level</strong><small className="block font-normal text-muted-foreground mt-1">7 quick questions · no max-effort testing</small></span><ArrowRight size={19}/></Link>}
-    <label className="block my-4 text-sm font-bold">Find a progression<input className="mt-2 h-12 w-full bg-card border rounded-xl px-3" placeholder="Planche, compression, yoga, ballet…" value={search} onChange={e=>setSearch(e.target.value)}/></label>
-    <label className="block text-xs font-bold my-3">Focus<select className="block w-full h-12 rounded-xl border bg-card px-3 mt-2" value={group} onChange={e=>setGroup(e.target.value)}>{groups.map(g=><option key={g}>{g}</option>)}</select></label>
-    <div className="flex flex-wrap gap-2 my-4">{['Yoga','Ballet','Compression','Rings'].map(g=><button type="button" aria-pressed={group===g} className="min-h-11 px-3 border rounded-xl text-xs font-bold" onClick={()=>setGroup(group===g?'All':g)} key={g}>{g}</button>)}</div>
-    <p className="text-xs text-muted-foreground mb-3">{displayed.length} shown / {SKILL_PATHS.length} progression families · your current level is L{profile.tier||1}</p>
-    <div className="power-skills-grid" aria-label="Choose a skill">{displayed.map((path,index)=><Link className="power-goal-card" to={`/skills/${path.id}`} key={path.id}>
-      <div className="power-goal-card-top"><PowerDisciplineIcon discipline={icons[path.id]||(path.group==='Yoga'?'yoga':path.group==='Ballet'?'ballet':/Mobility/.test(path.group)?'mobility':/Compression|Core/.test(path.group)?'core':path.group==='Rings'?'rings':'planche')} width={38} height={38}/><span>{String(index+1).padStart(2,'0')}</span></div>
-      <h2>{path.title}</h2><p>{path.short}</p><div className="power-goal-card-footer"><span>{path.slugs.length+(path.accessories?.length||0)} movements · L{Math.min(...path.slugs.map(minimumTier))}–{Math.max(...path.slugs.map(minimumTier))}</span><ArrowRight size={19}/></div>
-    </Link>)}</div>
-    {group==='All'&&!search&&<button type="button" className="power-assessment-action w-full my-4" onClick={()=>setShowAll(v=>!v)}>{showAll?'Show featured progressions':`Browse all ${SKILL_PATHS.length} progression families`}</button>}
-    <details className="border rounded-xl p-3 my-4"><summary className="min-h-11 cursor-pointer font-bold text-sm">L{profile.tier||1} · Level and readiness</summary><LevelProgressReview profile={profile} onChange={next=>{setProfile(next);writeTrainingProfile(next);}}/><TrainingLevelControls profile={profile} onChange={next=>{setProfile(next);writeTrainingProfile(next);}}/></details>
-    {visible.length===0&&<p className="text-sm text-muted-foreground">No matching progression. Try a skill name or choose All.</p>}
-    <Link className="power-simple-secondary" to="/ai-lab">Coach · help choose my next step <ArrowRight size={18}/></Link>
-    <Link className="power-simple-secondary" to="/build">Build a skill workout <ArrowRight size={18}/></Link>
-  </main>;
+import { exerciseBySlug } from '@/lib/skillGraph';
+import { movementThumbnailSources } from '@/lib/movementThumbnails';
+import { minimumTier } from '@/lib/trainingPolicy';
+import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
+import Library from './Library';
+const featured=['foundation','rings','straight-arm','planche','pike-compression','straddle-press','yoga-foundation','ballet-barre'];
+const categories=['Featured','Rings','Straight arm','Yoga','Compression','Balance','Ballet','All'];
+export default function Skills(){
+ const [params]=useSearchParams();const [view,setView]=useState('paths');const [group,setGroup]=useState(params.get('group')||'Featured');const [search,setSearch]=useState('');
+ const visible=SKILL_PATHS.filter(p=>{const match=group==='All'||group==='Featured'&&featured.includes(p.id)||group==='Straight arm'&&['straight-arm','planche','stalder','straddle-press','front-lever','back-lever'].includes(p.id)||group==='Balance'&&/handstand|hspu|crow|elbow/.test(p.id)||p.group===group;return (search||match)&&`${p.title} ${p.short} ${p.slugs.map(s=>exerciseBySlug.get(s)?.name).join(' ')}`.toLowerCase().includes(search.toLowerCase());});
+ return <main className="power-movements-page"><header className="power-page-intro"><p className="power-kicker">LEARN • PRACTICE • PROGRESS</p><h1>Movements</h1><p>Choose a skill. See your level. Practice the right step.</p></header><div className="power-view-tabs" role="group" aria-label="Movement view"><button type="button" aria-pressed={view==='paths'} onClick={()=>setView('paths')}>Progressions</button><button type="button" aria-pressed={view==='all'} onClick={()=>setView('all')}>All movements</button></div>
+ {view==='all'?<Library embedded/>:<><label className="power-movement-search"><Search size={19}/><input aria-label="Find a movement or progression" placeholder="Rings, planche, yoga, pike…" value={search} onChange={e=>setSearch(e.target.value)}/></label><div className="power-focus-chips" aria-label="Movement focus">{categories.map(c=><button type="button" key={c} aria-pressed={group===c} onClick={()=>setGroup(c)}>{c}</button>)}</div><div className="power-path-list">{visible.map(path=>{const e=path.slugs.map(s=>exerciseBySlug.get(s)).find(e=>e&&movementThumbnailSources(e).length)||exerciseBySlug.get(path.slugs[0]);const levels=path.slugs.map(minimumTier);return <Link to={`/skills/${path.id}`} className="power-path-row" key={path.id}>{e&&<MovementThumbnail exercise={e}/>}<span><strong>{path.title}</strong><small>{path.short}</small><b>{Math.min(...levels)===Math.max(...levels)?`L${Math.min(...levels)}`:`L${Math.min(...levels)}–L${Math.max(...levels)}`} · {path.slugs.length} movements{path.kind==='collection'?' · choose any comfortable pose':''}</b></span><ArrowRight size={20}/></Link>;})}</div>{!visible.length&&<p className="py-8 text-sm">No matching movement. Try a shorter name or choose All.</p>}<Link to="/assessment" className="power-quiet-link">Unsure where to begin? Find my starting level <ArrowRight size={16}/></Link></>}
+ </main>;
 }
