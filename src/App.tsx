@@ -12,6 +12,7 @@ import LevelAssessment from "./pages/LevelAssessment";
 import VideoAudit from "./pages/VideoAudit";
 import { MobileNav } from "./components/Layout/MobileNav";
 import Index from "./pages/Index";
+import FocusPlanner from "./pages/FocusPlanner";
 import PowerIntro from "./pages/PowerIntro";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
@@ -28,6 +29,7 @@ import NotFound from "./pages/NotFound";
 import Community from "./pages/Community";
 import Admin from "./pages/Admin";
 import "./styles/neumorph.css";
+import "./styles/focus-training.css";
 import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();
@@ -43,6 +45,7 @@ function AppContent() {
           <Route path="/auth" element={<Navigate to="/library" replace />} />
           <Route path="/admin-login" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/today" element={<FocusPlanner />} />
           <Route path="/planner" element={<Planner />} />
           <Route path="/library" element={<Library />} />
           <Route path="/ai-lab" element={<AILab />} />

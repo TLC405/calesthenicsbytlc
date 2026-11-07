@@ -24,6 +24,7 @@ export default function Skills() {
   const unfinished = Boolean(localStorage.getItem('power-active-workout-v2'));
   return <main className="power-simple-page" aria-labelledby="skills-title">
     <header className="power-simple-heading"><div><p className="power-simple-eyebrow"><Crown size={15}/> POWER / TLC</p><h1 id="skills-title">Skills</h1><p>Build control. Choose your progression.</p></div></header>
+    <Link className="focus-skills-cta" to="/today"><span><strong>What should I train today?</strong><small>Turn a goal into a focused, level-appropriate session.</small></span><ArrowRight size={22}/></Link>
     {unfinished && <Link className="power-simple-resume" to="/workout"><Dumbbell size={19}/><span>Resume your workout</span><ArrowRight size={18}/></Link>}
     {focus&&<Link className="power-simple-resume" to={`/skills/${focus.pathId}`}><Target size={19}/><span><strong className="block">Continue your progression</strong><small className="block mt-1 text-muted-foreground">{exerciseBySlug.get(focus.slug)?.name}</small></span><ArrowRight size={18}/></Link>}
     {!assessed&&<Link className="power-simple-secondary power-starting-link" to="/assessment"><span><strong className="block">Find my starting level</strong><small className="block font-normal text-muted-foreground mt-1">7 quick questions · no max-effort testing</small></span><ArrowRight size={19}/></Link>}

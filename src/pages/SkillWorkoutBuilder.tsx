@@ -106,7 +106,7 @@ export default function SkillWorkoutBuilder() {
         <div className="power-elevated relative overflow-hidden p-4 sm:p-6 space-y-2">
           <p className="text-[10px] font-mono font-bold tracking-[.17em] uppercase text-primary">Your goal, your workout</p>
           <h1 className="font-display text-[clamp(1.6rem,6vw,2.35rem)] font-black leading-tight">Pick a skill. Press play.</h1>
-          <p className="text-sm text-muted-foreground leading-relaxed">POWER chooses drills for your working level, equipment and readiness.</p><Link className="inline-flex min-h-11 items-center text-sm text-primary underline" to="/ai-lab">Let the coach help choose</Link>
+          <p className="text-sm text-muted-foreground leading-relaxed">POWER chooses drills for your working level, equipment and readiness.</p><Link className="inline-flex min-h-11 items-center text-sm text-primary underline" to={`/today?goal=${goalId}`}>Build this around what I need to practice</Link>
         </div>
 
         <section className="space-y-2" aria-label="Choose a training skill"><label className="block text-sm font-bold" htmlFor="workout-skill">1 · Your skill</label><select id="workout-skill" className="h-14 w-full rounded-xl border bg-card px-3 font-bold" value={goalId} onChange={e=>regenerate(e.target.value,level,minutes)}>{SKILL_GOALS.map(option=><option key={option.id} value={option.id}>{option.title}</option>)}</select><p className="text-xs text-muted-foreground">{goal.detail} · {goal.equipment}</p></section>

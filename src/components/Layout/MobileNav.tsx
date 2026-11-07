@@ -13,7 +13,7 @@ export function MobileNav() {
   const items = [
     {path:'/',label:'Home',icon:Home,active:pathname==='/'||pathname==='/intro'},
     {path:'/skills',label:'Skills',icon:Target,active:pathname==='/assessment'||pathname.startsWith('/skills')},
-    {path:'/planner',label:'Workout',icon:Dumbbell,active:['/build','/planner','/train','/routine-days'].includes(pathname)},
+    {path:'/planner',label:'Workout',icon:Dumbbell,active:['/today','/build','/planner','/train','/routine-days'].includes(pathname)},
   ];
   return <nav className="power-mobile-nav power-simple-nav" aria-label="Primary navigation">
     <div className="power-nav-surface">{items.map(({path,label,icon:Icon,active}) =>
