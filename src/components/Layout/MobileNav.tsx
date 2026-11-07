@@ -11,9 +11,9 @@ export function MobileNav() {
   },[key,navigationType]);
   if (pathname === '/workout') return null;
   const items = [
-    {path:'/',label:'Home',icon:Home,active:pathname==='/'||pathname==='/intro'},
+    {path:'/',label:'Home',icon:Home,active:pathname==='/'||pathname==='/intro'||['/today','/build','/train'].includes(pathname)},
     {path:'/skills',label:'Movements',icon:Target,active:pathname==='/assessment'||pathname.startsWith('/skills')},
-    {path:'/today',label:'Train',icon:Dumbbell,active:['/today','/build','/planner','/train','/routine-days'].includes(pathname)},
+    {path:'/planner',label:'Custom',icon:Dumbbell,active:['/planner','/routine-days'].includes(pathname)},
   ];
   return <nav className="power-mobile-nav power-simple-nav" aria-label="Primary navigation">
     <div className="power-nav-surface">{items.map(({path,label,icon:Icon,active}) =>
