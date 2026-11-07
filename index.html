@@ -2,7 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <script>
+      try {
+        let theme=localStorage.getItem('power-theme');
+        if(!localStorage.getItem('power-vasa-default-v1')){
+          if(!theme||theme==='default')theme='vasa';
+          localStorage.setItem('power-theme',theme||'vasa');
+          localStorage.setItem('power-vasa-default-v1','1');
+        }
+        if(theme!=='default')document.documentElement.dataset.theme=theme||'vasa';
+      } catch {document.documentElement.dataset.theme='vasa';}
+    </script>
     <title>I Got The Power – Calisthenics Training App</title>
     <meta name="description" content="Master human strength with 215 bodyweight exercises, advanced skill workouts and guided training. Powered by TLC." />
     <meta name="author" content="I Got The Power" />

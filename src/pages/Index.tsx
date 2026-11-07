@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Dumbbell, Headphones, Library, MapPin, Play, Target, Volume2, VolumeX, Zap, Crown, Video } from 'lucide-react';
 import { useMusic, POWER_ANTHEM_VIDEO_ID } from '@/providers/MusicProvider';
 import { InstallPowerApp } from '@/components/InstallPowerApp';
+import { useTheme } from '@/components/ThemeSwitcher';
 
 /**
  * An original TLC cartoon mascot and black/gold entrance. No unverifiable personal photograph.
@@ -10,6 +11,7 @@ import { InstallPowerApp } from '@/components/InstallPowerApp';
  */
 export default function Index() {
   const navigate = useNavigate();
+  const {theme}=useTheme();
   const { playIntroAnthem, playbackError, isPlaying, playerVisible, togglePlay, dismissPlayer } = useMusic();
   const [soundOn, setSoundOn] = useState(() => localStorage.getItem('power-intro-sound') !== 'off');
   const [requested, setRequested] = useState(false);
@@ -45,7 +47,7 @@ export default function Index() {
   }
 
   return (
-    <main className="power-entry power-entry-gold" aria-label="I Got the Power opening experience">
+    <main className={`power-entry ${theme==='vasa'?'power-entry-vasa':'power-entry-gold'}`} aria-label="I Got the Power opening experience">
       <div className="power-entry-frame" aria-hidden="true">
         <span className="power-entry-rail power-entry-rail-one" />
         <span className="power-entry-rail power-entry-rail-two" />

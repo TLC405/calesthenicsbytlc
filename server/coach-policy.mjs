@@ -19,7 +19,7 @@ var publicExerciseCatalog_default = [
       "Move slowly"
     ],
     difficulty_level: 1,
-    youtube_url: "https://www.youtube.com/watch?v=jvPddSwyo3c",
+    youtube_url: "https://www.youtube.com/watch?v=GbSC02oU3To",
     instagram_url: null,
     image_url: null,
     description: null,
@@ -3037,7 +3037,7 @@ var publicExerciseCatalog_default = [
       "Lower chest to the incline"
     ],
     difficulty_level: 1,
-    youtube_url: "https://www.youtube.com/watch?v=cfns5VRDssk",
+    youtube_url: "https://www.youtube.com/watch?v=0JUrOH--Kdk",
     instagram_url: null,
     image_url: null,
     description: null,
@@ -3156,7 +3156,7 @@ var publicExerciseCatalog_default = [
       "Full lockout"
     ],
     difficulty_level: 1,
-    youtube_url: "https://www.youtube.com/watch?v=sposDXWEB0A",
+    youtube_url: "https://www.youtube.com/watch?v=DG-NcMnfZ_0",
     instagram_url: null,
     image_url: null,
     description: "Hips high in an inverted V. Press straight down and up. Builds HSPU strength.",
@@ -3218,7 +3218,7 @@ var publicExerciseCatalog_default = [
       "Hollow body maintained"
     ],
     difficulty_level: 3,
-    youtube_url: "https://www.youtube.com/watch?v=LeMk15TN0No",
+    youtube_url: "https://www.youtube.com/watch?v=6snDOgFBBFA",
     instagram_url: null,
     image_url: null,
     description: "Elbows locked. Push floor away. Hollow body. Hold the line like you're freezing a screenshot.",
@@ -3487,7 +3487,7 @@ var publicExerciseCatalog_default = [
       "Control descent"
     ],
     difficulty_level: 1,
-    youtube_url: "https://www.youtube.com/watch?v=a6YHbXD2XlU",
+    youtube_url: "https://www.youtube.com/watch?v=5NPvv40gd3Q",
     instagram_url: null,
     image_url: null,
     description: null,
@@ -4975,7 +4975,7 @@ var publicExerciseCatalog_default = [
       "Gaze slightly forward"
     ],
     difficulty_level: 1,
-    youtube_url: "https://www.youtube.com/watch?v=7MNNGqec0Dc",
+    youtube_url: "https://www.youtube.com/watch?v=SrYBD4yCI84",
     instagram_url: null,
     image_url: null,
     description: "The foundational balance skill that builds wrist strength and body awareness for advanced hand balancing.",
@@ -5677,7 +5677,7 @@ var publicExerciseCatalog_default = [
       "Use a spotter if unsure"
     ],
     difficulty_level: 3,
-    youtube_url: "https://www.youtube.com/watch?v=6Ml8BIc8p6A",
+    youtube_url: "https://www.youtube.com/watch?v=d6_lcWtQDxw",
     instagram_url: null,
     image_url: null,
     description: null,
@@ -5734,7 +5734,7 @@ var publicExerciseCatalog_default = [
       "Return to wall with control"
     ],
     difficulty_level: 3,
-    youtube_url: "https://www.youtube.com/watch?v=aZZ5USlEA7s",
+    youtube_url: "https://www.youtube.com/watch?v=d6_lcWtQDxw",
     instagram_url: null,
     image_url: null,
     description: "In chest-to-wall HS, gently pull feet off wall and balance for 2\u20135 seconds. Return to wall.",
@@ -6006,7 +6006,7 @@ var publicExerciseCatalog_default = [
       "Gaze slightly forward"
     ],
     difficulty_level: 3,
-    youtube_url: "https://www.youtube.com/watch?v=Pu3KsHHM2II",
+    youtube_url: "https://www.youtube.com/watch?v=SrYBD4yCI84",
     instagram_url: null,
     image_url: null,
     description: "Squat, place hands on floor, lean forward and lift feet. The gateway arm balance that connects yoga to planche progression.",
@@ -6040,7 +6040,7 @@ var publicExerciseCatalog_default = [
       "Round upper back"
     ],
     difficulty_level: 3,
-    youtube_url: "https://www.youtube.com/watch?v=Kkwto8PEL2o",
+    youtube_url: "https://www.youtube.com/watch?v=SrYBD4yCI84",
     instagram_url: null,
     image_url: null,
     description: null,

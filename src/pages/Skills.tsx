@@ -1,14 +1,19 @@
+import { readProgressionFocus } from '@/lib/progressionFocus';
+import { useAuth } from '@/providers/AuthProvider';
+import { exerciseBySlug } from '@/lib/skillGraph';
 import { useState } from 'react';
-import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
+import { TrainingLevelControls, LevelProgressReview } from '@/components/Progression/TrainingLevelControls';
 import { readTrainingProfile, writeTrainingProfile } from '@/lib/skillGraph';
 import { minimumTier } from '@/lib/trainingPolicy';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Dumbbell, Crown } from 'lucide-react';
+import { ArrowRight, Dumbbell, Crown, Target } from 'lucide-react';
 import { SKILL_PATHS } from '@/data/skillPaths';
 import { PowerDisciplineIcon, type PowerDiscipline } from '@/components/Brand/PowerDisciplineIcon';
 
 const icons: Record<string, PowerDiscipline> = {planche:'planche',handstand:'handstand',rings:'rings','ring-muscle-up':'muscle-up','straddle-press':'handstand',hspu:'handstand'};
 export default function Skills() {
+  const assessed=Boolean(localStorage.getItem('power-starting-assessment-v1'));
+  const {user}=useAuth();const focus=readProgressionFocus(user?.id||'guest');
   const [search,setSearch]=useState('');const [group,setGroup]=useState('All');const [profile,setProfile]=useState(readTrainingProfile);
   const groups=['All',...new Set(SKILL_PATHS.map(p=>p.group))];
   const visible=SKILL_PATHS.filter(p=>(group==='All'||p.group===group)&&`${p.title} ${p.short}`.toLowerCase().includes(search.toLowerCase()));
@@ -16,6 +21,9 @@ export default function Skills() {
   return <main className="power-simple-page" aria-labelledby="skills-title">
     <header className="power-simple-heading"><div><p className="power-simple-eyebrow"><Crown size={15}/> POWER / TLC</p><h1 id="skills-title">Skills</h1><p>Build control. Choose your progression.</p></div></header>
     {unfinished && <Link className="power-simple-resume" to="/workout"><Dumbbell size={19}/><span>Resume your workout</span><ArrowRight size={18}/></Link>}
+    {focus&&<Link className="power-simple-resume" to={`/skills/${focus.pathId}`}><Target size={19}/><span><strong className="block">Continue your progression</strong><small className="block mt-1 text-muted-foreground">{exerciseBySlug.get(focus.slug)?.name}</small></span><ArrowRight size={18}/></Link>}
+    {!assessed&&<Link className="power-simple-secondary power-starting-link" to="/assessment"><span><strong className="block">Find my starting level</strong><small className="block font-normal text-muted-foreground mt-1">7 quick questions · no max-effort testing</small></span><ArrowRight size={19}/></Link>}
+    <LevelProgressReview profile={profile} onChange={next=>{setProfile(next);writeTrainingProfile(next);}}/>
     <details className="border rounded-xl p-3"><summary className="min-h-11 cursor-pointer font-bold text-sm">L{profile.tier||1} · Level and readiness</summary><TrainingLevelControls profile={profile} onChange={next=>{setProfile(next);writeTrainingProfile(next);}}/></details>
     <label className="block my-4 text-sm font-bold">Find a progression<input className="mt-2 h-12 w-full bg-card border rounded-xl px-3" placeholder="Compression, pike, planche, Stalder…" value={search} onChange={e=>setSearch(e.target.value)}/></label>
     <label className="block text-xs font-bold my-3">Focus<select className="block w-full h-12 rounded-xl border bg-card px-3 mt-2" value={group} onChange={e=>setGroup(e.target.value)}>{groups.map(g=><option key={g}>{g}</option>)}</select></label>

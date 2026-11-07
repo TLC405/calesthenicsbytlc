@@ -1,3 +1,5 @@
+import { readProgressionGoal, writeProgressionGoal, writeProgressionFocus } from '@/lib/progressionFocus';
+import { tutorialState } from '@/lib/mediaAudit';
 import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
 import { FoundationProgram } from '@/components/Progression/FoundationProgram';
 import { minimumTier, readinessReasons } from '@/lib/trainingPolicy';
@@ -24,12 +26,14 @@ export default function SkillStudio() {
   const {skillId}=useParams<{skillId:string}>();
   const path=getSkillPath(skillId);
   const {user}=useAuth(); const owner=user?.id||'guest';
-  const navigate=useNavigate(); const mobile=useIsMobile();
+  const navigate=useNavigate(); const mobile=useIsMobile(640);
   const session=useRef(crypto.randomUUID());
   const [attempts,setAttempts]=useState<SkillAttempt[]>(()=>deviceSkillProgress.read(owner));
   const [profile,setProfile]=useState<SkillTrainingProfile>(readTrainingProfile);
   const [selected,setSelected]=useState(path?.slugs[0]||'');
   const [detailOpen,setDetailOpen]=useState(false);
+  const [showAll,setShowAll]=useState(false);
+  const [goalSlug,setGoalSlug]=useState(()=>readProgressionGoal(owner,path?.id||''));
   const [comfortable,setComfortable]=useState(false);
   const [value,setValue]=useState(''); const [quality,setQuality]=useState(0);
   const [lean,setLean]=useState(''); const [band,setBand]=useState('');
@@ -42,18 +46,19 @@ export default function SkillStudio() {
     window.addEventListener('power-skill-progress',sync);
     return()=>window.removeEventListener('power-skill-progress',sync);
   },[owner]);
-  useEffect(()=>{setSelected(path?.slugs[0]||'');setComfortable(false);setDetailOpen(false);},[path?.id]);
+  useEffect(()=>{setSelected(path?.slugs[0]||'');setComfortable(false);setDetailOpen(false);setShowAll(false);setGoalSlug(readProgressionGoal(owner,path?.id||''));},[path?.id,owner]);
   useEffect(()=>{setValue('');setQuality(0);setComfortable(false);setDiscomfort('');setLean('');setBand('');setNegative('');setClearance('');},[selected]);
   if(!path)return <main className="p-6"><h1>Choose a skill studio</h1><Link to="/library">Return to library</Link></main>;
   const exercise=exerciseBySlug.get(selected);
   const dose=nodeDose(selected); const progress=nodeProgress(selected,attempts);
-  const recommendation=recommendedNode(path.id,attempts,profile);
+  const recommendation=recommendedNode(path.id,attempts,profile,goalSlug);
   const recommended=exerciseBySlug.get(recommendation||'');
   const blockers=trainingBlockers(selected,profile,comfortable&&!discomfort);
   const incoming=relatedNodes(selected);
   const regression=regressionFor(selected);
   const recent=progress.logs.slice(-4).reverse();
   const consistent=path.slugs.filter(s=>nodeProgress(s,attempts).consistent).length;
+  function practice(){if(!recommendation)return;writeProgressionFocus(owner,{pathId:path!.id,slug:recommendation});navigate(`/build?skill=${path!.id}&node=${encodeURIComponent(recommendation)}`);}
   function choose(slug:string){setSelected(slug);setDetailOpen(true);}
   function updateProfile(next:SkillTrainingProfile){setProfile(next);writeTrainingProfile(next);}
   function record() {
@@ -72,7 +77,7 @@ export default function SkillStudio() {
     <div className="flex items-start justify-between gap-3"><div><p className="text-xs uppercase tracking-widest text-primary">{progress.state} · {dose.metric}</p><h2 className="font-display text-2xl font-bold mt-1">{exercise.name}</h2></div><GitBranch className="text-primary h-6 w-6 shrink-0"/></div>
     <VideoPlayer key={selected} youtubeUrl={exercise.youtube_url} title={exercise.name} thumbnailMode />
     <ul className="text-xs text-muted-foreground space-y-2">{(Array.isArray(exercise.cues)?exercise.cues:[]).map((cue,i)=><li key={i}>• {cue}</li>)}</ul>
-    <p className="text-xs text-muted-foreground">{exercise.youtube_url?'Tutorial link available · movement verification pending':'No tutorial mapped. Follow the movement cues below; this drill is not marked video verified.'}</p>
+    <p className="text-xs text-muted-foreground">{tutorialState(exercise.youtube_url,exercise.name).label}</p>
     <div className="grid grid-cols-3 gap-2 text-center text-xs"><div className="rounded-xl border p-3"><strong className="block text-lg">{progress.logs.length}</strong>Attempts</div><div className="rounded-xl border p-3"><strong className="block text-lg">{progress.sessions}</strong>Quality sessions</div><div className="rounded-xl border p-3"><strong className="block text-lg">{progress.logs.length?Math.round(progress.confidence*100)+'%':'—'}</strong>Consistency estimate</div></div>
     <p className="text-[11px] text-muted-foreground">Based on your logs. Consistency needs repeated quality attempts across separate sessions; this is not a coach assessment.</p>
     <section className="rounded-xl border p-3 space-y-2"><h3 className="font-bold text-sm">What supports this movement?</h3>
@@ -100,9 +105,9 @@ export default function SkillStudio() {
     <header className="flex items-center justify-between"><Link className="inline-flex items-center gap-2 min-h-12 text-sm" to="/skills"><ArrowLeft className="h-4 w-4"/>All skills</Link><Link className="text-xs text-primary min-h-12 inline-flex items-center" to="/build">Build a workout</Link></header>
     <section className="power-elevated p-5 sm:p-7"><p className="text-primary text-xs uppercase tracking-widest">POWER / Skill navigation</p><h1 className="font-display text-3xl sm:text-4xl font-bold mt-2">{path.title}</h1><p className="mt-3 text-sm text-muted-foreground">{path.focus}</p><p className="mt-3 text-xs text-muted-foreground">{consistent} consistent / {path.slugs.length} movements · Progress saved on this device for {user?'your account':'guest training'}.</p></section>
 
-    <section className="rounded-xl border border-primary/40 bg-primary/5 p-4 flex flex-wrap justify-between items-center gap-3"><div><p className="text-xs text-primary uppercase tracking-wider">Practice next</p><h2 className="font-bold mt-1">{recommended?.name||'Choose your equipment'}</h2><p className="text-xs text-muted-foreground mt-1">{recommendation?'Based on your level, prerequisites and equipment. Unlogged movements remain unassessed.':'Add the required equipment or choose a Foundation focus day.'}</p></div><Button className="min-h-12" disabled={!recommendation} onClick={()=>recommendation&&choose(recommendation)}>See why <ArrowRight className="h-4 w-4 ml-2"/></Button></section>
-    <TrainingLevelControls profile={profile} onChange={updateProfile}/>{path.id==='foundation'&&<FoundationProgram attempts={attempts}/>}
-    <div className="power-studio-grid"><section aria-label="Skill progression" className="space-y-3"><h2 className="font-bold text-lg">Your path and connections</h2>{path.slugs.map((slug,index)=>{const e=exerciseBySlug.get(slug);const status=nodeProgress(slug,attempts);return e&&<button key={slug} onClick={()=>choose(slug)} aria-pressed={slug===selected} className={`power-studio-node w-full p-4 min-h-24 flex items-center gap-4 rounded-xl border text-left ${slug===selected?'border-primary bg-primary/5':'bg-card'}`}><span className="h-10 w-10 rounded-full border border-primary/40 text-primary grid place-items-center shrink-0">{status.consistent?<Check className="h-5 w-5"/>:String(index+1).padStart(2,'0')}</span><span className="min-w-0 flex-1"><strong className="block text-sm">{e.name}</strong><small className="block text-muted-foreground mt-1">L{minimumTier(slug)} · {readinessReasons(slug,profile).length?'Prep first':status.state} · {status.logs.length} attempts · {relatedNodes(slug).length} connections</small></span><ArrowRight className="w-4 h-4 shrink-0 text-primary"/></button>;})}<p className="text-xs leading-relaxed text-muted-foreground">{path.safety} These paths are guidance, not universal medical or coaching clearance.</p></section>{!mobile&&<aside className="power-elevated power-studio-detail p-5">{detail}</aside>}</div>
-    {mobile&&<Sheet open={detailOpen} onOpenChange={setDetailOpen}><SheetContent side="bottom" className="h-[88dvh] overflow-y-auto rounded-t-2xl px-4 pt-14 pb-12"><SheetTitle className="sr-only">{exercise?.name||path.title} movement details</SheetTitle><SheetDescription className="sr-only">Technique, dependencies, training checks and actual performance logs.</SheetDescription>{detail}</SheetContent></Sheet>}
+    <section className="power-practice-card rounded-2xl border border-primary/40 bg-primary/5 p-4 space-y-3" aria-label="Your current progression step"><p className="text-xs text-primary uppercase tracking-wider">Your current step</p><h2 className="font-bold text-2xl">{recommended?.name||'Choose your equipment'}</h2><p className="text-xs text-muted-foreground">Working toward {exerciseBySlug.get(goalSlug)?.name||path.title}. {recommendation?'Start here at your current level; build repeatable control.':'Add the required equipment or choose Foundation.'}</p><div className="power-practice-actions"><Button className="min-h-12 h-auto whitespace-normal py-3" disabled={!recommendation} onClick={practice}><Play className="h-4 w-4 mr-2 shrink-0"/>Practice this step</Button><Button className="min-h-12 h-auto whitespace-normal py-3" variant="outline" disabled={!recommendation} onClick={()=>recommendation&&choose(recommendation)}>Technique + my results</Button></div><details><summary className="min-h-11 flex items-center cursor-pointer text-xs font-bold">Change my goal</summary><label className="block text-xs">Working toward<select className="block w-full h-12 mt-2 border rounded-xl bg-card px-3" value={goalSlug} onChange={e=>{setGoalSlug(e.target.value);writeProgressionGoal(owner,path.id,e.target.value);}}>{path.slugs.map(slug=><option key={slug} value={slug}>{exerciseBySlug.get(slug)?.name}</option>)}</select></label></details></section>
+    <details className="rounded-xl border p-3"><summary className="min-h-11 flex items-center cursor-pointer text-xs font-bold">Level and equipment readiness · L{profile.tier||1}</summary><TrainingLevelControls profile={profile} onChange={updateProfile}/></details>{path.id==='foundation'&&<FoundationProgram attempts={attempts}/>}
+    <div className="power-studio-grid"><section aria-label="Skill progression" className="space-y-3"><h2 className="font-bold text-lg">Your path and connections</h2>{path.slugs.map((slug,index)=>{const e=exerciseBySlug.get(slug);const status=nodeProgress(slug,attempts);return e&&(!mobile||showAll||index<3||slug===recommendation||slug===selected)&&<button key={slug} onClick={()=>choose(slug)} aria-pressed={slug===selected} className={`power-studio-node w-full p-3 min-h-20 flex items-center gap-4 rounded-xl border text-left ${slug===selected?'border-primary bg-primary/5':'bg-card'}`}><span className="h-10 w-10 rounded-full border border-primary/40 text-primary grid place-items-center shrink-0">{status.consistent?<Check className="h-5 w-5"/>:String(index+1).padStart(2,'0')}</span><span className="min-w-0 flex-1"><strong className="block text-sm">{e.name}</strong><small className="block text-muted-foreground mt-1">L{minimumTier(slug)} · {readinessReasons(slug,profile).length?'Prep first':status.state} · {status.logs.length} attempts · {relatedNodes(slug).length} connections</small></span><ArrowRight className="w-4 h-4 shrink-0 text-primary"/></button>;})}{mobile&&path.slugs.length>3&&<button className="power-assessment-action w-full text-xs" type="button" onClick={()=>setShowAll(v=>!v)}>{showAll?'Show fewer steps':`Show all ${path.slugs.length} steps`}</button>}<p className="text-xs leading-relaxed text-muted-foreground">{path.safety} These paths are guidance, not universal medical or coaching clearance.</p></section>{!mobile&&<aside className="power-elevated power-studio-detail p-5">{detail}</aside>}</div>
+    {mobile&&<Sheet open={detailOpen} onOpenChange={setDetailOpen}><SheetContent side="bottom" className="power-movement-sheet h-[88dvh] overflow-y-auto rounded-t-2xl px-4 pt-14 pb-12"><SheetTitle className="sr-only">{exercise?.name||path.title} movement details</SheetTitle><SheetDescription className="sr-only">Technique, dependencies, training checks and actual performance logs.</SheetDescription>{detail}</SheetContent></Sheet>}
   </div></main>;
 }

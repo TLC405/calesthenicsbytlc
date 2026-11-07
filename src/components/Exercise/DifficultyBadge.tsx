@@ -1,3 +1,4 @@
+import { TRAINING_LEVELS } from '@/lib/trainingPolicy';
 import { cn } from '@/lib/utils';
 
 interface DifficultyBadgeProps {
@@ -6,13 +7,7 @@ interface DifficultyBadgeProps {
   size?: 'sm' | 'md' | 'lg';
 }
 
-const difficultyConfig: Record<number, { label: string; className: string }> = {
-  1: { label: 'Beginner', className: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' },
-  2: { label: 'Easy', className: 'bg-green-500/20 text-green-400 border-green-500/30' },
-  3: { label: 'Intermediate', className: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30' },
-  4: { label: 'Advanced', className: 'bg-orange-500/20 text-orange-400 border-orange-500/30' },
-  5: { label: 'Master', className: 'bg-red-500/20 text-red-400 border-red-500/30' },
-};
+const difficultyConfig=Object.fromEntries(TRAINING_LEVELS.map(level=>[level.id,{label:level.label,className:'bg-primary/10 text-primary border-primary/25'}]));
 
 export function DifficultyBadge({ level, showLabel = true, size = 'sm' }: DifficultyBadgeProps) {
   const config = difficultyConfig[level] || difficultyConfig[1];
@@ -26,7 +21,7 @@ export function DifficultyBadge({ level, showLabel = true, size = 'sm' }: Diffic
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 rounded-full border font-medium',
+        'inline-flex max-w-full items-center gap-1 rounded-full border font-medium',
         config.className,
         sizeClasses[size]
       )}

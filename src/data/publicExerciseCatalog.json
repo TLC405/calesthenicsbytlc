@@ -16,7 +16,7 @@
       "Move slowly"
     ],
     "difficulty_level": 1,
-    "youtube_url": "https://www.youtube.com/watch?v=jvPddSwyo3c",
+    "youtube_url": "https://www.youtube.com/watch?v=GbSC02oU3To",
     "instagram_url": null,
     "image_url": null,
     "description": null,
@@ -50,7 +50,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=moyFIvRrS0s",
     "instagram_url": null,
     "image_url": null,
-    "description": "Made famous by Bruce Lee. Keep the body as one unit\u2014no bending at the hips.",
+    "description": "Made famous by Bruce Lee. Keep the body as one unit—no bending at the hips.",
     "sets_reps": null,
     "chain_group": "lever-core-chain",
     "chain_order": 4,
@@ -258,7 +258,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=ASdvN_XEl_c",
     "instagram_url": null,
     "image_url": null,
-    "description": "Forearm plank with intent. Squeeze everything\u2014this is practice for maintaining tension under load.",
+    "description": "Forearm plank with intent. Squeeze everything—this is practice for maintaining tension under load.",
     "sets_reps": null,
     "chain_group": "plank-chain",
     "chain_order": 1,
@@ -596,7 +596,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=aLA1mUjgdeI",
     "instagram_url": null,
     "image_url": null,
-    "description": "Stand on one leg with the other lifted behind, knee bent at 90\u00b0. A sculptural position that demands balance and posterior chain engagement.",
+    "description": "Stand on one leg with the other lifted behind, knee bent at 90°. A sculptural position that demands balance and posterior chain engagement.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -639,7 +639,7 @@
   {
     "id": "b332a1e5-5624-4e6f-b0ff-340a9d701f0a",
     "slug": "developpe",
-    "name": "D\u00e9velopp\u00e9",
+    "name": "Développé",
     "category": "Flexibility",
     "primary_muscles": [
       "Hip Flexors",
@@ -660,7 +660,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=0oVrVwlpXAI",
     "instagram_url": null,
     "image_url": null,
-    "description": "Draw foot up the standing leg to pass\u00e9 then unfold to full extension. Tests hip flexor strength and hamstring flexibility simultaneously.",
+    "description": "Draw foot up the standing leg to passé then unfold to full extension. Tests hip flexor strength and hamstring flexibility simultaneously.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -670,7 +670,7 @@
   {
     "id": "497ee99f-32a1-41f4-a431-e05a1925c420",
     "slug": "first-position-plie",
-    "name": "First Position Pli\u00e9",
+    "name": "First Position Plié",
     "category": "Flexibility",
     "primary_muscles": [
       "Quads",
@@ -827,7 +827,7 @@
   {
     "id": "373513e9-23c2-4ca7-8376-999945265fe1",
     "slug": "grand-plie",
-    "name": "Grand Pli\u00e9",
+    "name": "Grand Plié",
     "category": "Flexibility",
     "primary_muscles": [
       "Quads",
@@ -849,7 +849,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=k70uyYKlIU0",
     "instagram_url": null,
     "image_url": null,
-    "description": "Full depth pli\u00e9 where heels may rise in first position. Develops deep hip mobility and leg endurance.",
+    "description": "Full depth plié where heels may rise in first position. Develops deep hip mobility and leg endurance.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -954,7 +954,7 @@
   {
     "id": "5338bace-60d1-4f65-bc6b-5be2b898bccf",
     "slug": "passe-balance",
-    "name": "Pass\u00e9 Balance",
+    "name": "Passé Balance",
     "category": "Flexibility",
     "primary_muscles": [
       "Glutes",
@@ -985,7 +985,7 @@
   {
     "id": "e422ec69-0d69-4b80-94d7-71b10895aece",
     "slug": "penche",
-    "name": "Pench\u00e9",
+    "name": "Penché",
     "category": "Flexibility",
     "primary_muscles": [
       "Hamstrings",
@@ -1077,7 +1077,7 @@
   {
     "id": "c08ba021-7f9a-48e2-ada9-b9454e2ecd9b",
     "slug": "releve",
-    "name": "Relev\u00e9",
+    "name": "Relevé",
     "category": "Flexibility",
     "primary_muscles": [
       "Calves",
@@ -1545,7 +1545,7 @@
       "floor"
     ],
     "cues": [
-      "Step length allows 90\u00b0 at both knees",
+      "Step length allows 90° at both knees",
       "Upright torso",
       "Control the descent"
     ],
@@ -3002,7 +3002,7 @@
       "wall"
     ],
     "cues": [
-      "Slow eccentrics (3\u20135s down)",
+      "Slow eccentrics (3–5s down)",
       "Pause at bottom",
       "Press through full ROM"
     ],
@@ -3034,7 +3034,7 @@
       "Lower chest to the incline"
     ],
     "difficulty_level": 1,
-    "youtube_url": "https://www.youtube.com/watch?v=cfns5VRDssk",
+    "youtube_url": "https://www.youtube.com/watch?v=0JUrOH--Kdk",
     "instagram_url": null,
     "image_url": null,
     "description": null,
@@ -3153,7 +3153,7 @@
       "Full lockout"
     ],
     "difficulty_level": 1,
-    "youtube_url": "https://www.youtube.com/watch?v=sposDXWEB0A",
+    "youtube_url": "https://www.youtube.com/watch?v=DG-NcMnfZ_0",
     "instagram_url": null,
     "image_url": null,
     "description": "Hips high in an inverted V. Press straight down and up. Builds HSPU strength.",
@@ -3215,7 +3215,7 @@
       "Hollow body maintained"
     ],
     "difficulty_level": 3,
-    "youtube_url": "https://www.youtube.com/watch?v=LeMk15TN0No",
+    "youtube_url": "https://www.youtube.com/watch?v=6snDOgFBBFA",
     "instagram_url": null,
     "image_url": null,
     "description": "Elbows locked. Push floor away. Hollow body. Hold the line like you're freezing a screenshot.",
@@ -3273,7 +3273,7 @@
     ],
     "cues": [
       "Body one straight line",
-      "Elbows ~45\u00b0",
+      "Elbows ~45°",
       "Full ROM"
     ],
     "difficulty_level": 2,
@@ -3484,7 +3484,7 @@
       "Control descent"
     ],
     "difficulty_level": 1,
-    "youtube_url": "https://www.youtube.com/watch?v=a6YHbXD2XlU",
+    "youtube_url": "https://www.youtube.com/watch?v=5NPvv40gd3Q",
     "instagram_url": null,
     "image_url": null,
     "description": null,
@@ -4516,7 +4516,7 @@
       "floor"
     ],
     "cues": [
-      "Elbows bent 90\u00b0",
+      "Elbows bent 90°",
       "Head close to ground",
       "Balance through wrists"
     ],
@@ -4824,7 +4824,7 @@
     "youtube_url": null,
     "instagram_url": null,
     "image_url": null,
-    "description": "A straight-line forearm stand held away from the wall. The culmination of Pincha training\u2014demands shoulder stability and refined balance.",
+    "description": "A straight-line forearm stand held away from the wall. The culmination of Pincha training—demands shoulder stability and refined balance.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -4972,7 +4972,7 @@
       "Gaze slightly forward"
     ],
     "difficulty_level": 1,
-    "youtube_url": "https://www.youtube.com/watch?v=7MNNGqec0Dc",
+    "youtube_url": "https://www.youtube.com/watch?v=SrYBD4yCI84",
     "instagram_url": null,
     "image_url": null,
     "description": "The foundational balance skill that builds wrist strength and body awareness for advanced hand balancing.",
@@ -5469,7 +5469,7 @@
     "youtube_url": null,
     "instagram_url": null,
     "image_url": null,
-    "description": "Support hold with rings turned out 45\u201390\u00b0. Builds biceps tendon resilience.",
+    "description": "Support hold with rings turned out 45–90°. Builds biceps tendon resilience.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -5499,7 +5499,7 @@
     "youtube_url": "https://www.youtube.com/watch?v=MhEUfmRGr6g",
     "instagram_url": null,
     "image_url": null,
-    "description": "The ultimate elbow lever progression\u2014balancing your entire body on one arm.",
+    "description": "The ultimate elbow lever progression—balancing your entire body on one arm.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -5674,7 +5674,7 @@
       "Use a spotter if unsure"
     ],
     "difficulty_level": 3,
-    "youtube_url": "https://www.youtube.com/watch?v=6Ml8BIc8p6A",
+    "youtube_url": "https://www.youtube.com/watch?v=d6_lcWtQDxw",
     "instagram_url": null,
     "image_url": null,
     "description": null,
@@ -5731,10 +5731,10 @@
       "Return to wall with control"
     ],
     "difficulty_level": 3,
-    "youtube_url": "https://www.youtube.com/watch?v=aZZ5USlEA7s",
+    "youtube_url": "https://www.youtube.com/watch?v=d6_lcWtQDxw",
     "instagram_url": null,
     "image_url": null,
-    "description": "In chest-to-wall HS, gently pull feet off wall and balance for 2\u20135 seconds. Return to wall.",
+    "description": "In chest-to-wall HS, gently pull feet off wall and balance for 2–5 seconds. Return to wall.",
     "sets_reps": null,
     "chain_group": null,
     "chain_order": null,
@@ -6003,7 +6003,7 @@
       "Gaze slightly forward"
     ],
     "difficulty_level": 3,
-    "youtube_url": "https://www.youtube.com/watch?v=Pu3KsHHM2II",
+    "youtube_url": "https://www.youtube.com/watch?v=SrYBD4yCI84",
     "instagram_url": null,
     "image_url": null,
     "description": "Squat, place hands on floor, lean forward and lift feet. The gateway arm balance that connects yoga to planche progression.",
@@ -6037,7 +6037,7 @@
       "Round upper back"
     ],
     "difficulty_level": 3,
-    "youtube_url": "https://www.youtube.com/watch?v=Kkwto8PEL2o",
+    "youtube_url": "https://www.youtube.com/watch?v=SrYBD4yCI84",
     "instagram_url": null,
     "image_url": null,
     "description": null,
@@ -6273,7 +6273,7 @@
       "floor"
     ],
     "cues": [
-      "Back foot at 45\u00b0",
+      "Back foot at 45°",
       "Front knee over ankle",
       "Arms reach high, shoulders down"
     ],
@@ -6507,7 +6507,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Band-assisted pull-up for building toward strict pull-ups.",
-    "sets_reps": "3\u00d78-12",
+    "sets_reps": "3×8-12",
     "chain_group": "pullup-chain",
     "chain_order": 3,
     "visibility": "public",
@@ -6540,7 +6540,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Elite dynamic rotational pull around the bar.",
-    "sets_reps": "3\u00d71",
+    "sets_reps": "3×1",
     "chain_group": null,
     "chain_order": null,
     "visibility": "public",
@@ -6575,7 +6575,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "L-Sit on rings adds instability challenge. Lock elbows, compress hard, point toes.",
-    "sets_reps": "4\u00d715s",
+    "sets_reps": "4×15s",
     "chain_group": "ring-chain",
     "chain_order": 7,
     "visibility": "public",
@@ -6610,7 +6610,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Deep ring dip builds pressing power and shoulder stability. Elbows back not flared, RTO at top.",
-    "sets_reps": "4\u00d78",
+    "sets_reps": "4×8",
     "chain_group": "ring-chain",
     "chain_order": 4,
     "visibility": "public",
@@ -6645,7 +6645,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Push-up on unstable rings builds deep stabilizer strength. RTO at top, controlled descent.",
-    "sets_reps": "4\u00d710",
+    "sets_reps": "4×10",
     "chain_group": "ring-chain",
     "chain_order": 3,
     "visibility": "public",
@@ -6777,7 +6777,7 @@
     "instagram_url": null,
     "image_url": "https://ajcmyrhxmwwjkhlwylyu.supabase.co/storage/v1/object/public/exercisetable/mobility/swimming-freestyle.jpg",
     "description": "Freestyle swimming for active recovery and cardio.",
-    "sets_reps": "20\u00d725m",
+    "sets_reps": "20×25m",
     "chain_group": null,
     "chain_order": null,
     "visibility": "public",
@@ -6810,8 +6810,8 @@
     "youtube_url": "https://www.youtube.com/watch?v=8FWdmFBUNP0",
     "instagram_url": null,
     "image_url": null,
-    "description": "Dead hang to active hang \u2014 pure scapular movement. Foundation for all pulling.",
-    "sets_reps": "3\u00d710-15",
+    "description": "Dead hang to active hang — pure scapular movement. Foundation for all pulling.",
+    "sets_reps": "3×10-15",
     "chain_group": "pullup-chain",
     "chain_order": 2,
     "visibility": "public",
@@ -6848,7 +6848,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Weighted pull-ups for maximal pulling strength.",
-    "sets_reps": "4\u00d73-5",
+    "sets_reps": "4×3-5",
     "chain_group": "pullup-chain",
     "chain_order": 7,
     "visibility": "public",
@@ -6883,7 +6883,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Adjustable-angle horizontal pull on rings. Body straight, pull chest to rings, squeeze shoulder blades.",
-    "sets_reps": "4\u00d712",
+    "sets_reps": "4×12",
     "chain_group": "ring-chain",
     "chain_order": 2,
     "visibility": "public",
@@ -6919,7 +6919,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Walking on hands. Weight shift side to side, controlled steps.",
-    "sets_reps": "3\u00d710m",
+    "sets_reps": "3×10m",
     "chain_group": "handstand-chain",
     "chain_order": 5,
     "visibility": "public",
@@ -6954,7 +6954,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Dynamic kip from standing to handstand.",
-    "sets_reps": "3\u00d73",
+    "sets_reps": "3×3",
     "chain_group": null,
     "chain_order": null,
     "visibility": "public",
@@ -6991,7 +6991,7 @@
     "instagram_url": null,
     "image_url": null,
     "description": "Belly-to-wall straddle handstand for alignment practice.",
-    "sets_reps": "3\u00d75",
+    "sets_reps": "3×5",
     "chain_group": "handstand-chain",
     "chain_order": 2,
     "visibility": "public",

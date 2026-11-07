@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Check } from 'lucide-react';
+import { initialTheme } from '@/lib/themePreference';
 
 interface ThemeOption {
   id: string;
@@ -25,11 +26,11 @@ const themes: ThemeOption[] = [
   {
     id: 'vasa',
     name: 'VASA Studio',
-    tagline: 'Graphite · Racing Red · White',
+    tagline: 'Signal Red · Concrete · Warm Brick',
     primary: '#BE2235',
-    accent: '#54575E',
-    bg: '#F6F7F8',
-    text: '#1a1a2e',
+    accent: '#A79C89',
+    bg: '#EEECE7',
+    text: '#25282B',
   },
   {
     id: 'planet-fitness',
@@ -61,9 +62,7 @@ const themes: ThemeOption[] = [
 ];
 
 export function useTheme() {
-  const [theme, setThemeState] = useState<string>(() => {
-    return typeof localStorage !== 'undefined' ? localStorage.getItem('power-theme') || 'default' : 'default';
-  });
+  const [theme, setThemeState] = useState<string>(initialTheme);
 
   useEffect(() => {
     const root = document.documentElement;

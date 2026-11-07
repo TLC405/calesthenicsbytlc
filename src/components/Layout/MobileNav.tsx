@@ -11,9 +11,9 @@ export function MobileNav() {
   },[key,navigationType]);
   if (pathname === '/workout') return null;
   const items = [
-    { path: '/skills', label: 'Skills', icon: Target, active: pathname === '/' || pathname.startsWith('/skills') },
+    { path: '/skills', label: 'Skills', icon: Target, active: pathname === '/' || pathname === '/assessment' || pathname.startsWith('/skills') },
     { path: '/build', label: 'Workout', icon: Dumbbell, active: ['/build', '/planner', '/train', '/routine-days'].includes(pathname) },
-    { path: '/more', label: 'More', icon: Menu, active: !['/', '/build', '/planner', '/train', '/routine-days'].includes(pathname) && !pathname.startsWith('/skills') },
+    { path: '/more', label: 'More', icon: Menu, active: !['/', '/assessment', '/build', '/planner', '/train', '/routine-days'].includes(pathname) && !pathname.startsWith('/skills') },
   ];
   return <nav className="power-mobile-nav power-simple-nav" aria-label="Primary navigation">
     <div className="power-nav-surface">{items.map(({path,label,icon:Icon,active}) =>

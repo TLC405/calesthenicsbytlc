@@ -1,3 +1,4 @@
+import { minimumTier } from '@/lib/trainingPolicy';
 import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useEffect, useState } from 'react';
 import { Plus, TrendingUp } from 'lucide-react';
@@ -59,11 +60,11 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
         <ScrollArea className="max-h-[min(90dvh,900px)]">
           <div className="p-3 sm:p-5 space-y-4 sm:space-y-5">
             <DialogHeader>
-              <div className="flex items-center gap-2 mb-1.5">
+              <div className="flex flex-wrap items-center gap-2 mb-1.5">
                 <div className="w-1.5 h-5 rounded-full" style={{ backgroundColor: accent }} />
                 <span className="text-[9px] font-mono text-muted-foreground uppercase tracking-wider">{exerciseLabel(currentExercise.slug,currentExercise.category)}</span>
                 {currentExercise.difficulty_level && (
-                  <><span className="text-border">·</span><DifficultyBadge level={currentExercise.difficulty_level} size="sm" /></>
+                  <><span className="text-border">·</span><DifficultyBadge level={minimumTier(currentExercise.slug)} size="sm" /></>
                 )}
               </div>
               <DialogTitle className="text-xl font-display font-bold tracking-tight">{currentExercise.name}</DialogTitle>
@@ -73,7 +74,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
             <ProgressionPathStrip exerciseId={currentExercise.id} chainGroup={currentExercise.chain_group || null} onNavigate={handleChainNavigate} />
 
             <VideoPlayer thumbnailMode youtubeUrl={currentExercise.youtube_url} instagramUrl={currentExercise.instagram_url} title={currentExercise.name}
-              exerciseData={{ recovery_muscle: currentExercise.recovery_muscle, recovery_tendon: currentExercise.recovery_tendon, recovery_nervous: currentExercise.recovery_nervous, primary_muscles: currentExercise.primary_muscles, secondary_muscles: currentExercise.secondary_muscles, stabilizer_muscles: currentExercise.stabilizer_muscles, tendons_involved: currentExercise.tendons_involved, equipment: currentExercise.equipment, cues: currentExercise.cues, sets_reps: currentExercise.sets_reps, difficulty_level: currentExercise.difficulty_level, category: currentExercise.category }} />
+              exerciseData={{ recovery_muscle: currentExercise.recovery_muscle, recovery_tendon: currentExercise.recovery_tendon, recovery_nervous: currentExercise.recovery_nervous, primary_muscles: currentExercise.primary_muscles, secondary_muscles: currentExercise.secondary_muscles, stabilizer_muscles: currentExercise.stabilizer_muscles, tendons_involved: currentExercise.tendons_involved, equipment: currentExercise.equipment, cues: currentExercise.cues, sets_reps: currentExercise.sets_reps, difficulty_level: minimumTier(currentExercise.slug), category: currentExercise.category }} />
 
             {progressions.length > 0 && (
               <div className="rounded-2xl border border-border/40 p-4 bg-accent/20">

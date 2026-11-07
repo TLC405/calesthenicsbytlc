@@ -70,7 +70,7 @@ export function readTrainingProfile(): SkillTrainingProfile {
   } catch {}
   return {tier:1,capabilities:[],equipment:['floor'],safeExit:false};
 }
-export function writeTrainingProfile(profile:SkillTrainingProfile){localStorage.setItem('power-training-profile-v1',JSON.stringify(profile));}
+export function writeTrainingProfile(profile:SkillTrainingProfile){localStorage.setItem('power-training-profile-v1',JSON.stringify(profile));window.dispatchEvent(new Event('power-training-profile'));}
 export function nodeDose(slug:string) {
  const timed=RULES[slug]?.metric==='seconds'||(!RULES[slug]?.metric&&/hold|hang|stand$|planche$|planche-lean|planche-plank|l-sit|tuck-sit|stretch|forward-fold|lever|plank$/.test(slug)&&!/(push-up|kick-up|bail|dip|lift|transition|raise|row)/.test(slug));
  return {metric:timed?'seconds' as const:'reps' as const,target:RULES[slug]?.target||(slug==='ring-muscle-up'?1:slug==='handstand-push-up'?3:timed?8:5),sets:3,restSeconds:/planche|press|hspu|muscle-up/.test(slug)?120:60,stopRule:'End the attempt when technique deteriorates or joint pain appears.'};
@@ -95,13 +95,15 @@ export function trainingBlockers(slug:string,profile:SkillTrainingProfile,comfor
   if(/handstand|press-to-hs|hs-kick-up|stalder-negative|wall-toe-taps/.test(slug)&&!/bail|prep|mobility/.test(slug)&&!profile.safeExit)reasons.push('Confirm that you can safely enter and exit the inversion.');
   return reasons;
 }
-export function recommendedNode(pathId:string,attempts:SkillAttempt[],profile:TrainingReadiness={tier:1}) {
+export function recommendedNode(pathId:string,attempts:SkillAttempt[],profile:TrainingReadiness={tier:1},targetSlug?:string) {
   const path=SKILL_PATHS.find(p=>p.id===pathId);
   if(!path)return null;
-  for(const slug of path.slugs) {
+  const targetIndex=targetSlug?path.slugs.indexOf(targetSlug):-1;
+  const slugs=targetIndex>=0?path.slugs.slice(0,targetIndex+1):path.slugs;
+  for(const slug of slugs) {
     if(!allowedAtLevel(slug,profile)||(profile.equipment&&equipmentReasons(slug,profile.equipment).length)||nodeProgress(slug,attempts).consistent)continue;
     const dependencies=skillEdges.filter(e=>e.to===slug&&e.type==='prerequisite');
     return dependencies.find(e=>allowedAtLevel(e.from,profile)&&(!profile.equipment||!equipmentReasons(e.from,profile.equipment).length)&&!nodeProgress(e.from,attempts).consistent)?.from || slug;
   }
-  return [...path.slugs].reverse().find(slug=>allowedAtLevel(slug,profile)&&(!profile.equipment||!equipmentReasons(slug,profile.equipment).length))||null;
+  return [...slugs].reverse().find(slug=>allowedAtLevel(slug,profile)&&(!profile.equipment||!equipmentReasons(slug,profile.equipment).length))||null;
 }

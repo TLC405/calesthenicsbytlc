@@ -9,6 +9,7 @@ export default function More() {
   const {user}=useAuth();
   const links=[
     {to:'/library',label:'All exercises',note:'Search, videos and your own movements',icon:Library},
+    {to:'/videos',label:'Tutorial checks',note:'Missing sources, playback and movement review',icon:Shield},
     {to:'/dashboard',label:'Your progress',note:'Workout history and recorded activity',icon:TrendingUp},
     {to:'/planner',label:'Custom workout',note:'Add your own exercises and sets',icon:FileText},
   ];

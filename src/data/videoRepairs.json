@@ -1,0 +1,122 @@
+[
+  {
+    "slug": "dead-bug",
+    "name": "Dead Bug",
+    "previousUrl": "https://www.youtube.com/watch?v=jvPddSwyo3c",
+    "url": "https://www.youtube.com/watch?v=GbSC02oU3To",
+    "sourceUrl": "https://www.hingehealth.com/resources/articles/deadbug/",
+    "scope": "exercise",
+    "decision": "corrected",
+    "reason": "Replacement sourced from the named creator or official tutorial page. Playback and exact technique remain separate checks."
+  },
+  {
+    "slug": "wall-push-up",
+    "name": "Wall Push-up",
+    "previousUrl": "https://www.youtube.com/watch?v=a6YHbXD2XlU",
+    "url": "https://www.youtube.com/watch?v=5NPvv40gd3Q",
+    "sourceUrl": "https://www.youtube.com/watch?v=5NPvv40gd3Q",
+    "scope": "exercise",
+    "decision": "corrected",
+    "reason": "Replacement sourced from the named creator or official tutorial page. Playback and exact technique remain separate checks."
+  },
+  {
+    "slug": "incline-push-up",
+    "name": "Incline Push-up",
+    "previousUrl": "https://www.youtube.com/watch?v=cfns5VRDssk",
+    "url": "https://www.youtube.com/watch?v=0JUrOH--Kdk",
+    "sourceUrl": "https://www.youtube.com/watch?v=0JUrOH--Kdk",
+    "scope": "exercise",
+    "decision": "corrected",
+    "reason": "Replacement sourced from the named creator or official tutorial page. Playback and exact technique remain separate checks."
+  },
+  {
+    "slug": "pike-push-up",
+    "name": "Pike Push-up",
+    "previousUrl": "https://www.youtube.com/watch?v=sposDXWEB0A",
+    "url": "https://www.youtube.com/watch?v=DG-NcMnfZ_0",
+    "sourceUrl": "https://www.youtube.com/watch?v=DG-NcMnfZ_0",
+    "scope": "exercise",
+    "decision": "corrected",
+    "reason": "Replacement sourced from the named creator or official tutorial page. Playback and exact technique remain separate checks."
+  },
+  {
+    "slug": "frog-stand",
+    "name": "Frog Stand",
+    "previousUrl": "https://www.youtube.com/watch?v=7MNNGqec0Dc",
+    "url": "https://www.youtube.com/watch?v=SrYBD4yCI84",
+    "sourceUrl": "https://gmb.io/crow-pose/",
+    "scope": "exercise",
+    "decision": "corrected",
+    "reason": "Replacement sourced from the named creator or official tutorial page. Playback and exact technique remain separate checks."
+  },
+  {
+    "slug": "crow-pose",
+    "name": "Crow Pose (Bakasana)",
+    "previousUrl": "https://www.youtube.com/watch?v=Pu3KsHHM2II",
+    "url": "https://www.youtube.com/watch?v=SrYBD4yCI84",
+    "sourceUrl": "https://gmb.io/crow-pose/",
+    "scope": "exercise",
+    "decision": "corrected",
+    "reason": "Replacement sourced from the named creator or official tutorial page. Playback and exact technique remain separate checks."
+  },
+  {
+    "slug": "crow-pose-yoga",
+    "name": "Crow Pose Yoga",
+    "previousUrl": "https://www.youtube.com/watch?v=Kkwto8PEL2o",
+    "url": "https://www.youtube.com/watch?v=SrYBD4yCI84",
+    "sourceUrl": "https://gmb.io/crow-pose/",
+    "scope": "exercise",
+    "decision": "corrected",
+    "reason": "Replacement sourced from the named creator or official tutorial page. Playback and exact technique remain separate checks."
+  },
+  {
+    "slug": "wall-handstand",
+    "name": "Wall Handstand",
+    "previousUrl": "https://www.youtube.com/watch?v=6Ml8BIc8p6A",
+    "url": "https://www.youtube.com/watch?v=d6_lcWtQDxw",
+    "sourceUrl": "https://gmb.io/handstand/",
+    "scope": "family",
+    "decision": "corrected",
+    "reason": "Replacement sourced from the named creator or official tutorial page. Playback and exact technique remain separate checks."
+  },
+  {
+    "slug": "wall-pull-aways",
+    "name": "Wall Pull-Aways",
+    "previousUrl": "https://www.youtube.com/watch?v=aZZ5USlEA7s",
+    "url": "https://www.youtube.com/watch?v=d6_lcWtQDxw",
+    "sourceUrl": "https://gmb.io/handstand/",
+    "scope": "family",
+    "decision": "corrected",
+    "reason": "Replacement sourced from the named creator or official tutorial page. Playback and exact technique remain separate checks."
+  },
+  {
+    "slug": "planche-plank",
+    "name": "Planche Plank",
+    "previousUrl": "https://www.youtube.com/watch?v=LeMk15TN0No",
+    "url": "https://www.youtube.com/watch?v=6snDOgFBBFA",
+    "sourceUrl": "https://gmb.io/planche/",
+    "scope": "family",
+    "decision": "corrected",
+    "reason": "Replacement sourced from the named creator or official tutorial page. Playback and exact technique remain separate checks."
+  },
+  {
+    "slug": "passe-balance",
+    "name": "Pass\u00e9 Balance",
+    "previousUrl": "https://www.youtube.com/watch?v=TqAxGUXxesU",
+    "url": "https://www.youtube.com/watch?v=TqAxGUXxesU",
+    "sourceUrl": "https://www.youtube.com/watch?v=TqAxGUXxesU",
+    "scope": "exercise",
+    "decision": "withheld",
+    "reason": "Mapped source teaches releve rather than the named passe balance."
+  },
+  {
+    "slug": "bent-arm-handstand",
+    "name": "Bent Arm Handstand",
+    "previousUrl": "https://www.youtube.com/watch?v=ozk8SOD3FCY",
+    "url": "https://www.youtube.com/watch?v=ozk8SOD3FCY",
+    "sourceUrl": "https://www.youtube.com/watch?v=ozk8SOD3FCY",
+    "scope": "exercise",
+    "decision": "withheld",
+    "reason": "Mapped source is a dynamic tiger-bend push-up tutorial rather than the named static bent-arm handstand."
+  }
+]

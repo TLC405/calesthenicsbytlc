@@ -1,0 +1,4123 @@
+{
+  "checkedAt": "2026-11-07T04:04:11.301000+00:00",
+  "method": "YouTube oEmbed and thumbnail HTTP checks; playback and movement identity are separate.",
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=GbSC02oU3To",
+      "videoId": "GbSC02oU3To",
+      "checkedAt": "2026-11-07T03:55:32.332255+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Dead Bug: A Guide from Physical Therapists",
+      "creator": "Hinge Health",
+      "creatorUrl": "https://www.youtube.com/@hingehealth",
+      "thumbnailUrl": "https://i.ytimg.com/vi/GbSC02oU3To/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=moyFIvRrS0s",
+      "videoId": "moyFIvRrS0s",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Dragon Flag Tutorial by Antranik",
+      "creator": "Antranik Kizirian",
+      "creatorUrl": "https://www.youtube.com/@AntranikDotOrg",
+      "thumbnailUrl": "https://i.ytimg.com/vi/moyFIvRrS0s/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Pr1ieGZ5atk",
+      "videoId": "Pr1ieGZ5atk",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Hanging Leg Raise | HOW-TO",
+      "creator": "ATHLEAN-X\u2122",
+      "creatorUrl": "https://www.youtube.com/@athleanx",
+      "thumbnailUrl": "https://i.ytimg.com/vi/Pr1ieGZ5atk/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=44ScXWFaVBs",
+      "videoId": "44ScXWFaVBs",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Bodyline Drills with Antranik",
+      "creator": "Antranik Kizirian",
+      "creatorUrl": "https://www.youtube.com/@AntranikDotOrg",
+      "thumbnailUrl": "https://i.ytimg.com/vi/44ScXWFaVBs/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cu0fHp8HCDo",
+      "videoId": "cu0fHp8HCDo",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Best Exercises To Increase L-SIT HOLD",
+      "creator": "FitnessFAQs",
+      "creatorUrl": "https://www.youtube.com/@FitnessFAQs",
+      "thumbnailUrl": "https://i.ytimg.com/vi/cu0fHp8HCDo/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nmwgirgXLYM",
+      "videoId": "nmwgirgXLYM",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Mountain Climber | Boot Camp Workout",
+      "creator": "Howcast",
+      "creatorUrl": "https://www.youtube.com/@howcast",
+      "thumbnailUrl": "https://i.ytimg.com/vi/nmwgirgXLYM/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ASdvN_XEl_c",
+      "videoId": "ASdvN_XEl_c",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Planks for Beginners | Bowflex\u00ae",
+      "creator": "BowFlex",
+      "creatorUrl": "https://www.youtube.com/@bowflex",
+      "thumbnailUrl": "https://i.ytimg.com/vi/ASdvN_XEl_c/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0GN-b3Q4dog",
+      "videoId": "0GN-b3Q4dog",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "The BEST Routine to Learn Press to Handstand FAST",
+      "creator": "CALISTHENICS FAMILY",
+      "creatorUrl": "https://www.youtube.com/@CalisthenicsFamily",
+      "thumbnailUrl": "https://i.ytimg.com/vi/0GN-b3Q4dog/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=3f6tRHAsjFo",
+      "videoId": "3f6tRHAsjFo",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How To Do Pike Leg Lifts - Core Compression Drills",
+      "creator": "More Than Lifting",
+      "creatorUrl": "https://www.youtube.com/@MorethanliftingOfficial",
+      "thumbnailUrl": "https://i.ytimg.com/vi/3f6tRHAsjFo/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=7MNNGqec0Dc",
+      "videoId": "7MNNGqec0Dc",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Seated Straddle Compression Lifts",
+      "creator": "Peak Gymnastics",
+      "creatorUrl": "https://www.youtube.com/@PeakSportScience",
+      "thumbnailUrl": "https://i.ytimg.com/vi/7MNNGqec0Dc/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=K2VljzCC16g",
+      "videoId": "K2VljzCC16g",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Perfect Side Plank | Abs Workout",
+      "creator": "Howcast",
+      "creatorUrl": "https://www.youtube.com/@howcast",
+      "thumbnailUrl": "https://i.ytimg.com/vi/K2VljzCC16g/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_03pCKOv4l4",
+      "videoId": "_03pCKOv4l4",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "The Kipping Toes-to-bar",
+      "creator": "CrossFit",
+      "creatorUrl": "https://www.youtube.com/@crossfit",
+      "thumbnailUrl": "https://i.ytimg.com/vi/_03pCKOv4l4/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=iP2fjvG0g3w",
+      "videoId": "iP2fjvG0g3w",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Exercise Tutorial - V-Up",
+      "creator": "XHIT Daily",
+      "creatorUrl": "https://www.youtube.com/@xhit",
+      "thumbnailUrl": "https://i.ytimg.com/vi/iP2fjvG0g3w/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0TnnnuMqDvQ",
+      "videoId": "0TnnnuMqDvQ",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ACuVnmS7h9A",
+      "videoId": "ACuVnmS7h9A",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "The Arabesque",
+      "creator": "mapleconservatory",
+      "creatorUrl": "https://www.youtube.com/@mapleconservatory",
+      "thumbnailUrl": "https://i.ytimg.com/vi/ACuVnmS7h9A/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=aLA1mUjgdeI",
+      "videoId": "aLA1mUjgdeI",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Help with Attitude Pirouettes | Kathryn Morgan",
+      "creator": "Kathryn Morgan",
+      "creatorUrl": "https://www.youtube.com/@kathryn_morgan",
+      "thumbnailUrl": "https://i.ytimg.com/vi/aLA1mUjgdeI/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=FBib8Rkf0Mg",
+      "videoId": "FBib8Rkf0Mg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0oVrVwlpXAI",
+      "videoId": "0oVrVwlpXAI",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to improve A LA SECONDE & developpe (side extension) at HOME",
+      "creator": "Maria Khoreva (ballet dancer public)",
+      "creatorUrl": "https://www.youtube.com/@MariaKhoreva",
+      "thumbnailUrl": "https://i.ytimg.com/vi/0oVrVwlpXAI/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=DrBhcopjDZQ",
+      "videoId": "DrBhcopjDZQ",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Plie | Ballet Dance",
+      "creator": "HowcastArtsRec",
+      "creatorUrl": "https://www.youtube.com/@HowcastArtsRec",
+      "thumbnailUrl": "https://i.ytimg.com/vi/DrBhcopjDZQ/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=UbFx3kVaqZE",
+      "videoId": "UbFx3kVaqZE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=NpMTNdauaHg",
+      "videoId": "NpMTNdauaHg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=CgKXn1Evj-o",
+      "videoId": "CgKXn1Evj-o",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Grand Battement | Ballet Dance",
+      "creator": "HowcastArtsRec",
+      "creatorUrl": "https://www.youtube.com/@HowcastArtsRec",
+      "thumbnailUrl": "https://i.ytimg.com/vi/CgKXn1Evj-o/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=k70uyYKlIU0",
+      "videoId": "k70uyYKlIU0",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unchecked",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 401,
+      "note": "Provider request could not be checked; this is not evidence that the video is deleted.",
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0MJl4DjEMCE",
+      "videoId": "0MJl4DjEMCE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=IEapGjp_KAo",
+      "videoId": "IEapGjp_KAo",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Get Your Middle Splits Fast: Frog Stretch Mastery",
+      "creator": "GymnastNadiia",
+      "creatorUrl": "https://www.youtube.com/@GymnastNadiia",
+      "thumbnailUrl": "https://i.ytimg.com/vi/IEapGjp_KAo/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=P2B5QMPRqlE",
+      "videoId": "P2B5QMPRqlE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=TqAxGUXxesU",
+      "videoId": "TqAxGUXxesU",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Proper Relev\u00e9 for Beginners",
+      "creator": "Salty Sugar Plum",
+      "creatorUrl": "https://www.youtube.com/@SaltySugarPlum",
+      "thumbnailUrl": "https://i.ytimg.com/vi/TqAxGUXxesU/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_T-qmjgBGx4",
+      "videoId": "_T-qmjgBGx4",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Improve Your Arabesque | Ballet Technique Tips for Higher Extensions & Better Lines",
+      "creator": "Kathryn Morgan",
+      "creatorUrl": "https://www.youtube.com/@kathryn_morgan",
+      "thumbnailUrl": "https://i.ytimg.com/vi/_T-qmjgBGx4/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0LRb4Bf2U1w",
+      "videoId": "0LRb4Bf2U1w",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=87qF6UGrG9o",
+      "videoId": "87qF6UGrG9o",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Ballet Glossary Arm Positions",
+      "creator": "Ballet Beautiful",
+      "creatorUrl": "https://www.youtube.com/@BalletBeautiful",
+      "thumbnailUrl": "https://i.ytimg.com/vi/87qF6UGrG9o/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=unv8TS3JO6U",
+      "videoId": "unv8TS3JO6U",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Releve | Ballet Dance",
+      "creator": "HowcastArtsRec",
+      "creatorUrl": "https://www.youtube.com/@HowcastArtsRec",
+      "thumbnailUrl": "https://i.ytimg.com/vi/unv8TS3JO6U/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=z-fYrgfn61o",
+      "videoId": "z-fYrgfn61o",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Rond de Jambe | Ballet Dance",
+      "creator": "HowcastArtsRec",
+      "creatorUrl": "https://www.youtube.com/@HowcastArtsRec",
+      "thumbnailUrl": "https://i.ytimg.com/vi/z-fYrgfn61o/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=HhdLEp2pETg",
+      "videoId": "HhdLEp2pETg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Straddle Compression Lifts",
+      "creator": "Breazeal Gymnastics",
+      "creatorUrl": "https://www.youtube.com/@BreazealGymnastics",
+      "thumbnailUrl": "https://i.ytimg.com/vi/HhdLEp2pETg/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=3g1fvGDevIg",
+      "videoId": "3g1fvGDevIg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=g_tea8ZNk5A",
+      "videoId": "g_tea8ZNk5A",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "15 Min. Full Body Stretch | Daily Routine for Flexibility, Mobility & Relaxation | DAY 7",
+      "creator": "Mady Morrison",
+      "creatorUrl": "https://www.youtube.com/@madymorrison",
+      "thumbnailUrl": "https://i.ytimg.com/vi/g_tea8ZNk5A/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=b7K9TlBdSzE",
+      "videoId": "b7K9TlBdSzE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=zeSVHYSMItg",
+      "videoId": "zeSVHYSMItg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Tendu | Ballet Dance",
+      "creator": "HowcastArtsRec",
+      "creatorUrl": "https://www.youtube.com/@HowcastArtsRec",
+      "thumbnailUrl": "https://i.ytimg.com/vi/zeSVHYSMItg/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cB0cOX7gePg",
+      "videoId": "cB0cOX7gePg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Proper Bodyweight Squat | Nerd Fitness",
+      "creator": "Nerd Fitness",
+      "creatorUrl": "https://www.youtube.com/@NerdFitness",
+      "thumbnailUrl": "https://i.ytimg.com/vi/cB0cOX7gePg/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=jWD8_iBkND0",
+      "videoId": "jWD8_iBkND0",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Split Squat and Reverse Lunge (6 min) | Dana-Farber Zakim Center Remote Programming",
+      "creator": "Dana-Farber Cancer Institute",
+      "creatorUrl": "https://www.youtube.com/@danafarber",
+      "thumbnailUrl": "https://i.ytimg.com/vi/jWD8_iBkND0/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=gwLzBJYoWlI",
+      "videoId": "gwLzBJYoWlI",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do Calf Raises",
+      "creator": "LIVESTRONG",
+      "creatorUrl": "https://www.youtube.com/@livestrongcom",
+      "thumbnailUrl": "https://i.ytimg.com/vi/gwLzBJYoWlI/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=JaCbmoDqUc4",
+      "videoId": "JaCbmoDqUc4",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How To Cossack Squat (Beginner to Advanced)",
+      "creator": "Flexibility Maestro",
+      "creatorUrl": "https://www.youtube.com/@Flexibility.Maestro",
+      "thumbnailUrl": "https://i.ytimg.com/vi/JaCbmoDqUc4/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=8bbE64NuDTU",
+      "videoId": "8bbE64NuDTU",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How To: Glute Bridge",
+      "creator": "ScottHermanFitness",
+      "creatorUrl": "https://www.youtube.com/@ScottHermanFitness",
+      "thumbnailUrl": "https://i.ytimg.com/vi/8bbE64NuDTU/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=A-cFYGvaXEc",
+      "videoId": "A-cFYGvaXEc",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=QOVaHwm-Q6U",
+      "videoId": "QOVaHwm-Q6U",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Bowflex\u00ae How-To | Lunges for Beginners",
+      "creator": "BowFlex",
+      "creatorUrl": "https://www.youtube.com/@bowflex",
+      "thumbnailUrl": "https://i.ytimg.com/vi/QOVaHwm-Q6U/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=6NCN6kOagfY",
+      "videoId": "6NCN6kOagfY",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Nordic Hamstring Curl",
+      "creator": "The Kneesovertoesguy",
+      "creatorUrl": "https://www.youtube.com/@TheKneesovertoesguy",
+      "thumbnailUrl": "https://i.ytimg.com/vi/6NCN6kOagfY/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=2YW5b4U7d2c",
+      "videoId": "2YW5b4U7d2c",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Pistol squats for complete beginners",
+      "creator": "Gomti Mehta",
+      "creatorUrl": "https://www.youtube.com/@GomtiMehta",
+      "thumbnailUrl": "https://i.ytimg.com/vi/2YW5b4U7d2c/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Oj7SRLkAotU",
+      "videoId": "Oj7SRLkAotU",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=R-oglfAMCQo",
+      "videoId": "R-oglfAMCQo",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=WCFCdxzFBa4",
+      "videoId": "WCFCdxzFBa4",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to do the STEP UP: technique and common mistakes",
+      "creator": "Get Exercise Confident",
+      "creatorUrl": "https://www.youtube.com/@GetExerciseConfident",
+      "thumbnailUrl": "https://i.ytimg.com/vi/WCFCdxzFBa4/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=BMUmyW1jepU",
+      "videoId": "BMUmyW1jepU",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "90/90 Hip Switches | Improve Hip Mobility & Rotational Control",
+      "creator": "uoasportsagility",
+      "creatorUrl": "https://www.youtube.com/@uoasportsagility",
+      "thumbnailUrl": "https://i.ytimg.com/vi/BMUmyW1jepU/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=kqnua4rHVVA",
+      "videoId": "kqnua4rHVVA",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Cat Cow Pose for Energy | Yoga",
+      "creator": "Howcast",
+      "creatorUrl": "https://www.youtube.com/@howcast",
+      "thumbnailUrl": "https://i.ytimg.com/vi/kqnua4rHVVA/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0wzrgyAurT8",
+      "videoId": "0wzrgyAurT8",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Deep Squat Hold",
+      "creator": "Strength Side",
+      "creatorUrl": "https://www.youtube.com/@Strengthside",
+      "thumbnailUrl": "https://i.ytimg.com/vi/0wzrgyAurT8/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=yq9MtXJb2Q4",
+      "videoId": "yq9MtXJb2Q4",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nYS0R4c3qCA",
+      "videoId": "nYS0R4c3qCA",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to do a Jefferson Curl",
+      "creator": "Emmet Louis",
+      "creatorUrl": "https://www.youtube.com/@EmmetLouisM3",
+      "thumbnailUrl": "https://i.ytimg.com/vi/nYS0R4c3qCA/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=2nnhHj5YAIw",
+      "videoId": "2nnhHj5YAIw",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=vP8YmmRMz6I",
+      "videoId": "vP8YmmRMz6I",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Shoulder Dislocates for Shoulder Flexibility",
+      "creator": "GMB Fitness (Praxis)",
+      "creatorUrl": "https://www.youtube.com/@gmbfit",
+      "thumbnailUrl": "https://i.ytimg.com/vi/vP8YmmRMz6I/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=LT_dFRnmdGs",
+      "videoId": "LT_dFRnmdGs",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Exercise to improve hunchback posture   forward head carriage correction",
+      "creator": "rekrain",
+      "creatorUrl": "https://www.youtube.com/@rekrain",
+      "thumbnailUrl": "https://i.ytimg.com/vi/LT_dFRnmdGs/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-CiWQ2IvY34",
+      "videoId": "-CiWQ2IvY34",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "The World's Greatest Stretch (Mobility Exercise) by Squat University",
+      "creator": "Squat University",
+      "creatorUrl": "https://www.youtube.com/@SquatUniversity",
+      "thumbnailUrl": "https://i.ytimg.com/vi/-CiWQ2IvY34/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=mSZWSQSSEjE",
+      "videoId": "mSZWSQSSEjE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Wrist Strength & Mobility Exercises",
+      "creator": "GMB Fitness (Praxis)",
+      "creatorUrl": "https://www.youtube.com/@gmbfit",
+      "thumbnailUrl": "https://i.ytimg.com/vi/mSZWSQSSEjE/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=HoE-C85ZlCE",
+      "videoId": "HoE-C85ZlCE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Active Hang",
+      "creator": "Ido Portal",
+      "creatorUrl": "https://www.youtube.com/@portaldo",
+      "thumbnailUrl": "https://i.ytimg.com/vi/HoE-C85ZlCE/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=AcBYUhgk2_s",
+      "videoId": "AcBYUhgk2_s",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Unlock Archer and Diamond Push-Ups | Hand Position Guide",
+      "creator": "Cali Hoss | Calisthenics ",
+      "creatorUrl": "https://www.youtube.com/@CaliHoss",
+      "thumbnailUrl": "https://i.ytimg.com/vi/AcBYUhgk2_s/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Fl0UMfdEzsE",
+      "videoId": "Fl0UMfdEzsE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Inverted Rows (Beginner to Advanced Progressions)",
+      "creator": "Zack Henderson",
+      "creatorUrl": "https://www.youtube.com/@ZackHenderson",
+      "thumbnailUrl": "https://i.ytimg.com/vi/Fl0UMfdEzsE/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=e1YSApl-QcM",
+      "videoId": "e1YSApl-QcM",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "PERFECT CHIN-UPS | The Only Chin-up Tutorial You'll Ever Need (Full Guide)",
+      "creator": "Simonster Strength",
+      "creatorUrl": "https://www.youtube.com/@SimonsterStrength",
+      "thumbnailUrl": "https://i.ytimg.com/vi/e1YSApl-QcM/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=fq9gDvNZQ2c",
+      "videoId": "fq9gDvNZQ2c",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How To Dead Hang Correctly?",
+      "creator": "FitnessFAQs",
+      "creatorUrl": "https://www.youtube.com/@FitnessFAQs",
+      "thumbnailUrl": "https://i.ytimg.com/vi/fq9gDvNZQ2c/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=AGhb8V8M758",
+      "videoId": "AGhb8V8M758",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Front Lever for Beginners (ALL PROGRESSIONS)",
+      "creator": "FitnessFAQs",
+      "creatorUrl": "https://www.youtube.com/@FitnessFAQs",
+      "thumbnailUrl": "https://i.ytimg.com/vi/AGhb8V8M758/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=NtS6MYnIYaw",
+      "videoId": "NtS6MYnIYaw",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=lU4v7Bfginw",
+      "videoId": "lU4v7Bfginw",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=eGo4IYlbE5g",
+      "videoId": "eGo4IYlbE5g",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "The Perfect Pull Up  - Do it right!",
+      "creator": "Calisthenicmovement",
+      "creatorUrl": "https://www.youtube.com/@calimove",
+      "thumbnailUrl": "https://i.ytimg.com/vi/eGo4IYlbE5g/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=eworH_YuaOM",
+      "videoId": "eworH_YuaOM",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Bar Pullover | Step-by-Step Calisthenics Tutorial",
+      "creator": "The Sustainable Training Method",
+      "creatorUrl": "https://www.youtube.com/@Sustainable-Training-Method",
+      "thumbnailUrl": "https://i.ytimg.com/vi/eworH_YuaOM/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=3EFH7EEorOU",
+      "videoId": "3EFH7EEorOU",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Ring Row, Neutral Grip",
+      "creator": "The Sustainable Training Method",
+      "creatorUrl": "https://www.youtube.com/@Sustainable-Training-Method",
+      "thumbnailUrl": "https://i.ytimg.com/vi/3EFH7EEorOU/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-ZIpSoTRsuE",
+      "videoId": "-ZIpSoTRsuE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Scapular Pull Ups (Beginner to Advanced Progressions)",
+      "creator": "Zack Henderson",
+      "creatorUrl": "https://www.youtube.com/@ZackHenderson",
+      "thumbnailUrl": "https://i.ytimg.com/vi/-ZIpSoTRsuE/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=K9xHRYyoFe0",
+      "videoId": "K9xHRYyoFe0",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=UpP-77-GeLA",
+      "videoId": "UpP-77-GeLA",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Perform a Towel Dead Hang",
+      "creator": "Nottingham Physio",
+      "creatorUrl": "https://www.youtube.com/@nottinghamphysio",
+      "thumbnailUrl": "https://i.ytimg.com/vi/UpP-77-GeLA/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=tiST0v9pXbY",
+      "videoId": "tiST0v9pXbY",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=zNxRb9BaiPE",
+      "videoId": "zNxRb9BaiPE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=LgPG0MZPI84",
+      "videoId": "LgPG0MZPI84",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do Planche in 2026? Full Guide",
+      "creator": "Andry Strong",
+      "creatorUrl": "https://www.youtube.com/@andrystrong1",
+      "thumbnailUrl": "https://i.ytimg.com/vi/LgPG0MZPI84/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=hPJvnA6Z2pg",
+      "videoId": "hPJvnA6Z2pg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Archer Push Up Made Easier in 3 Simple Steps #calisthenics #shorts #pushups #tutorial",
+      "creator": "Bachawals Calisthenics ",
+      "creatorUrl": "https://www.youtube.com/@Bachawals",
+      "thumbnailUrl": "https://i.ytimg.com/vi/hPJvnA6Z2pg/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=SKPab2YC8BE",
+      "videoId": "SKPab2YC8BE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How To: Decline Push-Up",
+      "creator": "ScottHermanFitness",
+      "creatorUrl": "https://www.youtube.com/@ScottHermanFitness",
+      "thumbnailUrl": "https://i.ytimg.com/vi/SKPab2YC8BE/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=J0DnG1_S3lg",
+      "videoId": "J0DnG1_S3lg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=tQhrk6WMcKw",
+      "videoId": "tQhrk6WMcKw",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Freestanding Handstand Push-Up Tutorial",
+      "creator": "Doctor Yaad",
+      "creatorUrl": "https://www.youtube.com/@DoctorYaad",
+      "thumbnailUrl": "https://i.ytimg.com/vi/tQhrk6WMcKw/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0JUrOH--Kdk",
+      "videoId": "0JUrOH--Kdk",
+      "checkedAt": "2026-11-07T03:55:32.332255+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to do an Incline Push-Up | Proper Form & Technique | NASM",
+      "creator": "National Academy of Sports Medicine (NASM)",
+      "creatorUrl": "https://www.youtube.com/@NasmOrgPersonalTrainer",
+      "thumbnailUrl": "https://i.ytimg.com/vi/0JUrOH--Kdk/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=IODxDxX7oi4",
+      "videoId": "IODxDxX7oi4",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "The Perfect Push Up | Do it right!",
+      "creator": "Calisthenicmovement",
+      "creatorUrl": "https://www.youtube.com/@calimove",
+      "thumbnailUrl": "https://i.ytimg.com/vi/IODxDxX7oi4/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=85u_8mz5lBA",
+      "videoId": "85u_8mz5lBA",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Parallel Bars Dips: Perfect Form & Common Mistakes",
+      "creator": "One Minute Tutorial",
+      "creatorUrl": "https://www.youtube.com/@OneMinuteTutorial-1",
+      "thumbnailUrl": "https://i.ytimg.com/vi/85u_8mz5lBA/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=2z8JmcrW-As",
+      "videoId": "2z8JmcrW-As",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "The Perfect Dip  - Do it right",
+      "creator": "Calisthenicmovement",
+      "creatorUrl": "https://www.youtube.com/@calimove",
+      "thumbnailUrl": "https://i.ytimg.com/vi/2z8JmcrW-As/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=DG-NcMnfZ_0",
+      "videoId": "DG-NcMnfZ_0",
+      "checkedAt": "2026-11-07T03:55:32.332255+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Instant Pike Push-Up Fix (Do More Reps)",
+      "creator": "FitnessFAQs",
+      "creatorUrl": "https://www.youtube.com/@FitnessFAQs",
+      "thumbnailUrl": "https://i.ytimg.com/vi/DG-NcMnfZ_0/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ghNIgUG8_ZY",
+      "videoId": "ghNIgUG8_ZY",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "The Smartest Planche Workout Techniques (YOU MUST TRY)",
+      "creator": "FitnessFAQs",
+      "creatorUrl": "https://www.youtube.com/@FitnessFAQs",
+      "thumbnailUrl": "https://i.ytimg.com/vi/ghNIgUG8_ZY/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=6snDOgFBBFA",
+      "videoId": "6snDOgFBBFA",
+      "checkedAt": "2026-11-07T03:55:32.332255+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Straddle Planche Tutorial",
+      "creator": "GMB Fitness (Praxis)",
+      "creatorUrl": "https://www.youtube.com/@gmbfit",
+      "thumbnailUrl": "https://i.ytimg.com/vi/6snDOgFBBFA/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=C-SML6xnVkI",
+      "videoId": "C-SML6xnVkI",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Pseudo planche push-up",
+      "creator": "Ryan Ford",
+      "creatorUrl": "https://www.youtube.com/@ryanford1",
+      "thumbnailUrl": "https://i.ytimg.com/vi/C-SML6xnVkI/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=RFODjZQos8E",
+      "videoId": "RFODjZQos8E",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Ring Dip Progressions from Beginner to Advanced with Antranik",
+      "creator": "Antranik Kizirian",
+      "creatorUrl": "https://www.youtube.com/@AntranikDotOrg",
+      "thumbnailUrl": "https://i.ytimg.com/vi/RFODjZQos8E/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=F5HVuHBBXaw",
+      "videoId": "F5HVuHBBXaw",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ozk8SOD3FCY",
+      "videoId": "ozk8SOD3FCY",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Teaching you how to do Tiger Bend Push Ups \ud83d\udd25 #tiger #bend #pushups #calisthenics #ytshorts #tutorial",
+      "creator": "Calixpert",
+      "creatorUrl": "https://www.youtube.com/@Calixpert",
+      "thumbnailUrl": "https://i.ytimg.com/vi/ozk8SOD3FCY/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=qvWvfZuUN4k",
+      "videoId": "qvWvfZuUN4k",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to do a Tucked Planche | Watch all active muscles",
+      "creator": "Muscle & Motion",
+      "creatorUrl": "https://www.youtube.com/@MuscleandMotion",
+      "thumbnailUrl": "https://i.ytimg.com/vi/qvWvfZuUN4k/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=5NPvv40gd3Q",
+      "videoId": "5NPvv40gd3Q",
+      "checkedAt": "2026-11-07T03:55:32.332255+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "6: Push-ups against a wall",
+      "creator": "Sunnybrook Hospital",
+      "creatorUrl": "https://www.youtube.com/@SunnybrookHospital",
+      "thumbnailUrl": "https://i.ytimg.com/vi/5NPvv40gd3Q/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=GbPOEUGfWVY",
+      "videoId": "GbPOEUGfWVY",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=TIMMk2mEPeE",
+      "videoId": "TIMMk2mEPeE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Master the False Grip to Unlock Muscle-Ups on Gymnastic Rings",
+      "creator": "GMB Fitness (Praxis)",
+      "creatorUrl": "https://www.youtube.com/@gmbfit",
+      "thumbnailUrl": "https://i.ytimg.com/vi/TIMMk2mEPeE/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=vpPjY4BtJuI",
+      "videoId": "vpPjY4BtJuI",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Master the Ring Muscle Up | 4 Best Exercises",
+      "creator": "FitnessFAQs",
+      "creatorUrl": "https://www.youtube.com/@FitnessFAQs",
+      "thumbnailUrl": "https://i.ytimg.com/vi/vpPjY4BtJuI/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=PVDP_WVkJtI",
+      "videoId": "PVDP_WVkJtI",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=olA58oW-21A",
+      "videoId": "olA58oW-21A",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Chest To Wall Handstand | STRONG & STRAIGHT Handstands",
+      "creator": "Andrew Alinda",
+      "creatorUrl": "https://www.youtube.com/@CaliToTheCrowd",
+      "thumbnailUrl": "https://i.ytimg.com/vi/olA58oW-21A/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=hBaHx4wPMbA",
+      "videoId": "hBaHx4wPMbA",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=MhEUfmRGr6g",
+      "videoId": "MhEUfmRGr6g",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=FtTzceXNMPw",
+      "videoId": "FtTzceXNMPw",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Straddle Handstand - A Step-By-Step Guide (Follow Along) #handstandtips #handstandtutorial #straddle",
+      "creator": "Ed Liu Hand Balance",
+      "creatorUrl": "https://www.youtube.com/@EdLiuHandBalance",
+      "thumbnailUrl": "https://i.ytimg.com/vi/FtTzceXNMPw/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=HXVtKWV_sKY",
+      "videoId": "HXVtKWV_sKY",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to do an Elbow Stand in 5 minutes!",
+      "creator": "Anna McNulty",
+      "creatorUrl": "https://www.youtube.com/@annamcnulty",
+      "thumbnailUrl": "https://i.ytimg.com/vi/HXVtKWV_sKY/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Xz-6EI1abKo",
+      "videoId": "Xz-6EI1abKo",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Still Rings Basics: Master the False Grip With Antranik",
+      "creator": "Antranik Kizirian",
+      "creatorUrl": "https://www.youtube.com/@AntranikDotOrg",
+      "thumbnailUrl": "https://i.ytimg.com/vi/Xz-6EI1abKo/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=cjL0-4DbpYY",
+      "videoId": "cjL0-4DbpYY",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Pincha Mayurasana - Forearm Stand with Kino Macgregor",
+      "creator": "KinoYoga",
+      "creatorUrl": "https://www.youtube.com/@KinoYoga",
+      "thumbnailUrl": "https://i.ytimg.com/vi/cjL0-4DbpYY/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=d6_lcWtQDxw",
+      "videoId": "d6_lcWtQDxw",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Handstand Progression for Perfect Freestanding Handstands",
+      "creator": "GMB Fitness (Praxis)",
+      "creatorUrl": "https://www.youtube.com/@gmbfit",
+      "thumbnailUrl": "https://i.ytimg.com/vi/d6_lcWtQDxw/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=SrYBD4yCI84",
+      "videoId": "SrYBD4yCI84",
+      "checkedAt": "2026-11-07T03:55:32.332255+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Crow Pose Tutorial",
+      "creator": "GMB Fitness (Praxis)",
+      "creatorUrl": "https://www.youtube.com/@gmbfit",
+      "thumbnailUrl": "https://i.ytimg.com/vi/SrYBD4yCI84/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=K2uOvPYeMi4",
+      "videoId": "K2uOvPYeMi4",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=nShYhQLCbgE",
+      "videoId": "nShYhQLCbgE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to bail out from your handstand!",
+      "creator": "UMove Fitness",
+      "creatorUrl": "https://www.youtube.com/@umovefitnesssg",
+      "thumbnailUrl": "https://i.ytimg.com/vi/nShYhQLCbgE/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_ZTSkpBjhu0",
+      "videoId": "_ZTSkpBjhu0",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Tripod Headstand Tutorial for Beginners!",
+      "creator": "BYG Method - Kerri Verna",
+      "creatorUrl": "https://www.youtube.com/@beachyogagirl",
+      "thumbnailUrl": "https://i.ytimg.com/vi/_ZTSkpBjhu0/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=NWskCNO3rCo",
+      "videoId": "NWskCNO3rCo",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=2PDPDqOa_cg",
+      "videoId": "2PDPDqOa_cg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Q7dB1jSJpLk",
+      "videoId": "Q7dB1jSJpLk",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=6U6W3NjhJgo",
+      "videoId": "6U6W3NjhJgo",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=p22IDJHqHKE",
+      "videoId": "p22IDJHqHKE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=bn-HZm7bpy0",
+      "videoId": "bn-HZm7bpy0",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Planche For Beginners Made Easy",
+      "creator": "FitnessFAQs",
+      "creatorUrl": "https://www.youtube.com/@FitnessFAQs",
+      "thumbnailUrl": "https://i.ytimg.com/vi/bn-HZm7bpy0/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=9PKChU9Ozs8",
+      "videoId": "9PKChU9Ozs8",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Still Rings Basics: Master the RTO Support Hold with Antranik",
+      "creator": "Antranik Kizirian",
+      "creatorUrl": "https://www.youtube.com/@AntranikDotOrg",
+      "thumbnailUrl": "https://i.ytimg.com/vi/9PKChU9Ozs8/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Ry6PmcQ5qq0",
+      "videoId": "Ry6PmcQ5qq0",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=S4QLsLT2wx8",
+      "videoId": "S4QLsLT2wx8",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "You Need These to Learn Press Handstand in 2026",
+      "creator": "Paul Twyman",
+      "creatorUrl": "https://www.youtube.com/@PaulTwyman",
+      "thumbnailUrl": "https://i.ytimg.com/vi/S4QLsLT2wx8/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=-xPx6-rbcfs",
+      "videoId": "-xPx6-rbcfs",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Straddle Press to Handstand Tutorial - Strength and Technique",
+      "creator": "GMB Fitness (Praxis)",
+      "creatorUrl": "https://www.youtube.com/@gmbfit",
+      "thumbnailUrl": "https://i.ytimg.com/vi/-xPx6-rbcfs/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0CXqbR8y8v4",
+      "videoId": "0CXqbR8y8v4",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=wPM8icPu6H8",
+      "videoId": "wPM8icPu6H8",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How To Do A Glute Bridge | The Right Way | Well+Good",
+      "creator": "Well+Good",
+      "creatorUrl": "https://www.youtube.com/@Wellandgood",
+      "thumbnailUrl": "https://i.ytimg.com/vi/wPM8icPu6H8/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=VPp5n2MZO4c",
+      "videoId": "VPp5n2MZO4c",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=semq253gJOc",
+      "videoId": "semq253gJOc",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=2MJGg-dUKh0",
+      "videoId": "2MJGg-dUKh0",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Beginners Yoga: How to do Balasana - Child's Pose",
+      "creator": "Yoga & You",
+      "creatorUrl": "https://www.youtube.com/@VentunoYoga",
+      "thumbnailUrl": "https://i.ytimg.com/vi/2MJGg-dUKh0/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=n6jrC6WeF84",
+      "videoId": "n6jrC6WeF84",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Cobra Pose - Yoga With Adriene",
+      "creator": "Yoga With Adriene",
+      "creatorUrl": "https://www.youtube.com/@yogawithadriene",
+      "thumbnailUrl": "https://i.ytimg.com/vi/n6jrC6WeF84/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=j97SSGsnCAQ",
+      "videoId": "j97SSGsnCAQ",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Downward Dog - Downward Facing Dog Yoga Pose",
+      "creator": "Yoga With Adriene",
+      "creatorUrl": "https://www.youtube.com/@yogawithadriene",
+      "thumbnailUrl": "https://i.ytimg.com/vi/j97SSGsnCAQ/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=pMoBDGa_BT0",
+      "videoId": "pMoBDGa_BT0",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=0RQVD6viVXo",
+      "videoId": "0RQVD6viVXo",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Correctly Practice Pigeon Pose | Learning Yoga",
+      "creator": "YouAligned",
+      "creatorUrl": "https://www.youtube.com/@youaligned",
+      "thumbnailUrl": "https://i.ytimg.com/vi/0RQVD6viVXo/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=yVE4XXFFO70",
+      "videoId": "yVE4XXFFO70",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Tree Pose - Vrksasana - Yoga With Adriene",
+      "creator": "Yoga With Adriene",
+      "creatorUrl": "https://www.youtube.com/@yogawithadriene",
+      "thumbnailUrl": "https://i.ytimg.com/vi/yVE4XXFFO70/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=S6gB0QHbWFE",
+      "videoId": "S6gB0QHbWFE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to do Trikonasana - Triangle Pose",
+      "creator": "Yoga & You",
+      "creatorUrl": "https://www.youtube.com/@VentunoYoga",
+      "thumbnailUrl": "https://i.ytimg.com/vi/S6gB0QHbWFE/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=k4qaVoAbeHM",
+      "videoId": "k4qaVoAbeHM",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do a Warrior One | Yoga",
+      "creator": "Howcast",
+      "creatorUrl": "https://www.youtube.com/@howcast",
+      "thumbnailUrl": "https://i.ytimg.com/vi/k4qaVoAbeHM/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=QMr0JJfEgbM",
+      "videoId": "QMr0JJfEgbM",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=t-VgOxS9zRQ",
+      "videoId": "t-VgOxS9zRQ",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "8\ufe0f\u20e3 Levels of Warrior Three \ud83d\udca5  Day 4\ufe0f\u20e3 Hands Clasped Behind \ud83e\udd1d",
+      "creator": "Shana Meyerson YOGAthletica",
+      "creatorUrl": "https://www.youtube.com/@YOGAthletica",
+      "thumbnailUrl": "https://i.ytimg.com/vi/t-VgOxS9zRQ/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=ViPnKbrc_bI",
+      "videoId": "ViPnKbrc_bI",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "unavailable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "unavailable",
+      "httpStatus": 404,
+      "note": "YouTube returned no public oEmbed record."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=4yE-XGDWJPg",
+      "videoId": "4yE-XGDWJPg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to do Banded Assisted Pull-Ups",
+      "creator": "REP",
+      "creatorUrl": "https://www.youtube.com/@repfitnessequipment",
+      "thumbnailUrl": "https://i.ytimg.com/vi/4yE-XGDWJPg/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=BVw3aBFypHA",
+      "videoId": "BVw3aBFypHA",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "360 Pull - Calisthenics Ring Strength for Intermediate to Advanced",
+      "creator": "Paul Twyman",
+      "creatorUrl": "https://www.youtube.com/@PaulTwyman",
+      "thumbnailUrl": "https://i.ytimg.com/vi/BVw3aBFypHA/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=eywCpp0p7lg",
+      "videoId": "eywCpp0p7lg",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "The Perfect L-Sit Tutorial - Beginner Friendly",
+      "creator": "STRIQfit",
+      "creatorUrl": "https://www.youtube.com/@STRIQfit",
+      "thumbnailUrl": "https://i.ytimg.com/vi/eywCpp0p7lg/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=7FRwuB1_l7U",
+      "videoId": "7FRwuB1_l7U",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Ring Push Up Tutorial | Do It Right",
+      "creator": "Andrew Alinda",
+      "creatorUrl": "https://www.youtube.com/@CaliToTheCrowd",
+      "thumbnailUrl": "https://i.ytimg.com/vi/7FRwuB1_l7U/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=wKV5zVJTYBo",
+      "videoId": "wKV5zVJTYBo",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How To Planche Lean Correctly | Calisthenics Beginner Tutorial",
+      "creator": "Vitality",
+      "creatorUrl": "https://www.youtube.com/@VitalityFitnessScience",
+      "thumbnailUrl": "https://i.ytimg.com/vi/wKV5zVJTYBo/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=V9LWMkorWoc",
+      "videoId": "V9LWMkorWoc",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to STRADDLE PLANCHE - Step by Step Tutorial",
+      "creator": "CALISTHENICS FAMILY",
+      "creatorUrl": "https://www.youtube.com/@CalisthenicsFamily",
+      "thumbnailUrl": "https://i.ytimg.com/vi/V9LWMkorWoc/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=6_vXycbD2TM",
+      "videoId": "6_vXycbD2TM",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Learn To Swim Freestyle | A Simple Step-By-Step Guide",
+      "creator": "Global Triathlon Network",
+      "creatorUrl": "https://www.youtube.com/@gtn",
+      "thumbnailUrl": "https://i.ytimg.com/vi/6_vXycbD2TM/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=8FWdmFBUNP0",
+      "videoId": "8FWdmFBUNP0",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Do Scapular Pull Ups",
+      "creator": "Your House Fitness",
+      "creatorUrl": "https://www.youtube.com/@Yourhousefitness",
+      "thumbnailUrl": "https://i.ytimg.com/vi/8FWdmFBUNP0/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=9dPCJCF5pQE",
+      "videoId": "9dPCJCF5pQE",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How I Hit a 200lb Weighted Pullup",
+      "creator": "Alex Leonidas",
+      "creatorUrl": "https://www.youtube.com/@AlexLeonidas",
+      "thumbnailUrl": "https://i.ytimg.com/vi/9dPCJCF5pQE/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=VQn3aGSUorc",
+      "videoId": "VQn3aGSUorc",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "RING ROWS Tutorial | Beginner Calisthenics",
+      "creator": "Leon Thorley",
+      "creatorUrl": "https://www.youtube.com/@LeonThorley",
+      "thumbnailUrl": "https://i.ytimg.com/vi/VQn3aGSUorc/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=3EF6p9EFdZc",
+      "videoId": "3EF6p9EFdZc",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "How to Walk in a Handstand | Full Workout",
+      "creator": "Summerfunfitness",
+      "creatorUrl": "https://www.youtube.com/@Summerfunfitness",
+      "thumbnailUrl": "https://i.ytimg.com/vi/3EF6p9EFdZc/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=_fGgJmq-QPU",
+      "videoId": "_fGgJmq-QPU",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Headstand Kip to Handstand",
+      "creator": "CrossFit Invictus",
+      "creatorUrl": "https://www.youtube.com/@InvictusFitness_",
+      "thumbnailUrl": "https://i.ytimg.com/vi/_fGgJmq-QPU/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=q_UNtDuRwsw",
+      "videoId": "q_UNtDuRwsw",
+      "checkedAt": "2026-11-07T03:48:47.214937+00:00",
+      "availability": "reachable",
+      "playback": "not_tested",
+      "movement": "not_reviewed",
+      "thumbnail": "available",
+      "httpStatus": 200,
+      "title": "Learn and Master the Straddle Handstand - Wall and Freestanding",
+      "creator": "Paul Twyman",
+      "creatorUrl": "https://www.youtube.com/@PaulTwyman",
+      "thumbnailUrl": "https://i.ytimg.com/vi/q_UNtDuRwsw/hqdefault.jpg",
+      "embedOffered": true,
+      "thumbnailWidth": 480,
+      "thumbnailHeight": 360
+    }
+  ],
+  "exercises": [
+    {
+      "slug": "dead-bug",
+      "name": "Dead Bug",
+      "url": "https://www.youtube.com/watch?v=GbSC02oU3To",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "dragon-flag",
+      "name": "Dragon Flag",
+      "url": "https://www.youtube.com/watch?v=moyFIvRrS0s",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "elevated-chair-compression",
+      "name": "Elevated Chair Compression Drill",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "hanging-leg-raise",
+      "name": "Hanging Leg Raise",
+      "url": "https://www.youtube.com/watch?v=Pr1ieGZ5atk",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "hollow-body-hold",
+      "name": "Hollow Body Hold",
+      "url": "https://www.youtube.com/watch?v=44ScXWFaVBs",
+      "availability": "reachable",
+      "titleSignal": "title_needs_review"
+    },
+    {
+      "slug": "l-sit",
+      "name": "L-Sit",
+      "url": "https://www.youtube.com/watch?v=cu0fHp8HCDo",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "l-sit-tuck-hold",
+      "name": "L-sit Tuck Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "mountain-climber",
+      "name": "Mountain Climber",
+      "url": "https://www.youtube.com/watch?v=nmwgirgXLYM",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "plank",
+      "name": "Plank",
+      "url": "https://www.youtube.com/watch?v=ASdvN_XEl_c",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "press-hs-journey",
+      "name": "Press Handstand Journey Drills",
+      "url": "https://www.youtube.com/watch?v=0GN-b3Q4dog",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "seated-pike-lift",
+      "name": "Seated Pike Compression Lifts",
+      "url": "https://www.youtube.com/watch?v=3f6tRHAsjFo",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "seated-straddle-lift",
+      "name": "Seated Straddle Lift",
+      "url": "https://www.youtube.com/watch?v=7MNNGqec0Dc",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "side-plank",
+      "name": "Side Plank",
+      "url": "https://www.youtube.com/watch?v=K2VljzCC16g",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "toes-to-bar",
+      "name": "Toes to Bar",
+      "url": "https://www.youtube.com/watch?v=_03pCKOv4l4",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "tuck-sit",
+      "name": "Tuck Sit",
+      "url": "https://www.youtube.com/watch?v=cu0fHp8HCDo",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "v-up",
+      "name": "V-Up",
+      "url": "https://www.youtube.com/watch?v=iP2fjvG0g3w",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "wall-compression-stretch",
+      "name": "Wall Compression Stretch",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "windshield-wiper",
+      "name": "Windshield Wiper",
+      "url": "https://www.youtube.com/watch?v=0TnnnuMqDvQ",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "arabesque-hold",
+      "name": "Arabesque Hold",
+      "url": "https://www.youtube.com/watch?v=ACuVnmS7h9A",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "attitude-hold",
+      "name": "Attitude Hold",
+      "url": "https://www.youtube.com/watch?v=aLA1mUjgdeI",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "couch-stretch",
+      "name": "Couch Stretch",
+      "url": "https://www.youtube.com/watch?v=FBib8Rkf0Mg",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "developpe",
+      "name": "D\u00e9velopp\u00e9",
+      "url": "https://www.youtube.com/watch?v=0oVrVwlpXAI",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "first-position-plie",
+      "name": "First Position Pli\u00e9",
+      "url": "https://www.youtube.com/watch?v=DrBhcopjDZQ",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "front-split",
+      "name": "Front Split",
+      "url": "https://www.youtube.com/watch?v=UbFx3kVaqZE",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "front-split-preparation",
+      "name": "Front Split Preparation",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "german-hang",
+      "name": "German Hang",
+      "url": "https://www.youtube.com/watch?v=NpMTNdauaHg",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "grand-battement",
+      "name": "Grand Battement",
+      "url": "https://www.youtube.com/watch?v=CgKXn1Evj-o",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "grand-plie",
+      "name": "Grand Pli\u00e9",
+      "url": "https://www.youtube.com/watch?v=k70uyYKlIU0",
+      "availability": "unchecked",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "middle-split",
+      "name": "Middle Split",
+      "url": "https://www.youtube.com/watch?v=0MJl4DjEMCE",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "middle-split-frog-stretch",
+      "name": "Middle Split Frog Stretch",
+      "url": "https://www.youtube.com/watch?v=IEapGjp_KAo",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "pancake-good-morning",
+      "name": "Pancake Good Morning",
+      "url": "https://www.youtube.com/watch?v=P2B5QMPRqlE",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "passe-balance",
+      "name": "Pass\u00e9 Balance",
+      "url": "https://www.youtube.com/watch?v=TqAxGUXxesU",
+      "availability": "reachable",
+      "titleSignal": "title_needs_review"
+    },
+    {
+      "slug": "penche",
+      "name": "Pench\u00e9",
+      "url": "https://www.youtube.com/watch?v=_T-qmjgBGx4",
+      "availability": "reachable",
+      "titleSignal": "title_needs_review"
+    },
+    {
+      "slug": "pike-stretch",
+      "name": "Pike Stretch",
+      "url": "https://www.youtube.com/watch?v=0LRb4Bf2U1w",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "port-de-bras",
+      "name": "Port de Bras",
+      "url": "https://www.youtube.com/watch?v=87qF6UGrG9o",
+      "availability": "reachable",
+      "titleSignal": "title_needs_review"
+    },
+    {
+      "slug": "releve",
+      "name": "Relev\u00e9",
+      "url": "https://www.youtube.com/watch?v=unv8TS3JO6U",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "rond-de-jambe",
+      "name": "Rond de Jambe",
+      "url": "https://www.youtube.com/watch?v=z-fYrgfn61o",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "seated-forward-fold",
+      "name": "Seated Forward Fold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "seated-straddle-compression-lift",
+      "name": "Seated Straddle Compression Lift",
+      "url": "https://www.youtube.com/watch?v=HhdLEp2pETg",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "shoulder-bridge",
+      "name": "Shoulder Bridge",
+      "url": "https://www.youtube.com/watch?v=3g1fvGDevIg",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "standing-pike",
+      "name": "Standing Pike",
+      "url": "https://www.youtube.com/watch?v=g_tea8ZNk5A",
+      "availability": "reachable",
+      "titleSignal": "title_needs_review"
+    },
+    {
+      "slug": "straddle-stretch",
+      "name": "Straddle Stretch",
+      "url": "https://www.youtube.com/watch?v=b7K9TlBdSzE",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "tendu",
+      "name": "Tendu",
+      "url": "https://www.youtube.com/watch?v=zeSVHYSMItg",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "assisted-pistol-squat",
+      "name": "Assisted Pistol Squat",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "bodyweight-squat",
+      "name": "Bodyweight Squat",
+      "url": "https://www.youtube.com/watch?v=cB0cOX7gePg",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "bulgarian-split-squat",
+      "name": "Bulgarian Split Squat",
+      "url": "https://www.youtube.com/watch?v=jWD8_iBkND0",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "calf-raise",
+      "name": "Calf Raise",
+      "url": "https://www.youtube.com/watch?v=gwLzBJYoWlI",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "cossack-squat",
+      "name": "Cossack Squat",
+      "url": "https://www.youtube.com/watch?v=JaCbmoDqUc4",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "glute-bridge",
+      "name": "Glute Bridge",
+      "url": "https://www.youtube.com/watch?v=8bbE64NuDTU",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "jump-squat",
+      "name": "Jump Squat",
+      "url": "https://www.youtube.com/watch?v=A-cFYGvaXEc",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "lunge",
+      "name": "Lunges",
+      "url": "https://www.youtube.com/watch?v=QOVaHwm-Q6U",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "nordic-curl",
+      "name": "Nordic Curl",
+      "url": "https://www.youtube.com/watch?v=6NCN6kOagfY",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "pistol-squat",
+      "name": "Pistol Squat",
+      "url": "https://www.youtube.com/watch?v=2YW5b4U7d2c",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "reverse-lunge",
+      "name": "Reverse Lunge",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "shrimp-squat",
+      "name": "Shrimp Squat",
+      "url": "https://www.youtube.com/watch?v=2YW5b4U7d2c",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "single-leg-rdl",
+      "name": "Single Leg RDL",
+      "url": "https://www.youtube.com/watch?v=Oj7SRLkAotU",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "sissy-squat",
+      "name": "Sissy Squat",
+      "url": "https://www.youtube.com/watch?v=R-oglfAMCQo",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "split-squat",
+      "name": "Split Squat",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "step-up",
+      "name": "Step-up",
+      "url": "https://www.youtube.com/watch?v=WCFCdxzFBa4",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "90-90-hip-switches",
+      "name": "90/90 Hip Switches",
+      "url": "https://www.youtube.com/watch?v=BMUmyW1jepU",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "cat-cow",
+      "name": "Cat-Cow",
+      "url": "https://www.youtube.com/watch?v=kqnua4rHVVA",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "deep-squat-hold",
+      "name": "Deep Squat Hold",
+      "url": "https://www.youtube.com/watch?v=0wzrgyAurT8",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "extensor-band",
+      "name": "Extensor Band Exercises",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "frog-stretch",
+      "name": "Frog Stretch",
+      "url": "https://www.youtube.com/watch?v=yq9MtXJb2Q4",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "jefferson-curl",
+      "name": "Jefferson Curl",
+      "url": "https://www.youtube.com/watch?v=nYS0R4c3qCA",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "middle-split-hold",
+      "name": "Middle Split Hold",
+      "url": "https://www.youtube.com/watch?v=0MJl4DjEMCE",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "needle",
+      "name": "Needle",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "pancake-stretch",
+      "name": "Pancake Stretch",
+      "url": "https://www.youtube.com/watch?v=2nnhHj5YAIw",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "shoulder-cars",
+      "name": "Shoulder CARs",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "shoulder-dislocate",
+      "name": "Shoulder Dislocate",
+      "url": "https://www.youtube.com/watch?v=vP8YmmRMz6I",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "thoracic-extension",
+      "name": "Thoracic Extension",
+      "url": "https://www.youtube.com/watch?v=LT_dFRnmdGs",
+      "availability": "reachable",
+      "titleSignal": "title_needs_review"
+    },
+    {
+      "slug": "thoracic-open-book",
+      "name": "Thoracic Open Book",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "wall-ankle-dorsiflexion",
+      "name": "Wall Ankle Dorsiflexion",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "world-s-greatest-stretch",
+      "name": "World's Greatest Stretch",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "worlds-greatest-stretch",
+      "name": "World's Greatest Stretch",
+      "url": "https://www.youtube.com/watch?v=-CiWQ2IvY34",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "wrist-circles",
+      "name": "Wrist Circles",
+      "url": "https://www.youtube.com/watch?v=mSZWSQSSEjE",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "active-hang",
+      "name": "Active Hang",
+      "url": "https://www.youtube.com/watch?v=HoE-C85ZlCE",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "archer-pull-up",
+      "name": "Archer Pull-up",
+      "url": "https://www.youtube.com/watch?v=AcBYUhgk2_s",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "australian-row",
+      "name": "Australian Row",
+      "url": "https://www.youtube.com/watch?v=Fl0UMfdEzsE",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "bodyweight-row",
+      "name": "Bodyweight Row",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "chin-up",
+      "name": "Chin-up",
+      "url": "https://www.youtube.com/watch?v=e1YSApl-QcM",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "dead-hang",
+      "name": "Dead Hang",
+      "url": "https://www.youtube.com/watch?v=fq9gDvNZQ2c",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "front-lever-raise",
+      "name": "Front Lever Raise",
+      "url": "https://www.youtube.com/watch?v=AGhb8V8M758",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "muscle-up",
+      "name": "Muscle-up",
+      "url": "https://www.youtube.com/watch?v=NtS6MYnIYaw",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "one-arm-chin-up",
+      "name": "One Arm Chin-up",
+      "url": "https://www.youtube.com/watch?v=lU4v7Bfginw",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "pull-up",
+      "name": "Pull-up",
+      "url": "https://www.youtube.com/watch?v=eGo4IYlbE5g",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "pullover",
+      "name": "Pullover",
+      "url": "https://www.youtube.com/watch?v=eworH_YuaOM",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "ring-row",
+      "name": "Ring Row",
+      "url": "https://www.youtube.com/watch?v=3EFH7EEorOU",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "scapular-pull-up",
+      "name": "Scapular Pull-up",
+      "url": "https://www.youtube.com/watch?v=-ZIpSoTRsuE",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "skin-the-cat",
+      "name": "Skin The Cat",
+      "url": "https://www.youtube.com/watch?v=K9xHRYyoFe0",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "towel-hang",
+      "name": "Towel Hang",
+      "url": "https://www.youtube.com/watch?v=UpP-77-GeLA",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "tuck-front-lever",
+      "name": "Tuck Front Lever",
+      "url": "https://www.youtube.com/watch?v=tiST0v9pXbY",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "typewriter-pull-up",
+      "name": "Typewriter Pull-up",
+      "url": "https://www.youtube.com/watch?v=zNxRb9BaiPE",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "advanced-tuck-planche",
+      "name": "Advanced Tuck Planche",
+      "url": "https://www.youtube.com/watch?v=LgPG0MZPI84",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "archer-push-up",
+      "name": "Archer Push-up",
+      "url": "https://www.youtube.com/watch?v=hPJvnA6Z2pg",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "band-assisted-progressions",
+      "name": "Band-Assisted Progressions",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "decline-push-up",
+      "name": "Decline Push-up",
+      "url": "https://www.youtube.com/watch?v=SKPab2YC8BE",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "diamond-push-up",
+      "name": "Diamond Push-up",
+      "url": "https://www.youtube.com/watch?v=J0DnG1_S3lg",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "handstand-push-up",
+      "name": "Handstand Push-up",
+      "url": "https://www.youtube.com/watch?v=tQhrk6WMcKw",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "hspu-capacity-builder",
+      "name": "HSPU Capacity Builder",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "incline-push-up",
+      "name": "Incline Push-up",
+      "url": "https://www.youtube.com/watch?v=0JUrOH--Kdk",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "one-arm-push-up",
+      "name": "One-arm Push-up",
+      "url": "https://www.youtube.com/watch?v=IODxDxX7oi4",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "parallel-bar-dip",
+      "name": "Parallel Bar Dip",
+      "url": "https://www.youtube.com/watch?v=85u_8mz5lBA",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "dip",
+      "name": "Parallel Bar Dip",
+      "url": "https://www.youtube.com/watch?v=2z8JmcrW-As",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "pike-push-up",
+      "name": "Pike Push-up",
+      "url": "https://www.youtube.com/watch?v=DG-NcMnfZ_0",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "planche-lean",
+      "name": "Planche Lean",
+      "url": "https://www.youtube.com/watch?v=ghNIgUG8_ZY",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "planche-plank",
+      "name": "Planche Plank",
+      "url": "https://www.youtube.com/watch?v=6snDOgFBBFA",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "pseudo-planche-push-up",
+      "name": "Pseudo Planche Push-up",
+      "url": "https://www.youtube.com/watch?v=C-SML6xnVkI",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "push-up",
+      "name": "Push-up",
+      "url": "https://www.youtube.com/watch?v=IODxDxX7oi4",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "ring-dip",
+      "name": "Ring Dip",
+      "url": "https://www.youtube.com/watch?v=RFODjZQos8E",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "ring-push-up",
+      "name": "Ring Push-up",
+      "url": "https://www.youtube.com/watch?v=F5HVuHBBXaw",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "standard-push-up",
+      "name": "Standard Push-up",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "straddle-planche",
+      "name": "Straddle Planche",
+      "url": "https://www.youtube.com/watch?v=LgPG0MZPI84",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "tiger-bend-pushup",
+      "name": "Tiger Bend Push Up",
+      "url": "https://www.youtube.com/watch?v=ozk8SOD3FCY",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "tuck-planche",
+      "name": "Tuck Planche",
+      "url": "https://www.youtube.com/watch?v=qvWvfZuUN4k",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "wall-push-up",
+      "name": "Wall Push-up",
+      "url": "https://www.youtube.com/watch?v=5NPvv40gd3Q",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "wide-push-up",
+      "name": "Wide Push-up",
+      "url": "https://www.youtube.com/watch?v=GbPOEUGfWVY",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "advanced-tuck-front-lever-on-rings",
+      "name": "Advanced Tuck Front Lever on Rings",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "archer-ring-row",
+      "name": "Archer Ring Row",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "assisted-ring-dip",
+      "name": "Assisted Ring Dip",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "assisted-ring-support-hold",
+      "name": "Assisted Ring Support Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "false-grip-ring-hang",
+      "name": "False Grip Ring Hang",
+      "url": "https://www.youtube.com/watch?v=TIMMk2mEPeE",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "false-grip-ring-row",
+      "name": "False Grip Ring Row",
+      "url": "https://www.youtube.com/watch?v=TIMMk2mEPeE",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "feet-elevated-ring-row",
+      "name": "Feet-Elevated Ring Row",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "german-hang-preparation",
+      "name": "German Hang Preparation",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "incline-ring-row",
+      "name": "Incline Ring Row",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "iron-cross-assisted-hold",
+      "name": "Iron Cross Assisted Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "low-ring-muscle-up-assisted",
+      "name": "Low Ring Muscle-Up Assisted",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-assisted-deep-squat",
+      "name": "Ring Assisted Deep Squat",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-assisted-pistol-squat",
+      "name": "Ring Assisted Pistol Squat",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-back-lever-tuck",
+      "name": "Ring Back Lever Tuck",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-biceps-curl",
+      "name": "Ring Biceps Curl",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-body-saw",
+      "name": "Ring Body Saw",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-bulgarian-split-squat",
+      "name": "Ring Bulgarian Split Squat",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-dip-negative",
+      "name": "Ring Dip Negative",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-face-pull",
+      "name": "Ring Face Pull",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-fallout",
+      "name": "Ring Fallout",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-fly-regression",
+      "name": "Ring Fly Regression",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-hamstring-curl",
+      "name": "Ring Hamstring Curl",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-knee-raise",
+      "name": "Ring Knee Raise",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-l-sit-hold",
+      "name": "Ring L-Sit Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-muscle-up",
+      "name": "Ring Muscle-Up",
+      "url": "https://www.youtube.com/watch?v=vpPjY4BtJuI",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "ring-muscle-up-transition-drill",
+      "name": "Ring Muscle-Up Transition Drill",
+      "url": "https://www.youtube.com/watch?v=vpPjY4BtJuI",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "ring-push-up-turnout",
+      "name": "Ring Push-Up Turnout",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-reverse-plank",
+      "name": "Ring Reverse Plank",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-scapular-depression",
+      "name": "Ring Scapular Depression",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-scapular-row",
+      "name": "Ring Scapular Row",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-triceps-extension",
+      "name": "Ring Triceps Extension",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-tuck-hold",
+      "name": "Ring Tuck Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-turnout-support-hold",
+      "name": "Ring Turnout Support Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "skin-the-cat-preparation",
+      "name": "Skin the Cat Preparation",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "tuck-front-lever-on-rings",
+      "name": "Tuck Front Lever on Rings",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "back-lever",
+      "name": "Back Lever",
+      "url": "https://www.youtube.com/watch?v=PVDP_WVkJtI",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "bent-arm-handstand",
+      "name": "Bent Arm Handstand",
+      "url": "https://www.youtube.com/watch?v=ozk8SOD3FCY",
+      "availability": "reachable",
+      "titleSignal": "title_needs_review"
+    },
+    {
+      "slug": "chest-to-wall-handstand",
+      "name": "Chest-to-Wall Handstand",
+      "url": "https://www.youtube.com/watch?v=olA58oW-21A",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "chest-to-wall-handstand-hold",
+      "name": "Chest-to-Wall Handstand Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "clutch-flag",
+      "name": "Clutch Flag",
+      "url": "https://www.youtube.com/watch?v=hBaHx4wPMbA",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "crocodile-pose",
+      "name": "Crocodile Pose (One-Arm Balance)",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "elbow-lever",
+      "name": "Elbow Lever",
+      "url": "https://www.youtube.com/watch?v=MhEUfmRGr6g",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "elbow-stand-exit",
+      "name": "Elbow Stand Exits",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "elbow-stand-straddle-entry",
+      "name": "Elbow Stand Straddle Entry",
+      "url": "https://www.youtube.com/watch?v=FtTzceXNMPw",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "elbow-stand-wall-hold",
+      "name": "Elbow Stand Wall Holds",
+      "url": "https://www.youtube.com/watch?v=HXVtKWV_sKY",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "false-grip-hold",
+      "name": "False Grip Hold",
+      "url": "https://www.youtube.com/watch?v=Xz-6EI1abKo",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "forearm-stand-line-hold",
+      "name": "Forearm Stand Line Holds",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "forearm-stand-toe-pulls",
+      "name": "Forearm Stand Toe Pulls",
+      "url": "https://www.youtube.com/watch?v=cjL0-4DbpYY",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "handstand",
+      "name": "Freestanding Handstand",
+      "url": "https://www.youtube.com/watch?v=d6_lcWtQDxw",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "freestanding-handstand",
+      "name": "Freestanding Handstand",
+      "url": "https://www.youtube.com/watch?v=olA58oW-21A",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "freestanding-handstand-kick-up",
+      "name": "Freestanding Handstand Kick-Up",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "frog-stand",
+      "name": "Frog Stand",
+      "url": "https://www.youtube.com/watch?v=SrYBD4yCI84",
+      "availability": "reachable",
+      "titleSignal": "title_needs_review"
+    },
+    {
+      "slug": "front-lever",
+      "name": "Front Lever",
+      "url": "https://www.youtube.com/watch?v=K2uOvPYeMi4",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "handstand-bail",
+      "name": "Handstand Exits / Bail-Outs",
+      "url": "https://www.youtube.com/watch?v=nShYhQLCbgE",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "handstand-heel-pull",
+      "name": "Handstand Heel Pull",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "hs-shrugs",
+      "name": "Handstand Shrugs",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "headstand",
+      "name": "Headstand",
+      "url": "https://www.youtube.com/watch?v=_ZTSkpBjhu0",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "human-flag",
+      "name": "Human Flag",
+      "url": "https://www.youtube.com/watch?v=NWskCNO3rCo",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "iron-cross",
+      "name": "Iron Cross",
+      "url": "https://www.youtube.com/watch?v=2PDPDqOa_cg",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "l-sit-to-handstand",
+      "name": "L-Sit to Handstand",
+      "url": "https://www.youtube.com/watch?v=Q7dB1jSJpLk",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "maltese",
+      "name": "Maltese",
+      "url": "https://www.youtube.com/watch?v=6U6W3NjhJgo",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "manna",
+      "name": "Manna",
+      "url": "https://www.youtube.com/watch?v=p22IDJHqHKE",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "parallette-tuck-planche",
+      "name": "Parallette Tuck Planche",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "planche",
+      "name": "Planche",
+      "url": "https://www.youtube.com/watch?v=bn-HZm7bpy0",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "full-planche",
+      "name": "Planche",
+      "url": "https://www.youtube.com/watch?v=LgPG0MZPI84",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "ring-support-hold",
+      "name": "Ring Support Hold",
+      "url": "https://www.youtube.com/watch?v=9PKChU9Ozs8",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "ringmaster",
+      "name": "Ringmaster",
+      "url": "https://www.youtube.com/watch?v=Ry6PmcQ5qq0",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "rto-support-hold",
+      "name": "RTO Support Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "single-arm-elbow-lever",
+      "name": "Single Arm Elbow Lever",
+      "url": "https://www.youtube.com/watch?v=MhEUfmRGr6g",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "stalder-press-to-hs",
+      "name": "Stalder Press to Handstand",
+      "url": "https://www.youtube.com/watch?v=S4QLsLT2wx8",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "straddle-hs-kick-up",
+      "name": "Straddle Handstand Kick-Ups",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "straddle-press-to-hs",
+      "name": "Straddle Press to Handstand",
+      "url": "https://www.youtube.com/watch?v=-xPx6-rbcfs",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "tuck-planche-push-up-preparation",
+      "name": "Tuck Planche Push-Up Preparation",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "victorian-cross",
+      "name": "Victorian Cross",
+      "url": "https://www.youtube.com/watch?v=0CXqbR8y8v4",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "wall-handstand",
+      "name": "Wall Handstand",
+      "url": "https://www.youtube.com/watch?v=d6_lcWtQDxw",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "wall-handstand-shoulder-taps",
+      "name": "Wall Handstand Shoulder Taps",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "wall-pull-aways",
+      "name": "Wall Pull-Aways",
+      "url": "https://www.youtube.com/watch?v=d6_lcWtQDxw",
+      "availability": "reachable",
+      "titleSignal": "title_needs_review"
+    },
+    {
+      "slug": "bridge-pose",
+      "name": "Bridge Pose",
+      "url": "https://www.youtube.com/watch?v=wPM8icPu6H8",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "bridge",
+      "name": "Bridge Pose",
+      "url": "https://www.youtube.com/watch?v=wPM8icPu6H8",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "camel-pose",
+      "name": "Camel Pose (Ustrasana)",
+      "url": "https://www.youtube.com/watch?v=VPp5n2MZO4c",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "cat-cow-stretch",
+      "name": "Cat-Cow Stretch",
+      "url": "https://www.youtube.com/watch?v=kqnua4rHVVA",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "chair-pose",
+      "name": "Chair Pose (Utkatasana)",
+      "url": "https://www.youtube.com/watch?v=semq253gJOc",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "child-s-pose",
+      "name": "Child's Pose",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "childs-pose",
+      "name": "Child's Pose",
+      "url": "https://www.youtube.com/watch?v=2MJGg-dUKh0",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "cobra-pose",
+      "name": "Cobra Pose",
+      "url": "https://www.youtube.com/watch?v=n6jrC6WeF84",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "crow-pose",
+      "name": "Crow Pose (Bakasana)",
+      "url": "https://www.youtube.com/watch?v=SrYBD4yCI84",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "crow-pose-yoga",
+      "name": "Crow Pose Yoga",
+      "url": "https://www.youtube.com/watch?v=SrYBD4yCI84",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "dolphin-pose",
+      "name": "Dolphin Pose",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "downward-dog",
+      "name": "Downward Dog",
+      "url": "https://www.youtube.com/watch?v=j97SSGsnCAQ",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "downward-facing-dog",
+      "name": "Downward Facing Dog",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "half-moon-pose",
+      "name": "Half Moon Pose (Ardha Chandrasana)",
+      "url": "https://www.youtube.com/watch?v=pMoBDGa_BT0",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "pigeon-pose",
+      "name": "Pigeon Pose",
+      "url": "https://www.youtube.com/watch?v=0RQVD6viVXo",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "tree-pose",
+      "name": "Tree Pose (Vrksasana)",
+      "url": "https://www.youtube.com/watch?v=yVE4XXFFO70",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "triangle-pose",
+      "name": "Triangle Pose (Trikonasana)",
+      "url": "https://www.youtube.com/watch?v=S6gB0QHbWFE",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "warrior-i",
+      "name": "Warrior I (Virabhadrasana I)",
+      "url": "https://www.youtube.com/watch?v=k4qaVoAbeHM",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "warrior-ii",
+      "name": "Warrior II (Virabhadrasana II)",
+      "url": "https://www.youtube.com/watch?v=QMr0JJfEgbM",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "warrior-iii",
+      "name": "Warrior III (Virabhadrasana III)",
+      "url": "https://www.youtube.com/watch?v=t-VgOxS9zRQ",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "wheel-pose",
+      "name": "Wheel Pose (Urdhva Dhanurasana)",
+      "url": "https://www.youtube.com/watch?v=ViPnKbrc_bI",
+      "availability": "unavailable",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "seated-pike-leg-lifts-1773317360868",
+      "name": "Seated Pike Leg Lifts",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "seated-pike-leg-lifts-1773317361818",
+      "name": "Seated Pike Leg Lifts",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "tuck-planche-1768085453845",
+      "name": "Tuck Planche",
+      "url": "https://www.youtube.com/watch?v=bn-HZm7bpy0",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "band-assisted-pull-up",
+      "name": "Band-Assisted Pull-up",
+      "url": "https://www.youtube.com/watch?v=4yE-XGDWJPg",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "360-pull",
+      "name": "360 Pull",
+      "url": "https://www.youtube.com/watch?v=BVw3aBFypHA",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "ring-l-sit",
+      "name": "Ring L-Sit",
+      "url": "https://www.youtube.com/watch?v=eywCpp0p7lg",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "ring-dips",
+      "name": "Ring Dips",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "ring-push-ups",
+      "name": "Ring Push-ups",
+      "url": "https://www.youtube.com/watch?v=7FRwuB1_l7U",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "planche-lean-1768085452113",
+      "name": "Planche Lean",
+      "url": "https://www.youtube.com/watch?v=wKV5zVJTYBo",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "advanced-tuck-planche-1768085455793",
+      "name": "Advanced Tuck Planche",
+      "url": "https://www.youtube.com/watch?v=bn-HZm7bpy0",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "straddle-planche-1768085457054",
+      "name": "Straddle Planche",
+      "url": "https://www.youtube.com/watch?v=V9LWMkorWoc",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "swimming-freestyle",
+      "name": "Swimming Freestyle",
+      "url": "https://www.youtube.com/watch?v=6_vXycbD2TM",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "scapular-pulls",
+      "name": "Scapular Pulls",
+      "url": "https://www.youtube.com/watch?v=8FWdmFBUNP0",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "weighted-pull-up",
+      "name": "Weighted Pull-up",
+      "url": "https://www.youtube.com/watch?v=9dPCJCF5pQE",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "ring-rows",
+      "name": "Ring Rows",
+      "url": "https://www.youtube.com/watch?v=VQn3aGSUorc",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "handstand-walking",
+      "name": "Handstand Walking",
+      "url": "https://www.youtube.com/watch?v=3EF6p9EFdZc",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "kip-to-handstand",
+      "name": "Kip to Handstand",
+      "url": "https://www.youtube.com/watch?v=_fGgJmq-QPU",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "wall-stomach-straddle-handstand",
+      "name": "Wall Stomach Straddle Handstand",
+      "url": "https://www.youtube.com/watch?v=q_UNtDuRwsw",
+      "availability": "reachable",
+      "titleSignal": "title_overlap"
+    },
+    {
+      "slug": "bent-knee-compression-lift",
+      "name": "Bent-Knee Compression Lift",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "single-leg-pike-lift",
+      "name": "Single-Leg Pike Lift",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "pike-compression-hold",
+      "name": "Pike Compression Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "bent-knee-straddle-lift",
+      "name": "Bent-Knee Straddle Lift",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "straddle-compression-hold",
+      "name": "Straddle Compression Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "hip-lift-setup",
+      "name": "Hip-Lift Setup",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "slow-frogger-toe-pull",
+      "name": "Slow Frogger Toe Pull",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "straight-leg-frogger",
+      "name": "Straight-Leg Frogger",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "wall-press-negative",
+      "name": "Wall Press Negative",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "elevated-straddle-press",
+      "name": "Elevated Straddle Press",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "stalder-feet-assisted-hip-lift",
+      "name": "Stalder Feet-Assisted Hip Lift",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "stalder-toe-assisted-press",
+      "name": "Stalder Toe-Assisted Press",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "stalder-negative",
+      "name": "Stalder Negative",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "quadruped-planche-lean",
+      "name": "Quadruped Planche Lean",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "scapular-push-up",
+      "name": "Scapular Push-Up",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "planche-scapular-pulse",
+      "name": "Planche Lean Scapular Pulse",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "band-assisted-tuck-planche",
+      "name": "Band-Assisted Tuck Planche",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "incline-pike-push-up",
+      "name": "Incline Pike Push-Up",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "elevated-pike-push-up",
+      "name": "Feet-Elevated Pike Push-Up",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "wall-hspu-negative",
+      "name": "Wall Handstand Push-Up Negative",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "partial-rom-wall-hspu",
+      "name": "Partial-Range Wall Handstand Push-Up",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "one-leg-l-sit",
+      "name": "One-Leg L-Sit",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "v-sit-preparation",
+      "name": "V-Sit Preparation",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "supported-crow-balance",
+      "name": "Supported Crow Balance",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "assisted-elbow-lever",
+      "name": "Assisted Elbow Lever",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "incline-one-arm-push-up",
+      "name": "Incline One-Arm Push-Up",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "wall-support-shrug",
+      "name": "Wall Support Scapular Shrug",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "kneeling-planche-plank",
+      "name": "Kneeling Planche Plank",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "pike-support-hold",
+      "name": "Pike Support Hold",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "wall-toe-taps",
+      "name": "Wall Toe Taps",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    },
+    {
+      "slug": "assisted-box-pistol-sit",
+      "name": "Assisted Box Pistol Sit",
+      "url": null,
+      "availability": "missing",
+      "titleSignal": "not_checked"
+    }
+  ]
+}

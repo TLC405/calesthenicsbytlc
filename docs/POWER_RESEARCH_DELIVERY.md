@@ -1,3 +1,17 @@
+# Assessment, Fold training and video audit — November 6, 2026
+
+Implemented the selected work: a seven-question starting assessment (conservatively capped at L3), opt-in level review based on actual recent quality logs, VASA exterior-inspired default styling, saved progression goals, one primary practice action, and layouts at Fold cover/inner widths. Existing manual levels and individual capability gates remain available. Switching to an easier step does not invent a failed attempt.
+
+The exterior color reference is the official VASA Oklahoma City Western Ave location: https://vasafitness.com/locations/ok/oklahoma-city/ (signal red, graphite glazing, warm brick/concrete). The old default migrates to VASA once; subsequent deliberate theme choices persist.
+
+Audited all 264 canonical exercise records and all mapped video URLs. Initial audit found 46 unavailable mappings, 2 unchecked and 98 unsourced. Ten mappings were repaired using creator-owned sources (Hinge Health, NASM, Sunnybrook Hospital, FitnessFAQs and GMB). Two clearly different variations are withheld from normal playback. The final provider snapshot contains 125 reachable mappings, 40 unavailable, 1 unchecked and 98 missing. Reachability is not a verified movement or a guarantee of playback. All original URL mappings remain traceable in the repair ledger and Git history.
+
+The public Tutorial checks page exposes source title, creator, thumbnail result and device playback evidence. The player records a successful playback only after YouTube's PLAYING event, and handles loading errors, embed rejection and a stalled start. Owner movement/coaching review remains a separate explicit ledger, not an automatic title-based badge.
+
+Checks: actual application TypeScript project, assessment/evidence tests, 810 goal/level/readiness/duration cases, graph validity, production build and browser interactions at simulated Fold cover and inner widths. Physical Fold hardware and a complete human technique review of every video are not claimed. Progress remains device-local; cloud sync is outside this selected scope.
+
+---
+
 # Progressions and Foundation expansion — November 3, 2026
 
 This release adds 23 searchable progression families, including separate straight-arm strength, Pike Compression, Straddle Compression, Stalder, Pike Pressing, levers, unilateral strength and Foundation. The bundled catalog now contains 264 real exercise/drill records. The 31 new editorial drills have no fabricated video URLs or verification badges.

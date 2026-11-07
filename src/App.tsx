@@ -8,6 +8,8 @@ import { MusicProvider } from "./providers/MusicProvider";
 import { InlineSoundtrackSlot } from "./components/Music/InlineSoundtrackSlot";
 import Skills from "./pages/Skills";
 import More from "./pages/More";
+import LevelAssessment from "./pages/LevelAssessment";
+import VideoAudit from "./pages/VideoAudit";
 import { MobileNav } from "./components/Layout/MobileNav";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -25,10 +27,12 @@ import NotFound from "./pages/NotFound";
 import Community from "./pages/Community";
 import Admin from "./pages/Admin";
 import "./styles/neumorph.css";
+import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();
 
 function AppContent() {
+  useTheme();
   return (
     <BrowserRouter>
       <div className="power-app-shell min-w-0 md:pb-0">
@@ -43,6 +47,8 @@ function AppContent() {
           <Route path="/train" element={<Navigate to="/build" replace />} />
           <Route path="/routine-days" element={<Train />} />
           <Route path="/skills" element={<Skills />} />
+          <Route path="/assessment" element={<LevelAssessment />} />
+          <Route path="/videos" element={<VideoAudit />} />
           <Route path="/more" element={<More />} />
           <Route path="/workout" element={<ActiveWorkout />} />
           <Route path="/skills/:skillId" element={<SkillStudio />} />

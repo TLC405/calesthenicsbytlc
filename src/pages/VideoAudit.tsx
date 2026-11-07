@@ -1,0 +1,28 @@
+import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ArrowLeft, Film } from 'lucide-react';
+import catalog from '@/data/publicExerciseCatalog.json';
+import { playbackEvidence, tutorialState, videoAudit } from '@/lib/mediaAudit';
+import { VideoPlayer } from '@/components/Exercise/VideoPlayer';
+
+export default function VideoAudit(){
+ const [params]=useSearchParams();const [query,setQuery]=useState('');const [filter,setFilter]=useState('issues');
+ const [selected,setSelected]=useState(params.get('exercise')||'dead-bug');const [playback,setPlayback]=useState(playbackEvidence);
+ useEffect(()=>{const sync=()=>setPlayback(playbackEvidence());window.addEventListener('power-video-playback',sync);return()=>window.removeEventListener('power-video-playback',sync);},[]);
+ const rows=catalog.map(exercise=>({exercise,media:tutorialState(exercise.youtube_url,exercise.name)}));
+ const missing=rows.filter(r=>!r.media.url).length;const unavailable=rows.filter(r=>r.media.blocked).length;
+ const reachable=rows.filter(r=>r.media.record?.availability==='reachable').length;
+ const visible=rows.filter(({exercise:e,media:m})=>`${e.name} ${m.record?.creator||''}`.toLowerCase().includes(query.toLowerCase())&&(filter==='all'||filter==='missing'&&!m.url||filter==='reachable'&&m.record?.availability==='reachable'||filter==='issues'&&(m.blocked||m.mapping?.titleSignal==='title_needs_review'&&!m.repair||m.url&&!m.record)));
+ const current=rows.find(r=>r.exercise.slug===selected)||visible[0]||rows[0];const evidence=playback.find(p=>p.videoId===current.media.id);
+ return <main className="power-simple-page"><Link className="inline-flex gap-2 items-center min-h-12 text-sm" to="/more"><ArrowLeft size={17}/> More</Link><header className="power-simple-heading mt-3"><div><p className="power-simple-eyebrow"><Film size={16}/> POWER / TUTORIAL CHECKS</p><h1>Know your source.</h1><p>Every exercise included. Source availability, playback and movement matching are separate checks.</p></div></header>
+  <div className="grid grid-cols-3 gap-2 text-xs mb-4">{[{value:reachable,label:'Source reached'},{value:unavailable,label:'Needs replacement'},{value:missing,label:'Not sourced'}].map(stat=><div className="border rounded-xl p-3" key={stat.label}><strong className="block text-2xl text-primary">{stat.value}</strong><span>{stat.label}</span></div>)}</div>
+  <p className="text-xs text-muted-foreground mb-4">Provider checks: {new Date(videoAudit.checkedAt).toLocaleDateString()}. A reachable URL does not verify a movement or guarantee playback on your phone.</p>
+  <div className="power-media-grid"><section className="space-y-3" aria-label="Tutorial review queue"><label className="block text-xs font-bold">Find an exercise<input className="h-12 block w-full border rounded-xl bg-card px-3 mt-2" placeholder="Search tutorial checks" value={query} onChange={e=>setQuery(e.target.value)}/></label><label className="block text-xs font-bold">Show<select className="h-12 block w-full border rounded-xl bg-card px-3 mt-2" value={filter} onChange={e=>setFilter(e.target.value)}><option value="issues">Needs attention</option><option value="missing">Missing tutorials</option><option value="reachable">Source reached</option><option value="all">All exercises</option></select></label><p className="text-xs text-muted-foreground">{visible.length} exercises</p><div className="power-media-queue rounded-xl border overflow-y-auto max-h-80">{visible.map(({exercise:e,media:m})=><button key={e.slug} type="button" onClick={()=>setSelected(e.slug)} aria-pressed={selected===e.slug} className={`w-full min-h-14 p-3 text-left border-b text-xs ${selected===e.slug?'bg-primary/10 text-primary':''}`}><strong className="block">{e.name}</strong><small className="block text-muted-foreground mt-1">{m.label}</small></button>)}{!visible.length&&<p className="p-3 text-xs">No matches in this view.</p>}</div></section>
+  <section className="power-elevated p-4 space-y-3 min-w-0" aria-label="Selected tutorial evidence"><h2 className="font-bold text-xl">{current.exercise.name}</h2><VideoPlayer key={current.exercise.slug} youtubeUrl={current.media.url} title={current.exercise.name} thumbnailMode/>
+   <p className="text-sm">{current.media.label}</p>{current.media.record&&<dl className="text-xs space-y-2"><div><dt className="font-bold">Source title</dt><dd className="text-muted-foreground break-words">{current.media.record.title||'No public metadata returned'}</dd></div><div><dt className="font-bold">Creator</dt><dd className="text-muted-foreground">{current.media.record.creator||'Not available'}</dd></div><div><dt className="font-bold">Thumbnail</dt><dd className="text-muted-foreground">{current.media.record.thumbnail.replace('_',' ')}</dd></div></dl>}
+   {current.media.repair&&<p className="text-xs text-primary">{current.media.repair.decision==='withheld'?current.media.repair.reason:'Repaired source mapping'+(current.media.repair.scope==='family'?' · this broader tutorial covers the skill family':'')+'.'}</p>}
+   {current.media.url&&<p className="text-xs text-muted-foreground">Playback on this device: {evidence?(evidence.state==='played'?'Playing event observed':evidence.state==='loaded'?'Player loaded; playback not confirmed':'Player returned an error')+' · '+new Date(evidence.at).toLocaleString():'not tested yet'}. Movement and coaching: human review pending.</p>}
+   <details className="border rounded-xl p-3"><summary className="min-h-11 cursor-pointer text-xs font-bold">Movement cues</summary><ul className="text-xs text-muted-foreground space-y-2 pt-2">{(Array.isArray(current.exercise.cues)?current.exercise.cues:[]).map(c=><li key={c}>{c}</li>)}</ul></details>
+  </section></div>
+ </main>;
+}

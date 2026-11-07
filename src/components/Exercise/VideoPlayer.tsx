@@ -1,3 +1,6 @@
+import { TRAINING_LEVELS } from '@/lib/trainingPolicy';
+import { tutorialState } from '@/lib/mediaAudit';
+import { InlineYouTubeFrame } from './InlineYouTubeFrame';
 import { exerciseLabel } from '@/lib/exerciseLabels';
 import * as React from 'react';
 import { Minimize2, Maximize2, Volume2, ChevronDown, ChevronUp, Target, Dumbbell, Shield, Info, Clock } from 'lucide-react';
@@ -30,6 +33,7 @@ interface VideoPlayerProps {
   privacyEnhanced?: boolean;
   className?: string;
   exerciseData?: ExerciseData;
+  auditPreview?: boolean;
 }
 
 const getStartTime = (url: string): number | undefined => {
@@ -59,7 +63,7 @@ function buildEmbedSrc(youtubeId: string, startSec?: number, privacyEnhanced = t
   return `${host}/embed/${youtubeId}?${params.toString()}`;
 }
 
-const diffLabel = ['', 'Beginner', 'Easy', 'Intermediate', 'Advanced', 'Elite'];
+const diffLabel = ['', ...TRAINING_LEVELS.map(level=>level.label)];
 
 function DataSidebar({ data }: { data: ExerciseData }) {
   const cues = (() => {
@@ -200,10 +204,13 @@ export function VideoPlayer({
   privacyEnhanced = true,
   className,
   exerciseData,
+  auditPreview = false,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const [isMinimized, setIsMinimized] = React.useState(false);
   const [showData, setShowData] = React.useState(true);
+  const media=tutorialState(youtubeUrl,title);
+  youtubeUrl=media.url;
+  if(media.blocked&&!auditPreview)return <div className={cn('rounded-xl border bg-card p-4 space-y-2',className)} role="status"><p className="font-bold text-sm">Tutorial needs replacement</p><p className="text-xs text-muted-foreground">{media.label}. Use the movement cues or a suitable alternative.</p></div>;
 
   if (!youtubeUrl && !instagramUrl) {
     return (
@@ -232,29 +239,6 @@ export function VideoPlayer({
 
     const effectiveStartSec = startSec ?? getStartTime(youtubeUrl);
 
-    // Minimized bar
-    if (isMinimized && isPlaying) {
-      return (
-        <div className={cn("border-2 border-foreground bg-foreground flex items-center gap-3 p-2", className)}>
-          <div className="w-20 h-12 flex-shrink-0 overflow-hidden">
-            <iframe
-              className="w-[160px] h-[90px] scale-50 origin-top-left pointer-events-none"
-              src={buildEmbedSrc(videoId, effectiveStartSec, privacyEnhanced, true)}
-              title={title}
-              allow="autoplay"
-            />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-[10px] font-display font-bold text-background uppercase tracking-wider truncate">{title}</p>
-            <p className="text-[8px] font-mono text-background/50 uppercase tracking-wider">tlcTV • Playing</p>
-          </div>
-          <button onClick={() => setIsMinimized(false)} className="p-1.5 hover:bg-background/10 transition-colors">
-            <Maximize2 className="w-4 h-4 text-background/70" />
-          </button>
-        </div>
-      );
-    }
-
     // Thumbnail mode
     if (thumbnailMode && !isPlaying) {
       return (
@@ -282,6 +266,7 @@ export function VideoPlayer({
             </button>
           </div>
           <BottomBar />
+          <p className="px-3 py-2 text-[11px] text-muted-foreground border-t">{media.label}</p>
           {exerciseData && showData && (
             <div className="p-3 border-t border-border bg-background">
               <DataSidebar data={exerciseData} />
@@ -294,18 +279,9 @@ export function VideoPlayer({
     // Full player with embedded data
     return (
       <div className={cn("relative w-full overflow-hidden bg-background", className)}>
-        <HeaderBar title={title} isLive={isPlaying} onMinimize={() => setIsMinimized(true)} />
-        <div className="aspect-video relative">
-          <iframe
-            className="h-full w-full"
-            src={buildEmbedSrc(videoId, effectiveStartSec, privacyEnhanced, isPlaying)}
-            title={title}
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          />
-        </div>
+        <HeaderBar title={title} isLive={isPlaying} onMinimize={null} />
+        <InlineYouTubeFrame videoId={videoId} title={title} startSec={effectiveStartSec} autoplay={isPlaying}/>
+        <p className="px-3 py-2 text-[11px] text-muted-foreground border-t">{media.label}</p>
         <BottomBar onToggleData={exerciseData ? () => setShowData(!showData) : undefined} showingData={showData} />
         {exerciseData && showData && (
           <div className="p-3 border-t border-border bg-background">
@@ -351,7 +327,7 @@ function HeaderBar({ title, isLive, onMinimize }: { title: string; isLive: boole
         {isLive && (
           <>
             <div className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse" />
-            <span className="text-[8px] font-mono text-background/60 uppercase tracking-wider">Live</span>
+            <span className="text-[8px] font-mono text-background/60 uppercase tracking-wider">Player open</span>
           </>
         )}
         {!isLive && (

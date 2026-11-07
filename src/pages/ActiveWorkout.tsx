@@ -124,7 +124,7 @@ export default function ActiveWorkout() {
     const easier=slug?exerciseBySlug.get(slug):null;
     if(!easier){toast.info('Choose an appropriate movement in the builder, or review your level and readiness.');return;}
     const dose=nodeDose(easier.slug);
-    if(!exerciseReadinessReasons(item.exercise,readiness).length){try {saveAttempt(progressOwner,{id:crypto.randomUUID(),nodeId:item.exercise.slug,sessionId:String(draft.startedAt),at:new Date().toISOString(),metric:nodeDose(item.exercise.slug).metric,value:0,target:nodeDose(item.exercise.slug).target,quality:2});} catch {}}
+    // Switching to preparation does not invent a failed attempt.
     const remaining=Math.max(1,item.sets.filter(s=>!s.done).length);
     const replacement:SessionEntry={section:item.section,phaseLabel:'Regression / preserve technique',exercise:easier,restSeconds:dose.restSeconds,sets:Array.from({length:remaining},()=>({progressId:crypto.randomUUID(),reps:dose.metric==='reps'?dose.target:0,...(dose.metric==='seconds'?{seconds:dose.target}:{}),done:false}))};
     setDraft(old=>{
@@ -224,6 +224,7 @@ export default function ActiveWorkout() {
         </div>
         <details className="rounded-xl border p-3"><summary className="text-xs font-bold cursor-pointer min-h-10 flex items-center">Level and readiness · L{readiness.tier||1}</summary><TrainingLevelControls profile={readiness} onChange={next=>{setReadiness(next);writeTrainingProfile(next);}}/></details>
         {exerciseReadinessReasons(item.exercise,readiness).length>0&&<section className="rounded-xl border border-primary p-4 text-sm" role="status"><p className="font-bold">Use a suitable preparation first</p>{exerciseReadinessReasons(item.exercise,readiness).map(r=><p key={r} className="text-xs mt-2">{r}</p>)}<Button className="min-h-12 mt-3" variant="outline" onClick={regressMovement}>Choose a suitable regression</Button></section>}
+        <div className="power-training-cockpit">
         <section id="power-current-exercise" className="space-y-3" aria-label="Current exercise">
           <div>
             <div className="flex items-center justify-between gap-2">
@@ -256,7 +257,7 @@ export default function ActiveWorkout() {
             <span className="text-xs text-muted-foreground">{item.sets.filter(s => s.done).length} of {item.sets.length} done</span>
           </div>
           <details className="border rounded-xl p-3"><summary className="text-xs font-bold cursor-pointer">Technique quality · optional progress logging</summary><label className="text-xs block mt-3">Your quality for these attempts<select className="h-12 w-full bg-card border rounded-lg mt-1 px-2" value={techniqueQuality??''} onChange={e=>setTechniqueQuality(e.target.value?Number(e.target.value):null)}><option value="">Not assessed · workout only</option>{[1,2,3,4,5].map(n=><option key={n} value={n}>{n}/5 · {n<3?'lost control':n===3?'mixed quality':'controlled technique'}</option>)}</select></label><p className="text-[11px] text-muted-foreground mt-2">Only your explicit quality rating contributes to skill consistency. Stop when form deteriorates.</p></details>
-          <div className="grid grid-cols-2 gap-2"><Button variant="outline" className="min-h-12 text-xs" disabled={!regressionFor(item.exercise.slug)} onClick={regressMovement}>Failed / use regression</Button><a className="border rounded-xl min-h-12 grid place-items-center text-xs text-primary" href="#power-current-exercise">Technique / video</a></div>
+          <div className="grid grid-cols-2 gap-2"><Button variant="outline" className="min-h-12 h-auto whitespace-normal py-2 text-xs" disabled={!regressionFor(item.exercise.slug)} onClick={regressMovement}>Use easier step</Button><a className="border rounded-xl min-h-12 grid place-items-center text-xs text-primary" href="#power-current-exercise">Technique / video</a></div>
           {item.sets.map((set,index) => (
             <div key={index} className={`power-set-row grid grid-cols-[1.15rem_minmax(0,1fr)_2.6rem] sm:grid-cols-[1.5rem_minmax(0,1fr)_3rem] gap-1.5 sm:gap-3 items-center p-2 sm:p-3 rounded-xl ${set.done?'is-done':''}`}>
               <span className="w-5 text-xs font-mono font-bold text-muted-foreground">{index+1}</span>
@@ -306,7 +307,8 @@ export default function ActiveWorkout() {
           </div>
           <p className="text-[11px] text-muted-foreground">Automatically starts when you complete a set. Skill-specific starting rest; adjust between 60 and 180 seconds.</p>
         </section>
-        <div className="sticky bottom-0 z-30 grid grid-cols-3 gap-2 rounded-t-2xl border-t border-border/60 bg-background/95 p-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-lg">
+        </div>
+        <div className="power-workout-actions sticky bottom-0 z-30 grid grid-cols-3 gap-2 rounded-t-2xl border-t border-border/60 bg-background/95 p-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-lg">
           <Button variant="outline" className="h-14 font-bold rounded-2xl" disabled={draft.index===0}
             onClick={() => changeExercise(draft.index-1)}><ChevronLeft className="h-5 w-5 mr-1"/> Back</Button>
           <Button className="min-h-14 rounded-2xl px-2 font-black text-xs min-[360px]:text-sm col-span-2"

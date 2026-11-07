@@ -1,3 +1,5 @@
+import { tutorialState } from '@/lib/mediaAudit';
+import { InlineYouTubeFrame } from './InlineYouTubeFrame';
 import { minimumTier } from '@/lib/trainingPolicy';
 import { useState } from 'react';
 import { Plus, Dumbbell, X, Play } from 'lucide-react';
@@ -43,7 +45,8 @@ const difficultyLabel = ['', 'L1 · Starting', 'L2 · Foundation', 'L3 · Buildi
 
 export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: ExerciseCardProps) {
   const [playing, setPlaying] = useState(false);
-  const videoId = getYouTubeId(exercise.youtube_url);
+  const media=tutorialState(exercise.youtube_url,exercise.name);
+  const videoId = media.blocked?null:media.id;
   const style = categoryStyle[exercise.category] || { color: 'hsl(var(--muted-foreground))' };
   const level = minimumTier(exercise.slug);
 
@@ -54,21 +57,14 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
       style={{ '--glow-color': `${style.color}20` } as any}
     >
       {/* Thumbnail */}
-      <div className="power-skeuo-screen aspect-[16/10] bg-muted/30 relative overflow-hidden">
+      <div className={`power-skeuo-screen bg-muted/30 relative overflow-hidden ${playing?'min-h-[240px]':'aspect-[16/10]'}`}>
         {playing && videoId ? (
           <div className="relative h-full w-full bg-black" onClick={(event) => event.stopPropagation()}>
-            <iframe
-              className="h-full w-full"
-              src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&playsinline=1&rel=0`}
-              title={`${exercise.name} video tutorial`}
-              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
+            <div className="pt-12"><InlineYouTubeFrame videoId={videoId} title={exercise.name} autoplay/></div>
             <button
               type="button"
               onClick={(event) => { event.stopPropagation(); setPlaying(false); }}
-              className="power-skeuo-button absolute right-2 top-2 z-20 grid h-9 w-9 place-items-center rounded-xl bg-black/80 text-white"
+              className="power-skeuo-button absolute right-2 top-1 z-20 grid h-11 w-11 place-items-center rounded-xl bg-black/80 text-white"
               aria-label={`Close ${exercise.name} video`}
             ><X className="h-4 w-4" /></button>
           </div>
@@ -80,7 +76,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
             {videoId && (
               <button type="button" aria-label={`Play ${exercise.name} tutorial here`}
                 className="absolute inset-0 z-10 grid place-items-center focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary"
-                onClick={(event) => { event.stopPropagation(); setPlaying(true); }}>
+                onClick={(event) => { event.stopPropagation(); if(event.currentTarget.getBoundingClientRect().width<240)onViewDetails(exercise);else setPlaying(true); }}>
                 <span className="power-skeuo-play flex h-14 w-14 items-center justify-center rounded-full text-white shadow-xl transition-transform group-hover:scale-105">
                   <Play className="ml-1 h-7 w-7" fill="currentColor" />
                 </span>
@@ -124,6 +120,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
           </div>
         </div>
 
+        <p className="text-[10px] leading-snug text-muted-foreground">{media.label}</p>
         {/* Muscles */}
         <div className="flex flex-wrap gap-1">
           {exercise.primary_muscles.slice(0, 3).map(muscle => (

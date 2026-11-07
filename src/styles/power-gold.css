@@ -239,13 +239,13 @@
 .power-studio-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: 28px; }
 .power-studio-node { position: relative; }
 .power-studio-detail { min-width: 0; align-self: start; }
-@media(min-width:768px) {
+@media(min-width:640px) {
   .power-studio-grid {grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}
-  .power-studio-detail {position:sticky;top:20px;max-height:calc(100dvh - 40px);overflow-y:auto}
+  .power-studio-detail {position:sticky;top:20px;max-height:calc(100dvh - var(--power-nav-space) - 48px);overflow-y:auto;scrollbar-gutter:stable}
   .power-session > div {max-width:1100px}
-  .power-session section[aria-label="Current exercise"] {float:left;width:calc(50% - 18px);position:sticky;top:20px}
-  .power-session section[aria-label="Log your sets"], .power-session section[aria-label="Log your sets"] + section {margin-left:calc(50% + 18px)}
-  .power-session > div > .sticky {clear:both}
+  .power-training-cockpit {grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+  .power-training-cockpit section[aria-label="Current exercise"] {grid-column:1;grid-row:1 / span 2;position:sticky;top:16px}
+  .power-training-cockpit section[aria-label="Log your sets"], .power-training-cockpit section[aria-label="Log your sets"] + section {grid-column:2}
 }
 @media(max-width:767px){.power-skill-studio input,.power-skill-studio select{font-size:16px}}
 
@@ -287,6 +287,64 @@
 .power-inline-soundtrack[hidden] {display:none;}
 .power-music-settings input {font-size:16px;}
 .power-builder-launch {position:relative;bottom:auto;z-index:auto;}
+.power-training-cockpit {display:grid;gap:16px;min-width:0}
+.power-training-cockpit > * {min-width:0}
+.power-workout-actions {isolation:isolate;scroll-margin-bottom:16px}
+.power-training-cockpit .power-set-row{grid-template-columns:20px minmax(0,1fr) 48px;gap:6px;padding:8px;}
+.power-training-cockpit .power-set-row>div{gap:4px;}
+.power-training-cockpit .power-set-row>div>div{min-width:46px;}
+.power-session{padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))!important;}
+.power-session :is(button,input,select,a){scroll-margin-block:20px 120px;}
+.power-session .power-workout-actions{position:fixed!important;left:50%;bottom:0;transform:translateX(-50%);width:min(calc(100% - 16px),1052px);z-index:45;}
+@media(max-height:500px){.power-session .power-workout-actions{position:sticky!important;left:auto;transform:none;width:auto;}.power-session{padding-bottom:20px!important;}}
+.power-movement-sheet {overscroll-behavior-y:contain;padding-bottom:max(24px,env(safe-area-inset-bottom));scroll-padding-block:56px 24px;}
+.power-assessment h1:focus {outline:none}
+.power-assessment-option,.power-assessment-action {min-height:48px;min-width:0;border:1px solid hsl(var(--border));border-radius:12px;padding:12px 14px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:700;line-height:1.45;overflow-wrap:anywhere;}
+.power-assessment-option {justify-content:space-between;text-align:left;background:hsl(var(--card));}
+.power-assessment-option > span {min-width:0;flex:1}
+.power-assessment-option > svg {flex-shrink:0}
+.power-assessment-option.is-selected {border-color:hsl(var(--primary));background:hsl(var(--primary) / .1);color:hsl(var(--primary));}
+.power-assessment-action.is-primary {background:hsl(var(--primary));color:hsl(var(--primary-foreground));border-color:transparent;}
+.power-assessment-action:disabled {opacity:.4;cursor:not-allowed}
+.power-assessment-option:focus-visible,.power-assessment-action:focus-visible {outline:3px solid hsl(var(--ring));outline-offset:3px}
+.power-starting-link {background:linear-gradient(120deg,hsl(var(--primary)/.09),hsl(var(--card)));}
+.power-embedded-stage {aspect-ratio:16 / 9;min-height:200px;}
+.power-embedded-stage iframe {width:100%;height:100%;min-height:200px;}
+.power-media-grid{display:grid;gap:20px;grid-template-columns:minmax(0,1fr)}
+.power-media-grid>*{min-width:0}
+.power-practice-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+@media(min-width:380px){.power-practice-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* VASA Western Ave exterior: red entrance tower, graphite glazing, warm brick and concrete. */
+:root[data-theme="vasa"],:root[data-theme="vasa"].dark{
+ color-scheme:light;--background:42 16% 92%;--foreground:210 8% 16%;--card:42 23% 98%;--card-foreground:210 8% 16%;
+ --popover:42 23% 98%;--popover-foreground:210 8% 16%;--primary:353 72% 40%;--primary-foreground:0 0% 100%;
+ --secondary:36 14% 84%;--secondary-foreground:210 8% 16%;--muted:38 14% 87%;--muted-foreground:30 7% 34%;
+ --accent:32 14% 81%;--accent-foreground:210 8% 16%;--border:32 12% 71%;--input:32 12% 71%;--ring:353 72% 40%;
+ --electric:353 72% 40%;--electric-glow:353 72% 50%;--surface:42 16% 92%;--surface-raised:42 23% 98%;--power-metal:32 10% 75%;--power-highlight:40 15% 97%;
+ --shadow-light:42 23% 99%;--shadow-dark:30 10% 52%;--gradient-start:353 72% 40%;--gradient-end:210 8% 25%;
+ --cat-push:353 72% 40%;--cat-pull:210 8% 28%;--cat-legs:25 24% 34%;--cat-core:9 48% 35%;--cat-skills:353 55% 32%;--cat-mobility:30 12% 36%;
+}
+:root[data-theme="vasa"] body{background:linear-gradient(180deg,#e6e2da,#f3f1ec 440px);}
+:root[data-theme="vasa"] .power-elevated{border-color:#bfb5a6;background:linear-gradient(145deg,#fffefa,#f1ede6);box-shadow:0 3px 0 #c8c0b3,0 10px 24px #39332d09;}
+:root[data-theme="vasa"] .power-goal-card{border-top:4px solid #ad1d32;background:linear-gradient(140deg,#fffefa,#e8e2d8);border-color:#c2b8a8;border-top-color:#ad1d32;}
+:root[data-theme="vasa"] .power-practice-card{border-left:5px solid #ad1d32;background:linear-gradient(120deg,#fffefa,#e6ded1);}
+:root[data-theme="vasa"] .power-simple-nav{background:#292b2d;color:#faf8f3;border-top:4px solid #ad1d32;}
+:root[data-theme="vasa"] .power-simple-nav-link{color:#dcd6cb;}
+:root[data-theme="vasa"] .power-simple-nav-link.is-active{color:#fffdfa;background:#ad1d32;box-shadow:none;}
+:root[data-theme="vasa"] .power-shell{--pg-gold:#ad1d32;--pg-bright:#8d1427;--pg-quiet:#665c50;--pg-cream:#25282b;--pg-line:#c2b8a8;background:#eeece7;color:#25282b;}
+:root[data-theme="vasa"] .power-shell .power-topbar{background:#fffdf8;}
+:root[data-theme="vasa"] .power-shell::before{display:none;}
+.power-entry-vasa{--entry-ink:#eeece7;--entry-panel:#f9f7f2;--entry-panel-2:#ddd5c8;--entry-stroke:#b7ad9d;--entry-paper:#25282b;--entry-muted:#6b6155;--entry-blue:#ad1d32;--entry-orange:#ad1d32;background:linear-gradient(120deg,#f4f1eb,#e5e0d6);}
+.power-entry-vasa .power-entry-wordmark-top,.power-entry-vasa .power-entry-description{color:#655d53;}
+.power-entry-vasa .power-entry-primary{background:#ad1d32;color:#fff;border-color:#8f1527;box-shadow:0 4px 0 #721222;}
+.power-entry-vasa .power-entry-primary-icon{background:#8f1527;color:white;}
+.power-entry-vasa .power-entry-brandmark{background:#ad1d32;color:white;box-shadow:3px 3px 0 #7f1828;}
+.power-entry-vasa .power-entry-audio-switch[aria-pressed="true"]{border-color:#ad1d32;color:#9e1b2d;}
+.power-entry-vasa .power-entry-mascot-stage{background:radial-gradient(ellipse at center,#c4b9a650,transparent 70%),#ddd6cb;border:1px solid #b4a692;min-height:340px;}
+.power-entry-vasa .power-entry-mascot-legend,.power-entry-vasa .power-entry-mascot-caption{color:#5b5041;}
+.power-entry-vasa .power-entry-quiet-options button{border-color:#a5947c;}
+@media(min-width:640px){.power-media-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}.power-media-queue{max-height:540px}}
+@media(max-width:359px){.power-skills-grid{grid-template-columns:minmax(0,1fr)}.power-goal-card{min-height:150px}.power-set-row{padding-inline:4px;gap:4px}.power-builder-movement{flex-wrap:wrap}.power-builder-movement>div:nth-child(2){flex-basis:calc(100% - 130px)}.power-rep-button{width:40px!important;min-width:40px!important;height:44px!important}.power-training-cockpit section[aria-label="Log your sets"]{padding-inline:8px}}
 .power-entry-top {flex-wrap:wrap;padding-block:12px;}
 .power-entry-top-actions {flex-wrap:wrap;}
 @media(min-width:768px){.power-skills-grid{grid-template-columns:repeat(3,minmax(0,1fr));}.power-simple-page{padding-top:40px}.power-goal-card{padding:22px;min-height:220px;}}

@@ -1,3 +1,4 @@
+import { resolveTutorialUrl, tutorialState } from '@/lib/mediaAudit';
 import { exerciseReadinessReasons } from '@/lib/trainingPolicy';
 import { readTrainingProfile } from '@/lib/skillGraph';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -43,7 +44,7 @@ function mergeCatalog(remote: Exercise[] = [], includeLocal = true): Exercise[] 
       instagram_url: item.instagram_url || previous?.instagram_url || null,
     });
   }
-  return [...bySlug.values()];
+  return [...bySlug.values()].map(e=>({...e,youtube_url:resolveTutorialUrl(e.slug,e.youtube_url)}));
 }
 
 export default function Library() {
@@ -104,7 +105,7 @@ export default function Library() {
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = !activeCategory || (CATEGORY_GROUPS[activeCategory] ? CATEGORY_GROUPS[activeCategory].includes(exercise.category) : exercise.category === activeCategory);
     const matchesOwner = !mineOnly || exercise.created_by === ownerId;
-    const matchesVideo = !videosOnly || Boolean(exercise.youtube_url);
+    const matchesVideo = !videosOnly || Boolean(exercise.youtube_url)&&!tutorialState(exercise.youtube_url,exercise.name).blocked;
     return matchesSearch && matchesCategory && matchesOwner && matchesVideo;
   });
 

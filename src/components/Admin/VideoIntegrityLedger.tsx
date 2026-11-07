@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { VideoPlayer } from '@/components/Exercise/VideoPlayer';
 import { toast } from 'sonner';
+import { Link } from 'react-router-dom';
+import { tutorialState } from '@/lib/mediaAudit';
 
 type ReviewStatus='unverified'|'reachable'|'playable'|'movement_verified'|'rejected'|'stale';
 type Review={slug:string;url:string|null;status:ReviewStatus;creator:string;reason:string;checkedAt:string;reviewer:string;movement:boolean;coaching:boolean;playback:boolean};
@@ -32,7 +34,8 @@ export function VideoIntegrityLedger({owner}:{owner:string}) {
     <div><p className="text-primary text-xs uppercase tracking-widest">Coach / media review</p><h2 className="font-display text-2xl font-bold mt-2">Video Integrity Ledger</h2><p className="text-xs text-muted-foreground mt-2">Owner reviews on this device. These records do not certify the public library or sync to other devices.</p></div>
     <div className="grid grid-cols-3 gap-3 text-xs"><div className="border rounded-xl p-3"><strong className="block text-xl">{catalog.filter(e=>!e.youtube_url).length}</strong>Missing links</div><div className="border rounded-xl p-3"><strong className="block text-xl">{reviews.length}</strong>Recorded reviews</div><div className="border rounded-xl p-3"><strong className="block text-xl">{reviews.filter(r=>r.status==='movement_verified').length}</strong>Movement verified</div></div>
     <div className="grid md:grid-cols-2 gap-5"><div className="space-y-3"><label className="block text-sm">Find a movement<Input className="mt-2 h-12" placeholder="Search video review queue" value={search} onChange={e=>setSearch(e.target.value)}/></label><div className="max-h-80 overflow-y-auto border rounded-xl">{visible.map(e=><button key={e.slug} onClick={()=>choose(e.slug)} aria-pressed={slug===e.slug} className={`min-h-14 w-full border-b px-3 py-2 text-left text-xs ${slug===e.slug?'bg-primary/10 text-primary':''}`}><strong>{e.name}</strong><small className="block mt-1 text-muted-foreground">{e.youtube_url?(reviews.find(r=>r.slug===e.slug&&r.url===e.youtube_url)?.status||'unverified'):'missing tutorial'}</small></button>)}</div></div>
-      <div className="space-y-3"><h3 className="font-bold">{exercise.name}</h3><VideoPlayer key={slug} youtubeUrl={exercise.youtube_url} title={exercise.name} thumbnailMode/>
+      <div className="space-y-3"><h3 className="font-bold">{exercise.name}</h3><VideoPlayer key={slug} youtubeUrl={exercise.youtube_url} title={exercise.name} thumbnailMode auditPreview/>
+        <p className="text-xs text-muted-foreground">Provider audit: {tutorialState(exercise.youtube_url,exercise.name).label}</p><Link className="inline-flex min-h-11 items-center text-xs text-primary underline" to={`/videos?exercise=${exercise.slug}`}>View source and playback evidence</Link>
         {prior&&<p className="text-xs text-muted-foreground">Last reviewed {new Date(prior.checkedAt).toLocaleString()}</p>}
         <label className="block text-xs">Status<select className="h-12 mt-1 w-full bg-card border rounded-xl px-2" value={status} onChange={e=>setStatus(e.target.value as ReviewStatus)}>{statuses.map(s=><option value={s} key={s}>{s.replace(/_/g,' ')}</option>)}</select></label>
         <label className="block text-xs">Creator / coaching source<Input className="h-12 mt-1" maxLength={160} value={creator} onChange={e=>setCreator(e.target.value)}/></label>

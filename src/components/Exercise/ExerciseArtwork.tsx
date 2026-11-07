@@ -2,20 +2,9 @@ import { useEffect, useState } from 'react';
 import { Dumbbell, Play } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export function getYouTubeId(value?: string | null): string | null {
-  if (!value) return null;
-  try {
-    const url = new URL(value);
-    const host = url.hostname.toLowerCase().replace(/^www\./, '');
-    let candidate: string | null = null;
-    if (host === 'youtu.be') candidate = url.pathname.split('/')[1];
-    else if (host === 'youtube.com' || host === 'music.youtube.com' || host === 'youtube-nocookie.com') {
-      if (url.pathname === '/watch') candidate = url.searchParams.get('v');
-      else if (/^\/(embed|shorts|live|v)\//.test(url.pathname)) candidate = url.pathname.split('/')[2];
-    }
-    return candidate && /^[A-Za-z0-9_-]{11}$/.test(candidate) ? candidate : null;
-  } catch { return null; }
-}
+import { getYouTubeId } from '@/lib/youtube';
+import { tutorialState } from '@/lib/mediaAudit';
+export { getYouTubeId } from '@/lib/youtube';
 
 interface ArtworkProps {
   title: string;
@@ -29,7 +18,8 @@ interface ArtworkProps {
 
 /** YouTube preview -> user image -> branded nondeceptive placeholder. No invented exercise photograph. */
 export function ExerciseArtwork({ title, category = 'Training', youtubeUrl, imageUrl, className, showPlayHint = false, compact = false }: ArtworkProps) {
-  const id = getYouTubeId(youtubeUrl);
+  const media = tutorialState(youtubeUrl,title);
+  const id = media.blocked ? null : media.id;
   const src = id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : imageUrl || null;
   const [imageFailed, setImageFailed] = useState(false);
   useEffect(() => setImageFailed(false), [src]);
