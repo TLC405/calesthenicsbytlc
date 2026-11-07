@@ -1,3 +1,4 @@
+import { presentWorkout } from './workoutPresentation';
 import { SKILL_PATHS, getSkillPath } from '../data/skillPaths';
 import { buildSkillWorkout, getCandidates, type SkillMinutes, type SkillWorkoutItem, type WorkoutPhase } from './skillWorkoutBuilder';
 import { exerciseBySlug, nodeDose, nodeProgress, recommendedNode, trainingBlockers, type SkillAttempt, type SkillTrainingProfile } from './skillGraph';
@@ -6,11 +7,11 @@ import { canonicalSlug } from './exerciseProgressions';
 
 export const FOCUS_CHOICES=[
  {id:'auto',title:'Help me choose',detail:'Use my readiness and recent results'},
- {id:'compression',title:'Compression',detail:'Lift the legs; bring hips over hands'},
- {id:'straight-arm',title:'Straight-arm control',detail:'Support, protraction and controlled lean'},
- {id:'balance',title:'Balance & entries',detail:'Steady support before freestanding work'},
+ {id:'compression',title:'Leg lifts & core',detail:'Build controlled leg lifts toward your body'},
+ {id:'straight-arm',title:'Straight-arm strength',detail:'Push tall and lean with straight elbows'},
+ {id:'balance',title:'Balance',detail:'Build steady support before balancing alone'},
  {id:'strength',title:'Strength base',detail:'Build repeatable pushing and pulling'},
- {id:'mobility',title:'Active range',detail:'Own a comfortable pike, straddle or extension'},
+ {id:'mobility',title:'Flexibility',detail:'Build comfortable movement in your hips and shoulders'},
  {id:'control',title:'Technique & consistency',detail:'Repeat the current step with better control'},
 ] as const;
 export type FocusId=typeof FOCUS_CHOICES[number]['id'];
@@ -32,7 +33,7 @@ const pools:Record<Exclude<FocusId,'auto'>,readonly string[]>={
  mobility:['cat-cow','pike-stretch','bent-knee-straddle-lift','straddle-stretch','pancake-good-morning'],
  control:['dead-bug','kneeling-planche-plank','hollow-body-hold'],
 };
-const labels:Record<Exclude<FocusId,'auto'>,string>={compression:'Compression first','straight-arm':'Build straight-arm control',balance:'Own your balance',strength:'Build your strength base',mobility:'Create usable range',control:'Make this step repeatable'};
+const labels:Record<Exclude<FocusId,'auto'>,string>={compression:'Build your leg lift','straight-arm':'Build straight-arm control',balance:'Own your balance',strength:'Build your strength base',mobility:'Move more comfortably',control:'Make this step repeatable'};
 const capNames:Record<Capability,string>={'compression-control':'straight-leg compression','inversion-control':'controlled inversion','support-base':'stable support','straight-arm-base':'straight-arm lean','push-base':'basic pressing','pull-base':'controlled pulling'};
 export function usableFocusHistory(attempts:SkillAttempt[],now:number){return attempts.filter(a=>{const date=Date.parse(a.at);return Number.isFinite(date)&&date<=now&&date>=now-60*86400000&&Number.isFinite(a.value)&&a.value>=0&&Number.isFinite(a.target)&&a.target>0&&Number.isInteger(a.quality)&&a.quality>=1&&a.quality<=5;}).map(a=>({...a,nodeId:canonicalSlug(a.nodeId)})).sort((a,b)=>a.at.localeCompare(b.at));}
 export function estimateFocusMinutes(items:readonly SkillWorkoutItem[]){return Math.ceil(items.reduce((sum,item)=>sum+item.sets*(item.metric==='seconds'?item.target:item.target*4)+Math.max(0,item.sets-1)*nodeDose(item.exercise.slug).restSeconds+30,0)/60);}
@@ -48,8 +49,8 @@ export function suggestedMovementTarget(slug:string,history:SkillAttempt[],base:
  const target=light?Math.min(base,retained):repeated?Math.min(cap,retained+(dose.metric==='seconds'?2:1)):retained;
  return {target,reason:light?'Conservative target for a lighter practice day.':repeated&&target>retained?'Small increase after 3 controlled logs across at least 2 sessions and days, with matching setup.':last?'Repeat your recent target with control before adding more.':'Starting target; repeated controlled logs will inform the next suggestion.'};
 }
-export function buildFocusPlan(preferences:FocusPreferences,profile:SkillTrainingProfile,attempts:SkillAttempt[],options:{now?:number;recentPathId?:string;targetSlug?:string}={}){
- const prefs=sanitizeFocusPreferences(preferences);const now=options.now??Date.now();const history=usableFocusHistory(attempts,now);
+export function buildFocusPlan(preferences:FocusPreferences,profile:SkillTrainingProfile,attempts:SkillAttempt[],options:{now?:number;recentPathId?:string;targetSlug?:string;automaticVolume?:boolean}={}){
+ const stored=sanitizeFocusPreferences(preferences);const prefs={...stored,...(options.automaticVolume?{minutes:((profile.tier||1)>=3?40:25) as SkillMinutes}:{})};const now=options.now??Date.now();const history=usableFocusHistory(attempts,now);
  const recentPath=getSkillPath(options.recentPathId);const last=history[history.length-1];
  const inferred=last?SKILL_PATHS.find(p=>p.id!=='foundation'&&p.slugs.includes(last.nodeId)):undefined;
  const goal=getSkillPath(prefs.goalId==='auto'?(recentPath?.id||inferred?.id||'foundation'):prefs.goalId)||SKILL_PATHS[0];
@@ -98,5 +99,5 @@ export function buildFocusPlan(preferences:FocusPreferences,profile:SkillTrainin
  const next=nextIndex>=0?goal.slugs[nextIndex+1]:undefined;
  const checkpoints=needs(goal.id).map(([cap,dimension])=>({id:cap,label:capNames[cap],state:profile.capabilities?.includes(cap)?'Confirmed by you':'Preparation first',focus:dimension,confirmed:Boolean(profile.capabilities?.includes(cap))}));
  const estimatedMinutes=estimateFocusMinutes(items);
- return {goal,focus,title:goal.kind==='collection'&&prefs.focus==='auto'?`${goal.title.replace(/.*· /,'')} practice`:labels[focus],reasons,items,checkpoints,primarySlug:main?.exercise.slug||null,nextSlug:next||null,estimatedMinutes,light:prefs.energy==='light',reviewRequired:Boolean(recentConcern),reviewNote:recentConcern?`You noted discomfort during ${exerciseBySlug.get(recentConcern.nodeId)?.name||'this progression'} in the last 48 hours. Review that before loading this progression again.`:'',evidenceCount:goalLogs.length,consistentCount:goal.slugs.filter(s=>nodeProgress(s,history).consistent).length};
+ return {goal,focus,title:goal.kind==='collection'&&prefs.focus==='auto'?`${presentWorkout(goal).title} practice`:labels[focus],reasons,items,checkpoints,primarySlug:main?.exercise.slug||null,nextSlug:next||null,estimatedMinutes,light:prefs.energy==='light',reviewRequired:Boolean(recentConcern),reviewNote:recentConcern?`You noted discomfort during ${exerciseBySlug.get(recentConcern.nodeId)?.name||'this progression'} in the last 48 hours. Review that before loading this progression again.`:'',evidenceCount:goalLogs.length,consistentCount:goal.slugs.filter(s=>nodeProgress(s,history).consistent).length};
 }

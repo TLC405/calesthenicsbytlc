@@ -11,9 +11,9 @@ export function tutorialState(url?:string|null,title=''){
  const resolved=resolveTutorialUrl(title,url);const id=getYouTubeId(resolved);const record=id?byId.get(id):undefined;
  const mapping=audit.exercises.find(e=>e.name===title&&getYouTubeId(e.url)===id);
  const repair=repairs.find(r=>r.name===title&&r.url===resolved);
- const unavailable=record?.availability==='unavailable'||record?.availability==='invalid'||repair?.decision==='withheld';
+ const unavailable=record?.availability==='unavailable'||record?.availability==='invalid'||record?.availability==='unchecked'&&record?.lastKnownAvailability==='unavailable'||repair?.decision==='withheld';
  return {url:resolved,id,record,mapping,repair,blocked:unavailable,
-  label:!resolved?'Tutorial not sourced':!id?'Video link needs repair':repair?.decision==='withheld'?'Wrong variation · source withheld':unavailable?'Source unavailable at last check':mapping?.titleSignal==='title_needs_review'&&!repair?'Variation needs review':record?.availability==='reachable'?(repair?.scope==='family'?'Family tutorial · variation cues below':'Source reached · movement not verified'):'Tutorial not checked',
+  label:!resolved?'Video coming soon':!id?'Video link needs repair':repair?.decision==='withheld'?'Wrong variation · source withheld':unavailable?'Video needs replacing':mapping?.titleSignal==='title_needs_review'&&!repair?'Exercise match needs checking':record?.availability==='reachable'?(repair?.scope==='family'?'Related lesson':'Video link checked'):'Video not checked yet',
  };
 }
 export type PlaybackEvidence={videoId:string;at:string;state:'loaded'|'played'|'error';code?:number};

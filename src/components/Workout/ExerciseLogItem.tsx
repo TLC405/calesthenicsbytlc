@@ -1,3 +1,5 @@
+import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
+import { movementThumbnailSources } from '@/lib/movementThumbnails';
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, Play, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -20,46 +22,28 @@ interface ExerciseLogItemProps {
   onViewVideo?: () => void;
 }
 
-const getYouTubeVideoId = (url: string): string | null => {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-  const match = url.match(regExp);
-  return match && match[2].length === 11 ? match[2] : null;
-};
-
 export function ExerciseLogItem({ exercise, sets, onSetsChange, onRemove, onViewVideo }: ExerciseLogItemProps) {
   const [isOpen, setIsOpen] = useState(true);
   
-  const videoId = exercise.youtube_url ? getYouTubeVideoId(exercise.youtube_url) : null;
-  const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/default.jpg` : null;
-
-  const totalReps = sets.reduce((sum, set) => sum + set.reps, 0);
+  const hasVideo=movementThumbnailSources(exercise).some(s=>s.url);
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen} className="neumorph-inset rounded-lg overflow-hidden">
       <CollapsibleTrigger asChild>
         <div className="flex items-center gap-3 p-3 cursor-pointer hover:bg-muted/50 transition-colors">
-          {/* Thumbnail */}
-          <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-muted">
-            {thumbnailUrl ? (
-              <img src={thumbnailUrl} alt={exercise.name} className="w-full h-full object-cover" />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-lg font-bold text-muted-foreground">
-                {exercise.name.charAt(0)}
-              </div>
-            )}
-          </div>
+          <MovementThumbnail exercise={exercise}/>
 
           {/* Info */}
           <div className="flex-1 min-w-0">
-            <h4 className="font-medium truncate">{exercise.name}</h4>
+            <h4 className="font-medium">{exercise.name}</h4>
             <p className="text-sm text-muted-foreground">
-              {sets.length} sets × {totalReps} reps
+              {sets.length} sets
             </p>
           </div>
 
           {/* Actions */}
           <div className="flex items-center gap-1">
-            {videoId && (
+            {hasVideo && (
               <Button 
                 variant="ghost" 
                 size="icon" 

@@ -1,3 +1,5 @@
+import { exercisePaths } from '@/lib/exerciseProgressions';
+import { matchesWorkoutCategory } from '@/lib/workoutPresentation';
 import { cn } from '@/lib/utils';
 
 interface CategoryTabsProps {
@@ -10,10 +12,15 @@ interface CategoryTabsProps {
 // Group raw categories into simplified groups
 export const CATEGORY_GROUPS: Record<string, string[]> = {
   'Strength': ['Push', 'Pull', 'Rings'],
-  'Lower Body': ['Legs', 'Core'],
-  'Skills': ['Skills', 'Yoga'],
-  'Recovery': ['Mobility', 'Flexibility'],
+  'Legs & core': ['Legs', 'Core'],
+  'Balance': ['Yoga', 'Ballet', 'Skills'],
+  'Mobility': ['Yoga', 'Ballet', 'Mobility', 'Flexibility'],
+  'Yoga': ['Yoga'],
+  'Ballet': ['Ballet'],
+
 };
+
+export function matchesExerciseCategory(exercise:{slug:string;category:string},category:string|null){if(!category)return true;if(['Balance','Mobility','Yoga','Ballet'].includes(category))return exercisePaths(exercise.slug).some(p=>matchesWorkoutCategory(p,category));return CATEGORY_GROUPS[category]?.includes(exercise.category)||exercise.category===category;}
 
 const groupColors: Record<string, string> = {
   'Strength': 'data-[active=true]:bg-[hsl(var(--cat-push))] data-[active=true]:text-white data-[active=true]:border-[hsl(var(--cat-push))]',
@@ -31,11 +38,11 @@ export function CategoryTabs({ categories, activeCategory, onCategoryChange, cou
     groupCounts[group] = cats.reduce((sum, c) => sum + (counts?.[c] || 0), 0);
   }
 
-  const visibleGroups = Object.keys(CATEGORY_GROUPS).filter(group => CATEGORY_GROUPS[group].some(cat => categories.includes(cat)));
+  const visibleGroups = Object.keys(CATEGORY_GROUPS).filter(group => group==='Ballet'?categories.some(c=>['Ballet','Flexibility'].includes(c)):CATEGORY_GROUPS[group].some(cat => categories.includes(cat)));
 
   // Check if activeCategory is a group name (for group-level filtering)
   const isGroupActive = (group: string) => {
-    return activeCategory === group || CATEGORY_GROUPS[group]?.includes(activeCategory || '') || false;
+    return activeCategory === group;
   };
 
   const handleGroupClick = (group: string) => {
@@ -69,7 +76,7 @@ export function CategoryTabs({ categories, activeCategory, onCategoryChange, cou
             )}
           >
             {group}
-            {groupCounts[group] > 0 && <span className="ml-1 opacity-50">{groupCounts[group]}</span>}
+            {!['Balance','Mobility','Ballet'].includes(group)&&groupCounts[group] > 0 && <span className="ml-1 opacity-50">{groupCounts[group]}</span>}
           </button>
         );
       })}

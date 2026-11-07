@@ -15,7 +15,7 @@
       } catch {document.documentElement.dataset.theme='vasa';}
     </script>
     <title>I Got The Power – Calisthenics Training App</title>
-    <meta name="description" content="Master human strength with 215 bodyweight exercises, advanced skill workouts and guided training. Powered by TLC." />
+    <meta name="description" content="Master human strength with skill-based workouts, clear tutorials and a simple training calendar. Powered by TLC." />
     <meta name="author" content="I Got The Power" />
 
     <!-- Premium Google Fonts: Inter (body) + Space Grotesk (display) -->
@@ -25,7 +25,7 @@
 
     <!-- PWA Meta Tags -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta name="theme-color" content="#070708" />
+    <meta name="theme-color" content="#AD1D32" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="POWER" />
@@ -33,28 +33,18 @@
     <link rel="manifest" href="/manifest.json" />
 
     <meta property="og:title" content="I Got The Power – Calisthenics Training" />
-    <meta property="og:description" content="215 bodyweight exercises, skill workouts and advanced calisthenics. Powered by TLC." />
+    <meta property="og:description" content="Skill workouts, tutorials and your training calendar. Powered by TLC." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/icon-512.png" />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="I Got The Power" />
-    <meta name="twitter:description" content="150+ bodyweight exercises, AI coaching, skill progressions." />
+    <meta name="twitter:description" content="Choose a skill, build a workout and plan your training days." />
     <meta name="twitter:image" content="/icon-512.png" />
   </head>
 
   <body>
     <div id="root"></div>
-    <script>
-      // Purge the legacy workbox service worker that cached the old login screen.
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.unregister())).catch(() => {});
-      }
-      if ("caches" in window) {
-        caches.keys().then(keys => Promise.all(keys.filter(k => /workbox|precache|runtime/i.test(k)).map(k => caches.delete(k)))).catch(() => {});
-      }
-      if (location.pathname === "/auth") location.replace("/library");
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

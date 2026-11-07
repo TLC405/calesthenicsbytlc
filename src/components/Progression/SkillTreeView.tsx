@@ -1,3 +1,5 @@
+import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
+import { minimumTier, TRAINING_LEVELS } from '@/lib/trainingPolicy';
 import { useEffect, useState } from 'react';
 import { backendConfigured, supabase } from '@/integrations/supabase/client';
 import publicCatalog from '@/data/publicExerciseCatalog.json';
@@ -100,13 +102,13 @@ export function SkillTreeView({ onExerciseClick }: SkillTreeViewProps) {
                         borderLeftColor: i === 0 ? color : undefined,
                       }}
                     >
-                      <div className="text-[8px] font-mono font-bold uppercase tracking-wider leading-tight">{ex.name}</div>
+                      <MovementThumbnail exercise={ex}/><div className="text-sm font-bold leading-snug mt-2">{ex.name}</div>
                       <div className="flex items-center gap-1.5 mt-1">
                         <span
                           className="text-[7px] font-mono font-bold uppercase px-1 py-0.5 text-white"
                           style={{ backgroundColor: color }}
                         >
-                          {difficultyLabels[ex.difficulty_level || 1] || 'L' + (ex.difficulty_level || 1)}
+                          {TRAINING_LEVELS[minimumTier(ex.slug)-1].label}
                         </span>
                         {ex.sets_reps && (
                           <span className="text-[7px] font-mono text-muted-foreground">{ex.sets_reps}</span>

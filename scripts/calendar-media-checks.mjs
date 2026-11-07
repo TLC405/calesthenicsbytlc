@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import {mkdtemp,readFile,access,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+const temp=await mkdtemp(path.join(tmpdir(),'power-calendar-'));
+try{
+ async function load(name,file){const out=path.join(temp,name+'.mjs');await build({entryPoints:[file],outfile:out,bundle:true,platform:'node',format:'esm',logLevel:'silent'});return import(pathToFileURL(out));}
+ const [calendar,media,audit,paths,copy,focus]=await Promise.all([load('calendar','src/lib/practiceCalendar.ts'),load('media','src/lib/movementThumbnails.ts'),load('audit','src/lib/mediaAudit.ts'),load('paths','src/data/skillPaths.ts'),load('copy','src/lib/workoutPresentation.ts'),load('focus','src/lib/focusPlan.ts')]);
+ assert(calendar.validDay('2028-02-29'));assert(!calendar.validDay('2026-02-29'));assert(!calendar.validDay('2026-13-01'));assert(!calendar.validDay('../bad'));assert.equal(calendar.shiftDay('2026-12-31',1),'2027-01-01');assert.equal(calendar.shiftDay('2026-03-08',1),'2026-03-09');assert.equal(calendar.shiftDay('2026-11-01',-1),'2026-10-31');assert.deepEqual(calendar.weekDays('2026-11-08'),['2026-11-02','2026-11-03','2026-11-04','2026-11-05','2026-11-06','2026-11-07','2026-11-08']);
+ const store=new Map();globalThis.localStorage={getItem:k=>store.get(k)||null,setItem:(k,v)=>store.set(k,v)};globalThis.window={dispatchEvent:()=>{}};
+ const profile={tier:1,capabilities:[],equipment:['floor','wall','rings'],safeExit:false};const prefs={goalId:'rings',focus:'auto',minutes:60,energy:'normal',warmup:'yoga'};
+ const plan=focus.buildFocusPlan(prefs,profile,[],{automaticVolume:true});const other=focus.buildFocusPlan({...prefs,minutes:15},profile,[],{automaticVolume:true});assert.deepEqual(plan.items,other.items,'Old time preference must not change automatic plan');
+ const row={date:'2026-11-08',goalId:'rings',title:'Rings',items:plan.items,savedAt:new Date().toISOString()};calendar.saveScheduledPractice('guest',row);assert.equal(calendar.readScheduledPractice('guest').length,1);assert.equal(calendar.readScheduledPractice('other').length,0);calendar.saveScheduledPractice('guest',{...row,title:'Updated'});assert.equal(calendar.readScheduledPractice('guest').length,1);assert.equal(calendar.readScheduledPractice('guest')[0].title,'Updated');assert([...store.keys()].every(k=>k.startsWith('power-practice-calendar-v1:')),'Scheduling must never write completion logs');
+ const catalog=JSON.parse(await readFile('src/data/publicExerciseCatalog.json','utf8'));
+ for(const e of catalog){const sources=media.movementThumbnailSources(e);assert(sources.length,`Image coverage ${e.slug}`);for(const s of sources){if(s.src.startsWith('/'))await access('public'+s.src);if(s.url)assert(!audit.tutorialState(s.url).blocked,`Unavailable lesson offered ${e.slug}`);if(s.scope==='category')assert.equal(s.url,null,'Category image must not create a tutorial');}}
+ for(const p of paths.SKILL_PATHS)assert(copy.WORKOUT_CATEGORIES.some(c=>c!=='All'&&copy.matchesWorkoutCategory(p,c)),`Uncategorized ${p.id}`);
+ const find=id=>paths.SKILL_PATHS.find(p=>p.id===id);for(const id of ['ballet-balance','ballet-penche','yoga-standing','forearm-balance','crow'])assert(copy.matchesWorkoutCategory(find(id),'Balance'));for(const id of ['ballet-extension','yoga-backbends','yoga-foundation','splits','shoulder-mobility','wrist-preparation','ankle-squat-mobility','pancake'])assert(copy.matchesWorkoutCategory(find(id),'Mobility'));assert(!copy.matchesWorkoutCategory(find('ring-muscle-up'),'Mobility'));assert(!copy.matchesWorkoutCategory(find('push-up'),'Balance'));
+ const child=media.movementThumbnailSources(catalog.find(e=>e.slug==='child-s-pose'));assert(child.find(s=>s.src==='/movement-previews/eqVMAPM00DM.jpg').url,'A category fallback must not overwrite the real lesson for the same image');
+ const manifest=JSON.parse(await readFile('public/manifest.json','utf8'));assert.equal(manifest.display,'standalone');for(const icon of manifest.icons)await access('public'+icon.src);assert.equal(manifest.start_url,'/?launch=home');assert.equal(manifest.id,'/power-independent-guest');
+ console.log(`PASS: local calendar dates, leap year and DST boundaries, isolated planned workouts without fake history, automatic volume, all ${catalog.length} image/source mappings and available eligible lessons, complete categories with yoga/ballet balance and mobility, preserved standalone installation identity.`);
+}finally{await rm(temp,{recursive:true,force:true});}

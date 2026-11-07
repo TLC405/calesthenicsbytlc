@@ -1,11 +1,11 @@
 {
   "name": "I GOT THE POWER",
   "short_name": "POWER",
-  "description": "Calisthenics skills, guided workouts and personal progress. Powered by TLC.",
+  "description": "Choose a skill, build your workout and plan your training days.",
   "start_url": "/?launch=home",
   "display": "standalone",
-  "background_color": "#070708",
-  "theme_color": "#070708",
+  "background_color": "#FFF9F3",
+  "theme_color": "#AD1D32",
   "orientation": "any",
   "icons": [
     {
@@ -45,5 +45,6 @@
     }
   ],
   "id": "/power-independent-guest",
-  "scope": "/"
+  "scope": "/",
+  "prefer_related_applications": false
 }

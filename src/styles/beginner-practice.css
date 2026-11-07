@@ -15,3 +15,71 @@
 .power-builder-home-banner{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center;overflow:hidden;border:1px solid hsl(var(--border));border-radius:20px;background:hsl(var(--card));margin-bottom:22px}.power-builder-home-banner>img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;background:#201d18}.power-builder-home-banner>div{padding:26px}.power-builder-home-banner h1{font-size:clamp(26px,3.2vw,39px);line-height:1.12;font-weight:800;letter-spacing:-.035em;margin:12px 0}.power-builder-home-banner h1 span{color:hsl(var(--primary))}.power-builder-home-banner>div>p:last-child{font-size:14px;line-height:1.6;color:hsl(var(--muted-foreground));margin-top:13px}.power-home-skill-search{margin:0 0 17px;background:hsl(var(--card));min-height:50px}.power-home-skill-search input{font-size:15px}.power-builder-home .focus-goal-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}.power-builder-home .focus-goal-tile{min-height:145px!important}.power-home-auto{margin:14px 0 0;min-height:64px!important;padding:12px!important}.power-home-auto strong{font-size:13px}.power-home-auto small{font-size:12px}.power-builder-resume{display:flex;align-items:center;gap:10px;padding:13px 16px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;margin-bottom:17px;font-size:13px;font-weight:650;min-height:48px}.power-builder-resume>span{flex:1}.power-builder-resume>svg{color:hsl(var(--primary));flex-shrink:0}
 @media(max-width:899px){.power-builder-home .focus-goal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.power-builder-home-banner>div{padding:20px}.power-builder-home-banner h1{font-size:28px}.power-builder-home-banner>div>p:last-child{font-size:13px}}
 @media(max-width:600px){.power-builder-home{padding-top:16px}.power-builder-home-banner{display:block;border-radius:16px;margin-bottom:17px}.power-builder-home-banner>img{width:100%;max-height:225px;object-fit:contain}.power-builder-home-banner>div{padding:17px 18px}.power-builder-home-banner .focus-eyebrow{font-size:9px}.power-builder-home-banner h1{font-size:25px;margin:8px 0}.power-builder-home-banner>div>p:last-child{font-size:12px;line-height:1.5;margin-top:9px}.power-builder-home .focus-goal-tile{min-height:138px!important}.power-home-skill-search{margin-bottom:12px}.power-home-skill-search input{font-size:13px}.power-home-auto small{font-size:11px}}
+
+/* Brighter VASA surfaces, clear edges, and images large enough to learn from. */
+:root[data-theme="vasa"],:root[data-theme="vasa"].dark{--background:35 75% 97%;--card:0 0% 100%;--secondary:34 48% 93%;--muted:34 35% 94%;--foreground:218 15% 13%;--muted-foreground:215 10% 32%;--border:28 17% 72%;--input:28 17% 72%}
+:root[data-theme="vasa"] body{background:#fff9f2}
+:root[data-theme="vasa"] :is(.focus-panel,.focus-movement,.focus-goal-tile,.power-path-row,.power-exercise-row,.power-practice-card,.power-elevated,.neumorph-inset,.neumorph-raised){background:#fff!important;border:1px solid #c8bbae;box-shadow:0 2px 0 #e5dacf}
+:root[data-theme="vasa"] :is(.focus-panel,.focus-movement,.power-path-row,.power-exercise-row){border-left:3px solid #b3a190}
+:root[data-theme="vasa"] .focus-goal-tile.is-selected{border-color:#ad1d32;background:#fff1ee!important;box-shadow:inset 3px 0 #ad1d32}
+:root[data-theme="vasa"] .power-app-controls{background:#fff;border-bottom:2px solid #ad1d32}
+:root[data-theme="vasa"] .power-shell{background:#fff9f2;--pg-line:#c8bbae;--pg-quiet:#4c5058}
+.power-movement-thumbnail,.power-movement-thumbnail.is-small{width:120px!important;height:90px!important;min-width:120px;flex-shrink:0;border:1px solid hsl(var(--border));border-radius:10px;overflow:hidden;background:#242529}
+.power-movement-thumbnail img{object-fit:cover;width:100%;height:100%}
+.power-thumbnail-label{font-size:10px!important;line-height:1.4;padding:2px 6px!important;color:#fff;background:#16191ee8!important}
+.power-studio-node>.power-studio-thumb .power-movement-thumbnail{width:120px!important;height:90px!important}
+.power-exercise-open,.power-path-row{gap:14px;min-height:120px}
+.power-exercise-open strong,.power-path-row strong,.focus-movement-main strong{font-size:15px!important;line-height:1.4}
+.power-exercise-open small,.power-path-row small,.focus-movement-main small{font-size:12px!important;line-height:1.5}
+.focus-movement>summary{gap:14px;min-height:122px}
+.power-builder-home{max-width:1040px;padding-top:16px}
+.power-builder-home-banner{display:grid;grid-template-columns:174px 1fr;border:1px solid hsl(var(--border));background:hsl(var(--card));margin:0 0 16px;border-radius:14px;min-height:116px}
+.power-builder-home-banner>img{position:static;width:174px;height:116px;min-height:0;max-height:none;object-fit:contain;opacity:1}
+.power-builder-home-banner>div{padding:12px 17px}
+.power-builder-home-banner h1{font-size:26px;margin:4px 0;line-height:1.12}
+.power-builder-home-banner>div>p:last-child{font-size:13px;line-height:1.45;margin:6px 0 0}
+.power-builder-home-banner .focus-eyebrow{font-size:9px}
+.focus-goal-grid,.power-builder-home .focus-goal-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+.focus-goal-tile,.power-builder-home .focus-goal-tile{display:flex;flex-direction:row;align-items:center;gap:12px;min-height:112px!important;text-align:left;padding:10px!important;border-radius:13px}
+.power-goal-copy{display:block;flex:1;min-width:0}
+.power-goal-copy strong{display:block;font-size:15px;line-height:1.35;color:hsl(var(--foreground))}
+.power-goal-copy small{display:block;font-size:12px;line-height:1.45;color:hsl(var(--muted-foreground));margin-top:5px}
+.focus-goal-tile>svg{flex-shrink:0;color:hsl(var(--primary))}
+.power-workout-filters{display:grid;grid-template-columns:190px 1fr;gap:12px;align-items:end;margin-bottom:13px}
+.power-workout-filters>label:first-child{font-size:12px;font-weight:700;display:grid;gap:5px}
+.power-workout-filters select{height:48px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:11px;font-size:14px;padding:0 12px;max-width:100%;color:hsl(var(--foreground))}
+.power-workout-filters .power-home-skill-search{margin:0;height:48px;min-width:0}
+.power-home-install{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:12px 0;font-size:13px;font-weight:700}
+.power-install-button,.power-install-button.is-compact{height:auto;min-height:44px;padding:8px 13px;font-size:12px;border:1px solid hsl(var(--primary));color:hsl(var(--primary));background:hsl(var(--card));gap:7px}
+.power-install-dialog p{font-size:14px;line-height:1.65}
+.power-practice-calendar{border:1px solid hsl(var(--border));border-top:3px solid hsl(var(--primary));border-radius:14px;background:hsl(var(--card));padding:9px 12px 10px}
+.power-practice-calendar>header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px}
+.power-practice-calendar>header>div{display:flex;align-items:center;gap:3px}
+.power-practice-calendar header button{min-width:36px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px}
+.power-calendar-date{position:relative;display:flex;gap:8px;align-items:center;font-size:14px;min-height:44px}
+.power-calendar-date input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.power-calendar-date:focus-within{outline:2px solid hsl(var(--primary));outline-offset:2px}
+.power-calendar-today{font-size:12px;font-weight:700;padding:0 7px}
+.power-calendar-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.power-calendar-week>button{display:flex;align-items:center;flex-direction:column;justify-content:center;gap:3px;min-height:65px;border:1px solid transparent;border-radius:10px;color:hsl(var(--foreground))}
+.power-calendar-week small{font-size:11px;color:hsl(var(--muted-foreground))}.power-calendar-week strong{font-size:18px;line-height:1.2}
+.power-calendar-week>button[aria-current=date]{border-color:hsl(var(--primary))}
+.power-calendar-week>button[aria-pressed=true]{background:hsl(var(--primary));color:#fff}
+.power-calendar-week>button[aria-pressed=true] small{color:#fff}
+.power-calendar-dot{width:5px;height:5px;border-radius:50%;background:transparent}
+.power-calendar-dot.has-plan{background:hsl(var(--primary))}.power-calendar-dot.has-practice{background:hsl(var(--foreground))}
+.power-calendar-week>button[aria-pressed=true] .power-calendar-dot:is(.has-plan,.has-practice){background:white}
+.power-scheduled-row{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;background:hsl(var(--card));border:1px solid hsl(var(--primary));border-radius:12px;padding:12px 15px;margin:0 0 13px}
+.power-scheduled-row small{display:block;font-size:10px;color:hsl(var(--primary));margin-bottom:5px}.power-scheduled-row strong{font-size:15px}
+.power-save-day{min-height:48px;font-size:14px;font-weight:700;border:1px solid hsl(var(--primary));color:hsl(var(--primary));border-radius:11px;padding:10px 18px;margin-top:10px;width:100%;background:hsl(var(--card))}.power-save-day:disabled{opacity:.5}
+.power-balance-mobility{margin:0 0 17px}.power-balance-mobility h2{font-size:14px;font-weight:750;margin:0 0 8px}.power-balance-mobility>div{display:grid;grid-template-columns:1fr 1fr;gap:9px}.power-balance-mobility button{text-align:left;padding:11px 13px;border:1px solid hsl(var(--border));border-radius:11px;background:hsl(var(--card));font-weight:750;font-size:14px;min-height:67px}.power-balance-mobility button[aria-pressed=true]{border-color:hsl(var(--primary));background:hsl(var(--primary)/.07);box-shadow:inset 3px 0 hsl(var(--primary))}.power-balance-mobility small{display:block;margin-top:3px;font-weight:400;font-size:12px;line-height:1.4;color:hsl(var(--muted-foreground))}.power-balance-mobility>a{display:block;font-size:13px;text-decoration:underline;margin:10px 0;min-height:30px}
+@media(max-width:720px){.focus-goal-grid,.power-builder-home .focus-goal-grid{grid-template-columns:1fr!important}.power-workout-filters{grid-template-columns:1fr 1.25fr;gap:8px}.power-workout-filters select{font-size:13px;padding:0 8px}.power-home-skill-search input{font-size:13px}.power-builder-home-banner{grid-template-columns:132px 1fr;min-height:100px}.power-builder-home-banner>img{width:132px;height:100px}.power-builder-home-banner>div{padding:10px 12px}.power-builder-home-banner h1{font-size:21px}.power-builder-home-banner>div>p:last-child{font-size:12px}.power-builder-home-banner .focus-eyebrow{display:none}.power-builder-home{padding-left:14px;padding-right:14px}.power-practice-calendar{padding:7px 8px 9px}.power-calendar-date{font-size:13px;gap:5px}.power-calendar-week{gap:2px}.power-practice-calendar header button{min-width:32px}.power-calendar-week>button{min-height:62px}.power-movement-thumbnail,.power-movement-thumbnail.is-small,.power-studio-node>.power-studio-thumb .power-movement-thumbnail{width:108px!important;height:82px!important;min-width:108px}.power-path-row{padding:12px;gap:11px}.power-path-row>svg{display:none}.power-exercise-open{padding:10px;gap:10px}.focus-movement>summary{padding:12px 10px;gap:10px}.power-exercise-add{margin-right:6px}.power-goal-copy small{font-size:12px}.power-balance-mobility small{font-size:11px}}
+@media(max-width:360px){.power-workout-filters{grid-template-columns:1fr}.power-builder-home-banner{grid-template-columns:112px 1fr}.power-builder-home-banner>img{width:112px;height:100px}.power-builder-home-banner h1{font-size:20px}.power-calendar-date strong{font-size:12px}.power-calendar-date svg{display:none}.power-exercise-open>.power-movement-thumbnail{width:98px!important;min-width:98px;height:78px!important}.power-exercise-open strong{font-size:14px!important}.power-exercise-open small{font-size:11px!important}}
+.power-workout-filters .focus-search{order:0}
+@media(max-width:720px){.power-builder-home{padding-top:12px}.power-practice-calendar>header{margin-bottom:1px}.power-calendar-date{min-height:36px}.power-practice-calendar header button{height:36px}.power-calendar-week>button{min-height:53px}.power-home-install{margin:8px 0}.power-builder-home-banner{grid-template-columns:118px 1fr;min-height:90px;margin-bottom:12px}.power-builder-home-banner>img{width:118px;height:90px}.power-builder-home-banner h1{font-size:20px}.power-builder-home-banner>div{padding:9px 11px}.power-builder-home-banner>div>p:last-child{font-size:12px;margin-top:4px}.power-balance-mobility{margin-bottom:12px}.power-balance-mobility h2{font-size:13px;margin-bottom:7px}.power-balance-mobility button{padding:9px 10px;min-height:64px}.power-balance-mobility small{font-size:11px}.power-workout-filters{grid-template-columns:120px minmax(0,1fr);align-items:end;margin-bottom:11px}.power-workout-filters label:first-child{font-size:11px}.power-workout-filters .focus-search{padding:0 9px;gap:7px}.power-workout-filters .focus-search input{font-size:12px}.power-workout-filters .focus-search svg{width:15px}}
+.power-related-note{font-size:13px;line-height:1.6;padding:11px 13px;border-left:3px solid hsl(var(--primary));background:hsl(var(--secondary));margin-bottom:10px;border-radius:0 9px 9px 0}
+.power-category-track button{font-size:12px;min-height:44px;border-color:hsl(var(--border));color:hsl(var(--foreground))}
+.power-category-track button[data-active=true]{background:hsl(var(--primary));color:#fff;border-color:hsl(var(--primary))}
+.power-install-dialog{background:hsl(var(--card));border:1px solid hsl(var(--border))}
+
+.power-lesson-source{display:flex;align-items:center;min-height:44px;font-size:13px;font-weight:650;color:hsl(var(--primary));text-decoration:underline;text-underline-offset:3px;margin-top:5px}

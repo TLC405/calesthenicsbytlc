@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { preparePowerInstall } from "./lib/installPower";
 import App from "./App.tsx";
 import { initialTheme } from "./lib/themePreference";
 import "./index.css";
@@ -11,5 +12,8 @@ import "./styles/beginner-practice.css";
 const theme=initialTheme();
 if(theme==='default')document.documentElement.removeAttribute('data-theme');
 else document.documentElement.setAttribute('data-theme',theme);
+
+preparePowerInstall();
+if(import.meta.env.PROD&&"serviceWorker" in navigator){window.addEventListener("load",()=>{void navigator.serviceWorker.register("/power-sw.js",{scope:"/",updateViaCache:"none"}).catch(()=>{});});}
 
 createRoot(document.getElementById("root")!).render(<App />);

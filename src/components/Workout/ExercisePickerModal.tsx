@@ -10,7 +10,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { CategoryTabs, CATEGORY_GROUPS } from '@/components/Exercise/CategoryTabs';
+import { CategoryTabs, matchesExerciseCategory } from '@/components/Exercise/CategoryTabs';
 import { supabase, backendConfigured } from '@/integrations/supabase/client';
 import { getOfflineExercises } from '@/lib/offlineExercises';
 import publicCatalog from '@/data/publicExerciseCatalog.json';
@@ -57,7 +57,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
   const filteredExercises = exercises.filter(exercise => {
     const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesCategory = !activeCategory || (CATEGORY_GROUPS[activeCategory] ? CATEGORY_GROUPS[activeCategory].includes(exercise.category) : exercise.category === activeCategory);
+    const matchesCategory = matchesExerciseCategory(exercise,activeCategory);
     return canonicalSlug(exercise.slug)===exercise.slug && matchesSearch && matchesCategory && matchesProgression(exercise.slug,pathId) && !exerciseReadinessReasons(exercise,profile).length && !equipmentReasons(exercise.slug,profile.equipment).length;
   });
 
@@ -65,7 +65,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <DialogContent className="w-[calc(100vw-1rem)] max-w-lg max-h-[90dvh] flex flex-col min-h-0 overflow-hidden rounded-2xl p-0">
         <DialogHeader className="p-3 sm:p-4 pb-0">
-          <DialogTitle>Add Exercise</DialogTitle><p className="text-xs text-muted-foreground">Showing movements for L{profile.tier||1} and your readiness checks.</p>
+          <DialogTitle>Add Exercise</DialogTitle><p className="text-xs text-muted-foreground">Showing movements for L{profile.tier||1} and your starting checks.</p>
         </DialogHeader>
 
         <div className="px-3 sm:px-4 space-y-3">
@@ -81,11 +81,11 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
           </div>
 
           <label className="block text-xs">Progression<select className="h-11 w-full border bg-card rounded-xl px-2 mt-1" value={pathId} onChange={e=>setPathId(e.target.value)}><option value="">All level-appropriate movements</option>{SKILL_PATHS.map(p=><option key={p.id} value={p.id}>{p.title}</option>)}</select></label>
-          <details><summary className="min-h-11 flex items-center cursor-pointer text-sm">Filter movements</summary><CategoryTabs
+          <CategoryTabs
             categories={categories}
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}
-          /></details>
+          />
         </div>
 
         {/* Exercise List */}
@@ -106,8 +106,8 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
                   >
                     <MovementThumbnail exercise={exercise} className="is-small"/>
                     <div className="flex-1 min-w-0">
-                      <p className="font-medium truncate">{exercise.name}</p>
-                      <p className="text-xs text-muted-foreground truncate">
+                      <p className="font-medium">{exercise.name}</p>
+                      <p className="text-xs text-muted-foreground">
                         {exerciseLabel(exercise.slug,exercise.category)} • {exercise.primary_muscles.join(', ')}
                       </p>
                     </div>

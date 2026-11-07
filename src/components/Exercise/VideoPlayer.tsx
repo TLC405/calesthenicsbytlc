@@ -34,6 +34,7 @@ interface VideoPlayerProps {
   className?: string;
   exerciseData?: ExerciseData;
   auditPreview?: boolean;
+  clean?: boolean;
 }
 
 const getStartTime = (url: string): number | undefined => {
@@ -204,7 +205,7 @@ export function VideoPlayer({
   privacyEnhanced = true,
   className,
   exerciseData,
-  auditPreview = false,
+  auditPreview = false, clean = false,
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [showData, setShowData] = React.useState(true);
@@ -243,7 +244,7 @@ export function VideoPlayer({
     if (thumbnailMode && !isPlaying) {
       return (
         <div className={cn("relative w-full overflow-hidden bg-background group", className)}>
-          <HeaderBar title="" isLive={false} onMinimize={null} />
+          {!clean&&<HeaderBar title="" isLive={false} onMinimize={null} />}
           <div className="aspect-video relative">
             <button
               type="button"
@@ -261,12 +262,12 @@ export function VideoPlayer({
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/90 to-transparent">
                 <p className="text-background font-display font-bold text-sm uppercase tracking-wider line-clamp-1">{title}</p>
-                <p className="text-background/50 text-[8px] font-mono uppercase tracking-[0.2em] mt-0.5">Tap to play • tlcTV</p>
+                <p className="text-background/50 text-[8px] font-mono uppercase tracking-[0.2em] mt-0.5">Play lesson</p>
               </div>
             </button>
           </div>
-          <BottomBar />
-          <p className="px-3 py-2 text-[11px] text-muted-foreground border-t">{media.label}</p>
+          {!clean&&<BottomBar />}
+          {!clean&&<p className="px-3 py-2 text-[11px] text-muted-foreground border-t">{media.label}</p>}
           {exerciseData && showData && (
             <div className="p-3 border-t border-border bg-background">
               <DataSidebar data={exerciseData} />
@@ -279,10 +280,10 @@ export function VideoPlayer({
     // Full player with embedded data
     return (
       <div className={cn("relative w-full overflow-hidden bg-background", className)}>
-        <HeaderBar title={title} isLive={isPlaying} onMinimize={null} />
+        {!clean&&<HeaderBar title={title} isLive={isPlaying} onMinimize={null} />}
         <InlineYouTubeFrame videoId={videoId} title={title} startSec={effectiveStartSec} autoplay={isPlaying}/>
-        <p className="px-3 py-2 text-[11px] text-muted-foreground border-t">{media.label}</p>
-        <BottomBar onToggleData={exerciseData ? () => setShowData(!showData) : undefined} showingData={showData} />
+        {!clean&&<p className="px-3 py-2 text-[11px] text-muted-foreground border-t">{media.label}</p>}
+        {!clean&&<BottomBar onToggleData={exerciseData ? () => setShowData(!showData) : undefined} showingData={showData} />}
         {exerciseData && showData && (
           <div className="p-3 border-t border-border bg-background">
             <DataSidebar data={exerciseData} />
@@ -296,7 +297,7 @@ export function VideoPlayer({
   if (instagramUrl) {
     return (
       <div className={cn("relative w-full overflow-hidden bg-background", className)}>
-        <HeaderBar title="" isLive={false} onMinimize={null} />
+        {!clean&&<HeaderBar title="" isLive={false} onMinimize={null} />}
         <div className="aspect-video flex flex-col items-center justify-center gap-4 p-6 border-x-2 border-border">
           <TlcPlayIcon size="lg" />
           <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">External Tutorial</p>

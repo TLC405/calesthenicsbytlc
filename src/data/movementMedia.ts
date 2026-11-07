@@ -1,5 +1,11 @@
 /** Public creator sources matched by title/embed; these are not human technique certifications. */
-export const MOVEMENT_MEDIA:Record<string,{id:string;creator:string;title:string;source:string}>={
+export const MOVEMENT_MEDIA:Record<string,{id:string;creator:string;title:string;source:string;scope?:'clip'|'guide'}>={
+ 'hollow-body-hold':{id:'LlDNef_Ztsc',creator:'GMB Fitness',title:'Hollow Body Hold Progression',source:'https://gmb.io/hollow-body/'},
+ 'wheel-pose':{id:'IwDHNXc_CEQ',creator:'Esther Ekhart',title:'How to get into wheel pose',source:'https://www.youtube.com/watch?v=IwDHNXc_CEQ'},
+ 'split-squat':{id:'qW5OGJ62ZjY',creator:'Hinge Health',title:'How to Do a Split Squat',source:'https://www.hingehealth.com/resources/articles/split-squat/'},
+ 'world-s-greatest-stretch':{id:'0gUTxg_fNfc',creator:'Squat University',title:'The Worlds Greatest Stretch',source:'https://www.youtube.com/watch?v=0gUTxg_fNfc'},
+ 'assisted-elbow-lever':{id:'UcDjtLoM91g',creator:'GMB Fitness',title:'Double Arm Lever Tutorial',source:'https://www.youtube.com/watch?v=UcDjtLoM91g',scope:'guide'},
+ 'single-arm-elbow-lever':{id:'UcDjtLoM91g',creator:'GMB Fitness',title:'Double Arm Lever Tutorial',source:'https://www.youtube.com/watch?v=UcDjtLoM91g',scope:'guide'},
  'chair-pose':{id:'ySafTekJ3Ls',creator:'Yoga With Adriene',title:'Chair Pose · Utkatasana',source:'https://yogawithadriene.com/chair-pose-utktasana/'},
  'dolphin-pose':{id:'6w4ZoSuBDCg',creator:'Yoga With Adriene',title:'Dolphin Pose',source:'https://yogawithadriene.com/dolphin-pose/'},
  'camel-pose':{id:'AigVwIFvmAQ',creator:'Yoga With Adriene',title:'Camel Pose · Ustrasana',source:'https://yogawithadriene.com/camel-pose-ustrasana/'},
