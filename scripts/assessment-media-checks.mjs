@@ -26,6 +26,12 @@ try{
  assert(!a.levelReview(base,logs,now+90*86400000).ready);
  assert(!a.levelReview(base,logs.map(x=>({...x,at:new Date(now+100000).toISOString()})),now).ready);
  assert.equal(graph.recommendedNode('planche',[],base,'quadruped-planche-lean'),'quadruped-planche-lean');
+ const prefs=await load('themes','src/lib/themePreference.ts');
+ const memory=new Map();globalThis.localStorage={getItem:k=>memory.get(k)||null,setItem:(k,v)=>memory.set(k,v)};
+ assert.equal(prefs.initialTheme(),'vasa');memory.set('power-theme','default');assert.equal(prefs.initialTheme(),'default','A later deliberate choice must persist');
+ memory.clear();memory.set('power-theme','ymca');assert.equal(prefs.initialTheme(),'ymca');
+ memory.clear();memory.set('power-theme','default');assert.equal(prefs.initialTheme(),'vasa','The old default migrates once');
+ const startup=await readFile('src/main.tsx','utf8');assert(!startup.includes('gold-2026-11'));assert(startup.includes('initialTheme()'));
  const catalog=JSON.parse(await readFile('src/data/publicExerciseCatalog.json','utf8'));
  const audit=media.videoAudit;assert.equal(audit.exercises.length,catalog.length);
  for(const exercise of catalog){const e=audit.exercises.find(x=>x.slug===exercise.slug);assert(e);assert.equal(e.url,exercise.youtube_url);if(e.url)assert(media.tutorialState(e.url,e.name).record);}
