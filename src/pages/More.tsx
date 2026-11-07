@@ -18,7 +18,7 @@ export default function More() {
     <details className="power-more-section"><summary><SlidersHorizontal size={20}/> Appearance</summary><div className="pt-4"><ThemeSwitcher/></div></details>
     <MusicControl/>
     <details className="power-more-section"><summary>Community and coaching</summary><div className="power-more-links mt-3"><Link to="/community"><Users size={20}/><span>Power Circle</span><ArrowRight size={18}/></Link><Link to="/ai-lab"><Sparkles size={20}/><span>AI coach</span><ArrowRight size={18}/></Link></div></details>
-    <div className="power-more-links"><Link to="/"><Crown size={20}/><span>POWER intro and anthem</span><ArrowRight size={18}/></Link><Link to={user?'/settings':'/admin-login'}><Shield size={20}/><span>{user?'Account settings':'Owner sign-in'}</span><ArrowRight size={18}/></Link></div>
+    <div className="power-more-links"><Link to="/intro"><Crown size={20}/><span>POWER intro and anthem</span><ArrowRight size={18}/></Link><Link to={user?'/settings':'/admin-login'}><Shield size={20}/><span>{user?'Account settings':'Owner sign-in'}</span><ArrowRight size={18}/></Link></div>
     <div className="mt-5"><InstallPowerApp/></div>
   </main>;
 }

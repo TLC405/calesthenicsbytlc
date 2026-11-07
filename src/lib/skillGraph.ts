@@ -11,7 +11,7 @@ export type SkillAttempt = {
   assistance?: 'none' | 'feet' | 'wall' | 'band'; rom?: 'partial' | 'full';
   elbowLocked?: boolean; scapularControl?: boolean; discomfort?: string;
 };
-export type TrainingEquipment = 'floor' | 'wall' | 'rings' | 'bar' | 'parallettes' | 'bands' | 'bench' | 'pole';
+export type TrainingEquipment = 'floor' | 'wall' | 'rings' | 'bar' | 'parallettes' | 'bands' | 'bench' | 'pole' | 'pool';
 export type SkillTrainingProfile = Omit<TrainingReadiness,'equipment'> & { equipment: TrainingEquipment[]; safeExit: boolean };
 export interface SkillProgressAdapter {
   read(owner: string): SkillAttempt[];
@@ -22,7 +22,7 @@ const known = new Set(catalog.map(e => e.slug));
 export const exerciseBySlug = new Map(catalog.map(e => [e.slug,e]));
 export const skillEdges: SkillEdge[] = [];
 for (const path of SKILL_PATHS) {
-  for (let i=1;i<path.slugs.length;i++) skillEdges.push({from:path.slugs[i-1],to:path.slugs[i],type:'supports',hardGate:false});
+  for (let i=1;path.kind!=='collection'&&i<path.slugs.length;i++) skillEdges.push({from:path.slugs[i-1],to:path.slugs[i],type:'supports',hardGate:false});
 }
 const cross: [string,string,EdgeType][] = [
   ['wrist-circles','planche-lean','supports'],['wrist-circles','wall-handstand','supports'],
@@ -66,7 +66,7 @@ export function saveAttempt(owner:string,attempt:SkillAttempt) {
 export function removeAttempt(owner:string,id:string) {deviceSkillProgress.write(owner,deviceSkillProgress.read(owner).filter(x=>x.id!==id));}
 export function readTrainingProfile(): SkillTrainingProfile {
   try {const x=JSON.parse(localStorage.getItem('power-training-profile-v1')||'null');
-    if(x&&Array.isArray(x.equipment))return {...safeProfile(x),equipment:x.equipment.filter((v:string)=>['floor','wall','rings','bar','parallettes','bands','bench','pole'].includes(v)),safeExit:x.safeExit===true};
+    if(x&&Array.isArray(x.equipment))return {...safeProfile(x),equipment:x.equipment.filter((v:string)=>['floor','wall','rings','bar','parallettes','bands','bench','pole','pool'].includes(v)),safeExit:x.safeExit===true};
   } catch {}
   return {tier:1,capabilities:[],equipment:['floor'],safeExit:false};
 }
@@ -92,7 +92,7 @@ export function trainingBlockers(slug:string,profile:SkillTrainingProfile,comfor
   const reasons:string[]=readinessReasons(slug,profile);
   if(!comfortable)reasons.push('Confirm a comfortable, pain-free variation before starting.');
   reasons.push(...equipmentReasons(slug,profile.equipment));
-  if(/handstand|press-to-hs|hs-kick-up|stalder-negative|wall-toe-taps/.test(slug)&&!/bail|prep|mobility/.test(slug)&&!profile.safeExit)reasons.push('Confirm that you can safely enter and exit the inversion.');
+  if(/handstand|headstand|forearm-stand|elbow-stand|press-to-hs|hs-kick-up|stalder-negative|wall-toe-taps/.test(slug)&&!/bail|prep|mobility/.test(slug)&&!profile.safeExit)reasons.push('Confirm that you can safely enter and exit the inversion.');
   return reasons;
 }
 export function recommendedNode(pathId:string,attempts:SkillAttempt[],profile:TrainingReadiness={tier:1},targetSlug?:string) {

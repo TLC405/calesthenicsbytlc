@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,6 +8,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Lock, Mail, User, Zap, Loader2 } from 'lucide-react';
 
 export default function Auth() {
+  const [params]=useSearchParams();
+  const returnTo=params.get('return')==='workout'?'/planner?coach=1':'/admin';
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,7 +18,7 @@ export default function Auth() {
   const { signIn, signUp, user } = useAuth();
   const { toast } = useToast();
 
-  if (user) return <Navigate to="/admin" replace />;
+  if (user) return <Navigate to={returnTo} replace />;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

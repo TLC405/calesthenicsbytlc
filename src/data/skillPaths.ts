@@ -1,10 +1,10 @@
-export interface SkillPath {id:string;title:string;short:string;focus:string;equipment:string;cue:string;safety:string;group:string;slugs:readonly string[];}
+export interface SkillPath {id:string;title:string;short:string;focus:string;equipment:string;cue:string;safety:string;group:string;slugs:readonly string[];accessories?:readonly string[];kind?:"progression"|"collection";}
 export const SKILL_PATHS: readonly SkillPath[] = [
   {
     "id": "foundation",
     "title": "Calisthenics Foundation",
-    "short": "Four focus days \u00b7 learn control first",
-    "focus": "Joint comfort \u2022 body line \u2022 quiet control",
+    "short": "Four focus days · learn control first",
+    "focus": "Joint comfort • body line • quiet control",
     "equipment": "Check the selected focus day",
     "cue": "Exhale. Ribs down. Push tall. End the set when technique deteriorates.",
     "safety": "Stop for sharp or joint pain. Scale the movement and dose to current control.",
@@ -22,7 +22,8 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "pike-support-hold",
       "split-squat",
       "assisted-box-pistol-sit"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "planche",
@@ -42,6 +43,12 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "advanced-tuck-planche",
       "straddle-planche",
       "full-planche"
+    ],
+    "accessories": [
+      "planche-plank",
+      "parallette-tuck-planche",
+      "band-assisted-progressions",
+      "pseudo-planche-push-up"
     ]
   },
   {
@@ -61,7 +68,8 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "planche-scapular-pulse",
       "band-assisted-tuck-planche",
       "tuck-planche"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "pike-compression",
@@ -78,7 +86,8 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "seated-pike-lift",
       "pike-compression-hold",
       "elevated-chair-compression"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "straddle-compression",
@@ -95,7 +104,8 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "seated-straddle-compression-lift",
       "straddle-compression-hold",
       "stalder-feet-assisted-hip-lift"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "straddle-press",
@@ -113,6 +123,9 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "elevated-straddle-press",
       "wall-press-negative",
       "straddle-press-to-hs"
+    ],
+    "accessories": [
+      "press-hs-journey"
     ]
   },
   {
@@ -131,7 +144,8 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "straddle-compression-hold",
       "stalder-negative",
       "stalder-press-to-hs"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "handstand",
@@ -151,6 +165,15 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "freestanding-handstand-kick-up",
       "freestanding-handstand",
       "handstand-walking"
+    ],
+    "accessories": [
+      "hs-shrugs",
+      "wall-handstand-shoulder-taps",
+      "wall-pull-aways",
+      "straddle-hs-kick-up",
+      "wall-stomach-straddle-handstand",
+      "kip-to-handstand",
+      "wall-toe-taps"
     ]
   },
   {
@@ -170,7 +193,8 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "wall-hspu-negative",
       "partial-rom-wall-hspu",
       "handstand-push-up"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "hspu",
@@ -190,6 +214,9 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "wall-hspu-negative",
       "partial-rom-wall-hspu",
       "handstand-push-up"
+    ],
+    "accessories": [
+      "hspu-capacity-builder"
     ]
   },
   {
@@ -208,6 +235,9 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "one-leg-l-sit",
       "l-sit",
       "v-sit-preparation"
+    ],
+    "accessories": [
+      "manna"
     ]
   },
   {
@@ -227,7 +257,8 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "assisted-ring-dip",
       "ring-dip",
       "ring-turnout-support-hold"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "ring-muscle-up",
@@ -245,6 +276,9 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "ring-muscle-up-transition-drill",
       "low-ring-muscle-up-assisted",
       "ring-muscle-up"
+    ],
+    "accessories": [
+      "false-grip-hold"
     ]
   },
   {
@@ -264,6 +298,9 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "tuck-front-lever-on-rings",
       "advanced-tuck-front-lever-on-rings",
       "front-lever"
+    ],
+    "accessories": [
+      "front-lever-raise"
     ]
   },
   {
@@ -284,6 +321,12 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "weighted-pull-up",
       "archer-pull-up",
       "one-arm-chin-up"
+    ],
+    "accessories": [
+      "chin-up",
+      "dead-hang",
+      "towel-hang",
+      "typewriter-pull-up"
     ]
   },
   {
@@ -303,6 +346,10 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "archer-push-up",
       "incline-one-arm-push-up",
       "one-arm-push-up"
+    ],
+    "accessories": [
+      "decline-push-up",
+      "wide-push-up"
     ]
   },
   {
@@ -320,6 +367,9 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "assisted-ring-dip",
       "ring-dip-negative",
       "ring-dip"
+    ],
+    "accessories": [
+      "parallel-bar-dip"
     ]
   },
   {
@@ -336,7 +386,8 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "supported-crow-balance",
       "frog-stand",
       "crow-pose"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "elbow-lever",
@@ -352,7 +403,8 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "assisted-elbow-lever",
       "elbow-lever",
       "single-arm-elbow-lever"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "pistol",
@@ -370,7 +422,8 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "assisted-pistol-squat",
       "pistol-squat",
       "shrimp-squat"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "pancake",
@@ -388,6 +441,9 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "pancake-good-morning",
       "pancake-stretch",
       "middle-split-frog-stretch"
+    ],
+    "accessories": [
+      "wall-compression-stretch"
     ]
   },
   {
@@ -406,6 +462,10 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "german-hang-preparation",
       "ring-back-lever-tuck",
       "back-lever"
+    ],
+    "accessories": [
+      "skin-the-cat",
+      "german-hang"
     ]
   },
   {
@@ -423,7 +483,523 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "scapular-pull-up",
       "clutch-flag",
       "human-flag"
-    ]
+    ],
+    "accessories": []
+  },
+  {
+    "id": "yoga-foundation",
+    "title": "Yoga · Foundation",
+    "short": "Resting shapes, breathing and supported floor practice",
+    "focus": "Resting shapes, breathing and supported floor practice",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Yoga",
+    "slugs": [
+      "child-s-pose",
+      "cat-cow",
+      "downward-dog",
+      "cobra-pose"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "yoga-standing",
+    "title": "Yoga · Standing & Balance",
+    "short": "Standing shapes, then supported single-leg balance",
+    "focus": "Standing shapes, then supported single-leg balance",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Yoga",
+    "slugs": [
+      "chair-pose",
+      "warrior-i",
+      "warrior-ii",
+      "triangle-pose",
+      "tree-pose",
+      "warrior-iii",
+      "half-moon-pose"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "yoga-backbends",
+    "title": "Yoga · Hips & Backbends",
+    "short": "Hip opening and extension with your own range",
+    "focus": "Hip opening and extension with your own range",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Yoga",
+    "slugs": [
+      "cat-cow",
+      "glute-bridge",
+      "bridge-pose",
+      "pigeon-pose",
+      "camel-pose",
+      "wheel-pose"
+    ],
+    "accessories": [
+      "shoulder-bridge"
+    ],
+    "kind": "collection"
+  },
+  {
+    "id": "yoga-arm-balance",
+    "title": "Yoga · Arm Balance",
+    "short": "Floor support into crow and forearm preparation",
+    "focus": "Floor support into crow and forearm preparation",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Yoga",
+    "slugs": [
+      "quadruped-planche-lean",
+      "supported-crow-balance",
+      "dolphin-pose",
+      "crow-pose"
+    ],
+    "accessories": [
+      "crocodile-pose"
+    ],
+    "kind": "collection"
+  },
+  {
+    "id": "ballet-barre",
+    "title": "Ballet · Barre Foundations",
+    "short": "Arm carriage, foot articulation, plié and relevé",
+    "focus": "Arm carriage, foot articulation, plié and relevé",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Ballet",
+    "slugs": [
+      "port-de-bras",
+      "tendu",
+      "first-position-plie",
+      "releve",
+      "grand-plie"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "ballet-balance",
+    "title": "Ballet · Single-Leg Balance",
+    "short": "Supported passé, arabesque and attitude",
+    "focus": "Supported passé, arabesque and attitude",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Ballet",
+    "slugs": [
+      "calf-raise",
+      "passe-balance",
+      "arabesque-hold",
+      "attitude-hold"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "ballet-extension",
+    "title": "Ballet · Extension & Control",
+    "short": "Rond de jambe, développé and controlled battement",
+    "focus": "Rond de jambe, développé and controlled battement",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Ballet",
+    "slugs": [
+      "tendu",
+      "rond-de-jambe",
+      "developpe",
+      "grand-battement"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "ballet-penche",
+    "title": "Ballet · Penché & Needle",
+    "short": "Hip control before deeper supported extensions",
+    "focus": "Hip control before deeper supported extensions",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Ballet",
+    "slugs": [
+      "glute-bridge",
+      "single-leg-rdl",
+      "arabesque-hold",
+      "penche",
+      "needle"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "splits",
+    "title": "Splits & Hip Opening",
+    "short": "Comfortable hip range before deeper splits",
+    "focus": "Comfortable hip range before deeper splits",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Mobility",
+    "slugs": [
+      "90-90-hip-switches",
+      "frog-stretch",
+      "front-split-preparation",
+      "couch-stretch",
+      "front-split",
+      "middle-split-hold",
+      "middle-split"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "shoulder-mobility",
+    "title": "Shoulder & Thoracic Mobility",
+    "short": "Controlled shoulder motion and upper-back range",
+    "focus": "Controlled shoulder motion and upper-back range",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Mobility",
+    "slugs": [
+      "cat-cow",
+      "thoracic-open-book",
+      "shoulder-cars",
+      "thoracic-extension",
+      "shoulder-dislocate"
+    ],
+    "accessories": [
+      "german-hang"
+    ],
+    "kind": "collection"
+  },
+  {
+    "id": "wrist-preparation",
+    "title": "Wrist & Scapular Preparation",
+    "short": "Prepare hands, wrists and shoulder support",
+    "focus": "Prepare hands, wrists and shoulder support",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Mobility",
+    "slugs": [
+      "wrist-circles",
+      "extensor-band",
+      "scapular-push-up",
+      "wall-support-shrug"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "ankle-squat-mobility",
+    "title": "Ankle & Squat Mobility",
+    "short": "Ankle range, hip rotation and controlled deep squat",
+    "focus": "Ankle range, hip rotation and controlled deep squat",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Mobility",
+    "slugs": [
+      "calf-raise",
+      "wall-ankle-dorsiflexion",
+      "90-90-hip-switches",
+      "world-s-greatest-stretch",
+      "deep-squat-hold"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "core-control",
+    "title": "Core · Body Line",
+    "short": "Dead bug and plank into hollow-body control",
+    "focus": "Dead bug and plank into hollow-body control",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Core",
+    "slugs": [
+      "dead-bug",
+      "plank",
+      "side-plank",
+      "hollow-body-hold",
+      "mountain-climber",
+      "v-up",
+      "dragon-flag"
+    ],
+    "accessories": [],
+    "kind": "progression"
+  },
+  {
+    "id": "hanging-core",
+    "title": "Core · Hanging Strength",
+    "short": "Active hang, knee raises and controlled leg lifts",
+    "focus": "Active hang, knee raises and controlled leg lifts",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Core",
+    "slugs": [
+      "dead-bug",
+      "active-hang",
+      "ring-knee-raise",
+      "hanging-leg-raise",
+      "toes-to-bar",
+      "windshield-wiper"
+    ],
+    "accessories": [],
+    "kind": "progression"
+  },
+  {
+    "id": "leg-strength",
+    "title": "Legs · Squat & Lunge",
+    "short": "Squat, split squat and stable single-leg strength",
+    "focus": "Squat, split squat and stable single-leg strength",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Lower body",
+    "slugs": [
+      "bodyweight-squat",
+      "split-squat",
+      "lunge",
+      "reverse-lunge",
+      "step-up",
+      "bulgarian-split-squat",
+      "cossack-squat"
+    ],
+    "accessories": [
+      "jump-squat",
+      "sissy-squat"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "posterior-chain",
+    "title": "Legs · Posterior Chain",
+    "short": "Bridges and hinge control before demanding curls",
+    "focus": "Bridges and hinge control before demanding curls",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Lower body",
+    "slugs": [
+      "glute-bridge",
+      "single-leg-rdl",
+      "ring-hamstring-curl",
+      "nordic-curl"
+    ],
+    "accessories": [
+      "jefferson-curl"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "ring-push",
+    "title": "Rings · Pressing",
+    "short": "Supported stability into controlled ring pressing",
+    "focus": "Supported stability into controlled ring pressing",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Rings",
+    "slugs": [
+      "wall-push-up",
+      "incline-push-up",
+      "assisted-ring-support-hold",
+      "ring-push-up",
+      "ring-push-up-turnout"
+    ],
+    "accessories": [
+      "ring-fly-regression",
+      "ring-triceps-extension"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "ring-pull",
+    "title": "Rings · Rows & Scapular Control",
+    "short": "Upright rows before longer-lever pulling",
+    "focus": "Upright rows before longer-lever pulling",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Rings",
+    "slugs": [
+      "incline-ring-row",
+      "ring-scapular-row",
+      "ring-row",
+      "feet-elevated-ring-row",
+      "archer-ring-row"
+    ],
+    "accessories": [
+      "ring-face-pull",
+      "ring-biceps-curl",
+      "ring-scapular-depression"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "ring-core",
+    "title": "Rings · Core & Support",
+    "short": "Assisted support before ring tucks and L-sits",
+    "focus": "Assisted support before ring tucks and L-sits",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Rings",
+    "slugs": [
+      "dead-bug",
+      "assisted-ring-support-hold",
+      "ring-tuck-hold",
+      "ring-knee-raise",
+      "ring-l-sit-hold"
+    ],
+    "accessories": [
+      "ring-reverse-plank",
+      "ring-body-saw",
+      "ring-fallout"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "ring-legs",
+    "title": "Rings · Assisted Legs",
+    "short": "Ring support helps control squat and single-leg depth",
+    "focus": "Ring support helps control squat and single-leg depth",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Rings",
+    "slugs": [
+      "bodyweight-squat",
+      "ring-assisted-deep-squat",
+      "ring-bulgarian-split-squat",
+      "ring-assisted-pistol-squat"
+    ],
+    "accessories": [],
+    "kind": "progression"
+  },
+  {
+    "id": "ring-straight-arm",
+    "title": "Rings · Advanced Straight Arm",
+    "short": "Support foundations; elite holds require specialist coaching",
+    "focus": "Support foundations; elite holds require specialist coaching",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Rings",
+    "slugs": [
+      "assisted-ring-support-hold",
+      "ring-support-hold",
+      "ring-turnout-support-hold",
+      "iron-cross-assisted-hold",
+      "iron-cross"
+    ],
+    "accessories": [
+      "maltese",
+      "victorian-cross",
+      "ringmaster"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "forearm-balance",
+    "title": "Forearm & Headstand Preparation",
+    "short": "Shoulder support, wall exposure and controlled exits",
+    "focus": "Shoulder support, wall exposure and controlled exits",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Press & balance",
+    "slugs": [
+      "pike-support-hold",
+      "dolphin-pose",
+      "elbow-stand-wall-hold",
+      "forearm-stand-line-hold",
+      "forearm-stand-toe-pulls",
+      "elbow-stand-exit",
+      "elbow-stand-straddle-entry",
+      "headstand"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "bent-arm-press",
+    "title": "Bent-Arm Handstand Strength",
+    "short": "Pike strength and crow support before bent-arm transitions",
+    "focus": "Pike strength and crow support before bent-arm transitions",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Press & balance",
+    "slugs": [
+      "incline-pike-push-up",
+      "pike-push-up",
+      "frog-stand",
+      "elbow-lever",
+      "bent-arm-handstand",
+      "l-sit-to-handstand"
+    ],
+    "accessories": [
+      "tiger-bend-pushup",
+      "tuck-planche-push-up-preparation"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "bar-transitions",
+    "title": "Bar · Transitions & Dynamic Skills",
+    "short": "Hanging foundations before pullovers and muscle-ups",
+    "focus": "Hanging foundations before pullovers and muscle-ups",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Strength",
+    "slugs": [
+      "active-hang",
+      "scapular-pull-up",
+      "band-assisted-pull-up",
+      "pull-up",
+      "chin-up",
+      "pullover",
+      "muscle-up"
+    ],
+    "accessories": [
+      "360-pull"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "recovery",
+    "title": "Recovery & Whole-Body Mobility",
+    "short": "Easy movement options and active recovery",
+    "focus": "Easy movement options and active recovery",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Mobility",
+    "slugs": [
+      "cat-cow",
+      "child-s-pose",
+      "world-s-greatest-stretch"
+    ],
+    "accessories": [
+      "swimming-freestyle"
+    ],
+    "kind": "collection"
   }
 ];
 export const getSkillPath=(id?:string)=>SKILL_PATHS.find(p=>p.id===id);

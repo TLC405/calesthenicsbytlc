@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { Link, useLocation, useNavigationType } from 'react-router-dom';
-import { Target, Dumbbell, Menu } from 'lucide-react';
+import { Target, Dumbbell, Home } from 'lucide-react';
 
 /** One navigation bar. Secondary tools live on More, away from workout controls. */
 export function MobileNav() {
@@ -11,9 +11,9 @@ export function MobileNav() {
   },[key,navigationType]);
   if (pathname === '/workout') return null;
   const items = [
-    { path: '/skills', label: 'Skills', icon: Target, active: pathname === '/' || pathname === '/assessment' || pathname.startsWith('/skills') },
-    { path: '/build', label: 'Workout', icon: Dumbbell, active: ['/build', '/planner', '/train', '/routine-days'].includes(pathname) },
-    { path: '/more', label: 'More', icon: Menu, active: !['/', '/assessment', '/build', '/planner', '/train', '/routine-days'].includes(pathname) && !pathname.startsWith('/skills') },
+    {path:'/',label:'Home',icon:Home,active:pathname==='/'||pathname==='/intro'},
+    {path:'/skills',label:'Skills',icon:Target,active:pathname==='/assessment'||pathname.startsWith('/skills')},
+    {path:'/planner',label:'Workout',icon:Dumbbell,active:['/build','/planner','/train','/routine-days'].includes(pathname)},
   ];
   return <nav className="power-mobile-nav power-simple-nav" aria-label="Primary navigation">
     <div className="power-nav-surface">{items.map(({path,label,icon:Icon,active}) =>

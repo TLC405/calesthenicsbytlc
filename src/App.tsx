@@ -12,6 +12,7 @@ import LevelAssessment from "./pages/LevelAssessment";
 import VideoAudit from "./pages/VideoAudit";
 import { MobileNav } from "./components/Layout/MobileNav";
 import Index from "./pages/Index";
+import PowerIntro from "./pages/PowerIntro";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Planner from "./pages/Planner";
@@ -38,6 +39,7 @@ function AppContent() {
       <div className="power-app-shell min-w-0 md:pb-0">
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/intro" element={<PowerIntro />} />
           <Route path="/auth" element={<Navigate to="/library" replace />} />
           <Route path="/admin-login" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />

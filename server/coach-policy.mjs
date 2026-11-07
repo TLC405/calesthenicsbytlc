@@ -7896,7 +7896,8 @@ var SKILL_PATHS = [
       "pike-support-hold",
       "split-squat",
       "assisted-box-pistol-sit"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "planche",
@@ -7916,6 +7917,12 @@ var SKILL_PATHS = [
       "advanced-tuck-planche",
       "straddle-planche",
       "full-planche"
+    ],
+    "accessories": [
+      "planche-plank",
+      "parallette-tuck-planche",
+      "band-assisted-progressions",
+      "pseudo-planche-push-up"
     ]
   },
   {
@@ -7935,7 +7942,8 @@ var SKILL_PATHS = [
       "planche-scapular-pulse",
       "band-assisted-tuck-planche",
       "tuck-planche"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "pike-compression",
@@ -7952,7 +7960,8 @@ var SKILL_PATHS = [
       "seated-pike-lift",
       "pike-compression-hold",
       "elevated-chair-compression"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "straddle-compression",
@@ -7969,7 +7978,8 @@ var SKILL_PATHS = [
       "seated-straddle-compression-lift",
       "straddle-compression-hold",
       "stalder-feet-assisted-hip-lift"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "straddle-press",
@@ -7987,6 +7997,9 @@ var SKILL_PATHS = [
       "elevated-straddle-press",
       "wall-press-negative",
       "straddle-press-to-hs"
+    ],
+    "accessories": [
+      "press-hs-journey"
     ]
   },
   {
@@ -8005,7 +8018,8 @@ var SKILL_PATHS = [
       "straddle-compression-hold",
       "stalder-negative",
       "stalder-press-to-hs"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "handstand",
@@ -8025,6 +8039,15 @@ var SKILL_PATHS = [
       "freestanding-handstand-kick-up",
       "freestanding-handstand",
       "handstand-walking"
+    ],
+    "accessories": [
+      "hs-shrugs",
+      "wall-handstand-shoulder-taps",
+      "wall-pull-aways",
+      "straddle-hs-kick-up",
+      "wall-stomach-straddle-handstand",
+      "kip-to-handstand",
+      "wall-toe-taps"
     ]
   },
   {
@@ -8044,7 +8067,8 @@ var SKILL_PATHS = [
       "wall-hspu-negative",
       "partial-rom-wall-hspu",
       "handstand-push-up"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "hspu",
@@ -8064,6 +8088,9 @@ var SKILL_PATHS = [
       "wall-hspu-negative",
       "partial-rom-wall-hspu",
       "handstand-push-up"
+    ],
+    "accessories": [
+      "hspu-capacity-builder"
     ]
   },
   {
@@ -8082,6 +8109,9 @@ var SKILL_PATHS = [
       "one-leg-l-sit",
       "l-sit",
       "v-sit-preparation"
+    ],
+    "accessories": [
+      "manna"
     ]
   },
   {
@@ -8101,7 +8131,8 @@ var SKILL_PATHS = [
       "assisted-ring-dip",
       "ring-dip",
       "ring-turnout-support-hold"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "ring-muscle-up",
@@ -8119,6 +8150,9 @@ var SKILL_PATHS = [
       "ring-muscle-up-transition-drill",
       "low-ring-muscle-up-assisted",
       "ring-muscle-up"
+    ],
+    "accessories": [
+      "false-grip-hold"
     ]
   },
   {
@@ -8138,6 +8172,9 @@ var SKILL_PATHS = [
       "tuck-front-lever-on-rings",
       "advanced-tuck-front-lever-on-rings",
       "front-lever"
+    ],
+    "accessories": [
+      "front-lever-raise"
     ]
   },
   {
@@ -8158,6 +8195,12 @@ var SKILL_PATHS = [
       "weighted-pull-up",
       "archer-pull-up",
       "one-arm-chin-up"
+    ],
+    "accessories": [
+      "chin-up",
+      "dead-hang",
+      "towel-hang",
+      "typewriter-pull-up"
     ]
   },
   {
@@ -8177,6 +8220,10 @@ var SKILL_PATHS = [
       "archer-push-up",
       "incline-one-arm-push-up",
       "one-arm-push-up"
+    ],
+    "accessories": [
+      "decline-push-up",
+      "wide-push-up"
     ]
   },
   {
@@ -8194,6 +8241,9 @@ var SKILL_PATHS = [
       "assisted-ring-dip",
       "ring-dip-negative",
       "ring-dip"
+    ],
+    "accessories": [
+      "parallel-bar-dip"
     ]
   },
   {
@@ -8210,7 +8260,8 @@ var SKILL_PATHS = [
       "supported-crow-balance",
       "frog-stand",
       "crow-pose"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "elbow-lever",
@@ -8226,7 +8277,8 @@ var SKILL_PATHS = [
       "assisted-elbow-lever",
       "elbow-lever",
       "single-arm-elbow-lever"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "pistol",
@@ -8244,7 +8296,8 @@ var SKILL_PATHS = [
       "assisted-pistol-squat",
       "pistol-squat",
       "shrimp-squat"
-    ]
+    ],
+    "accessories": []
   },
   {
     "id": "pancake",
@@ -8262,6 +8315,9 @@ var SKILL_PATHS = [
       "pancake-good-morning",
       "pancake-stretch",
       "middle-split-frog-stretch"
+    ],
+    "accessories": [
+      "wall-compression-stretch"
     ]
   },
   {
@@ -8280,6 +8336,10 @@ var SKILL_PATHS = [
       "german-hang-preparation",
       "ring-back-lever-tuck",
       "back-lever"
+    ],
+    "accessories": [
+      "skin-the-cat",
+      "german-hang"
     ]
   },
   {
@@ -8297,7 +8357,523 @@ var SKILL_PATHS = [
       "scapular-pull-up",
       "clutch-flag",
       "human-flag"
-    ]
+    ],
+    "accessories": []
+  },
+  {
+    "id": "yoga-foundation",
+    "title": "Yoga \xB7 Foundation",
+    "short": "Resting shapes, breathing and supported floor practice",
+    "focus": "Resting shapes, breathing and supported floor practice",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Yoga",
+    "slugs": [
+      "child-s-pose",
+      "cat-cow",
+      "downward-dog",
+      "cobra-pose"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "yoga-standing",
+    "title": "Yoga \xB7 Standing & Balance",
+    "short": "Standing shapes, then supported single-leg balance",
+    "focus": "Standing shapes, then supported single-leg balance",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Yoga",
+    "slugs": [
+      "chair-pose",
+      "warrior-i",
+      "warrior-ii",
+      "triangle-pose",
+      "tree-pose",
+      "warrior-iii",
+      "half-moon-pose"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "yoga-backbends",
+    "title": "Yoga \xB7 Hips & Backbends",
+    "short": "Hip opening and extension with your own range",
+    "focus": "Hip opening and extension with your own range",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Yoga",
+    "slugs": [
+      "cat-cow",
+      "glute-bridge",
+      "bridge-pose",
+      "pigeon-pose",
+      "camel-pose",
+      "wheel-pose"
+    ],
+    "accessories": [
+      "shoulder-bridge"
+    ],
+    "kind": "collection"
+  },
+  {
+    "id": "yoga-arm-balance",
+    "title": "Yoga \xB7 Arm Balance",
+    "short": "Floor support into crow and forearm preparation",
+    "focus": "Floor support into crow and forearm preparation",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Yoga",
+    "slugs": [
+      "quadruped-planche-lean",
+      "supported-crow-balance",
+      "dolphin-pose",
+      "crow-pose"
+    ],
+    "accessories": [
+      "crocodile-pose"
+    ],
+    "kind": "collection"
+  },
+  {
+    "id": "ballet-barre",
+    "title": "Ballet \xB7 Barre Foundations",
+    "short": "Arm carriage, foot articulation, pli\xE9 and relev\xE9",
+    "focus": "Arm carriage, foot articulation, pli\xE9 and relev\xE9",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Ballet",
+    "slugs": [
+      "port-de-bras",
+      "tendu",
+      "first-position-plie",
+      "releve",
+      "grand-plie"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "ballet-balance",
+    "title": "Ballet \xB7 Single-Leg Balance",
+    "short": "Supported pass\xE9, arabesque and attitude",
+    "focus": "Supported pass\xE9, arabesque and attitude",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Ballet",
+    "slugs": [
+      "calf-raise",
+      "passe-balance",
+      "arabesque-hold",
+      "attitude-hold"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "ballet-extension",
+    "title": "Ballet \xB7 Extension & Control",
+    "short": "Rond de jambe, d\xE9velopp\xE9 and controlled battement",
+    "focus": "Rond de jambe, d\xE9velopp\xE9 and controlled battement",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Ballet",
+    "slugs": [
+      "tendu",
+      "rond-de-jambe",
+      "developpe",
+      "grand-battement"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "ballet-penche",
+    "title": "Ballet \xB7 Pench\xE9 & Needle",
+    "short": "Hip control before deeper supported extensions",
+    "focus": "Hip control before deeper supported extensions",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Ballet",
+    "slugs": [
+      "glute-bridge",
+      "single-leg-rdl",
+      "arabesque-hold",
+      "penche",
+      "needle"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "splits",
+    "title": "Splits & Hip Opening",
+    "short": "Comfortable hip range before deeper splits",
+    "focus": "Comfortable hip range before deeper splits",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Mobility",
+    "slugs": [
+      "90-90-hip-switches",
+      "frog-stretch",
+      "front-split-preparation",
+      "couch-stretch",
+      "front-split",
+      "middle-split-hold",
+      "middle-split"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "shoulder-mobility",
+    "title": "Shoulder & Thoracic Mobility",
+    "short": "Controlled shoulder motion and upper-back range",
+    "focus": "Controlled shoulder motion and upper-back range",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Mobility",
+    "slugs": [
+      "cat-cow",
+      "thoracic-open-book",
+      "shoulder-cars",
+      "thoracic-extension",
+      "shoulder-dislocate"
+    ],
+    "accessories": [
+      "german-hang"
+    ],
+    "kind": "collection"
+  },
+  {
+    "id": "wrist-preparation",
+    "title": "Wrist & Scapular Preparation",
+    "short": "Prepare hands, wrists and shoulder support",
+    "focus": "Prepare hands, wrists and shoulder support",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Mobility",
+    "slugs": [
+      "wrist-circles",
+      "extensor-band",
+      "scapular-push-up",
+      "wall-support-shrug"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "ankle-squat-mobility",
+    "title": "Ankle & Squat Mobility",
+    "short": "Ankle range, hip rotation and controlled deep squat",
+    "focus": "Ankle range, hip rotation and controlled deep squat",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Mobility",
+    "slugs": [
+      "calf-raise",
+      "wall-ankle-dorsiflexion",
+      "90-90-hip-switches",
+      "world-s-greatest-stretch",
+      "deep-squat-hold"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "core-control",
+    "title": "Core \xB7 Body Line",
+    "short": "Dead bug and plank into hollow-body control",
+    "focus": "Dead bug and plank into hollow-body control",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Core",
+    "slugs": [
+      "dead-bug",
+      "plank",
+      "side-plank",
+      "hollow-body-hold",
+      "mountain-climber",
+      "v-up",
+      "dragon-flag"
+    ],
+    "accessories": [],
+    "kind": "progression"
+  },
+  {
+    "id": "hanging-core",
+    "title": "Core \xB7 Hanging Strength",
+    "short": "Active hang, knee raises and controlled leg lifts",
+    "focus": "Active hang, knee raises and controlled leg lifts",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Core",
+    "slugs": [
+      "dead-bug",
+      "active-hang",
+      "ring-knee-raise",
+      "hanging-leg-raise",
+      "toes-to-bar",
+      "windshield-wiper"
+    ],
+    "accessories": [],
+    "kind": "progression"
+  },
+  {
+    "id": "leg-strength",
+    "title": "Legs \xB7 Squat & Lunge",
+    "short": "Squat, split squat and stable single-leg strength",
+    "focus": "Squat, split squat and stable single-leg strength",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Lower body",
+    "slugs": [
+      "bodyweight-squat",
+      "split-squat",
+      "lunge",
+      "reverse-lunge",
+      "step-up",
+      "bulgarian-split-squat",
+      "cossack-squat"
+    ],
+    "accessories": [
+      "jump-squat",
+      "sissy-squat"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "posterior-chain",
+    "title": "Legs \xB7 Posterior Chain",
+    "short": "Bridges and hinge control before demanding curls",
+    "focus": "Bridges and hinge control before demanding curls",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Lower body",
+    "slugs": [
+      "glute-bridge",
+      "single-leg-rdl",
+      "ring-hamstring-curl",
+      "nordic-curl"
+    ],
+    "accessories": [
+      "jefferson-curl"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "ring-push",
+    "title": "Rings \xB7 Pressing",
+    "short": "Supported stability into controlled ring pressing",
+    "focus": "Supported stability into controlled ring pressing",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Rings",
+    "slugs": [
+      "wall-push-up",
+      "incline-push-up",
+      "assisted-ring-support-hold",
+      "ring-push-up",
+      "ring-push-up-turnout"
+    ],
+    "accessories": [
+      "ring-fly-regression",
+      "ring-triceps-extension"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "ring-pull",
+    "title": "Rings \xB7 Rows & Scapular Control",
+    "short": "Upright rows before longer-lever pulling",
+    "focus": "Upright rows before longer-lever pulling",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Rings",
+    "slugs": [
+      "incline-ring-row",
+      "ring-scapular-row",
+      "ring-row",
+      "feet-elevated-ring-row",
+      "archer-ring-row"
+    ],
+    "accessories": [
+      "ring-face-pull",
+      "ring-biceps-curl",
+      "ring-scapular-depression"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "ring-core",
+    "title": "Rings \xB7 Core & Support",
+    "short": "Assisted support before ring tucks and L-sits",
+    "focus": "Assisted support before ring tucks and L-sits",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Rings",
+    "slugs": [
+      "dead-bug",
+      "assisted-ring-support-hold",
+      "ring-tuck-hold",
+      "ring-knee-raise",
+      "ring-l-sit-hold"
+    ],
+    "accessories": [
+      "ring-reverse-plank",
+      "ring-body-saw",
+      "ring-fallout"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "ring-legs",
+    "title": "Rings \xB7 Assisted Legs",
+    "short": "Ring support helps control squat and single-leg depth",
+    "focus": "Ring support helps control squat and single-leg depth",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Rings",
+    "slugs": [
+      "bodyweight-squat",
+      "ring-assisted-deep-squat",
+      "ring-bulgarian-split-squat",
+      "ring-assisted-pistol-squat"
+    ],
+    "accessories": [],
+    "kind": "progression"
+  },
+  {
+    "id": "ring-straight-arm",
+    "title": "Rings \xB7 Advanced Straight Arm",
+    "short": "Support foundations; elite holds require specialist coaching",
+    "focus": "Support foundations; elite holds require specialist coaching",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Rings",
+    "slugs": [
+      "assisted-ring-support-hold",
+      "ring-support-hold",
+      "ring-turnout-support-hold",
+      "iron-cross-assisted-hold",
+      "iron-cross"
+    ],
+    "accessories": [
+      "maltese",
+      "victorian-cross",
+      "ringmaster"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "forearm-balance",
+    "title": "Forearm & Headstand Preparation",
+    "short": "Shoulder support, wall exposure and controlled exits",
+    "focus": "Shoulder support, wall exposure and controlled exits",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Press & balance",
+    "slugs": [
+      "pike-support-hold",
+      "dolphin-pose",
+      "elbow-stand-wall-hold",
+      "forearm-stand-line-hold",
+      "forearm-stand-toe-pulls",
+      "elbow-stand-exit",
+      "elbow-stand-straddle-entry",
+      "headstand"
+    ],
+    "accessories": [],
+    "kind": "collection"
+  },
+  {
+    "id": "bent-arm-press",
+    "title": "Bent-Arm Handstand Strength",
+    "short": "Pike strength and crow support before bent-arm transitions",
+    "focus": "Pike strength and crow support before bent-arm transitions",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Press & balance",
+    "slugs": [
+      "incline-pike-push-up",
+      "pike-push-up",
+      "frog-stand",
+      "elbow-lever",
+      "bent-arm-handstand",
+      "l-sit-to-handstand"
+    ],
+    "accessories": [
+      "tiger-bend-pushup",
+      "tuck-planche-push-up-preparation"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "bar-transitions",
+    "title": "Bar \xB7 Transitions & Dynamic Skills",
+    "short": "Hanging foundations before pullovers and muscle-ups",
+    "focus": "Hanging foundations before pullovers and muscle-ups",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Strength",
+    "slugs": [
+      "active-hang",
+      "scapular-pull-up",
+      "band-assisted-pull-up",
+      "pull-up",
+      "chin-up",
+      "pullover",
+      "muscle-up"
+    ],
+    "accessories": [
+      "360-pull"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "recovery",
+    "title": "Recovery & Whole-Body Mobility",
+    "short": "Easy movement options and active recovery",
+    "focus": "Easy movement options and active recovery",
+    "equipment": "Check the selected movement and available support",
+    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "group": "Mobility",
+    "slugs": [
+      "cat-cow",
+      "child-s-pose",
+      "world-s-greatest-stretch"
+    ],
+    "accessories": [
+      "swimming-freestyle"
+    ],
+    "kind": "collection"
   }
 ];
 
@@ -8308,6 +8884,34 @@ var FOUNDATION_DAYS = [
   { id: "foundation-inversion", title: "Alignment & inversion prep", detail: "Supported overhead control before inverted work", main: ["wall-support-shrug", "pike-support-hold", "incline-pike-push-up", "chest-to-wall-handstand", "wall-toe-taps"], targets: [{ slug: "chest-to-wall-handstand", sets: 3, value: 30, metric: "seconds", cue: "Only after entry/exit readiness; keep an active shoulder line without a large back arch." }, { slug: "pike-support-hold", sets: 3, value: 45, metric: "seconds", cue: "Push the floor away and keep breathing; bend the knees to scale." }, { slug: "wall-toe-taps", sets: 3, value: 10, metric: "reps", cue: "Keep the torso controlled while moving a leg; prior handstand control is required." }] },
   { id: "foundation-legs", title: "Legs & mobility", detail: "Split squats, controlled sitting and useful range", main: ["bodyweight-squat", "split-squat", "assisted-box-pistol-sit", "glute-bridge"], targets: [{ slug: "split-squat", sets: 3, value: 12, metric: "reps", cue: "Per side. Keep the front heel planted and a controlled torso." }, { slug: "assisted-box-pistol-sit", sets: 3, value: 8, metric: "reps", cue: "Per side. Use assistance and a high box; lower for three seconds without dropping." }] }
 ];
+
+// src/data/catalogAliases.json
+var catalogAliases_default = {
+  "standard-push-up": "push-up",
+  "bodyweight-row": "australian-row",
+  "ring-rows": "ring-row",
+  "ring-push-ups": "ring-push-up",
+  "ring-dips": "ring-dip",
+  "ring-l-sit": "ring-l-sit-hold",
+  "rto-support-hold": "ring-turnout-support-hold",
+  "scapular-pulls": "scapular-pull-up",
+  planche: "full-planche",
+  handstand: "freestanding-handstand",
+  dip: "parallel-bar-dip",
+  "downward-facing-dog": "downward-dog",
+  "childs-pose": "child-s-pose",
+  "cat-cow-stretch": "cat-cow",
+  bridge: "bridge-pose",
+  "crow-pose-yoga": "crow-pose",
+  "worlds-greatest-stretch": "world-s-greatest-stretch",
+  "seated-forward-fold": "pike-stretch",
+  "seated-pike-leg-lifts-1773317360868": "seated-pike-lift",
+  "seated-pike-leg-lifts-1773317361818": "seated-pike-lift",
+  "tuck-planche-1768085453845": "tuck-planche",
+  "planche-lean-1768085452113": "planche-lean",
+  "advanced-tuck-planche-1768085455793": "advanced-tuck-planche",
+  "straddle-planche-1768085457054": "straddle-planche"
+};
 
 // src/lib/trainingPolicy.ts
 var CAPABILITIES = [{ id: "push-base", label: "Controlled basic push-ups" }, { id: "pull-base", label: "Controlled pulling and hanging" }, { id: "support-base", label: "Stable straight-arm support" }, { id: "inversion-control", label: "Controlled handstand entry and exit" }, { id: "compression-control", label: "Controlled straight-leg compression lifts" }, { id: "straight-arm-base", label: "Comfortable planche lean with straight elbows" }];
@@ -8398,6 +9002,34 @@ var RULES = {
   "active-hang": { tier: 1, metric: "seconds" },
   "side-plank": { tier: 2, regression: "dead-bug", metric: "seconds" }
 };
+for (const slug of ["bridge-pose", "camel-pose", "chair-pose", "cobra-pose", "dolphin-pose", "downward-dog", "half-moon-pose", "pigeon-pose", "tree-pose", "triangle-pose", "warrior-i", "warrior-ii", "warrior-iii", "wheel-pose", "passe-balance", "arabesque-hold", "attitude-hold", "penche", "needle", "middle-split", "front-split", "front-split-preparation", "deep-squat-hold", "wall-compression-stretch"]) RULES[slug] = { ...RULES[slug], metric: "seconds" };
+Object.assign(RULES, {
+  "grand-plie": { tier: 3, regression: "first-position-plie" },
+  "first-position-plie": { tier: 1 },
+  "port-de-bras": { tier: 1 },
+  "tendu": { tier: 1 },
+  "calf-raise": { tier: 1 },
+  "releve": { tier: 2, regression: "calf-raise" },
+  "passe-balance": { tier: 2, regression: "calf-raise", metric: "seconds" },
+  "wheel-pose": { tier: 4, regression: "bridge-pose", metric: "seconds" },
+  "iron-cross": { tier: 5, requires: ["support-base", "straight-arm-base"], regression: "ring-turnout-support-hold", metric: "seconds" },
+  "maltese": { tier: 5, requires: ["support-base", "straight-arm-base"], regression: "ring-turnout-support-hold", metric: "seconds" },
+  "victorian-cross": { tier: 5, requires: ["support-base", "pull-base", "straight-arm-base"], regression: "ring-support-hold", metric: "seconds" },
+  "bent-arm-handstand": { tier: 4, requires: ["push-base", "inversion-control"], regression: "pike-push-up", metric: "seconds" },
+  "l-sit-to-handstand": { tier: 5, requires: ["support-base", "compression-control", "inversion-control"], regression: "stalder-feet-assisted-hip-lift" },
+  "muscle-up": { tier: 5, requires: ["pull-base", "support-base"], regression: "pull-up" },
+  "hspu-capacity-builder": { tier: 4, requires: ["push-base", "inversion-control"], regression: "elevated-pike-push-up" },
+  "press-hs-journey": { tier: 4, requires: ["support-base", "compression-control", "inversion-control"], regression: "bent-knee-compression-lift" },
+  "forearm-stand-line-hold": { tier: 3, requires: ["inversion-control"], regression: "dolphin-pose", metric: "seconds" },
+  "forearm-stand-toe-pulls": { tier: 4, requires: ["inversion-control"], regression: "dolphin-pose" },
+  "elbow-stand-wall-hold": { tier: 3, requires: ["inversion-control"], regression: "dolphin-pose", metric: "seconds" },
+  "elbow-stand-straddle-entry": { tier: 4, requires: ["inversion-control"], regression: "dolphin-pose" },
+  "elbow-stand-exit": { tier: 3, requires: ["inversion-control"], regression: "dolphin-pose" }
+});
+for (const [alias, canonical] of Object.entries(catalogAliases_default)) {
+  const e = publicExerciseCatalog_default.find((e2) => e2.slug === canonical);
+  RULES[alias] = { tier: Math.max(1, Math.min(5, e?.difficulty_level || 1)), ...RULES[canonical] };
+}
 var bySlug = new Map(publicExerciseCatalog_default.map((e) => [e.slug, e]));
 function minimumTier(slug) {
   return RULES[slug]?.tier || Math.max(1, Math.min(5, bySlug.get(slug)?.difficulty_level || 1));
@@ -8443,6 +9075,7 @@ function equipmentReasons(slug, available) {
   if (eq.some((e) => /band/.test(e)) && !available.includes("bands")) reasons.push("A suitable resistance band is required.");
   if ((/parallette/.test(slug) || eq.some((e) => /parallettes|parallel bars/.test(e)) && !eq.includes("floor")) && !available.includes("parallettes")) reasons.push("Parallettes or suitable parallel bars are required.");
   if ((eq.includes("wall") || /wall|chest-to-wall/.test(slug)) && !available.includes("wall")) reasons.push("A clear wall is required.");
+  if (eq.includes("pool") && !available.includes("pool")) reasons.push("Access to a suitable swimming pool is required.");
   if (/human-flag|clutch-flag/.test(slug) && !available.includes("pole")) reasons.push("Suitable stable flag apparatus is required.");
   return reasons;
 }
@@ -8451,10 +9084,10 @@ function equipmentReasons(slug, available) {
 var known = new Map(publicExerciseCatalog_default.map((e) => [e.slug, e]));
 function coachContext(profile, progress = [], equipment = ["floor"]) {
   const ready = safeProfile(profile);
-  const gear = Array.isArray(equipment) ? equipment.filter((e) => typeof e === "string" && ["floor", "wall", "rings", "bar", "parallettes", "bands", "bench", "pole"].includes(e)) : ["floor"];
+  const gear = Array.isArray(equipment) ? equipment.filter((e) => typeof e === "string" && ["floor", "wall", "rings", "bar", "parallettes", "bands", "bench", "pole", "pool"].includes(e)) : ["floor"];
   const allowed = publicExerciseCatalog_default.filter((e) => allowedAtLevel(e.slug, ready) && !equipmentReasons(e.slug, gear).length);
   const records = Array.isArray(progress) ? progress.filter((p) => p && typeof p === "object" && known.has(p.nodeId) && Number.isFinite(p.value) && Number.isInteger(p.quality)).slice(-12).map((p) => ({ nodeId: p.nodeId, value: p.value, metric: p.metric === "seconds" ? "seconds" : "reps", quality: Math.max(1, Math.min(5, p.quality)) })) : [];
-  return { profile: ready, equipment: gear, progress: records, goals: [...SKILL_PATHS, ...FOUNDATION_DAYS].map((g) => ({ id: g.id, title: g.title, nodes: "slugs" in g ? g.slugs : g.main })), allowedExercises: allowed.map((e) => ({ slug: e.slug, name: e.name, minimumLevel: minimumTier(e.slug), equipment: e.equipment, readiness: RULES[e.slug]?.requires || [], regression: RULES[e.slug]?.regression || null, cues: Array.isArray(e.cues) ? e.cues.slice(0, 3) : [] })) };
+  return { profile: ready, equipment: gear, progress: records, goals: [...SKILL_PATHS, ...FOUNDATION_DAYS].map((g) => ({ id: g.id, title: g.title, nodes: "slugs" in g ? g.slugs : g.main, ..."accessories" in g ? { optionalDrills: g.accessories } : {}, ..."kind" in g ? { kind: g.kind } : {} })), allowedExercises: allowed.map((e) => ({ slug: e.slug, name: e.name, minimumLevel: minimumTier(e.slug), equipment: e.equipment, readiness: RULES[e.slug]?.requires || [], regression: RULES[e.slug]?.regression || null, cues: Array.isArray(e.cues) ? e.cues.slice(0, 3) : [] })) };
 }
 function validateCoachSelection(value, profile) {
   const raw = value && typeof value === "object" ? value : {};
@@ -8463,15 +9096,27 @@ function validateCoachSelection(value, profile) {
   const requested = Array.isArray(raw.exercise_slugs) ? raw.exercise_slugs.filter((s) => typeof s === "string").slice(0, 8) : [];
   const accepted = [...new Set(requested.flatMap((slug) => {
     if (!known.has(slug)) return [];
-    if (allowedAtLevel(slug, profile)) return [slug];
+    if (allowedAtLevel(slug, profile) && (!profile.equipment || !equipmentReasons(slug, profile.equipment).length)) return [slug];
     const regression = approvedRegression(slug, profile);
     return regression ? [regression] : [];
   }))];
-  const changed = requested.some((slug) => !known.has(slug) || !allowedAtLevel(slug, profile));
+  const changed = requested.some((slug) => !known.has(slug) || !allowedAtLevel(slug, profile) || Boolean(profile.equipment) && equipmentReasons(slug, profile.equipment).length > 0);
   return { goalId, focusSlug: accepted[0] || null, exercises: accepted.map((slug) => known.get(slug)), message: changed ? "Some proposed drills exceeded your level or readiness. POWER replaced or removed those drills; review the level-appropriate workout before training." : typeof raw.message === "string" ? raw.message.slice(0, 4e3) : "Review your level-appropriate workout.", adjusted: changed };
+}
+
+// src/lib/coachConversation.ts
+var known2 = new Set(publicExerciseCatalog_default.map((e) => e.slug));
+function sanitizeCoachHistory(value) {
+  if (!Array.isArray(value)) return [];
+  return value.filter((x) => Boolean(x && typeof x === "object" && (x.role === "user" || x.role === "assistant") && typeof x.content === "string" && x.content.trim())).slice(-6).map((x) => ({ role: x.role, content: x.content.slice(0, 800) }));
+}
+function sanitizeBuilderSlugs(value) {
+  return Array.isArray(value) ? [...new Set(value.filter((s) => typeof s === "string" && known2.has(s)))].slice(0, 30) : [];
 }
 export {
   coachContext,
   safeProfile,
+  sanitizeBuilderSlugs,
+  sanitizeCoachHistory,
   validateCoachSelection
 };

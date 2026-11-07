@@ -1,112 +1,12 @@
-import { useState } from 'react';
 import { Plus, Minus, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-
-export interface SetData {
-  reps: number;
-  weight?: number;
-  rpe?: number;
-}
-
-interface SetTrackerProps {
-  sets: SetData[];
-  onChange: (sets: SetData[]) => void;
-  showWeight?: boolean;
-}
-
-export function SetTracker({ sets, onChange, showWeight = false }: SetTrackerProps) {
-  const addSet = () => {
-    const lastSet = sets[sets.length - 1];
-    onChange([...sets, lastSet ? { ...lastSet } : { reps: 10 }]);
-  };
-
-  const removeSet = (index: number) => {
-    if (sets.length > 1) {
-      onChange(sets.filter((_, i) => i !== index));
-    }
-  };
-
-  const updateSet = (index: number, field: keyof SetData, value: number) => {
-    const newSets = [...sets];
-    newSets[index] = { ...newSets[index], [field]: value };
-    onChange(newSets);
-  };
-
-  return (
-    <div className="space-y-2">
-      <div className="flex items-center gap-1 sm:gap-2 text-xs text-muted-foreground font-medium mb-1">
-        <span className="w-8 text-center">Set</span>
-        <span className="flex-1 text-center">Reps</span>
-        {showWeight && <span className="flex-1 text-center">Weight</span>}
-        <span className="w-8"></span>
-      </div>
-      
-      {sets.map((set, index) => (
-        <div key={index} className="flex items-center min-w-0 gap-1 sm:gap-2">
-          <span className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-medium">
-            {index + 1}
-          </span>
-          
-          <div className="flex-1 min-w-0 flex items-center justify-center gap-0.5 sm:gap-1">
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="h-10 w-9 shrink-0"
-              onClick={() => updateSet(index, 'reps', Math.max(1, set.reps - 1))}
-            >
-              <Minus className="w-3 h-3" />
-            </Button>
-            <Input
-              type="number"
-              value={set.reps}
-              onChange={(e) => updateSet(index, 'reps', parseInt(e.target.value) || 0)}
-              className="h-10 w-11 sm:w-14 min-w-0 text-center neumorph-inset px-1"
-              min={1}
-            />
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="h-8 w-8"
-              onClick={() => updateSet(index, 'reps', set.reps + 1)}
-            >
-              <Plus className="w-3 h-3" />
-            </Button>
-          </div>
-
-          {showWeight && (
-            <div className="flex-1 flex items-center gap-1">
-              <Input
-                type="number"
-                value={set.weight || ''}
-                onChange={(e) => updateSet(index, 'weight', parseInt(e.target.value) || 0)}
-                className="h-10 w-12 sm:w-16 min-w-0 text-center neumorph-inset px-1"
-                placeholder="kg"
-              />
-            </div>
-          )}
-
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="h-10 w-9 shrink-0 text-muted-foreground hover:text-destructive"
-            onClick={() => removeSet(index)}
-            disabled={sets.length <= 1}
-          >
-            <Trash2 className="w-3 h-3" />
-          </Button>
-        </div>
-      ))}
-
-      <Button 
-        variant="outline" 
-        size="sm" 
-        className="w-full min-h-11 mt-2 neumorph-flat"
-        onClick={addSet}
-      >
-        <Plus className="w-4 h-4 mr-1" />
-        Add Set
-      </Button>
-    </div>
-  );
+export interface SetData {reps:number;seconds?:number;weight?:number;rpe?:number;}
+interface Props {sets:SetData[];onChange:(sets:SetData[])=>void;showWeight?:boolean;}
+export function SetTracker({sets,onChange,showWeight=false}:Props){
+ function update(index:number,field:keyof SetData,value:number){onChange(sets.map((set,i)=>i===index?{...set,[field]:value}:set));}
+ return <div className="space-y-2"><div className="flex gap-1 text-xs text-muted-foreground"><span className="w-7 text-center">Set</span><span className="flex-1 text-center">{sets[0]?.seconds!==undefined?'Seconds':'Reps'}</span>{showWeight&&<span className="w-14 text-center">kg</span>}<span className="w-11"/></div>
+  {sets.map((set,index)=>{const timed=set.seconds!==undefined;const field=timed?'seconds':'reps';const value=timed?set.seconds!:set.reps;const max=timed?300:999;return <div className="flex gap-1 items-center min-w-0" key={index}><span className="w-7 shrink-0 text-center text-xs font-bold">{index+1}</span><div className="flex-1 min-w-0 flex justify-center items-center gap-1"><Button variant="ghost" size="icon" className="h-11 w-11 shrink-0" onClick={()=>update(index,field,Math.max(1,value-(timed?5:1)))} aria-label={`Decrease ${field} for set ${index+1}`}><Minus size={14}/></Button><Input type="number" min={1} max={max} value={value} aria-label={`Set ${index+1} ${field}`} className="h-11 w-14 min-w-0 px-1 text-center" onChange={e=>update(index,field,Math.max(1,Math.min(max,Number(e.target.value)||1)))}/><Button variant="ghost" size="icon" className="h-11 w-11 shrink-0" onClick={()=>update(index,field,Math.min(max,value+(timed?5:1)))} aria-label={`Increase ${field} for set ${index+1}`}><Plus size={14}/></Button></div>{showWeight&&<Input className="w-14 min-w-0 h-11 px-1" type="number" min={0} max={1000} value={set.weight??''} aria-label={`Set ${index+1} weight in kg`} onChange={e=>update(index,'weight',Math.max(0,Math.min(1000,Number(e.target.value)||0)))}/>}<Button variant="ghost" size="icon" className="h-11 w-11 shrink-0" disabled={sets.length<=1} aria-label={`Remove set ${index+1}`} onClick={()=>onChange(sets.filter((_,i)=>i!==index))}><Trash2 size={14}/></Button></div>;})}
+  <Button variant="outline" className="w-full min-h-11" onClick={()=>onChange([...sets,sets.length?{...sets[sets.length-1]}:{reps:5}])}><Plus size={15} className="mr-1"/>Add set</Button>
+ </div>;
 }

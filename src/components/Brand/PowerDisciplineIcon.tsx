@@ -1,11 +1,13 @@
 import type { SVGProps } from 'react';
 
-export type PowerDiscipline = 'planche' | 'handstand' | 'rings' | 'muscle-up' | 'mobility' | 'core';
+export type PowerDiscipline = 'planche' | 'handstand' | 'rings' | 'muscle-up' | 'mobility' | 'core' | 'yoga' | 'ballet';
 
 /** A consistent line-drawn movement alphabet, sharp at every screen size. */
 export function PowerDisciplineIcon({ discipline, ...props }: SVGProps<SVGSVGElement> & { discipline: PowerDiscipline }) {
   return <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" strokeWidth="1.5"
     strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+    {discipline === 'yoga' && <><circle cx="18" cy="7" r="3"/><path d="M18 11v10m-7-6 7-4 7 4M18 21l-8 7h16l-8-7M5 32h26"/></>}
+    {discipline === 'ballet' && <><circle cx="18" cy="5" r="2.5"/><path d="M18 9v13m0-11L8 8l-3-5m13 8 9 2 5-4M18 22l-3 9h4m-1-9 10-6 3 1"/></>}
     {discipline === 'rings' && <>
       <path d="M11 3v15m14-15v15" /><ellipse cx="11" cy="23" rx="5" ry="7" />
       <ellipse cx="25" cy="23" rx="5" ry="7" /><path d="M8 7h6m8 0h6" />

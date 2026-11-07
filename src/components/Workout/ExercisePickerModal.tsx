@@ -1,4 +1,6 @@
-import { exerciseReadinessReasons } from '@/lib/trainingPolicy';
+import { SKILL_PATHS } from '@/data/skillPaths';
+import { matchesProgression, canonicalSlug } from '@/lib/exerciseProgressions';
+import { equipmentReasons, exerciseReadinessReasons } from '@/lib/trainingPolicy';
 import { readTrainingProfile } from '@/lib/skillGraph';
 import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useState, useEffect } from 'react';
@@ -37,6 +39,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
   const [exercises,setExercises]=useState<Exercise[]>(()=>merge());
   const [searchTerm,setSearchTerm]=useState('');
   const [activeCategory,setActiveCategory]=useState<string|null>(null);
+  const [pathId,setPathId]=useState('');
   useEffect(()=>{
     if(!open||!backendConfigured)return;
     const controller=new AbortController();
@@ -55,7 +58,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
     const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = !activeCategory || (CATEGORY_GROUPS[activeCategory] ? CATEGORY_GROUPS[activeCategory].includes(exercise.category) : exercise.category === activeCategory);
-    return matchesSearch && matchesCategory && !exerciseReadinessReasons(exercise,profile).length;
+    return canonicalSlug(exercise.slug)===exercise.slug && matchesSearch && matchesCategory && matchesProgression(exercise.slug,pathId) && !exerciseReadinessReasons(exercise,profile).length && !equipmentReasons(exercise.slug,profile.equipment).length;
   });
 
   return (
@@ -77,6 +80,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
             />
           </div>
 
+          <label className="block text-xs">Progression<select className="h-11 w-full border bg-card rounded-xl px-2 mt-1" value={pathId} onChange={e=>setPathId(e.target.value)}><option value="">All level-appropriate movements</option>{SKILL_PATHS.map(p=><option key={p.id} value={p.id}>{p.title}</option>)}</select></label>
           <details><summary className="min-h-11 flex items-center cursor-pointer text-sm">Filter movements</summary><CategoryTabs
             categories={categories}
             activeCategory={activeCategory}

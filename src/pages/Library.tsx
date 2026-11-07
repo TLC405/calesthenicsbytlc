@@ -1,3 +1,4 @@
+import { matchesProgression, canonicalSlug } from '@/lib/exerciseProgressions';
 import { resolveTutorialUrl, tutorialState } from '@/lib/mediaAudit';
 import { exerciseReadinessReasons } from '@/lib/trainingPolicy';
 import { readTrainingProfile } from '@/lib/skillGraph';
@@ -64,6 +65,8 @@ export default function Library() {
   const [editingExercise, setEditingExercise] = useState<Exercise | null>(null);
   const [mineOnly, setMineOnly] = useState(() => new URLSearchParams(location.search).get('mine') === '1');
   const [videosOnly, setVideosOnly] = useState(false);
+  const [showAliases,setShowAliases]=useState(false);
+  const [pathId,setPathId]=useState(new URLSearchParams(location.search).get('progression')||'');
 
   const fetchExercises = useCallback(async () => {
     const currentRequest = ++requestId.current;
@@ -106,7 +109,7 @@ export default function Library() {
     const matchesCategory = !activeCategory || (CATEGORY_GROUPS[activeCategory] ? CATEGORY_GROUPS[activeCategory].includes(exercise.category) : exercise.category === activeCategory);
     const matchesOwner = !mineOnly || exercise.created_by === ownerId;
     const matchesVideo = !videosOnly || Boolean(exercise.youtube_url)&&!tutorialState(exercise.youtube_url,exercise.name).blocked;
-    return matchesSearch && matchesCategory && matchesOwner && matchesVideo;
+    return (showAliases||canonicalSlug(exercise.slug)===exercise.slug) && matchesSearch && matchesCategory && matchesOwner && matchesVideo && matchesProgression(exercise.slug,pathId);
   });
 
   const handleAddToWorkout = (exercise: Exercise) => {
@@ -163,7 +166,9 @@ export default function Library() {
           <div className="flex items-center justify-between gap-3"><div className="min-w-0"><h1 className="font-display text-2xl font-bold">All exercises</h1><p className="text-xs text-muted-foreground mt-1">{exercises.length} movements</p></div><Button variant="outline" className="min-h-12 shrink-0" onClick={()=>navigate('/skills')}><Target className="w-4 h-4 mr-2"/>Skills</Button></div>
           <div className="relative"><Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"/><Input aria-label="Search exercises" placeholder="Search exercises…" value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} className="pl-10 h-12 rounded-xl"/></div>
           <details className="power-library-tools"><summary className="min-h-12 flex items-center cursor-pointer font-bold text-sm">Filters and tools</summary><div className="space-y-3 pt-3">
-            <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts}/>
+            <label className="block text-xs font-bold mb-3">Progression<select className="w-full h-12 border rounded-xl bg-card px-3 mt-2" value={pathId} onChange={e=>setPathId(e.target.value)}><option value="">All progression families</option>{SKILL_PATHS.map(path=><option key={path.id} value={path.id}>{path.title}</option>)}</select></label>
+        <label className="flex min-h-11 items-center gap-3 text-xs mb-2"><input type="checkbox" className="h-5 w-5" checked={showAliases} onChange={e=>setShowAliases(e.target.checked)}/>Include legacy duplicate records</label>
+        <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts}/>
             <div className="flex flex-wrap gap-2"><Button variant={videosOnly?'default':'outline'} className="min-h-12" aria-pressed={videosOnly} onClick={()=>setVideosOnly(v=>!v)}><PlayCircle className="h-4 w-4 mr-2"/>Video tutorials</Button><Button variant={mineOnly?'default':'outline'} className="min-h-12" aria-pressed={mineOnly} onClick={()=>setMineOnly(v=>!v)}>My exercises</Button><Button variant="outline" className="min-h-12" onClick={()=>{setEditingExercise(null);setShowAddModal(true);}}><Plus className="h-4 w-4 mr-2"/>New movement</Button><Button variant="outline" className="min-h-12" disabled={!filteredExercises.length} onClick={downloadExerciseList}><Download className="h-4 w-4 mr-2"/>Export</Button></div>
             {(activeCategory||mineOnly||videosOnly)&&<Button variant="ghost" className="min-h-12" onClick={()=>{setActiveCategory(null);setMineOnly(false);setVideosOnly(false);}}>Clear filters</Button>}
           </div></details>
