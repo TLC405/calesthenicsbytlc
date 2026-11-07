@@ -5,4 +5,6 @@
 - The user dislikes the current icon that looks like a blue bull. Do not use bull/bison imagery for the replacement.
 - Let the user choose a concept, then prepare the launcher icons, maskable icon, Apple touch icon, and favicon consistently from that selected design.
 
-Requested by Lord TLC on November 7, 2026.
+Selected POWER icon: concept 4, the colorful TLC sketchbook sticker (red T, blue L, golden-yellow C with a small red heart inside the C). Keep all app-icon surfaces consistent with this selected artwork.
+
+Requested and selected by Lord TLC on November 7, 2026.
