@@ -1,7 +1,8 @@
+import reviewedPhotos from '../data/reviewedMovementPhotos.json';
 import thumbnailReview from '../data/thumbnailReview.json';
 import auditMetadata from '../data/videoAudit.json';
 import thumbnailCache from '../data/thumbnailCache.json';
-import { MOVEMENT_MEDIA, LOCAL_MOVEMENT_PHOTOS, RING_FAMILY_GUIDE } from '../data/movementMedia';
+import { MOVEMENT_MEDIA, RING_FAMILY_GUIDE } from '../data/movementMedia';
 import catalog from '../data/publicExerciseCatalog.json';
 import { PROGRESSION_SOURCES } from '../data/progressionSources';
 import { exercisePaths, canonicalSlug } from './exerciseProgressions';
@@ -23,7 +24,8 @@ function movementMediaSources(input:ThumbnailExercise):ThumbnailSource[]{
  const results:ThumbnailSource[]=[];
  const slug=canonicalSlug(input.slug);
  const review=reviewed.get(slug);
- const localPhoto=null;
+ const photos=movementPhotoSet(input);
+ for(const src of photos?.images||[])results.push({src,scope:"photo",label:"Photo",title:`${title} · ${photos.author}`,url:null});
  for(const id of review?.approvedVideoIds||[]){const meta=videoMetadata.get(id);const url=`https://www.youtube.com/watch?v=${id}`;if(!tutorialState(url).blocked)results.push({src:`https://i.ytimg.com/vi/${id}/hqdefault.jpg`,scope:'clip',label:'Video',title:meta?`${meta.creator} · ${meta.title}`:title,url});}
  const ownPhoto=input.image_url&&input.image_url!==bySlug.get(input.slug)?.image_url&&input.image_url!==canonical?.image_url?input.image_url:null;
  const photo=ownPhoto||(review?null:input.image_url);
@@ -34,7 +36,6 @@ function movementMediaSources(input:ThumbnailExercise):ThumbnailSource[]{
   const family=review?!review.approvedVideoIds.includes(direct.id):direct.repair?.scope==='family'||(sharedVideos.get(direct.id)?.size||0)>2;results.push({src:`https://i.ytimg.com/vi/${direct.id}/hqdefault.jpg`,scope:family?'guide':'clip',label:family?'Guide':'Video',title:family?`${title} · family tutorial`:`${title} · video preview`,url:direct.url});
  }
  if(photoSource&&input.image_url===canonical?.image_url)results.push(photoSource);
- if(localPhoto&&!results.some(s=>s.src===localPhoto))results.push({src:localPhoto,scope:'photo',label:'Photo',title:input.name,url:null});
  const curated=MOVEMENT_MEDIA[slug];
  if(curated&&!review?.rejectedVideoIds.includes(curated.id)&&!tutorialState(`https://www.youtube.com/watch?v=${curated.id}`).blocked)results.push({src:`https://i.ytimg.com/vi/${curated.id}/hqdefault.jpg`,scope:review&&!review.approvedVideoIds.includes(curated.id)?'guide':curated.scope||'clip',label:curated.scope==='guide'?'Related':'Video',title:`${curated.creator} · ${curated.title}`,url:`https://www.youtube.com/watch?v=${curated.id}`});
  const paths=exercisePaths(input.slug).map(p=>p.id);
@@ -54,3 +55,5 @@ export function movementTutorialSources(input:ThumbnailExercise):ThumbnailSource
 export function movementVisualDetails(input:ThumbnailExercise){const e=bySlug.get(canonicalSlug(input.slug));const path=exercisePaths(input.slug)[0];return {family:path?.title||e?.category||'Your movement',cue:Array.isArray(e?.cues)?String(e.cues[0]||''):''};}
 const coverSlugs:Record<string,string[]>={'iron-cross':['band-assisted-iron-cross'],'human-flag':['band-assisted-human-flag'],planche:['tuck-planche','straddle-planche','planche-lean'],'straight-arm':['planche-lean','scapular-push-up'],rings:['ring-row','ring-dip'],'handstand':['freestanding-handstand','chest-to-wall-handstand'],'straddle-press':['straddle-press-to-hs','wall-press-negative'],stalder:['stalder-press-to-hs','stalder-negative'],'pike-compression':['seated-pike-lift'],'straddle-compression':['seated-straddle-lift'],'yoga-foundation':['downward-dog','cat-cow'],'ballet-barre':['first-position-plie','tendu'],'ballet-balance':['arabesque-hold','attitude-hold']};
 export function skillCoverMovement(path:{id:string;slugs:readonly string[]}){const slugs=[...(coverSlugs[path.id]||[]),...path.slugs];return slugs.map(slug=>bySlug.get(canonicalSlug(slug))).find(e=>e&&movementThumbnailSources(e).length)||bySlug.get(canonicalSlug(path.slugs[0]));}
+
+export function movementPhotoSet(input:ThumbnailExercise){return (reviewedPhotos as Record<string,{images:string[];author:string;source:string;license:string;licenseUrl:string}>)[canonicalSlug(input.slug)]||null;}

@@ -1,8 +1,10 @@
 # POWER thumbnail and category review
 
-272 catalog records (248 canonical movements); 107 records have an admitted movement preview, 165 need a matching picture. This includes legacy aliases; the picker hides aliases by default.
+272 catalog records (248 canonical movements); 127 records have an admitted movement preview, 145 need a matching picture. This includes legacy aliases; the picker hides aliases by default.
 
-Reviewed all 112 unique displayed preview images in five contact sheets, eight bundled picture assets, and five replacement/additional provider previews. Approval means the preview matches the movement/variation; it does not certify technique or playback. General lessons remain labeled separately. No unrelated pictures were substituted for missing ones. All static movement pictures now use the positive review list, including fallback providers.
+Added 27 visually reviewed real photographs for 18 canonical movements (20 catalog records including aliases). Photos and their license credits appear in movement details and are kept locally. Rejected assisted one-arm chin-up, non-ring suspension fallout, ballet drawings and standing-split images as mismatched alternatives. 145 catalog records still have no admitted movement image; this pass does not claim complete photo coverage.
+
+Previously reviewed all 112 unique displayed preview images in five contact sheets, eight bundled picture assets, and five replacement/additional provider previews. Approval means the preview matches the movement/variation; it does not certify technique or playback. General lessons remain labeled separately. No unrelated pictures were substituted for missing ones. All static movement pictures now use the positive review list, including fallback providers.
 
 Navigation: 10 categories cover all 49 skill families once. Families show six per page, the Home movement list eight, the library ten, and the custom exercise picker six. A Play button beside a movement opens its embedded lesson without TLC TV.
 
@@ -31,7 +33,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Couch Stretch | couch-stretch | Matching picture still needed | 0 |
 | Développé | developpe | Matched provider preview | 1 |
 | First Position Plié | first-position-plie | Matched provider preview | 1 |
-| Front Split | front-split | Matching picture still needed | 0 |
+| Front Split | front-split | Matched provider preview | 0 |
 | Front Split Preparation | front-split-preparation | Matching picture still needed | 0 |
 | German Hang | german-hang | Matching picture still needed | 1 |
 | Grand Battement | grand-battement | Matched provider preview | 1 |
@@ -40,7 +42,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Middle Split Frog Stretch | middle-split-frog-stretch | Matched provider preview | 1 |
 | Pancake Good Morning | pancake-good-morning | Matching picture still needed | 0 |
 | Passé Balance | passe-balance | Matching picture still needed | 0 |
-| Penché | penche | Matching picture still needed | 0 |
+| Penché | penche | Matched provider preview | 0 |
 | Pike Stretch | pike-stretch | Matching picture still needed | 0 |
 | Port de Bras | port-de-bras | Matching picture still needed | 0 |
 | Relevé | releve | Matched provider preview | 1 |
@@ -49,7 +51,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Seated Straddle Compression Lift | seated-straddle-compression-lift | Matched provider preview | 2 |
 | Shoulder Bridge | shoulder-bridge | Matching picture still needed | 0 |
 | Standing Pike | standing-pike | Matching picture still needed | 0 |
-| Straddle Stretch | straddle-stretch | Matching picture still needed | 0 |
+| Straddle Stretch | straddle-stretch | Matched provider preview | 0 |
 | Tendu | tendu | Matched provider preview | 1 |
 | Assisted Pistol Squat | assisted-pistol-squat | Matching picture still needed | 1 |
 | Bodyweight Squat | bodyweight-squat | Matched provider preview | 1 |
@@ -57,7 +59,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Calf Raise | calf-raise | Matching picture still needed | 1 |
 | Cossack Squat | cossack-squat | Matched provider preview | 1 |
 | Glute Bridge | glute-bridge | Matched provider preview | 1 |
-| Jump Squat | jump-squat | Matching picture still needed | 0 |
+| Jump Squat | jump-squat | Matched provider preview | 0 |
 | Lunges | lunge | Matched provider preview | 1 |
 | Nordic Curl | nordic-curl | Matched provider preview | 1 |
 | Pistol Squat | pistol-squat | Matched provider preview | 1 |
@@ -75,7 +77,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Jefferson Curl | jefferson-curl | Matching picture still needed | 1 |
 | Middle Split Hold | middle-split-hold | Matching picture still needed | 0 |
 | Needle | needle | Matching picture still needed | 0 |
-| Pancake Stretch | pancake-stretch | Matching picture still needed | 0 |
+| Pancake Stretch | pancake-stretch | Matched provider preview | 0 |
 | Shoulder CARs | shoulder-cars | Matching picture still needed | 0 |
 | Shoulder Dislocate | shoulder-dislocate | Matched provider preview | 1 |
 | Thoracic Extension | thoracic-extension | Matching picture still needed | 0 |
@@ -83,7 +85,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Wall Ankle Dorsiflexion | wall-ankle-dorsiflexion | Matching picture still needed | 0 |
 | World's Greatest Stretch | world-s-greatest-stretch | Matched provider preview | 2 |
 | World's Greatest Stretch | worlds-greatest-stretch | Matched provider preview | 3 |
-| Wrist Circles | wrist-circles | Matching picture still needed | 1 |
+| Wrist Circles | wrist-circles | Matched provider preview | 1 |
 | Active Hang | active-hang | Matched provider preview | 9 |
 | Archer Pull-up | archer-pull-up | Matched provider preview | 1 |
 | Australian Row | australian-row | Matched provider preview | 1 |
@@ -91,7 +93,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Chin-up | chin-up | Matched provider preview | 1 |
 | Dead Hang | dead-hang | Matched provider preview | 1 |
 | Front Lever Raise | front-lever-raise | Matching picture still needed | 2 |
-| Muscle-up | muscle-up | Matching picture still needed | 1 |
+| Muscle-up | muscle-up | Matched provider preview | 1 |
 | One Arm Chin-up | one-arm-chin-up | Matching picture still needed | 0 |
 | Pull-up | pull-up | Matched provider preview | 1 |
 | Pullover | pullover | Matched provider preview | 1 |
@@ -124,7 +126,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Tiger Bend Push Up | tiger-bend-pushup | Matched provider preview | 2 |
 | Tuck Planche | tuck-planche | Matched provider preview | 3 |
 | Wall Push-up | wall-push-up | Matched provider preview | 1 |
-| Wide Push-up | wide-push-up | Matching picture still needed | 0 |
+| Wide Push-up | wide-push-up | Matched provider preview | 0 |
 | Advanced Tuck Front Lever on Rings | advanced-tuck-front-lever-on-rings | Matching picture still needed | 1 |
 | Archer Ring Row | archer-ring-row | Matching picture still needed | 1 |
 | Assisted Ring Dip | assisted-ring-dip | Matching picture still needed | 2 |
@@ -133,7 +135,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | False Grip Ring Row | false-grip-ring-row | Matching picture still needed | 3 |
 | Feet-Elevated Ring Row | feet-elevated-ring-row | Matching picture still needed | 1 |
 | German Hang Preparation | german-hang-preparation | Matching picture still needed | 1 |
-| Incline Ring Row | incline-ring-row | Matching picture still needed | 2 |
+| Incline Ring Row | incline-ring-row | Matched provider preview | 2 |
 | Iron Cross Assisted Hold | iron-cross-assisted-hold | Matching picture still needed | 5 |
 | Low Ring Muscle-Up Assisted | low-ring-muscle-up-assisted | Matching picture still needed | 2 |
 | Ring Assisted Deep Squat | ring-assisted-deep-squat | Matching picture still needed | 1 |
@@ -141,7 +143,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Ring Back Lever Tuck | ring-back-lever-tuck | Matching picture still needed | 1 |
 | Ring Biceps Curl | ring-biceps-curl | Matching picture still needed | 1 |
 | Ring Body Saw | ring-body-saw | Matching picture still needed | 1 |
-| Ring Bulgarian Split Squat | ring-bulgarian-split-squat | Matching picture still needed | 1 |
+| Ring Bulgarian Split Squat | ring-bulgarian-split-squat | Matched provider preview | 1 |
 | Ring Dip Negative | ring-dip-negative | Matching picture still needed | 1 |
 | Ring Face Pull | ring-face-pull | Matching picture still needed | 1 |
 | Ring Fallout | ring-fallout | Matching picture still needed | 1 |
@@ -160,7 +162,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Ring Turnout Support Hold | ring-turnout-support-hold | Matching picture still needed | 6 |
 | Skin the Cat Preparation | skin-the-cat-preparation | Matching picture still needed | 1 |
 | Tuck Front Lever on Rings | tuck-front-lever-on-rings | Matching picture still needed | 1 |
-| Back Lever | back-lever | Matching picture still needed | 1 |
+| Back Lever | back-lever | Matched provider preview | 1 |
 | Bent Arm Handstand | bent-arm-handstand | Matching picture still needed | 1 |
 | Chest-to-Wall Handstand | chest-to-wall-handstand | Matched provider preview | 2 |
 | Chest-to-Wall Handstand Hold | chest-to-wall-handstand-hold | Matching picture still needed | 1 |
@@ -173,23 +175,23 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | False Grip Hold | false-grip-hold | Matching picture still needed | 3 |
 | Forearm Stand Line Holds | forearm-stand-line-hold | Matching picture still needed | 0 |
 | Forearm Stand Toe Pulls | forearm-stand-toe-pulls | Matching picture still needed | 1 |
-| Freestanding Handstand | handstand | Matching picture still needed | 1 |
-| Freestanding Handstand | freestanding-handstand | Matching picture still needed | 1 |
+| Freestanding Handstand | handstand | Matched provider preview | 1 |
+| Freestanding Handstand | freestanding-handstand | Matched provider preview | 1 |
 | Freestanding Handstand Kick-Up | freestanding-handstand-kick-up | Matching picture still needed | 1 |
 | Frog Stand | frog-stand | Matched provider preview | 3 |
-| Front Lever | front-lever | Matching picture still needed | 1 |
+| Front Lever | front-lever | Matched provider preview | 1 |
 | Handstand Exits / Bail-Outs | handstand-bail | Matched provider preview | 2 |
 | Handstand Heel Pull | handstand-heel-pull | Matching picture still needed | 1 |
 | Handstand Shrugs | hs-shrugs | Matching picture still needed | 1 |
 | Headstand | headstand | Matched provider preview | 1 |
-| Human Flag | human-flag | Matching picture still needed | 4 |
-| Iron Cross | iron-cross | Matching picture still needed | 5 |
+| Human Flag | human-flag | Matched provider preview | 4 |
+| Iron Cross | iron-cross | Matched provider preview | 5 |
 | L-Sit to Handstand | l-sit-to-handstand | Matching picture still needed | 1 |
-| Maltese | maltese | Matching picture still needed | 5 |
+| Maltese | maltese | Matched provider preview | 5 |
 | Manna | manna | Matching picture still needed | 1 |
 | Parallette Tuck Planche | parallette-tuck-planche | Matching picture still needed | 1 |
-| Planche | planche | Matching picture still needed | 2 |
-| Planche | full-planche | Matching picture still needed | 2 |
+| Planche | planche | Matched provider preview | 2 |
+| Planche | full-planche | Matched provider preview | 2 |
 | Ring Support Hold | ring-support-hold | Matched provider preview | 7 |
 | Ringmaster | ringmaster | Matching picture still needed | 5 |
 | RTO Support Hold | rto-support-hold | Matching picture still needed | 6 |
@@ -236,7 +238,7 @@ Navigation: 10 categories cover all 49 skill families once. Families show six pe
 | Straddle Planche | straddle-planche-1768085457054 | Matched provider preview | 2 |
 | Swimming Freestyle | swimming-freestyle | Matched provider preview | 1 |
 | Scapular Pulls | scapular-pulls | Matched provider preview | 6 |
-| Weighted Pull-up | weighted-pull-up | Matching picture still needed | 1 |
+| Weighted Pull-up | weighted-pull-up | Matched provider preview | 1 |
 | Ring Rows | ring-rows | Matched provider preview | 5 |
 | Handstand Walking | handstand-walking | Matching picture still needed | 2 |
 | Kip to Handstand | kip-to-handstand | Matched provider preview | 2 |

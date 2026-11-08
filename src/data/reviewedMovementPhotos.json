@@ -1,0 +1,254 @@
+{
+  "maltese": {
+    "images": [
+      "/movement-photos/reviewed/maltese.jpg"
+    ],
+    "author": "Martin Rulsch, Wikimedia Commons",
+    "source": "https://commons.wikimedia.org/wiki/File:2019-06-29_1st_FIG_Artistic_Gymnastics_JWCH_Men%27s_Apparatus_finals_Still_rings_(Martin_Rulsch)_382.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "review": "Visual match checked against catalog variation, 2026-11-08; resized source image; no technique certification.",
+    "sha256": {
+      "/movement-photos/reviewed/maltese.jpg": "71d181c85e7edee913051205baf73765dbf83f39a8034503613a8bb96d994676"
+    }
+  },
+  "back-lever": {
+    "images": [
+      "/movement-photos/reviewed/back-lever.jpg"
+    ],
+    "author": "Ondra7575",
+    "source": "https://commons.wikimedia.org/wiki/File:Back_lever_on_gymnastics_rings.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "review": "Visual match checked against catalog variation, 2026-11-08; resized source image; no technique certification.",
+    "sha256": {
+      "/movement-photos/reviewed/back-lever.jpg": "689b2ff67419d57f866b030de6074bc3b1f575411d28153a8546bd886e486b41"
+    }
+  },
+  "iron-cross": {
+    "images": [
+      "/movement-photos/reviewed/iron-cross.jpg"
+    ],
+    "author": "Gonzo-wiki at English Wikipedia",
+    "source": "https://commons.wikimedia.org/wiki/File:Example2ofironcross.jpg",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "review": "Visual match checked against catalog variation, 2026-11-08; resized source image; no technique certification.",
+    "sha256": {
+      "/movement-photos/reviewed/iron-cross.jpg": "6f7edd13df0082ffe9be9d1adef9180e7f38cd3e93d35bdd0621fa0e4ccb3f69"
+    }
+  },
+  "front-lever": {
+    "images": [
+      "/movement-photos/reviewed/front-lever.jpg"
+    ],
+    "author": "Fenix1000",
+    "source": "https://commons.wikimedia.org/wiki/File:Front_lever_-_Serhii_Solodkyi_18280.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "review": "Visual match checked against catalog variation, 2026-11-08; resized source image; no technique certification.",
+    "sha256": {
+      "/movement-photos/reviewed/front-lever.jpg": "a1190582ae1006ecc28250d41c5dc3360af698e08026c9a3d266cc046df53fe8"
+    }
+  },
+  "full-planche": {
+    "images": [
+      "/movement-photos/reviewed/full-planche.jpg"
+    ],
+    "author": "Mrplr",
+    "source": "https://commons.wikimedia.org/wiki/File:Full_planche.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "review": "Visual match checked against catalog variation, 2026-11-08; resized source image; no technique certification.",
+    "sha256": {
+      "/movement-photos/reviewed/full-planche.jpg": "e9695737447b8a956a22011ac9ec3d5fa2caf2553aa8bab11e95b0f3ecd62ad3"
+    }
+  },
+  "freestanding-handstand": {
+    "images": [
+      "/movement-photos/reviewed/freestanding-handstand.jpg"
+    ],
+    "author": "IronlennyCom",
+    "source": "https://commons.wikimedia.org/wiki/File:Handstand.jpg",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "review": "Visual match checked against catalog variation, 2026-11-08; resized source image; no technique certification.",
+    "sha256": {
+      "/movement-photos/reviewed/freestanding-handstand.jpg": "6facf6a741e405b653a0f2ebf2d0e45b913cb74788509f53b7cfe739cd0af8ce"
+    }
+  },
+  "human-flag": {
+    "images": [
+      "/movement-photos/reviewed/human-flag.jpg"
+    ],
+    "author": "Daniel Kaiser",
+    "source": "https://commons.wikimedia.org/wiki/File:Human_Flag_von_Sven_Kohl_(Calisthenic_Movement),_2013.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "review": "Visual match checked against catalog variation, 2026-11-08; resized source image; no technique certification.",
+    "sha256": {
+      "/movement-photos/reviewed/human-flag.jpg": "4955c36cdb4045e6e714e6760311657d8fa3a6af81a3019f04a52619cbdc3375"
+    }
+  },
+  "penche": {
+    "images": [
+      "/movement-photos/reviewed/penche.gif"
+    ],
+    "author": "Lambtron",
+    "source": "https://commons.wikimedia.org/wiki/File:Pench%C3%A9.gif",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "review": "Visual match checked against catalog variation, 2026-11-08; resized source image; no technique certification.",
+    "sha256": {
+      "/movement-photos/reviewed/penche.gif": "066b3828828a54ae161e166732d52e161ac70bcf67b1ccd41c5b4f36ee77decf"
+    }
+  },
+  "front-split": {
+    "images": [
+      "/movement-photos/reviewed/front-split.jpg"
+    ],
+    "author": "Akhlispurnomo",
+    "source": "https://commons.wikimedia.org/wiki/File:Front_split.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "review": "Visual match checked against catalog variation, 2026-11-08; resized source image; no technique certification.",
+    "sha256": {
+      "/movement-photos/reviewed/front-split.jpg": "b31c17eff4dd83620a80bb07cbbc676272ef305151fd3a5a811a24966505c186"
+    }
+  },
+  "jump-squat": {
+    "images": [
+      "/movement-photos/reviewed/jump-squat-0.jpg",
+      "/movement-photos/reviewed/jump-squat-1.jpg"
+    ],
+    "author": "Free Exercise DB contributors",
+    "source": "https://github.com/yuhonas/free-exercise-db/tree/main/exercises/Freehand_Jump_Squat",
+    "license": "Public domain (Unlicense)",
+    "licenseUrl": "https://github.com/yuhonas/free-exercise-db/blob/main/LICENSE.md",
+    "review": "Both demonstration photographs inspected against catalog equipment and variation, 2026-11-08; muscle-up photo uses rings and is not assigned to the strict ring-muscle-up entry.",
+    "sha256": {
+      "/movement-photos/reviewed/jump-squat-0.jpg": "6efb2bc42ce6554aa70b8b4e1643e41d539342117ac1ad39327790eedd2f87ed",
+      "/movement-photos/reviewed/jump-squat-1.jpg": "269e6d3308ead7b95a1b0c8ce102ce1bd892507e680740bde3b38bf20949ae97"
+    }
+  },
+  "wide-push-up": {
+    "images": [
+      "/movement-photos/reviewed/wide-push-up-0.jpg",
+      "/movement-photos/reviewed/wide-push-up-1.jpg"
+    ],
+    "author": "Free Exercise DB contributors",
+    "source": "https://github.com/yuhonas/free-exercise-db/tree/main/exercises/Push-Up_Wide",
+    "license": "Public domain (Unlicense)",
+    "licenseUrl": "https://github.com/yuhonas/free-exercise-db/blob/main/LICENSE.md",
+    "review": "Both demonstration photographs inspected against catalog equipment and variation, 2026-11-08; muscle-up photo uses rings and is not assigned to the strict ring-muscle-up entry.",
+    "sha256": {
+      "/movement-photos/reviewed/wide-push-up-0.jpg": "94f027d2a6aa5de82866d3c2a1519cc564bc168810c652632a2ac9ae20ff39a8",
+      "/movement-photos/reviewed/wide-push-up-1.jpg": "19eef3f2315e5013eed2934297f3943cdcbb020d69b42a983b4b09d68a13fe07"
+    }
+  },
+  "weighted-pull-up": {
+    "images": [
+      "/movement-photos/reviewed/weighted-pull-up-0.jpg",
+      "/movement-photos/reviewed/weighted-pull-up-1.jpg"
+    ],
+    "author": "Free Exercise DB contributors",
+    "source": "https://github.com/yuhonas/free-exercise-db/tree/main/exercises/Weighted_Pull_Ups",
+    "license": "Public domain (Unlicense)",
+    "licenseUrl": "https://github.com/yuhonas/free-exercise-db/blob/main/LICENSE.md",
+    "review": "Both demonstration photographs inspected against catalog equipment and variation, 2026-11-08; muscle-up photo uses rings and is not assigned to the strict ring-muscle-up entry.",
+    "sha256": {
+      "/movement-photos/reviewed/weighted-pull-up-0.jpg": "066e6552683526c9fefa1ca8a5dd73f7428a3e32a8f65a4ee4ccdca2bf6dd7ce",
+      "/movement-photos/reviewed/weighted-pull-up-1.jpg": "1c9ca5cf666a656d690f2e9793f5e4a6b87b913fe31bb48a8d8ccf6bbcf7bd83"
+    }
+  },
+  "straddle-stretch": {
+    "images": [
+      "/movement-photos/reviewed/straddle-stretch-0.jpg",
+      "/movement-photos/reviewed/straddle-stretch-1.jpg"
+    ],
+    "author": "Free Exercise DB contributors",
+    "source": "https://github.com/yuhonas/free-exercise-db/tree/main/exercises/The_Straddle",
+    "license": "Public domain (Unlicense)",
+    "licenseUrl": "https://github.com/yuhonas/free-exercise-db/blob/main/LICENSE.md",
+    "review": "Both demonstration photographs inspected against catalog equipment and variation, 2026-11-08; muscle-up photo uses rings and is not assigned to the strict ring-muscle-up entry.",
+    "sha256": {
+      "/movement-photos/reviewed/straddle-stretch-0.jpg": "2516c64e87f8dfd00935075bef1c6d18e06b8482048a478753e38e394c6f4a45",
+      "/movement-photos/reviewed/straddle-stretch-1.jpg": "2516c64e87f8dfd00935075bef1c6d18e06b8482048a478753e38e394c6f4a45"
+    }
+  },
+  "pancake-stretch": {
+    "images": [
+      "/movement-photos/reviewed/pancake-stretch-0.jpg",
+      "/movement-photos/reviewed/pancake-stretch-1.jpg"
+    ],
+    "author": "Free Exercise DB contributors",
+    "source": "https://github.com/yuhonas/free-exercise-db/tree/main/exercises/The_Straddle",
+    "license": "Public domain (Unlicense)",
+    "licenseUrl": "https://github.com/yuhonas/free-exercise-db/blob/main/LICENSE.md",
+    "review": "Both demonstration photographs inspected against catalog equipment and variation, 2026-11-08; muscle-up photo uses rings and is not assigned to the strict ring-muscle-up entry.",
+    "sha256": {
+      "/movement-photos/reviewed/pancake-stretch-0.jpg": "2516c64e87f8dfd00935075bef1c6d18e06b8482048a478753e38e394c6f4a45",
+      "/movement-photos/reviewed/pancake-stretch-1.jpg": "2516c64e87f8dfd00935075bef1c6d18e06b8482048a478753e38e394c6f4a45"
+    }
+  },
+  "wrist-circles": {
+    "images": [
+      "/movement-photos/reviewed/wrist-circles-0.jpg",
+      "/movement-photos/reviewed/wrist-circles-1.jpg"
+    ],
+    "author": "Free Exercise DB contributors",
+    "source": "https://github.com/yuhonas/free-exercise-db/tree/main/exercises/Wrist_Circles",
+    "license": "Public domain (Unlicense)",
+    "licenseUrl": "https://github.com/yuhonas/free-exercise-db/blob/main/LICENSE.md",
+    "review": "Both demonstration photographs inspected against catalog equipment and variation, 2026-11-08; muscle-up photo uses rings and is not assigned to the strict ring-muscle-up entry.",
+    "sha256": {
+      "/movement-photos/reviewed/wrist-circles-0.jpg": "0a5cdd08f243f6c90cd20b64a15244e94562feba83c5114c17c04f7858cf3003",
+      "/movement-photos/reviewed/wrist-circles-1.jpg": "7da7668a84e7fcf290aa199409b8911bde6a57a5b78d54f0413d143d2a9827c6"
+    }
+  },
+  "ring-bulgarian-split-squat": {
+    "images": [
+      "/movement-photos/reviewed/ring-bulgarian-split-squat-0.jpg",
+      "/movement-photos/reviewed/ring-bulgarian-split-squat-1.jpg"
+    ],
+    "author": "Free Exercise DB contributors",
+    "source": "https://github.com/yuhonas/free-exercise-db/tree/main/exercises/Suspended_Split_Squat",
+    "license": "Public domain (Unlicense)",
+    "licenseUrl": "https://github.com/yuhonas/free-exercise-db/blob/main/LICENSE.md",
+    "review": "Both demonstration photographs inspected against catalog equipment and variation, 2026-11-08; muscle-up photo uses rings and is not assigned to the strict ring-muscle-up entry.",
+    "sha256": {
+      "/movement-photos/reviewed/ring-bulgarian-split-squat-0.jpg": "94b39835fb4abce2fcfe85887e370349e2653ab045ebbc9ed9153587f17d0ab8",
+      "/movement-photos/reviewed/ring-bulgarian-split-squat-1.jpg": "dcb6abf9cce948b9f4a423ef2f5f2d34b16d0f02665f687d902e6449da828b56"
+    }
+  },
+  "incline-ring-row": {
+    "images": [
+      "/movement-photos/reviewed/incline-ring-row-0.jpg",
+      "/movement-photos/reviewed/incline-ring-row-1.jpg"
+    ],
+    "author": "Free Exercise DB contributors",
+    "source": "https://github.com/yuhonas/free-exercise-db/tree/main/exercises/Suspended_Row",
+    "license": "Public domain (Unlicense)",
+    "licenseUrl": "https://github.com/yuhonas/free-exercise-db/blob/main/LICENSE.md",
+    "review": "Both demonstration photographs inspected against catalog equipment and variation, 2026-11-08; muscle-up photo uses rings and is not assigned to the strict ring-muscle-up entry.",
+    "sha256": {
+      "/movement-photos/reviewed/incline-ring-row-0.jpg": "edfd60517553a1d22b48c0f01585658bf783f93e2004b3289893f18d213a4f18",
+      "/movement-photos/reviewed/incline-ring-row-1.jpg": "9bbe152e839da67bc1f919d5539bce140564c73e9e0db5685bf24b4b599cacac"
+    }
+  },
+  "muscle-up": {
+    "images": [
+      "/movement-photos/reviewed/muscle-up-0.jpg",
+      "/movement-photos/reviewed/muscle-up-1.jpg"
+    ],
+    "author": "Free Exercise DB contributors",
+    "source": "https://github.com/yuhonas/free-exercise-db/tree/main/exercises/Muscle_Up",
+    "license": "Public domain (Unlicense)",
+    "licenseUrl": "https://github.com/yuhonas/free-exercise-db/blob/main/LICENSE.md",
+    "review": "Both demonstration photographs inspected against catalog equipment and variation, 2026-11-08; muscle-up photo uses rings and is not assigned to the strict ring-muscle-up entry.",
+    "sha256": {
+      "/movement-photos/reviewed/muscle-up-0.jpg": "168517e1b401ee8272f40a3197ae88188889d0aad183a344b56e6ee5c0e14dae",
+      "/movement-photos/reviewed/muscle-up-1.jpg": "ba22b7adfdd248005e4195eea5e247dd511e0b1a0d09c2fe2dded39bd69be99c"
+    }
+  }
+}
