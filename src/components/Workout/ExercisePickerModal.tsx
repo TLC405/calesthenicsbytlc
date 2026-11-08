@@ -1,3 +1,6 @@
+import { MovementTutorialButton } from '@/components/Exercise/MovementTutorialButton';
+import { ResultPager } from '@/components/Exercise/ResultPager';
+import { pageSlice } from '@/lib/skillBrowse';
 import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
 import { SKILL_PATHS } from '@/data/skillPaths';
 import { matchesProgression, canonicalSlug } from '@/lib/exerciseProgressions';
@@ -37,6 +40,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
     return [...map.values()];
   };
   const [exercises,setExercises]=useState<Exercise[]>(()=>merge());
+  const [page,setPage]=useState(0);
   const [searchTerm,setSearchTerm]=useState('');
   const [activeCategory,setActiveCategory]=useState<string|null>(null);
   const [pathId,setPathId]=useState('');
@@ -61,6 +65,8 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
     return canonicalSlug(exercise.slug)===exercise.slug && matchesSearch && matchesCategory && matchesProgression(exercise.slug,pathId) && !exerciseReadinessReasons(exercise,profile).length && !equipmentReadinessReasons(exercise.slug,profile).length;
   });
 
+  useEffect(()=>setPage(0),[searchTerm,activeCategory,pathId]);
+  const resultPage=pageSlice(filteredExercises,page,6);
   return (
     <Dialog open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
       <DialogContent className="w-[calc(100vw-1rem)] max-w-lg max-h-[90dvh] flex flex-col min-h-0 overflow-hidden rounded-2xl p-0">
@@ -82,7 +88,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
 
           <label className="block text-xs">Progression<select className="h-11 w-full border bg-card rounded-xl px-2 mt-1" value={pathId} onChange={e=>setPathId(e.target.value)}><option value="">All level-appropriate movements</option>{SKILL_PATHS.map(p=><option key={p.id} value={p.id}>{p.title}</option>)}</select></label>
           <CategoryTabs
-            categories={categories}
+            exercises={exercises.filter(e=>canonicalSlug(e.slug)===e.slug)} categories={categories}
             activeCategory={activeCategory}
             onCategoryChange={setActiveCategory}
           />
@@ -94,10 +100,9 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
             <div className="py-8 text-center text-muted-foreground">No exercises found</div>
           ) : (
             <div className="space-y-2 pt-2">
-              {filteredExercises.map((exercise) => {
+              {resultPage.items.map((exercise) => {
                 return (
-                  <button
-                    key={exercise.id}
+                  <div key={exercise.id} className="power-picker-row"><button
                     onClick={() => {
                       onSelectExercise(exercise);
                       onClose();
@@ -111,12 +116,12 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
                         {exerciseLabel(exercise.slug,exercise.category)} • {exercise.primary_muscles.join(', ')}
                       </p>
                     </div>
-                  </button>
+                  </button><MovementTutorialButton exercise={exercise}/></div>
                 );
               })}
             </div>
           )}
-        </ScrollArea>
+        </ScrollArea><ResultPager result={resultPage} onPage={setPage}/>
       </DialogContent>
     </Dialog>
   );

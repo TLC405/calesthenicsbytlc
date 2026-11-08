@@ -1,3 +1,5 @@
+import { ResultPager } from '@/components/Exercise/ResultPager';
+import { pageSlice } from '@/lib/skillBrowse';
 import { movementTutorialSources } from '@/lib/movementThumbnails';
 import { matchesProgression, canonicalSlug } from '@/lib/exerciseProgressions';
 import { resolveTutorialUrl, tutorialState } from '@/lib/mediaAudit';
@@ -54,6 +56,7 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useAuth();
+  const [page,setPage]=useState(0);
   const [exercises, setExercises] = useState<Exercise[]>(() => mergeCatalog());
   const guestMode = !user;
   const [profile,setProfile]=useState(readTrainingProfile);
@@ -118,6 +121,9 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
     return (showAliases||canonicalSlug(exercise.slug)===exercise.slug) && matchesSearch && matchesCategory && matchesOwner && matchesVideo && matchesProgression(exercise.slug,pathId);
   });
 
+  useEffect(()=>setPage(0),[searchTerm,activeCategory,mineOnly,videosOnly,pathId,showAliases]);
+  const resultPage=pageSlice(filteredExercises,page,10);
+
   const handleAddToWorkout = (exercise: Exercise) => {
     const profile=readTrainingProfile();const reasons=exerciseReadinessReasons(exercise,profile);
     if(reasons.length){toast.info(reasons[0]+' Review your working level in Settings.');return false;}
@@ -171,9 +177,9 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
     <div className={`power-movement-library ${embedded?'is-embedded':''}`}>
       <header className="power-library-head relative bg-background border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 py-5 space-y-4">
-          {!embedded&&<div className="flex items-center justify-between gap-3"><div className="min-w-0"><h1 className="font-display text-2xl font-bold">All exercises</h1><p className="text-xs text-muted-foreground mt-1">{exercises.length} movements</p></div><Button variant="outline" className="min-h-12 shrink-0" onClick={()=>navigate('/skills')}><Target className="w-4 h-4 mr-2"/>Skills</Button></div>}
+          {!embedded&&<div className="flex items-center justify-between gap-3"><div className="min-w-0"><h1 className="font-display text-2xl font-bold">Find a movement</h1><p className="text-xs text-muted-foreground mt-1">{exercises.filter(e=>showAliases||canonicalSlug(e.slug)===e.slug).length} movements</p></div><Button variant="outline" className="min-h-12 shrink-0" onClick={()=>navigate('/skills')}><Target className="w-4 h-4 mr-2"/>Skills</Button></div>}
           <div className="relative"><Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"/><Input aria-label="Search exercises" placeholder="Search exercises…" value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} className="pl-10 h-12 rounded-xl"/></div>
-          <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts}/>
+          <CategoryTabs exercises={exercises.filter(e=>showAliases||canonicalSlug(e.slug)===e.slug)} categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts}/>
           <details className="power-library-tools"><summary className="min-h-12 flex items-center cursor-pointer font-bold text-sm">Filters and tools</summary><div className="space-y-3 pt-3">
             <label className="block text-xs font-bold mb-3">Progression<select className="w-full h-12 border rounded-xl bg-card px-3 mt-2" value={pathId} onChange={e=>setPathId(e.target.value)}><option value="">All progression families</option>{SKILL_PATHS.map(path=><option key={path.id} value={path.id}>{path.title}</option>)}</select></label>
         <label className="flex min-h-11 items-center gap-3 text-xs mb-2"><input type="checkbox" className="h-5 w-5" checked={showAliases} onChange={e=>setShowAliases(e.target.checked)}/>Include legacy duplicate records</label>
@@ -187,20 +193,7 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
           <span>{syncState === 'refreshing' ? 'Refreshing your saved movements…' : syncState === 'error' ? 'Included movements are ready. Saved movements could not connect.' : syncState === 'offline' ? 'Included and device-saved movements' : `${filteredExercises.length} movements`}</span>
           {syncState === 'error' && <Button type="button" variant="outline" size="sm" onClick={() => void fetchExercises()}>Reconnect library</Button>}
         </div>
-        {guestMode && !embedded && (
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-primary/25 bg-primary/5 px-4 py-3">
-            <div>
-              <p className="text-sm font-bold">Guest training · saved on this device</p>
-              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
-                Explore the exercise catalog. Custom exercises stay in this browser until you sign in. Export a backup before clearing browser data.
-              </p>
-            </div>
-            <Button type="button" variant="outline" size="sm" onClick={() => exportLocalExercises()}
-              className="h-9 rounded-xl text-xs font-bold">
-              <Download className="mr-2 h-3.5 w-3.5" /> Backup mine
-            </Button>
-          </div>
-        )}
+        {guestMode&&!embedded&&<details className="power-device-note"><summary>Saved on this device · backup options</summary><p>Your custom movements stay in this browser. Export a copy before clearing browser data.</p><Button type="button" variant="outline" size="sm" onClick={()=>exportLocalExercises()}><Download size={15}/>Back up my movements</Button></details>}
         {filteredExercises.length === 0 ? (
           <div className="py-20 text-center">
             <p className="text-muted-foreground text-xs font-mono">{mineOnly ? 'No personal exercises are available for this session.' : 'No exercises match these filters.'}</p>
@@ -214,7 +207,7 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
           </div>
         ) : (
           <div className="power-exercise-rows">
-            {filteredExercises.map(exercise => (
+            {resultPage.items.map(exercise => (
               <div key={exercise.id} className="power-library-record">
                 <ExerciseCard exercise={exercise} addDisabledReason={publicCatalog.some(e=>e.slug===exercise.slug)?trainingBlockers(canonicalSlug(exercise.slug),profile,true)[0]:exerciseReadinessReasons(exercise,profile)[0]} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} isAdded={workoutSlugs.includes(canonicalSlug(exercise.slug))} />
                 {ownerId && exercise.created_by === ownerId && (
@@ -240,6 +233,7 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
             ))}
           </div>
         )}
+        <ResultPager result={resultPage} onPage={next=>{setPage(next);document.querySelector('.power-library-results')?.scrollIntoView({block:'start'});}}/>
       </main>
 
       <ExerciseDetailModal workoutSlugs={workoutSlugs} exercise={selectedExercise} open={!!selectedExercise} onClose={() => setSelectedExercise(null)} onAddToWorkout={handleAddToWorkout} />

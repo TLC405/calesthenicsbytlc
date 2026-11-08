@@ -15,7 +15,7 @@ try{
  const blocked=media.movementThumbnailSources(catalog.find(e=>e.slug==='windshield-wiper'));assert(!blocked.some(s=>s.src.includes('0TnnnuMqDvQ')));
  const wrong=media.movementThumbnailSources(catalog.find(e=>e.slug==='passe-balance'));assert(!wrong.some(s=>s.scope==='clip'));
  const own=media.movementThumbnailSources({slug:'wall-push-up',name:'Wall Push-up',image_url:'/my-own-photo.webp'});assert.equal(own[0].scope,'photo');
- assert.equal(media.movementThumbnailSources(catalog.find(e=>e.slug==='wrist-circles'))[0].scope,'clip');
+ assert.equal(media.movementThumbnailSources(catalog.find(e=>e.slug==='wrist-circles')).length,0,'A broad wrist-prep lesson is not an exact wrist-circle picture');
  const push=relations.movementRelations('push-up',profile);assert(push.easier.some(o=>o.exercise.slug==='incline-push-up'));assert(push.harder.every(o=>o.reasons.length>0));assert(!relations.movementRelations('tuck-planche',profile).harder.some(o=>o.exercise.slug.endsWith('1768085455793')));
  const now=Date.parse('2026-11-07T16:00:00Z');const logs=Array.from({length:3},(_,i)=>({id:String(i),nodeId:'push-up',sessionId:'s'+i,at:`2026-11-0${4+i}T12:00:00Z`,metric:'reps',value:6,target:5,quality:4}));
  assert.equal(focus.suggestedMovementTarget('push-up',logs,5).target,6);assert.equal(focus.suggestedMovementTarget('push-up',logs.slice(0,1),5).target,5);assert.equal(focus.suggestedMovementTarget('push-up',logs,5,true).target,5);

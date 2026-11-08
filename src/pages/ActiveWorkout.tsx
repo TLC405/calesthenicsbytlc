@@ -1,6 +1,6 @@
 import { DifficultyBadge } from '@/components/Exercise/DifficultyBadge';
 import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
-import { MovementVideo } from '@/components/Exercise/MovementVideo';
+import { MovementTutorialButton } from '@/components/Exercise/MovementTutorialButton';
 import { MovementOverview } from '@/components/Exercise/MovementOverview';
 import { minimumTier, TRAINING_LEVELS } from '@/lib/trainingPolicy';
 import { exerciseReadinessReasons, approvedRegression } from '@/lib/trainingPolicy';
@@ -235,7 +235,7 @@ export default function ActiveWorkout() {
             </div>
             <div className="power-active-movement-title"><MovementThumbnail exercise={item.exercise}/><div><h2>{item.exercise.name}</h2><DifficultyBadge level={minimumTier(item.exercise.slug)}/></div></div>
           </div>
-          <details className="power-learn-section"><summary>Watch tutorial</summary><MovementVideo key={item.exercise.id} exercise={item.exercise}/></details>
+          <MovementTutorialButton exercise={item.exercise} label/>
           <details className="power-learn-section"><summary>How to perform this movement</summary><MovementOverview exercise={item.exercise}/></details>
         </section>
         <section className="power-elevated p-2.5 sm:p-4 space-y-3" aria-label="Log your sets">

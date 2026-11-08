@@ -1,0 +1,2048 @@
+{
+  "checkedAt": "2026-11-08T12:50:55.941005+00:00",
+  "method": "All 272 catalog mappings reviewed, with 112 unique displayed previews inspected in five contact sheets plus the eight bundled picture assets. Only positively matched preview IDs are allowed as movement pictures. Broader lessons retain separate labels. This is a thumbnail/mapping review, not video playback or coaching certification.",
+  "exercises": [
+    {
+      "slug": "dead-bug",
+      "approvedVideoIds": [
+        "GbSC02oU3To"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "dragon-flag",
+      "approvedVideoIds": [
+        "moyFIvRrS0s"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "elevated-chair-compression",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "hanging-leg-raise",
+      "approvedVideoIds": [
+        "Pr1ieGZ5atk"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "hollow-body-hold",
+      "approvedVideoIds": [
+        "LlDNef_Ztsc"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "l-sit",
+      "approvedVideoIds": [
+        "cu0fHp8HCDo",
+        "eywCpp0p7lg"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "l-sit-tuck-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "mountain-climber",
+      "approvedVideoIds": [
+        "nmwgirgXLYM"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "plank",
+      "approvedVideoIds": [
+        "ASdvN_XEl_c"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "press-hs-journey",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "0GN-b3Q4dog"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "seated-pike-lift",
+      "approvedVideoIds": [
+        "3f6tRHAsjFo"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "seated-straddle-lift",
+      "approvedVideoIds": [
+        "7MNNGqec0Dc"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "side-plank",
+      "approvedVideoIds": [
+        "K2VljzCC16g"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "toes-to-bar",
+      "approvedVideoIds": [
+        "_03pCKOv4l4"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "tuck-sit",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "cu0fHp8HCDo"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "v-up",
+      "approvedVideoIds": [
+        "iP2fjvG0g3w"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-compression-stretch",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "windshield-wiper",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "arabesque-hold",
+      "approvedVideoIds": [
+        "ACuVnmS7h9A"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "attitude-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "aLA1mUjgdeI"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "couch-stretch",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "developpe",
+      "approvedVideoIds": [
+        "0oVrVwlpXAI"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "first-position-plie",
+      "approvedVideoIds": [
+        "DrBhcopjDZQ"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "front-split",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "front-split-preparation",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "german-hang",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "grand-battement",
+      "approvedVideoIds": [
+        "CgKXn1Evj-o"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "grand-plie",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "k70uyYKlIU0"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "middle-split",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "middle-split-frog-stretch",
+      "approvedVideoIds": [
+        "IEapGjp_KAo"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pancake-good-morning",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "passe-balance",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "penche",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pike-stretch",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "port-de-bras",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "releve",
+      "approvedVideoIds": [
+        "unv8TS3JO6U"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "rond-de-jambe",
+      "approvedVideoIds": [
+        "z-fYrgfn61o"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "seated-straddle-compression-lift",
+      "approvedVideoIds": [
+        "HhdLEp2pETg"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "shoulder-bridge",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "standing-pike",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "straddle-stretch",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "tendu",
+      "approvedVideoIds": [
+        "zeSVHYSMItg"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "assisted-pistol-squat",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "bodyweight-squat",
+      "approvedVideoIds": [
+        "cB0cOX7gePg"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "bulgarian-split-squat",
+      "approvedVideoIds": [
+        "-4LVK1crLSw"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [
+        "jWD8_iBkND0"
+      ],
+      "notes": []
+    },
+    {
+      "slug": "calf-raise",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "gwLzBJYoWlI"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "cossack-squat",
+      "approvedVideoIds": [
+        "JaCbmoDqUc4"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "glute-bridge",
+      "approvedVideoIds": [
+        "8bbE64NuDTU"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "jump-squat",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "lunge",
+      "approvedVideoIds": [
+        "QOVaHwm-Q6U"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "nordic-curl",
+      "approvedVideoIds": [
+        "6NCN6kOagfY"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pistol-squat",
+      "approvedVideoIds": [
+        "2YW5b4U7d2c"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "reverse-lunge",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "shrimp-squat",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [
+        "2YW5b4U7d2c"
+      ],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "single-leg-rdl",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "sissy-squat",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "split-squat",
+      "approvedVideoIds": [
+        "qW5OGJ62ZjY"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "step-up",
+      "approvedVideoIds": [
+        "WCFCdxzFBa4"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "90-90-hip-switches",
+      "approvedVideoIds": [
+        "BMUmyW1jepU"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "cat-cow",
+      "approvedVideoIds": [
+        "kqnua4rHVVA"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "deep-squat-hold",
+      "approvedVideoIds": [
+        "0wzrgyAurT8"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Bundled illustration/photo not admitted: source or exact movement not established. Use reviewed provider previews only."
+      ]
+    },
+    {
+      "slug": "extensor-band",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "frog-stretch",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Bundled illustration/photo not admitted: source or exact movement not established. Use reviewed provider previews only."
+      ]
+    },
+    {
+      "slug": "jefferson-curl",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "nYS0R4c3qCA"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture.",
+        "Bundled illustration/photo not admitted: source or exact movement not established. Use reviewed provider previews only."
+      ]
+    },
+    {
+      "slug": "middle-split-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "needle",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pancake-stretch",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "shoulder-cars",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "shoulder-dislocate",
+      "approvedVideoIds": [
+        "vP8YmmRMz6I"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Bundled illustration/photo not admitted: source or exact movement not established. Use reviewed provider previews only."
+      ]
+    },
+    {
+      "slug": "thoracic-extension",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Bundled illustration/photo not admitted: source or exact movement not established. Use reviewed provider previews only."
+      ]
+    },
+    {
+      "slug": "thoracic-open-book",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-ankle-dorsiflexion",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "world-s-greatest-stretch",
+      "approvedVideoIds": [
+        "aiN-2yAIkec"
+      ],
+      "relatedVideoIds": [
+        "0gUTxg_fNfc"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Bundled illustration/photo not admitted: source or exact movement not established. Use reviewed provider previews only."
+      ]
+    },
+    {
+      "slug": "wrist-circles",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "mSZWSQSSEjE"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture.",
+        "Bundled illustration/photo not admitted: source or exact movement not established. Use reviewed provider previews only."
+      ]
+    },
+    {
+      "slug": "active-hang",
+      "approvedVideoIds": [
+        "HoE-C85ZlCE"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "archer-pull-up",
+      "approvedVideoIds": [
+        "_LGLKUiQH5k"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [
+        "AcBYUhgk2_s"
+      ],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "australian-row",
+      "approvedVideoIds": [
+        "Fl0UMfdEzsE"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "chin-up",
+      "approvedVideoIds": [
+        "e1YSApl-QcM"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "dead-hang",
+      "approvedVideoIds": [
+        "fq9gDvNZQ2c"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "front-lever-raise",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "AGhb8V8M758"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "muscle-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "one-arm-chin-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pull-up",
+      "approvedVideoIds": [
+        "eGo4IYlbE5g"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pullover",
+      "approvedVideoIds": [
+        "eworH_YuaOM"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-row",
+      "approvedVideoIds": [
+        "3EFH7EEorOU",
+        "VQn3aGSUorc"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "scapular-pull-up",
+      "approvedVideoIds": [
+        "-ZIpSoTRsuE",
+        "8FWdmFBUNP0"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "skin-the-cat",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "towel-hang",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "UpP-77-GeLA"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "tuck-front-lever",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "typewriter-pull-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "advanced-tuck-planche",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "archer-push-up",
+      "approvedVideoIds": [
+        "hPJvnA6Z2pg"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "band-assisted-progressions",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "decline-push-up",
+      "approvedVideoIds": [
+        "SKPab2YC8BE"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "diamond-push-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "handstand-push-up",
+      "approvedVideoIds": [
+        "tQhrk6WMcKw"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "hspu-capacity-builder",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "incline-push-up",
+      "approvedVideoIds": [
+        "0JUrOH--Kdk"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "one-arm-push-up",
+      "approvedVideoIds": [
+        "7rqykkPtg2M"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [
+        "IODxDxX7oi4"
+      ],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "parallel-bar-dip",
+      "approvedVideoIds": [
+        "85u_8mz5lBA",
+        "2z8JmcrW-As"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pike-push-up",
+      "approvedVideoIds": [
+        "DG-NcMnfZ_0"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "planche-lean",
+      "approvedVideoIds": [
+        "wKV5zVJTYBo"
+      ],
+      "relatedVideoIds": [
+        "ghNIgUG8_ZY"
+      ],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "planche-plank",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pseudo-planche-push-up",
+      "approvedVideoIds": [
+        "C-SML6xnVkI"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "push-up",
+      "approvedVideoIds": [
+        "IODxDxX7oi4"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-dip",
+      "approvedVideoIds": [
+        "RFODjZQos8E"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-push-up",
+      "approvedVideoIds": [
+        "7FRwuB1_l7U"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "straddle-planche",
+      "approvedVideoIds": [
+        "V9LWMkorWoc"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "tiger-bend-pushup",
+      "approvedVideoIds": [
+        "ozk8SOD3FCY"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "tuck-planche",
+      "approvedVideoIds": [
+        "qvWvfZuUN4k"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-push-up",
+      "approvedVideoIds": [
+        "5NPvv40gd3Q"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wide-push-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "advanced-tuck-front-lever-on-rings",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "archer-ring-row",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "assisted-ring-dip",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "assisted-ring-support-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "false-grip-ring-hang",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "TIMMk2mEPeE"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "false-grip-ring-row",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "TIMMk2mEPeE"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "feet-elevated-ring-row",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "german-hang-preparation",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "incline-ring-row",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "iron-cross-assisted-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "low-ring-muscle-up-assisted",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-assisted-deep-squat",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-assisted-pistol-squat",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-back-lever-tuck",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-biceps-curl",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-body-saw",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-bulgarian-split-squat",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-dip-negative",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-face-pull",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-fallout",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-fly-regression",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-hamstring-curl",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-knee-raise",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-l-sit-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "eywCpp0p7lg"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "ring-muscle-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "vpPjY4BtJuI"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "ring-muscle-up-transition-drill",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "vpPjY4BtJuI"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "ring-push-up-turnout",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-reverse-plank",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-scapular-depression",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-scapular-row",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-triceps-extension",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-tuck-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-turnout-support-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "skin-the-cat-preparation",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "tuck-front-lever-on-rings",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "back-lever",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "bent-arm-handstand",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "chest-to-wall-handstand",
+      "approvedVideoIds": [
+        "olA58oW-21A"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "chest-to-wall-handstand-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "clutch-flag",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "crocodile-pose",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "elbow-lever",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "elbow-stand-exit",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "elbow-stand-straddle-entry",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [
+        "FtTzceXNMPw"
+      ],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "elbow-stand-wall-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "HXVtKWV_sKY"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "false-grip-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "Xz-6EI1abKo"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "forearm-stand-line-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "forearm-stand-toe-pulls",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "cjL0-4DbpYY"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "freestanding-handstand",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [
+        "olA58oW-21A"
+      ],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "freestanding-handstand-kick-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "frog-stand",
+      "approvedVideoIds": [
+        "SrYBD4yCI84"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "front-lever",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "handstand-bail",
+      "approvedVideoIds": [
+        "nShYhQLCbgE"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "handstand-heel-pull",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "hs-shrugs",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "headstand",
+      "approvedVideoIds": [
+        "_ZTSkpBjhu0"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "human-flag",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "iron-cross",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "l-sit-to-handstand",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "maltese",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "manna",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "parallette-tuck-planche",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "full-planche",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ring-support-hold",
+      "approvedVideoIds": [
+        "9PKChU9Ozs8"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "ringmaster",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "single-arm-elbow-lever",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "stalder-press-to-hs",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "S4QLsLT2wx8"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "straddle-hs-kick-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "straddle-press-to-hs",
+      "approvedVideoIds": [
+        "-xPx6-rbcfs"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "tuck-planche-push-up-preparation",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "victorian-cross",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-handstand",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-handstand-shoulder-taps",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-pull-aways",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "bridge-pose",
+      "approvedVideoIds": [
+        "wPM8icPu6H8"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "camel-pose",
+      "approvedVideoIds": [
+        "AigVwIFvmAQ"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "chair-pose",
+      "approvedVideoIds": [
+        "ySafTekJ3Ls"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "child-s-pose",
+      "approvedVideoIds": [
+        "2MJGg-dUKh0"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "cobra-pose",
+      "approvedVideoIds": [
+        "n6jrC6WeF84"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "crow-pose",
+      "approvedVideoIds": [
+        "SrYBD4yCI84"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "dolphin-pose",
+      "approvedVideoIds": [
+        "6w4ZoSuBDCg"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "downward-dog",
+      "approvedVideoIds": [
+        "j97SSGsnCAQ"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "half-moon-pose",
+      "approvedVideoIds": [
+        "EriPRTk1ly0"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pigeon-pose",
+      "approvedVideoIds": [
+        "0RQVD6viVXo"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "tree-pose",
+      "approvedVideoIds": [
+        "yVE4XXFFO70"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "triangle-pose",
+      "approvedVideoIds": [
+        "S6gB0QHbWFE"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "warrior-i",
+      "approvedVideoIds": [
+        "k4qaVoAbeHM"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "warrior-ii",
+      "approvedVideoIds": [
+        "4Ejz7IgODlU"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "warrior-iii",
+      "approvedVideoIds": [
+        "t-VgOxS9zRQ"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wheel-pose",
+      "approvedVideoIds": [
+        "IwDHNXc_CEQ"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "band-assisted-pull-up",
+      "approvedVideoIds": [
+        "4yE-XGDWJPg"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "360-pull",
+      "approvedVideoIds": [
+        "BVw3aBFypHA"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "swimming-freestyle",
+      "approvedVideoIds": [
+        "6_vXycbD2TM"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Bundled illustration/photo not admitted: source or exact movement not established. Use reviewed provider previews only."
+      ]
+    },
+    {
+      "slug": "weighted-pull-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "9dPCJCF5pQE"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "handstand-walking",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "3EF6p9EFdZc"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "kip-to-handstand",
+      "approvedVideoIds": [
+        "_fGgJmq-QPU"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-stomach-straddle-handstand",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [
+        "q_UNtDuRwsw"
+      ],
+      "rejectedVideoIds": [],
+      "notes": [
+        "Displayed preview reviewed: wrong variation or broader lesson; not an exercise-specific picture."
+      ]
+    },
+    {
+      "slug": "bent-knee-compression-lift",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "single-leg-pike-lift",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pike-compression-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "bent-knee-straddle-lift",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "straddle-compression-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "hip-lift-setup",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "slow-frogger-toe-pull",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "straight-leg-frogger",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-press-negative",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "elevated-straddle-press",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "stalder-feet-assisted-hip-lift",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "stalder-toe-assisted-press",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "stalder-negative",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "quadruped-planche-lean",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "scapular-push-up",
+      "approvedVideoIds": [
+        "IZT_tW3G6ug"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "planche-scapular-pulse",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "band-assisted-tuck-planche",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "incline-pike-push-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "elevated-pike-push-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-hspu-negative",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "partial-rom-wall-hspu",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "one-leg-l-sit",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "v-sit-preparation",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "supported-crow-balance",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "assisted-elbow-lever",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "incline-one-arm-push-up",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-support-shrug",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "kneeling-planche-plank",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "pike-support-hold",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "wall-toe-taps",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "assisted-box-pistol-sit",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "band-assisted-iron-cross",
+      "approvedVideoIds": [
+        "kvxLvwsCmFQ"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "short-lever-iron-cross",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "feet-assisted-human-flag",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "vertical-human-flag",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "band-assisted-human-flag",
+      "approvedVideoIds": [
+        "ngUFrZGO-bQ"
+      ],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "tuck-human-flag",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "one-leg-human-flag",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    },
+    {
+      "slug": "straddle-human-flag",
+      "approvedVideoIds": [],
+      "relatedVideoIds": [],
+      "rejectedVideoIds": [],
+      "notes": []
+    }
+  ]
+}

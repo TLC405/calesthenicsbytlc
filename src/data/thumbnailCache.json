@@ -766,5 +766,40 @@
     "sha256": "f9503393480130089f97757ff65111de383d958a5637a2f4d47c3215fe289cf0",
     "source": "https://i.ytimg.com/vi/zeSVHYSMItg/hqdefault.jpg",
     "width": 480
+  },
+  "7rqykkPtg2M": {
+    "width": 480,
+    "height": 360,
+    "sha256": "878f131fa3f06b28621d8d0a47b596abd8c47f0b6649830ee842309cd92f075a",
+    "source": "https://i.ytimg.com/vi/7rqykkPtg2M/hqdefault.jpg",
+    "checkedAt": "2026-11-08T12:50:55.941005+00:00"
+  },
+  "aiN-2yAIkec": {
+    "width": 480,
+    "height": 360,
+    "sha256": "3a5556863b9004b81926df327359077f406de0e1c5096f1c45663a3e2581b473",
+    "source": "https://i.ytimg.com/vi/aiN-2yAIkec/hqdefault.jpg",
+    "checkedAt": "2026-11-08T12:50:55.941005+00:00"
+  },
+  "-4LVK1crLSw": {
+    "width": 480,
+    "height": 360,
+    "sha256": "a743bac479d4abec596f6df17182763f45918111d19fb77de567846b2531c517",
+    "source": "https://i.ytimg.com/vi/-4LVK1crLSw/hqdefault.jpg",
+    "checkedAt": "2026-11-08T12:50:55.941005+00:00"
+  },
+  "_LGLKUiQH5k": {
+    "width": 480,
+    "height": 360,
+    "sha256": "9cc58b8dbdafa449e60b7b1a90399fbac34b119b1d7bf5e80ee103ed1b9a44ae",
+    "source": "https://i.ytimg.com/vi/_LGLKUiQH5k/hqdefault.jpg",
+    "checkedAt": "2026-11-08T12:50:55.941005+00:00"
+  },
+  "IZT_tW3G6ug": {
+    "width": 480,
+    "height": 360,
+    "sha256": "abba69ac7e16b62533df0881a45192e8e3ac6ca51789719caa9a4920d8bccaf6",
+    "source": "https://i.ytimg.com/vi/IZT_tW3G6ug/hqdefault.jpg",
+    "checkedAt": "2026-11-08T12:50:55.941005+00:00"
   }
 }

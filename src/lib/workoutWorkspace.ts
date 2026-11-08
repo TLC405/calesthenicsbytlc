@@ -30,8 +30,8 @@ export function workoutBlockers(items:SkillWorkoutItem[],profile:SkillTrainingPr
  return [...new Set([...items.flatMap(i=>trainingBlockers(i.exercise.slug,profile,true)),...(recent?[`You noted discomfort during ${exerciseBySlug.get(recent.nodeId)?.name||'related practice'} in the last 48 hours. Review that before loading this progression again.`]:[])])];
 }
 
-export function workspaceMovements(path:SkillPath,all=false){
- const families=path.id==='rings'?SKILL_PATHS.filter(p=>p.id==='rings'||p.id==='ring-muscle-up'||p.group==='Rings'):path.id==='straight-arm'?SKILL_PATHS.filter(p=>['straight-arm','planche','straddle-press','stalder','l-sit','front-lever','back-lever','ring-straight-arm'].includes(p.id)):[path];
+export function workspaceMovements(path:SkillPath,all=false,scope:'family'|'related'='related'){
+ const families=scope==='family'?[path]:path.id==='rings'?SKILL_PATHS.filter(p=>p.id==='rings'||p.id==='ring-muscle-up'||p.group==='Rings'):path.id==='straight-arm'?SKILL_PATHS.filter(p=>['straight-arm','planche','straddle-press','stalder','l-sit','front-lever','back-lever','ring-straight-arm'].includes(p.id)):[path];
  const slugs=all?[...exerciseBySlug.keys()]:families.flatMap(p=>[...p.slugs,...(p.accessories||[])]);
  return [...new Set(slugs.map(canonicalSlug))].flatMap(slug=>exerciseBySlug.get(slug)?[exerciseBySlug.get(slug)!]:[]).sort((a,b)=>minimumTier(a.slug)-minimumTier(b.slug));
 }
