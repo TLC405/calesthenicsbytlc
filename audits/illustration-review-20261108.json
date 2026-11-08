@@ -1,0 +1,1271 @@
+[
+  {
+    "slug": "advanced-tuck-front-lever-on-rings",
+    "asset": "/movement-illustrations/advanced-tuck-front-lever-on-rings.webp",
+    "sha256": "326a6a9aa113e140fd593d495e6552d0e32d8d3ca04983150a716cc2d926e2e2",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "advanced-tuck-planche",
+    "asset": "/movement-illustrations/advanced-tuck-planche.webp",
+    "sha256": "297998181c4892fb3696cd502ac30107eaace88e361295f75fd117b677f88b48",
+    "width": 960,
+    "height": 720,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "archer-ring-row",
+    "asset": "/movement-illustrations/archer-ring-row.webp",
+    "sha256": "8d6912b9eec5a9a5de75b50881d9411b7af009a8e2a387ee7e4d45201a670a3e",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "assisted-box-pistol-sit",
+    "asset": "/movement-illustrations/assisted-box-pistol-sit.webp",
+    "sha256": "5a33ac18ba20363d38adb9a642f1c079b47d5eb56d5c2fdcd734a0f97f239185",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "assisted-elbow-lever",
+    "asset": "/movement-illustrations/assisted-elbow-lever.webp",
+    "sha256": "10ae25eb19dc9a458668e0655a2afb50ef623542baf378ed1f408f6ff5daec4b",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "assisted-pistol-squat",
+    "asset": "/movement-illustrations/assisted-pistol-squat.webp",
+    "sha256": "0ce5f8a0437f286976f22d41eb86d931d3adb1d75e787d3b0c52c4a9da4b2123",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "assisted-ring-dip",
+    "asset": "/movement-illustrations/assisted-ring-dip.webp",
+    "sha256": "2e33da5733d081a404ead5a608cfe43c46479d5a1a32df975c5b55e42711ad24",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "assisted-ring-support-hold",
+    "asset": "/movement-illustrations/assisted-ring-support-hold.webp",
+    "sha256": "a21ca33fd4c78ace7cd81679b66ba0c821aef640a8e045398456cdf28833ed90",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "attitude-hold",
+    "asset": "/movement-illustrations/attitude-hold.webp",
+    "sha256": "547dddd7aecf67b4b69862806014f55f69cc273ce416fe88781f7359594dc164",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "band-assisted-progressions",
+    "asset": "/movement-illustrations/band-assisted-progressions.webp",
+    "sha256": "6d6fa4268adc94ce15924c9d21cf2be5fa237dbc7b6df181d4482c34330f6aca",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "band-assisted-tuck-planche",
+    "asset": "/movement-illustrations/band-assisted-tuck-planche.webp",
+    "sha256": "805d923d45c7dad51da2d196f4e4234aa8debc4683ac006beef781f21f0c3a12",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "bent-arm-handstand",
+    "asset": "/movement-illustrations/bent-arm-handstand.webp",
+    "sha256": "6a5c07b64eea9fb6a9fad2657d3281014d22fd8f32bc00eeaa9a46ca36acb64b",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "bent-knee-compression-lift",
+    "asset": "/movement-illustrations/bent-knee-compression-lift.webp",
+    "sha256": "965cf3a80f30af346e35ea74a573df3e411accf5a75cb866db09d4106d84c440",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "bent-knee-straddle-lift",
+    "asset": "/movement-illustrations/bent-knee-straddle-lift.webp",
+    "sha256": "0af24a36175a2709812a7a9fdc3edf070bcd573244ef80e2ec15af1765628d5c",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "calf-raise",
+    "asset": "/movement-illustrations/calf-raise.webp",
+    "sha256": "9bf85a095a291abdd3ec129b7d138bdda492b8481d85f7b0d9c268e3a1e61eb0",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "chest-to-wall-handstand-hold",
+    "asset": "/movement-illustrations/chest-to-wall-handstand-hold.webp",
+    "sha256": "7053b08910a68b49dcf5941a467aea98434e3a160e32d239a2b32da29c3825db",
+    "width": 640,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "clutch-flag",
+    "asset": "/movement-illustrations/clutch-flag.webp",
+    "sha256": "cab0692f96183f204f0ce4c62059206fc3fbacc4a137a33b8fdda2c609000d04",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "couch-stretch",
+    "asset": "/movement-illustrations/couch-stretch.webp",
+    "sha256": "7162de7d5b7d18b13882752e66758e5296f768108f656b26ca79790af4896aec",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "crocodile-pose",
+    "asset": "/movement-illustrations/crocodile-pose.webp",
+    "sha256": "f7bb8f9837f98f66915169807f95c4dc1b7e25809a09f4d2e4e6c38dbd0f6daa",
+    "width": 960,
+    "height": 320,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "diamond-push-up",
+    "asset": "/movement-illustrations/diamond-push-up.webp",
+    "sha256": "b13dd0832cb2da99d0ea1a58c55a1b225b6c60474f30f0b589427aa7d0c4edb5",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "elbow-lever",
+    "asset": "/movement-illustrations/elbow-lever.webp",
+    "sha256": "861afeb51fd500e0d5fc3d526b812b03e5cb93d34362a50de374741e821192aa",
+    "width": 960,
+    "height": 320,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "elbow-stand-exit",
+    "asset": "/movement-illustrations/elbow-stand-exit.webp",
+    "sha256": "b148a35067d024833393932a0ca4a16fd63c63dda33218e1723f2c5d06ad0025",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "elbow-stand-straddle-entry",
+    "asset": "/movement-illustrations/elbow-stand-straddle-entry.webp",
+    "sha256": "d8519f09483617df8a58b838ebe1583fdf23bb4d0f64f6c6c77b2d4c4e449261",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "elbow-stand-wall-hold",
+    "asset": "/movement-illustrations/elbow-stand-wall-hold.webp",
+    "sha256": "5e16f244c6c13c6fc2e3371eec8e31a763b7dc533b03e16ea5d1ea3d36c6f4cf",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "elevated-chair-compression",
+    "asset": "/movement-illustrations/elevated-chair-compression.webp",
+    "sha256": "6d5ba21fd8e671edcbbd20ad068066e676cbbc5689f2c9574bedff67cd832065",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "elevated-pike-push-up",
+    "asset": "/movement-illustrations/elevated-pike-push-up.webp",
+    "sha256": "08adeeb04937294c02b1006cfaaa8268efc61b50bdccdf3f6259103b24ae6c3d",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "elevated-straddle-press",
+    "asset": "/movement-illustrations/elevated-straddle-press.webp",
+    "sha256": "6da905158240f4cec8ef9963b3b151c8a0d26e8a5f48685b3f18706b755b3722",
+    "width": 877,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "extensor-band",
+    "asset": "/movement-illustrations/extensor-band.webp",
+    "sha256": "22f042701e5f6557936769562628ae1237be9470d19c46398c56e0a63fea8e67",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "false-grip-hold",
+    "asset": "/movement-illustrations/false-grip-hold.webp",
+    "sha256": "6a2d16276850aa79e7996b717530a8acc4193e81cd3ebfdd2a0076ca94d04c91",
+    "width": 640,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "false-grip-ring-hang",
+    "asset": "/movement-illustrations/false-grip-ring-hang.webp",
+    "sha256": "8e818d239a1fa2fccfbc638c432fd53c8f7ac992311a7f6b8dbb6c8493d10cf0",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "false-grip-ring-row",
+    "asset": "/movement-illustrations/false-grip-ring-row.webp",
+    "sha256": "510560230093de33b761cc79959aaf2b6afd99363d424ca54c7c557cb045d687",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "feet-assisted-human-flag",
+    "asset": "/movement-illustrations/feet-assisted-human-flag.webp",
+    "sha256": "b19c24cdb2912024a9a2f93e57d49da9a3834b9829a0c34d0b3dc636496b0c13",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "feet-elevated-ring-row",
+    "asset": "/movement-illustrations/feet-elevated-ring-row.webp",
+    "sha256": "584b954df07eace9efe8691541c1d1cebbf028a9b95cfbaea3b214b575fbb623",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "forearm-stand-line-hold",
+    "asset": "/movement-illustrations/forearm-stand-line-hold.webp",
+    "sha256": "454c86ea18935acd7d040db0b4efb067ba5d18fd03f637fe3f3a69f4e4440b17",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "forearm-stand-toe-pulls",
+    "asset": "/movement-illustrations/forearm-stand-toe-pulls.webp",
+    "sha256": "f1c8434e793f05315b4f0286170cdd85ba7a0e3d19127d90aff107f7a9dc555a",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "freestanding-handstand-kick-up",
+    "asset": "/movement-illustrations/freestanding-handstand-kick-up.webp",
+    "sha256": "7be305fb30c376dd6b1e690de0e3fa9a1a8f49158ae5b1c1fa00758d1bcadd61",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "frog-stretch",
+    "asset": "/movement-illustrations/frog-stretch.webp",
+    "sha256": "08c6156de33ae8da4b9dcce83324d8f869760a76085ab8ded24a3e8be80f3016",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "front-lever-raise",
+    "asset": "/movement-illustrations/front-lever-raise.webp",
+    "sha256": "865a1d002e637e0c3b39a533564ab3d697e9dda5f998734ae6743bf9dead7d3a",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "front-split-preparation",
+    "asset": "/movement-illustrations/front-split-preparation.webp",
+    "sha256": "92943263c7319577d137f153cbfbe78cc2dcd4acf531980c57273b2d2da781c5",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "german-hang",
+    "asset": "/movement-illustrations/german-hang.webp",
+    "sha256": "3c5586d569936f3d7b72d9830331427ecc4bd4a9063fcc2afa10ccccdb33e45b",
+    "width": 640,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "german-hang-preparation",
+    "asset": "/movement-illustrations/german-hang-preparation.webp",
+    "sha256": "e66dd67825d593422e30f7424bfd619eb66fb7fb0127b9d58f93b276a3247b95",
+    "width": 877,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "grand-plie",
+    "asset": "/movement-illustrations/grand-plie.webp",
+    "sha256": "20f58533c8bc34d055506f6ac31d954ac154f595b0c586fff51999f8a7166187",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "handstand-heel-pull",
+    "asset": "/movement-illustrations/handstand-heel-pull.webp",
+    "sha256": "3f880f401da4beb45fc643d2b83b81a6bc5f50bb42e57e2e5319bda13c150bf7",
+    "width": 640,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "handstand-walking",
+    "asset": "/movement-illustrations/handstand-walking.webp",
+    "sha256": "08fa7c5d02781c3107f0da6578787beb2d3f8bb881735ffd1b3cbf5c36550110",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "hip-lift-setup",
+    "asset": "/movement-illustrations/hip-lift-setup.webp",
+    "sha256": "490da9372d0f97cef68314acd02440351e38436db82184f53a3d22eafab0839d",
+    "width": 960,
+    "height": 640,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "hs-shrugs",
+    "asset": "/movement-illustrations/hs-shrugs.webp",
+    "sha256": "c3978ca3803ce1bd9e4bf6e30604eccde09ba1b94ff6bfab14b4c280ef38d8ab",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "hspu-capacity-builder",
+    "asset": "/movement-illustrations/hspu-capacity-builder.webp",
+    "sha256": "3c125695002a4100c712545b66eb2652969984a58102e31edc6fb76aaa93d899",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "incline-one-arm-push-up",
+    "asset": "/movement-illustrations/incline-one-arm-push-up.webp",
+    "sha256": "f65cb36be6f25dfd87cf9a4a48e0a6e03315fcf5e217a3a7399f1c71dc92f6cb",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "incline-pike-push-up",
+    "asset": "/movement-illustrations/incline-pike-push-up.webp",
+    "sha256": "a9a48f03081b5f20ea0979be063a1088f0ec490412a65d36690a4a5369732c67",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "iron-cross-assisted-hold",
+    "asset": "/movement-illustrations/iron-cross-assisted-hold.webp",
+    "sha256": "b151d7ba135710d4472ccbd077ce82af044c896737f4159fcae664ac1754b51c",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "jefferson-curl",
+    "asset": "/movement-illustrations/jefferson-curl.webp",
+    "sha256": "1c8e15406331f39af714e15b31f25c1ed18cff26d0fb4c34f0657cc39f14fcaf",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "kneeling-planche-plank",
+    "asset": "/movement-illustrations/kneeling-planche-plank.webp",
+    "sha256": "fa1f5078e4e574ceea792a06e7de692c484d7dc9bfac0939aa882562740edc55",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "l-sit-to-handstand",
+    "asset": "/movement-illustrations/l-sit-to-handstand.webp",
+    "sha256": "23de31512e6ba316fd53107f99b1682cfa5e8484b15fe36667841d1762756610",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "l-sit-tuck-hold",
+    "asset": "/movement-illustrations/l-sit-tuck-hold.webp",
+    "sha256": "2bb9725fb3b13e9d10ce34aa5a94bba8ffc6aecb5759c06422ba5ae3a0e9cebd",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "low-ring-muscle-up-assisted",
+    "asset": "/movement-illustrations/low-ring-muscle-up-assisted.webp",
+    "sha256": "a778323f434d38de63145e6515d3b0734ecf4bf742e71768ed33754b1896cddf",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "manna",
+    "asset": "/movement-illustrations/manna.webp",
+    "sha256": "0b5f99a6e9858d0dc5d4932702a297e597ae3ee80d6790f8ee2e55445d9e43bc",
+    "width": 960,
+    "height": 640,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "middle-split",
+    "asset": "/movement-illustrations/middle-split.webp",
+    "sha256": "ab837e3f4f1831661da25b7dbe0e551fbc2fdbdcdca98f4c9a679c7e05efad49",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "middle-split-hold",
+    "asset": "/movement-illustrations/middle-split-hold.webp",
+    "sha256": "45229fec16fab96f56c1bed1dd27d0ec4261e333d4cadc79e19c14c71ecbaf29",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "needle",
+    "asset": "/movement-illustrations/needle.webp",
+    "sha256": "1f5502b967729af60c58ef6ee59cdac5e66b46c731f63a44520b96184e5b2f3d",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "one-arm-chin-up",
+    "asset": "/movement-illustrations/one-arm-chin-up.webp",
+    "sha256": "e9932313ba50493ec8091d6c55623c61f6a71ff6edc125644f6f8a42cd4d5896",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "one-leg-human-flag",
+    "asset": "/movement-illustrations/one-leg-human-flag.webp",
+    "sha256": "f3106df16f7bf8561c30466b12340c2cd195710e71573e4dff2f116621411531",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "one-leg-l-sit",
+    "asset": "/movement-illustrations/one-leg-l-sit.webp",
+    "sha256": "34cba76929db9baee43127f284459b23441bd9c00276224e887be76b24b15e67",
+    "width": 877,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "pancake-good-morning",
+    "asset": "/movement-illustrations/pancake-good-morning.webp",
+    "sha256": "7471ce966b002806d31823fdf21900b2d6e53558a827b0ab87d25a55305b230a",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "parallette-tuck-planche",
+    "asset": "/movement-illustrations/parallette-tuck-planche.webp",
+    "sha256": "6f49fab0e1e824c204eb9edc5316096afc44ef48d27d7d98e1e6ec81c00f8210",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "partial-rom-wall-hspu",
+    "asset": "/movement-illustrations/partial-rom-wall-hspu.webp",
+    "sha256": "8f0c4594144ce73f33868a9dcb4bd20d3ad1b9d2c11e40810c5038081d7651d4",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "passe-balance",
+    "asset": "/movement-illustrations/passe-balance.webp",
+    "sha256": "6799fabfa593dad9c8e6fd4baa2a71928ab0207ebb19c37fa47764b1fa63f754",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "pike-compression-hold",
+    "asset": "/movement-illustrations/pike-compression-hold.webp",
+    "sha256": "9fc722a301a58e762ed82fd1aa0d245cea1e793bbaec7c0fb03ebd6822381929",
+    "width": 960,
+    "height": 640,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "pike-stretch",
+    "asset": "/movement-illustrations/pike-stretch.webp",
+    "sha256": "6953c7d1b0843e54e85672c3b561e011e770b96d7c9ab7fc4a5257d48ed225b0",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "pike-support-hold",
+    "asset": "/movement-illustrations/pike-support-hold.webp",
+    "sha256": "94911a5094008d6faab1968827cf83d135de8d585af72315ddd7e856b046ea6d",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "planche-plank",
+    "asset": "/movement-illustrations/planche-plank.webp",
+    "sha256": "1c1215caf4a4a366953085223ebbcb6570d42fb16fcd0b8d07ff6319aea3eacd",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "planche-scapular-pulse",
+    "asset": "/movement-illustrations/planche-scapular-pulse.webp",
+    "sha256": "8f2a2c3ba0ae238382eaee8d319815261d0b0069fd3b69222202fead61c6badb",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "port-de-bras",
+    "asset": "/movement-illustrations/port-de-bras.webp",
+    "sha256": "a09f902d6d96bb1352a0039204116e7a4204b4a5263352e18b7fc0f4ebbbcab3",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "press-hs-journey",
+    "asset": "/movement-illustrations/press-hs-journey.webp",
+    "sha256": "883bbb7ee13dc74483580772e4d7f00283b29702a9e4946f8d5b5b9d136e7e9c",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "quadruped-planche-lean",
+    "asset": "/movement-illustrations/quadruped-planche-lean.webp",
+    "sha256": "3250cddf81fb929b0f20d52957b8db89b659443bdef1882bbdc08fb44945c4bb",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "reverse-lunge",
+    "asset": "/movement-illustrations/reverse-lunge.webp",
+    "sha256": "00edc3c651f690556013f31e78efb1946d1a60fa116fc2f7d70ecd9d1645a8a8",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-assisted-deep-squat",
+    "asset": "/movement-illustrations/ring-assisted-deep-squat.webp",
+    "sha256": "2768033498ae4c8bf0262ca7ffd7bd4d94ffccaa31e8f730ce04494a89692390",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-assisted-pistol-squat",
+    "asset": "/movement-illustrations/ring-assisted-pistol-squat.webp",
+    "sha256": "6756e504d9b73eb8222334bf587b4128552cdc3075643ccbe7b719a5d421e790",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-back-lever-tuck",
+    "asset": "/movement-illustrations/ring-back-lever-tuck.webp",
+    "sha256": "171f2abdcfbb72cdfd179c5c82073cfbe78c4ca362e2983931e80b0bdef31c25",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-biceps-curl",
+    "asset": "/movement-illustrations/ring-biceps-curl.webp",
+    "sha256": "534811f0812593820a2e88a09dcbca8b78c9089f1960844303d05083085c1a4a",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-body-saw",
+    "asset": "/movement-illustrations/ring-body-saw.webp",
+    "sha256": "e72a3518a7f6967f7133ad03c752250143e47fb58fd27fc9d059b8d995fb2e5c",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-dip-negative",
+    "asset": "/movement-illustrations/ring-dip-negative.webp",
+    "sha256": "90b17c94c42a9efda0c448754281a55c673520882bcdc04707ec65881e3339fb",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-face-pull",
+    "asset": "/movement-illustrations/ring-face-pull.webp",
+    "sha256": "8deb5b8c4ac66e1c911118333b125f1ef9266793588bc2682a65148795d22116",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-fallout",
+    "asset": "/movement-illustrations/ring-fallout.webp",
+    "sha256": "512f01f3963cc3e71cc259594d567ce209813f8de95fee5a91cd819a108462d2",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-fly-regression",
+    "asset": "/movement-illustrations/ring-fly-regression.webp",
+    "sha256": "117ea549a8d20f0a100a3e8510d69fc627fc7f76eb7c5f2c755fcec5b83f580e",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-hamstring-curl",
+    "asset": "/movement-illustrations/ring-hamstring-curl.webp",
+    "sha256": "97ed3f0c0dbb3068a1272d3bcdb56c58c699be21bc396a82130455572bde11c5",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-knee-raise",
+    "asset": "/movement-illustrations/ring-knee-raise.webp",
+    "sha256": "39ee29cdf0c5ed3165ab7c72c879ce506622561c3d9cbc0570fa435366e088d6",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-l-sit-hold",
+    "asset": "/movement-illustrations/ring-l-sit-hold.webp",
+    "sha256": "be0a874acf6f43920549e38414fa935eb89599bc32970a2f4135d4634033c0b8",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-muscle-up",
+    "asset": "/movement-illustrations/ring-muscle-up.webp",
+    "sha256": "be4b98ded6a4c523d5610ae0d9c4d863b1a9ee15f7a8f675fd57632e72677188",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-muscle-up-transition-drill",
+    "asset": "/movement-illustrations/ring-muscle-up-transition-drill.webp",
+    "sha256": "b92c52f6c75f820c3a509a49494468f8e02e00587d47189663877d593166e5f2",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-push-up-turnout",
+    "asset": "/movement-illustrations/ring-push-up-turnout.webp",
+    "sha256": "5ec58acb0348b27630ab89c0e1ec9944fb1b7ab7e982f7930e8c5788a9ad264a",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-reverse-plank",
+    "asset": "/movement-illustrations/ring-reverse-plank.webp",
+    "sha256": "078211ce9cd0651b8236617c175968b86b0dbe3832f75aed0af860ceeb3828fd",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-scapular-depression",
+    "asset": "/movement-illustrations/ring-scapular-depression.webp",
+    "sha256": "0b2a63d7cbdad2bdf279f30d4e74f2f27238e11c39a68e03e1d34e78970ff233",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-scapular-row",
+    "asset": "/movement-illustrations/ring-scapular-row.webp",
+    "sha256": "23718452a0ceb0c440e3f81d67f541e58329aa962d9277a767d25103373b3a5a",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-triceps-extension",
+    "asset": "/movement-illustrations/ring-triceps-extension.webp",
+    "sha256": "31a99d1416423edd9e1398561f5a3228a092653c89e76870d7575ef60aa004a7",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-tuck-hold",
+    "asset": "/movement-illustrations/ring-tuck-hold.webp",
+    "sha256": "2997e81a99b015bd970e7ce9bea360181a798e4ffae6466fb2025c90a02b654b",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ring-turnout-support-hold",
+    "asset": "/movement-illustrations/ring-turnout-support-hold.webp",
+    "sha256": "a48a4ae41cf38f8d1331f3776ca8c2839b7eb483cc705e2f668f91fbbfd8ee8a",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "ringmaster",
+    "asset": "/movement-illustrations/ringmaster.webp",
+    "sha256": "e9b5d2bb307751810d7dd6e45239bf02ad63a6df06c41c4d2c7cd357d899b769",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "short-lever-iron-cross",
+    "asset": "/movement-illustrations/short-lever-iron-cross.webp",
+    "sha256": "58c7cdd0ba6a40010f679bd41e611cccf91319ff146b2e69a27134593214f814",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "shoulder-bridge",
+    "asset": "/movement-illustrations/shoulder-bridge.webp",
+    "sha256": "ce03ccfe507bafe5470c0d6f5e89570155a83b6aeb4e8b687ea1edd4b49fd72f",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "shoulder-cars",
+    "asset": "/movement-illustrations/shoulder-cars.webp",
+    "sha256": "c730e89235e99a9afdb10adebd305e0fa79726a8d504fea2afceb47da0af57e9",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "shrimp-squat",
+    "asset": "/movement-illustrations/shrimp-squat.webp",
+    "sha256": "0305a55e4ee8ce799a09d75aa4c319abe1f5f36dfa3a013c17a613a0a80bd68d",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "single-arm-elbow-lever",
+    "asset": "/movement-illustrations/single-arm-elbow-lever.webp",
+    "sha256": "b502e57faaa4079edff22030356a1b702a71a893ee834294da0f0f7aa7c797f0",
+    "width": 960,
+    "height": 320,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "single-leg-pike-lift",
+    "asset": "/movement-illustrations/single-leg-pike-lift.webp",
+    "sha256": "9904bd68aed60d5d04d7440a87bfa73b9f84afd69cb2d0f8cc6e7f498b262787",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "single-leg-rdl",
+    "asset": "/movement-illustrations/single-leg-rdl.webp",
+    "sha256": "3e5c78401cb8a67d1a74680141e1538e7d5554e95c2e4801a2402b01a8ee6b76",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "sissy-squat",
+    "asset": "/movement-illustrations/sissy-squat.webp",
+    "sha256": "4a7aeb1501ba7dc0e8d92ced84d6254b5f7676f4f1fdbab22e79a10f82e803ff",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "skin-the-cat",
+    "asset": "/movement-illustrations/skin-the-cat.webp",
+    "sha256": "fc3342328a7059aa9602a9770dc944279e7abb756582e8392536b751b8307b5e",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "skin-the-cat-preparation",
+    "asset": "/movement-illustrations/skin-the-cat-preparation.webp",
+    "sha256": "16614c7bd385d09a744ae5a85892f180ec6ce14e1e89794376838a15f7a5e6ab",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "slow-frogger-toe-pull",
+    "asset": "/movement-illustrations/slow-frogger-toe-pull.webp",
+    "sha256": "bc168301a1cca59ec4e2731104350e9c396190ac2ec2b2b9b8fbdaac9fedf6f9",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "stalder-feet-assisted-hip-lift",
+    "asset": "/movement-illustrations/stalder-feet-assisted-hip-lift.webp",
+    "sha256": "d228453cc624cca8d39559548f3cf702764300dd6db6b027a9d4fcdeccb846cf",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "stalder-negative",
+    "asset": "/movement-illustrations/stalder-negative.webp",
+    "sha256": "51fd56fb8118a8788918774f3af64b9a948d20c638463ee8807c60582db1d8ed",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "stalder-press-to-hs",
+    "asset": "/movement-illustrations/stalder-press-to-hs.webp",
+    "sha256": "47f9de77575f9a45463198452aa97bd8bc3dec84037ebd31f0c25a9f024c61a8",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "stalder-toe-assisted-press",
+    "asset": "/movement-illustrations/stalder-toe-assisted-press.webp",
+    "sha256": "b76f45ec35edb2866d04e8aa0b7bd21ef82435c11271dbc3907ae34ae92e8800",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "standing-pike",
+    "asset": "/movement-illustrations/standing-pike.webp",
+    "sha256": "7faee5de15b33b5c09eb33398ae880990811485576ce5bf2a68e8e891a3cd3dc",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "straddle-compression-hold",
+    "asset": "/movement-illustrations/straddle-compression-hold.webp",
+    "sha256": "1de90a96c3525d3eee6e77e4fc72ad35159f9960b27ae40ce2cda9b1f562cfd7",
+    "width": 960,
+    "height": 640,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "straddle-hs-kick-up",
+    "asset": "/movement-illustrations/straddle-hs-kick-up.webp",
+    "sha256": "829c8693214bf63a277fbad6fb22efdbbff17c237f05b77c561c1ee13bb2cb26",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "straddle-human-flag",
+    "asset": "/movement-illustrations/straddle-human-flag.webp",
+    "sha256": "ab6f75ae37933f8d86c02eb1e50632d048da1997172777f7863a98f16d3bcfa7",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "straight-leg-frogger",
+    "asset": "/movement-illustrations/straight-leg-frogger.webp",
+    "sha256": "f194530b63c9b89b9645d3bb5a9180c5f8c00116824b2caeb7cc56f85a50f139",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "supported-crow-balance",
+    "asset": "/movement-illustrations/supported-crow-balance.webp",
+    "sha256": "b7e11291db66f1c35e0180179070209551f841c0ba59d8e80dcab2440157206f",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "thoracic-extension",
+    "asset": "/movement-illustrations/thoracic-extension.webp",
+    "sha256": "1c5b151f6fbcad4fa6913f578627b984acebd04b6a430f0e173adbd24bbcf0b9",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "thoracic-open-book",
+    "asset": "/movement-illustrations/thoracic-open-book.webp",
+    "sha256": "296a4df34072151172707f5f3bbdcd8fcd4d1bef6697b3bdb77523e28b9dcb67",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "towel-hang",
+    "asset": "/movement-illustrations/towel-hang.webp",
+    "sha256": "6931718646ae1a028b208e4f87314e2e014763af3cbdf993102f1b0c1946e780",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "tuck-front-lever",
+    "asset": "/movement-illustrations/tuck-front-lever.webp",
+    "sha256": "d00f0b07561330aa4a5183d92f62b5a5ed9137ea22349a60eeca606d31e497bb",
+    "width": 960,
+    "height": 720,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "tuck-front-lever-on-rings",
+    "asset": "/movement-illustrations/tuck-front-lever-on-rings.webp",
+    "sha256": "a6bc16132e83540452251d4a63b4637b672cce693a5283ac1ee43c12b07fda7e",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "tuck-human-flag",
+    "asset": "/movement-illustrations/tuck-human-flag.webp",
+    "sha256": "948389ea3c6dc145c833457c2b75798121ee2e0e7d81fe5697c9550daa4dc01a",
+    "width": 960,
+    "height": 720,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "tuck-planche-push-up-preparation",
+    "asset": "/movement-illustrations/tuck-planche-push-up-preparation.webp",
+    "sha256": "f6c6856d3492ab34bba5ec36b93fa39aae182e18cac46a600832f4194801e15d",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "tuck-sit",
+    "asset": "/movement-illustrations/tuck-sit.webp",
+    "sha256": "032ce2b582500ca034949658734851cb6f046e2b3f6709d22f420803a30de247",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "typewriter-pull-up",
+    "asset": "/movement-illustrations/typewriter-pull-up.webp",
+    "sha256": "763449f6c5acf5dbfa6288fdf51247954bac352ab99f2a9d4f2038682616ab01",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "v-sit-preparation",
+    "asset": "/movement-illustrations/v-sit-preparation.webp",
+    "sha256": "708b0d744a178b8710e72eccf6ae9775411622d47a483ae291d720f31242d6bd",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "vertical-human-flag",
+    "asset": "/movement-illustrations/vertical-human-flag.webp",
+    "sha256": "988b6c8296768b1f39ed154c9dbdf21c99191956006397a1d31853549cba26e6",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "victorian-cross",
+    "asset": "/movement-illustrations/victorian-cross.webp",
+    "sha256": "6d0a0349fe00c338fc978c503d20c4b1f46929177446a1876a9bbe63f1a9884e",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "wall-ankle-dorsiflexion",
+    "asset": "/movement-illustrations/wall-ankle-dorsiflexion.webp",
+    "sha256": "25cd22c05572f75ffa61753d0bab6d383f5a512208ba63dd843e61c37021bc33",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "wall-compression-stretch",
+    "asset": "/movement-illustrations/wall-compression-stretch.webp",
+    "sha256": "1a4437633e2bdc6f62fc6c21108b241811d0ae1e05354dda026d475c62edef82",
+    "width": 877,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  },
+  {
+    "slug": "wall-handstand",
+    "asset": "/movement-illustrations/wall-handstand.webp",
+    "sha256": "567523fbe64a2e05c5c33a8104b0ddffed099656c85bd07b97e08e2f2e783173",
+    "width": 960,
+    "height": 720,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "wall-handstand-shoulder-taps",
+    "asset": "/movement-illustrations/wall-handstand-shoulder-taps.webp",
+    "sha256": "3aaa39177c590972b53af18c21d079d2b4f4d642f337bf8b6759fd127f4d6054",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "wall-hspu-negative",
+    "asset": "/movement-illustrations/wall-hspu-negative.webp",
+    "sha256": "612d417bbc4580440e3f719fdc3cb1dd0fbee0eb941d1ccdcb683050ee8250a9",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "wall-press-negative",
+    "asset": "/movement-illustrations/wall-press-negative.webp",
+    "sha256": "946e182b92ca5d9302ca2269a4fa37b22ed4216197cb4fa777129bdf8c0c42cc",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "wall-pull-aways",
+    "asset": "/movement-illustrations/wall-pull-aways.webp",
+    "sha256": "2f9e93dd2f2d8374d3de5d760d33c948c3ff60a022baa4c232c2370455efe8ff",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "wall-stomach-straddle-handstand",
+    "asset": "/movement-illustrations/wall-stomach-straddle-handstand.webp",
+    "sha256": "1e4538becab9d280a1b3f4ffdcde0276b25d1180ac391f34fe5072215bde8ea0",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "wall-support-shrug",
+    "asset": "/movement-illustrations/wall-support-shrug.webp",
+    "sha256": "71309d1df4a8484e1bb7e7cbeffe0d981350946891ed3f0f5b24bac39faa3732",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "wall-toe-taps",
+    "asset": "/movement-illustrations/wall-toe-taps.webp",
+    "sha256": "cd02f72df5e07d1d51cad62559fccb8643eb0ac2a4635ebcaf86f9964ed56afa",
+    "width": 960,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": false
+  },
+  {
+    "slug": "windshield-wiper",
+    "asset": "/movement-illustrations/windshield-wiper.webp",
+    "sha256": "c884f7fd59b54eec8ae5bcffe9d696264fd41687c464d0e0c488c44c74e890c6",
+    "width": 904,
+    "height": 960,
+    "visualReview": "Movement/variation illustration match; hands, feet and support checked",
+    "corrected": true
+  }
+]
