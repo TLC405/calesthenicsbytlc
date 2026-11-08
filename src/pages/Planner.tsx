@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ExercisePickerModal } from '@/components/Workout/ExercisePickerModal';
 import { SetTracker } from '@/components/Workout/SetTracker';
+import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
+import { getYouTubeVideoId } from '@/components/Exercise/VideoPlayer';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { toast } from 'sonner';
@@ -21,6 +23,7 @@ interface Exercise {
   youtube_url?: string | null; equipment?: string[];
   cues?: any; image_url?: string | null; difficulty_level?: number;
   sets_reps?: string | null; description?: string | null;
+  chain_group?: string | null; video_verified?: boolean | null;
   instagram_url?: string | null;
 }
 
@@ -70,11 +73,6 @@ const suggestedSets = (exercise: Exercise) => exerciseIsHold(exercise.name)
   ? [{ reps: 0, seconds: 15 }, { reps: 0, seconds: 15 }, { reps: 0, seconds: 15 }]
   : [{ reps: 8 }, { reps: 8 }, { reps: 8 }];
 const difficultyName = (level?: number | null) => difficultyNames[level || 0] || 'Not rated';
-const exerciseVideoId = (url?: string | null) => {
-  if (!url) return null;
-  const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([-\w]{11})/);
-  return m?.[1] || null;
-};
 
 
 export default function Planner() {
@@ -92,6 +90,7 @@ export default function Planner() {
   const [coachLoading, setCoachLoading] = useState(false);
   const [templateDifficulty, setTemplateDifficulty] = useState('all');
   const [openExerciseDetails, setOpenExerciseDetails] = useState<Record<string, boolean>>({});
+  const [previewTarget, setPreviewTarget] = useState<{ sectionKey: string; index: number; exercise: Exercise } | null>(null);
 
   const runSuperCoach = async (prompt: string) => {
     if (!prompt.trim()) return;
@@ -152,30 +151,47 @@ export default function Planner() {
     }
   };
 
-  // Consume AI Coach handoff (sessionStorage)
+  // Import only canonical catalog records; do not accept fake exercise IDs from handoffs.
   useEffect(() => {
     const raw = sessionStorage.getItem('powa-builder-import');
     if (!raw) return;
-    try {
-      const parsed = JSON.parse(raw) as { name?: string; items: { name: string; section: string; exercise?: Exercise }[] };
-      if (parsed.name) setWorkoutName(parsed.name);
-      setSections(prev => prev.map(s => {
-        const items = parsed.items.filter(i => i.section === s.key);
-        return {
-          ...s,
-          open: s.key === 'workout' || items.length > 0,
-          entries: [
-            ...s.entries,
-            ...items.map(i => ({
-              exercise: i.exercise || ({ id: i.name, name: i.name, slug: i.name, category: '', primary_muscles: [] } as Exercise),
-              sets: [{ reps: 10 }],
-            })),
-          ],
-        };
-      }));
-      sessionStorage.removeItem('powa-builder-import');
-      toast.success('Imported from AI Coach');
-    } catch {/* noop */}
+    let active = true;
+    const importExercises = async () => {
+      try {
+        const parsed: unknown = JSON.parse(raw);
+        if (!parsed || typeof parsed !== 'object' || !('items' in parsed)) throw new Error('Invalid handoff');
+        const payload = parsed as { name?: string; items?: { name?: string; section?: string; exercise?: Partial<Exercise> }[] };
+        if (!Array.isArray(payload.items)) throw new Error('Invalid exercise list');
+        const { data, error } = await supabase.from('exercises').select('*');
+        if (error) throw error;
+        if (!active) return;
+        const catalog = (data || []) as Exercise[];
+        const verified = payload.items.map(item => {
+          const source = item.exercise;
+          const match = catalog.find(ex =>
+            (!!source?.id && ex.id === source.id) ||
+            (!!source?.slug && ex.slug === source.slug) ||
+            (!!item.name && ex.name.toLowerCase() === item.name.toLowerCase()));
+          return match ? { section: item.section || 'workout', exercise: match } : null;
+        }).filter((item): item is { section: string; exercise: Exercise } => item !== null);
+        if (!verified.length) { toast.error('No matching catalog exercises to import'); return; }
+        if (payload.name) setWorkoutName(payload.name);
+        setSections(prev => prev.map(section => {
+          const items = verified.filter(item => item.section === section.key);
+          return { ...section, open: section.key === 'workout' || items.length > 0,
+            entries: [...section.entries, ...items.map(item => ({
+              exercise: item.exercise, sets: suggestedSets(item.exercise),
+              unit: exerciseIsHold(item.exercise.name) ? 'seconds' as const : 'reps' as const,
+            }))] };
+        }));
+        sessionStorage.removeItem('powa-builder-import');
+        toast.success(verified.length + ' exercises imported');
+      } catch {
+        toast.error('Could not import exercises. Choose them from the library.');
+      }
+    };
+    void importExercises();
+    return () => { active = false; };
   }, []);
 
   const loadTemplate = async (tpl: typeof QUICK_TEMPLATES[number]) => {
@@ -184,9 +200,10 @@ export default function Planner() {
       if (error) throw error;
       const library = (data || []) as Exercise[];
       const selected = library.filter(ex => {
-        const n = ex.name.toLowerCase();
-        const categoryMatch = tpl.categories.includes(ex.category);
-        const termMatch = tpl.terms.some(term => n.includes(term));
+        const name = ex.name.toLowerCase();
+        const category = ex.category.toLowerCase();
+        const categoryMatch = tpl.categories.some(c => c.toLowerCase() === category);
+        const termMatch = tpl.terms.some(term => name.includes(term));
         return (categoryMatch || termMatch) &&
           (templateDifficulty === 'all' || Number(ex.difficulty_level) === Number(templateDifficulty));
       });
@@ -194,18 +211,34 @@ export default function Planner() {
         toast.error('No matching exercises at that difficulty. Try another difficulty or template.');
         return;
       }
-      // Deterministic selection based on real library entries. Do not invent or randomly assign exercises.
-      const priority = tpl.label === 'Full'
-        ? ['Push', 'Pull', 'Legs', 'Core', 'Push', 'Pull']
-        : [];
+      // Prefer varied movement families and intermediate loading when the user has not selected a level.
+      const byDifficulty = [...selected].sort((a, b) => {
+        const target = templateDifficulty === 'all' ? 2 : Number(templateDifficulty);
+        return Math.abs((a.difficulty_level || 2) - target) -
+          Math.abs((b.difficulty_level || 2) - target) || a.name.localeCompare(b.name);
+      });
+      const priority = tpl.label === 'Full' ? ['Push', 'Pull', 'Legs', 'Core'] : [];
       const chosen: Exercise[] = [];
+      const usedFamilies = new Set<string>();
+      const add = (exercise?: Exercise) => {
+        if (!exercise || chosen.some(e => e.id === exercise.id)) return;
+        const family = exercise.chain_group || exercise.slug || exercise.name;
+        if (usedFamilies.has(family)) return;
+        chosen.push(exercise);
+        usedFamilies.add(family);
+      };
       for (const category of priority) {
-        const match = selected.find(e => e.category === category && !chosen.some(c => c.id === e.id));
-        if (match) chosen.push(match);
+        add(byDifficulty.find(e => e.category.toLowerCase() === category.toLowerCase() && !usedFamilies.has(e.chain_group || e.slug || e.name)));
       }
-      for (const ex of selected) {
+      for (const exercise of byDifficulty) {
         if (chosen.length >= 6) break;
-        if (!chosen.some(e => e.id === ex.id)) chosen.push(ex);
+        add(exercise);
+      }
+      if (chosen.length < 3) {
+        for (const exercise of byDifficulty) {
+          if (chosen.length >= Math.min(6, byDifficulty.length)) break;
+          if (!chosen.some(e => e.id === exercise.id)) chosen.push(exercise);
+        }
       }
       setWorkoutName(tpl.tag);
       setSections(prev => prev.map(section => section.key === 'workout'
@@ -426,13 +459,15 @@ export default function Planner() {
                   {section.entries.map((entry, idx) => {
                     const key = section.key + ':' + idx;
                     const open = !!openExerciseDetails[key];
-                    const videoId = exerciseVideoId(entry.exercise.youtube_url);
+                    const videoId = getYouTubeVideoId(entry.exercise.youtube_url);
                     const thumbnail = entry.exercise.image_url || (videoId ? 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg' : null);
                     return <div key={key} className="rounded-xl border border-border/70 bg-card overflow-hidden">
                       <div className="flex items-center gap-3 p-2.5">
-                        <div className="h-12 w-14 shrink-0 bg-secondary rounded-lg overflow-hidden flex items-center justify-center">
+                        <button type="button" className="h-12 w-14 shrink-0 bg-secondary rounded-lg overflow-hidden flex items-center justify-center"
+                          onClick={() => setPreviewTarget({ sectionKey: section.key, index: idx, exercise: entry.exercise })}
+                          aria-label={'Preview or change ' + entry.exercise.name}>
                           {thumbnail ? <img src={thumbnail} alt="" className="w-full h-full object-cover" loading="lazy"/> : <Dumbbell className="w-5 h-5 text-muted-foreground"/>}
-                        </div>
+                        </button>
                         <button type="button" onClick={() => setOpenExerciseDetails(v => ({ ...v, [key]: !v[key] }))}
                           className="min-w-0 flex-1 text-left py-1" aria-expanded={open}>
                           <span className="block text-sm font-semibold truncate">{entry.exercise.name}</span>
@@ -493,6 +528,26 @@ export default function Planner() {
       </main>
 
       {/* Exercise Picker */}
+      <ExerciseDetailModal
+        exercise={previewTarget?.exercise || null}
+        open={!!previewTarget}
+        onClose={() => setPreviewTarget(null)}
+        actionLabel="Use this variation"
+        onAddToWorkout={(replacement) => {
+          if (!previewTarget) return;
+          const { sectionKey, index } = previewTarget;
+          setSections(prev => prev.map(section => section.key !== sectionKey ? section : {
+            ...section,
+            entries: section.entries.map((entry, idx) => idx !== index ? entry : {
+              exercise: replacement as Exercise,
+              unit: exerciseIsHold(replacement.name) ? 'seconds' as const : 'reps' as const,
+              sets: suggestedSets(replacement as Exercise),
+            }),
+          }));
+          setPreviewTarget(null);
+          toast.success('Exercise variation updated');
+        }}
+      />
       <ExercisePickerModal
         open={!!pickerSection}
         onClose={() => setPickerSection(null)}
