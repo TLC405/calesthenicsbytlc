@@ -36,7 +36,7 @@ interface ActiveExercise {
 }
 interface WorkoutSet { progressId?: string; reps: number; seconds?: number; weight?: number; rpe?: number; done: boolean }
 interface SessionEntry { restSeconds?: number; section: string; phaseLabel?: string; exercise: ActiveExercise; sets: WorkoutSet[] }
-interface SessionDraft { name: string; notes: string; entries: SessionEntry[]; index: number; restEnd: number | null; startedAt: number }
+interface SessionDraft { returnTo?:'/'|'/planner'; name: string; notes: string; entries: SessionEntry[]; index: number; restEnd: number | null; startedAt: number }
 
 function readDraft(): SessionDraft | null {
   try {
@@ -50,7 +50,7 @@ function readDraft(): SessionDraft | null {
         sets: entry.sets.map((set, setIndex) => ({ progressId: set.progressId || `${value.startedAt}:${entry.exercise.slug}:${setIndex}`, reps: Math.max(0, Number(set.reps) || 0), seconds: typeof set.seconds === 'number' ? Math.max(0, set.seconds) : undefined, weight: set.weight, rpe: set.rpe, done: Boolean(set.done) }))
       }));
     if (!entries.length) return null;
-    return { name: value.name || 'Workout', notes: value.notes || '', entries,
+    return { returnTo:value.returnTo==='/'?'/':'/planner', name: value.name || 'Workout', notes: value.notes || '', entries,
       index: Math.max(0, Math.min(entries.length - 1, Number(value.index) || 0)),
       restEnd: typeof value.restEnd === 'number' ? value.restEnd : null,
       startedAt: Number(value.startedAt) || Date.now() };
@@ -145,7 +145,7 @@ export default function ActiveWorkout() {
   }
   function leave() {
     toast.info('Workout saved as a draft on this device.');
-    navigate('/planner');
+    navigate(draft?.returnTo||'/planner');
   }
   async function finishWorkout() {
     if (!draft || saving) return;
@@ -186,7 +186,7 @@ export default function ActiveWorkout() {
       localStorage.removeItem(ACTIVE_WORKOUT_KEY);
       setDraft(null);
       toast.success(`Workout finished · ${doneCount} sets recorded!`);
-      navigate('/planner');
+      navigate(draft?.returnTo||'/planner');
     } catch (error) {
       toast.error(error instanceof Error ? error.message : 'Could not save workout. Draft preserved.');
     } finally { setSaving(false); }
