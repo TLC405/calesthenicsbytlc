@@ -28,7 +28,7 @@ function LevelBadge({slug}:{slug:string}){const tier=minimumTier(slug);return <s
 export default function FocusPlanner({home=false}:{home?:boolean}){const {user,loading}=useAuth();if(loading)return <main className="power-simple-page">Opening your workout builder…</main>;return <WorkoutWorkspace key={user?.id||'guest'} owner={user?.id||'guest'} home={home}/>;}
 function WorkoutWorkspace({owner,home}:{owner:string;home:boolean}){
  const navigate=useNavigate();const [params]=useSearchParams();
- const [prefs,setPrefs]=useState<FocusPreferences>(()=>{const saved=readFocusPreferences(owner);const requested=params.get('goal');return {...saved,goalId:getSkillPath(requested||'')?requested!:getSkillPath(saved.goalId)?saved.goalId:'straight-arm'};});
+ const [prefs,setPrefs]=useState<FocusPreferences>(()=>{const saved=readFocusPreferences(owner);const requested=params.get('goal');return {...saved,focus:'auto',goalId:getSkillPath(requested||'')?requested!:getSkillPath(saved.goalId)?saved.goalId:'straight-arm'};});
  const [profile,setProfile]=useState(readTrainingProfile);const [attempts,setAttempts]=useState(()=>deviceSkillProgress.read(owner));
  const [items,setItems]=useState(()=>readWorkoutDraft(owner));const [tab,setTab]=useState<'movements'|'workout'>('movements');
  const [category,setCategory]=useState('All');const [query,setQuery]=useState('');const [level,setLevel]=useState('all');const [addTo,setAddTo]=useState<WorkoutPhase>('skill');
@@ -36,7 +36,7 @@ function WorkoutWorkspace({owner,home}:{owner:string;home:boolean}){
  const [selectedDay,setSelectedDay]=useState(localDay);const [scheduled,setScheduled]=useState(()=>readScheduledPractice(owner));
  const path=getSkillPath(prefs.goalId)!;const selectedPlan=scheduled.find(p=>p.date===selectedDay);const today=localDay();const dayLabel=calendarDate(selectedDay).toLocaleDateString(undefined,{month:'short',day:'numeric'});
  const targetSlug=params.get('node')||readProgressionGoal(owner,path.id);
- const plan=useMemo(()=>buildFocusPlan(prefs,profile,attempts,{targetSlug,automaticVolume:true}),[prefs,profile,attempts,targetSlug]);
+ const plan=useMemo(()=>buildFocusPlan({...prefs,goalId:allMovements?'auto':prefs.goalId},profile,attempts,{targetSlug:allMovements?undefined:targetSlug,automaticVolume:true}),[prefs,profile,attempts,targetSlug,allMovements]);
  const loggedDays=[...new Set(attempts.map(a=>localDay(new Date(a.at))))];
  const choices=SKILL_PATHS.filter(p=>matchesWorkoutCategory(p,category));
  const candidates=useMemo(()=>workspaceMovements(path,allMovements),[allMovements,path]);
@@ -50,7 +50,7 @@ function WorkoutWorkspace({owner,home}:{owner:string;home:boolean}){
  function choose(id:string){setCategory('All');setPrefs(p=>({...p,goalId:id}));setAllMovements(false);setExpanded(null);setQuery('');setLevel('all');setTab('movements');}
  function updateProfile(next:SkillTrainingProfile){setProfile(next);writeTrainingProfile(next);setComfortable(false);}
  function add(slug:string,phase=addTo){const next=addWorkoutMovement(items,slug,phase,profile);if(next===items){toast.info(trainingBlockers(slug,profile,true)[0]||'Already added, or your workout has 12 movements.');return;}setItems(next);toast.success('Added to your workout');}
- function suggest(){if(plan.reviewRequired){toast.info(plainTrainingText(plan.reviewNote));return;}if(items.length&&!window.confirm('Replace your current draft with a suggested workout?'))return;setItems(cleanWorkoutItems(plan.items));switchTab('workout');}
+ function suggest(){if(plan.reviewRequired){toast.info(plainTrainingText(plan.reviewNote));return;}if(items.length&&!window.confirm('Replace your current draft with a suggested workout?'))return;if(allMovements)choose(plan.goal.id);setItems(cleanWorkoutItems(plan.items));switchTab('workout');}
  function save(){if(!items.length||blockers.length)return;try{saveScheduledPractice(owner,{date:selectedDay,goalId:path.id,title:`${presentWorkout(path).title} · ${items.length} movements`,items:orderedWorkout(items),savedAt:new Date().toISOString()});toast.success(`Workout saved for ${dayLabel}`);}catch{toast.error('Could not save this workout.');}}
  function start(){if(!items.length||blockers.length||!comfortable||selectedDay!==today)return;if(localStorage.getItem('power-active-workout-v2')&&!window.confirm('Replace your unfinished workout? Cancel preserves it.'))return;const primary=items.find(i=>path.slugs.includes(i.exercise.slug));if(primary)writeProgressionFocus(owner,{pathId:path.id,slug:primary.exercise.slug});localStorage.setItem('power-active-workout-v2',JSON.stringify({returnTo:'/',name:'My POWER workout',notes:`Built around ${presentWorkout(path).title}`,entries:toSessionEntries(orderedWorkout(items)),index:0,restEnd:null,startedAt:Date.now()}));navigate('/workout');}
  function addCoach(exercises:SkillExercise[]){let next=items;for(const exercise of exercises)next=addWorkoutMovement(next,exercise.slug,'support',profile);if(next===items){toast.info('Already included, or preparation is needed.');return;}setItems(next);switchTab('workout');}
