@@ -9,6 +9,8 @@ import { AddExerciseModal } from '@/components/Exercise/AddExerciseModal';
 import { SkillTreeView } from '@/components/Progression/SkillTreeView';
 import { useAuth } from '@/providers/AuthProvider';
 import { toast } from 'sonner';
+import { movementGoals, matchesMovementGoal } from '@/lib/movementGoals';
+import { getYouTubeVideoId } from '@/components/Exercise/VideoPlayer';
 
 interface Exercise {
   id: string; name: string; slug: string; category: string;
@@ -16,20 +18,10 @@ interface Exercise {
   cues: unknown; youtube_url?: string | null; instagram_url?: string | null;
   image_url?: string | null; difficulty_level?: number | null; sets_reps?: string | null;
   description?: string | null; chain_group?: string | null; chain_order?: number | null;
+  video_verified?: boolean | null;
 }
 const difficultyLabels = ['Not rated', 'Beginner', 'Novice', 'Intermediate', 'Advanced', 'Elite'];
-const getVideoId = (url?: string | null) => {
-  if (!url) return null;
-  try {
-    const parsed = new URL(url);
-    if (parsed.hostname === 'youtu.be') return /^[-\w]{11}$/.test(parsed.pathname.slice(1)) ? parsed.pathname.slice(1) : null;
-    if (['www.youtube.com', 'youtube.com', 'm.youtube.com', 'www.youtube-nocookie.com'].includes(parsed.hostname)) {
-      const id = parsed.searchParams.get('v') || (parsed.pathname.startsWith('/embed/') ? parsed.pathname.split('/')[2] : null);
-      return id && /^[-\w]{11}$/.test(id) ? id : null;
-    }
-  } catch { /* The original URL is missing or malformed. */ }
-  return null;
-};
+
 
 export default function Library() {
   const navigate = useNavigate();
@@ -40,6 +32,7 @@ export default function Library() {
   const [searchTerm, setSearchTerm] = useState((location.state as { search?: string } | null)?.search || '');
   const [category, setCategory] = useState<string | null>((location.state as { category?: string } | null)?.category || null);
   const [difficulty, setDifficulty] = useState('all');
+  const [goal, setGoal] = useState((location.state as { goal?: string } | null)?.goal || 'all');
   const [view, setView] = useState<'list' | 'paths'>('list');
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -53,9 +46,10 @@ export default function Library() {
   };
   useEffect(() => { void loadExercises(); }, []);
   useEffect(() => { 
-    const state = location.state as { search?: string; category?: string } | null;
+    const state = location.state as { search?: string; category?: string; goal?: string } | null;
     if (state?.search !== undefined) { setSearchTerm(state.search); setCategory(null); setView('list'); }
     if (state?.category) setCategory(state.category);
+    if (state?.goal) { setGoal(state.goal); setSearchTerm(''); setCategory(null); setView('list'); }
   }, [location.state]);
 
   const categories = useMemo(() => [...new Set(exercises.map(e => e.category).filter(Boolean))].sort(), [exercises]);
@@ -65,9 +59,10 @@ export default function Library() {
       const searchMatch = !q || e.name.toLowerCase().includes(q) || e.category?.toLowerCase().includes(q) ||
         (e.primary_muscles || []).some(m => m.toLowerCase().includes(q));
       return searchMatch && (!category || e.category === category) &&
+        (goal === 'all' || matchesMovementGoal(e, goal)) &&
         (difficulty === 'all' || Number(e.difficulty_level) === Number(difficulty));
     });
-  }, [exercises, searchTerm, category, difficulty]);
+  }, [exercises, searchTerm, category, difficulty, goal]);
 
   const addToBuilder = (exercise: Exercise) => {
     try {
@@ -116,6 +111,14 @@ export default function Library() {
               {difficultyLabels.slice(1).map((label, i) => <option key={i} value={i + 1}>{label}</option>)}
             </select>}
           </div>
+          {view === 'list' && <div className="flex items-center gap-2">
+            <label htmlFor="movement-goal" className="text-xs text-muted-foreground shrink-0">Training focus</label>
+            <select id="movement-goal" className="power-difficulty-select max-w-none flex-1" value={goal}
+              onChange={e => { setGoal(e.target.value); setVisibleCount(40); }}>
+              <option value="all">All movements</option>
+              {movementGoals.map(item => <option key={item.id} value={item.id}>{item.label}</option>)}
+            </select>
+          </div>}
           {view === 'list' && <div className="power-category-scroll" role="group" aria-label="Exercise categories">
             <button type="button" className={!category ? 'power-category-chip selected' : 'power-category-chip'} onClick={() => { setCategory(null); setVisibleCount(40); }}>All</button>
             {categories.map(c => <button type="button" key={c} className={category === c ? 'power-category-chip selected' : 'power-category-chip'}
@@ -141,7 +144,7 @@ export default function Library() {
               <Search size={23}/><p>No matching exercises. Try another term or difficulty.</p>
             </div> : <div className="power-exercise-list">
               {filtered.slice(0, visibleCount).map(exercise => {
-                const id = getVideoId(exercise.youtube_url);
+                const id = getYouTubeVideoId(exercise.youtube_url);
                 const thumbnail = exercise.image_url || (id ? 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg' : null);
                 return <div className="power-exercise-row" key={exercise.id}>
                   <button type="button" className="power-exercise-open" onClick={() => setSelectedExercise(exercise)} aria-label={'View ' + exercise.name + ' and tutorial'}>
