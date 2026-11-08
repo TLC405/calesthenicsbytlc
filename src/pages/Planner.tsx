@@ -218,7 +218,7 @@ export default function Planner() {
   const addExercise = (sectionKey: string, exercise: Exercise) => {
     setSections(prev => prev.map(s =>
       s.key === sectionKey
-        ? { ...s, entries: [...s.entries, { exercise, sets: suggestedSets(exercise), unit: exerciseIsHold(exercise.name) ? 'seconds' : 'reps' }] }
+        ? { ...s, entries: [...s.entries, { exercise, sets: suggestedSets(exercise), unit: exerciseIsHold(exercise.name) ? 'seconds' as const : 'reps' as const }] }
         : s
     ));
   };
