@@ -19,7 +19,7 @@ try{
  const cache=JSON.parse(await readFile('src/data/thumbnailCache.json','utf8'));for(const [id,entry] of Object.entries(cache)){const bytes=await readFile(`public/movement-previews/${id}.jpg`);assert.equal(createHash('sha256').update(bytes).digest('hex'),entry.sha256);assert(entry.width>120&&entry.height>90);}
  const catalog=JSON.parse(await readFile('src/data/publicExerciseCatalog.json','utf8'));
  for(const slug of ['chair-pose','dolphin-pose','camel-pose','warrior-ii','half-moon-pose'])assert(media.movementThumbnailSources(catalog.find(e=>e.slug===slug)).some(s=>s.scope==='clip'));
- for(const e of catalog.filter(e=>e.category==='Rings'))assert(media.movementThumbnailSources(e).length>0,`Missing ring preview ${e.slug}`);
+ for(const e of catalog.filter(e=>e.category==='Rings'))assert(media.movementThumbnailSources(e).every(s=>s.scope==='clip'||s.scope==='photo'),`Borrowed ring preview ${e.slug}`);
  for(const slug of ['wrist-circles','frog-stretch','deep-squat-hold'])assert(media.movementThumbnailSources(catalog.find(e=>e.slug===slug)).some(s=>s.src.startsWith('/movement-photos/')));
- console.log('PASS: installed-app Home launch without overriding browser links or in-app navigation, preserved installation identity, 24 safe ring/straight-arm/yoga warm-up cases, all Rings preview coverage, five newly sourced yoga previews and local photo fallbacks.');
+ console.log('PASS: installed-app Home launch without overriding browser links or in-app navigation, preserved installation identity, 24 safe ring/straight-arm/yoga warm-up cases, no borrowed Ring-family pictures, five newly sourced yoga previews and local photo fallbacks.');
 }finally{await rm(dir,{recursive:true,force:true});}

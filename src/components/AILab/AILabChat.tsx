@@ -106,8 +106,7 @@ export function AILabChat({ onAddToNotepad }: AILabChatProps) {
     if (exercise.youtube_url) {
       setVideoPopup({ url: exercise.youtube_url, title: exercise.name });
     } else {
-      const searchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(exercise.youtube_search + ' tutorial calisthenics')}`;
-      window.open(searchUrl, '_blank', 'noopener,noreferrer');
+      toast({title:'Tutorial not matched yet',description:'Use Watch to paste a specific video or live-stream link and play it inside POWER.'});
     }
   };
 

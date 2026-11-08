@@ -1,5 +1,6 @@
 /** Public creator sources matched by title/embed; these are not human technique certifications. */
 export const MOVEMENT_MEDIA:Record<string,{id:string;creator:string;title:string;source:string;scope?:'clip'|'guide'}>={
+ 'ring-row':{id:'xhlReCpAE9k',creator:'CrossFit',title:'The Ring Row',source:'https://www.youtube.com/watch?v=xhlReCpAE9k'},
  'hollow-body-hold':{id:'LlDNef_Ztsc',creator:'GMB Fitness',title:'Hollow Body Hold Progression',source:'https://gmb.io/hollow-body/'},
  'wheel-pose':{id:'IwDHNXc_CEQ',creator:'Esther Ekhart',title:'How to get into wheel pose',source:'https://www.youtube.com/watch?v=IwDHNXc_CEQ'},
  'split-squat':{id:'qW5OGJ62ZjY',creator:'Hinge Health',title:'How to Do a Split Squat',source:'https://www.hingehealth.com/resources/articles/split-squat/'},

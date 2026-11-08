@@ -8,3 +8,5 @@
 Selected POWER icon: concept 4, the colorful TLC sketchbook sticker (red T, blue L, golden-yellow C with a small red heart inside the C). Keep all app-icon surfaces consistent with this selected artwork.
 
 Requested and selected by Lord TLC on November 7, 2026.
+
+Media preferences: make primary movement previews full card width on phones. Do not reuse a general coaching-video or category image as the exercise picture. Keep tutorials, playlists and supported live streams embedded inside POWER; do not add custom outbound Watch buttons or external tutorial-search pop-ups. Preserve provider-required player controls and attribution.

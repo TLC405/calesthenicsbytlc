@@ -102,7 +102,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
                       onSelectExercise(exercise);
                       onClose();
                     }}
-                    className="w-full flex min-h-14 items-center gap-3 p-2.5 rounded-xl power-elevated hover:bg-primary/5 transition-colors text-left"
+                    className="power-picker-movement w-full flex min-h-14 items-center gap-3 p-2.5 rounded-xl power-elevated hover:bg-primary/5 transition-colors text-left"
                   >
                     <MovementThumbnail exercise={exercise} className="is-small"/>
                     <div className="flex-1 min-w-0">

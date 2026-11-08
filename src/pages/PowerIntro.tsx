@@ -138,7 +138,7 @@ export default function Index() {
               {playerVisible && <button type="button" className="power-entry-music-stop" onClick={dismissPlayer}>Stop / Close</button>}
             </div>
             <p className="power-entry-music-note">The original commercial song is not copied or hidden as background audio. YouTube requires visible playback; the integrated player appears right here.</p>
-            <p className="power-entry-music-source">Playback courtesy of <a href={`https://www.youtube.com/watch?v=${POWER_ANTHEM_VIDEO_ID}`} target="_blank" rel="noopener noreferrer">the official YouTube source</a>.</p>
+            <p className="power-entry-music-source">Official SNAP! video · plays here in POWER.</p>
           </div>
           <div className="power-entry-inline-youtube" id="power-inline-youtube">
             {!playerVisible && <div className="power-entry-audio-placeholder"><Video size={30}/><span>IN-APP VIDEO PLAYER</span><small>Press Play Anthem to start</small></div>}

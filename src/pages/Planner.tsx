@@ -316,10 +316,10 @@ function PlannerEditor({owner}:{owner:string}) {
               {section.open && (
                 <div className="px-4 pb-4 space-y-2">
                   {section.entries.map((entry, idx) => (
-                    <div key={idx} className="rounded-xl border border-border/40 bg-accent/10 p-3">
+                    <div key={idx} className="power-custom-movement rounded-xl border border-border/40 bg-accent/10 p-3">
+                      <MovementThumbnail exercise={entry.exercise}/>
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex min-w-0 items-center gap-2">
-                          <MovementThumbnail exercise={entry.exercise} className="is-small"/>
                           <p className="text-xs font-bold break-words">{entry.exercise.name}</p>
                         </div>
                         <button onClick={() => removeEntry(section.key, idx)} aria-label={`Remove ${entry.exercise.name}`} className="h-11 w-11 shrink-0 grid place-items-center text-muted-foreground hover:text-destructive transition-colors">

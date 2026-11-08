@@ -1,3 +1,4 @@
+import { EmbeddedMedia } from './EmbeddedMedia';
 import { TRAINING_LEVELS } from '@/lib/trainingPolicy';
 import { tutorialState } from '@/lib/mediaAudit';
 import { InlineYouTubeFrame } from './InlineYouTubeFrame';
@@ -293,26 +294,8 @@ export function VideoPlayer({
     );
   }
 
-  // Instagram
-  if (instagramUrl) {
-    return (
-      <div className={cn("relative w-full overflow-hidden bg-background", className)}>
-        {!clean&&<HeaderBar title="" isLive={false} onMinimize={null} />}
-        <div className="aspect-video flex flex-col items-center justify-center gap-4 p-6 border-x-2 border-border">
-          <TlcPlayIcon size="lg" />
-          <p className="text-muted-foreground text-xs font-mono uppercase tracking-wider">External Tutorial</p>
-          <a
-            href={instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 py-2 border-2 border-foreground text-xs font-mono font-bold uppercase tracking-wider hover:bg-foreground hover:text-background transition-colors"
-          >
-            Watch Tutorial →
-          </a>
-        </div>
-      </div>
-    );
-  }
+  // Public Instagram posts and reels use an in-page provider embed.
+  if(instagramUrl)return <EmbeddedMedia url={instagramUrl} title={title}/>;
 
   return null;
 }

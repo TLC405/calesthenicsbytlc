@@ -1,3 +1,6 @@
+import { parseEmbeddedMedia } from '@/lib/embeddedMedia';
+import { getYouTubeId } from '@/lib/youtube';
+import { loadYouTubeApi } from '@/lib/youtubeApi';
 import { createContext, useContext, useEffect, useRef, useState, useCallback, ReactNode } from 'react';
 import { useAuth } from './AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
@@ -41,15 +44,8 @@ export function useMusic() {
 export const POWER_ANTHEM_VIDEO_ID = 'nm6DO_7px1I'; // SNAP! - The Power (official YouTube source)
 const DEFAULT_VIDEO = POWER_ANTHEM_VIDEO_ID;
 
-function extractPlaylistId(url: string): string | null {
-  const match = url.match(/[?&]list=([^&#]+)/);
-  return match ? match[1] : null;
-}
-
-function extractVideoId(url: string): string | null {
-  const match = url.match(/(?:youtu\.be\/|v=|embed\/)([^&#?]{11})/);
-  return match ? match[1] : null;
-}
+function extractPlaylistId(url:string):string|null{const source=parseEmbeddedMedia(url);return source?.provider==='youtube'?source.playlistId||null:null;}
+function extractVideoId(url:string):string|null{return getYouTubeId(url);}
 
 // Declare YT types
 declare global {
@@ -59,30 +55,7 @@ declare global {
   }
 }
 
-let apiLoaded = false;
-let apiReady = false;
-const apiReadyCallbacks: (() => void)[] = [];
-
-function loadYouTubeAPI(): Promise<void> {
-  return new Promise((resolve) => {
-    if (apiReady) { resolve(); return; }
-    apiReadyCallbacks.push(resolve);
-    if (apiLoaded) return; // script already loading
-    apiLoaded = true;
-    
-    const prev = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
-      apiReady = true;
-      prev?.();
-      apiReadyCallbacks.forEach(cb => cb());
-      apiReadyCallbacks.length = 0;
-    };
-    
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    document.head.appendChild(tag);
-  });
-}
+const loadYouTubeAPI=()=>loadYouTubeApi().then(()=>{});
 
 export function MusicProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();

@@ -1,3 +1,4 @@
+import { parseEmbeddedMedia } from '@/lib/embeddedMedia';
 import { useEffect, useState } from 'react';
 import { useMusic } from '@/providers/MusicProvider';
 import { Volume2, VolumeX, Play, Pause, Music, ChevronDown, SkipBack, SkipForward, Link2, Check, X, Plus, Search, Trash2, ListMusic } from 'lucide-react';
@@ -28,7 +29,7 @@ export function MusicControl() {
   if (hiddenPaths.includes(location.pathname)) return null;
 
   const isYtMusic = /music\.youtube\.com/i.test(playlistUrl);
-  const isYtUrl = (u: string) => /(youtu\.be|youtube\.com|music\.youtube\.com)/i.test(u);
+  const isYtUrl = (u: string) => parseEmbeddedMedia(u)?.provider==='youtube';
 
   const saveUrl = () => {
     const trimmed = draftUrl.trim();
