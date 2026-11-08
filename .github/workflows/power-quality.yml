@@ -1,0 +1,29 @@
+name: POWER quality gates
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feature/power-premium-no-gamification-2026]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: TypeScript check
+        run: npx tsc --noEmit -p tsconfig.app.json
+      - name: Production build
+        run: npm run build
+        env:
+          VITE_SUPABASE_URL: https://example.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: build-only-placeholder
+      - name: Lint (report existing baseline)
+        run: npm run lint
+        continue-on-error: true
