@@ -26,7 +26,8 @@ interface Exercise {
 
 interface WorkoutEntry {
   exercise: Exercise;
-  sets: { reps: number; weight?: number }[];
+  sets: { reps: number; weight?: number; seconds?: number }[];
+  unit?: 'reps' | 'seconds';
 }
 
 interface WorkoutSection {
@@ -46,11 +47,35 @@ const SECTION_DEFAULTS: Omit<WorkoutSection, 'entries' | 'open'>[] = [
 ];
 
 const QUICK_TEMPLATES = [
-  { label: 'Push', tag: 'Push Day', categories: ['Push'] },
-  { label: 'Pull', tag: 'Pull Day', categories: ['Pull'] },
-  { label: 'Legs', tag: 'Leg Day', categories: ['Legs'] },
-  { label: 'Full', tag: 'Full Body', categories: ['Push', 'Pull', 'Legs'] },
+  { label: 'Push', tag: 'Push Strength', categories: ['Push'], terms: [] },
+  { label: 'Pull', tag: 'Pull Strength', categories: ['Pull'], terms: [] },
+  { label: 'Legs', tag: 'Leg Strength', categories: ['Legs'], terms: [] },
+  { label: 'Full', tag: 'Full Body', categories: ['Push', 'Pull', 'Legs', 'Core'], terms: [] },
+  { label: 'Planche', tag: 'Planche', categories: [], terms: ['planche'] },
+  { label: 'Handstand', tag: 'Handstands', categories: [], terms: ['handstand'] },
+  { label: 'Grip', tag: 'Grip Strength', categories: [], terms: ['grip', 'hang', 'pinch', 'farmer', 'wrist', 'finger', 'towel'] },
+  { label: 'Rings', tag: 'Rings', categories: ['Rings'], terms: ['ring', 'iron cross', 'false grip'] },
+  { label: 'Flag', tag: 'Human Flag', categories: [], terms: ['flag'] },
+  { label: 'Levers', tag: 'Levers', categories: [], terms: ['lever'] },
+  { label: 'Calves', tag: 'Calves & Tibialis', categories: [], terms: ['calf', 'calves', 'tibial'] },
+  { label: 'Mobility', tag: 'Mobility', categories: ['Mobility', 'Flexibility', 'Yoga'], terms: [] },
 ];
+const difficultyNames = ['All difficulties', 'Beginner', 'Novice', 'Intermediate', 'Advanced', 'Elite'];
+const exerciseIsHold = (name: string) => {
+  const n = name.toLowerCase();
+  return !/(push.?up|pull.?up|press|dip|row|squat|raise|curl|rep)/.test(n) &&
+    /(hold|hang|planche|lever|flag|handstand|l.?sit|v.?sit|plank|support|cross|lean)/.test(n);
+};
+const suggestedSets = (exercise: Exercise) => exerciseIsHold(exercise.name)
+  ? [{ reps: 0, seconds: 15 }, { reps: 0, seconds: 15 }, { reps: 0, seconds: 15 }]
+  : [{ reps: 8 }, { reps: 8 }, { reps: 8 }];
+const difficultyName = (level?: number | null) => difficultyNames[level || 0] || 'Not rated';
+const exerciseVideoId = (url?: string | null) => {
+  if (!url) return null;
+  const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([-\w]{11})/);
+  return m?.[1] || null;
+};
+
 
 export default function Planner() {
   const { user } = useAuth();
@@ -65,6 +90,8 @@ export default function Planner() {
   const [coachOpen, setCoachOpen] = useState(false);
   const [coachPrompt, setCoachPrompt] = useState('');
   const [coachLoading, setCoachLoading] = useState(false);
+  const [templateDifficulty, setTemplateDifficulty] = useState('all');
+  const [openExerciseDetails, setOpenExerciseDetails] = useState<Record<string, boolean>>({});
 
   const runSuperCoach = async (prompt: string) => {
     if (!prompt.trim()) return;
@@ -139,24 +166,50 @@ export default function Planner() {
 
   const loadTemplate = async (tpl: typeof QUICK_TEMPLATES[number]) => {
     try {
-      const { data } = await supabase
-        .from('exercises')
-        .select('*')
-        .in('category', tpl.categories)
-        .limit(20);
-      if (!data || data.length === 0) { toast.error('No exercises found'); return; }
-      // Pick 4-6 random
-      const shuffled = [...data].sort(() => Math.random() - 0.5).slice(0, Math.min(6, data.length));
+      const { data, error } = await supabase.from('exercises').select('*').order('name');
+      if (error) throw error;
+      const library = (data || []) as Exercise[];
+      const selected = library.filter(ex => {
+        const n = ex.name.toLowerCase();
+        const categoryMatch = tpl.categories.includes(ex.category);
+        const termMatch = tpl.terms.some(term => n.includes(term));
+        return (categoryMatch || termMatch) &&
+          (templateDifficulty === 'all' || Number(ex.difficulty_level) === Number(templateDifficulty));
+      });
+      if (!selected.length) {
+        toast.error('No matching exercises at that difficulty. Try another difficulty or template.');
+        return;
+      }
+      // Deterministic selection based on real library entries. Do not invent or randomly assign exercises.
+      const priority = tpl.label === 'Full'
+        ? ['Push', 'Pull', 'Legs', 'Core', 'Push', 'Pull']
+        : [];
+      const chosen: Exercise[] = [];
+      for (const category of priority) {
+        const match = selected.find(e => e.category === category && !chosen.some(c => c.id === e.id));
+        if (match) chosen.push(match);
+      }
+      for (const ex of selected) {
+        if (chosen.length >= 6) break;
+        if (!chosen.some(e => e.id === ex.id)) chosen.push(ex);
+      }
       setWorkoutName(tpl.tag);
-      setSections(prev => prev.map(s => s.key === 'workout'
-        ? { ...s, open: true, entries: shuffled.map(e => ({ exercise: e as any, sets: [{ reps: 10 }, { reps: 10 }, { reps: 10 }] })) }
-        : s
-      ));
-      toast.success(`${tpl.tag} loaded`);
-    } catch (e: any) {
-      toast.error(e.message || 'Failed');
+      setSections(prev => prev.map(section => section.key === 'workout'
+        ? {
+            ...section, open: true,
+            entries: chosen.map(exercise => ({
+              exercise, sets: suggestedSets(exercise),
+              unit: exerciseIsHold(exercise.name) ? 'seconds' as const : 'reps' as const,
+            })),
+          }
+        : section));
+      setOpenExerciseDetails({});
+      toast.success(tpl.tag + ' template loaded — customize any exercise.');
+    } catch (err: any) {
+      toast.error(err?.message || 'Could not load template');
     }
   };
+
 
   const toggleSection = (key: string) => {
     setSections(prev => prev.map(s => s.key === key ? { ...s, open: !s.open } : s));
@@ -165,7 +218,7 @@ export default function Planner() {
   const addExercise = (sectionKey: string, exercise: Exercise) => {
     setSections(prev => prev.map(s =>
       s.key === sectionKey
-        ? { ...s, entries: [...s.entries, { exercise, sets: [{ reps: 10 }] }] }
+        ? { ...s, entries: [...s.entries, { exercise, sets: suggestedSets(exercise), unit: exerciseIsHold(exercise.name) ? 'seconds' : 'reps' }] }] }
         : s
     ));
   };
@@ -178,7 +231,7 @@ export default function Planner() {
     ));
   };
 
-  const updateSets = (sectionKey: string, idx: number, sets: { reps: number; weight?: number }[]) => {
+  const updateSets = (sectionKey: string, idx: number, sets: { reps: number; weight?: number; seconds?: number }[]) => {
     setSections(prev => prev.map(s =>
       s.key === sectionKey
         ? { ...s, entries: s.entries.map((e, i) => i === idx ? { ...e, sets } : e) }
@@ -199,6 +252,7 @@ export default function Planner() {
           exercise_id: e.exercise.id,
           exercise_name: e.exercise.name,
           sets: e.sets,
+          unit: e.unit || 'reps',
         }))
       );
       const { error } = await supabase.from('workouts').insert({
@@ -273,14 +327,14 @@ export default function Planner() {
             </DialogDescription>
           </DialogHeader>
           <Textarea
-            placeholder="e.g. Push day focused on planche progressions, 45 minutes, intermediate"
+            placeholder="e.g. Intermediate planche strength with grip accessories"
             value={coachPrompt}
             onChange={e => setCoachPrompt(e.target.value)}
             rows={4}
             className="rounded-xl"
           />
           <div className="flex flex-wrap gap-1.5">
-            {['Full body 40min', 'Push + core', 'Pull day intermediate', 'Mobility flow', 'Beginner legs'].map(s => (
+            {['Full body', 'Push + core', 'Pull intermediate', 'Grip + rings', 'Mobility'].map(s => (
               <Button variant="ghost"
                 key={s}
                 onClick={() => setCoachPrompt(s)}
@@ -308,20 +362,23 @@ export default function Planner() {
           className="h-12 rounded-xl border-border bg-card font-display font-bold text-base placeholder:font-normal placeholder:text-muted-foreground"
         />
 
-        {/* Quick start templates */}
-        <div>
-          <p className="text-xs font-semibold text-muted-foreground mb-2 px-1">Quick Start</p>
-          <div className="grid grid-cols-4 gap-2">
-            {QUICK_TEMPLATES.map(tpl => (
-              <Button variant="ghost"
-                key={tpl.label}
-                onClick={() => loadTemplate(tpl)}
-                className="h-11 rounded-xl border border-border bg-card hover:border-border hover:-translate-y-0.5 hover:shadow-sm transition-all text-[10px] font-mono uppercase tracking-[0.15em] font-bold"
-              >
-                {tpl.label}
-              </Button>
-            ))}
+        {/* Simple difficulty-first templates: no equipment setup or duration limits. */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-sm font-semibold text-foreground">Workout templates</p>
+            <select className="power-difficulty-select" aria-label="Template exercise difficulty"
+              value={templateDifficulty} onChange={e => setTemplateDifficulty(e.target.value)}>
+              <option value="all">All difficulties</option>
+              {difficultyNames.slice(1).map((name, index) => <option value={index + 1} key={name}>{name}</option>)}
+            </select>
           </div>
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+            {QUICK_TEMPLATES.map(tpl => <Button key={tpl.label} variant="outline" onClick={() => loadTemplate(tpl)}
+              className="h-11 rounded-xl bg-card border-border/70 text-xs font-semibold">
+              {tpl.label}
+            </Button>)}
+          </div>
+          <p className="text-xs text-muted-foreground">Choose a focus and difficulty. Every template uses existing exercises, and you can change anything.</p>
         </div>
 
 
@@ -352,23 +409,49 @@ export default function Planner() {
               {/* Section content */}
               {section.open && (
                 <div className="px-4 pb-4 space-y-2">
-                  {section.entries.map((entry, idx) => (
-                    <div key={idx} className="rounded-xl border border-border bg-accent/10 p-3">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center gap-2 min-w-0">
-                          <GripVertical className="w-3 h-3 text-muted-foreground/40" />
-                          <p className="text-xs font-bold truncate">{entry.exercise.name}</p>
+                  {section.entries.map((entry, idx) => {
+                    const key = section.key + ':' + idx;
+                    const open = !!openExerciseDetails[key];
+                    const videoId = exerciseVideoId(entry.exercise.youtube_url);
+                    const thumbnail = entry.exercise.image_url || (videoId ? 'https://i.ytimg.com/vi/' + videoId + '/mqdefault.jpg' : null);
+                    return <div key={key} className="rounded-xl border border-border/70 bg-card overflow-hidden">
+                      <div className="flex items-center gap-3 p-2.5">
+                        <div className="h-12 w-14 shrink-0 bg-secondary rounded-lg overflow-hidden flex items-center justify-center">
+                          {thumbnail ? <img src={thumbnail} alt="" className="w-full h-full object-cover" loading="lazy"/> : <Dumbbell className="w-5 h-5 text-muted-foreground"/>}
                         </div>
-                        <Button variant="ghost" onClick={() => removeEntry(section.key, idx)} size="icon" aria-label={`Remove ${entry.exercise.name}`} className="shrink-0 text-muted-foreground hover:text-destructive transition-colors">
-                          <Trash2 className="w-3.5 h-3.5" />
+                        <button type="button" onClick={() => setOpenExerciseDetails(v => ({ ...v, [key]: !v[key] }))}
+                          className="min-w-0 flex-1 text-left py-1" aria-expanded={open}>
+                          <span className="block text-sm font-semibold truncate">{entry.exercise.name}</span>
+                          <span className="block text-xs text-muted-foreground">{difficultyName(entry.exercise.difficulty_level)} · {entry.sets.length} sets</span>
+                        </button>
+                        <Button variant="ghost" size="icon" aria-label={'Edit ' + entry.exercise.name + ' sets'}
+                          className="h-11 w-11 shrink-0" onClick={() => setOpenExerciseDetails(v => ({ ...v, [key]: !v[key] }))}>
+                          {open ? <ChevronUp className="w-4 h-4"/> : <ChevronDown className="w-4 h-4"/>}
+                        </Button>
+                        <Button variant="ghost" size="icon" aria-label={'Remove ' + entry.exercise.name}
+                          className="h-11 w-11 shrink-0 text-muted-foreground" onClick={() => removeEntry(section.key, idx)}>
+                          <Trash2 className="w-4 h-4"/>
                         </Button>
                       </div>
-                      <SetTracker
-                        sets={entry.sets}
-                        onChange={sets => updateSets(section.key, idx, sets)}
-                      />
-                    </div>
-                  ))}
+                      {open && <div className="px-3 pb-3 border-t border-border/50 pt-3 space-y-2">
+                        <div className="flex items-center justify-between text-xs">
+                          <span className="text-muted-foreground">Measure each set by</span>
+                          <div className="flex gap-1">
+                            {(['reps', 'seconds'] as const).map(unit => <Button key={unit} variant={(entry.unit || 'reps') === unit ? 'default' : 'outline'}
+                              size="sm" className="h-9 rounded-lg" onClick={() => setSections(prev => prev.map(s => s.key !== section.key ? s : {
+                                ...s, entries: s.entries.map((e, i) => i !== idx ? e : {
+                                  ...e, unit, sets: unit === 'seconds'
+                                    ? e.sets.map(set => ({ ...set, seconds: set.seconds || 15 }))
+                                    : e.sets.map(set => ({ ...set, reps: set.reps || 8 })),
+                                }),
+                              }))}>{unit === 'seconds' ? 'Hold (sec)' : 'Reps'}</Button>)}
+                          </div>
+                        </div>
+                        <SetTracker unit={entry.unit || 'reps'} sets={entry.sets} onChange={sets => updateSets(section.key, idx, sets)}/>
+                      </div>}
+                    </div>;
+                  })}
+
 
                   <Button variant="ghost"
                     onClick={() => setPickerSection(section.key)}
