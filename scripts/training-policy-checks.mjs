@@ -26,6 +26,8 @@ try{
  const context=coach.coachContext({tier:1},[],['floor']);assert(context.allowedExercises.every(e=>!policy.equipmentReasons(e.slug,['floor']).length));
  assert(context.allowedExercises.every(e=>e.minimumLevel===1));
  const foundation=builder.buildSkillWorkout('foundation-inversion','foundation',25,{tier:1});assert(!foundation.some(i=>i.exercise.slug==='wall-toe-taps'||i.exercise.slug==='chest-to-wall-handstand'));
+ for(const slug of ['band-assisted-iron-cross','short-lever-iron-cross','feet-assisted-human-flag','vertical-human-flag','band-assisted-human-flag','tuck-human-flag','one-leg-human-flag','straddle-human-flag']){assert(!policy.allowedAtLevel(slug,{tier:1,capabilities:[]}));assert(!policy.allowedAtLevel(slug,{tier:5,capabilities:[]}));assert(policy.allowedAtLevel(slug,{tier:5,capabilities:caps}));assert.equal(policy.RULES[slug].metric,'seconds');}
+ assert.equal(coach.matchCoachGoal('band assisted iron cross'),'iron-cross');assert.equal(coach.matchCoachGoal('human flag practice'),'human-flag');
  const api=await load('endpoint','api/discover-exercises.ts');let status,body;const response={setHeader(){},set statusCode(v){status=v;},end(s){body=JSON.parse(s);}};
  await api.default({method:'GET',headers:{}},response);assert.equal(status,200);assert.equal(body.authenticationRequired,true);
  console.log(`PASS: ${cases} goal/level/readiness/duration plans, all swap pools, beginner exclusions, AI selection validation, equipment context and API bundling.`);

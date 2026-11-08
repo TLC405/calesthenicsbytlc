@@ -1,3 +1,4 @@
+import { DifficultyBadge } from '@/components/Exercise/DifficultyBadge';
 import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
 import { MovementVideo } from '@/components/Exercise/MovementVideo';
 import { MovementOverview } from '@/components/Exercise/MovementOverview';
@@ -36,7 +37,7 @@ interface ActiveExercise {
 }
 interface WorkoutSet { progressId?: string; reps: number; seconds?: number; weight?: number; rpe?: number; done: boolean }
 interface SessionEntry { restSeconds?: number; section: string; phaseLabel?: string; exercise: ActiveExercise; sets: WorkoutSet[] }
-interface SessionDraft { returnTo?:'/'|'/planner'; name: string; notes: string; entries: SessionEntry[]; index: number; restEnd: number | null; startedAt: number }
+interface SessionDraft { autoRest?:boolean; returnTo?:'/'|'/planner'; name: string; notes: string; entries: SessionEntry[]; index: number; restEnd: number | null; startedAt: number }
 
 function readDraft(): SessionDraft | null {
   try {
@@ -50,7 +51,7 @@ function readDraft(): SessionDraft | null {
         sets: entry.sets.map((set, setIndex) => ({ progressId: set.progressId || `${value.startedAt}:${entry.exercise.slug}:${setIndex}`, reps: Math.max(0, Number(set.reps) || 0), seconds: typeof set.seconds === 'number' ? Math.max(0, set.seconds) : undefined, weight: set.weight, rpe: set.rpe, done: Boolean(set.done) }))
       }));
     if (!entries.length) return null;
-    return { returnTo:value.returnTo==='/'?'/':'/planner', name: value.name || 'Workout', notes: value.notes || '', entries,
+    return { autoRest:value.autoRest!==false, returnTo:value.returnTo==='/'?'/':'/planner', name: value.name || 'Workout', notes: value.notes || '', entries,
       index: Math.max(0, Math.min(entries.length - 1, Number(value.index) || 0)),
       restEnd: typeof value.restEnd === 'number' ? value.restEnd : null,
       startedAt: Number(value.startedAt) || Date.now() };
@@ -119,7 +120,7 @@ export default function ActiveWorkout() {
       } catch {toast.error('Skill progress could not be saved. Workout controls still work.');}
     }
     modifySet(setIndex, set => ({ ...set, done: !set.done }));
-    if (!wasDone) {
+    if (!wasDone&&draft?.autoRest!==false) {
       setDraft(old => old ? { ...old, restEnd: Date.now() + restDuration * 1000 } : old);
     }
   }
@@ -204,7 +205,7 @@ export default function ActiveWorkout() {
   );
   return (
     <main className="power-session min-h-[100dvh] overflow-x-hidden pb-12">
-      <div className="max-w-2xl mx-auto px-2.5 min-[360px]:px-4 sm:px-6 pt-[max(0.75rem,env(safe-area-inset-top))] space-y-3 sm:space-y-4">
+      <div className="max-w-2xl power-active-container mx-auto px-2.5 min-[360px]:px-4 sm:px-6 pt-[max(0.75rem,env(safe-area-inset-top))] space-y-3 sm:space-y-4">
         <header className="flex items-center justify-between gap-3">
           <button type="button" onClick={leave} aria-label="Leave workout and save draft"
             className="power-hardware shrink-0 h-11 px-3 flex items-center gap-2 text-xs font-bold"><ArrowLeft className="h-4 w-4"/> Exit</button>
@@ -232,7 +233,7 @@ export default function ActiveWorkout() {
               <p className="text-xs font-bold uppercase tracking-widest text-primary">{item.phaseLabel || exerciseLabel(item.exercise.slug,item.exercise.category)}</p>
               <p className="text-xs font-mono text-muted-foreground"><Clock3 className="w-3 h-3 inline"/> {timeLabel(elapsed)}</p>
             </div>
-            <div className="power-active-movement-title"><MovementThumbnail exercise={item.exercise}/><div><h2>{item.exercise.name}</h2><p>{TRAINING_LEVELS[minimumTier(item.exercise.slug)-1].label}</p></div></div>
+            <div className="power-active-movement-title"><MovementThumbnail exercise={item.exercise}/><div><h2>{item.exercise.name}</h2><DifficultyBadge level={minimumTier(item.exercise.slug)}/></div></div>
           </div>
           <details className="power-learn-section"><summary>Watch tutorial</summary><MovementVideo key={item.exercise.id} exercise={item.exercise}/></details>
           <details className="power-learn-section"><summary>How to perform this movement</summary><MovementOverview exercise={item.exercise}/></details>
@@ -242,8 +243,7 @@ export default function ActiveWorkout() {
             <h3 className="font-display font-black text-base">Log your sets</h3>
             <span className="text-xs text-muted-foreground">{item.sets.filter(s => s.done).length} of {item.sets.length} done</span>
           </div>
-          <details className="border rounded-xl p-3"><summary className="text-xs font-bold cursor-pointer">Technique quality · optional progress logging</summary><label className="text-xs block mt-3">Your quality for these attempts<select className="h-12 w-full bg-card border rounded-lg mt-1 px-2" value={techniqueQuality??''} onChange={e=>setTechniqueQuality(e.target.value?Number(e.target.value):null)}><option value="">Not assessed · workout only</option>{[1,2,3,4,5].map(n=><option key={n} value={n}>{n}/5 · {n<3?'lost control':n===3?'mixed quality':'controlled technique'}</option>)}</select></label><p className="text-[11px] text-muted-foreground mt-2">Only your explicit quality rating contributes to skill consistency. Stop when form deteriorates.</p></details>
-          <div className="grid grid-cols-2 gap-2"><Button variant="outline" className="min-h-12 h-auto whitespace-normal py-2 text-xs" disabled={!regressionFor(item.exercise.slug)} onClick={regressMovement}>Use easier step</Button><a className="border rounded-xl min-h-12 grid place-items-center text-xs text-primary" href="#power-current-exercise">Technique / video</a></div>
+          <details className="border rounded-xl p-3"><summary className="text-xs font-bold cursor-pointer">Quality & easier options</summary><label className="text-xs block mt-3">Your quality for these attempts<select className="h-12 w-full bg-card border rounded-lg mt-1 px-2" value={techniqueQuality??''} onChange={e=>setTechniqueQuality(e.target.value?Number(e.target.value):null)}><option value="">Not assessed · workout only</option>{[1,2,3,4,5].map(n=><option key={n} value={n}>{n}/5 · {n<3?'lost control':n===3?'mixed quality':'controlled technique'}</option>)}</select></label><p className="text-[11px] text-muted-foreground mt-2">Only your explicit quality rating contributes to skill consistency. Stop when form deteriorates.</p><div className="grid grid-cols-2 gap-2"><Button variant="outline" className="min-h-12 h-auto whitespace-normal py-2 text-xs" disabled={!regressionFor(item.exercise.slug)} onClick={regressMovement}>Use easier step</Button><a className="border rounded-xl min-h-12 grid place-items-center text-xs text-primary" href="#power-current-exercise">Technique / video</a></div></details>
           {item.sets.map((set,index) => (
             <div key={index} className={`power-set-row grid grid-cols-[1.15rem_minmax(0,1fr)_2.6rem] sm:grid-cols-[1.5rem_minmax(0,1fr)_3rem] gap-1.5 sm:gap-3 items-center p-2 sm:p-3 rounded-xl ${set.done?'is-done':''}`}>
               <span className="w-5 text-xs font-mono font-bold text-muted-foreground">{index+1}</span>
@@ -270,7 +270,7 @@ export default function ActiveWorkout() {
             <Plus className="h-4 w-4"/> Add another set
           </button>
         </section>
-        <section className="power-elevated p-3 sm:p-4 space-y-3">
+        <section className="power-elevated power-rest-panel p-3 sm:p-4 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <p className="text-xs font-mono tracking-wider uppercase text-muted-foreground">Rest timer</p>
@@ -291,7 +291,7 @@ export default function ActiveWorkout() {
                 aria-label="Restart rest timer"><TimerReset className="h-5 w-5"/></button>
             </div>
           </div>
-          <p className="text-[11px] text-muted-foreground">Automatically starts when you complete a set. Skill-specific starting rest; adjust between 60 and 180 seconds.</p>
+          <details className="power-rest-options"><summary>Rest options</summary><label><input type="checkbox" checked={draft.autoRest!==false} onChange={e=>setDraft(old=>old?{...old,autoRest:e.target.checked}:old)}/>Start rest after each completed set</label><p>Rest is optional. Your workout has no time cutoff.</p></details>
         </section>
         </div>
         <div className="power-workout-actions sticky bottom-0 z-30 grid grid-cols-3 gap-2 rounded-t-2xl border-t border-border/60 bg-background/95 p-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-lg">

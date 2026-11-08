@@ -25,5 +25,5 @@ try{
  assert.equal(focus.suggestedMovementTarget('push-up',[{...logs[0],target:7,value:7}],4).target,7);
  const capped=focus.suggestedMovementTarget('push-up',logs.map(a=>({...a,target:12,value:12})),4);assert.equal(capped.target,12);assert(!capped.reason.includes('increase'));
  const history=relations.movementHistorySummary('push-up',[...logs,{...logs[0],value:999,at:'2030-01-01'}],now);assert.equal(history.best,6);assert.equal(history.count,3);assert.equal(relations.movementHistorySummary('wall-push-up',logs,now).best,null);
- console.log('PASS: all 264 movement preview/connection records, withheld-media exclusion, labeled coaching guides, missing-image fallback, canonical progression links, readiness locks, real history, and comparable multi-session target adaptation.');
+ console.log('PASS: all 272 movement preview/connection records, withheld-media exclusion, labeled coaching guides, missing-image fallback, canonical progression links, readiness locks, real history, and comparable multi-session target adaptation.');
 }finally{await rm(dir,{recursive:true,force:true});}

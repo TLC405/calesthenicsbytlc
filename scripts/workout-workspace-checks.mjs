@@ -11,7 +11,7 @@ try{
  const pathsOut=path.join(temp,'paths.mjs');await build({entryPoints:['src/data/skillPaths.ts'],outfile:pathsOut,bundle:true,platform:'node',format:'esm',logLevel:'silent'});const {getSkillPath}=await import(pathToFileURL(pathsOut));
  const ringMoves=w.workspaceMovements(getSkillPath('rings'));assert(ringMoves.some(e=>e.slug==='incline-ring-row'));assert(ringMoves.some(e=>e.slug==='iron-cross'));assert(ringMoves.some(e=>e.slug==='ring-muscle-up'));
  const straightMoves=w.workspaceMovements(getSkillPath('straight-arm'));assert(straightMoves.some(e=>e.slug==='full-planche'));assert(straightMoves.some(e=>e.slug==='stalder-press-to-hs'));
- const allMoves=w.workspaceMovements(getSkillPath('rings'),true);assert.equal(allMoves.length,240);assert.equal(new Set(allMoves.map(e=>e.slug)).size,240,'Alias records must not create duplicate choices');
+ const allMoves=w.workspaceMovements(getSkillPath('rings'),true);assert.equal(allMoves.length,248);assert.equal(new Set(allMoves.map(e=>e.slug)).size,248,'Alias records must not create duplicate choices');
  const profile={tier:1,capabilities:[],equipment:['floor','wall','rings'],safeExit:false};
  let items=[];
  items=w.addWorkoutMovement(items,'incline-ring-row','skill',profile);assert.equal(items.length,1);
@@ -31,6 +31,8 @@ try{
  const symptom={nodeId:'tuck-planche',at:'2026-11-08T10:00:00Z',metric:'seconds',value:3,target:8,quality:2,discomfort:true,sessionId:'one'};
  assert(w.workoutBlockers(items,profile,[symptom],now).some(s=>s.includes('discomfort')),'Related progression symptoms are retained when mixing families');
  assert.equal(w.workoutBlockers(items,profile,[{...symptom,at:'2026-11-10T10:00:00Z'}],now).length,0,'Future records cannot block a current session');
+ const moved=w.moveWorkoutItem(items,items[0].key,1);assert.equal(moved[0].key,items[1].key);assert.equal(moved[1].key,items[0].key);assert.equal(items[0].exercise.slug,'incline-ring-row');assert.equal(w.moveWorkoutItem(items,items[0].key,-1),items);assert.equal(w.moveWorkoutItem(items,items[2].key,1),items,'Cannot reorder into a different phase');
+ const identity=w.workoutIdentity(items,'yoga-foundation');assert.equal(identity.slug,'incline-ring-row');assert.notEqual(identity.pathId,'yoga-foundation','Browsing a warmup must not relabel main practice');
  const data=new Map();globalThis.localStorage={getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,v)};
  w.writeWorkoutDraft('guest',items);assert.equal(w.readWorkoutDraft('guest').length,3);assert.equal(w.readWorkoutDraft('other').length,0);assert([...data.keys()].every(k=>k.startsWith('power-home-workout-v1:')),'Draft editing must never create completed workout logs');
  assert.deepEqual(w.readWorkoutDraft('bad-json'),[]);data.set('power-home-workout-v1:bad-json','{');assert.deepEqual(w.readWorkoutDraft('bad-json'),[]);

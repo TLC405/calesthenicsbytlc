@@ -7866,5 +7866,263 @@
     "chain_order": null,
     "visibility": "public",
     "created_by": null
+  },
+  {
+    "id": "bf8da027-c2e8-511d-a9aa-cde719ff5882",
+    "slug": "band-assisted-iron-cross",
+    "name": "Band-Assisted Iron Cross",
+    "category": "Rings",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [
+      "Grip"
+    ],
+    "equipment": [
+      "Rings",
+      "Long loop resistance band"
+    ],
+    "cues": [
+      "Use an appropriate band setup demonstrated by your coach",
+      "Keep elbows straight and control the return",
+      "Record the band and support point"
+    ],
+    "difficulty_level": 5,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "A supported Iron Cross variation. Elastic assistance shares the load while the athlete maintains straight-arm control. Assistance does not make this a beginner skill.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "6da7ac3c-c4d5-59ef-94af-26adec78f2ae",
+    "slug": "short-lever-iron-cross",
+    "name": "Short-Lever Iron Cross",
+    "category": "Rings",
+    "primary_muscles": [
+      "Shoulders",
+      "Core"
+    ],
+    "secondary_muscles": [
+      "Grip"
+    ],
+    "equipment": [
+      "Rings",
+      "Purpose-built cross trainers"
+    ],
+    "cues": [
+      "Use correctly fitted purpose-built forearm supports",
+      "Work in a range you can return from with control",
+      "Keep the setup consistent"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Iron Cross preparation using specialist forearm supports to shorten the arm lever. This is a distinct assisted result, not an unassisted cross.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "1e036264-0998-5aef-a56e-c7e1d0549d4c",
+    "slug": "feet-assisted-human-flag",
+    "name": "Feet-Assisted Human Flag",
+    "category": "Skills",
+    "primary_muscles": [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    "secondary_muscles": [
+      "Grip"
+    ],
+    "equipment": [
+      "Stable flag apparatus",
+      "Floor support"
+    ],
+    "cues": [
+      "Keep feet supported while learning the hand positions",
+      "Pull with the upper arm and push with the lower arm",
+      "Practice both orientations"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "A supported sideways flag setup with the feet carrying part of the load. Learn the opposing arm actions before lifting the full body.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "0704f995-0f7a-53cf-a292-dd8ea6a4bd91",
+    "slug": "vertical-human-flag",
+    "name": "Vertical Human Flag",
+    "category": "Skills",
+    "primary_muscles": [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    "secondary_muscles": [
+      "Grip"
+    ],
+    "equipment": [
+      "Stable flag apparatus"
+    ],
+    "cues": [
+      "Use a controlled supported entry",
+      "Maintain straight elbows and active shoulders",
+      "Lower only as far as you can control"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "An upright flag position used to practice support and controlled lowering. Confirm safe entry and exit before leaving foot support.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "357c0a5a-487d-5712-a068-0a72edf4544c",
+    "slug": "band-assisted-human-flag",
+    "name": "Band-Assisted Human Flag",
+    "category": "Skills",
+    "primary_muscles": [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    "secondary_muscles": [
+      "Grip"
+    ],
+    "equipment": [
+      "Stable flag apparatus",
+      "Long loop resistance band"
+    ],
+    "cues": [
+      "Follow the demonstrated band anchor and support setup",
+      "Keep the band from twisting your body",
+      "Pull with the top arm and push with the bottom arm"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "A horizontal Human Flag with elastic support. Log the band and contact point separately from unassisted results, and train both sides.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "b89152bf-77a3-5dbd-ba0a-300726881d50",
+    "slug": "tuck-human-flag",
+    "name": "Tuck Human Flag",
+    "category": "Skills",
+    "primary_muscles": [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    "secondary_muscles": [
+      "Grip"
+    ],
+    "equipment": [
+      "Stable flag apparatus"
+    ],
+    "cues": [
+      "Use a compact leg position to shorten the body lever",
+      "Keep your shoulders active and control rotation",
+      "Return to supported feet before grip fades"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "A shorter-body flag variation with bent legs. Use the position that lets you control rotation; tuck shapes are not suitable for every setup.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "a15c9c62-4c9c-5ff7-97f4-1c9a4ffb671d",
+    "slug": "one-leg-human-flag",
+    "name": "One-Leg Human Flag",
+    "category": "Skills",
+    "primary_muscles": [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    "secondary_muscles": [
+      "Grip"
+    ],
+    "equipment": [
+      "Stable flag apparatus"
+    ],
+    "cues": [
+      "Keep one leg bent while extending the other",
+      "Maintain the upper-arm pull and lower-arm push",
+      "Train both sides with comparable control"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "A flag variation that changes body position before working toward a longer full-body hold. Record the leg shape used.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "6d203460-93c4-5e8f-8856-dcff610724f3",
+    "slug": "straddle-human-flag",
+    "name": "Straddle Human Flag",
+    "category": "Skills",
+    "primary_muscles": [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    "secondary_muscles": [
+      "Grip"
+    ],
+    "equipment": [
+      "Stable flag apparatus"
+    ],
+    "cues": [
+      "Separate the legs only as far as you can control",
+      "Keep the shoulders, hips and trunk aligned",
+      "Use a controlled entry and return"
+    ],
+    "difficulty_level": 5,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "A wide-leg Human Flag variation. The leg position changes leverage; it is recorded separately from a full legs-together flag.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
   }
 ]

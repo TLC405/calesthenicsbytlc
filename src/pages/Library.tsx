@@ -1,8 +1,9 @@
-import { movementThumbnailSources } from '@/lib/movementThumbnails';
+import { movementTutorialSources } from '@/lib/movementThumbnails';
 import { matchesProgression, canonicalSlug } from '@/lib/exerciseProgressions';
 import { resolveTutorialUrl, tutorialState } from '@/lib/mediaAudit';
 import { exerciseReadinessReasons } from '@/lib/trainingPolicy';
-import { readTrainingProfile } from '@/lib/skillGraph';
+import { addWorkoutMovement, readWorkoutDraft, writeWorkoutDraft } from '@/lib/workoutWorkspace';
+import { readTrainingProfile, trainingBlockers } from '@/lib/skillGraph';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { supabase, backendConfigured } from '@/integrations/supabase/client';
@@ -55,6 +56,10 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
   const { user } = useAuth();
   const [exercises, setExercises] = useState<Exercise[]>(() => mergeCatalog());
   const guestMode = !user;
+  const [profile,setProfile]=useState(readTrainingProfile);
+  useEffect(()=>{const sync=()=>setProfile(readTrainingProfile());window.addEventListener('power-training-profile',sync);return()=>window.removeEventListener('power-training-profile',sync);},[]);
+  const [workoutSlugs,setWorkoutSlugs]=useState(()=>readWorkoutDraft(user?.id||'guest').map(i=>i.exercise.slug));
+  useEffect(()=>{const sync=()=>setWorkoutSlugs(readWorkoutDraft(user?.id||'guest').map(i=>i.exercise.slug));sync();window.addEventListener('power-workout-draft',sync);return()=>window.removeEventListener('power-workout-draft',sync);},[user?.id]);
   const ownerId = user?.id ?? LOCAL_USER_ID;
   const [syncState, setSyncState] = useState<'refreshing' | 'ready' | 'offline' | 'error'>('refreshing');
   const requestId = useRef(0);
@@ -109,17 +114,19 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = matchesExerciseCategory(exercise,activeCategory);
     const matchesOwner = !mineOnly || exercise.created_by === ownerId;
-    const matchesVideo = !videosOnly || movementThumbnailSources(exercise).some(source=>source.url);
+    const matchesVideo = !videosOnly || movementTutorialSources(exercise).some(source=>source.url);
     return (showAliases||canonicalSlug(exercise.slug)===exercise.slug) && matchesSearch && matchesCategory && matchesOwner && matchesVideo && matchesProgression(exercise.slug,pathId);
   });
 
   const handleAddToWorkout = (exercise: Exercise) => {
-    const reasons=exerciseReadinessReasons(exercise,readTrainingProfile());if(reasons.length){toast.info(reasons[0]+' Review your working level in Skills.');return;}
-    // The exercise is carried into the actual builder, not an empty workout dialog.
-    sessionStorage.setItem('powa-builder-import', JSON.stringify({
-      items: [{ name: exercise.name, section: 'workout', exercise }]
-    }));
-    navigate('/planner');
+    const profile=readTrainingProfile();const reasons=exerciseReadinessReasons(exercise,profile);
+    if(reasons.length){toast.info(reasons[0]+' Review your working level in Settings.');return false;}
+    const owner=user?.id||'guest';const draft=readWorkoutDraft(owner);
+    const next=addWorkoutMovement(draft,exercise.slug,'skill',profile);
+    if(next!==draft){try{writeWorkoutDraft(owner,next);toast.success('Added to your Home workout',{action:{label:'View workout',onClick:()=>navigate('/?view=workout')}});return true;}catch{toast.error('Could not save this movement. Your current workout is preserved.');return false;}}
+    if(publicCatalog.some(e=>canonicalSlug(e.slug)===canonicalSlug(exercise.slug))){toast.info(draft.some(i=>i.exercise.slug===canonicalSlug(exercise.slug))?'Already in your Home workout.':'Review the movement’s starting checks before adding it.');return false;}
+    // Personal movements outside the included catalog retain the custom-plan flow.
+    sessionStorage.setItem('powa-builder-import',JSON.stringify({items:[{name:exercise.name,section:'workout',exercise}]}));navigate('/planner');return true;
   };
 
   const deleteExercise = async (exercise: Exercise) => {
@@ -170,14 +177,14 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
           <details className="power-library-tools"><summary className="min-h-12 flex items-center cursor-pointer font-bold text-sm">Filters and tools</summary><div className="space-y-3 pt-3">
             <label className="block text-xs font-bold mb-3">Progression<select className="w-full h-12 border rounded-xl bg-card px-3 mt-2" value={pathId} onChange={e=>setPathId(e.target.value)}><option value="">All progression families</option>{SKILL_PATHS.map(path=><option key={path.id} value={path.id}>{path.title}</option>)}</select></label>
         <label className="flex min-h-11 items-center gap-3 text-xs mb-2"><input type="checkbox" className="h-5 w-5" checked={showAliases} onChange={e=>setShowAliases(e.target.checked)}/>Include legacy duplicate records</label>
-            <div className="flex flex-wrap gap-2"><Button variant={videosOnly?'default':'outline'} className="min-h-12" aria-pressed={videosOnly} onClick={()=>setVideosOnly(v=>!v)}><PlayCircle className="h-4 w-4 mr-2"/>Video tutorials</Button><Button variant={mineOnly?'default':'outline'} className="min-h-12" aria-pressed={mineOnly} onClick={()=>setMineOnly(v=>!v)}>My exercises</Button><Button variant="outline" className="min-h-12" onClick={()=>{setEditingExercise(null);setShowAddModal(true);}}><Plus className="h-4 w-4 mr-2"/>New movement</Button><Button variant="outline" className="min-h-12" disabled={!filteredExercises.length} onClick={downloadExerciseList}><Download className="h-4 w-4 mr-2"/>Export</Button></div>
+            <div className="flex flex-wrap gap-2"><Button variant={videosOnly?'default':'outline'} className="min-h-12" aria-pressed={videosOnly} onClick={()=>setVideosOnly(v=>!v)}><PlayCircle className="h-4 w-4 mr-2"/>With tutorials</Button><Button variant={mineOnly?'default':'outline'} className="min-h-12" aria-pressed={mineOnly} onClick={()=>setMineOnly(v=>!v)}>My exercises</Button><Button variant="outline" className="min-h-12" onClick={()=>{setEditingExercise(null);setShowAddModal(true);}}><Plus className="h-4 w-4 mr-2"/>New movement</Button><Button variant="outline" className="min-h-12" disabled={!filteredExercises.length} onClick={downloadExerciseList}><Download className="h-4 w-4 mr-2"/>Export</Button></div>
             {(activeCategory||mineOnly||videosOnly)&&<Button variant="ghost" className="min-h-12" onClick={()=>{setActiveCategory(null);setMineOnly(false);setVideosOnly(false);}}>Clear filters</Button>}
           </div></details>
         </div>
       </header>
       <main className="power-library-results max-w-6xl mx-auto px-3 sm:px-4 md:px-8 py-3 sm:py-5 pb-32 md:pb-5">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground" role="status" aria-live="polite">
-          <span>{syncState === 'refreshing' ? 'Library ready · refreshing saved exercises…' : syncState === 'error' ? 'Saved collection is taking longer to connect. Your available exercises are shown below.' : syncState === 'offline' ? 'Showing the included library and exercises saved on this device.' : 'Saved library connected.'}</span>
+          <span>{syncState === 'refreshing' ? 'Refreshing your saved movements…' : syncState === 'error' ? 'Included movements are ready. Saved movements could not connect.' : syncState === 'offline' ? 'Included and device-saved movements' : `${filteredExercises.length} movements`}</span>
           {syncState === 'error' && <Button type="button" variant="outline" size="sm" onClick={() => void fetchExercises()}>Reconnect library</Button>}
         </div>
         {guestMode && !embedded && (
@@ -198,7 +205,7 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
           <div className="py-20 text-center">
             <p className="text-muted-foreground text-xs font-mono">{mineOnly ? 'No personal exercises are available for this session.' : 'No exercises match these filters.'}</p>
             {mineOnly && guestMode && <p className="mx-auto mt-3 max-w-md text-xs leading-relaxed text-muted-foreground">Personal exercises saved at another app address do not automatically appear here. This view shows items saved in this browser at this address.</p>}
-            <Button className="mt-4 mx-2 rounded-xl" variant="outline" onClick={() => { setSearchTerm(''); setActiveCategory(null); setVideosOnly(false); setMineOnly(false); navigate('/library', { replace: true, state: null }); }}>Show all exercises</Button>
+            <Button className="mt-4 mx-2 rounded-xl" variant="outline" onClick={() => { setSearchTerm(''); setActiveCategory(null); setVideosOnly(false); setMineOnly(false);setPathId(''); }}>Show all exercises</Button>
             {ownerId && mineOnly && (
               <Button className="mt-4 rounded-xl" onClick={() => { setEditingExercise(null); setShowAddModal(true); }}>
                 <Plus className="mr-2 h-4 w-4" /> Create your first exercise
@@ -208,10 +215,10 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
         ) : (
           <div className="power-exercise-rows">
             {filteredExercises.map(exercise => (
-              <div key={exercise.id} className="relative">
-                <ExerciseCard exercise={exercise} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} />
+              <div key={exercise.id} className="power-library-record">
+                <ExerciseCard exercise={exercise} addDisabledReason={publicCatalog.some(e=>e.slug===exercise.slug)?trainingBlockers(canonicalSlug(exercise.slug),profile,true)[0]:exerciseReadinessReasons(exercise,profile)[0]} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} isAdded={workoutSlugs.includes(canonicalSlug(exercise.slug))} />
                 {ownerId && exercise.created_by === ownerId && (
-                  <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5">
+                  <div className="power-library-owner-tools">
                     <span title={exercise.visibility === 'public' ? 'Shared with members' : 'Private exercise'}
                       className="flex h-8 items-center gap-1 rounded-lg bg-card/95 px-2 text-[9px] font-semibold shadow-lg backdrop-blur-md">
                       {exercise.visibility === 'public' ? <Globe2 className="h-3.5 w-3.5" /> : <LockKeyhole className="h-3.5 w-3.5" />}
@@ -235,7 +242,7 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
         )}
       </main>
 
-      <ExerciseDetailModal exercise={selectedExercise} open={!!selectedExercise} onClose={() => setSelectedExercise(null)} onAddToWorkout={handleAddToWorkout} />
+      <ExerciseDetailModal workoutSlugs={workoutSlugs} exercise={selectedExercise} open={!!selectedExercise} onClose={() => setSelectedExercise(null)} onAddToWorkout={handleAddToWorkout} />
       <AddExerciseModal open={showAddModal}
         initialExercise={editingExercise as EditableExercise | null}
         onClose={() => { setShowAddModal(false); setEditingExercise(null); }}

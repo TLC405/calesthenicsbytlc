@@ -7869,6 +7869,264 @@ var publicExerciseCatalog_default = [
     chain_order: null,
     visibility: "public",
     created_by: null
+  },
+  {
+    id: "bf8da027-c2e8-511d-a9aa-cde719ff5882",
+    slug: "band-assisted-iron-cross",
+    name: "Band-Assisted Iron Cross",
+    category: "Rings",
+    primary_muscles: [
+      "Shoulders",
+      "Core"
+    ],
+    secondary_muscles: [
+      "Grip"
+    ],
+    equipment: [
+      "Rings",
+      "Long loop resistance band"
+    ],
+    cues: [
+      "Use an appropriate band setup demonstrated by your coach",
+      "Keep elbows straight and control the return",
+      "Record the band and support point"
+    ],
+    difficulty_level: 5,
+    youtube_url: null,
+    instagram_url: null,
+    image_url: null,
+    description: "A supported Iron Cross variation. Elastic assistance shares the load while the athlete maintains straight-arm control. Assistance does not make this a beginner skill.",
+    sets_reps: null,
+    chain_group: null,
+    chain_order: null,
+    visibility: "public",
+    created_by: null
+  },
+  {
+    id: "6da7ac3c-c4d5-59ef-94af-26adec78f2ae",
+    slug: "short-lever-iron-cross",
+    name: "Short-Lever Iron Cross",
+    category: "Rings",
+    primary_muscles: [
+      "Shoulders",
+      "Core"
+    ],
+    secondary_muscles: [
+      "Grip"
+    ],
+    equipment: [
+      "Rings",
+      "Purpose-built cross trainers"
+    ],
+    cues: [
+      "Use correctly fitted purpose-built forearm supports",
+      "Work in a range you can return from with control",
+      "Keep the setup consistent"
+    ],
+    difficulty_level: 4,
+    youtube_url: null,
+    instagram_url: null,
+    image_url: null,
+    description: "Iron Cross preparation using specialist forearm supports to shorten the arm lever. This is a distinct assisted result, not an unassisted cross.",
+    sets_reps: null,
+    chain_group: null,
+    chain_order: null,
+    visibility: "public",
+    created_by: null
+  },
+  {
+    id: "1e036264-0998-5aef-a56e-c7e1d0549d4c",
+    slug: "feet-assisted-human-flag",
+    name: "Feet-Assisted Human Flag",
+    category: "Skills",
+    primary_muscles: [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    secondary_muscles: [
+      "Grip"
+    ],
+    equipment: [
+      "Stable flag apparatus",
+      "Floor support"
+    ],
+    cues: [
+      "Keep feet supported while learning the hand positions",
+      "Pull with the upper arm and push with the lower arm",
+      "Practice both orientations"
+    ],
+    difficulty_level: 3,
+    youtube_url: null,
+    instagram_url: null,
+    image_url: null,
+    description: "A supported sideways flag setup with the feet carrying part of the load. Learn the opposing arm actions before lifting the full body.",
+    sets_reps: null,
+    chain_group: null,
+    chain_order: null,
+    visibility: "public",
+    created_by: null
+  },
+  {
+    id: "0704f995-0f7a-53cf-a292-dd8ea6a4bd91",
+    slug: "vertical-human-flag",
+    name: "Vertical Human Flag",
+    category: "Skills",
+    primary_muscles: [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    secondary_muscles: [
+      "Grip"
+    ],
+    equipment: [
+      "Stable flag apparatus"
+    ],
+    cues: [
+      "Use a controlled supported entry",
+      "Maintain straight elbows and active shoulders",
+      "Lower only as far as you can control"
+    ],
+    difficulty_level: 4,
+    youtube_url: null,
+    instagram_url: null,
+    image_url: null,
+    description: "An upright flag position used to practice support and controlled lowering. Confirm safe entry and exit before leaving foot support.",
+    sets_reps: null,
+    chain_group: null,
+    chain_order: null,
+    visibility: "public",
+    created_by: null
+  },
+  {
+    id: "357c0a5a-487d-5712-a068-0a72edf4544c",
+    slug: "band-assisted-human-flag",
+    name: "Band-Assisted Human Flag",
+    category: "Skills",
+    primary_muscles: [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    secondary_muscles: [
+      "Grip"
+    ],
+    equipment: [
+      "Stable flag apparatus",
+      "Long loop resistance band"
+    ],
+    cues: [
+      "Follow the demonstrated band anchor and support setup",
+      "Keep the band from twisting your body",
+      "Pull with the top arm and push with the bottom arm"
+    ],
+    difficulty_level: 4,
+    youtube_url: null,
+    instagram_url: null,
+    image_url: null,
+    description: "A horizontal Human Flag with elastic support. Log the band and contact point separately from unassisted results, and train both sides.",
+    sets_reps: null,
+    chain_group: null,
+    chain_order: null,
+    visibility: "public",
+    created_by: null
+  },
+  {
+    id: "b89152bf-77a3-5dbd-ba0a-300726881d50",
+    slug: "tuck-human-flag",
+    name: "Tuck Human Flag",
+    category: "Skills",
+    primary_muscles: [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    secondary_muscles: [
+      "Grip"
+    ],
+    equipment: [
+      "Stable flag apparatus"
+    ],
+    cues: [
+      "Use a compact leg position to shorten the body lever",
+      "Keep your shoulders active and control rotation",
+      "Return to supported feet before grip fades"
+    ],
+    difficulty_level: 4,
+    youtube_url: null,
+    instagram_url: null,
+    image_url: null,
+    description: "A shorter-body flag variation with bent legs. Use the position that lets you control rotation; tuck shapes are not suitable for every setup.",
+    sets_reps: null,
+    chain_group: null,
+    chain_order: null,
+    visibility: "public",
+    created_by: null
+  },
+  {
+    id: "a15c9c62-4c9c-5ff7-97f4-1c9a4ffb671d",
+    slug: "one-leg-human-flag",
+    name: "One-Leg Human Flag",
+    category: "Skills",
+    primary_muscles: [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    secondary_muscles: [
+      "Grip"
+    ],
+    equipment: [
+      "Stable flag apparatus"
+    ],
+    cues: [
+      "Keep one leg bent while extending the other",
+      "Maintain the upper-arm pull and lower-arm push",
+      "Train both sides with comparable control"
+    ],
+    difficulty_level: 4,
+    youtube_url: null,
+    instagram_url: null,
+    image_url: null,
+    description: "A flag variation that changes body position before working toward a longer full-body hold. Record the leg shape used.",
+    sets_reps: null,
+    chain_group: null,
+    chain_order: null,
+    visibility: "public",
+    created_by: null
+  },
+  {
+    id: "6d203460-93c4-5e8f-8856-dcff610724f3",
+    slug: "straddle-human-flag",
+    name: "Straddle Human Flag",
+    category: "Skills",
+    primary_muscles: [
+      "Obliques",
+      "Lats",
+      "Shoulders"
+    ],
+    secondary_muscles: [
+      "Grip"
+    ],
+    equipment: [
+      "Stable flag apparatus"
+    ],
+    cues: [
+      "Separate the legs only as far as you can control",
+      "Keep the shoulders, hips and trunk aligned",
+      "Use a controlled entry and return"
+    ],
+    difficulty_level: 5,
+    youtube_url: null,
+    instagram_url: null,
+    image_url: null,
+    description: "A wide-leg Human Flag variation. The leg position changes leverage; it is recorded separately from a full legs-together flag.",
+    sets_reps: null,
+    chain_group: null,
+    chain_order: null,
+    visibility: "public",
+    created_by: null
   }
 ];
 
@@ -8345,20 +8603,27 @@ var SKILL_PATHS = [
   {
     "id": "human-flag",
     "title": "Human Flag",
-    "short": "Hanging control, side support and flag",
-    "focus": "Hanging control, side support and flag",
+    "short": "Supported entries, band help and sideways holds",
+    "focus": "Push, pull and side-body control",
     "equipment": "Suitable stable flag apparatus for full skill",
     "cue": "Practice a controlled variation, then build repeatable quality before increasing leverage.",
-    "safety": "Use a comfortable range and stop when technique deteriorates or joint pain appears.",
+    "safety": "Use stable apparatus and controlled entry and exit. Practice both sides. Band assistance does not replace the starting checks.",
     "group": "Strength",
     "slugs": [
       "side-plank",
       "active-hang",
       "scapular-pull-up",
-      "clutch-flag",
+      "feet-assisted-human-flag",
+      "vertical-human-flag",
+      "band-assisted-human-flag",
+      "tuck-human-flag",
+      "one-leg-human-flag",
+      "straddle-human-flag",
       "human-flag"
     ],
-    "accessories": []
+    "accessories": [
+      "clutch-flag"
+    ]
   },
   {
     "id": "yoga-foundation",
@@ -8779,12 +9044,38 @@ var SKILL_PATHS = [
       "ring-support-hold",
       "ring-turnout-support-hold",
       "iron-cross-assisted-hold",
+      "short-lever-iron-cross",
+      "band-assisted-iron-cross",
       "iron-cross"
     ],
     "accessories": [
       "maltese",
       "victorian-cross",
       "ringmaster"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "iron-cross",
+    "title": "Iron Cross",
+    "short": "Ring support, assisted holds and straight-arm cross strength",
+    "focus": "Support control and carefully scaled cross practice",
+    "equipment": "Rings; assistance is described for each movement",
+    "cue": "Own the support position and a controlled return before changing assistance.",
+    "safety": "This is advanced ring work. Use specialist coaching for unfamiliar cross and band setups. Stop when joint discomfort or loss of control appears.",
+    "group": "Rings",
+    "slugs": [
+      "assisted-ring-support-hold",
+      "ring-support-hold",
+      "ring-turnout-support-hold",
+      "short-lever-iron-cross",
+      "iron-cross-assisted-hold",
+      "band-assisted-iron-cross",
+      "iron-cross"
+    ],
+    "accessories": [
+      "scapular-push-up",
+      "active-hang"
     ],
     "kind": "progression"
   },
@@ -8988,7 +9279,7 @@ var RULES = {
   "tuck-front-lever": { tier: 3, requires: ["pull-base"], regression: "australian-row", metric: "seconds" },
   "front-lever": { tier: 5, requires: ["pull-base", "support-base"], regression: "tuck-front-lever", metric: "seconds" },
   "back-lever": { tier: 5, requires: ["pull-base", "support-base"], regression: "ring-support-hold", metric: "seconds" },
-  "human-flag": { tier: 5, requires: ["pull-base", "support-base"], regression: "side-plank", metric: "seconds" },
+  "human-flag": { tier: 5, requires: ["pull-base", "support-base"], regression: "straddle-human-flag", metric: "seconds" },
   "clutch-flag": { tier: 4, requires: ["pull-base"], regression: "side-plank", metric: "seconds" },
   "assisted-pistol-squat": { tier: 3, regression: "split-squat" },
   "pistol-squat": { tier: 4, regression: "split-squat" },
@@ -9012,7 +9303,17 @@ Object.assign(RULES, {
   "releve": { tier: 2, regression: "calf-raise" },
   "passe-balance": { tier: 2, regression: "calf-raise", metric: "seconds" },
   "wheel-pose": { tier: 4, regression: "bridge-pose", metric: "seconds" },
-  "iron-cross": { tier: 5, requires: ["support-base", "straight-arm-base"], regression: "ring-turnout-support-hold", metric: "seconds" },
+  "ring-turnout-support-hold": { tier: 4, requires: ["support-base"], regression: "ring-support-hold", metric: "seconds" },
+  "short-lever-iron-cross": { tier: 4, requires: ["support-base", "straight-arm-base"], regression: "ring-turnout-support-hold", metric: "seconds" },
+  "iron-cross-assisted-hold": { tier: 5, requires: ["support-base", "straight-arm-base"], regression: "short-lever-iron-cross", metric: "seconds" },
+  "band-assisted-iron-cross": { tier: 5, requires: ["support-base", "straight-arm-base"], regression: "short-lever-iron-cross", metric: "seconds" },
+  "iron-cross": { tier: 5, requires: ["support-base", "straight-arm-base"], regression: "band-assisted-iron-cross", metric: "seconds" },
+  "feet-assisted-human-flag": { tier: 3, requires: ["pull-base", "support-base"], regression: "side-plank", metric: "seconds" },
+  "vertical-human-flag": { tier: 4, requires: ["pull-base", "support-base", "inversion-control"], regression: "feet-assisted-human-flag", metric: "seconds" },
+  "band-assisted-human-flag": { tier: 4, requires: ["pull-base", "support-base"], regression: "feet-assisted-human-flag", metric: "seconds" },
+  "tuck-human-flag": { tier: 4, requires: ["pull-base", "support-base"], regression: "feet-assisted-human-flag", metric: "seconds" },
+  "one-leg-human-flag": { tier: 4, requires: ["pull-base", "support-base"], regression: "tuck-human-flag", metric: "seconds" },
+  "straddle-human-flag": { tier: 5, requires: ["pull-base", "support-base"], regression: "one-leg-human-flag", metric: "seconds" },
   "maltese": { tier: 5, requires: ["support-base", "straight-arm-base"], regression: "ring-turnout-support-hold", metric: "seconds" },
   "victorian-cross": { tier: 5, requires: ["support-base", "pull-base", "straight-arm-base"], regression: "ring-support-hold", metric: "seconds" },
   "bent-arm-handstand": { tier: 4, requires: ["push-base", "inversion-control"], regression: "pike-push-up", metric: "seconds" },

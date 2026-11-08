@@ -24,7 +24,7 @@ export function sanitizeFocusPreferences(value:unknown):FocusPreferences {
 }
 export function readFocusPreferences(owner:string){try{return sanitizeFocusPreferences(JSON.parse(localStorage.getItem(`power-focus-plan-v1:${owner}`)||'null'));}catch{return {...DEFAULT_FOCUS};}}
 export function writeFocusPreferences(owner:string,preferences:FocusPreferences){localStorage.setItem(`power-focus-plan-v1:${owner}`,JSON.stringify(sanitizeFocusPreferences(preferences)));}
-const needs=(id:string):[Capability,FocusId][]=>/planche|straight-arm/.test(id)?[['straight-arm-base','straight-arm'],['support-base','strength']]:/straddle-press|stalder/.test(id)?[['compression-control','compression'],['inversion-control','balance'],['support-base','straight-arm']]:/compression|l-sit/.test(id)?[['compression-control','compression'],['support-base','straight-arm']]:/handstand|hspu|pike-press|bent-arm/.test(id)?[['support-base','straight-arm'],['inversion-control','balance'],['push-base','strength']]:/ring|pull|lever|flag/.test(id)?[['pull-base','strength'],['support-base','straight-arm']]:[];
+const needs=(id:string):[Capability,FocusId][]=>/planche|straight-arm|iron-cross/.test(id)?[['straight-arm-base','straight-arm'],['support-base','strength']]:/straddle-press|stalder/.test(id)?[['compression-control','compression'],['inversion-control','balance'],['support-base','straight-arm']]:/compression|l-sit/.test(id)?[['compression-control','compression'],['support-base','straight-arm']]:/handstand|hspu|pike-press|bent-arm/.test(id)?[['support-base','straight-arm'],['inversion-control','balance'],['push-base','strength']]:/ring|pull|lever|flag/.test(id)?[['pull-base','strength'],['support-base','straight-arm']]:[];
 const pools:Record<Exclude<FocusId,'auto'>,readonly string[]>={
  compression:['bent-knee-compression-lift','single-leg-pike-lift','bent-knee-straddle-lift','seated-pike-lift','seated-straddle-lift','straddle-compression-hold'],
  'straight-arm':['quadruped-planche-lean','kneeling-planche-plank','scapular-push-up','planche-lean','band-assisted-tuck-planche'],
@@ -72,7 +72,7 @@ export function buildFocusPlan(preferences:FocusPreferences,profile:SkillTrainin
  let primary=recommendedNode(goal.id,history,profile,options.targetSlug);
  if(poor&&lastGoal){const regression=approvedRegression(lastGoal.nodeId,profile);if(regression&&safe(regression))primary=regression;}
  const componentFocus=prefs.focus!=='auto'||Boolean(missing);
- const candidates=focus==='strength'&&/ring|pull|lever/.test(goal.id)?['incline-ring-row','australian-row','assisted-ring-support-hold','dead-bug']:focus==='straight-arm'&&/ring|lever/.test(goal.id)?['assisted-ring-support-hold','ring-support-hold','ring-scapular-row']:pools[focus];
+ const candidates=focus==='strength'&&/ring|pull|lever|flag|iron-cross/.test(goal.id)?['incline-ring-row','australian-row','assisted-ring-support-hold','dead-bug']:focus==='straight-arm'&&/ring|lever|iron-cross/.test(goal.id)?['assisted-ring-support-hold','ring-support-hold','ring-scapular-row']:pools[focus];
  const availableFocus=candidates.filter(safe);
  const focusPrimary=componentFocus?(availableFocus.find(slug=>!nodeProgress(slug,history).consistent)||availableFocus[availableFocus.length-1]):null;
  const chosen=poor&&prefs.focus==='auto'?(primary||focusPrimary):(focusPrimary||primary);
@@ -85,7 +85,7 @@ export function buildFocusPlan(preferences:FocusPreferences,profile:SkillTrainin
   const exercise=exerciseBySlug.get(slug)!;const dose=nodeDose(slug);const prep=phase==='warmup'||phase==='cooldown';
   const starting=dose.metric==='seconds'?8:(profile.tier||1)===1?4:dose.target;
   const suggestion=suggestedMovementTarget(slug,history,starting,prefs.energy==='light');
-  items.push({key:`${phase}-${slug}`,phase,exercise,sets:prep?1:prefs.energy==='light'?1:(profile.tier||1)<=2?2:3,target:prep?(dose.metric==='seconds'?15:5):suggestion.target,targetReason:prep?undefined:suggestion.reason,metric:dose.metric,perSide:/split-squat|pistol|single-leg|one-leg/.test(slug)});seen.add(slug);
+  items.push({key:`${phase}-${slug}`,phase,exercise,sets:prep?1:prefs.energy==='light'?1:(profile.tier||1)<=2?2:3,target:prep?(dose.metric==='seconds'?15:5):suggestion.target,targetReason:prep?undefined:suggestion.reason,metric:dose.metric,perSide:/split-squat|pistol|single-leg|one-leg|human-flag|clutch-flag/.test(slug)});seen.add(slug);
  };
  const warm=base.filter(i=>i.phase==='warmup');warm.slice(0,prefs.minutes===15?1:2).forEach(i=>add(i.exercise.slug,'warmup'));
  if(prefs.warmup!=='mobility')add('cat-cow','warmup');

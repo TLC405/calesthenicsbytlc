@@ -1,47 +1,8 @@
 import { TRAINING_LEVELS } from '@/lib/trainingPolicy';
 import { cn } from '@/lib/utils';
-
-interface DifficultyBadgeProps {
-  level: number;
-  showLabel?: boolean;
-  size?: 'sm' | 'md' | 'lg';
+interface DifficultyBadgeProps {level:number;showLabel?:boolean;size?:'sm'|'md'|'lg';className?:string;}
+export function DifficultyBadge({level,showLabel=true,size='sm',className}:DifficultyBadgeProps){
+ const tier=Math.max(1,Math.min(5,Math.round(level)||1));
+ return <span className={cn('power-level-badge',`power-level-${tier}`,`power-level-size-${size}`,className)} aria-label={TRAINING_LEVELS[tier-1].label}><span className="power-level-dot" aria-hidden="true"/>{showLabel?TRAINING_LEVELS[tier-1].label:`L${tier}`}</span>;
 }
-
-const difficultyConfig=Object.fromEntries(TRAINING_LEVELS.map(level=>[level.id,{label:level.label,className:'bg-primary/10 text-primary border-primary/25'}]));
-
-export function DifficultyBadge({ level, showLabel = true, size = 'sm' }: DifficultyBadgeProps) {
-  const config = difficultyConfig[level] || difficultyConfig[1];
-  
-  const sizeClasses = {
-    sm: 'text-xs px-2 py-0.5',
-    md: 'text-sm px-2.5 py-1',
-    lg: 'text-base px-3 py-1.5',
-  };
-
-  return (
-    <span
-      className={cn(
-        'inline-flex max-w-full items-center gap-1 rounded-full border font-medium',
-        config.className,
-        sizeClasses[size]
-      )}
-    >
-      <span className="flex gap-0.5">
-        {Array.from({ length: 5 }, (_, i) => (
-          <span
-            key={i}
-            className={cn(
-              'w-1.5 h-1.5 rounded-full',
-              i < level ? 'bg-current' : 'bg-current/20'
-            )}
-          />
-        ))}
-      </span>
-      {showLabel && <span>{config.label}</span>}
-    </span>
-  );
-}
-
-export function getDifficultyLabel(level: number): string {
-  return difficultyConfig[level]?.label || 'Unknown';
-}
+export function getDifficultyLabel(level:number){return TRAINING_LEVELS.find(t=>t.id===level)?.label||'Unknown';}

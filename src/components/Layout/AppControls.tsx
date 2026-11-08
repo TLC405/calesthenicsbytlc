@@ -1,15 +1,14 @@
 import { MediaSheet } from '@/components/Media/MediaSheet';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Settings2, Zap, TvMinimal } from 'lucide-react';
+import { Settings2, TvMinimal, WifiOff } from 'lucide-react';
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { TrainingSettings } from '@/components/Settings/TrainingSettings';
+import { DifficultyBadge } from '@/components/Exercise/DifficultyBadge';
 import { readTrainingProfile } from '@/lib/skillGraph';
-import { TRAINING_LEVELS } from '@/lib/trainingPolicy';
 export function AppControls(){
- const {pathname}=useLocation();const [open,setOpen]=useState(false);const [watchOpen,setWatchOpen]=useState(false);const [profile,setProfile]=useState(readTrainingProfile);
- useEffect(()=>{const sync=()=>setProfile(readTrainingProfile());window.addEventListener('power-training-profile',sync);return()=>window.removeEventListener('power-training-profile',sync);},[]);
+ const {pathname}=useLocation();const [open,setOpen]=useState(false);const [watchOpen,setWatchOpen]=useState(false);const [profile,setProfile]=useState(readTrainingProfile);const [offline,setOffline]=useState(()=>!navigator.onLine);
+ useEffect(()=>{const sync=()=>setProfile(readTrainingProfile());const connectivity=()=>setOffline(!navigator.onLine);window.addEventListener('power-training-profile',sync);window.addEventListener('online',connectivity);window.addEventListener('offline',connectivity);return()=>{window.removeEventListener('power-training-profile',sync);window.removeEventListener('online',connectivity);window.removeEventListener('offline',connectivity);};},[]);
  useEffect(()=>{setOpen(false);setWatchOpen(false);},[pathname]);
- const level=TRAINING_LEVELS[(profile.tier||1)-1];
- return <><header className="power-app-controls"><Link to="/" aria-label="POWER home" className="power-app-wordmark"><Zap size={19} fill="currentColor"/>POWER<small>BY TLC</small></Link><div><span className="power-working-level">{level.label}</span><button type="button" aria-label="Open videos and live streams" onClick={()=>setWatchOpen(true)}><TvMinimal size={21}/><span>Watch</span></button><button type="button" aria-label="Open settings" onClick={()=>setOpen(true)}><Settings2 size={21}/><span>Settings</span></button></div></header><Sheet open={open} onOpenChange={setOpen}><SheetContent className="power-settings-sheet overflow-y-auto" side="right"><SheetTitle>Settings</SheetTitle><SheetDescription>Your level, appearance and app options, without leaving your page.</SheetDescription><TrainingSettings/></SheetContent></Sheet><MediaSheet open={watchOpen} onOpenChange={setWatchOpen}/></>;
+ return <><header className="power-app-controls"><Link to="/" aria-label="POWER home" className="power-app-wordmark"><img src="/icons/tlc-doodle-32.png" alt="" width={28} height={28}/><span>POWER<small>BY TLC</small></span></Link><div><button type="button" className="power-level-shortcut" aria-label="Review your training level" onClick={()=>setOpen(true)}><DifficultyBadge level={profile.tier||1} showLabel={false}/></button><button type="button" aria-label="Open videos and live streams" title="TLC TV: videos, tutorials and live streams" onClick={()=>setWatchOpen(true)}><TvMinimal size={20}/><span>TLC TV</span></button><button type="button" aria-label="Open settings" title="Settings" onClick={()=>setOpen(true)}><Settings2 size={20}/><span>Settings</span></button></div></header>{offline&&<div className="power-offline-banner" role="status"><WifiOff size={15}/><span>You’re offline. Some photos and videos may be unavailable.</span></div>}<Sheet open={open} onOpenChange={setOpen}><SheetContent className="power-settings-sheet overflow-y-auto" side="right"><SheetTitle>Settings</SheetTitle><SheetDescription>Training, appearance and app options.</SheetDescription><TrainingSettings/></SheetContent></Sheet><MediaSheet open={watchOpen} onOpenChange={setWatchOpen}/></>;
 }

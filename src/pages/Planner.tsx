@@ -202,7 +202,7 @@ function PlannerEditor({owner}:{owner:string}) {
               <FileText className="w-5 h-5 text-primary" />
             </div>
             <div className="min-w-0">
-              <h1 className="font-display text-sm sm:text-base font-bold tracking-tight truncate">Workout builder</h1>
+              <h1 className="font-display text-sm sm:text-base font-bold tracking-tight truncate">My plans</h1>
               <p className="text-[8px] font-mono text-muted-foreground uppercase tracking-[0.2em]">
                 {totalExercises} exercise{totalExercises !== 1 ? 's' : ''}
               </p>
@@ -236,7 +236,7 @@ function PlannerEditor({owner}:{owner:string}) {
       <WorkoutCoach open={coachOpen} onOpenChange={setCoachOpen} workoutSlugs={sections.flatMap(s=>s.entries.map(e=>e.exercise.slug))} onAdd={addCoachExercises}/>
 
       <main className="max-w-3xl mx-auto px-3 sm:px-4 md:px-8 py-4 space-y-4 pb-28 md:pb-8">
-        <div className="rounded-2xl border bg-card p-4"><p className="font-bold text-lg">Your workout, your way</p><p className="text-sm text-muted-foreground mt-2">Add movements or plan together with your coach.</p><Button variant="outline" className="min-h-12 mt-4 gap-2" onClick={()=>setCoachOpen(true)}><Sparkles className="w-4 h-4"/>Chat with workout coach</Button></div>
+        <div className="rounded-2xl border bg-card p-4"><p className="font-bold text-lg">Create a custom plan</p><p className="text-sm text-muted-foreground mt-2">Save a repeatable routine, or build with your coach.</p><Button variant="outline" className="min-h-12 mt-4 gap-2" onClick={()=>setCoachOpen(true)}><Sparkles className="w-4 h-4"/>Chat with workout coach</Button></div>
 
         {localStorage.getItem('power-active-workout-v2') && (
           <Button type="button" variant="outline" className="power-elevated h-12 w-full rounded-2xl font-bold"

@@ -471,20 +471,27 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   {
     "id": "human-flag",
     "title": "Human Flag",
-    "short": "Hanging control, side support and flag",
-    "focus": "Hanging control, side support and flag",
+    "short": "Supported entries, band help and sideways holds",
+    "focus": "Push, pull and side-body control",
     "equipment": "Suitable stable flag apparatus for full skill",
     "cue": "Practice a controlled variation, then build repeatable quality before increasing leverage.",
-    "safety": "Use a comfortable range and stop when technique deteriorates or joint pain appears.",
+    "safety": "Use stable apparatus and controlled entry and exit. Practice both sides. Band assistance does not replace the starting checks.",
     "group": "Strength",
     "slugs": [
       "side-plank",
       "active-hang",
       "scapular-pull-up",
-      "clutch-flag",
+      "feet-assisted-human-flag",
+      "vertical-human-flag",
+      "band-assisted-human-flag",
+      "tuck-human-flag",
+      "one-leg-human-flag",
+      "straddle-human-flag",
       "human-flag"
     ],
-    "accessories": []
+    "accessories": [
+      "clutch-flag"
+    ]
   },
   {
     "id": "yoga-foundation",
@@ -905,12 +912,38 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "ring-support-hold",
       "ring-turnout-support-hold",
       "iron-cross-assisted-hold",
+      "short-lever-iron-cross",
+      "band-assisted-iron-cross",
       "iron-cross"
     ],
     "accessories": [
       "maltese",
       "victorian-cross",
       "ringmaster"
+    ],
+    "kind": "progression"
+  },
+  {
+    "id": "iron-cross",
+    "title": "Iron Cross",
+    "short": "Ring support, assisted holds and straight-arm cross strength",
+    "focus": "Support control and carefully scaled cross practice",
+    "equipment": "Rings; assistance is described for each movement",
+    "cue": "Own the support position and a controlled return before changing assistance.",
+    "safety": "This is advanced ring work. Use specialist coaching for unfamiliar cross and band setups. Stop when joint discomfort or loss of control appears.",
+    "group": "Rings",
+    "slugs": [
+      "assisted-ring-support-hold",
+      "ring-support-hold",
+      "ring-turnout-support-hold",
+      "short-lever-iron-cross",
+      "iron-cross-assisted-hold",
+      "band-assisted-iron-cross",
+      "iron-cross"
+    ],
+    "accessories": [
+      "scapular-push-up",
+      "active-hang"
     ],
     "kind": "progression"
   },

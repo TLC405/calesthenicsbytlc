@@ -1,5 +1,7 @@
 /** Public creator sources matched by title/embed; these are not human technique certifications. */
 export const MOVEMENT_MEDIA:Record<string,{id:string;creator:string;title:string;source:string;scope?:'clip'|'guide'}>={
+ 'band-assisted-iron-cross':{id:'kvxLvwsCmFQ',creator:'Nejc Hojc Personal Training Systems',title:'Iron Cross Band Assisted',source:'https://www.youtube.com/watch?v=kvxLvwsCmFQ',scope:'clip'},
+ 'band-assisted-human-flag':{id:'ngUFrZGO-bQ',creator:'Simonster Strength',title:'Tips for Band-Assisted Flags',source:'https://www.youtube.com/watch?v=ngUFrZGO-bQ',scope:'clip'},
  'ring-row':{id:'xhlReCpAE9k',creator:'CrossFit',title:'The Ring Row',source:'https://www.youtube.com/watch?v=xhlReCpAE9k'},
  'hollow-body-hold':{id:'LlDNef_Ztsc',creator:'GMB Fitness',title:'Hollow Body Hold Progression',source:'https://gmb.io/hollow-body/'},
  'wheel-pose':{id:'IwDHNXc_CEQ',creator:'Esther Ekhart',title:'How to get into wheel pose',source:'https://www.youtube.com/watch?v=IwDHNXc_CEQ'},

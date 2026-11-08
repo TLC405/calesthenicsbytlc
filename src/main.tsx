@@ -6,6 +6,7 @@ import "./index.css";
 import "./styles/neumorph.css";
 import "./styles/power-gold.css";
 import "./styles/beginner-practice.css";
+import "./styles/ui-sweep.css";
 
 // Match the HTML bootstrap before React paints, including direct Library links.
 // Only appearance preferences are migrated; training records stay intact.
