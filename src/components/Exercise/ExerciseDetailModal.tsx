@@ -9,8 +9,8 @@ import { supabase } from '@/integrations/supabase/client';
 
 interface Exercise {
   id: string; name: string; slug: string; category: string;
-  primary_muscles: string[]; secondary_muscles: string[]; equipment: string[];
-  cues: unknown; difficulty_level?: number | null; youtube_url?: string | null;
+  primary_muscles?: string[]; secondary_muscles?: string[]; equipment?: string[];
+  cues?: unknown; difficulty_level?: number | null; youtube_url?: string | null;
   instagram_url?: string | null; image_url?: string | null;
   chain_group?: string | null; chain_order?: number | null;
   stabilizer_muscles?: string[] | null; tendons_involved?: string[] | null;
@@ -24,10 +24,11 @@ interface ExerciseDetailModalProps {
   open: boolean;
   onClose: () => void;
   onAddToWorkout?: (exercise: Exercise) => void;
+  actionLabel?: string;
 }
 const difficulty = ['Not rated', 'Beginner', 'Novice', 'Intermediate', 'Advanced', 'Elite'];
 
-export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }: ExerciseDetailModalProps) {
+export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout, actionLabel = 'Add to workout' }: ExerciseDetailModalProps) {
   const [current, setCurrent] = useState<Exercise | null>(exercise);
   const [progressions, setProgressions] = useState<Progression[]>([]);
   useEffect(() => { setCurrent(exercise); }, [exercise]);
@@ -95,7 +96,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout }:
               <Button className="w-full min-h-12 rounded-xl font-semibold" onClick={() => {
                 onAddToWorkout(current); onClose();
               }}>
-                <Plus size={18} className="mr-2"/> Add to workout
+                <Plus size={18} className="mr-2"/> {actionLabel}
               </Button>
             )}
           </div>
