@@ -5,6 +5,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ChevronRight, Plus, BookOpen, Dumbbell, CalendarDays } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
+import { movementGoals } from '@/lib/movementGoals';
 
 interface RecentWorkout {
   id: string;
@@ -13,16 +14,7 @@ interface RecentWorkout {
   entries: unknown;
 }
 
-const focusAreas = [
-  { label: 'Planche', search: 'planche' },
-  { label: 'Handstands', search: 'handstand' },
-  { label: 'Grip', search: 'grip' },
-  { label: 'Human flag', search: 'flag' },
-  { label: 'Pull & levers', search: 'lever' },
-  { label: 'Rings', search: 'rings' },
-  { label: 'Legs', search: 'squat' },
-  { label: 'Mobility', search: 'mobility' },
-] as const;
+
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -41,7 +33,7 @@ export default function Dashboard() {
     return () => { active = false; };
   }, [user]);
 
-  const browse = (search: string) => navigate('/library', { state: { search } });
+  const browse = (goal: string) => navigate('/library', { state: { goal } });
 
   return (
     <div className="power-shell power-quiet-home">
@@ -84,8 +76,8 @@ export default function Dashboard() {
             <Button variant="ghost" className="power-home-text-action" onClick={() => navigate('/library')}>All exercises <ChevronRight size={16}/></Button>
           </div>
           <div className="power-focus-list">
-            {focusAreas.map((item) => (
-              <button key={item.label} type="button" className="power-focus-item" onClick={() => browse(item.search)}>
+            {movementGoals.map((item) => (
+              <button key={item.id} type="button" className="power-focus-item" onClick={() => browse(item.id)}>
                 <span>{item.label}</span>
                 <ChevronRight size={16} aria-hidden="true" />
               </button>
