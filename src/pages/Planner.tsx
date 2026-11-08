@@ -101,34 +101,48 @@ export default function Planner() {
         body: { query: `Build a complete workout with warm-up, main workout, cool-down and compression sections. Request: ${prompt}` },
       });
       if (res.error) throw new Error(res.error.message);
-      const exercises = res.data?.exercises || [];
-      if (!exercises.length) { toast.error('Coach returned no exercises'); return; }
+      // Accept only exercises that exist in the real exercise database.
+      // AI suggestions cannot create placeholder exercise IDs or fake tutorials.
+      const suggestions = Array.isArray(res.data?.exercises) ? res.data.exercises : [];
+      if (!suggestions.length) { toast.error('Coach returned no exercises'); return; }
+      const { data: catalog, error: catalogError } = await supabase.from('exercises').select('*');
+      if (catalogError) throw catalogError;
+      const library = (catalog || []) as Exercise[];
+      const exercises: Exercise[] = suggestions.map((suggestion: any) => {
+        const id = String(suggestion?.id || suggestion?.exercise_id || '');
+        const name = String(suggestion?.name || '').trim().toLowerCase();
+        const slug = String(suggestion?.slug || '').trim().toLowerCase();
+        return library.find(e => (id && e.id === id) ||
+          (name && e.name.toLowerCase() === name) ||
+          (slug && e.slug.toLowerCase() === slug)) || null;
+      }).filter((item: Exercise | null): item is Exercise => item !== null);
+      const unique = [...new Map(exercises.map(e => [e.id, e])).values()];
+      if (!unique.length) {
+        toast.error('No verified exercise matches found. Try choosing a workout template.');
+        return;
+      }
       const sectionFor = (cat: string): string => {
         const c = (cat || '').toLowerCase();
         if (['mobility', 'flexibility'].includes(c)) return 'warmup';
-        if (['yoga'].includes(c)) return 'cooldown';
+        if (c === 'yoga') return 'cooldown';
         return 'workout';
       };
-      setWorkoutName(prev => prev || `Coach: ${prompt.slice(0, 40)}`);
-      setSections(prev => prev.map(s => {
-        const items = exercises.filter((e: any) => sectionFor(e.category) === s.key);
+      setWorkoutName(prev => prev || 'Coach: ' + prompt.slice(0, 40));
+      setSections(prev => prev.map(section => {
+        const items = unique.filter(e => sectionFor(e.category) === section.key);
         return {
-          ...s,
-          open: s.key === 'workout' || items.length > 0,
+          ...section,
+          open: section.key === 'workout' || items.length > 0,
           entries: [
-            ...s.entries,
-            ...items.map((e: any) => ({
-              exercise: {
-                id: e.name, name: e.name, slug: e.name, category: e.category,
-                primary_muscles: e.primary_muscles || [], cues: e.cues,
-                youtube_url: e.youtube_url || null, difficulty_level: e.difficulty,
-              } as Exercise,
-              sets: [{ reps: 10 }, { reps: 10 }, { reps: 10 }],
+            ...section.entries,
+            ...items.map(exercise => ({
+              exercise, sets: suggestedSets(exercise),
+              unit: exerciseIsHold(exercise.name) ? 'seconds' as const : 'reps' as const,
             })),
           ],
         };
       }));
-      toast.success(`Coach added ${exercises.length} exercises`);
+      toast.success(`Coach added ${unique.length} verified exercises`);
       setCoachOpen(false);
       setCoachPrompt('');
     } catch (err: any) {
