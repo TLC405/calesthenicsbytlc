@@ -76,7 +76,7 @@ export function buildFocusPlan(preferences:FocusPreferences,profile:SkillTrainin
  const availableFocus=candidates.filter(safe);
  const focusPrimary=componentFocus?(availableFocus.find(slug=>!nodeProgress(slug,history).consistent)||availableFocus[availableFocus.length-1]):null;
  const chosen=poor&&prefs.focus==='auto'?(primary||focusPrimary):(focusPrimary||primary);
- if(!goal.slugs.some(safe))reasons.push('The main skill is not available with your current equipment or readiness. This session uses preparation; adjust your setup to practice the skill itself.');
+ if(!goal.slugs.some(safe))reasons.push(profile.equipmentMode==='informational'?'The main skill needs more preparation at your current level. This session works on its starting steps.':'The main skill is not available with your current equipment or readiness. This session uses preparation; adjust your setup to practice the skill itself.');
  const base=buildSkillWorkout(goal.id,stage,prefs.minutes,profile);
  const items:SkillWorkoutItem[]=[];const seen=new Set<string>();
  const add=(slug:string,phase:WorkoutPhase)=>{

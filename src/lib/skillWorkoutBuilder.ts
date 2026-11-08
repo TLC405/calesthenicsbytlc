@@ -2,7 +2,7 @@ import publicCatalog from '../data/publicExerciseCatalog.json';
 import { SKILL_PATHS } from '../data/skillPaths';
 import { FOUNDATION_DAYS } from '../data/foundationProgram';
 import { nodeDose } from './skillGraph';
-import { allowedAtLevel, equipmentReasons, minimumTier, type TrainingReadiness, type TrainingTier } from './trainingPolicy';
+import { allowedAtLevel, equipmentReadinessReasons, minimumTier, type TrainingReadiness, type TrainingTier } from './trainingPolicy';
 export type SkillLevel='foundation'|'building'|'advanced';
 export type SkillMinutes=15|25|40;
 export type WorkoutPhase='warmup'|'skill'|'support'|'cooldown';
@@ -19,7 +19,7 @@ export const legacyTier=(level:SkillLevel):TrainingTier=>level==='advanced'?4:le
 export function getCandidates(goalId:string,level:SkillLevel,phase:WorkoutPhase,readiness:TrainingReadiness={tier:legacyTier(level)}):SkillExercise[]{
  const goal=findSkillGoal(goalId);if(!goal)return[];
  const slugs=phase==='warmup'?goal.warmup:phase==='skill'?goal.main[level]:phase==='support'?goal.support:goal.cooldown;
- const candidates=slugs.flatMap(slug=>{const e=catalog.get(slug);return e&&allowedAtLevel(slug,readiness)&&(!readiness.equipment||!equipmentReasons(slug,readiness.equipment).length)?[e]:[];});
+ const candidates=slugs.flatMap(slug=>{const e=catalog.get(slug);return e&&allowedAtLevel(slug,readiness)&&!equipmentReadinessReasons(slug,readiness).length?[e]:[];});
  // Preparation stays simple. Skill/support choices remain within the selected level and demonstrated capabilities.
  return phase==='skill'?candidates.sort((a,b)=>minimumTier(b.slug)-minimumTier(a.slug)):candidates;
 }

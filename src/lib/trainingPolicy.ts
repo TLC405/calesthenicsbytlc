@@ -4,7 +4,7 @@ export type TrainingTier=1|2|3|4|5;
 export const TRAINING_LEVELS=[{id:1,label:'L1 · Starting',note:'Supported positions and simple movement'},{id:2,label:'L2 · Foundation',note:'Repeatable basic strength and control'},{id:3,label:'L3 · Building',note:'Tuck skills, active compression and assisted presses'},{id:4,label:'L4 · Advanced',note:'Inversion strength and longer levers'},{id:5,label:'L5 · Elite',note:'Full skills and demanding unilateral work'}] as const;
 export const CAPABILITIES=[{id:'push-base',label:'Controlled basic push-ups'},{id:'pull-base',label:'Controlled pulling and hanging'},{id:'support-base',label:'Stable straight-arm support'},{id:'inversion-control',label:'Controlled handstand entry and exit'},{id:'compression-control',label:'Controlled straight-leg compression lifts'},{id:'straight-arm-base',label:'Comfortable planche lean with straight elbows'}] as const;
 export type Capability=typeof CAPABILITIES[number]['id'];
-export type TrainingReadiness={tier?:TrainingTier;capabilities?:Capability[];equipment?:readonly string[]};
+export type TrainingReadiness={equipmentMode?:'selected'|'informational';tier?:TrainingTier;capabilities?:Capability[];equipment?:readonly string[]};
 type Rule={tier?:TrainingTier;requires?:Capability[];regression?:string;metric?:'seconds'|'reps';target?:number};
 export const RULES:Record<string,Rule>={
  'diamond-push-up':{tier:3,requires:['push-base'],regression:'push-up'},'bulgarian-split-squat':{tier:3,regression:'split-squat'},'cossack-squat':{tier:3,regression:'bodyweight-squat'},'headstand':{tier:3,requires:['inversion-control']},'ring-push-ups':{tier:3,requires:['push-base'],regression:'incline-push-up'},'skin-the-cat':{tier:4,requires:['pull-base','support-base']},'band-assisted-pull-up':{tier:2,regression:'australian-row'},
@@ -73,7 +73,7 @@ export function safeProfile(value:unknown):{tier:TrainingTier;capabilities:Capab
 }
 export function approvedRegression(slug:string,profile:TrainingReadiness):string|null {
  const seen=new Set<string>();let current=RULES[slug]?.regression;
- while(current&&!seen.has(current)){seen.add(current);if(allowedAtLevel(current,profile)&&(!profile.equipment||!equipmentReasons(current,profile.equipment).length))return current;current=RULES[current]?.regression;}
+ while(current&&!seen.has(current)){seen.add(current);if(allowedAtLevel(current,profile)&&!equipmentReadinessReasons(current,profile).length)return current;current=RULES[current]?.regression;}
  return null;
 }
 export function exerciseReadinessReasons(exercise:{slug:string;name?:string;difficulty_level?:number|null},profile:TrainingReadiness){
@@ -93,4 +93,9 @@ export function equipmentReasons(slug:string,available:readonly string[]):string
  if(eq.includes('pool')&&!available.includes('pool'))reasons.push('Access to a suitable swimming pool is required.');
  if(/human-flag|clutch-flag/.test(slug)&&!available.includes('pole'))reasons.push('Suitable stable flag apparatus is required.');
  return reasons;
+}
+
+/** Equipment describes a movement; the app does not ask users to maintain an inventory. */
+export function equipmentReadinessReasons(slug:string,profile:TrainingReadiness){
+ return profile.equipmentMode==='informational'||!profile.equipment?[]:equipmentReasons(slug,profile.equipment);
 }

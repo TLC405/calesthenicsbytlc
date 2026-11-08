@@ -53,7 +53,7 @@ export default async function handler(req: ApiRequest, res: ServerResponse) {
   }
 
   const contextBody=body as {profile?:unknown;progress?:unknown;history?:unknown;workoutSlugs?:unknown};
-  const profile=safeProfile(contextBody.profile);
+  const profile={...safeProfile(contextBody.profile),equipmentMode:'informational' as const};
   const history=sanitizeCoachHistory(contextBody.history);
   const workoutSlugs=sanitizeBuilderSlugs(contextBody.workoutSlugs);
   const context=coachContext(profile,Array.isArray(contextBody.progress)?contextBody.progress:[],Array.isArray((contextBody.profile as {equipment?:unknown})?.equipment)?(contextBody.profile as {equipment:string[]}).equipment:["floor"]);

@@ -9053,7 +9053,7 @@ function approvedRegression(slug, profile) {
   let current = RULES[slug]?.regression;
   while (current && !seen.has(current)) {
     seen.add(current);
-    if (allowedAtLevel(current, profile) && (!profile.equipment || !equipmentReasons(current, profile.equipment).length)) return current;
+    if (allowedAtLevel(current, profile) && !equipmentReadinessReasons(current, profile).length) return current;
     current = RULES[current]?.regression;
   }
   return null;
@@ -9079,15 +9079,18 @@ function equipmentReasons(slug, available) {
   if (/human-flag|clutch-flag/.test(slug) && !available.includes("pole")) reasons.push("Suitable stable flag apparatus is required.");
   return reasons;
 }
+function equipmentReadinessReasons(slug, profile) {
+  return profile.equipmentMode === "informational" || !profile.equipment ? [] : equipmentReasons(slug, profile.equipment);
+}
 
 // src/lib/coachGrounding.ts
 var known = new Map(publicExerciseCatalog_default.map((e) => [e.slug, e]));
 function coachContext(profile, progress = [], equipment = ["floor"]) {
   const ready = safeProfile(profile);
   const gear = Array.isArray(equipment) ? equipment.filter((e) => typeof e === "string" && ["floor", "wall", "rings", "bar", "parallettes", "bands", "bench", "pole", "pool"].includes(e)) : ["floor"];
-  const allowed = publicExerciseCatalog_default.filter((e) => allowedAtLevel(e.slug, ready) && !equipmentReasons(e.slug, gear).length);
+  const allowed = publicExerciseCatalog_default.filter((e) => allowedAtLevel(e.slug, ready) && !equipmentReadinessReasons(e.slug, { ...profile, equipment: gear }).length);
   const records = Array.isArray(progress) ? progress.filter((p) => p && typeof p === "object" && known.has(p.nodeId) && Number.isFinite(p.value) && Number.isInteger(p.quality)).slice(-12).map((p) => ({ nodeId: p.nodeId, value: p.value, metric: p.metric === "seconds" ? "seconds" : "reps", quality: Math.max(1, Math.min(5, p.quality)) })) : [];
-  return { profile: ready, equipment: gear, progress: records, goals: [...SKILL_PATHS, ...FOUNDATION_DAYS].map((g) => ({ id: g.id, title: g.title, nodes: "slugs" in g ? g.slugs : g.main, ..."accessories" in g ? { optionalDrills: g.accessories } : {}, ..."kind" in g ? { kind: g.kind } : {} })), allowedExercises: allowed.map((e) => ({ slug: e.slug, name: e.name, minimumLevel: minimumTier(e.slug), equipment: e.equipment, readiness: RULES[e.slug]?.requires || [], regression: RULES[e.slug]?.regression || null, cues: Array.isArray(e.cues) ? e.cues.slice(0, 3) : [] })) };
+  return { profile: ready, equipment: profile.equipmentMode === "informational" ? [] : gear, equipmentMode: profile.equipmentMode, equipmentPolicy: profile.equipmentMode === "informational" ? "Do not ask for equipment selection. Describe equipment needed alongside each suggested movement." : void 0, progress: records, goals: [...SKILL_PATHS, ...FOUNDATION_DAYS].map((g) => ({ id: g.id, title: g.title, nodes: "slugs" in g ? g.slugs : g.main, ..."accessories" in g ? { optionalDrills: g.accessories } : {}, ..."kind" in g ? { kind: g.kind } : {} })), allowedExercises: allowed.map((e) => ({ slug: e.slug, name: e.name, minimumLevel: minimumTier(e.slug), equipment: e.equipment, readiness: RULES[e.slug]?.requires || [], regression: RULES[e.slug]?.regression || null, cues: Array.isArray(e.cues) ? e.cues.slice(0, 3) : [] })) };
 }
 function validateCoachSelection(value, profile) {
   const raw = value && typeof value === "object" ? value : {};
@@ -9096,11 +9099,11 @@ function validateCoachSelection(value, profile) {
   const requested = Array.isArray(raw.exercise_slugs) ? raw.exercise_slugs.filter((s) => typeof s === "string").slice(0, 8) : [];
   const accepted = [...new Set(requested.flatMap((slug) => {
     if (!known.has(slug)) return [];
-    if (allowedAtLevel(slug, profile) && (!profile.equipment || !equipmentReasons(slug, profile.equipment).length)) return [slug];
+    if (allowedAtLevel(slug, profile) && !equipmentReadinessReasons(slug, profile).length) return [slug];
     const regression = approvedRegression(slug, profile);
     return regression ? [regression] : [];
   }))];
-  const changed = requested.some((slug) => !known.has(slug) || !allowedAtLevel(slug, profile) || Boolean(profile.equipment) && equipmentReasons(slug, profile.equipment).length > 0);
+  const changed = requested.some((slug) => !known.has(slug) || !allowedAtLevel(slug, profile) || equipmentReadinessReasons(slug, profile).length > 0);
   return { goalId, focusSlug: accepted[0] || null, exercises: accepted.map((slug) => known.get(slug)), message: changed ? "Some proposed drills exceeded your level or readiness. POWER replaced or removed those drills; review the level-appropriate workout before training." : typeof raw.message === "string" ? raw.message.slice(0, 4e3) : "Review your level-appropriate workout.", adjusted: changed };
 }
 

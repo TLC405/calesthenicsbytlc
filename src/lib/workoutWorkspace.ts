@@ -12,11 +12,11 @@ export function cleanWorkoutItems(raw:unknown):SkillWorkoutItem[]{
  return raw.flatMap(item=>{const slug=typeof item?.exercise?.slug==='string'?canonicalSlug(item.exercise.slug):'';const exercise=exerciseBySlug.get(slug);
   if(!exercise||seen.has(slug)||!WORKOUT_PHASES.includes(item.phase)||!Number.isInteger(item.sets)||item.sets<1||item.sets>12||!Number.isFinite(item.target)||item.target<1||item.target>999)return[];
   seen.add(slug);const dose=nodeDose(slug);return [{key:slug,exercise,phase:item.phase,sets:item.sets,target:item.target,metric:dose.metric,perSide:/split-squat|pistol|single-leg|one-leg/.test(slug)}];
- }).slice(0,12);
+ }).slice(0,240);
 }
 export function addWorkoutMovement(items:SkillWorkoutItem[],slug:string,phase:WorkoutPhase,profile:SkillTrainingProfile):SkillWorkoutItem[]{
  const canonical=canonicalSlug(slug);const exercise=exerciseBySlug.get(canonical);
- if(!exercise||items.length>=12||items.some(i=>i.exercise.slug===canonical)||trainingBlockers(canonical,profile,true).length)return items;
+ if(!exercise||items.some(i=>i.exercise.slug===canonical)||trainingBlockers(canonical,profile,true).length)return items;
  const dose=nodeDose(canonical);return [...items,{key:canonical,phase,exercise,sets:phase==='warmup'||phase==='cooldown'?1:(profile.tier||1)<=2?2:3,target:dose.metric==='seconds'?8:(profile.tier||1)===1?4:dose.target,metric:dose.metric,perSide:/split-squat|pistol|single-leg|one-leg/.test(canonical)}];
 }
 export function readWorkoutDraft(owner:string){try{return cleanWorkoutItems(JSON.parse(localStorage.getItem(`power-home-workout-v1:${owner}`)||'[]'));}catch{return[];}}

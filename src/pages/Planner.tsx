@@ -1,5 +1,5 @@
 import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
-import { readTrainingProfile, writeTrainingProfile, trainingBlockers, type TrainingEquipment } from '@/lib/skillGraph';
+import { readTrainingProfile, writeTrainingProfile, trainingBlockers } from '@/lib/skillGraph';
 import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
 import { WorkoutCoach } from '@/components/Workout/WorkoutCoach';
 import { readCustomDraft, writeCustomDraft, startingSets, customEntryReasons, savedCustomPlans, saveCustomPlan, type CustomPlan, type PlannedSet } from '@/lib/customWorkoutDraft';
@@ -79,7 +79,7 @@ function PlannerEditor({owner}:{owner:string}) {
   const addCoachExercises=(exercises:SkillExercise[])=>{
     const profile=readTrainingProfile();const existing=new Set(sections.flatMap(s=>s.entries.map(e=>e.exercise.slug)));
     const accepted=exercises.filter(e=>!existing.has(e.slug)&&!customEntryReasons(e,profile).length);
-    if(!accepted.length){toast.info('Already added, or preparation/equipment is needed.');return;}
+    if(!accepted.length){toast.info('Already added, or preparation is needed.');return;}
     setSections(prev=>prev.map(s=>s.key==='workout'?{...s,open:true,entries:[...s.entries,...accepted.map(exercise=>({exercise,sets:startingSets(exercise.slug)}))]}:s));
     toast.success(`${accepted.length} movement${accepted.length===1?'':'s'} added to your workout`);
   };
@@ -256,7 +256,7 @@ function PlannerEditor({owner}:{owner:string}) {
           className="h-12 rounded-xl border-border/50 bg-card font-display font-bold text-base placeholder:font-normal placeholder:text-muted-foreground"
         />
 
-        <details className="rounded-xl border p-3"><summary className="min-h-12 font-bold text-sm cursor-pointer">L{profile.tier||1} · My level and equipment</summary><TrainingLevelControls profile={profile} onChange={next=>{setProfile(next);writeTrainingProfile(next);setComfortable(false);}}/><fieldset className="mt-3"><legend className="text-xs font-bold mb-2">Available equipment</legend><div className="flex flex-wrap gap-2">{(['floor','wall','rings','bar','parallettes','bands','bench','pole','pool'] as TrainingEquipment[]).map(gear=><button type="button" key={gear} aria-pressed={profile.equipment.includes(gear)} className={`min-h-12 px-3 rounded-xl border text-xs capitalize ${profile.equipment.includes(gear)?'border-primary text-primary bg-primary/5':''}`} onClick={()=>{const next={...profile,equipment:profile.equipment.includes(gear)?profile.equipment.filter(g=>g!==gear):[...profile.equipment,gear]};setProfile(next);writeTrainingProfile(next);setComfortable(false);}}>{gear}</button>)}</div></fieldset></details>
+        <details className="rounded-xl border p-3"><summary className="min-h-12 font-bold text-sm cursor-pointer">L{profile.tier||1} · My level</summary><TrainingLevelControls profile={profile} onChange={next=>{setProfile(next);writeTrainingProfile(next);setComfortable(false);}}/></details>
         <details className="rounded-xl border p-3"><summary className="min-h-12 font-bold text-sm cursor-pointer">Strength templates (optional)</summary>
           <div className="pt-3">
           <div className="grid grid-cols-4 gap-2">

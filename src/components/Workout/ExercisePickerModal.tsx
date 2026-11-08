@@ -1,7 +1,7 @@
 import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
 import { SKILL_PATHS } from '@/data/skillPaths';
 import { matchesProgression, canonicalSlug } from '@/lib/exerciseProgressions';
-import { equipmentReasons, exerciseReadinessReasons } from '@/lib/trainingPolicy';
+import { equipmentReadinessReasons, exerciseReadinessReasons } from '@/lib/trainingPolicy';
 import { readTrainingProfile } from '@/lib/skillGraph';
 import { exerciseLabel } from '@/lib/exerciseLabels';
 import { useState, useEffect } from 'react';
@@ -58,7 +58,7 @@ export function ExercisePickerModal({ open, onClose, onSelectExercise }: Exercis
     const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = matchesExerciseCategory(exercise,activeCategory);
-    return canonicalSlug(exercise.slug)===exercise.slug && matchesSearch && matchesCategory && matchesProgression(exercise.slug,pathId) && !exerciseReadinessReasons(exercise,profile).length && !equipmentReasons(exercise.slug,profile.equipment).length;
+    return canonicalSlug(exercise.slug)===exercise.slug && matchesSearch && matchesCategory && matchesProgression(exercise.slug,pathId) && !exerciseReadinessReasons(exercise,profile).length && !equipmentReadinessReasons(exercise.slug,profile).length;
   });
 
   return (

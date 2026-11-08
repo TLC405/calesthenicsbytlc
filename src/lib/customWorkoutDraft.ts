@@ -1,6 +1,6 @@
 import type { SkillExercise } from './skillWorkoutBuilder';
 import { nodeDose } from './skillGraph';
-import { exerciseReadinessReasons, equipmentReasons } from './trainingPolicy';
+import { exerciseReadinessReasons, equipmentReadinessReasons } from './trainingPolicy';
 import type { SkillTrainingProfile } from './skillGraph';
 export type PlannedSet={reps:number;seconds?:number;weight?:number};
 export type PlannedEntry={exercise:SkillExercise;sets:PlannedSet[]};
@@ -17,4 +17,4 @@ export function readCustomDraft(owner:string){try{return customPlan(JSON.parse(l
 export function writeCustomDraft(owner:string,plan:CustomPlan){localStorage.setItem(draftKey(owner),JSON.stringify(plan));}
 export function savedCustomPlans(owner:string):CustomPlan[]{try{const raw=JSON.parse(localStorage.getItem(`power-saved-plans-v1:${owner}`)||'[]');return Array.isArray(raw)?raw.map(customPlan).filter((x):x is CustomPlan=>Boolean(x)).slice(0,30):[];}catch{return[];}}
 export function saveCustomPlan(owner:string,plan:CustomPlan){const name=plan.name.trim()||'My workout';const previous=savedCustomPlans(owner);localStorage.setItem(`power-saved-plans-v1:${owner}`,JSON.stringify([{...plan,name},...previous.filter(p=>p.name!==name)].slice(0,30)));writeCustomDraft(owner,{...plan,name});}
-export function customEntryReasons(exercise:SkillExercise,profile:SkillTrainingProfile){return [...exerciseReadinessReasons(exercise,profile),...equipmentReasons(exercise.slug,profile.equipment)];}
+export function customEntryReasons(exercise:SkillExercise,profile:SkillTrainingProfile){return [...exerciseReadinessReasons(exercise,profile),...equipmentReadinessReasons(exercise.slug,profile)];}

@@ -1,4 +1,4 @@
-import { RULES, equipmentReasons, readinessReasons, safeProfile, allowedAtLevel, type TrainingReadiness } from './trainingPolicy';
+import { RULES, equipmentReadinessReasons, readinessReasons, safeProfile, allowedAtLevel, type TrainingReadiness } from './trainingPolicy';
 import catalog from '../data/publicExerciseCatalog.json';
 import { SKILL_PATHS } from '../data/skillPaths';
 
@@ -66,11 +66,11 @@ export function saveAttempt(owner:string,attempt:SkillAttempt) {
 export function removeAttempt(owner:string,id:string) {deviceSkillProgress.write(owner,deviceSkillProgress.read(owner).filter(x=>x.id!==id));}
 export function readTrainingProfile(): SkillTrainingProfile {
   try {const x=JSON.parse(localStorage.getItem('power-training-profile-v1')||'null');
-    if(x&&Array.isArray(x.equipment))return {...safeProfile(x),equipment:x.equipment.filter((v:string)=>['floor','wall','rings','bar','parallettes','bands','bench','pole','pool'].includes(v)),safeExit:x.safeExit===true};
+    if(x&&Array.isArray(x.equipment))return {...safeProfile(x),equipmentMode:'informational',equipment:x.equipment.filter((v:string)=>['floor','wall','rings','bar','parallettes','bands','bench','pole','pool'].includes(v)),safeExit:x.safeExit===true};
   } catch {}
-  return {tier:1,capabilities:[],equipment:['floor'],safeExit:false};
+  return {tier:1,capabilities:[],equipmentMode:'informational',equipment:['floor'],safeExit:false};
 }
-export function writeTrainingProfile(profile:SkillTrainingProfile){localStorage.setItem('power-training-profile-v1',JSON.stringify(profile));window.dispatchEvent(new Event('power-training-profile'));}
+export function writeTrainingProfile(profile:SkillTrainingProfile){localStorage.setItem('power-training-profile-v1',JSON.stringify({...profile,equipmentMode:'informational'}));window.dispatchEvent(new Event('power-training-profile'));}
 export function nodeDose(slug:string) {
  const timed=RULES[slug]?.metric==='seconds'||(!RULES[slug]?.metric&&/hold|hang|stand$|planche$|planche-lean|planche-plank|l-sit|tuck-sit|stretch|forward-fold|lever|plank$/.test(slug)&&!/(push-up|kick-up|bail|dip|lift|transition|raise|row)/.test(slug));
  return {metric:timed?'seconds' as const:'reps' as const,target:RULES[slug]?.target||(slug==='ring-muscle-up'?1:slug==='handstand-push-up'?3:timed?8:5),sets:3,restSeconds:/planche|press|hspu|muscle-up/.test(slug)?120:60,stopRule:'End the attempt when technique deteriorates or joint pain appears.'};
@@ -91,7 +91,7 @@ export function regressionFor(slug:string) {
 export function trainingBlockers(slug:string,profile:SkillTrainingProfile,comfortable:boolean) {
   const reasons:string[]=readinessReasons(slug,profile);
   if(!comfortable)reasons.push('Confirm a comfortable, pain-free variation before starting.');
-  reasons.push(...equipmentReasons(slug,profile.equipment));
+  reasons.push(...equipmentReadinessReasons(slug,profile));
   if(/handstand|headstand|forearm-stand|elbow-stand|press-to-hs|hs-kick-up|stalder-negative|wall-toe-taps/.test(slug)&&!/bail|prep|mobility/.test(slug)&&!profile.safeExit)reasons.push('Confirm that you can safely enter and exit the inversion.');
   return reasons;
 }
@@ -101,9 +101,9 @@ export function recommendedNode(pathId:string,attempts:SkillAttempt[],profile:Tr
   const targetIndex=targetSlug?path.slugs.indexOf(targetSlug):-1;
   const slugs=targetIndex>=0?path.slugs.slice(0,targetIndex+1):path.slugs;
   for(const slug of slugs) {
-    if(!allowedAtLevel(slug,profile)||(profile.equipment&&equipmentReasons(slug,profile.equipment).length)||nodeProgress(slug,attempts).consistent)continue;
+    if(!allowedAtLevel(slug,profile)||equipmentReadinessReasons(slug,profile).length||nodeProgress(slug,attempts).consistent)continue;
     const dependencies=skillEdges.filter(e=>e.to===slug&&e.type==='prerequisite');
-    return dependencies.find(e=>allowedAtLevel(e.from,profile)&&(!profile.equipment||!equipmentReasons(e.from,profile.equipment).length)&&!nodeProgress(e.from,attempts).consistent)?.from || slug;
+    return dependencies.find(e=>allowedAtLevel(e.from,profile)&&!equipmentReadinessReasons(e.from,profile).length&&!nodeProgress(e.from,attempts).consistent)?.from || slug;
   }
-  return [...slugs].reverse().find(slug=>allowedAtLevel(slug,profile)&&(!profile.equipment||!equipmentReasons(slug,profile.equipment).length))||null;
+  return [...slugs].reverse().find(slug=>allowedAtLevel(slug,profile)&&!equipmentReadinessReasons(slug,profile).length)||null;
 }

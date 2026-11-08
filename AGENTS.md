@@ -9,4 +9,6 @@ Selected POWER icon: concept 4, the colorful TLC sketchbook sticker (red T, blue
 
 Requested and selected by Lord TLC on November 7, 2026.
 
-Media preferences: make primary movement previews full card width on phones. Do not reuse a general coaching-video or category image as the exercise picture. Keep tutorials, playlists and supported live streams embedded inside POWER; do not add custom outbound Watch buttons or external tutorial-search pop-ups. Preserve provider-required player controls and attribution.
+Media preferences: use readable thumbnails beside movements, workout entries and focus choices; show the large preview inside movement details. Do not reuse a general coaching-video or category image as the exercise picture. Keep tutorials, playlists and supported live streams embedded inside POWER; do not add custom outbound Watch buttons or external tutorial-search pop-ups. Preserve provider-required player controls and attribution.
+
+Home should stay compact: one focus picker, a searchable movement list grouped by colored levels, and the editable workout. Do not add equipment-selection steps or a workout-duration picker. Equipment is descriptive information, not an inventory gate. Keep capability and inversion checks. Sessions have no time cutoff.
