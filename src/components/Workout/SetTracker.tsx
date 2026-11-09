@@ -1,4 +1,4 @@
-import { Plus, Minus, Trash2 } from 'lucide-react';
+import { Plus, Minus, Trash2, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -7,6 +7,7 @@ export interface SetData {
   weight?: number;
   seconds?: number;
   rpe?: number;
+  completed?: boolean;
 }
 
 interface SetTrackerProps {
@@ -20,11 +21,11 @@ export function SetTracker({ sets, onChange, showWeight = false, unit = 'reps' }
   const field: 'reps' | 'seconds' = unit === 'seconds' ? 'seconds' : 'reps';
   const step = unit === 'seconds' ? 5 : 1;
   const updateSet = (index: number, fieldName: keyof SetData, value: number) => {
-    onChange(sets.map((set, i) => i === index ? { ...set, [fieldName]: value } : set));
+    onChange(sets.map((set, i) => i === index ? { ...set, [fieldName]: value, completed: false } : set));
   };
   const addSet = () => {
     const previous = sets[sets.length - 1];
-    onChange([...sets, previous ? { ...previous } : (unit === 'seconds' ? { reps: 0, seconds: 15 } : { reps: 8 })]);
+    onChange([...sets, previous ? { ...previous, completed: false } : (unit === 'seconds' ? { reps: 0, seconds: 15, completed: false } : { reps: 8, completed: false })]);
   };
 
   return <div className="space-y-2">
@@ -32,6 +33,7 @@ export function SetTracker({ sets, onChange, showWeight = false, unit = 'reps' }
       <span className="w-8 text-center">Set</span>
       <span className="flex-1 text-center">{unit === 'seconds' ? 'Hold (sec)' : 'Reps'}</span>
       {showWeight && <span className="flex-1 text-center">Weight</span>}
+      <span className="w-11 text-center">Done</span>
       <span className="w-11"/>
     </div>
     {sets.map((set, index) => {
@@ -60,11 +62,18 @@ export function SetTracker({ sets, onChange, showWeight = false, unit = 'reps' }
           aria-label={'Set ' + (index + 1) + ' external weight'}
           onChange={e => updateSet(index, 'weight', Number(e.target.value) || 0)}
           className="h-10 w-20 flex-1 text-center rounded-lg" placeholder="Weight"/>}
+        <Button variant={set.completed ? 'default' : 'outline'} size="icon"
+          className="h-11 w-11 shrink-0 rounded-xl" aria-pressed={!!set.completed}
+          aria-label={(set.completed ? 'Mark set ' + (index + 1) + ' as not completed' : 'Mark set ' + (index + 1) + ' completed')}
+          onClick={() => onChange(sets.map((item, i) => i === index ? { ...item, completed: !item.completed } : item))}>
+          <Check className="w-4 h-4"/>
+        </Button>
         <Button variant="ghost" size="icon" className="h-11 w-11 shrink-0 text-muted-foreground"
           aria-label={'Remove set ' + (index + 1)} onClick={() => { if (sets.length > 1) onChange(sets.filter((_, i) => i !== index)); }}
           disabled={sets.length <= 1}><Trash2 className="w-4 h-4"/></Button>
       </div>;
     })}
+    <p className="text-xs text-muted-foreground">Check off sets you actually finish. Unchecked targets never count as completed training.</p>
     <Button variant="outline" size="sm" className="w-full min-h-11 mt-2 rounded-xl" onClick={addSet}>
       <Plus className="w-4 h-4 mr-1"/> Add Set
     </Button>
