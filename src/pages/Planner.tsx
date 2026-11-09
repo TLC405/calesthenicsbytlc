@@ -56,12 +56,18 @@ const QUICK_TEMPLATES = [
   { label: 'Pull', tag: 'Pull Strength', categories: ['Pull'], terms: [] },
   { label: 'Legs', tag: 'Leg Strength', categories: ['Legs'], terms: [] },
   { label: 'Full', tag: 'Full Body', categories: ['Push', 'Pull', 'Legs', 'Core'], terms: [] },
-  { label: 'Planche', tag: 'Planche', categories: [], terms: ['planche'] },
+  { label: 'Planche', tag: 'Planche', categories: [], terms: ['planche', 'scapular protraction', 'straight arm pulldown', 'wrist preparation'] },
   { label: 'Handstand', tag: 'Handstands', categories: [], terms: ['handstand'] },
-  { label: 'Grip', tag: 'Grip Strength', categories: [], terms: ['grip', 'hang', 'pinch', 'farmer', 'wrist', 'finger', 'towel'] },
+  { label: 'Grip', tag: 'Grip Strength', categories: [], terms: ['grip', 'hang', 'pinch', 'farmer', 'wrist', 'finger', 'towel', 'extensor', 'crush'] },
   { label: 'Rings', tag: 'Rings', categories: ['Rings'], terms: ['ring', 'iron cross', 'false grip'] },
   { label: 'Flag', tag: 'Human Flag', categories: [], terms: ['flag'] },
-  { label: 'Levers', tag: 'Levers', categories: [], terms: ['lever'] },
+  { label: 'Levers', tag: 'Levers', categories: [], terms: ['lever', 'skin the cat'] },
+  { label: 'Front lever', tag: 'Front Lever', categories: [], terms: ['front lever'] },
+  { label: 'Back lever', tag: 'Back Lever', categories: [], terms: ['back lever', 'skin the cat'] },
+  { label: 'Straight arm', tag: 'Straight-arm Strength', categories: [], terms: ['straight-arm', 'straight arm', 'scapular protraction', 'planche lean', 'ring support'] },
+  { label: 'Muscle-up', tag: 'Muscle-up', categories: [], terms: ['muscle-up', 'muscle up', 'false grip', 'transition drill'] },
+  { label: 'Core', tag: 'Core & Compression', categories: ['Core'], terms: ['hollow', 'l-sit', 'v-sit', 'compression'] },
+  { label: 'Flow', tag: 'Balance & Flow', categories: [], terms: ['flow', 'balance', 'crow', 'elbow lever', 'handstand walk'] },
   { label: 'Calves', tag: 'Calves & Tibialis', categories: [], terms: ['calf', 'calves', 'tibial'] },
   { label: 'Mobility', tag: 'Mobility', categories: ['Mobility', 'Flexibility', 'Yoga'], terms: [] },
 ];
@@ -91,6 +97,7 @@ export default function Planner() {
   const [coachPrompt, setCoachPrompt] = useState('');
   const [coachLoading, setCoachLoading] = useState(false);
   const [templateDifficulty, setTemplateDifficulty] = useState('all');
+  const [showAllTemplates, setShowAllTemplates] = useState(false);
   const [openExerciseDetails, setOpenExerciseDetails] = useState<Record<string, boolean>>({});
   const [previewTarget, setPreviewTarget] = useState<{ sectionKey: string; index: number; exercise: Exercise } | null>(null);
   const [historyIndex, setHistoryIndex] = useState<Map<string, ExerciseHistory>>(new Map());
@@ -439,11 +446,15 @@ export default function Planner() {
             </select>
           </div>
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-            {QUICK_TEMPLATES.map(tpl => <Button key={tpl.label} variant="outline" onClick={() => loadTemplate(tpl)}
+            {QUICK_TEMPLATES.slice(0, showAllTemplates ? QUICK_TEMPLATES.length : 9).map(tpl => <Button key={tpl.label} variant="outline" onClick={() => loadTemplate(tpl)}
               className="h-11 rounded-xl bg-card border-border/70 text-xs font-semibold">
               {tpl.label}
             </Button>)}
           </div>
+          <Button type="button" variant="ghost" className="w-full min-h-11 text-xs font-medium"
+            onClick={() => setShowAllTemplates(value => !value)} aria-expanded={showAllTemplates}>
+            {showAllTemplates ? 'Show fewer focuses' : 'See all ' + QUICK_TEMPLATES.length + ' training focuses'}
+          </Button>
           <p className="text-xs text-muted-foreground">Choose a focus and difficulty. Every template uses existing exercises, and you can change anything.</p>
         </div>
 
