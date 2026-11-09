@@ -95,7 +95,8 @@ export function readinessReasons(slug:string,profile:TrainingReadiness):string[]
 export function allowedAtLevel(slug:string,profile:TrainingReadiness){return readinessReasons(slug,profile).length===0;}
 export function safeProfile(value:unknown):{tier:TrainingTier;capabilities:Capability[]}{
  const x=value&&typeof value==='object'?value as TrainingReadiness:{};
- return {tier:([1,2,3,4,5].includes(Number(x.tier))?Number(x.tier):1) as TrainingTier,capabilities:Array.isArray(x.capabilities)?CAPABILITIES.filter(c=>x.capabilities.includes(c.id)).map(c=>c.id):[]};
+ const capabilities = Array.isArray(x.capabilities) ? x.capabilities : [];
+ return {tier:([1,2,3,4,5].includes(Number(x.tier))?Number(x.tier):1) as TrainingTier,capabilities:CAPABILITIES.filter(c=>capabilities.includes(c.id)).map(c=>c.id)};
 }
 export function approvedRegression(slug:string,profile:TrainingReadiness):string|null {
  const seen=new Set<string>();let current=RULES[slug]?.regression;
