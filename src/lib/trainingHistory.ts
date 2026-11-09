@@ -63,6 +63,7 @@ export function buildExerciseHistory(rows: StoredWorkout[]): Map<string, Exercis
   });
   for (const workout of sorted) {
     const entries = readEntries(workout.entries);
+    const recordedThisWorkout = new Set<string>();
     for (const entry of entries) {
       const id = entry.exercise_id;
       if (typeof id !== 'string' || !id) continue;
@@ -71,7 +72,8 @@ export function buildExerciseHistory(rows: StoredWorkout[]): Map<string, Exercis
         : [];
       const done = allSets.filter(set => set.completed &&
         (entry.unit === 'seconds' ? (set.seconds ?? 0) > 0 : (set.reps ?? 0) > 0));
-      if (done.length === 0) continue;
+      if (done.length === 0 || recordedThisWorkout.has(id)) continue;
+      recordedThisWorkout.add(id);
       const session: CompletedExerciseSession = {
         date: workout.date || null,
         unit: entry.unit === 'seconds' ? 'seconds' : 'reps',
