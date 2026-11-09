@@ -22,7 +22,7 @@ interface Exercise {
   id: string; name: string; slug: string; category: string;
   primary_muscles: string[]; secondary_muscles?: string[];
   youtube_url?: string | null; equipment?: string[];
-  cues?: any; image_url?: string | null; difficulty_level?: number;
+  cues?: unknown; image_url?: string | null; difficulty_level?: number;
   sets_reps?: string | null; description?: string | null;
   chain_group?: string | null; video_verified?: boolean | null;
   instagram_url?: string | null;
@@ -129,7 +129,7 @@ export default function Planner() {
       const { data: catalog, error: catalogError } = await supabase.from('exercises').select('*');
       if (catalogError) throw catalogError;
       const library = (catalog || []) as Exercise[];
-      const exercises: Exercise[] = suggestions.map((suggestion: any) => {
+      const exercises: Exercise[] = suggestions.map((suggestion: Record<string, unknown>) => {
         const id = String(suggestion?.id || suggestion?.exercise_id || '');
         const name = String(suggestion?.name || '').trim().toLowerCase();
         const slug = String(suggestion?.slug || '').trim().toLowerCase();
@@ -166,8 +166,8 @@ export default function Planner() {
       toast.success(`Coach added ${unique.length} verified exercises`);
       setCoachOpen(false);
       setCoachPrompt('');
-    } catch (err: any) {
-      toast.error(err.message || 'Coach failed');
+    } catch (err: unknown) {
+      toast.error((err instanceof Error ? err.message : 'Coach failed'));
     } finally {
       setCoachLoading(false);
     }
@@ -274,8 +274,8 @@ export default function Planner() {
         : section));
       setOpenExerciseDetails({});
       toast.success(tpl.tag + ' template loaded — customize any exercise.');
-    } catch (err: any) {
-      toast.error(err?.message || 'Could not load template');
+    } catch (err: unknown) {
+      toast.error((err instanceof Error ? err.message : 'Could not load template'));
     }
   };
 
@@ -340,8 +340,8 @@ export default function Planner() {
       setSections(SECTION_DEFAULTS.map(s => ({ ...s, entries: [], open: s.key === 'workout' })));
       setWorkoutName('');
       setNotes('');
-    } catch (err: any) {
-      toast.error(err.message || 'Failed to save');
+    } catch (err: unknown) {
+      toast.error((err instanceof Error ? err.message : 'Failed to save'));
     } finally {
       setSaving(false);
     }
