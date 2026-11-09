@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
+import type { Json } from '@/integrations/supabase/types';
 import { Zap, ChevronRight, Play, Dumbbell, Plus, Save, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { NonNegotiablesBar } from '@/components/Training/NonNegotiablesBar';
@@ -14,7 +15,7 @@ import { toast } from 'sonner';
 
 interface TrainingDay { id: string; day_key: string; label: string; title: string; emphasis: string; exercise_categories: string[]; integrity_block_slugs: string[]; sort_order: number; }
 interface IntegrityData { slug: string; title: string; duration: string; drills: string[]; key_cues: string[]; }
-interface Exercise { id: string; name: string; slug: string; category: string; primary_muscles: string[]; secondary_muscles: string[]; equipment: string[]; cues: any; difficulty_level?: number | null; youtube_url?: string | null; instagram_url?: string | null; image_url?: string | null; chain_group?: string | null; chain_order?: number | null; sets_reps?: string | null; description?: string | null; stabilizer_muscles?: string[] | null; tendons_involved?: string[] | null; recovery_muscle?: string | null; recovery_tendon?: string | null; recovery_nervous?: string | null; }
+interface Exercise { id: string; name: string; slug: string; category: string; primary_muscles: string[]; secondary_muscles: string[]; equipment: string[]; cues: unknown; difficulty_level?: number | null; youtube_url?: string | null; instagram_url?: string | null; image_url?: string | null; chain_group?: string | null; chain_order?: number | null; sets_reps?: string | null; description?: string | null; stabilizer_muscles?: string[] | null; tendons_involved?: string[] | null; recovery_muscle?: string | null; recovery_tendon?: string | null; recovery_nervous?: string | null; }
 
 const dayColors: Record<string, string> = { A: 'hsl(var(--cat-push))', B: 'hsl(var(--cat-pull))', C: 'hsl(var(--cat-skills))', D: 'hsl(var(--cat-legs))', E: 'hsl(var(--cat-core))' };
 
@@ -74,12 +75,14 @@ export default function Train() {
       const { data: existing } = await supabase.from('workouts').select('id, entries').eq('user_id', user.id).eq('date', today).maybeSingle();
       const newEntry = { exercise_id: ex.id, exercise_name: ex.name, exercise_slug: ex.slug, category: ex.category, sets };
       if (existing) {
-        const entries = (existing.entries as any[]) || [];
-        const idx = entries.findIndex((e: any) => e.exercise_id === ex.id);
+        const entries: Record<string, Json | undefined>[] = Array.isArray(existing.entries)
+          ? existing.entries.filter((entry): entry is { [key: string]: Json | undefined } => typeof entry === 'object' && entry !== null && !Array.isArray(entry)).map(entry => ({ ...entry }))
+          : [];
+        const idx = entries.findIndex(e => e.exercise_id === ex.id);
         if (idx >= 0) entries[idx] = newEntry; else entries.push(newEntry);
-        await supabase.from('workouts').update({ entries: entries as any, updated_at: new Date().toISOString() }).eq('id', existing.id);
+        await supabase.from('workouts').update({ entries: entries as Json, updated_at: new Date().toISOString() }).eq('id', existing.id);
       } else {
-        await supabase.from('workouts').insert({ user_id: user.id, date: today, entries: [newEntry] as any });
+        await supabase.from('workouts').insert({ user_id: user.id, date: today, entries: [newEntry] as Json });
       }
       setSavedIds(prev => new Set(prev).add(ex.id));
       toast.success(`${ex.name} logged — ${sets.length} set${sets.length > 1 ? 's' : ''}`);
