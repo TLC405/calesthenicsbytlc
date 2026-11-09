@@ -10,6 +10,7 @@ import { ExercisePickerModal } from './ExercisePickerModal';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { SetData } from './SetTracker';
 import { supabase } from '@/integrations/supabase/client';
+import type { Json } from '@/integrations/supabase/types';
 import { useAuth } from '@/providers/AuthProvider';
 import { toast } from 'sonner';
 
@@ -21,7 +22,7 @@ interface Exercise {
   primary_muscles: string[];
   secondary_muscles: string[];
   equipment: string[];
-  cues: any;
+  cues: unknown;
   youtube_url?: string | null;
   instagram_url?: string | null;
   image_url?: string | null;
@@ -31,6 +32,8 @@ interface WorkoutEntry {
   exercise_id: string;
   exercise: Exercise;
   sets: SetData[];
+  unit?: 'reps' | 'seconds';
+  quality_confirmed?: boolean;
 }
 
 interface WorkoutModalProps {
@@ -83,7 +86,17 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
       setNotes(workout.notes || '');
       
       // Load exercise details for each entry
-      const workoutEntries = workout.entries as any[];
+      const workoutEntries: { exercise_id: string; sets: SetData[]; unit?: 'reps' | 'seconds'; quality_confirmed?: boolean }[] =
+        Array.isArray(workout.entries) ? workout.entries
+          .filter((item): item is Record<string, Json | undefined> =>
+            item !== null && typeof item === 'object' && !Array.isArray(item))
+          .filter(item => typeof item.exercise_id === 'string')
+          .map(item => ({
+            exercise_id: item.exercise_id as string,
+            sets: Array.isArray(item.sets) ? item.sets as SetData[] : [],
+            unit: item.unit === 'seconds' ? 'seconds' as const : 'reps' as const,
+            quality_confirmed: item.quality_confirmed === true,
+          })) : [];
       if (workoutEntries && workoutEntries.length > 0) {
         const exerciseIds = workoutEntries.map(e => e.exercise_id);
         const { data: exercises } = await supabase
@@ -145,7 +158,9 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
     
     const entriesJson = entries.map(e => ({
       exercise_id: e.exercise_id,
-      sets: e.sets.map(s => ({ reps: s.reps, weight: s.weight, rpe: s.rpe }))
+      unit: e.unit || (e.sets.some(set => (set.seconds || 0) > 0) ? 'seconds' : 'reps'),
+      quality_confirmed: e.quality_confirmed === true && e.sets.length > 0 && e.sets.every(set => set.completed === true),
+      sets: e.sets.map(s => ({ reps: s.reps, seconds: s.seconds, weight: s.weight, rpe: s.rpe, completed: s.completed === true }))
     }));
 
     let error;
@@ -156,7 +171,7 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
         .from('workouts')
         .update({
           notes,
-          entries: entriesJson as any
+          entries: entriesJson as Json
         })
         .eq('id', workoutId);
       error = result.error;
@@ -168,7 +183,7 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
           user_id: user.id,
           date: dateStr,
           notes,
-          entries: entriesJson as any
+          entries: entriesJson as Json
         });
       error = result.error;
     }
