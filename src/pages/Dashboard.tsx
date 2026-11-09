@@ -7,12 +7,12 @@ import { PowerAthleteArt } from '@/components/Brand/PowerAthleteArt';
 import { PowerDisciplineIcon, type PowerDiscipline } from '@/components/Brand/PowerDisciplineIcon';
 import { readGuestWorkouts } from '@/lib/offlineWorkouts';
 import {
-  Settings, LogOut, Sparkles, ArrowRight, ArrowUpRight, Library, Zap, Flame, TrendingUp,
+  Settings, LogOut, Sparkles, ArrowRight, ArrowUpRight, Library, TrendingUp,
   Palette, FileText, CalendarDays, GitBranch, ChevronDown, ChevronUp, Users, Crown, Target,
 } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 
-type Profile = Pick<Database['public']['Tables']['profiles']['Row'], 'display_name' | 'streak_days' | 'total_xp' | 'level'>;
+type Profile = Pick<Database['public']['Tables']['profiles']['Row'], 'display_name'>;
 type RecentWorkout = { id: string; date: string; notes: string | null; entries: unknown };
 const disciplines: { label: string; search: string; icon: PowerDiscipline; category?: string; studio?: string }[] = [
   { label: 'Planche', search: 'planche', icon: 'planche', studio: 'planche' },
@@ -55,7 +55,7 @@ export default function Dashboard() {
       try {
         const weekStart = format(new Date(Date.now() - 6 * 86400000), 'yyyy-MM-dd');
         const [profileResult, workoutsResult, countResult] = await Promise.all([
-          supabase.from('profiles').select('display_name, streak_days, total_xp, level').eq('id', user.id).single(),
+          supabase.from('profiles').select('display_name').eq('id', user.id).single(),
           supabase.from('workouts').select('id, date, notes, entries').eq('user_id', user.id).order('date', { ascending: false }).limit(5),
           supabase.from('workouts').select('id', { count: 'exact', head: true }).eq('user_id', user.id).gte('date', weekStart),
         ]);
@@ -81,9 +81,9 @@ export default function Dashboard() {
   const name = profile?.display_name;
   const unavailable = authLoading || statsLoading || loadError;
   const metrics = user ? [
-    { label: 'Day streak', value: `${profile?.streak_days ?? 0}`, unit: 'days', icon: Flame },
-    { label: 'Total XP', value: Number(profile?.total_xp ?? 0).toLocaleString(), unit: 'earned', icon: Zap },
     { label: 'Last 7 days', value: `${sevenDayWorkouts}`, unit: 'sessions', icon: TrendingUp },
+    { label: 'Recent workouts', value: `${recent.length}`, unit: 'listed', icon: CalendarDays },
+    { label: 'Recent exercises', value: `${recent.reduce((total, workout) => total + (Array.isArray(workout.entries) ? workout.entries.length : 0), 0)}`, unit: 'listed', icon: Target },
   ] : [
     { label: 'Training days', value: `${guestWorkouts.length}`, unit: 'logged', icon: CalendarDays },
     { label: 'Exercises', value: `${guestExerciseCount}`, unit: 'logged', icon: Target },
@@ -137,7 +137,7 @@ export default function Dashboard() {
 
         <div className="power-training-grid">
           <section className="power-progress-section" aria-labelledby="power-progress-title">
-            <div className="power-section-heading"><h2 id="power-progress-title">Your progress</h2><span className="power-section-meta">{user ? profile && !unavailable ? `LEVEL ${profile.level ?? 1}` : 'YOUR ACCOUNT' : 'ON THIS DEVICE'}</span></div>
+            <div className="power-section-heading"><h2 id="power-progress-title">Your progress</h2><span className="power-section-meta">{user ? 'RECORDED WORKOUTS' : 'ON THIS DEVICE'}</span></div>
             <div className="power-metrics" aria-label="Your recorded performance" aria-busy={unavailable}>{metrics.map(({ label, value, unit, icon: Icon }) => <div className="power-metric" key={label}><div className="power-metric-top"><Icon size={15} /><span>{label}</span></div><div className="power-metric-number">{unavailable ? '—' : value}<span>{unit}</span></div></div>)}</div>
             <p className="power-progress-note">{loadError ? 'Progress could not be loaded.' : user ? 'Built one session at a time.' : 'Your completed workouts stay on this device.'}{loadError && <button onClick={() => setReload(value => value + 1)}>Try again</button>}</p>
           </section>
