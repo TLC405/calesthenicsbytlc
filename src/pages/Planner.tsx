@@ -9,6 +9,7 @@ import { ExercisePickerModal } from '@/components/Workout/ExercisePickerModal';
 import { SetTracker } from '@/components/Workout/SetTracker';
 import { ExerciseDetailModal } from '@/components/Exercise/ExerciseDetailModal';
 import { getYouTubeVideoId } from '@/components/Exercise/VideoPlayer';
+import { buildExerciseHistory, formatCompletedSets, type StoredWorkout, type ExerciseHistory } from '@/lib/trainingHistory';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { toast } from 'sonner';
@@ -29,8 +30,9 @@ interface Exercise {
 
 interface WorkoutEntry {
   exercise: Exercise;
-  sets: { reps: number; weight?: number; seconds?: number }[];
+  sets: { reps: number; weight?: number; seconds?: number; completed?: boolean }[];
   unit?: 'reps' | 'seconds';
+  qualityConfirmed?: boolean;
 }
 
 interface WorkoutSection {
@@ -91,6 +93,19 @@ export default function Planner() {
   const [templateDifficulty, setTemplateDifficulty] = useState('all');
   const [openExerciseDetails, setOpenExerciseDetails] = useState<Record<string, boolean>>({});
   const [previewTarget, setPreviewTarget] = useState<{ sectionKey: string; index: number; exercise: Exercise } | null>(null);
+  const [historyIndex, setHistoryIndex] = useState<Map<string, ExerciseHistory>>(new Map());
+
+  useEffect(() => {
+    if (!user) { setHistoryIndex(new Map()); return; }
+    let active = true;
+    supabase.from('workouts').select('date,created_at,entries')
+      .eq('user_id', user.id).order('created_at', { ascending: false }).limit(80)
+      .then(({ data, error }) => {
+        if (active && !error) setHistoryIndex(buildExerciseHistory((data || []) as StoredWorkout[]));
+      });
+    return () => { active = false; };
+  }, [user]);
+
 
   const runSuperCoach = async (prompt: string) => {
     if (!prompt.trim()) return;
@@ -278,10 +293,10 @@ export default function Planner() {
     ));
   };
 
-  const updateSets = (sectionKey: string, idx: number, sets: { reps: number; weight?: number; seconds?: number }[]) => {
+  const updateSets = (sectionKey: string, idx: number, sets: { reps: number; weight?: number; seconds?: number; completed?: boolean }[]) => {
     setSections(prev => prev.map(s =>
       s.key === sectionKey
-        ? { ...s, entries: s.entries.map((e, i) => i === idx ? { ...e, sets } : e) }
+        ? { ...s, entries: s.entries.map((e, i) => i === idx ? { ...e, sets, qualityConfirmed: false } : e) }
         : s
     ));
   };
@@ -300,6 +315,7 @@ export default function Planner() {
           exercise_name: e.exercise.name,
           sets: e.sets,
           unit: e.unit || 'reps',
+          quality_confirmed: e.qualityConfirmed === true && e.sets.length > 0 && e.sets.every(set => set.completed === true),
         }))
       );
       const { error } = await supabase.from('workouts').insert({
@@ -310,6 +326,9 @@ export default function Planner() {
       });
       if (error) throw error;
       toast.success('Workout saved!');
+      const { data: freshHistory } = await supabase.from('workouts').select('date,created_at,entries')
+        .eq('user_id', user.id).order('created_at', { ascending: false }).limit(80);
+      if (freshHistory) setHistoryIndex(buildExerciseHistory(freshHistory as StoredWorkout[]));
       // Reset
       setSections(SECTION_DEFAULTS.map(s => ({ ...s, entries: [], open: s.key === 'workout' })));
       setWorkoutName('');
@@ -489,14 +508,37 @@ export default function Planner() {
                             {(['reps', 'seconds'] as const).map(unit => <Button key={unit} variant={(entry.unit || 'reps') === unit ? 'default' : 'outline'}
                               size="sm" className="h-9 rounded-lg" onClick={() => setSections(prev => prev.map(s => s.key !== section.key ? s : {
                                 ...s, entries: s.entries.map((e, i) => i !== idx ? e : {
-                                  ...e, unit, sets: unit === 'seconds'
-                                    ? e.sets.map(set => ({ ...set, seconds: set.seconds || 15 }))
-                                    : e.sets.map(set => ({ ...set, reps: set.reps || 8 })),
+                                  ...e, unit, qualityConfirmed: false, sets: unit === 'seconds'
+                                    ? e.sets.map(set => ({ ...set, seconds: set.seconds || 15, completed: false }))
+                                    : e.sets.map(set => ({ ...set, reps: set.reps || 8, completed: false })),
                                 }),
                               }))}>{unit === 'seconds' ? 'Hold (sec)' : 'Reps'}</Button>)}
                           </div>
                         </div>
                         <SetTracker unit={entry.unit || 'reps'} sets={entry.sets} onChange={sets => updateSets(section.key, idx, sets)}/>
+                        {historyIndex.get(entry.exercise.id)?.previous && (
+                          <div className="rounded-xl bg-secondary/50 px-3 py-2 text-xs text-muted-foreground" role="note">
+                            <span className="font-medium text-foreground">Previous completed:</span>{' '}
+                            {formatCompletedSets(historyIndex.get(entry.exercise.id)!.previous!)}
+                          </div>
+                        )}
+                        <button type="button" aria-pressed={entry.qualityConfirmed === true}
+                          disabled={!entry.sets.length || !entry.sets.every(set => set.completed === true)}
+                          onClick={() => setSections(prev => prev.map(s => s.key !== section.key ? s : ({
+                            ...s, entries: s.entries.map((e, i) => i !== idx ? e : ({
+                              ...e, qualityConfirmed: !e.qualityConfirmed,
+                            })),
+                          })))}
+                          className="w-full min-h-11 rounded-xl border border-border/70 p-3 text-left text-xs font-medium disabled:opacity-50">
+                          {entry.qualityConfirmed ? '✓' : '○'} Technique felt controlled and comfortable
+                        </button>
+                        {historyIndex.get(entry.exercise.id)?.eligibleToReviewVariation && (
+                          <p className="text-xs text-muted-foreground">
+                            Two completed, comfortable sessions logged. You may review a harder variation when ready;
+                            advancement is never automatic.
+                          </p>
+                        )}
+                        <p className="text-xs text-muted-foreground">Use the exercise thumbnail to review the video or swap difficulty.</p>
                       </div>}
                     </div>;
                   })}
@@ -542,6 +584,7 @@ export default function Planner() {
               exercise: replacement as Exercise,
               unit: exerciseIsHold(replacement.name) ? 'seconds' as const : 'reps' as const,
               sets: suggestedSets(replacement as Exercise),
+              qualityConfirmed: false,
             }),
           }));
           setPreviewTarget(null);
