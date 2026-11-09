@@ -7,7 +7,7 @@ export type Capability=typeof CAPABILITIES[number]['id'];
 export type TrainingReadiness={equipmentMode?:'selected'|'informational';tier?:TrainingTier;capabilities?:Capability[];equipment?:readonly string[]};
 type Rule={tier?:TrainingTier;requires?:Capability[];regression?:string;metric?:'seconds'|'reps';target?:number};
 export const RULES:Record<string,Rule>={
- 'plate-pinch-hold':{tier:2,metric:'seconds'},
+ 'plate-pinch-hold':{tier:1,metric:'seconds'},
  'block-pinch-hold':{tier:3,metric:'seconds',regression:'plate-pinch-hold'},
  'gripper-crush':{tier:3,metric:'reps'},
  'farmers-carry':{tier:2,metric:'seconds'},
