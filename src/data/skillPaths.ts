@@ -1034,5 +1034,57 @@ export const SKILL_PATHS: readonly SkillPath[] = [
     ],
     "kind": "collection"
   }
+  {
+    id: "grip-support",
+    title: "Grip · Hanging & Support",
+    short: "Control, load and one-arm hang foundations",
+    focus: "Support grip strength and shoulder control",
+    equipment: "Bar, weights or suitable carry implements",
+    cue: "Start supported, load progressively and step down before grip fails.",
+    safety: "Unilateral hanging is high demand; avoid sudden loading and stop for finger, elbow or shoulder pain.",
+    group: "Grip",
+    slugs: ["active-hang","dead-hang","farmers-carry","suitcase-carry","towel-hang","one-arm-assisted-hang","one-arm-hang"],
+    accessories: ["wrist-circles","extensor-band","false-grip-hold"],
+    kind: "progression"
+  },
+  {
+    id: "grip-pinch",
+    title: "Grip · Pinch & Crush",
+    short: "Finger-thumb pinch and controlled crushing strength",
+    focus: "Pinch, crush and forearm strength",
+    equipment: "Plates, pinch block and optional gripper",
+    cue: "Use suitable light implements at first and gradually increase resistance.",
+    safety: "Pinch and crush tasks are not a single interchangeable progression; train each according to tolerance.",
+    group: "Grip",
+    slugs: ["plate-pinch-hold","block-pinch-hold","gripper-crush"],
+    accessories: ["band-finger-extension","wrist-pronation-supination"],
+    kind: "collection"
+  },
+  {
+    id: "grip-wrist",
+    title: "Grip · Wrists & Extensors",
+    short: "Balanced wrist, finger and rotation strength",
+    focus: "Wrist control, forearm rotation and finger extension",
+    equipment: "Elastic band, light dumbbells or wrist roller",
+    cue: "Use smooth controlled movement without forcing uncomfortable ranges.",
+    safety: "Increase resistance gradually, especially after other heavy gripping sessions.",
+    group: "Grip",
+    slugs: ["wrist-circles","band-finger-extension","wrist-extension","wrist-flexion","wrist-pronation-supination","grip-roller"],
+    accessories: ["extensor-band"],
+    kind: "collection"
+  },
+  {
+    id: "calves-tibialis",
+    title: "Calves & Tibialis",
+    short: "Heel raises, soleus and shin strength",
+    focus: "Ankle plantar flexion and dorsiflexion",
+    equipment: "Floor, wall or optional resistance",
+    cue: "Control every repetition and increase resistance gradually.",
+    safety: "Avoid bouncing under load or pushing through Achilles or ankle pain.",
+    group: "Lower body",
+    slugs: ["tibialis-raise","calf-raise","seated-calf-raise","single-leg-calf-raise","weighted-calf-raise"],
+    accessories: ["wall-ankle-dorsiflexion"],
+    kind: "progression"
+  },
 ];
 export const getSkillPath=(id?:string)=>SKILL_PATHS.find(p=>p.id===id);
