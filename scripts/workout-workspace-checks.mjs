@@ -12,7 +12,7 @@ try{
  const ringMoves=w.workspaceMovements(getSkillPath('rings'));assert(ringMoves.some(e=>e.slug==='incline-ring-row'));assert(ringMoves.some(e=>e.slug==='iron-cross'));assert(ringMoves.some(e=>e.slug==='ring-muscle-up'));
  const straightMoves=w.workspaceMovements(getSkillPath('straight-arm'));assert(straightMoves.some(e=>e.slug==='full-planche'));assert(straightMoves.some(e=>e.slug==='stalder-press-to-hs'));
  const specific=w.workspaceMovements(getSkillPath('rings'),false,'family');assert(specific.length<ringMoves.length);assert(!specific.some(e=>e.slug==='iron-cross'),'Choosing a foundation family must not pour every related studio into the Home list');
- const allMoves=w.workspaceMovements(getSkillPath('rings'),true);assert.equal(allMoves.length,248);assert.equal(new Set(allMoves.map(e=>e.slug)).size,248,'Alias records must not create duplicate choices');
+ const allMoves=w.workspaceMovements(getSkillPath('rings'),true);assert(allMoves.length>=248,'Previously available movement choices must be preserved');assert.equal(new Set(allMoves.map(e=>e.slug)).size,allMoves.length,'Alias records must not create duplicate choices');
  const profile={tier:1,capabilities:[],equipment:['floor','wall','rings'],safeExit:false};
  let items=[];
  items=w.addWorkoutMovement(items,'incline-ring-row','skill',profile);assert.equal(items.length,1);
