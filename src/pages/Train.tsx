@@ -73,7 +73,7 @@ export default function Train() {
     const sets = getExerciseSets(ex.id);
     try {
       const { data: existing } = await supabase.from('workouts').select('id, entries').eq('user_id', user.id).eq('date', today).maybeSingle();
-      const newEntry = { exercise_id: ex.id, exercise_name: ex.name, exercise_slug: ex.slug, category: ex.category, sets };
+      const newEntry: Record<string, Json | undefined> = { exercise_id: ex.id, exercise_name: ex.name, exercise_slug: ex.slug, category: ex.category, sets: sets as unknown as Json };
       if (existing) {
         const entries: Record<string, Json | undefined>[] = Array.isArray(existing.entries)
           ? existing.entries.filter((entry): entry is { [key: string]: Json | undefined } => typeof entry === 'object' && entry !== null && !Array.isArray(entry)).map(entry => ({ ...entry }))
