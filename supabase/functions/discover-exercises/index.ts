@@ -123,8 +123,8 @@ Be enthusiastic, encouraging, and provide practical coaching tips!`;
     const data = await response.json();
     const choice = data.choices?.[0];
     
-    let messageContent = choice?.message?.content || "";
-    let exercises: any[] = [];
+    const messageContent = choice?.message?.content || "";
+    let exercises: unknown[] = [];
 
     // Extract exercises from tool calls
     if (choice?.message?.tool_calls) {
@@ -132,7 +132,7 @@ Be enthusiastic, encouraging, and provide practical coaching tips!`;
         if (toolCall.function?.name === "suggest_exercises") {
           try {
             const args = JSON.parse(toolCall.function.arguments);
-            exercises = args.exercises || [];
+            exercises = Array.isArray(args.exercises) ? args.exercises : [];
           } catch (e) {
             console.error("Error parsing tool call:", e);
           }

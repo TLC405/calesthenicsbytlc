@@ -1,4 +1,5 @@
 import { Plus, Dumbbell } from 'lucide-react';
+import type { CSSProperties } from 'react';
 import { TlcPlayIcon } from './TlcPlayIcon';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -11,7 +12,7 @@ interface Exercise {
   primary_muscles: string[];
   secondary_muscles: string[];
   equipment: string[];
-  cues: any;
+  cues: unknown;
   difficulty_level?: number | null;
   youtube_url?: string | null;
   instagram_url?: string | null;
@@ -53,7 +54,7 @@ export function ExerciseCard({ exercise, onViewDetails, onAddToWorkout }: Exerci
     <div
       className="group cursor-pointer rounded-2xl border border-border/40 bg-card overflow-hidden transition-all duration-300 hover:border-border hover:-translate-y-1 hover:shadow-lg"
       onClick={() => onViewDetails(exercise)}
-      style={{ '--glow-color': `${style.color}20` } as any}
+      style={{ '--glow-color': `${style.color}20` } as CSSProperties}
     >
       {/* Thumbnail */}
       <div className="aspect-[16/10] bg-muted/30 relative overflow-hidden">

@@ -76,7 +76,7 @@ export default function Anatomy() {
   const [selectedMuscle, setSelectedMuscle] = useState<string | null>(null);
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedExercise, setSelectedExercise] = useState<any>(null);
+  const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
 
   useEffect(() => {
     supabase.from('exercises').select('id, name, slug, category, primary_muscles, secondary_muscles, difficulty_level, youtube_url, sets_reps, description, equipment, recovery_muscle, tendons_involved')

@@ -23,10 +23,10 @@ export default function Auth() {
     setLoading(true);
     try {
       const { error } = isSignUp ? await signUp(email, password, displayName) : await signIn(email, password);
-      if (error) toast({ title: 'Error', description: error.message, variant: 'destructive' });
+      if (error) toast({ title: 'Error', description: error instanceof Error ? error.message : 'Authentication failed', variant: 'destructive' });
       else if (isSignUp) toast({ title: 'Welcome', description: 'Check your email to confirm your account.' });
-    } catch (error: any) {
-      toast({ title: 'Error', description: error.message, variant: 'destructive' });
+    } catch (error: unknown) {
+      toast({ title: 'Error', description: error instanceof Error ? error.message : 'Authentication failed', variant: 'destructive' });
     } finally {
       setLoading(false);
     }

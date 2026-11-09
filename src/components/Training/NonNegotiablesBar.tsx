@@ -33,7 +33,7 @@ export function NonNegotiablesBar({ categories }: NonNegotiablesBarProps) {
       .then(({ data }) => {
         if (!data) return;
         if (categories?.length) {
-          setCues(data.filter((c: any) =>
+          setCues(data.filter(c =>
             (c.applies_to as string[]).some(cat => categories.includes(cat))
           ) as NonNegotiable[]);
         } else {

@@ -1,139 +1,76 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { ChevronRight, Star, Lock } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 
 interface ChainExercise {
-  id: string;
-  name: string;
-  slug: string;
-  chain_group: string;
-  chain_order: number;
-  difficulty_level: number | null;
-  category: string;
-  sets_reps: string | null;
+  id: string; name: string; chain_group: string; chain_order: number | null;
+  difficulty_level: number | null; category: string; sets_reps: string | null;
 }
-
-interface SkillPath {
-  group: string;
-  exercises: ChainExercise[];
-}
-
-const pathColors: Record<string, string> = {
-  push: 'hsl(var(--cat-push))',
-  pull: 'hsl(var(--cat-pull))',
-  skills: 'hsl(var(--cat-skills))',
-  core: 'hsl(var(--cat-core))',
-  legs: 'hsl(var(--cat-legs))',
-  mobility: 'hsl(var(--cat-mobility))',
-  rings: 'hsl(40, 70%, 40%)',
-  flexibility: 'hsl(40, 96%, 50%)',
-  yoga: 'hsl(330, 65%, 55%)',
-};
-
-const difficultyLabels: Record<number, string> = {
-  1: 'BEG', 2: 'INT', 3: 'ADV', 4: 'EXP', 5: 'ELT',
-};
-
-interface SkillTreeViewProps {
-  onExerciseClick?: (exerciseId: string) => void;
-}
+interface SkillPath { group: string; exercises: ChainExercise[] }
+interface SkillTreeViewProps { onExerciseClick?: (exerciseId: string) => void }
+const difficulty = ['', 'Beginner', 'Novice', 'Intermediate', 'Advanced', 'Elite'];
 
 export function SkillTreeView({ onExerciseClick }: SkillTreeViewProps) {
   const [paths, setPaths] = useState<SkillPath[]>([]);
+  const [expanded, setExpanded] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadPaths();
+    let active = true;
+    const load = async () => {
+      const { data } = await supabase.from('exercises')
+        .select('id, name, chain_group, chain_order, difficulty_level, category, sets_reps')
+        .not('chain_group', 'is', null).order('chain_order');
+      if (!active) return;
+      const grouped: Record<string, ChainExercise[]> = {};
+      ((data || []) as ChainExercise[]).forEach(exercise => {
+        (grouped[exercise.chain_group] ||= []).push(exercise);
+      });
+      setPaths(Object.entries(grouped).filter(([, items]) => items.length >= 2)
+        .map(([group, exercises]) => ({
+          group,
+          exercises: [...exercises].sort((a, b) => (a.chain_order || 0) - (b.chain_order || 0)),
+        }))
+        .sort((a, b) => a.group.localeCompare(b.group)));
+      setLoading(false);
+    };
+    void load();
+    return () => { active = false; };
   }, []);
 
-  const loadPaths = async () => {
-    const { data } = await supabase
-      .from('exercises')
-      .select('id, name, slug, chain_group, chain_order, difficulty_level, category, sets_reps')
-      .not('chain_group', 'is', null)
-      .order('chain_order');
+  if (loading) return <div className="space-y-3" aria-label="Loading progressions">
+    {[1, 2, 3].map(i => <div className="h-16 bg-card border border-border rounded-xl animate-pulse" key={i}/>)}
+  </div>;
+  if (paths.length === 0) return <p className="text-sm text-muted-foreground py-10 text-center">
+    No progression paths are available yet. Browse individual exercises instead.
+  </p>;
 
-    if (data) {
-      const groups: Record<string, ChainExercise[]> = {};
-      (data as ChainExercise[]).forEach(ex => {
-        if (!groups[ex.chain_group]) groups[ex.chain_group] = [];
-        groups[ex.chain_group].push(ex);
-      });
-
-      const sorted = Object.entries(groups)
-        .filter(([, exs]) => exs.length >= 3)
-        .sort((a, b) => b[1].length - a[1].length)
-        .map(([group, exercises]) => ({ group, exercises }));
-
-      setPaths(sorted);
-    }
-    setLoading(false);
-  };
-
-  if (loading) {
-    return (
-      <div className="space-y-3">
-        {[1, 2, 3].map(i => (
-          <div key={i} className="h-24 border border-foreground/10 animate-pulse bg-secondary/30" />
-        ))}
-      </div>
-    );
-  }
-
-  return (
-    <div className="space-y-3">
-      {paths.map(path => {
-        const color = pathColors[path.exercises[0]?.category] || 'hsl(var(--muted-foreground))';
-        const pathName = path.group.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-
-        return (
-          <div key={path.group} className="border-2 border-foreground/20 bg-card overflow-hidden">
-            <div className="flex items-center gap-2 px-3 py-2 border-b border-foreground/10">
-              <div className="w-2.5 h-2.5" style={{ backgroundColor: color }} />
-              <span className="text-[9px] font-mono font-bold uppercase tracking-[0.15em]">{pathName}</span>
-              <span className="text-[8px] font-mono text-muted-foreground ml-auto">{path.exercises.length} steps</span>
-              <Star className="w-3 h-3 text-muted-foreground/30" />
-            </div>
-            <ScrollArea className="w-full">
-              <div className="flex items-center gap-0.5 p-3 overflow-x-auto">
-                {path.exercises.map((ex, i) => (
-                  <div key={ex.id} className="flex items-center">
-                    <button
-                      onClick={() => onExerciseClick?.(ex.id)}
-                      className={cn(
-                        "min-w-max px-3 py-2 border transition-all duration-150 hover:bg-foreground/5 cursor-pointer text-left",
-                        "border-foreground/20 hover:border-foreground/50"
-                      )}
-                      style={{
-                        borderLeftWidth: i === 0 ? '3px' : '1px',
-                        borderLeftColor: i === 0 ? color : undefined,
-                      }}
-                    >
-                      <div className="text-[8px] font-mono font-bold uppercase tracking-wider leading-tight">{ex.name}</div>
-                      <div className="flex items-center gap-1.5 mt-1">
-                        <span
-                          className="text-[7px] font-mono font-bold uppercase px-1 py-0.5 text-white"
-                          style={{ backgroundColor: color }}
-                        >
-                          {difficultyLabels[ex.difficulty_level || 1] || 'L' + (ex.difficulty_level || 1)}
-                        </span>
-                        {ex.sets_reps && (
-                          <span className="text-[7px] font-mono text-muted-foreground">{ex.sets_reps}</span>
-                        )}
-                      </div>
-                    </button>
-                    {i < path.exercises.length - 1 && (
-                      <ChevronRight className="w-3 h-3 text-muted-foreground/40 flex-shrink-0 mx-0.5" />
-                    )}
-                  </div>
-                ))}
-              </div>
-            </ScrollArea>
-          </div>
-        );
-      })}
-    </div>
-  );
+  return <div className="space-y-2">
+    {paths.map(path => {
+      const isOpen = expanded === path.group;
+      const title = path.group.replace(/[-_]/g, ' ').replace(/\b\w/g, m => m.toUpperCase());
+      return <section key={path.group} className="overflow-hidden rounded-2xl border border-border/60 bg-card">
+        <button type="button" aria-expanded={isOpen} onClick={() => setExpanded(isOpen ? null : path.group)}
+          className="w-full flex items-center gap-3 p-4 text-left min-h-16 hover:bg-accent/30 transition-colors">
+          <span className="flex-1 min-w-0">
+            <strong className="block text-sm font-display">{title}</strong>
+            <small className="text-xs text-muted-foreground">{path.exercises.length} progressions · easier to harder</small>
+          </span>
+          <ChevronDown className={isOpen ? 'rotate-180 transition-transform text-primary' : 'transition-transform text-muted-foreground'} size={18}/>
+        </button>
+        {isOpen && <div className="px-3 pb-3">
+          {path.exercises.map((exercise, idx) => <button key={exercise.id} type="button"
+            onClick={() => onExerciseClick?.(exercise.id)}
+            className="w-full flex items-center gap-3 rounded-xl px-3 py-3 min-h-14 text-left hover:bg-accent/40 focus-visible:outline-2 focus-visible:outline-primary">
+            <span className="w-7 h-7 flex shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-semibold tabular-nums">{idx + 1}</span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-sm font-medium">{exercise.name}</span>
+              <span className="block text-xs text-muted-foreground">{difficulty[exercise.difficulty_level || 0] || 'Not rated'}{exercise.sets_reps ? ' · ' + exercise.sets_reps : ''}</span>
+            </span>
+            <ChevronRight size={17} className="text-muted-foreground shrink-0"/>
+          </button>)}
+        </div>}
+      </section>;
+    })}
+  </div>;
 }

@@ -17,7 +17,7 @@ export default function Settings() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const music = useMusic();
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<unknown>(null);
   const [displayName, setDisplayName] = useState('');
   const [loading, setLoading] = useState(false);
   const [playlistInput, setPlaylistInput] = useState('');
@@ -44,7 +44,7 @@ export default function Settings() {
     const { data } = await supabase.from('site_config').select('*');
     if (data) {
       const config: Record<string, string> = {};
-      data.forEach((row: any) => { config[row.key] = row.value || ''; });
+      data.forEach(row => { config[row.key] = row.value || ''; });
       setSiteConfig(config);
     }
   };
