@@ -7,7 +7,7 @@ on:
     branches: [feature/power-premium-no-gamification-2026]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
@@ -19,21 +19,7 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      # Existing main-branch package-lock is out of sync with package.json.
-      # Temporary QA-only install; regenerate/commit lock before production merge.
-      - name: Install dependencies (temporary lock reconciliation)
-        run: npm install --no-audit --no-fund
-      - name: Commit repaired lockfile to feature branch
-        if: github.event_name == 'push' && github.ref == 'refs/heads/feature/power-premium-no-gamification-2026'
-        run: |
-          if ! git diff --quiet -- package-lock.json; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add package-lock.json
-            git commit -m "fix(power): synchronize npm lockfile for reproducible builds"
-            git push origin HEAD:refs/heads/feature/power-premium-no-gamification-2026
-          fi
-      - name: Validate reproducible installation
+      - name: Reproducible dependency installation
         run: npm ci --no-audit --no-fund
       - name: Training-history unit tests
         run: npm run test:unit
@@ -44,6 +30,5 @@ jobs:
         env:
           VITE_SUPABASE_URL: https://example.supabase.co
           VITE_SUPABASE_PUBLISHABLE_KEY: build-only-placeholder
-      - name: Lint (report existing baseline)
+      - name: Full repository lint
         run: npm run lint
-        continue-on-error: true
