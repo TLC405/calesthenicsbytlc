@@ -5,7 +5,7 @@
  * backwards-compatible bridge, not curated many-to-many progression edges.
  * Do not create or duplicate exercises simply because a tag exists.
  */
-export const movementGoals = [
+export const movementGoals: ReadonlyArray<{ id: string; label: string; terms: readonly string[]; categories: readonly string[] }> = [
   { id: 'planche', label: 'Planche', terms: ['planche', 'frog stand', 'crow stand'], categories: [] },
   { id: 'straight-arm', label: 'Straight-arm strength', terms: ['straight arm', 'straight-arm', 'planche lean', 'scapular protraction', 'scapular support', 'cross preparation', 'ring support'], categories: [] },
   { id: 'handstand', label: 'Handstands', terms: ['handstand', 'hand stand', 'wall walk', 'heel pull', 'toe pull'], categories: [] },
@@ -23,7 +23,7 @@ export const movementGoals = [
   { id: 'core', label: 'Core & compression', terms: ['hollow', 'dead bug', 'plank', 'l-sit', 'v-sit', 'leg raise', 'dragon flag', 'compression'], categories: ['Core'] },
   { id: 'mobility', label: 'Mobility', terms: ['mobility', 'stretch', 'flexibility', 'pancake', 'shoulder dislocate'], categories: ['Mobility', 'Flexibility', 'Yoga'] },
   { id: 'flow', label: 'Balance & flow', terms: ['flow', 'balance', 'crow', 'elbow lever', 'handstand walk', 'animal movement'], categories: [] },
-] as const;
+];
 
 export interface GoalExercise {
   name: string;
