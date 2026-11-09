@@ -6,6 +6,9 @@ on:
   push:
     branches: [feature/power-premium-no-gamification-2026]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,11 +23,18 @@ jobs:
       # Temporary QA-only install; regenerate/commit lock before production merge.
       - name: Install dependencies (temporary lock reconciliation)
         run: npm install --no-audit --no-fund
-      - name: Report lockfile drift
+      - name: Commit repaired lockfile to feature branch
+        if: github.event_name == 'push' && github.ref == 'refs/heads/feature/power-premium-no-gamification-2026'
         run: |
-          if ! git diff --exit-code -- package-lock.json; then
-            echo "::warning::Committed package-lock.json is out of sync; npm ci will not work until regenerated lock is committed."
+          if ! git diff --quiet -- package-lock.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add package-lock.json
+            git commit -m "fix(power): synchronize npm lockfile for reproducible builds"
+            git push origin HEAD:refs/heads/feature/power-premium-no-gamification-2026
           fi
+      - name: Validate reproducible installation
+        run: npm ci --no-audit --no-fund
       - name: Training-history unit tests
         run: npm run test:unit
       - name: TypeScript check
