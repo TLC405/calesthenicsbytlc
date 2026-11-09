@@ -1033,7 +1033,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "swimming-freestyle"
     ],
     "kind": "collection"
-  }
+  },
   {
     id: "grip-support",
     title: "Grip · Hanging & Support",
