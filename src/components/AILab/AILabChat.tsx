@@ -64,9 +64,9 @@ export function AILabChat({ onAddToNotepad }: AILabChatProps) {
       if (response.error) throw new Error(response.error.message || 'Failed to get response');
       const data = response.data;
       setMessages(prev => [...prev, { role: 'assistant', content: data.message || data.content, exercises: data.exercises }]);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('AI Lab error:', error);
-      toast({ title: 'Error', description: error.message || 'Failed to get AI response', variant: 'destructive' });
+      toast({ title: 'Error', description: error instanceof Error ? error.message : 'Failed to get AI response', variant: 'destructive' });
       setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, I encountered an error. Please try again!" }]);
     } finally {
       setIsLoading(false);
@@ -89,8 +89,8 @@ export function AILabChat({ onAddToNotepad }: AILabChatProps) {
       });
       if (error) throw error;
       toast({ title: 'Exercise added!', description: `${exercise.name} is now in your library` });
-    } catch (error: any) {
-      toast({ title: 'Error adding exercise', description: error.message, variant: 'destructive' });
+    } catch (error: unknown) {
+      toast({ title: 'Error adding exercise', description: error instanceof Error ? error.message : 'Could not add exercise', variant: 'destructive' });
     }
   };
 
