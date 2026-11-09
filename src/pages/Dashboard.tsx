@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, ChevronRight, Plus, BookOpen, Dumbbell, CalendarDays } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { movementGoals, matchesMovementGoal } from '@/lib/movementGoals';
+import { toast } from 'sonner';
 
 interface RecentWorkout {
   id: string;
@@ -49,6 +50,29 @@ export default function Dashboard() {
   }, [user]);
 
   const browse = (goal: string) => navigate('/library', { state: { goal } });
+  const repeatWorkout = (workout: RecentWorkout) => {
+    const entries = Array.isArray(workout.entries) ? workout.entries : [];
+    const items = entries
+      .filter((entry): entry is Record<string, unknown> =>
+        entry !== null && typeof entry === 'object' && !Array.isArray(entry))
+      .filter(entry => typeof entry.exercise_id === 'string' && Boolean(entry.exercise_id))
+      .map(entry => ({
+        section: typeof entry.section === 'string' ? entry.section : 'workout',
+        name: typeof entry.exercise_name === 'string' ? entry.exercise_name : '',
+        exercise: { id: entry.exercise_id },
+      }));
+    if (!items.length) { toast.error('This workout has no exercises available to repeat'); return; }
+    try {
+      const oldName = workout.notes?.split('\n')[0]?.trim();
+      sessionStorage.setItem('powa-builder-import', JSON.stringify({
+        name: oldName ? oldName + ' (repeat)' : 'Repeat workout',
+        items,
+      }));
+      navigate('/planner');
+    } catch {
+      toast.error('Could not open previous workout');
+    }
+  };
 
   return (
     <div className="power-shell power-quiet-home">
@@ -120,7 +144,7 @@ export default function Dashboard() {
                 const name = workout.notes?.split('\n')[0]?.trim() || 'Workout';
                 const dateLabel = workout.date ? format(parseISO(workout.date), 'MMM d') : 'Date unavailable';
                 return (
-                  <button key={workout.id} className="power-history-row" type="button" onClick={() => navigate('/planner')}>
+                  <button key={workout.id} className="power-history-row" type="button" onClick={() => repeatWorkout(workout)} aria-label={'Repeat ' + name + ' workout'}>
                     <CalendarDays size={18} aria-hidden="true" />
                     <span className="min-w-0 flex-1">
                       <strong className="block truncate">{name}</strong>
