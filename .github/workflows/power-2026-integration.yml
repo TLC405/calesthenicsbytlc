@@ -1,0 +1,43 @@
+name: POWER production-based upgrade quality
+
+on:
+  push:
+    branches: [feature/power-2026-production-ux]
+  pull_request:
+    branches: [feature/realtime-community-likes]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install production-matched dependencies
+        run: npm install --package-lock=false --no-audit --no-fund --legacy-peer-deps
+      - name: TypeScript check (app)
+        run: npx tsc --noEmit -p tsconfig.app.json
+      - name: TypeScript check (API)
+        run: npx tsc --noEmit -p tsconfig.api.json
+      - name: Verify movement and skill graphs
+        run: |
+          node scripts/progression-builder-checks.mjs
+          node scripts/skill-graph-checks.mjs
+          node scripts/workout-workspace-checks.mjs
+          node scripts/thumbnail-browse-checks.mjs
+          node scripts/training-policy-checks.mjs
+          node scripts/movement-learning-checks.mjs
+          node scripts/focus-plan-checks.mjs
+      - name: Production build
+        run: npm run build
+        env:
+          VITE_SUPABASE_URL: https://cdwckujpvrtdkvjqjfej.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: build-only-placeholder
+      - name: Lint changed exercise and training modules
+        run: npx eslint src/components/Exercise/CoachResources.tsx src/components/Exercise/MovementLearningPanel.tsx src/lib/skillBrowse.ts src/lib/trainingPolicy.ts src/pages/Planner.tsx
