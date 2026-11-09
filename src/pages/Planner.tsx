@@ -1,5 +1,7 @@
 import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
 import { readTrainingProfile, writeTrainingProfile, trainingBlockers } from '@/lib/skillGraph';
+import { getSkillPath } from '@/data/skillPaths';
+import { minimumTier } from '@/lib/trainingPolicy';
 import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
 import { WorkoutCoach } from '@/components/Workout/WorkoutCoach';
 import { readCustomDraft, writeCustomDraft, startingSets, customEntryReasons, savedCustomPlans, saveCustomPlan, type CustomPlan, type PlannedSet } from '@/lib/customWorkoutDraft';
@@ -51,11 +53,28 @@ const SECTION_DEFAULTS: Omit<WorkoutSection, 'entries' | 'open'>[] = [
   { key: 'compression', label: 'Compression', icon: Heart, color: 'hsl(var(--cat-push))' },
 ];
 
-const QUICK_TEMPLATES = [
-  { label: 'Push', tag: 'Push Day', categories: ['Push'] },
-  { label: 'Pull', tag: 'Pull Day', categories: ['Pull'] },
-  { label: 'Legs', tag: 'Leg Day', categories: ['Legs'] },
-  { label: 'Full', tag: 'Full Body', categories: ['Push', 'Pull', 'Legs'] },
+interface QuickTemplate { label: string; tag: string; categories: string[]; pathId?: string }
+const QUICK_TEMPLATES: QuickTemplate[] = [
+  { label: 'Push', tag: 'Push Strength', categories: ['Push'] },
+  { label: 'Pull', tag: 'Pull Strength', categories: ['Pull'] },
+  { label: 'Legs', tag: 'Lower Body Strength', categories: ['Legs'] },
+  { label: 'Full', tag: 'Full Body', categories: ['Push', 'Pull', 'Legs','Core'] },
+  { label: 'Planche', tag: 'Planche Skill Practice', categories: [], pathId: 'planche' },
+  { label: 'Straight Arm', tag: 'Straight-Arm Strength', categories: [], pathId: 'straight-arm' },
+  { label: 'Handstand', tag: 'Handstands', categories: [], pathId: 'handstand' },
+  { label: 'Grip', tag: 'Grip & Hangs', categories: [], pathId: 'grip-support' },
+  { label: 'Pinch', tag: 'Pinch & Crush Grip', categories: [], pathId: 'grip-pinch' },
+  { label: 'Wrist', tag: 'Wrist & Forearm Strength', categories: [], pathId: 'grip-wrist' },
+  { label: 'Human Flag', tag: 'Human Flag', categories: [], pathId: 'human-flag' },
+  { label: 'Front Lever', tag: 'Front Lever', categories: [], pathId: 'front-lever' },
+  { label: 'Back Lever', tag: 'Back Lever', categories: [], pathId: 'back-lever' },
+  { label: 'Rings', tag: 'Rings', categories: [], pathId: 'rings' },
+  { label: 'Ring Muscle-up', tag: 'Ring Muscle-up', categories: [], pathId: 'ring-muscle-up' },
+  { label: 'Iron Cross', tag: 'Iron Cross Preparation', categories: [], pathId: 'iron-cross' },
+  { label: 'Core', tag: 'Core & Compression', categories: [], pathId: 'core-control' },
+  { label: 'Calves', tag: 'Calves & Tibialis', categories: [], pathId: 'calves-tibialis' },
+  { label: 'Mobility', tag: 'Mobility', categories: [], pathId: 'recovery' },
+  { label: 'Press', tag: 'Press Handstands', categories: [], pathId: 'straddle-press' },
 ];
 
 export default function Planner(){const {user,loading}=useAuth();if(loading)return <main className="power-simple-page"><p>Opening your workout builder…</p></main>;return <PlannerEditor key={user?.id||'guest'} owner={user?.id||'guest'}/>;}
@@ -72,6 +91,8 @@ function PlannerEditor({owner}:{owner:string}) {
   const [pickerSection, setPickerSection] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [templateDifficulty, setTemplateDifficulty] = useState(0);
+  const [showAllTemplates, setShowAllTemplates] = useState(false);
   const [coachOpen, setCoachOpen] = useState(()=>new URLSearchParams(window.location.search).get('coach')==='1');
   const [profile,setProfile]=useState(readTrainingProfile);
   const [comfortable,setComfortable]=useState(false);
@@ -115,26 +136,71 @@ function PlannerEditor({owner}:{owner:string}) {
     } catch {/* noop */}
   }, []);
 
-  const loadTemplate = async (tpl: typeof QUICK_TEMPLATES[number]) => {
-    // Templates must work for guests and during Supabase outages.
+  const loadTemplate = async (tpl: QuickTemplate) => {
+    // Work offline, preserve canonical exercise slugs, and never invent video media.
     const builtIn = [...publicCatalog, ...getOfflineExercises()] as Exercise[];
-    let catalog: Exercise[] = builtIn;
+    let remote: Exercise[] = [];
     try {
-      const { data } = await supabase.from('exercises').select('*')
-        .in('category', tpl.categories).order('name').limit(300);
-      if (data?.length) catalog = [...data as Exercise[], ...builtIn];
-    } catch { /* Keep locally bundled catalog usable. */ }
-    const matched = [...new Map(catalog.filter(e => tpl.categories.includes(e.category)&&!customEntryReasons(e,readTrainingProfile()).length)
-      .map(e => [e.slug || e.name.toLowerCase(), e])).values()];
-    const chosen = matched.slice(0, Math.min(5, matched.length));
-    if (!chosen.length) { toast.error('No matching exercises found'); return; }
+      const query = supabase.from('exercises').select('*').order('name').limit(500);
+      const { data } = await query;
+      if (data) remote = data as Exercise[];
+    } catch { /* The bundled exercise catalog remains usable offline. */ }
+    const catalog = [...new Map([...remote, ...builtIn]
+      .filter(ex => Boolean(ex.slug))
+      .map(ex => [ex.slug, ex])).values()];
+    const bySlug = new Map(catalog.map(ex => [ex.slug, ex]));
+    const path = tpl.pathId ? getSkillPath(tpl.pathId) : undefined;
+    const requestedLevel = templateDifficulty || profile.tier || 1;
+    const available = (path
+      ? [...path.slugs, ...(path.accessories || [])].map(slug => bySlug.get(slug))
+        .filter((ex): ex is Exercise => !!ex)
+      : catalog.filter(ex => tpl.categories.includes(ex.category)))
+      .filter(ex => minimumTier(ex.slug) <= requestedLevel)
+      .filter(ex => templateDifficulty === 0 || minimumTier(ex.slug) === templateDifficulty)
+      .filter(ex => customEntryReasons(ex, profile).length === 0);
+    const eligible = [...new Map(available.map(ex => [ex.slug, ex])).values()];
+    const selected: Exercise[] = [];
+    const append = (exercise?: Exercise) => {
+      if (exercise && !selected.some(ex => ex.slug === exercise.slug) && selected.length < 6) selected.push(exercise);
+    };
+    if (path) {
+      const main = path.slugs.map(slug => eligible.find(ex => ex.slug === slug)).filter((ex): ex is Exercise => !!ex);
+      // Current reachable stage and a nearby regression; no blind "elite" auto-advancement.
+      const current = main.slice(-2);
+      current.forEach(append);
+      (path.accessories || []).forEach(slug => append(eligible.find(ex => ex.slug === slug)));
+      for (const ex of main) append(ex);
+    } else {
+      // Balance broad templates across actual movement categories and exercise families.
+      const usedFamilies = new Set<string>();
+      for (const category of tpl.categories) {
+        const candidate = eligible.find(ex => ex.category === category && !usedFamilies.has(ex.slug.split('-')[0]));
+        if (candidate) {
+          append(candidate);
+          usedFamilies.add(candidate.slug.split('-')[0]);
+        }
+      }
+      for (const ex of eligible) {
+        if (selected.length >= 6) break;
+        if (usedFamilies.has(ex.slug.split('-')[0])) continue;
+        append(ex);
+        usedFamilies.add(ex.slug.split('-')[0]);
+      }
+    }
+    if (!selected.length) {
+      toast.info('No suitable exercises at this difficulty. Adjust the difficulty or review your training level.');
+      return;
+    }
+    if (sections.some(section => section.entries.length) &&
+      !window.confirm('Replace your current draft with this template? Cancel keeps it.')) return;
     setWorkoutName(tpl.tag);
-    setSections(prev => prev.map(s => s.key === 'workout'
-      ? { ...s, open: true, entries: chosen.map(e => ({
-          exercise: e, sets: startingSets(e.slug)
-        })) } : s));
-    toast.success(`${tpl.tag} ready · ${chosen.length} exercises`);
+    setSections(prev => prev.map(section => section.key === 'workout'
+      ? { ...section, open: true, entries: selected.map(exercise => ({
+          exercise, sets: startingSets(exercise.slug)
+        })) } : { ...section, entries: [] }));
+    toast.success(tpl.tag + ' · ' + selected.length + ' exercises ready to edit');
   };
+
 
   const toggleSection = (key: string) => {
     setSections(prev => prev.map(s => s.key === key ? { ...s, open: !s.open } : s));
@@ -257,21 +323,33 @@ function PlannerEditor({owner}:{owner:string}) {
         />
 
         <details className="rounded-xl border p-3"><summary className="min-h-12 font-bold text-sm cursor-pointer">L{profile.tier||1} · My level</summary><TrainingLevelControls profile={profile} onChange={next=>{setProfile(next);writeTrainingProfile(next);setComfortable(false);}}/></details>
-        <details className="rounded-xl border p-3"><summary className="min-h-12 font-bold text-sm cursor-pointer">Strength templates (optional)</summary>
-          <div className="pt-3">
-          <div className="grid grid-cols-4 gap-2">
-            {QUICK_TEMPLATES.map(tpl => (
-              <button
-                key={tpl.label}
-                onClick={() => loadTemplate(tpl)}
-                className="h-11 rounded-xl border border-border/50 bg-card hover:border-border hover:-translate-y-0.5 hover:shadow-sm transition-all text-[10px] font-mono uppercase tracking-[0.15em] font-bold"
-              >
+        <section className="rounded-2xl border border-border/60 bg-card p-3 space-y-3" aria-label="Workout templates">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div><h2 className="font-display font-bold text-sm">Choose a workout</h2><p className="text-xs text-muted-foreground mt-1">Exercises first. No time limits or games.</p></div>
+            <label className="text-xs text-muted-foreground flex items-center gap-2">Difficulty
+              <select value={templateDifficulty} aria-label="Template exercise difficulty"
+                onChange={e=>setTemplateDifficulty(Number(e.target.value))}
+                className="min-h-11 rounded-xl border border-border bg-background px-2 text-foreground text-xs">
+                <option value={0}>My current level</option>
+                <option value={1}>Beginner</option><option value={2}>Foundation</option>
+                <option value={3}>Building</option><option value={4}>Advanced</option><option value={5}>Elite</option>
+              </select>
+            </label>
+          </div>
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+            {QUICK_TEMPLATES.slice(0,showAllTemplates?QUICK_TEMPLATES.length:9).map(tpl=>(
+              <button key={tpl.label} type="button" onClick={()=>void loadTemplate(tpl)}
+                className="min-h-12 rounded-xl border border-border/70 bg-background px-2 py-2 text-xs font-semibold hover:border-primary/60 focus-visible:outline-2 focus-visible:outline-primary">
                 {tpl.label}
               </button>
             ))}
           </div>
-          </div>
-        </details>
+          <button type="button" onClick={()=>setShowAllTemplates(v=>!v)} aria-expanded={showAllTemplates}
+            className="min-h-11 w-full text-xs font-semibold text-primary">
+            {showAllTemplates?'Show fewer workouts':'Explore all '+QUICK_TEMPLATES.length+' workout focuses'}
+          </button>
+          <p className="text-xs text-muted-foreground">Templates are editable suggestions based on existing exercises and your current training readiness.</p>
+        </section>
 
         <button type="button" className="text-xs text-muted-foreground underline underline-offset-4"
           onClick={() => setShowAdvanced(value => !value)}>

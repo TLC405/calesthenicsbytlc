@@ -8124,5 +8124,479 @@
     "chain_order": null,
     "visibility": "public",
     "created_by": null
+  },
+  {
+    "id": "a989c353-0e5d-4cf1-9726-1206584799e4",
+    "slug": "plate-pinch-hold",
+    "name": "Plate Pinch Hold",
+    "category": "Grip",
+    "primary_muscles": [
+      "Grip",
+      "Thumbs",
+      "Forearms"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Weight plates"
+    ],
+    "cues": [
+      "Start with a very light smooth-sided plate",
+      "Keep the wrist aligned and use a safe place to set it down",
+      "Stop before grip slips"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Pinch a very light manageable plate between thumb and fingers for a controlled hold. Increase the load only after comfortable practice.",
+    "sets_reps": null,
+    "chain_group": "support-grip",
+    "chain_order": 3,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "6459ca14-7720-446f-9229-af378dff6919",
+    "slug": "block-pinch-hold",
+    "name": "Block Pinch Hold",
+    "category": "Grip",
+    "primary_muscles": [
+      "Grip",
+      "Thumbs",
+      "Forearms"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Pinch block"
+    ],
+    "cues": [
+      "Begin with an easy implement",
+      "Keep fingers and thumb on the block",
+      "Lower it deliberately"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Hold an appropriate pinch block without compensating through the wrist.",
+    "sets_reps": null,
+    "chain_group": "pinch-grip",
+    "chain_order": 2,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "3985e2db-7661-4772-823e-7d54bd2645ef",
+    "slug": "gripper-crush",
+    "name": "Gripper Crush",
+    "category": "Grip",
+    "primary_muscles": [
+      "Finger Flexors",
+      "Forearms"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Hand gripper"
+    ],
+    "cues": [
+      "Choose a gripper you can close smoothly",
+      "Keep the wrist in a comfortable position",
+      "Release under control"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Close a hand gripper with deliberate control, rather than jerking beyond current capacity.",
+    "sets_reps": null,
+    "chain_group": "crush-grip",
+    "chain_order": 1,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "4453c7af-f3b8-49d0-ac65-ff97590b8011",
+    "slug": "farmers-carry",
+    "name": "Farmer's Carry",
+    "category": "Grip",
+    "primary_muscles": [
+      "Grip",
+      "Forearms",
+      "Trunk"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Dumbbells or kettlebells"
+    ],
+    "cues": [
+      "Stand upright without shrugging hard",
+      "Walk with smooth steps",
+      "Set loads down before your grip fails"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Walk while carrying balanced loads; choose a distance and weight that preserve posture.",
+    "sets_reps": null,
+    "chain_group": "support-grip",
+    "chain_order": 2,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "fe6a27fd-70c8-4b85-bfc3-de5068d25457",
+    "slug": "suitcase-carry",
+    "name": "Suitcase Carry",
+    "category": "Grip",
+    "primary_muscles": [
+      "Grip",
+      "Obliques",
+      "Forearms"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Dumbbell or kettlebell"
+    ],
+    "cues": [
+      "Keep torso upright",
+      "Breathe and walk normally",
+      "Switch sides and compare control"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Carry an object on one side while resisting sideways bending; practice both sides.",
+    "sets_reps": null,
+    "chain_group": "support-grip",
+    "chain_order": 2,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "aff47d37-62c2-4b84-aa37-15817ee42561",
+    "slug": "wrist-extension",
+    "name": "Wrist Extension",
+    "category": "Grip",
+    "primary_muscles": [
+      "Wrist Extensors",
+      "Forearms"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Light dumbbell"
+    ],
+    "cues": [
+      "Support the forearm",
+      "Keep the movement comfortable",
+      "Lower slowly without flicking"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Lift the back of the hand with a light controlled resistance.",
+    "sets_reps": null,
+    "chain_group": "wrist-strength",
+    "chain_order": 2,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "d8232a58-ac63-4071-ada0-0e338f10649d",
+    "slug": "wrist-flexion",
+    "name": "Wrist Flexion",
+    "category": "Grip",
+    "primary_muscles": [
+      "Wrist Flexors",
+      "Forearms"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Light dumbbell"
+    ],
+    "cues": [
+      "Support forearm",
+      "Keep full hand control",
+      "Avoid forcing painful wrist ranges"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Train controlled wrist flexion using an appropriate resistance.",
+    "sets_reps": null,
+    "chain_group": "wrist-strength",
+    "chain_order": 2,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "0ff8f237-18ea-49c0-a867-22b318031a87",
+    "slug": "one-arm-assisted-hang",
+    "name": "Assisted One-Arm Hang",
+    "category": "Grip",
+    "primary_muscles": [
+      "Grip",
+      "Lats",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Pull-up bar",
+      "Assistance support"
+    ],
+    "cues": [
+      "Keep assistance available throughout",
+      "Stay active through the shoulder",
+      "Step down without dropping"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Hang primarily through one arm while the other hand or feet provide adjustable support; avoid sudden loading.",
+    "sets_reps": null,
+    "chain_group": "support-grip",
+    "chain_order": 5,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "db7a72f8-ed89-4a17-8425-481ef0e6b002",
+    "slug": "one-arm-hang",
+    "name": "One-Arm Hang",
+    "category": "Grip",
+    "primary_muscles": [
+      "Grip",
+      "Lats",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Pull-up bar"
+    ],
+    "cues": [
+      "Only attempt with controlled assisted hangs first",
+      "Maintain stable shoulder position",
+      "Step down before control is lost"
+    ],
+    "difficulty_level": 5,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Advanced unilateral hang requiring extensive shoulder and grip preparation; use qualified coaching where appropriate.",
+    "sets_reps": null,
+    "chain_group": "support-grip",
+    "chain_order": 6,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "34b09907-963a-4917-a194-9e2a0875bebc",
+    "slug": "tibialis-raise",
+    "name": "Tibialis Raise",
+    "category": "Legs",
+    "primary_muscles": [
+      "Tibialis Anterior",
+      "Shins"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Wall optional"
+    ],
+    "cues": [
+      "Keep heels planted",
+      "Move ankles through comfortable range",
+      "Pause briefly at the top"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Raise toes toward shins while maintaining controlled balance, using wall support if needed.",
+    "sets_reps": null,
+    "chain_group": "calves-tibialis",
+    "chain_order": 1,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "98324495-6a7e-4078-8077-558ecd42bc4b",
+    "slug": "single-leg-calf-raise",
+    "name": "Single-Leg Calf Raise",
+    "category": "Legs",
+    "primary_muscles": [
+      "Calves",
+      "Ankles"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Stable support"
+    ],
+    "cues": [
+      "Use a wall or rail for balance",
+      "Keep pace controlled",
+      "Avoid bouncing at the bottom"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Raise the heel through a comfortable range on one leg with balance assistance.",
+    "sets_reps": null,
+    "chain_group": "calves-tibialis",
+    "chain_order": 3,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "f81492c1-e232-4687-aafb-fd43289a83a2",
+    "slug": "seated-calf-raise",
+    "name": "Seated Calf Raise",
+    "category": "Legs",
+    "primary_muscles": [
+      "Soleus",
+      "Calves"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Chair",
+      "Optional resistance"
+    ],
+    "cues": [
+      "Plant the ball of the foot",
+      "Control heel movement",
+      "Add load gradually if comfortable"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Raise the heels while seated to emphasize bent-knee plantar flexion.",
+    "sets_reps": null,
+    "chain_group": "calves-tibialis",
+    "chain_order": 2,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "7162ea24-011b-4e4b-b143-3e7b8863e696",
+    "slug": "weighted-calf-raise",
+    "name": "Weighted Calf Raise",
+    "category": "Legs",
+    "primary_muscles": [
+      "Calves",
+      "Ankles"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Dumbbells or machine"
+    ],
+    "cues": [
+      "Start with manageable resistance",
+      "Control each full repetition",
+      "Stop for Achilles or joint pain"
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Progress calf training using added resistance while retaining controlled range.",
+    "sets_reps": null,
+    "chain_group": "calves-tibialis",
+    "chain_order": 4,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "70216767-69a0-4d6c-ba56-81dae2a1f011",
+    "slug": "band-finger-extension",
+    "name": "Band Finger Extension",
+    "category": "Grip",
+    "primary_muscles": [
+      "Finger Extensors",
+      "Forearms"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Light elastic band"
+    ],
+    "cues": [
+      "Start with light elastic tension",
+      "Open all fingers slowly",
+      "Stop if discomfort develops"
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Open the fingers against gentle elastic resistance to balance gripping work.",
+    "sets_reps": null,
+    "chain_group": "finger-extension",
+    "chain_order": 1,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "719234ad-db8d-4a05-af0a-2d80a2cb4f93",
+    "slug": "grip-roller",
+    "name": "Wrist Roller",
+    "category": "Grip",
+    "primary_muscles": [
+      "Wrist Flexors",
+      "Wrist Extensors",
+      "Forearms"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Wrist roller"
+    ],
+    "cues": [
+      "Avoid lifting the shoulders to cheat",
+      "Start light",
+      "Work both directions and control the lowering"
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Wind and unwind a manageable weight using controlled wrist turns.",
+    "sets_reps": null,
+    "chain_group": "wrist-strength",
+    "chain_order": 4,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "b7949fe0-d907-47cd-b8d1-4d289f348c9f",
+    "slug": "wrist-pronation-supination",
+    "name": "Wrist Pronation and Supination",
+    "category": "Grip",
+    "primary_muscles": [
+      "Pronators",
+      "Supinators",
+      "Forearms"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Light lever or hammer"
+    ],
+    "cues": [
+      "Support the upper arm",
+      "Rotate deliberately",
+      "Start with little lever arm"
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Rotate the forearm through a comfortable range with light leverage.",
+    "sets_reps": null,
+    "chain_group": "wrist-strength",
+    "chain_order": 3,
+    "visibility": "public",
+    "created_by": null
   }
 ]

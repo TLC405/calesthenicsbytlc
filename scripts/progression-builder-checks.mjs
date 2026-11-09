@@ -10,7 +10,7 @@ try{
  async function load(name,file){const out=path.join(dir,name+'.mjs');await build({entryPoints:[file],outfile:out,bundle:true,platform:'node',format:'esm',alias:{'@':path.resolve('src')},logLevel:'silent'});return import(pathToFileURL(out));}
  const [placements,paths,drafts,conversation,policy,coach,graph]=await Promise.all([load('placements','src/lib/exerciseProgressions.ts'),load('paths','src/data/skillPaths.ts'),load('drafts','src/lib/customWorkoutDraft.ts'),load('conversation','src/lib/coachConversation.ts'),load('policy','src/lib/trainingPolicy.ts'),load('coach','src/lib/coachGrounding.ts'),load('graph','src/lib/skillGraph.ts')]);
  const catalog=JSON.parse(await readFile('src/data/publicExerciseCatalog.json','utf8'));
- assert.equal(catalog.length,272,'Original movement records must be retained');
+ assert(catalog.length>=288,'Original movement records and reviewed grip/ankle additions must be retained');
  for(const e of catalog)assert(placements.exercisePaths(e.slug).length,`Unplaced exercise ${e.slug}`);
  assert(paths.SKILL_PATHS.filter(p=>p.group==='Yoga').length>=4);assert(paths.SKILL_PATHS.filter(p=>p.group==='Ballet').length>=4);
  for(const e of catalog.filter(e=>e.category==='Yoga'))assert(placements.exercisePaths(e.slug).some(p=>p.group==='Yoga'||p.id==='yoga-foundation'),`Yoga record missing ${e.slug}`);
