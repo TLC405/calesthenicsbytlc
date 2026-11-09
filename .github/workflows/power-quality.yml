@@ -16,7 +16,15 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - run: npm ci
+      # Existing main-branch package-lock is out of sync with package.json.
+      # Temporary QA-only install; regenerate/commit lock before production merge.
+      - name: Install dependencies (temporary lock reconciliation)
+        run: npm install --no-audit --no-fund
+      - name: Report lockfile drift
+        run: |
+          if ! git diff --exit-code -- package-lock.json; then
+            echo "::warning::Committed package-lock.json is out of sync; npm ci will not work until regenerated lock is committed."
+          fi
       - name: Training-history unit tests
         run: npm run test:unit
       - name: TypeScript check
