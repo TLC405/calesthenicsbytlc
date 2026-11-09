@@ -93,7 +93,16 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
           .filter(item => typeof item.exercise_id === 'string')
           .map(item => ({
             exercise_id: item.exercise_id as string,
-            sets: Array.isArray(item.sets) ? item.sets as SetData[] : [],
+            sets: Array.isArray(item.sets) ? item.sets
+              .filter((set): set is Record<string, Json | undefined> =>
+                set !== null && typeof set === 'object' && !Array.isArray(set))
+              .map(set => ({
+                reps: typeof set.reps === 'number' ? set.reps : 0,
+                seconds: typeof set.seconds === 'number' ? set.seconds : undefined,
+                weight: typeof set.weight === 'number' ? set.weight : undefined,
+                rpe: typeof set.rpe === 'number' ? set.rpe : undefined,
+                completed: set.completed === true,
+              })) : [],
             unit: item.unit === 'seconds' ? 'seconds' as const : 'reps' as const,
             quality_confirmed: item.quality_confirmed === true,
           })) : [];
