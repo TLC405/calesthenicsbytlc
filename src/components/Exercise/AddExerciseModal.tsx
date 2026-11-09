@@ -158,10 +158,10 @@ export function AddExerciseModal({ open, onClose, onSuccess }: AddExerciseModalP
       setDifficultyLevel(2);
       onSuccess?.();
       onClose();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: 'Error adding exercise',
-        description: error.message,
+        description: error instanceof Error ? error.message : 'Unable to add exercise',
         variant: 'destructive',
       });
     } finally {
