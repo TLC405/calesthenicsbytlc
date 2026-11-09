@@ -7,6 +7,22 @@ export type Capability=typeof CAPABILITIES[number]['id'];
 export type TrainingReadiness={equipmentMode?:'selected'|'informational';tier?:TrainingTier;capabilities?:Capability[];equipment?:readonly string[]};
 type Rule={tier?:TrainingTier;requires?:Capability[];regression?:string;metric?:'seconds'|'reps';target?:number};
 export const RULES:Record<string,Rule>={
+ 'plate-pinch-hold':{tier:2,metric:'seconds'},
+ 'block-pinch-hold':{tier:3,metric:'seconds',regression:'plate-pinch-hold'},
+ 'gripper-crush':{tier:3,metric:'reps'},
+ 'farmers-carry':{tier:2,metric:'seconds'},
+ 'suitcase-carry':{tier:2,metric:'seconds'},
+ 'wrist-extension':{tier:1,metric:'reps'},
+ 'wrist-flexion':{tier:1,metric:'reps'},
+ 'one-arm-assisted-hang':{tier:4,requires:['pull-base'],metric:'seconds',regression:'towel-hang'},
+ 'one-arm-hang':{tier:5,requires:['pull-base'],metric:'seconds',regression:'one-arm-assisted-hang'},
+ 'tibialis-raise':{tier:1,metric:'reps'},
+ 'single-leg-calf-raise':{tier:2,metric:'reps',regression:'calf-raise'},
+ 'seated-calf-raise':{tier:2,metric:'reps'},
+ 'weighted-calf-raise':{tier:4,metric:'reps',regression:'single-leg-calf-raise'},
+ 'band-finger-extension':{tier:1,metric:'reps'},
+ 'grip-roller':{tier:3,metric:'reps',regression:'wrist-extension'},
+ 'wrist-pronation-supination':{tier:2,metric:'reps'},
  'diamond-push-up':{tier:3,requires:['push-base'],regression:'push-up'},'bulgarian-split-squat':{tier:3,regression:'split-squat'},'cossack-squat':{tier:3,regression:'bodyweight-squat'},'headstand':{tier:3,requires:['inversion-control']},'ring-push-ups':{tier:3,requires:['push-base'],regression:'incline-push-up'},'skin-the-cat':{tier:4,requires:['pull-base','support-base']},'band-assisted-pull-up':{tier:2,regression:'australian-row'},
  'child-s-pose':{tier:1,metric:'seconds'},'childs-pose':{tier:1,metric:'seconds'},'standing-pike':{tier:2,metric:'seconds'},
  'kneeling-planche-plank':{tier:1,metric:'seconds'},'pike-support-hold':{tier:1,metric:'seconds'},'wall-toe-taps':{tier:3,requires:['inversion-control'],regression:'pike-support-hold'},
