@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 import { useAuth } from '@/providers/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -327,7 +328,7 @@ export default function Planner() {
       );
       const { error } = await supabase.from('workouts').insert({
         user_id: user.id,
-        date: new Date().toISOString().slice(0, 10),
+        date: format(new Date(), 'yyyy-MM-dd'),
         entries,
         notes: `${workoutName ? workoutName + '\n' : ''}${notes}`,
       });
