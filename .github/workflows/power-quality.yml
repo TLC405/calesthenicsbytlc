@@ -17,6 +17,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - name: Training-history unit tests
+        run: npm run test:unit
       - name: TypeScript check
         run: npx tsc --noEmit -p tsconfig.app.json
       - name: Production build
