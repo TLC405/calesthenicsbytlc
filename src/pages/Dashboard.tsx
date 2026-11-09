@@ -5,7 +5,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ChevronRight, Plus, BookOpen, Dumbbell, CalendarDays } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
-import { movementGoals } from '@/lib/movementGoals';
+import { movementGoals, matchesMovementGoal } from '@/lib/movementGoals';
 
 interface RecentWorkout {
   id: string;
@@ -20,6 +20,21 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [recent, setRecent] = useState<RecentWorkout[]>([]);
+  const [availableGoalIds, setAvailableGoalIds] = useState<string[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    supabase.from('exercises').select('name,category,chain_group')
+      .order('name').limit(1000).then(({ data, error }) => {
+        if (!active || error) return;
+        const discovered = movementGoals
+          .filter(goal => (data || []).some(ex => matchesMovementGoal(ex, goal.id)))
+          .map(goal => goal.id);
+        setAvailableGoalIds(discovered);
+      });
+    return () => { active = false; };
+  }, []);
+
 
   useEffect(() => {
     if (!user) { setRecent([]); return; }
@@ -76,7 +91,7 @@ export default function Dashboard() {
             <Button variant="ghost" className="power-home-text-action" onClick={() => navigate('/library')}>All exercises <ChevronRight size={16}/></Button>
           </div>
           <div className="power-focus-list">
-            {movementGoals.map((item) => (
+            {movementGoals.filter(item => availableGoalIds.includes(item.id)).slice(0, 10).map((item) => (
               <button key={item.id} type="button" className="power-focus-item" onClick={() => browse(item.id)}>
                 <span>{item.label}</span>
                 <ChevronRight size={16} aria-hidden="true" />
