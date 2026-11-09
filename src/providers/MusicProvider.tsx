@@ -45,10 +45,36 @@ function extractVideoId(url: string): string | null {
   return match ? match[1] : null;
 }
 
-// Declare YT types
+// Minimal typed YouTube iframe API surface used by this provider.
+interface YouTubePlayer {
+  setVolume(level: number): void;
+  getVideoData?(): { title?: string; author?: string; video_id?: string } | null;
+  playVideo(): void;
+  pauseVideo(): void;
+  destroy(): void;
+  loadPlaylist(options: { list: string; listType: string }): void;
+  loadVideoById(videoId: string): void;
+  getPlayerState(): number;
+  unMute(): void;
+  mute(): void;
+  nextVideo?(): void;
+  previousVideo?(): void;
+}
+interface YouTubePlayerEvent { target: YouTubePlayer; data: number }
+interface YouTubeAPI {
+  Player: new (element: HTMLElement, options: {
+    height: string; width: string; videoId: string;
+    playerVars: Record<string, string | number>;
+    events: {
+      onReady: (event: YouTubePlayerEvent) => void;
+      onStateChange: (event: YouTubePlayerEvent) => void;
+      onError: (event: YouTubePlayerEvent) => void;
+    };
+  }) => YouTubePlayer;
+}
 declare global {
   interface Window {
-    YT: any;
+    YT?: YouTubeAPI;
     onYouTubeIframeAPIReady: (() => void) | undefined;
   }
 }
@@ -80,7 +106,7 @@ function loadYouTubeAPI(): Promise<void> {
 
 export function MusicProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
-  const playerRef = useRef<any>(null);
+  const playerRef = useRef<YouTubePlayer | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -131,6 +157,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
 
       const config = getPlayerConfig();
       
+      if (!window.YT) return;
       playerRef.current = new window.YT.Player(containerRef.current, {
         height: '0',
         width: '0',
@@ -146,15 +173,15 @@ export function MusicProvider({ children }: { children: ReactNode }) {
           ...config.playerVars,
         },
         events: {
-          onReady: (event: any) => {
+          onReady: (event: YouTubePlayerEvent) => {
             event.target.setVolume(volume);
             setIsReady(true);
             try {
               const d = event.target.getVideoData?.();
               if (d) setCurrentTrack({ title: d.title, author: d.author, videoId: d.video_id });
-            } catch {}
+            } catch { /* YouTube player not available in this state. */ }
           },
-          onStateChange: (event: any) => {
+          onStateChange: (event: YouTubePlayerEvent) => {
             // 1 playing, 2 paused, 0 ended
             if (event.data === 1) setIsPlaying(true);
             if (event.data === 2) setIsPlaying(false);
@@ -162,9 +189,9 @@ export function MusicProvider({ children }: { children: ReactNode }) {
             try {
               const d = event.target.getVideoData?.();
               if (d?.title) setCurrentTrack({ title: d.title, author: d.author, videoId: d.video_id });
-            } catch {}
+            } catch { /* YouTube player not available in this state. */ }
           },
-          onError: (event: any) => {
+          onError: (event: YouTubePlayerEvent) => {
             console.warn('YouTube Player error:', event.data);
           },
         },
@@ -175,7 +202,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
 
     return () => {
       if (playerRef.current?.destroy) {
-        try { playerRef.current.destroy(); } catch {}
+        try { playerRef.current.destroy(); } catch { /* YouTube player not available in this state. */ }
         playerRef.current = null;
       }
       initAttempted.current = false;
@@ -197,7 +224,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
         // Pause after loading new content if not playing
         setTimeout(() => playerRef.current?.pauseVideo(), 500);
       }
-    } catch {}
+    } catch { /* YouTube player not available in this state. */ }
   }, [playlistUrl, isReady]);
 
   const togglePlay = useCallback(() => {
@@ -211,7 +238,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
         playerRef.current.playVideo();
         setIsPlaying(true);
       }
-    } catch {}
+    } catch { /* YouTube player not available in this state. */ }
   }, [musicEnabled, isReady]);
 
   const toggleMute = useCallback(() => {
@@ -224,12 +251,12 @@ export function MusicProvider({ children }: { children: ReactNode }) {
         playerRef.current.mute();
         setIsMuted(true);
       }
-    } catch {}
+    } catch { /* YouTube player not available in this state. */ }
   }, [isMuted, isReady]);
 
   const setVolume = useCallback((v: number) => {
     setVolumeState(v);
-    try { playerRef.current?.setVolume(v); } catch {}
+    try { playerRef.current?.setVolume(v); } catch { /* YouTube player not available in this state. */ }
   }, []);
 
   const setPlaylistUrl = useCallback((url: string) => {
@@ -243,7 +270,7 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     setMusicEnabledState(enabled);
     localStorage.setItem('music_enabled', String(enabled));
     if (!enabled) {
-      try { playerRef.current?.pauseVideo(); } catch {}
+      try { playerRef.current?.pauseVideo(); } catch { /* YouTube player not available in this state. */ }
       setIsPlaying(false);
     }
     if (user) {
@@ -252,15 +279,15 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   }, [user]);
 
   const nextTrack = useCallback(() => {
-    try { playerRef.current?.nextVideo?.(); } catch {}
+    try { playerRef.current?.nextVideo?.(); } catch { /* YouTube player not available in this state. */ }
   }, []);
   const prevTrack = useCallback(() => {
-    try { playerRef.current?.previousVideo?.(); } catch {}
+    try { playerRef.current?.previousVideo?.(); } catch { /* YouTube player not available in this state. */ }
   }, []);
 
   const playUrl = useCallback((url: string) => {
     setPlaylistUrlState(url);
-    setTimeout(() => { try { playerRef.current?.playVideo?.(); } catch {} }, 700);
+    setTimeout(() => { try { playerRef.current?.playVideo?.(); } catch { /* YouTube player not available in this state. */ } }, 700);
   }, []);
 
   const persistLibrary = (next: SavedTrack[]) => {
