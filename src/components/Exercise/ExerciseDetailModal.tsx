@@ -3,6 +3,7 @@ import { Plus, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { VideoPlayer } from './VideoPlayer';
+import { CoachResources } from './CoachResources';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ProgressionPathStrip } from './ProgressionPathStrip';
 import { supabase } from '@/integrations/supabase/client';
@@ -72,6 +73,7 @@ export function ExerciseDetailModal({ exercise, open, onClose, onAddToWorkout, a
                 sets_reps: current.sets_reps, difficulty_level: current.difficulty_level,
                 category: current.category,
               }}/>
+            <CoachResources exerciseName={current.name} category={current.category}/>
             <ProgressionPathStrip exerciseId={current.id} chainGroup={current.chain_group || null}
               onNavigate={navigateVariation}/>
             {progressions.length > 0 && (
