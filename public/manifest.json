@@ -1,7 +1,7 @@
 {
-  "name": "I GOT THE POWER",
-  "short_name": "POWER",
-  "description": "Choose a skill, build your workout and plan your training days.",
+  "name": "TLC's Super Human Strength",
+  "short_name": "TLC Strength",
+  "description": "Assess your skills, explore your next progression, and build your own workouts—nothing preloaded.",
   "start_url": "/?launch=home",
   "display": "standalone",
   "background_color": "#FFF9F3",
@@ -37,15 +37,15 @@
     {
       "name": "Home",
       "url": "/",
-      "description": "Open POWER home"
+      "description": "Open TLC's Super Human Strength"
     },
     {
-      "name": "Movements",
+      "name": "Strength Skills",
       "url": "/skills",
       "description": "Rings, straight-arm strength, yoga and more"
     },
     {
-      "name": "Train",
+      "name": "Build My Workout",
       "url": "/today",
       "description": "Build a focused session"
     }
