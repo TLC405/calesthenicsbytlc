@@ -47,7 +47,7 @@ export default function Index() {
   }
 
   return (
-    <main className={`power-entry ${theme==='vasa'?'power-entry-vasa':'power-entry-gold'}`} aria-label="I Got the Power opening experience">
+    <main className={`power-entry ${theme==='vasa'?'power-entry-vasa':'power-entry-gold'}`} aria-label="TLC's Super Human Strength introduction">
       <div className="power-entry-frame" aria-hidden="true">
         <span className="power-entry-rail power-entry-rail-one" />
         <span className="power-entry-rail power-entry-rail-two" />
@@ -59,7 +59,7 @@ export default function Index() {
         <header className="power-entry-top">
           <div className="power-entry-brand">
             <span className="power-entry-brandmark" aria-hidden="true"><Zap size={22} fill="currentColor"/></span>
-            <span className="power-entry-brand-text"><strong>POWER</strong><small>CALISTHENICS TRAINING / TLC</small></span>
+            <span className="power-entry-brand-text"><strong>TLC'S</strong><small>SUPER HUMAN STRENGTH</small></span>
           </div>
           <div className="power-entry-top-actions">
             <InstallPowerApp compact />
@@ -73,17 +73,17 @@ export default function Index() {
 
         <section className="power-entry-hero" aria-label="Master human strength">
           <div className="power-entry-hero-copy">
-            <p className="power-entry-kicker"><span className="power-entry-live" aria-hidden="true" /> ENGINEERED HUMAN MOVEMENT <span className="power-entry-version">/ 001</span></p>
+            <p className="power-entry-kicker"><span className="power-entry-live" aria-hidden="true" /> BUILD THE EXTRAORDINARY <span className="power-entry-version">/ 001</span></p>
             <div className="power-entry-wordmark">
-              <span className="power-entry-wordmark-top">I GOT THE</span>
-              <h1>POWER<span className="power-entry-stop">.</span></h1>
+              <span className="power-entry-wordmark-top">TLC'S</span>
+              <h1 className="superhuman-entry-title"><span>SUPER HUMAN</span><span>STRENGTH<span className="power-entry-stop">.</span></span></h1>
             </div>
             <div className="power-entry-message">
               <span className="power-entry-message-bar" />
-              <p>MASTER <strong>HUMAN STRENGTH.</strong></p>
-              <p className="power-entry-message-alt">BUILD CONTROL. UNLOCK THE EXTRAORDINARY.</p>
+              <p>YOUR <strong>SUPER HUMAN STRENGTH.</strong></p>
+              <p className="power-entry-message-alt">MASTER CONTROL. EARN YOUR NEXT LEVEL.</p>
             </div>
-            <p className="power-entry-description">Train like the version of yourself you're becoming. Real calisthenics. Real progressions. Powered by TLC.</p>
+            <p className="power-entry-description">Your strength has a starting point. Test your skills, explore elite progressions and train your way. No preset workouts.</p>
             <button type="button" onClick={() => enter('/skills')} className="power-entry-primary">
               <span className="power-entry-primary-icon"><Play size={21} fill="currentColor"/></span>
               <span className="power-entry-primary-label"><strong>CHOOSE YOUR SKILL</strong><small>PLANCHE · HANDSTAND · RINGS</small></span>
@@ -106,8 +106,8 @@ export default function Index() {
 
         <section className="power-entry-paths" aria-label="Choose your training focus">
           <button type="button" className="power-entry-path" onClick={() => enter('/build?skill=planche')}>
-            <span className="power-entry-path-index">01 / POWER</span>
-            <span className="power-entry-path-title">SUPERHUMAN <strong>STRENGTH</strong></span>
+            <span className="power-entry-path-index">01 / SUPER HUMAN</span>
+            <span className="power-entry-path-title">BUILD <strong>SUPER HUMAN STRENGTH</strong></span>
             <span className="power-entry-path-desc">Planche & elite bodyweight progressions</span>
             <Zap className="power-entry-path-icon" size={22} aria-hidden="true"/>
           </button>
@@ -119,7 +119,7 @@ export default function Index() {
           </button>
         </section>
 
-        <section className="power-entry-music-panel" aria-label="Embedded POWER soundtrack">
+        <section className="power-entry-music-panel" aria-label="Embedded training soundtrack">
           <div className="power-entry-music-details">
             <div className="power-entry-music-meta">
               <span className="power-entry-small-label">OFFICIAL SONG / EMBEDDED VIDEO</span>
@@ -131,14 +131,14 @@ export default function Index() {
             <div className="power-entry-music-actions">
               <button type="button" className="power-entry-soundtrack-icon" onClick={() => {
                 if (isPlaying) togglePlay(); else startAnthem();
-              }} aria-label={isPlaying ? 'Pause I Got the Power anthem' : 'Play I Got the Power anthem'}>
+              }} aria-label={isPlaying ? 'Pause training anthem' : 'Play training anthem'}>
                 {isPlaying ? <Headphones size={18}/> : <Play size={18} fill="currentColor"/>}
                 <span>{isPlaying ? 'PAUSE ANTHEM' : 'PLAY ANTHEM'}</span>
               </button>
               {playerVisible && <button type="button" className="power-entry-music-stop" onClick={dismissPlayer}>Stop / Close</button>}
             </div>
             <p className="power-entry-music-note">The original commercial song is not copied or hidden as background audio. YouTube requires visible playback; the integrated player appears right here.</p>
-            <p className="power-entry-music-source">Official SNAP! video · plays here in POWER.</p>
+            <p className="power-entry-music-source">Official SNAP! video · plays inside TLC's Super Human Strength.</p>
           </div>
           <div className="power-entry-inline-youtube" id="power-inline-youtube">
             {!playerVisible && <div className="power-entry-audio-placeholder"><Video size={30}/><span>IN-APP VIDEO PLAYER</span><small>Press Play Anthem to start</small></div>}
@@ -146,7 +146,7 @@ export default function Index() {
         </section>
 
         <footer className="power-entry-footer">
-          <p className="power-entry-powered">POWERED BY <strong>TLC</strong><span className="power-entry-powered-dot">.</span></p>
+          <p className="power-entry-powered">SUPER HUMAN STRENGTH BY <strong>TLC</strong><span className="power-entry-powered-dot">.</span></p>
         </footer>
       </div>
     </main>
