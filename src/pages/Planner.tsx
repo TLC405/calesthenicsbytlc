@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ExercisePickerModal } from '@/components/Workout/ExercisePickerModal';
 import { SetTracker } from '@/components/Workout/SetTracker';
+import { PressProgramPanel } from '@/components/Training/PressProgramPanel';
+import { resolvedPressExercises, PRESS_STEPS, type PressSession, type PressUnit } from '@/data/pressProgram';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { toast } from 'sonner';
@@ -27,6 +29,9 @@ interface Exercise {
 interface WorkoutEntry {
   exercise: Exercise;
   sets: { reps: number; weight?: number }[];
+  unit?: PressUnit;
+  cue?: string;
+  level?: number;
 }
 
 interface WorkoutSection {
@@ -40,9 +45,9 @@ interface WorkoutSection {
 
 const SECTION_DEFAULTS: Omit<WorkoutSection, 'entries' | 'open'>[] = [
   { key: 'warmup', label: 'Warm-Up', icon: Flame, color: 'hsl(var(--cat-core))' },
+  { key: 'compression', label: 'Compression', icon: Heart, color: 'hsl(var(--cat-push))' },
   { key: 'workout', label: 'Workout', icon: Dumbbell, color: 'hsl(var(--cat-pull))' },
   { key: 'cooldown', label: 'Cool-Down', icon: Snowflake, color: 'hsl(var(--cat-mobility))' },
-  { key: 'compression', label: 'Compression', icon: Heart, color: 'hsl(var(--cat-push))' },
 ];
 
 const QUICK_TEMPLATES = [
@@ -65,6 +70,7 @@ export default function Planner() {
   const [coachOpen, setCoachOpen] = useState(false);
   const [coachPrompt, setCoachPrompt] = useState('');
   const [coachLoading, setCoachLoading] = useState(false);
+  const [pressLoading, setPressLoading] = useState(false);
 
   const runSuperCoach = async (prompt: string) => {
     if (!prompt.trim()) return;
@@ -158,6 +164,51 @@ export default function Planner() {
     }
   };
 
+  // Fixed coaching template with editable targets; no unpredictable AI-generated exercise substitutions.
+  const loadPressProgram = async (session: PressSession, level: number) => {
+    setPressLoading(true);
+    try {
+      const selected = resolvedPressExercises(session, level);
+      const names = [...new Set(selected.map(item => item.name))];
+      const { data, error } = await supabase.from('exercises').select('*').in('name', names);
+      if (error) throw error;
+      const indexed = new Map((data || []).map(item => [item.name.toLowerCase(), item]));
+      setSections(SECTION_DEFAULTS.map(section => ({
+        ...section,
+        open: true,
+        entries: selected.filter(item => item.section === section.key).map(item => {
+          const dbExercise = indexed.get(item.name.toLowerCase());
+          const slug = item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+          return {
+            exercise: dbExercise ? dbExercise as Exercise : {
+              id: 'press-program:' + slug,
+              name: item.name,
+              slug,
+              category: item.category,
+              primary_muscles: [],
+              description: item.cue,
+            } as Exercise,
+            sets: Array.from({ length: item.sets }, () => ({ reps: item.target })),
+            unit: item.unit,
+            cue: item.cue,
+            level: item.name === PRESS_STEPS[level - 1].name ? level : undefined,
+          };
+        }),
+      })));
+      setWorkoutName('Straight-Arm Press · Day ' + session.key);
+      setNotes('8–12+ week training formula · ' + session.title + '\nCurrent press: level ' + level +
+        ' — ' + PRESS_STEPS[level - 1].name +
+        '\nTrain 3 days/week; Day D optional. Straight-arm control before load. ' +
+        'Progress when quality is repeatable; avoid painful joint loading. ' +
+        'Take 2–3 min rest for challenging press sets and deload when needed.');
+      toast.success('Day ' + session.key + ' loaded · ' + selected.length + ' exercises');
+    } catch (error: any) {
+      toast.error(error?.message || 'Unable to load press formula');
+    } finally {
+      setPressLoading(false);
+    }
+  };
+
   const toggleSection = (key: string) => {
     setSections(prev => prev.map(s => s.key === key ? { ...s, open: !s.open } : s));
   };
@@ -196,8 +247,11 @@ export default function Planner() {
       const entries = sections.flatMap(s =>
         s.entries.map(e => ({
           section: s.key,
-          exercise_id: e.exercise.id,
+          exercise_id: /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(e.exercise.id) ? e.exercise.id : null,
           exercise_name: e.exercise.name,
+          unit: e.unit || 'reps',
+          cue: e.cue || null,
+          progression_level: e.level || null,
           sets: e.sets,
         }))
       );
@@ -308,6 +362,9 @@ export default function Planner() {
           className="h-12 rounded-xl border-border bg-card font-display font-bold text-base placeholder:font-normal placeholder:text-muted-foreground"
         />
 
+        {/* Straight-arm press formula from the TLC Trainer skill program */}
+        <PressProgramPanel onLoad={loadPressProgram} busy={pressLoading} />
+
         {/* Quick start templates */}
         <div>
           <p className="text-xs font-semibold text-muted-foreground mb-2 px-1">Quick Start</p>
@@ -363,9 +420,11 @@ export default function Planner() {
                           <Trash2 className="w-3.5 h-3.5" />
                         </Button>
                       </div>
+                      {entry.cue && <p className="mb-2 text-[11px] leading-relaxed text-muted-foreground">{entry.cue}</p>}
                       <SetTracker
                         sets={entry.sets}
                         onChange={sets => updateSets(section.key, idx, sets)}
+                        unit={entry.unit}
                       />
                     </div>
                   ))}
