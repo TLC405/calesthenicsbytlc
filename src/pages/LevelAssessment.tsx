@@ -81,9 +81,9 @@ export default function LevelAssessment() {
   return <main className="power-simple-page max-w-6xl mx-auto px-4 sm:px-6 pb-32">
     <header className="power-simple-heading mt-5 mb-6">
       <div>
-        <p className="power-simple-eyebrow flex items-center gap-2"><ClipboardCheck size={16}/> POWER / SKILLS CHECK</p>
-        <h1>Know your starting point.</h1>
-        <p>Measure one skill at a time. See where you are in the progression and get optional next-step suggestions—not a prescribed workout.</p>
+        <p className="power-simple-eyebrow flex items-center gap-2"><ClipboardCheck size={16}/> TLC / SUPER HUMAN SKILLS CHECK</p>
+        <h1>Discover your super human starting point.</h1>
+        <p>See where your super human strength stands. Measure one skill at a time, then explore optional next-level suggestions—never preset workouts.</p>
       </div>
     </header>
 
@@ -117,7 +117,7 @@ export default function LevelAssessment() {
     <section id="skill-check-form" className="power-elevated rounded-2xl p-4 sm:p-7 space-y-5 scroll-mt-20" aria-label="Individual skill test">
       <div className="flex gap-3 items-center">
         <span className="h-11 w-11 flex items-center justify-center rounded-xl bg-primary/10 text-primary"><Target size={22}/></span>
-        <div><p className="text-[10px] uppercase tracking-widest text-primary">Individual baseline</p><h2 className="font-display text-xl font-bold">Test your current ability</h2></div>
+        <div><p className="text-[10px] uppercase tracking-widest text-primary">Individual baseline</p><h2 className="font-display text-xl font-bold">Test your current strength</h2></div>
       </div>
       <label className="block text-sm font-semibold">Skill category
         <select className="mt-2 w-full min-h-12 rounded-xl border border-border bg-background px-3 text-sm" value={path.id} onChange={event => setPathId(event.target.value)}>
@@ -166,7 +166,7 @@ export default function LevelAssessment() {
     </section>
 
     <section className="power-elevated rounded-2xl p-4 sm:p-6 mt-5 space-y-3" aria-label="Your skill assessment result">
-      <div className="flex items-center gap-2"><Activity className="text-primary" size={19}/><h2 className="font-bold text-lg">Your current level · {path.title}</h2></div>
+      <div className="flex items-center gap-2"><Activity className="text-primary" size={19}/><h2 className="font-bold text-lg">Your super human level · {path.title}</h2></div>
       {current ? <>
         <p className="text-sm font-semibold">{formatResult(current)}</p>
         {current.slug && <div className="h-2 rounded-full bg-muted overflow-hidden" aria-label={'Step ' + stepNumber + ' of ' + path.slugs.length}>
@@ -185,7 +185,7 @@ export default function LevelAssessment() {
     </section>
 
     {completed > 0 && <section className="mt-7 space-y-3" aria-label="Other skill results">
-      <div className="flex items-center justify-between"><h2 className="font-bold text-lg">Your skill profile</h2><span className="text-xs text-muted-foreground">Retest anytime</span></div>
+      <div className="flex items-center justify-between"><h2 className="font-bold text-lg">Your strength profile</h2><span className="text-xs text-muted-foreground">Retest anytime</span></div>
       {Object.values(checks).sort((a,b) => b.at.localeCompare(a.at)).map(item => {
         const checkedPath = getSkillPath(item.pathId);
         return checkedPath && <button type="button" key={item.pathId} onClick={() => choosePath(item.pathId)} className="w-full rounded-xl border border-border/60 bg-card p-3 flex gap-3 items-center text-left">
