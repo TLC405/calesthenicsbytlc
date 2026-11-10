@@ -51,11 +51,11 @@ function AppContent() {
           <Route path="/admin-login" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/today" element={<TrainingEntry />} />
-          <Route path="/planner" element={<Planner />} />
+          <Route path="/planner" element={<TrainingEntry />} />
           <Route path="/library" element={<Library />} />
           <Route path="/ai-lab" element={<AILab />} />
           <Route path="/train" element={<TrainingEntry />} />
-          <Route path="/routine-days" element={<Train />} />
+          <Route path="/routine-days" element={<Navigate to="/skills" replace />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/assessment" element={<LevelAssessment />} />
           <Route path="/videos" element={<VideoAudit />} />
