@@ -16,7 +16,7 @@ interface ThemeOption {
 const themes: ThemeOption[] = [
   {
     id: 'default',
-    name: 'I Got the Power',
+    name: 'Super Human Signature',
     tagline: 'Obsidian · Gold · Onyx',
     primary: '#D5AC48',
     accent: '#101011',
