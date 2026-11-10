@@ -18,6 +18,7 @@ interface ExerciseLogItemProps {
   onSetsChange: (sets: SetData[]) => void;
   onRemove: () => void;
   onViewVideo?: () => void;
+  unit?: 'reps' | 'seconds';
 }
 
 const getYouTubeVideoId = (url: string): string | null => {
@@ -26,7 +27,7 @@ const getYouTubeVideoId = (url: string): string | null => {
   return match && match[2].length === 11 ? match[2] : null;
 };
 
-export function ExerciseLogItem({ exercise, sets, onSetsChange, onRemove, onViewVideo }: ExerciseLogItemProps) {
+export function ExerciseLogItem({ exercise, sets, onSetsChange, onRemove, onViewVideo, unit = 'reps' }: ExerciseLogItemProps) {
   const [isOpen, setIsOpen] = useState(true);
   
   const videoId = exercise.youtube_url ? getYouTubeVideoId(exercise.youtube_url) : null;
@@ -53,7 +54,7 @@ export function ExerciseLogItem({ exercise, sets, onSetsChange, onRemove, onView
           <div className="flex-1 min-w-0">
             <h4 className="font-medium truncate">{exercise.name}</h4>
             <p className="text-sm text-muted-foreground">
-              {sets.length} sets × {totalReps} reps
+              {sets.length} sets · {unit === 'seconds' ? totalReps + ' total seconds' : totalReps + ' total reps'}
             </p>
           </div>
 
@@ -90,7 +91,7 @@ export function ExerciseLogItem({ exercise, sets, onSetsChange, onRemove, onView
 
       <CollapsibleContent>
         <div className="px-3 pb-3 pt-1 border-t border-border/50">
-          <SetTracker sets={sets} onChange={onSetsChange} />
+          <SetTracker sets={sets} onChange={onSetsChange} unit={unit} />
         </div>
       </CollapsibleContent>
     </Collapsible>
