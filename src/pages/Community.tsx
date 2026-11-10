@@ -77,7 +77,7 @@ export default function Community() {
     const { data, error: fetchError } = await query.limit(40);
 
     if (fetchError) {
-      setError('The community database is not connected yet. Apply the Power Circle Supabase migration to enable live posts.');
+      setError('The community database is not connected yet. Apply the Super Human Circle Supabase migration to enable live posts.');
       setLoading(false);
       return;
     }
@@ -191,8 +191,8 @@ export default function Community() {
                 <Zap className="h-5 w-5 fill-current" />
               </div>
               <div className="min-w-0">
-                <p className="font-display text-sm font-black uppercase tracking-tight truncate">Power Circle</p>
-                <p className="text-[9px] font-mono tracking-[0.2em] uppercase text-muted-foreground">I Got The Power / Community</p>
+                <p className="font-display text-sm font-black uppercase tracking-tight truncate">Super Human Circle</p>
+                <p className="text-[9px] font-mono tracking-[0.2em] uppercase text-muted-foreground">TLC's Super Human Strength / Community</p>
               </div>
             </div>
           </div>
@@ -210,7 +210,7 @@ export default function Community() {
           </div>
           <div className="relative max-w-2xl">
             <div className="mb-5 flex items-center gap-2 text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-primary">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" /> The athlete network <span className="text-muted-foreground/40">/ 001</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" /> The super human strength network <span className="text-muted-foreground/40">/ 001</span>
             </div>
             <h1 className="font-display text-[clamp(2.65rem,7vw,5.5rem)] font-black tracking-[-0.065em] leading-[0.95] uppercase">
               Strive together.<br />
@@ -370,7 +370,7 @@ export default function Community() {
                     <Zap className="h-5 w-5 fill-current" />
                   </div>
                   <h3 className="mt-7 font-display text-3xl font-black uppercase leading-[0.97] tracking-[-0.05em]">
-                    Small wins.<br />Real power.
+                    Small wins.<br />Super human strength.
                   </h3>
                   <p className="mt-4 text-xs leading-relaxed opacity-70">
                     Real progress is built in public and earned in private. Share the work.
@@ -388,7 +388,7 @@ export default function Community() {
                   </div>
                 </div>
                 <div className="rounded-[24px] border border-dashed border-border/60 px-5 py-4">
-                  <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Power Circle / V1</span>
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground">Super Human Circle / V1</span>
                   <div className="mt-2 flex items-center gap-2 text-[11px] text-muted-foreground">
                     <Heart className="h-3.5 w-3.5 text-red-500" /> Likes notify the original author instantly.
                   </div>
