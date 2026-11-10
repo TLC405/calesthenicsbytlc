@@ -170,8 +170,8 @@ export default function Planner() {
     try {
       const selected = resolvedPressExercises(session, level);
       const names = [...new Set(selected.map(item => item.name))];
-      const { data, error } = await supabase.from('exercises').select('*').in('name', names);
-      if (error) throw error;
+      // The formula is bundled locally, so it remains loadable when the exercise catalog is unavailable.
+      const { data } = await supabase.from('exercises').select('*').in('name', names);
       const indexed = new Map((data || []).map(item => [item.name.toLowerCase(), item]));
       setSections(SECTION_DEFAULTS.map(section => ({
         ...section,
