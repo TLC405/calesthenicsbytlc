@@ -28,9 +28,13 @@ interface Exercise {
 }
 
 interface WorkoutEntry {
-  exercise_id: string;
+  exercise_id: string | null;
   exercise: Exercise;
   sets: SetData[];
+  unit?: 'reps' | 'seconds';
+  section?: string;
+  cue?: string | null;
+  progression_level?: number | null;
 }
 
 interface WorkoutModalProps {
@@ -85,25 +89,31 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
       // Load exercise details for each entry
       const workoutEntries = workout.entries as any[];
       if (workoutEntries && workoutEntries.length > 0) {
-        const exerciseIds = workoutEntries.map(e => e.exercise_id);
-        const { data: exercises } = await supabase
-          .from('exercises')
-          .select('*')
-          .in('id', exerciseIds);
+        // Program-generated exercise names may not yet exist in the exercise table.
+        // Never submit a null or non-UUID identifier to the UUID-based exercise lookup.
+        const isUuid = (value: unknown): value is string =>
+          typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
+        const exerciseIds: string[] = workoutEntries.map(e => e.exercise_id).filter(isUuid);
+        const { data: exercises } = exerciseIds.length
+          ? await supabase.from('exercises').select('*').in('id', exerciseIds)
+          : { data: [] as Exercise[] };
 
-        const entriesWithExercises = workoutEntries.map(entry => ({
-          ...entry,
-          exercise: exercises?.find(e => e.id === entry.exercise_id) || {
-            id: entry.exercise_id,
-            name: 'Unknown Exercise',
-            slug: 'unknown',
-            category: '',
-            primary_muscles: [],
-            secondary_muscles: [],
-            equipment: [],
-            cues: []
-          }
-        }));
+        const entriesWithExercises = workoutEntries.map(entry => {
+          const savedName = typeof entry.exercise_name === 'string' ? entry.exercise_name : 'Unknown Exercise';
+          return {
+            ...entry,
+            exercise: exercises?.find(e => e.id === entry.exercise_id) || {
+              id: entry.exercise_id || 'program:' + savedName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+              name: savedName,
+              slug: savedName.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+              category: entry.section || 'Skills',
+              primary_muscles: [],
+              secondary_muscles: [],
+              equipment: [],
+              cues: entry.cue ? [entry.cue] : [],
+            },
+          };
+        });
         
         setEntries(entriesWithExercises);
       }
@@ -145,6 +155,11 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
     
     const entriesJson = entries.map(e => ({
       exercise_id: e.exercise_id,
+      exercise_name: e.exercise.name,
+      section: e.section || 'workout',
+      unit: e.unit || 'reps',
+      cue: e.cue || null,
+      progression_level: e.progression_level || null,
       sets: e.sets.map(s => ({ reps: s.reps, weight: s.weight, rpe: s.rpe }))
     }));
 
@@ -225,6 +240,7 @@ export function WorkoutModal({ date, open, onClose, onSave }: WorkoutModalProps)
                         onSetsChange={(sets) => updateEntrySets(index, sets)}
                         onRemove={() => removeEntry(index)}
                         onViewVideo={() => setSelectedExercise(entry.exercise)}
+                        unit={entry.unit}
                       />
                     ))}
                     
