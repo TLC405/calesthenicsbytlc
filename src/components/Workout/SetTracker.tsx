@@ -13,9 +13,10 @@ interface SetTrackerProps {
   sets: SetData[];
   onChange: (sets: SetData[]) => void;
   showWeight?: boolean;
+  unit?: 'reps' | 'seconds';
 }
 
-export function SetTracker({ sets, onChange, showWeight = false }: SetTrackerProps) {
+export function SetTracker({ sets, onChange, showWeight = false, unit = 'reps' }: SetTrackerProps) {
   const addSet = () => {
     const lastSet = sets[sets.length - 1];
     onChange([...sets, lastSet ? { ...lastSet } : { reps: 10 }]);
@@ -37,7 +38,7 @@ export function SetTracker({ sets, onChange, showWeight = false }: SetTrackerPro
     <div className="space-y-2">
       <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium mb-1">
         <span className="w-8 text-center">Set</span>
-        <span className="flex-1 text-center">Reps</span>
+        <span className="flex-1 text-center">{unit === 'seconds' ? 'Seconds' : 'Reps'}</span>
         {showWeight && <span className="flex-1 text-center">Weight</span>}
         <span className="w-8"></span>
       </div>
@@ -59,6 +60,7 @@ export function SetTracker({ sets, onChange, showWeight = false }: SetTrackerPro
             </Button>
             <Input
               type="number"
+              aria-label={unit === 'seconds' ? `Set ${index + 1} hold seconds` : `Set ${index + 1} repetitions`}
               value={set.reps}
               onChange={(e) => updateSet(index, 'reps', parseInt(e.target.value) || 0)}
               className="h-8 w-14 text-center neumorph-inset"
