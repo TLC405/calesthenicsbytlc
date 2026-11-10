@@ -12,8 +12,8 @@ export function MobileNav() {
   if (pathname === '/workout') return null;
   const items = [
     {path:'/',label:'Home',icon:Home,active:pathname==='/'||pathname==='/intro'||['/today','/build','/train'].includes(pathname)},
-    {path:'/skills',label:'Skills',icon:Target,active:pathname.startsWith('/skills')},
-    {path:'/assessment',label:'Skill test',icon:ClipboardCheck,active:pathname==='/assessment'},
+    {path:'/skills',label:'Strength Skills',icon:Target,active:pathname.startsWith('/skills')},
+    {path:'/assessment',label:'Test Strength',icon:ClipboardCheck,active:pathname==='/assessment'},
   ];
   return <nav className="power-mobile-nav power-simple-nav" aria-label="Primary navigation">
     <div className="power-nav-surface">{items.map(({path,label,icon:Icon,active}) =>
