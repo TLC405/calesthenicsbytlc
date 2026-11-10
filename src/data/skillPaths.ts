@@ -1,6 +1,33 @@
 export interface SkillPath {id:string;title:string;short:string;focus:string;equipment:string;cue:string;safety:string;group:string;slugs:readonly string[];accessories?:readonly string[];kind?:"progression"|"collection";}
 export const SKILL_PATHS: readonly SkillPath[] = [
   {
+    "id": "grip",
+    "title": "Grip & Hanging Strength",
+    "short": "Grip endurance from active hangs to assisted one-arm holds",
+    "focus": "Grip endurance, scapular support and controlled hanging",
+    "equipment": "Secure bar, rings or grip tools as appropriate",
+    "cue": "Use a stable bar and an easy exit. Keep shoulders actively supported; release before grip fails.",
+    "safety": "Stop for wrist, elbow or shoulder pain. Test supported variations before harder hangs.",
+    "group": "Strength",
+    "slugs": [
+      "active-hang",
+      "dead-hang",
+      "towel-hang",
+      "one-arm-assisted-hang",
+      "one-arm-hang"
+    ],
+    "accessories": [
+      "plate-pinch-hold",
+      "block-pinch-hold",
+      "false-grip-ring-hang",
+      "farmers-carry",
+      "gripper-crush",
+      "band-finger-extension",
+      "grip-roller"
+    ],
+    "kind": "progression"
+  },
+  {
     "id": "foundation",
     "title": "Calisthenics Foundation",
     "short": "Four focus days · learn control first",
