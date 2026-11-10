@@ -55,6 +55,24 @@ export const PRESS_FOUNDATION_LADDER = [
   'Wall-assisted straight-arm presses',
 ];
 
+export const HANDSTAND_LADDER = [
+  'Wall handstand hold (chest-to-wall or back-to-wall)',
+  'Chest-to-wall alignment hold',
+  'Wall-supported shoulder taps',
+  'Freestanding kick-ups and safe bail',
+  'Freestanding hold (10–30 seconds)',
+  'Freestanding hold (30–60+ seconds)',
+  'Controlled handstand shape variations',
+];
+
+export const PISTOL_LADDER = [
+  'TRX / ring-assisted pistol squat',
+  'Controlled pistol squat negatives',
+  'Band-assisted pistol squat',
+  'Freestanding pistol squat',
+  'Freestanding pistol squat with pause',
+];
+
 export const PRESS_COMPRESSION_MENU = [
   'Seated straight-leg lifts',
   'Hip compression lifts on blocks',
