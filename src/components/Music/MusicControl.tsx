@@ -60,7 +60,7 @@ export function MusicControl() {
   );
   const searchSavedMusic = () => {
     setShowLibrary(true);
-    if (!library.length) toast({ title: 'Your music library is empty', description: 'Paste a YouTube Music link to play it inside POWER.' });
+    if (!library.length) toast({ title: 'Your music library is empty', description: 'Paste a YouTube Music link to play inside TLC's Super Human Strength.' });
   };
 
 
