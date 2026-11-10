@@ -4,6 +4,8 @@ import { getSkillPath } from '@/data/skillPaths';
 import { minimumTier } from '@/lib/trainingPolicy';
 import { TrainingLevelControls } from '@/components/Progression/TrainingLevelControls';
 import { WorkoutCoach } from '@/components/Workout/WorkoutCoach';
+import { PressProgramPanel } from '@/components/Training/PressProgramPanel';
+import { PRESS_STEPS, resolvedPressExercises, type PressSession } from '@/data/pressProgram';
 import { readCustomDraft, writeCustomDraft, startingSets, customEntryReasons, savedCustomPlans, saveCustomPlan, type CustomPlan, type PlannedSet } from '@/lib/customWorkoutDraft';
 import type { SkillExercise } from '@/lib/skillWorkoutBuilder';
 import { Link } from 'react-router-dom';
@@ -135,6 +137,79 @@ function PlannerEditor({owner}:{owner:string}) {
       toast.success('Added to your custom workout');
     } catch {/* noop */}
   }, []);
+
+  const loadPressFormula = (session: PressSession, pressLevel: number) => {
+    const moves = resolvedPressExercises(session, pressLevel);
+    if (sections.some(section => section.entries.length) &&
+        !window.confirm('Replace your current draft with this press workout? Cancel preserves your draft.')) return;
+
+    // Use real catalog movements where available. Custom drills have no invented tutorial links.
+    const catalog = [...publicCatalog, ...getOfflineExercises()] as Exercise[];
+    const bySlug = new Map(catalog.map(exercise => [exercise.slug, exercise]));
+    const aliases: Record<string, string> = {
+      'Pike support hold': 'pike-support-hold',
+      'Scapular push-ups': 'scapular-push-up',
+      'Pike stretch': 'pike-stretch',
+      'Seated straight-leg lifts': 'seated-pike-lift',
+      'Ring-assisted pistol squat': 'ring-assisted-pistol-squat',
+      'Chest-to-wall handstand': 'chest-to-wall-handstand',
+      'Freestanding handstand attempts': 'freestanding-handstand-kick-up',
+      'Pike push-ups': 'pike-push-up',
+      'Single-leg pike lifts': 'single-leg-pike-lift',
+      'Wall-supported press negatives': 'wall-press-negative',
+      'Wall-assisted pike press negative': 'wall-press-negative',
+      'Wall handstand hold': 'wall-handstand',
+      'Wrist circles': 'wrist-circles',
+      'Pistol squat negatives': 'assisted-box-pistol-sit',
+      'Pike mobility': 'pike-stretch',
+      'Forward-fold compression hold': 'pike-compression-hold',
+      'Downward dog to pike': 'downward-dog',
+      'Wrist rocks': 'wrist-circles',
+    };
+    const byName = new Map(catalog.map(exercise => [exercise.name.toLowerCase(), exercise]));
+    const advanced = /negative|wall.assisted.*press|elevated half.*press/i;
+    const result = SECTION_DEFAULTS.map(section => ({
+      ...section,
+      open: true,
+      entries: moves.filter(item => item.section === section.key).map(item => {
+        const found = bySlug.get(aliases[item.name] || '') || byName.get(item.name.toLowerCase());
+        const slug = item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        const exercise = found
+          ? { ...found, cues: [item.cue] }
+          : {
+              id: 'press-formula-' + slug,
+              slug: 'press-formula-' + slug,
+              name: item.name,
+              category: item.category,
+              primary_muscles: [],
+              secondary_muscles: [],
+              equipment: [],
+              cues: [item.cue],
+              description: item.cue,
+              difficulty_level: item.name === PRESS_STEPS[pressLevel - 1].name ? Math.min(5, Math.max(1, pressLevel - 1))
+                : advanced.test(item.name) ? 4 : 1,
+            };
+        return {
+          exercise: exercise as Exercise,
+          sets: Array.from({ length: item.sets }, () => item.unit === 'seconds'
+            ? { reps: 0, seconds: item.target } : { reps: item.target }),
+        };
+      }),
+    }));
+    setSections(result);
+    setShowAdvanced(true);
+    setWorkoutName('Straight-Arm Press / Day ' + session.key);
+    setNotes(
+      'Straight-arm pike press + handstand + compression + pistol squat.\n' +
+      'Session: ' + session.title + '. Press level: ' + pressLevel + ' / 7 · ' +
+      PRESS_STEPS[pressLevel - 1].name + '.\n' +
+      '3 sessions weekly; Day D optional. Skill quality comes first. ' +
+      'Use 2–3 min rest for demanding presses; scale down for joint discomfort.\n' +
+      moves.map(item => item.name + ': ' + item.cue).join('\n')
+    );
+    setComfortable(false);
+    toast.success('Day ' + session.key + ' loaded — ' + moves.length + ' editable movements');
+  };
 
   const loadTemplate = async (tpl: QuickTemplate) => {
     // Work offline, preserve canonical exercise slugs, and never invent video media.
@@ -321,6 +396,8 @@ function PlannerEditor({owner}:{owner:string}) {
           onChange={e => setWorkoutName(e.target.value)}
           className="h-12 rounded-xl border-border/50 bg-card font-display font-bold text-base placeholder:font-normal placeholder:text-muted-foreground"
         />
+
+        <PressProgramPanel onLoad={loadPressFormula} />
 
         <details className="rounded-xl border p-3"><summary className="min-h-12 font-bold text-sm cursor-pointer">L{profile.tier||1} · My level</summary><TrainingLevelControls profile={profile} onChange={next=>{setProfile(next);writeTrainingProfile(next);setComfortable(false);}}/></details>
         <section className="rounded-2xl border border-border/60 bg-card p-3 space-y-3" aria-label="Workout templates">
