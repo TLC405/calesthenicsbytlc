@@ -1,0 +1,37 @@
+/* Brand typography: keep the complete name readable on narrow phones and Fold covers. */
+.power-app-controls .power-app-wordmark{
+  display:inline-flex;align-items:center;gap:9px;min-width:0;max-width:min(66vw,370px)
+}
+.power-app-controls .power-app-wordmark>span{
+  display:flex;min-width:0;flex-direction:column;gap:2px;
+  font-family:"Space Grotesk",system-ui,sans-serif;
+  font-weight:800;font-size:clamp(13px,2.3vw,19px);
+  line-height:1.06;letter-spacing:-.035em;white-space:normal
+}
+.power-app-controls .power-app-wordmark>span small{
+  display:block;font-family:Inter,system-ui,sans-serif;
+  font-size:clamp(7px,1.4vw,10px);font-weight:700;
+  line-height:1.25;letter-spacing:.085em;white-space:normal
+}
+.power-entry-wordmark h1.superhuman-entry-title{
+  font-size:clamp(43px,6.1vw,96px);letter-spacing:-.065em;
+  line-height:.94;max-width:100%;overflow:visible
+}
+.power-entry-wordmark .superhuman-entry-title>span{display:block;white-space:nowrap}
+.power-hero-title.superhuman-dashboard-title{
+  font-size:clamp(2.7rem,5.2vw,5.8rem);
+  line-height:.96;letter-spacing:-.065em
+}
+.power-brand-wordmark strong{font-size:clamp(.82rem,1.5vw,1.1rem);letter-spacing:-.025em}
+@media (max-width:600px){
+  .power-entry-wordmark h1.superhuman-entry-title{font-size:clamp(35px,8.7vw,52px)}
+  .power-entry-brand-text small{font-size:8px;letter-spacing:.06em}
+  .power-app-controls .power-app-wordmark{max-width:62vw}
+  .power-app-controls .power-app-wordmark>span{font-size:13px}
+  .power-app-controls .power-app-wordmark>span small{font-size:7px}
+  .power-hero-title.superhuman-dashboard-title{font-size:clamp(2.4rem,9vw,4rem)}
+}
+@media (max-width:360px){
+  .power-entry-wordmark h1.superhuman-entry-title{font-size:34px}
+  .power-app-controls .power-app-wordmark>span small{font-size:6.5px;letter-spacing:.03em}
+}
