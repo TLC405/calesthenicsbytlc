@@ -1,7 +1,7 @@
-# ⚡ I GOT THE POWER — Independent by TLC
+# ⚡ TLC'S SUPER HUMAN STRENGTH — Independent Training by TLC
 
-**A premium, mobile-first calisthenics app with an installable PWA, independent AI coach,
-personal exercise creator, workout planner, progressions and realtime Power Circle.**
+**A premium, mobile-first super human strength and calisthenics app with an installable PWA, independent AI coach,
+personal exercise creator, optional workout suggestions, skill assessments, progressions and realtime Super Human Circle.**
 
 **Owner-controlled infrastructure — no Lovable account, subscription, preview broker
 or gateway required to run the independent version.**
@@ -17,11 +17,11 @@ or gateway required to run the independent version.**
 
 ## What members can do
 
-- Explore exercises, progression paths and training plans
+- Explore exercises, individual skill assessments and progression paths without preloaded workouts
 - Create **private** custom exercises, edit/delete them, or opt in to share them
-- Use AI coach to suggest exercises and build workouts
-- Participate in Power Circle with posts, likes and realtime notification badges
-- Install POWER from the mobile browser — no Lovable app wrapper or store submission needed
+- Use the AI coach for optional exercise suggestions; workouts are built by the athlete
+- Participate in Super Human Circle with posts, likes and realtime notification badges
+- Install TLC's Super Human Strength from the mobile browser — no Lovable app wrapper or store submission needed
 
 ## Run / Deploy
 
