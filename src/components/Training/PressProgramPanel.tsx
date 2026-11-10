@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import {
   PRESS_COMPRESSION_MENU,
   PRESS_FOUNDATION_LADDER,
+  HANDSTAND_LADDER,
+  PISTOL_LADDER,
   PRESS_SESSIONS,
   PRESS_STEPS,
   resolvedPressExercises,
@@ -143,6 +145,18 @@ export function PressProgramPanel({ onLoad, busy = false }: PressProgramPanelPro
               <h3 className="mb-1.5 font-semibold">Foundation / assisted pathway</h3>
               <ol className="space-y-1.5 pl-4 list-decimal text-muted-foreground">
                 {PRESS_FOUNDATION_LADDER.map(item => <li key={item}>{item}</li>)}
+              </ol>
+            </div>
+            <div>
+              <h3 className="mb-1.5 font-semibold">Handstand mastery ladder</h3>
+              <ol className="space-y-1.5 pl-4 list-decimal text-muted-foreground">
+                {HANDSTAND_LADDER.map(item => <li key={item}>{item}</li>)}
+              </ol>
+            </div>
+            <div>
+              <h3 className="mb-1.5 font-semibold">Pistol squat ladder</h3>
+              <ol className="space-y-1.5 pl-4 list-decimal text-muted-foreground">
+                {PISTOL_LADDER.map(item => <li key={item}>{item}</li>)}
               </ol>
             </div>
             <div>
