@@ -657,3 +657,170 @@ body .su-theme-note {margin:0!important;color:hsl(var(--muted-foreground));font-
     transition:none!important; transform:none!important;
   }
 }
+
+/* Dashboard is also a fully themed destination, not a stranded gold page. */
+body .power-shell {
+  --pg-gold: hsl(var(--primary));
+  --pg-bright: hsl(var(--primary));
+  --pg-quiet: hsl(var(--muted-foreground));
+  --pg-cream: hsl(var(--foreground));
+  --pg-line: hsl(var(--border));
+  background:hsl(var(--background)); color:hsl(var(--foreground));
+}
+body .power-shell .power-topbar {
+  background:hsl(var(--card));border-color:hsl(var(--border));
+}
+body .power-shell .power-welcome {color:hsl(var(--foreground));}
+body .power-shell .power-hero {
+  border:1px solid hsl(var(--border));border-top:4px solid var(--su-trim);
+  background:var(--su-hero);color:var(--su-hero-text);
+  border-radius:var(--su-radius);min-width:0;
+}
+body .power-shell .power-hero::before {
+  background:linear-gradient(90deg,var(--su-hero) 0%,var(--su-hero) 24%,transparent 72%);
+}
+body .power-shell .power-hero-content {--pg-cream:var(--su-hero-text);--pg-quiet:var(--su-hero-muted);min-width:0;}
+body .power-shell .power-hero-title {color:var(--su-hero-text);}
+body .power-shell .power-hero-title>span:last-child {color:hsl(var(--primary));}
+body .power-shell .power-hero-description {color:var(--su-hero-muted);}
+body .power-shell .power-button {
+  border-radius:11px;min-height:46px;box-shadow:none;letter-spacing:.04em;
+}
+body .power-shell .power-button-primary {
+  background:hsl(var(--primary));border-color:hsl(var(--primary));
+  color:hsl(var(--primary-foreground));
+}
+body .power-shell .power-button-outline {
+  background:transparent;border:1px solid var(--su-hero-muted);
+  color:var(--su-hero-text);
+}
+body .power-shell .power-rail,body .power-shell .power-training-empty {
+  background:hsl(var(--card));color:hsl(var(--foreground));
+  border-color:hsl(var(--border));
+  border-radius:var(--su-radius);
+}
+body .power-shell .power-rail {margin-top:12px;}
+body .power-shell .power-skill {color:hsl(var(--foreground));}
+body .power-shell :is(.power-feature,.power-metric) {
+  background:hsl(var(--card));color:hsl(var(--foreground));
+  border:1px solid hsl(var(--border));
+  border-radius:var(--su-radius);box-shadow:var(--su-card-shadow);
+}
+body .power-shell .power-feature::before {background:var(--su-trim);height:3px;left:16px;right:16px;}
+body .power-shell .power-feature:hover {background:hsl(var(--secondary) / .5);border-color:hsl(var(--primary) / .65);}
+body .power-shell .power-feature-title {color:hsl(var(--foreground));}
+body .power-shell .power-feature-index,
+body .power-shell .power-section-meta {color:hsl(var(--muted-foreground));}
+body .power-shell .power-progress-note,
+body .power-shell .power-feature-desc {color:hsl(var(--muted-foreground));}
+body .power-shell .power-metric-number {color:hsl(var(--foreground));}
+body .power-shell .power-recent-row {color:hsl(var(--foreground));border-color:hsl(var(--border));}
+body .power-shell .power-brand-wordmark strong {letter-spacing:-.04em;font-size:clamp(12px,1.35vw,17px);line-height:1.07;}
+body .power-shell .power-brand-label {color:hsl(var(--muted-foreground));}
+
+/* The opening stage changes material and typography by selected theme. */
+body .power-entry.su-entry-planet-fitness {
+  --entry-ink:#18131d;--entry-panel:#302639;--entry-panel-2:#392e43;
+  --entry-stroke:#66516e;--entry-paper:#f7f1fb;--entry-muted:#cfbfd6;
+  --entry-blue:#b687d9;--entry-orange:#e0c27d;
+  background:#18131d;color:#f7f1fb;
+}
+body .power-entry.su-entry-ymca {
+  --entry-ink:#f4f9fa;--entry-panel:#ffffff;--entry-panel-2:#e4f0f1;
+  --entry-stroke:#b5ced4;--entry-paper:#153241;--entry-muted:#3f6672;
+  --entry-blue:#096f9b;--entry-orange:#18857f;
+  background:#f4f9fa;color:#153241;
+}
+body .power-entry.su-entry-okc-thunder {
+  --entry-ink:#101d34;--entry-panel:#263c5b;--entry-panel-2:#294765;
+  --entry-stroke:#496686;--entry-paper:#f3f7fe;--entry-muted:#cadcef;
+  --entry-blue:#57a6dc;--entry-orange:#ed7a45;
+  background:#101d34;color:#f3f7fe;
+}
+body .power-entry.power-entry-vasa {
+  --entry-ink:#f5f2ed;--entry-panel:#ffffff;--entry-panel-2:#ece7df;
+  --entry-stroke:#c8c1b5;--entry-paper:#252b32;--entry-muted:#595f65;
+  --entry-blue:#b72841;--entry-orange:#b72841;
+  background:#f5f2ed;color:#252b32;
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-wordmark {
+  transform:none;
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-wordmark h1.superhuman-entry-title {
+  color:var(--entry-paper);text-shadow:none;
+  font-size:clamp(42px,6vw,95px);font-weight:900;
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-wordmark-top {
+  color:var(--entry-muted);text-shadow:none;
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-description {
+  color:var(--entry-muted);font-size:clamp(13px,1.4vw,16px);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-message strong {
+  color:var(--entry-paper);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-message-bar {
+  background:var(--entry-orange);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-brand-text strong {
+  color:var(--entry-paper);text-shadow:none;
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-brandmark {
+  background:var(--entry-orange);box-shadow:none;border:1px solid var(--entry-stroke);color:var(--entry-ink);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-primary {
+  background:var(--entry-blue);border-color:var(--entry-blue);
+  color:var(--entry-ink);border-radius:13px;
+  box-shadow:0 3px 0 var(--entry-stroke),0 15px 25px -18px rgb(0 0 0 / .6);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-primary-icon {
+  background:var(--entry-panel);border-radius:10px;color:var(--entry-paper);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-primary:hover {
+  box-shadow:0 5px 0 var(--entry-stroke),0 16px 26px -18px rgb(0 0 0 / .45);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-path {
+  color:var(--entry-paper);background:var(--entry-panel);border-color:var(--entry-stroke);
+  border-radius:13px;
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-path-index {
+  color:var(--entry-orange);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-mascot-stage {
+  background:var(--entry-panel);border:1px solid var(--entry-stroke);border-radius:19px;
+  box-shadow:inset 0 1px 0 var(--su-top-edge);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-mascot-legend,
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-mascot-caption {
+  color:var(--entry-muted);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-quiet-options button {
+  color:var(--entry-paper);border-color:var(--entry-stroke);
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-music-panel {
+  background:var(--entry-panel);color:var(--entry-paper);border-color:var(--entry-stroke);
+  border-radius:16px;
+}
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-powered strong,
+body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-track {
+  color:var(--entry-paper);
+}
+body .power-entry:is(.su-entry-ymca,.power-entry-vasa) .power-entry-primary {
+  color:#fff;
+}
+body .power-entry.su-entry-planet-fitness .power-entry-primary {color:#1a1021;}
+body .power-entry.su-entry-okc-thunder .power-entry-primary {color:#0c2036;}
+body .power-entry.su-entry-ymca .power-entry-mascot-stage,
+body .power-entry.power-entry-vasa .power-entry-mascot-stage {background:#e5eaec;}
+body .power-entry.su-entry-planet-fitness .power-entry-mascot-stage {background:#2a2232;}
+body .power-entry.su-entry-okc-thunder .power-entry-mascot-stage {background:#1b3553;}
+@media(max-width:780px) {
+ body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-wordmark h1.superhuman-entry-title {
+   font-size:clamp(34px,8.2vw,58px);
+ }
+}
+@media(max-width:360px) {
+ body .power-entry:is(.su-entry-planet-fitness,.su-entry-ymca,.su-entry-okc-thunder,.power-entry-vasa) .power-entry-wordmark h1.superhuman-entry-title {
+   font-size:32px;
+ }
+}
