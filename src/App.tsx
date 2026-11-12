@@ -34,6 +34,7 @@ import "./styles/neumorph.css";
 import "./styles/focus-training.css";
 import "./styles/movement-learning.css";
 import "./styles/superhuman-brand.css";
+import "./styles/superhuman-ui-v2.css";
 import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();
