@@ -634,7 +634,7 @@ body .su-theme-note {margin:0!important;color:hsl(var(--muted-foreground));font-
   body .power-app-controls .power-app-wordmark>img {width:28px;height:28px;padding:2px;}
   body .power-app-controls .power-app-wordmark>span {font-size:13px;}
   body .power-app-controls .power-app-wordmark>span small {font-size:7px;letter-spacing:.02em;}
-  body .power-app-controls button:has(svg) span {font-size:0;display:none;}
+  body .power-app-controls button[aria-label="Open videos and live streams"] > span {display:none;}
   body .power-simple-nav .power-nav-surface {padding:5px;gap:3px;}
   body .power-simple-nav-link>span {font-size:9px!important;}
   body .power-simple-heading,body .power-page-intro {padding:16px;}
