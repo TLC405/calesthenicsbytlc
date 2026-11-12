@@ -87,12 +87,12 @@ export default function LevelAssessment() {
       </div>
     </header>
 
-    <section className="grid grid-cols-2 gap-3 mb-6" aria-label="Assessment overview">
-      <div className="power-elevated p-4 rounded-2xl">
+    <section className="su-assessment-overview grid grid-cols-2 gap-3 mb-6" aria-label="Assessment overview">
+      <div className="power-elevated su-assessment-stat p-4 rounded-2xl">
         <p className="text-[11px] text-muted-foreground uppercase tracking-wider">Skills checked</p>
         <p className="font-display text-3xl font-bold mt-1">{completed}<span className="text-sm ml-1 text-muted-foreground">/ {allPaths.length}</span></p>
       </div>
-      <div className="power-elevated p-4 rounded-2xl">
+      <div className="power-elevated su-assessment-stat p-4 rounded-2xl">
         <p className="text-[11px] text-muted-foreground uppercase tracking-wider">How it works</p>
         <p className="font-bold text-sm mt-2">Measure → review → choose</p>
         <p className="text-xs text-muted-foreground mt-1">No automatic workouts</p>
@@ -107,14 +107,14 @@ export default function LevelAssessment() {
       <div className="flex flex-wrap gap-2">
         {featured.map(item => <button key={item.id} type="button"
           onClick={() => choosePath(item.id)} aria-pressed={path.id === item.id}
-          className={'rounded-xl border px-3 py-2.5 text-xs font-semibold transition-colors ' +
+          className={'su-assessment-chip rounded-xl border px-3 py-2.5 text-xs font-semibold transition-colors ' +
             (path.id === item.id ? 'bg-primary text-primary-foreground border-primary' : 'bg-card border-border/60 hover:border-primary/60')}>
           {checks[item.id]?.slug ? <Check size={12} className="inline mr-1"/> : null}{item.title}
         </button>)}
       </div>
     </section>
 
-    <section id="skill-check-form" className="power-elevated rounded-2xl p-4 sm:p-7 space-y-5 scroll-mt-20" aria-label="Individual skill test">
+    <section id="skill-check-form" className="power-elevated su-assessment-form rounded-2xl p-4 sm:p-7 space-y-5 scroll-mt-20" aria-label="Individual skill test">
       <div className="flex gap-3 items-center">
         <span className="h-11 w-11 flex items-center justify-center rounded-xl bg-primary/10 text-primary"><Target size={22}/></span>
         <div><p className="text-[10px] uppercase tracking-widest text-primary">Individual baseline</p><h2 className="font-display text-xl font-bold">Test your current strength</h2></div>
@@ -165,7 +165,7 @@ export default function LevelAssessment() {
       {message && <p role="status" className="text-xs text-primary font-semibold">{message}</p>}
     </section>
 
-    <section className="power-elevated rounded-2xl p-4 sm:p-6 mt-5 space-y-3" aria-label="Your skill assessment result">
+    <section className="power-elevated su-assessment-result rounded-2xl p-4 sm:p-6 mt-5 space-y-3" aria-label="Your skill assessment result">
       <div className="flex items-center gap-2"><Activity className="text-primary" size={19}/><h2 className="font-bold text-lg">Your super human level · {path.title}</h2></div>
       {current ? <>
         <p className="text-sm font-semibold">{formatResult(current)}</p>
@@ -188,7 +188,7 @@ export default function LevelAssessment() {
       <div className="flex items-center justify-between"><h2 className="font-bold text-lg">Your strength profile</h2><span className="text-xs text-muted-foreground">Retest anytime</span></div>
       {Object.values(checks).sort((a,b) => b.at.localeCompare(a.at)).map(item => {
         const checkedPath = getSkillPath(item.pathId);
-        return checkedPath && <button type="button" key={item.pathId} onClick={() => choosePath(item.pathId)} className="w-full rounded-xl border border-border/60 bg-card p-3 flex gap-3 items-center text-left">
+        return checkedPath && <button type="button" key={item.pathId} onClick={() => choosePath(item.pathId)} className="su-profile-result w-full rounded-xl border border-border/60 bg-card p-3 flex gap-3 items-center text-left">
           <span className="w-9 h-9 flex shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary"><RotateCcw size={17}/></span>
           <span className="min-w-0 flex-1"><strong className="block text-sm">{checkedPath.title}</strong><small className="block text-muted-foreground mt-1 text-xs truncate">{formatResult(item)}</small></span>
           <ArrowRight size={17} className="shrink-0 text-primary"/>
