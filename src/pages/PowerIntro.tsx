@@ -47,7 +47,7 @@ export default function Index() {
   }
 
   return (
-    <main className={`power-entry ${theme==='vasa'?'power-entry-vasa':'power-entry-gold'}`} aria-label="TLC's Super Human Strength introduction">
+    <main className={`power-entry ${theme==='vasa'?'power-entry-vasa':theme==='default'?'power-entry-gold':`su-entry-${theme}`}`} aria-label="TLC's Super Human Strength introduction">
       <div className="power-entry-frame" aria-hidden="true">
         <span className="power-entry-rail power-entry-rail-one" />
         <span className="power-entry-rail power-entry-rail-two" />
