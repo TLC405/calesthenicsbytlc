@@ -45,6 +45,7 @@ import "./styles/atomic-screen-fixes.css";
 import "./styles/client-portal.css";
 import "./styles/tlc-integrations.css";
 import "./styles/movement-modifications.css";
+import "./styles/tlctv-first.css";
 import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();
