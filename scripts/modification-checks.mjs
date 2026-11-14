@@ -12,12 +12,28 @@ try{
   bundle:true,platform:'node',format:'esm',logLevel:'silent',
   alias:{'@':'./src'}});
  const {movementModifications}=await import(pathToFileURL(output).href);
+ const bandOutput=path.join(dir,'band-assistance.mjs');
+ await build({entryPoints:['src/lib/bandAssistance.ts'],outfile:bandOutput,
+  bundle:true,platform:'node',format:'esm',logLevel:'silent',
+  alias:{'@':'./src'}});
+ const {bandGuideFor}=await import(pathToFileURL(bandOutput).href);
  const catalog=JSON.parse(await readFile('src/data/publicExerciseCatalog.json','utf8'));
  let applicable=0,foundations=0,elite=0,named=0,setup=0;
+ let bandAssisted=0,bandAlternative=0,bandSupervised=0,bandSkip=0;
  const missing=[];const violations=[];
  const known=new Map(catalog.map(e=>[e.slug,e]));
  for(const exercise of catalog){
   const plan=movementModifications(exercise.slug);
+  const band=bandGuideFor(exercise.slug);
+  assert(['assisted','alternative','supervised','skip'].includes(band.mode),exercise.slug+': invalid band mode');
+  assert(band.setup.length>0 && band.setup.every(s=>typeof s==='string'&&s.length>=22),exercise.slug+': band instructions must be actionable');
+  assert(band.progression.length>=35 && band.caution.length>=35 && band.logHint.length>=45,exercise.slug+': missing band progression, safety or logging context');
+  if(band.mode==='assisted')bandAssisted++;
+  else if(band.mode==='alternative')bandAlternative++;
+  else if(band.mode==='supervised')bandSupervised++;
+  else bandSkip++;
+  if(/push-up|pushup/.test(exercise.slug)&&band.mode==='assisted')violations.push(exercise.slug+': back-loop band is resistance, not push-up assistance');
+  if(/iron-cross|maltese|victorian|one-arm-hang/.test(exercise.slug)&&band.mode==='assisted')violations.push(exercise.slug+': unsafe unsupervised elite banding');
   if(plan.kind==='foundation'){
    foundations++;
    if(plan.options.length>0)violations.push(exercise.slug+': starting variation should remain simple');
@@ -52,9 +68,16 @@ try{
  assert.deepEqual(push.options.slice(0,2).map(x=>x.slug),['incline-push-up','wall-push-up'],'Full push-ups should show two established regressions');
  assert.equal(movementModifications('dead-bug').kind,'foundation','Starting moves should not have extra complexity');
  assert.equal(movementModifications('iron-cross').kind,'elite','Elite movements require prerequisite warnings');
+ assert.equal(bandGuideFor('pull-up').mode,'assisted','Pull-ups must offer real elastic assistance');
+ assert.equal(bandGuideFor('push-up').mode,'alternative','Push-up bands typically add resistance; recommend inclines');
+ assert.equal(bandGuideFor('human-flag').mode,'supervised','Flags need a verified band rig');
+ assert.equal(bandGuideFor('handstand').mode,'skip','Balance inversions should use wall support rather than improvised elastic suspension');
+ assert.equal(bandGuideFor('pistol-squat').mode,'assisted','Pistols can use safe counterbalance when appropriate');
+ assert.equal(bandGuideFor('iron-cross').mode,'supervised','Elite crosses cannot offer generic band assistance');
+
  const overview=await readFile('src/components/Exercise/MovementOverview.tsx','utf8');
  const app=await readFile('src/App.tsx','utf8');
  assert(overview.includes('<MovementModifications'), 'Modification UI must appear in every exercise guide');
  assert(app.includes('movement-modifications.css'), 'Five-theme styles must load');
- console.log(`PASS: ${catalog.length} catalog movements checked — ${applicable} intermediate with modification guidance, ${foundations} starting, ${elite} elite; ${named} named links and ${setup} setup options validated.`);
+ console.log(`PASS: ${catalog.length} movements and band guides checked — ${applicable} intermediate, ${foundations} starting, ${elite} elite; ${named} movement links, ${setup} setup options. Band modes: ${bandAssisted} assisted, ${bandAlternative} accessories, ${bandSupervised} coached only, ${bandSkip} not recommended.`);
 }finally{await rm(dir,{recursive:true,force:true});}
