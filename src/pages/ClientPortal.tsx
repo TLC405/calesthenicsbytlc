@@ -32,8 +32,8 @@ const EXPERIENCE:{value:ClientExperience;label:string}[]=[
 const FEATURED_IDS=['foundation','handstand','planche','pull-up','front-lever','back-lever','human-flag','pistol','l-sit','pike-compression','straddle-press','ring-muscle-up','grip','posterior-chain','splits'];
 const PATHS=FEATURED_IDS.map(id=>getSkillPath(id)).filter((p):p is NonNullable<typeof p>=>Boolean(p&&p.slugs.length));
 const tabs:{key:Tab;label:string;icon:typeof ClipboardCheck;detail:string}[]=[
-  {key:'overview',label:'Home',icon:UserRound,detail:'Your starting point'},
-  {key:'test',label:'Test',icon:ClipboardCheck,detail:'Find your level'},
+  {key:'overview',label:'Overview',icon:UserRound,detail:'Your starting point'},
+  {key:'test',label:'Skill Test',icon:ClipboardCheck,detail:'Find your starting level'},
   {key:'results',label:'Results',icon:Activity,detail:'Review your progress'},
 ];
 
@@ -66,12 +66,12 @@ function ClientAccess({onSignedIn}:{onSignedIn:()=>void}){
   if(loading)return <div className="tlc-client-access"><LockKeyhole size={18}/> Checking account session…</div>;
   if(user)return <section className="tlc-client-access" aria-label="Signed-in client account">
     <span className="tlc-client-access__icon"><ShieldCheck size={21}/></span>
-    <div><strong>Signed-in training account</strong><p>{user.email||'Your account'} · Your client reports in this beta remain stored on this device.</p></div>
+    <div><strong>Your training account</strong><p>{user.email||'Your account'} · Your client reports in this beta remain stored on this device.</p></div>
     <button type="button" onClick={()=>{void signOut();setStatus('');}} className="tlc-client-quiet"><LogOut size={15}/>Sign out</button>
   </section>;
   return <section className="tlc-client-access" aria-label="Client account access">
     <span className="tlc-client-access__icon"><LockKeyhole size={21}/></span>
-    <div><strong>Client preview</strong><p>Try the portal without an account. Guest test entries last only for this browser tab/session and are not shared with a coach.</p></div>
+    <div><strong>Continue as a guest</strong><p>Explore the portal without signing up. Guest test results last for this browser session and are not shared with a coach.</p></div>
     <div className="tlc-client-access__actions">
       <button type="button" onClick={()=>{setShowForm(v=>newAccount?true:!v);setNewAccount(false);setStatus('');}} aria-expanded={showForm&&!newAccount} className="tlc-client-quiet"><LogIn size={16}/>Sign in</button>
       <button type="button" onClick={()=>{setShowForm(v=>!newAccount?true:!v);setNewAccount(true);setStatus('');}} aria-expanded={showForm&&newAccount} className="tlc-client-cta">Sign up <ArrowRight size={16}/></button>
@@ -86,7 +86,7 @@ function ClientAccess({onSignedIn}:{onSignedIn:()=>void}){
         <label>Email<input type="email" required autoComplete="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="client@example.com"/></label>
         <label>Password<input type="password" required minLength={6} autoComplete={newAccount?'new-password':'current-password'} value={password} onChange={e=>setPassword(e.target.value)} placeholder="At least 6 characters"/></label>
         <button disabled={busy} type="submit" className="tlc-client-cta">{busy?'Checking…':newAccount?'Create client account':'Sign in'}<ArrowRight size={16}/></button>
-        <p className="tlc-client-fineprint">Accounts use the app's existing authentication service. This beta does not yet sync client test reports to the coach or another device.</p>
+        <p className="tlc-client-fineprint">Accounts use the app's existing sign-in service. Client test reports are saved in this browser and do not yet sync to a coach or another device.</p>
         {status&&<p role="status" className="tlc-client-message">{status}</p>}
       </form>
     </div>}
@@ -184,13 +184,13 @@ export default function ClientPortal(){
   }
   const current=skillChecks[path.id];
   const suggestion=current?suggestedSkillStep(path,current):null;
-  const heading=activeTab==='overview'?'A better starting point.':activeTab==='test'?'Know your starting level.':'See what is improving.';
+  const heading=activeTab==='overview'?'Your starting point.':activeTab==='test'?'Find your starting level.':'Track your progress.';
   return <main className="tlc-client-page min-h-screen pb-32">
     <div className="tlc-client-wrap">
       <div className="tlc-client-topline"><Link to="/" className="tlc-client-back"><ArrowLeft size={15}/>Back to Super Human Strength</Link><span>CLIENT PORTAL · PREVIEW</span></div>
       <header className="tlc-client-hero">
         <div className="tlc-client-hero__identity"><img src="/icons/tlc-doodle-180.png" width={72} height={72} alt="TLC sketch logo"/><span><strong>SPREAD TLC</strong><small>COACH TLC / CLIENT PERFORMANCE STUDIO</small></span></div>
-        <div className="tlc-client-hero__copy"><span>PERSONAL BASELINE / COACHING TOOLS</span><h1>{heading}</h1><p>Understand where you are, test one movement at a time, and choose a progression you can actually control. No gamification. No preloaded workouts.</p></div>
+        <div className="tlc-client-hero__copy"><span>PERSONAL BASELINE / COACHING TOOLS</span><h1>{heading}</h1><p>Find your starting level, test one movement at a time, and choose a progression you can control. No games or preloaded workouts.</p></div>
         <div className="tlc-client-hero__trim"><span>TRUTH</span><span>LOVE</span><span>COMMUNITY</span></div>
       </header>
       <nav className="tlc-client-tabs" aria-label="Client portal tabs">
@@ -207,11 +207,11 @@ export default function ClientPortal(){
             <p className="tlc-client-eyebrow"><Sparkles size={15}/> START HERE</p>
             <h2>{data.profile?.displayName?'Welcome, '+data.profile.displayName+'.':'Welcome to your starting line.'}</h2>
             <p>Start with a gentle seven-question readiness check, then select the movement you want to measure. The system makes suggestions, not diagnoses or automatic level promotions.</p>
-            <Link to="/client/test" className="tlc-client-cta">Open the Test tab <ArrowRight size={17}/></Link>
+            <Link to="/client/test" className="tlc-client-cta">Take a skills test <ArrowRight size={17}/></Link>
             <button type="button" onClick={()=>{void copyClientLink();}} className="tlc-client-secondary tlc-client-share"><Share2 size={16}/> Copy client test link</button>
           </div>
           <div className="tlc-client-panel">
-            <h2>Client preferences</h2><p className="tlc-client-muted">Personalize your on-device portal without setting a fixed workout plan.</p>
+            <h2>Your training preferences</h2><p className="tlc-client-muted">Choose your goals. This does not create a workout.</p>
             <form className="tlc-client-form" onSubmit={saveProfile}>
               <label>Name or nickname (optional)<input maxLength={60} value={draftName} onChange={e=>setDraftName(e.target.value)} placeholder="First name"/></label>
               <label>Primary focus<select value={draftGoal} onChange={e=>setDraftGoal(e.target.value as ClientGoal)}>{GOALS.map(x=><option key={x.value} value={x.value}>{x.label}</option>)}</select></label>
@@ -232,13 +232,13 @@ export default function ClientPortal(){
             <div><span>02</span><strong>Understand</strong><p>See the stage, assistance and technique you reported.</p></div>
             <div><span>03</span><strong>Explore</strong><p>Open a related exercise with TLCtv instructions on the same page.</p></div>
           </div>
-          <div className="tlc-client-actions"><Link to="/client/results">Review results <ArrowRight size={15}/></Link><Link to="/skills">Browse skills <ArrowRight size={15}/></Link></div>
+          <div className="tlc-client-actions"><Link to="/client/results">Review results <ArrowRight size={15}/></Link><Link to="/skills?view=tree">Browse the Skill Tree <ArrowRight size={15}/></Link></div>
         </section>
       </>}
 
       {activeTab==='test'&&<>
         <section className="tlc-client-panel tlc-client-test-head">
-          <div><p className="tlc-client-eyebrow"><ClipboardCheck size={15}/> THE TEST STUDIO</p><h2>Choose a starting point</h2><p className="tlc-client-muted">Seven non-maximal questions or a measured exercise result. Both are self-reported.</p></div>
+          <div><p className="tlc-client-eyebrow"><ClipboardCheck size={15}/> THE TEST STUDIO</p><h2>Choose your skills test</h2><p className="tlc-client-muted">Answer seven quick questions or record a movement you can perform comfortably. Results are self-reported.</p></div>
           <div role="group" className="tlc-client-mode-tabs" aria-label="Type of client test">
             <button type="button" aria-pressed={testMode==='starter'} onClick={()=>{setTestMode('starter');setNotice('');}}><HeartPulse size={16}/> Starter check</button>
             <button type="button" aria-pressed={testMode==='skill'} onClick={()=>{setTestMode('skill');setNotice('');}}><Dumbbell size={16}/> Skill test</button>
@@ -282,7 +282,7 @@ export default function ClientPortal(){
               <select value={path.id} onChange={e=>setPathId(e.target.value)}>{PATHS.map(x=><option key={x.id} value={x.id}>{x.title}</option>)}</select>
             </label>
             <div className="tlc-client-path-context"><span>{path.focus}</span><small>{path.slugs.length} variations available</small></div>
-            <label className="tlc-client-checkline"><input type="checkbox" checked={untested} onChange={e=>setUntested(e.target.checked)}/> Not tested yet / not sure</label>
+            <label className="tlc-client-checkline"><input type="checkbox" checked={untested} onChange={e=>setUntested(e.target.checked)}/> I haven't tested this skill yet</label>
             {!untested&&<>
               <label>Hardest controlled variation
                 <select value={selected} onChange={e=>{setSlug(e.target.value);setValue('');}}>
@@ -306,8 +306,8 @@ export default function ClientPortal(){
             </>}
             <button type="submit" className="tlc-client-cta"><FileCheck2 size={17}/> Record this skill test</button>
           </form>
-          {current&&<div className="tlc-client-assessment-result"><Activity size={18}/><div><strong>Latest connected strength check · {path.title}</strong><p>{current.slug?(exerciseBySlug.get(current.slug)?.name||current.slug)+' · '+(current.value??'—')+' '+current.metric:'No baseline yet'} · {dateLabel(current.at)}</p>{suggestion&&<span>{suggestion.label}: {suggestion.reason}</span>}</div></div>}
-          <div className="tlc-client-actions"><Link to={'/skills/'+path.id}>Open progression and TLCtv <ArrowRight size={15}/></Link><Link to="/assessment">Advanced strength test <ArrowRight size={15}/></Link></div>
+          {current&&<div className="tlc-client-assessment-result"><Activity size={18}/><div><strong>Latest recorded skill check · {path.title}</strong><p>{current.slug?(exerciseBySlug.get(current.slug)?.name||current.slug)+' · '+(current.value??'—')+' '+current.metric:'No baseline yet'} · {dateLabel(current.at)}</p>{suggestion&&<span>{suggestion.label}: {suggestion.reason}</span>}</div></div>}
+          <div className="tlc-client-actions"><Link to={'/skills/'+path.id}>Open progression and TLCtv <ArrowRight size={15}/></Link><Link to="/assessment">Full strength assessment <ArrowRight size={15}/></Link></div>
         </section>}
       </>}
 
@@ -324,10 +324,10 @@ export default function ClientPortal(){
         {data.baseline&&<section className="tlc-client-panel tlc-client-results-base"><h2>Starter check</h2><p><strong>Suggested focus:</strong> {data.baseline.nextFocus}</p><small>Baseline L{data.baseline.tier} · {dateLabel(data.baseline.at)}</small></section>}
         <section className="tlc-client-panel">
           <div className="tlc-client-section-title"><div><span>RECENT ASSESSMENTS</span><h2>Skill test history</h2></div><span>{data.history.length} entries</span></div>
-          {data.history.length===0?<div className="tlc-client-empty"><ClipboardCheck size={26}/><strong>No client skill tests yet</strong><p>Open Test to record a controlled movement baseline. You can use guest preview to explore without an account.</p><Link className="tlc-client-cta" to="/client/test">Take a skill test <ArrowRight size={16}/></Link></div>:<div className="tlc-client-history">
+          {data.history.length===0?<div className="tlc-client-empty"><ClipboardCheck size={26}/><strong>No skill tests recorded yet</strong><p>Open Test to record a controlled movement baseline. You can use guest preview to explore without an account.</p><Link className="tlc-client-cta" to="/client/test">Take a skill test <ArrowRight size={16}/></Link></div>:<div className="tlc-client-history">
             {data.history.map(row=><article key={row.id}><span className="tlc-client-history__mark"><Activity size={17}/></span><div><strong>{getSkillPath(row.pathId)?.title||row.pathId}</strong><p>{row.movement}</p><small>{dateLabel(row.at)} · {row.assistance==='none'?'Unassisted':row.assistance+' assisted'}{row.value!==null?' · Form '+row.quality+'/5':''}</small></div><span className="tlc-client-history__value">{row.value===null?'—':row.value}<small>{row.value===null?'Not tested':row.metric==='seconds'?'sec':'reps'}</small></span></article>)}
           </div>}
-          <div className="tlc-client-actions"><Link to="/client/test">Retest a skill <RefreshCcw size={15}/></Link><Link to="/skills">Explore the skill map <ArrowRight size={15}/></Link></div>
+          <div className="tlc-client-actions"><Link to="/client/test">Retest a skill <RefreshCcw size={15}/></Link><Link to="/skills?view=tree">Explore the Skill Tree <ArrowRight size={15}/></Link></div>
         </section>
         {latestChecks.length>0&&<p className="tlc-client-muted tlc-client-results-disclaimer">Latest measured skills: {latestChecks.map(x=>getSkillPath(x.pathId)?.title||x.pathId).slice(0,5).join(' · ')}. Measurements are client-reported, not independently verified by a coach.</p>}
       </>}
@@ -336,7 +336,7 @@ export default function ClientPortal(){
       <footer className="tlc-client-footer">
         <div><ShieldCheck size={17}/><span>{owner==='guest'?'Guest preview uses temporary session storage. Do not use a shared device for personal client records.':'Test records stay on this browser; coach review and cross-device cloud sync are not active yet.'}</span></div>
         <p>Physical tests are educational, not medical clearance. Stop for sharp pain, dizziness or loss of control. No training plans or appointments are automatically created.</p>
-        <div className="tlc-client-footer__links"><Link to="/">Train app <ChevronRight size={13}/></Link><Link to="/program">Program <ChevronRight size={13}/></Link><Link to="/skills">Skill library <ChevronRight size={13}/></Link></div>
+        <div className="tlc-client-footer__links"><Link to="/">Train app <ChevronRight size={13}/></Link><Link to="/program">Program <ChevronRight size={13}/></Link><Link to="/skills?view=tree">Skill Tree <ChevronRight size={13}/></Link></div>
       </footer>
     </div>
   </main>;
