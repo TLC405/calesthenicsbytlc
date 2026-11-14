@@ -52,6 +52,8 @@ export function videoLessonCoverage(exercise:ThumbnailExercise){
   seen.add(parsed.url);
   return [{url:parsed.url,title:s.scope==='clip'?(s.title||exercise.name):/related|guide/i.test(s.title)?s.title:(s.title||exercise.name)+' · related lesson',scope:s.scope==='clip'?'clip' as const:'guide' as const,provider:parsed.provider,origin:'catalog' as const}];
  });
+ const instagram=parseEmbeddedMedia(exercise.instagram_url||'');
+ if(instagram&&instagram.provider==='instagram'&&!seen.has(instagram.url))existing.unshift({url:instagram.url,title:exercise.name+' · Instagram video',scope:'clip',provider:'instagram',origin:'catalog'});
  const direct=existing.filter(s=>s.scope==='clip');
  const related=existing.filter(s=>s.scope==='guide');
  const extra=fallback(exercise);
