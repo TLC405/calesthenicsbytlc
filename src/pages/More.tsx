@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Library, TrendingUp, SlidersHorizontal, Users, Sparkles, Crown, FileText, Shield, Target } from 'lucide-react';
+import { ArrowRight, Library, TrendingUp, SlidersHorizontal, Users, Sparkles, Crown, FileText, Shield, Target, BrainCircuit } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { MusicControl } from '@/components/Music/MusicControl';
@@ -11,6 +11,7 @@ export default function More() {
     {to:'/program',label:'My skill training plan',note:'A / D / E / B / C, handstands and readiness ladders',icon:Target},
     {to:'/library',label:'All exercises',note:'Search, videos and your own movements',icon:Library},
     {to:'/videos',label:'Tutorial checks',note:'Missing sources, playback and movement review',icon:Shield},
+    {to:'/tlctv/analyzer',label:'TLCtv AI Video Analyzer',note:'Analyze social exercise clips and local video frames',icon:BrainCircuit},
     {to:'/dashboard',label:'My strength progress',note:'Workout history and recorded activity',icon:TrendingUp},
     {to:'/planner',label:'Custom workout',note:'Add your own exercises and sets',icon:FileText},
   ];
