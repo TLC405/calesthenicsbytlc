@@ -72,7 +72,10 @@ function ClientAccess({onSignedIn}:{onSignedIn:()=>void}){
   return <section className="tlc-client-access" aria-label="Client account access">
     <span className="tlc-client-access__icon"><LockKeyhole size={21}/></span>
     <div><strong>Client preview</strong><p>Try the portal without an account. Guest test entries last only for this browser tab/session and are not shared with a coach.</p></div>
-    <button type="button" onClick={()=>setShowForm(v=>!v)} aria-expanded={showForm} className="tlc-client-quiet"><LogIn size={16}/>{showForm?'Close':'Account sign-in'}</button>
+    <div className="tlc-client-access__actions">
+      <button type="button" onClick={()=>{setShowForm(v=>newAccount?true:!v);setNewAccount(false);setStatus('');}} aria-expanded={showForm&&!newAccount} className="tlc-client-quiet"><LogIn size={16}/>Sign in</button>
+      <button type="button" onClick={()=>{setShowForm(v=>!newAccount?true:!v);setNewAccount(true);setStatus('');}} aria-expanded={showForm&&newAccount} className="tlc-client-cta">Sign up <ArrowRight size={16}/></button>
+    </div>
     {showForm&&<div className="tlc-client-access__form">
       <div className="tlc-client-switch" role="group" aria-label="Client account access mode">
         <button type="button" aria-pressed={!newAccount} onClick={()=>{setNewAccount(false);setStatus('');}}>Sign in</button>
