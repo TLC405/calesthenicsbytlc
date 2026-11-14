@@ -1,233 +1,255 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, BookOpen, CalendarDays, ChevronDown, Clock3, Play, ShieldCheck, Target } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CalendarDays, Check, CheckCircle2, ChevronDown, Clock3, Dumbbell, Play, RotateCcw, ShieldCheck, Target } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { EmbeddedMedia } from '@/components/Exercise/EmbeddedMedia';
 import { AssistedSkillsLab } from '@/components/Training/AssistedSkillsLab';
 import {
-  SUPERHUMAN_BALANCE, SUPERHUMAN_REELS, SUPERHUMAN_SESSIONS,
-  type RoutineMove, type SessionKey,
+  HANDSTAND_SETS, SHIFT_CYCLE, STAGE_HOLD_KEYS, STAGE_HOLD_LABELS,
+  SUPERHUMAN_REELS, SUPERHUMAN_SESSIONS,
+  type RoutineMove, type SessionKey, type StageHold,
 } from '@/data/superHumanRoutine';
 
-type Preferences = { frequency: 3 | 4; day: SessionKey; week: number; plancheMax: string; lsitMax: string };
-const STORAGE_KEY = 'power-superhuman-blueprint-v1';
-const defaults: Preferences = { frequency: 3, day: 'A', week: 1, plancheMax: '', lsitMax: '' };
-function readPreferences(): Preferences {
+type Preferences = {
+  day:SessionKey;
+  week:number;
+  best:Record<StageHold,string>;
+  handstand:Record<string,number>;
+  clean:Record<StageHold,number>;
+};
+const STORAGE_KEY='power-superhuman-blueprint-v2';
+const defaults:Preferences={
+  day:'A',week:1,
+  best:{planche:'',flag:'',front:'',back:'',lsit:''},
+  handstand:{},clean:{planche:0,flag:0,front:0,back:0,lsit:0},
+};
+function readPreferences():Preferences{
   try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') as Partial<Preferences> | null;
-    if (!stored) return defaults;
-    return {
-      frequency: stored.frequency === 4 ? 4 : 3,
-      day: ['A', 'B', 'C', 'D'].includes(stored.day || '') ? stored.day as SessionKey : 'A',
-      week: Number.isInteger(stored.week) && Number(stored.week) >= 1 && Number(stored.week) <= 12 ? Number(stored.week) : 1,
-      plancheMax: typeof stored.plancheMax === 'string' ? stored.plancheMax : '',
-      lsitMax: typeof stored.lsitMax === 'string' ? stored.lsitMax : '',
+    const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null') as Partial<Preferences>|null;
+    if(saved) return {
+      day:['A','B','C','D'].includes(saved.day||'')?saved.day as SessionKey:'A',
+      week:Number.isInteger(saved.week)&&Number(saved.week)>=1&&Number(saved.week)<=12?Number(saved.week):1,
+      best:Object.fromEntries(STAGE_HOLD_KEYS.map(k=>[k,typeof saved.best?.[k]==='string'?saved.best[k]:''])) as Record<StageHold,string>,
+      handstand:saved.handstand && typeof saved.handstand==='object'?saved.handstand:{},
+      clean:Object.fromEntries(STAGE_HOLD_KEYS.map(k=>[k,Math.max(0,Math.min(2,Number(saved.clean?.[k])||0))])) as Record<StageHold,number>,
     };
-  } catch { return defaults; }
+    // Migrate best-hold inputs from previous app release.
+    const previous=JSON.parse(localStorage.getItem('power-superhuman-blueprint-v1')||'null') as {plancheMax?:string;lsitMax?:string;week?:number}|null;
+    return previous?{...defaults,week:Number.isInteger(previous.week)&&Number(previous.week)>=1&&Number(previous.week)<=12?Number(previous.week):1,
+      best:{...defaults.best,planche:typeof previous.plancheMax==='string'?previous.plancheMax:'',lsit:typeof previous.lsitMax==='string'?previous.lsitMax:''}}:defaults;
+  }catch{return defaults;}
 }
-function safeMax(value: string): number | undefined {
-  const n = Number(value);
-  return value.trim() !== '' && Number.isFinite(n) && n > 0 && n <= 300 ? n : undefined;
+function bestHold(raw:string):number|undefined {
+  const n=Number(raw);
+  return raw.trim()!==''&&Number.isFinite(n)&&n>0&&n<=300?n:undefined;
 }
-function dose(move: RoutineMove, deload: boolean, plancheMax: string, lsitMax: string): string {
-  if (move.count) return String(deload ? Math.ceil(move.count / 2) : move.count) + ' ' + (move.countUnit || 'tries');
-  const sets = move.sets ? (deload ? Math.ceil(move.sets / 2) : move.sets) : undefined;
-  if (move.holdMetric) {
-    const best = safeMax(move.holdMetric === 'planche' ? plancheMax : lsitMax);
-    const goal = best ? String(Math.max(1, Math.round(best * 0.65))) + ' sec' : '65% of your best hold';
-    return String(sets || 3) + ' × ' + goal;
+function dose(move:RoutineMove, deload:boolean,best:Record<StageHold,string>):string {
+  if(move.count)return String(deload?Math.ceil(move.count/2):move.count)+' '+(move.countUnit||'tries');
+  const sets=move.sets?(deload?Math.max(1,Math.ceil(move.sets/2)):move.sets):undefined;
+  if(move.holdMetric){
+    const m=bestHold(best[move.holdMetric]);
+    return String(sets||move.sets||1)+' × '+(m?Math.max(1,Math.round(m*.65))+'s':'65% best hold')+' · 2 min rest';
   }
-  return sets ? String(sets) + ' × ' + (move.target || 'quality practice') : (move.target || 'quality practice');
+  return sets?sets+' × '+(move.target||'clean reps'):(move.target||'controlled practice');
 }
-function MovementRow({ move, deload, plancheMax, lsitMax }: {
-  move: RoutineMove; deload: boolean; plancheMax: string; lsitMax: string;
-}) {
-  return <div className="group flex items-start gap-3 border-b border-border/60 py-3 last:border-b-0">
-    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500/70" aria-hidden="true" />
+function MovementRow({move,deload,best}:{move:RoutineMove;deload:boolean;best:Record<StageHold,string>}) {
+  return <div className="flex min-h-14 items-start gap-2.5 border-b border-border/60 py-2.5 last:border-b-0">
+    <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500/80"/>
     <div className="min-w-0 flex-1">
-      <p className="text-[13px] font-semibold leading-5 text-foreground">{move.name}</p>
-      <p className="mt-0.5 text-xs font-medium text-muted-foreground">{dose(move, deload, plancheMax, lsitMax)}</p>
-      {move.note && <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{move.note}</p>}
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+        <span className="text-[13px] font-semibold leading-snug text-foreground">{move.name}</span>
+        <span className="text-xs font-bold text-primary">{dose(move,deload,best)}</span>
+      </div>
+      {move.note&&<p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{move.note}</p>}
     </div>
-    {move.slug && move.goal && <Link
-      to={'/?goal=' + encodeURIComponent(move.goal) + '&node=' + encodeURIComponent(move.slug)}
-      className="inline-flex min-h-10 shrink-0 items-center gap-1 rounded-lg border border-border px-2.5 text-[11px] font-semibold text-primary hover:bg-accent"
-      aria-label={'Explore ' + move.name + ' in your movement library'}
-    >Explore <ArrowRight size={13} /></Link>}
+    {move.goal && <Link to={'/?goal='+encodeURIComponent(move.goal)+(move.slug?'&node='+encodeURIComponent(move.slug):'')}
+      className="flex min-h-9 shrink-0 items-center gap-1 rounded-lg border border-border px-2 text-[11px] font-bold text-primary hover:bg-accent"
+      aria-label={'Open skill map for '+move.name}>Skill map <ArrowRight size={12}/></Link>}
   </div>;
 }
-
-export default function SuperHumanProgram() {
-  const [prefs, setPrefs] = useState<Preferences>(readPreferences);
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
-  const [allVideos, setAllVideos] = useState(false);
-  const [balanceOpen, setBalanceOpen] = useState(false);
-  useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs)); } catch { /* Device may disallow storage. */ }
-  }, [prefs]);
-
-  const day = prefs.frequency === 3 && prefs.day === 'D' ? 'A' : prefs.day;
-  const session = SUPERHUMAN_SESSIONS.find(item => item.key === day) || SUPERHUMAN_SESSIONS[0];
-  const isDeload = prefs.week % 4 === 0;
-  const isRetest = prefs.week % 3 === 0;
-  const reels = useMemo(() => allVideos
-    ? SUPERHUMAN_REELS
-    : SUPERHUMAN_REELS.filter(clip => clip.days.includes(day)), [day, allVideos]);
-  const playing = SUPERHUMAN_REELS.find(clip => clip.id === selectedVideo);
-  const patch = (change: Partial<Preferences>) => setPrefs(old => ({ ...old, ...change }));
-  const labeledDays = prefs.frequency === 4 ? SUPERHUMAN_SESSIONS : SUPERHUMAN_SESSIONS.slice(0, 3);
-
-  return <main className="min-h-screen bg-background pb-28 text-foreground md:pb-14">
-    <div className="mx-auto max-w-5xl space-y-5 px-3 py-5 sm:px-6 sm:py-8">
-      <Link to="/" className="inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground">
-        <ArrowLeft size={16}/> Back to my workout builder
+export default function SuperHumanProgram(){
+  const [prefs,setPrefs]=useState<Preferences>(readPreferences);
+  const [selectedVideo,setSelectedVideo]=useState<string|null>(null);
+  const [allVideos,setAllVideos]=useState(false);
+  const [showFullHandstand,setShowFullHandstand]=useState(false);
+  const [showHolds,setShowHolds]=useState(false);
+  useEffect(()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify(prefs));}catch{/* Local device storage may be disabled. */}},[prefs]);
+  const patch=(next:Partial<Preferences>)=>setPrefs(p=>({...p,...next}));
+  const session=SUPERHUMAN_SESSIONS.find(s=>s.key===prefs.day)||SUPERHUMAN_SESSIONS[0];
+  const isDeload=prefs.week%4===0;
+  const isRetest=prefs.week%3===0;
+  const handstandCount=Math.max(0,Math.min(5,Number(prefs.handstand[prefs.week])||0));
+  const activeSet=HANDSTAND_SETS[handstandCount%2];
+  const refs=useMemo(()=>allVideos?SUPERHUMAN_REELS:SUPERHUMAN_REELS.filter(r=>r.days.includes(prefs.day)),[allVideos,prefs.day]);
+  const playing=SUPERHUMAN_REELS.find(r=>r.id===selectedVideo);
+  const recordHandstand=(change:1|-1)=>setPrefs(old=>({...old,handstand:{...old.handstand,[old.week]:Math.max(0,Math.min(5,(Number(old.handstand[old.week])||0)+change))}}));
+  const recordClean=(key:StageHold,done:boolean)=>setPrefs(old=>({...old,clean:{...old.clean,[key]:done?Math.min(2,(old.clean[key]||0)+1):0}}));
+  return <main className="min-h-screen bg-background pb-28 text-foreground md:pb-16">
+    <div className="mx-auto max-w-5xl space-y-4 px-3 py-5 sm:space-y-5 sm:px-6">
+      <Link to="/" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground">
+        <ArrowLeft size={15}/> Workout builder
       </Link>
-
-      <header className="relative overflow-hidden rounded-[24px] border border-amber-500/20 bg-[#161819] p-5 text-zinc-50 shadow-xl sm:p-8">
-        <div className="pointer-events-none absolute -right-10 -top-16 h-40 w-40 rounded-full border-[24px] border-amber-400/10" aria-hidden="true" />
-        <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-amber-300">TLC / Super Human Strength</p>
-        <h1 className="mt-3 max-w-xl text-3xl font-black tracking-tight sm:text-4xl">Your Skill Blueprint<span className="text-amber-400">.</span></h1>
-        <p className="mt-2 max-w-xl text-sm leading-relaxed text-zinc-300">Handstand · Planche · Press · Compression · Human flag. A suggested training formula, never a preloaded workout.</p>
-        <div className="mt-5 flex flex-wrap items-center gap-2">
-          <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-semibold">3 or 4 sessions</span>
-          <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-semibold">No fixed weekdays</span>
-          <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-semibold">Adaptive holds</span>
-          <a href="#assisted-skills" className="rounded-full border border-amber-400/50 bg-amber-400/10 px-3 py-1.5 text-[11px] font-bold text-amber-200 hover:bg-amber-400/20">Bands & gear ↓</a>
+      <header className="rounded-[22px] border border-amber-500/20 bg-[#171a1d] px-5 py-5 text-zinc-50 shadow-lg sm:p-7">
+        <p className="text-[10px] font-black uppercase tracking-[0.18em] text-amber-400">TLC's Super Human Strength / Training Plan</p>
+        <h1 className="mt-2 text-[clamp(25px,5vw,38px)] font-black leading-tight tracking-tight">Train skills. Not clutter<span className="text-amber-400">.</span></h1>
+        <p className="mt-2 max-w-xl text-xs leading-relaxed text-zinc-300 sm:text-sm">Your shift-friendly A → C → rest → B → D cycle, with alternating handstand practice and progression-based holds.</p>
+        <div className="mt-4 flex flex-wrap gap-2 text-[10px] font-semibold">
+          <span className="rounded-full border border-white/20 px-3 py-1.5">4 skill sessions</span>
+          <span className="rounded-full border border-white/20 px-3 py-1.5">Handstand · 5× weekly</span>
+          <span className="rounded-full border border-white/20 px-3 py-1.5">No fixed weekdays</span>
         </div>
       </header>
 
-      <section aria-label="Set training frequency and week" className="rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted-foreground">Your training rhythm</p>
-            <h2 className="mt-1 text-lg font-bold">Choose your weekly structure</h2>
-          </div>
-          <div role="group" aria-label="Training days" className="flex rounded-xl border border-border bg-background p-1">
-            {([3,4] as const).map(n => <button key={n} type="button" aria-pressed={prefs.frequency === n}
-              onClick={() => patch({frequency:n,day:n===3&&prefs.day==='D'?'A':prefs.day})}
-              className={'min-h-10 rounded-lg px-4 text-xs font-bold transition-colors ' + (prefs.frequency===n?'bg-foreground text-background':'text-muted-foreground hover:bg-accent')}>{n} days</button>)}
-          </div>
+      <section aria-label="Your rotating training schedule" className="rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div><p className="text-[10px] font-black uppercase tracking-[0.13em] text-primary">01 / The training cycle</p><h2 className="mt-1 text-lg font-black">Your seven-slot split</h2></div>
+          <label className="flex items-center gap-2 text-xs font-semibold text-muted-foreground">Week
+            <select aria-label="Training week" className="h-10 rounded-lg border border-border bg-background px-2 text-sm font-bold"
+              value={prefs.week} onChange={e=>patch({week:Number(e.target.value)})}>
+              {Array.from({length:12},(_,i)=>i+1).map(k=><option key={k} value={k}>Week {k}{k%4===0?' · deload':''}</option>)}
+            </select>
+          </label>
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {prefs.frequency===3 ? 'A → rest → B → rest → C. Never train A, B and C on back-to-back days.' : 'A → B → rest → C → D. No more than two training days in a row.'}
-        </p>
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
-          <div className="flex items-center gap-2 text-xs font-semibold"><CalendarDays size={15} className="text-primary"/> Training week</div>
-          <select aria-label="Select training week" value={prefs.week} onChange={event=>patch({week:Number(event.target.value)})}
-            className="min-h-11 rounded-xl border border-border bg-background px-3 text-sm font-semibold">
-            {Array.from({length:12},(_,i)=>i+1).map(n=><option key={n} value={n}>Week {n}{n%4===0?' · deload':''}{n%3===0?' · retest':''}</option>)}
-          </select>
+        <div className="mt-3 grid grid-cols-7 gap-1 sm:gap-2" role="group" aria-label="Cycle slots, not fixed weekdays">
+          {SHIFT_CYCLE.map((key,i)=>{
+            const isRest=key==='rest',active=!isRest&&key===prefs.day;
+            return isRest?<div key={i} className="flex min-h-[57px] flex-col items-center justify-center rounded-xl border border-border bg-background/40 text-[10px] text-muted-foreground"><span className="font-semibold">Rest</span><small>0{i+1}</small></div>
+              :<button key={i} type="button" aria-pressed={active} aria-label={'Select Day '+key}
+                onClick={()=>patch({day:key})}
+                className={'flex min-h-[57px] flex-col items-center justify-center rounded-xl border text-sm font-black transition-colors '+
+                  (active?'border-amber-500 bg-amber-500/10 text-foreground':'border-border bg-background hover:bg-accent')}>
+                {key}<span className="mt-1 text-[10px] font-normal text-muted-foreground">0{i+1}</span>
+              </button>;
+          })}
         </div>
-        {(isDeload||isRetest) && <div className="mt-3 flex flex-wrap gap-2">
-          {isDeload && <p className="rounded-lg border border-amber-500/25 bg-amber-500/10 px-3 py-2 text-xs font-semibold text-foreground">Deload week: sets and attempts shown at about half volume.</p>}
-          {isRetest && <p className="rounded-lg border border-border bg-accent/40 px-3 py-2 text-xs font-semibold">Retest best holds this week, while fresh.</p>}
+        <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">Slots are a sequence, not weekdays. Move the cycle to match your shifts; keep A and B separated by C and recovery. No hard workout deadline.</p>
+        {(isDeload||isRetest)&&<div className="mt-3 flex flex-wrap gap-2">
+          {isDeload&&<span className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs font-semibold">Week {prefs.week}: half sets, not half form</span>}
+          {isRetest&&<span className="rounded-lg border border-border bg-accent/50 px-3 py-2 text-xs font-semibold">Retest clean best holds while fresh</span>}
         </div>}
       </section>
 
-      <section aria-labelledby="current-session" className="space-y-4">
-        <div className="flex items-end justify-between gap-3 px-1">
-          <div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-primary">Select your session</p><h2 id="current-session" className="mt-1 text-xl font-black">A–D skill sessions</h2></div>
-          <span className="text-[11px] text-muted-foreground">Select, review, then build</span>
+      <section aria-label="Selected workout" className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <div className="border-b border-border bg-accent/40 px-4 py-4 sm:px-5">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-[10px] font-black uppercase tracking-[0.13em] text-primary">02 / Skill session · Day {session.key}</p>
+            <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground"><Clock3 size={13}/>{session.duration}</span>
+          </div>
+          <h2 className="mt-1 text-xl font-black">{session.title}</h2>
+          <p className="mt-1 text-xs text-muted-foreground">{session.subtitle}</p>
         </div>
-        <div role="group" aria-label="Choose session" className={'grid gap-2 ' + (prefs.frequency===4?'grid-cols-4':'grid-cols-3')}>
-          {labeledDays.map(item => <button key={item.key} type="button" aria-pressed={day===item.key} onClick={()=>patch({day:item.key})}
-            className={'min-h-[67px] rounded-xl border p-2 text-left transition-colors sm:p-3 ' + (day===item.key?'border-amber-500 bg-amber-500/10 shadow-sm':'border-border bg-card hover:bg-accent')}>
-            <span className="block text-base font-black">Day {item.key}</span><span className="mt-0.5 block text-[10px] leading-snug text-muted-foreground">{item.key==='A'?'Push + Planche':item.key==='B'?'Press + Core':item.key==='C'?'Flag + Pull':'Technique'}</span>
-          </button>)}
+        <div className="p-4 sm:p-5">
+          <p className="mb-3 text-xs leading-relaxed text-muted-foreground"><ShieldCheck size={14} className="mr-1 inline align-[-2px]"/>Skill holds use 65% of your best clean hold, with ~2 min rest. If a drill is too advanced, use the skill-map regression or a suitable assisted step.</p>
+          <div className="space-y-2">
+            {session.groups.map((group,i)=><details className="group rounded-xl border border-border bg-background/50" key={group.title} open={i===0?true:undefined}>
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3.5 py-3.5 text-left">
+                <span><strong className="block text-sm">{group.title}</strong><span className="mt-0.5 block text-[11px] text-muted-foreground">{group.movements.length} drills</span></span>
+                <ChevronDown size={17} className="text-muted-foreground transition-transform group-open:rotate-180"/>
+              </summary>
+              <div className="border-t border-border px-3.5 py-1">{group.movements.map(move=><MovementRow key={move.name} move={move} deload={isDeload} best={prefs.best}/>)}</div>
+            </details>)}
+          </div>
+          <p className="mt-3 text-xs leading-relaxed text-muted-foreground">This plan is a reference, not a preloaded workout. The skill-map links open your existing exercise library so you can choose movements and their safe regressions.</p>
         </div>
+      </section>
 
-        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-          <div className="border-b border-border bg-accent/30 p-4 sm:p-5">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-primary">Day {session.key} / {prefs.frequency} day formula</span>
-              <span className="inline-flex items-center gap-1.5 text-[11px] text-muted-foreground"><Clock3 size={14}/>{session.duration}</span>
+      <section aria-label="Daily handstand practice" className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <div className="border-b border-border bg-accent/30 px-4 py-4 sm:px-5">
+          <div className="flex flex-wrap items-center justify-between gap-2"><p className="text-[10px] font-black uppercase tracking-[0.13em] text-primary">03 / Handstand practice</p><span className="text-xs font-semibold text-muted-foreground">10-min target · 5× per week</span></div>
+          <h2 className="mt-1 text-lg font-black">{handstandCount===5?'Handstand week complete':activeSet.name}</h2>
+          <p className="mt-1 text-xs text-muted-foreground">{handstandCount===5?'All five practices logged. The next week starts again with Set 1.':activeSet.subtitle}</p>
+        </div>
+        <div className="space-y-3 p-4 sm:p-5">
+          <div className="flex gap-2" aria-label="Five handstand sessions this week">
+            {Array.from({length:5},(_,i)=><div key={i} className={'h-2 flex-1 rounded-full '+(i<handstandCount?'bg-amber-500':'bg-accent')}/>)}
+          </div>
+          <p className="text-xs leading-relaxed text-muted-foreground">Alternate Heidi → Haz → Heidi → Haz → Heidi, each completed practice. For a genuine 10-minute block, choose 2–3 quality drills from the five listed; completing every prescribed set may take longer.</p>
+          <div className="rounded-xl border border-border bg-background/50">
+            {(handstandCount===5?HANDSTAND_SETS[0]:activeSet).drills.slice(0,showFullHandstand?5:3).map(move=>
+              <div key={move.name} className="px-3.5"><MovementRow move={move} deload={isDeload} best={prefs.best}/></div>)}
+            <button type="button" onClick={()=>setShowFullHandstand(v=>!v)}
+              className="flex min-h-10 w-full items-center justify-center gap-1 border-t border-border text-xs font-bold text-primary">
+              {showFullHandstand?'Show fewer drills':'Show all 5 drills'} <ChevronDown size={15} className={showFullHandstand?'rotate-180':''}/>
+            </button>
+          </div>
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-xs font-semibold text-muted-foreground">{handstandCount} / 5 completed</span>
+            <div className="flex items-center gap-2">
+              <button type="button" disabled={!handstandCount} onClick={()=>recordHandstand(-1)} className="min-h-10 rounded-lg border border-border px-3 text-xs font-semibold disabled:opacity-40">Undo</button>
+              <button type="button" disabled={handstandCount>=5} onClick={()=>{recordHandstand(1);setShowFullHandstand(false);}}
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-lg bg-foreground px-4 text-xs font-bold text-background disabled:opacity-40">
+                <Check size={15}/>{handstandCount>=5?'Finished':'Mark completed'}
+              </button>
             </div>
-            <h3 className="mt-2 text-lg font-black sm:text-xl">{session.name}</h3>
-            <p className="mt-1 text-xs text-muted-foreground">{session.focus}</p>
           </div>
-          <p className="px-4 pt-4 text-xs text-muted-foreground sm:px-5"><ShieldCheck size={14} className="mr-1 inline align-[-2px]"/> Start with wrist and shoulder preparation. Work at a controlled difficulty; rest as needed to maintain form.</p>
-          <div className="space-y-5 p-4 sm:p-5">
-            {session.groups.map(group=><section key={group.title} aria-label={group.title}>
-              <h4 className="border-b border-border pb-2 text-[11px] font-black uppercase tracking-[0.11em] text-primary">{group.title}</h4>
-              <div>{group.movements.map(move=><MovementRow key={move.name} move={move} deload={isDeload} plancheMax={prefs.plancheMax} lsitMax={prefs.lsitMax}/>)}</div>
-            </section>)}
-          </div>
+          <p className="text-[11px] text-muted-foreground">Practice on five suitable days, including one off-day if recovered. Avoid stacking hard wrist work when sore or fatigued.</p>
         </div>
       </section>
 
-      <section aria-labelledby="hold-targets" className="rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
-        <div className="flex items-center gap-2"><Target size={18} className="text-primary"/><h2 id="hold-targets" className="text-base font-black">Calculate your 65% hold targets</h2></div>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Enter your best clean hold at your current progression. The program calculates a working target; it does not automatically advance your level.</p>
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          {([{key:'plancheMax',label:'Planche best hold',value:prefs.plancheMax},{key:'lsitMax',label:'L-sit best hold',value:prefs.lsitMax}] as const).map(item=>
-            <label key={item.key} className="block text-xs font-semibold">
-              {item.label}<span className="mt-1.5 flex min-h-12 items-center rounded-xl border border-border bg-background px-3">
-                <input type="number" min="1" max="300" step="1" inputMode="numeric" placeholder="Enter seconds"
-                  className="min-w-0 w-full bg-transparent text-base font-bold outline-none" value={item.value}
-                  onChange={event=>patch({[item.key]:event.target.value} as Partial<Preferences>)}/>
-                <span className="text-xs text-muted-foreground">sec</span>
-              </span>
-              <span className="mt-1 block font-normal text-muted-foreground">{safeMax(item.value)?'Working hold: '+Math.max(1,Math.round(safeMax(item.value)!*0.65))+' sec':'No hold entered'}</span>
-            </label>)}
-        </div>
-      </section>
-
-      <section aria-label="Balance on off days" className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-        <button type="button" aria-expanded={balanceOpen} onClick={()=>setBalanceOpen(v=>!v)}
-          className="flex min-h-20 w-full items-center gap-3 px-4 py-3 text-left sm:px-5">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-accent/50"><CalendarDays size={19} className="text-primary"/></span>
-          <span className="min-w-0 flex-1"><span className="block text-sm font-black">10-minute balance practice</span><span className="mt-0.5 block text-xs text-muted-foreground">2–3 off-days · light skill practice</span></span>
-          <ChevronDown size={18} className={'shrink-0 text-muted-foreground transition-transform '+(balanceOpen?'rotate-180':'')}/>
+      <section aria-label="Skill progression rules and hold calculator" className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <button type="button" aria-expanded={showHolds} onClick={()=>setShowHolds(v=>!v)}
+          className="flex min-h-[76px] w-full items-center gap-3 px-4 py-3 text-left sm:px-5">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-accent/60"><Target size={18} className="text-primary"/></span>
+          <span className="min-w-0 flex-1"><strong className="block text-sm">Best holds & stage readiness</strong><span className="mt-1 block text-xs text-muted-foreground">65% calculator · two clean sessions in a row</span></span>
+          <ChevronDown size={17} className={'shrink-0 text-muted-foreground transition-transform '+(showHolds?'rotate-180':'')}/>
         </button>
-        {balanceOpen && <div className="border-t border-border px-4 py-3 sm:px-5">
-          {SUPERHUMAN_BALANCE[0].movements.map(move=><MovementRow key={move.name} move={move} deload={isDeload} plancheMax={prefs.plancheMax} lsitMax={prefs.lsitMax}/>)}
-          <p className="mt-3 text-xs text-muted-foreground">These should stay easy, especially after high wrist or shoulder loads. Never force additional balance attempts through pain.</p>
+        {showHolds&&<div className="space-y-3 border-t border-border p-4 sm:p-5">
+          <p className="text-xs leading-relaxed text-muted-foreground">Enter the longest clean hold for your current stage. Mark each practice as clean only if every prescribed set is controlled. Failed sessions reset the consecutive count; advancement still requires the skill-map readiness checks.</p>
+          <div className="space-y-2">
+            {STAGE_HOLD_KEYS.map(key=><div key={key} className="grid grid-cols-[1fr_auto] items-center gap-2 rounded-xl border border-border bg-background/70 p-3 sm:grid-cols-[1fr_125px_115px]">
+              <div>
+                <strong className="text-xs">{STAGE_HOLD_LABELS[key]}</strong>
+                <p className="mt-0.5 text-[11px] text-muted-foreground">{bestHold(prefs.best[key])?Math.max(1,Math.round(bestHold(prefs.best[key])!*.65))+' sec per stage set':'Set best clean hold'}</p>
+              </div>
+              <label className="text-[10px] font-semibold text-muted-foreground">
+                Best seconds
+                <input type="number" min="1" max="300" inputMode="numeric" placeholder="—" value={prefs.best[key]}
+                  onChange={e=>patch({best:{...prefs.best,[key]:e.target.value}})}
+                  className="mt-1 h-10 w-20 rounded-lg border border-border bg-card px-2 text-sm font-bold text-foreground sm:w-full"/>
+              </label>
+              <div className="col-span-2 flex flex-wrap items-center gap-1.5 sm:col-span-1 sm:justify-end">
+                <span className="mr-1 text-[10px] text-muted-foreground">{prefs.clean[key]}/2 clean</span>
+                <button type="button" aria-label={'Record clean session for '+STAGE_HOLD_LABELS[key]} onClick={()=>recordClean(key,true)}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-foreground text-background"><Check size={16}/></button>
+                <button type="button" aria-label={'Record incomplete session for '+STAGE_HOLD_LABELS[key]} onClick={()=>recordClean(key,false)}
+                  className="flex h-9 w-9 items-center justify-center rounded-lg border border-border"><RotateCcw size={14}/></button>
+              </div>
+            </div>)}
+          </div>
+          <p className="text-xs leading-relaxed text-muted-foreground"><strong className="text-foreground">Progression rule:</strong> two consecutive clean stage sessions before considering advancement. For assisted human flag, also reach the previously established 20-sec clean per-side support hold before reducing band assistance.</p>
         </div>}
       </section>
 
-      <section aria-labelledby="starting-point" className="rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
-        <div className="flex items-center gap-2"><ShieldCheck size={18} className="text-primary"/><h2 id="starting-point" className="text-base font-black">Start where you are</h2></div>
+      <AssistedSkillsLab/>
+
+      <section aria-label="Coach technique videos" className="rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div><p className="text-[10px] font-black uppercase tracking-[0.13em] text-primary">04 / Coach reference videos</p><h2 className="mt-1 text-lg font-black">Technique library</h2></div>
+          <button type="button" className="min-h-10 rounded-lg border border-border px-3 text-xs font-bold" onClick={()=>setAllVideos(v=>!v)}>{allVideos?'This session only':'All 8 reels'}</button>
+        </div>
         <div className="mt-3 grid gap-2 sm:grid-cols-2">
-          {[
-            ['Planche','Frog stand → controlled short tuck holds','planche'],
-            ['Human flag','Flag plank until the readiness assessment is passed','human-flag'],
-            ['Compression','Tuck L-sit before extended-leg work','l-sit'],
-            ['Handstand','Chest-to-wall holds before free attempts','handstand'],
-          ].map(([name,stage,goal])=><Link to={'/assessment?skill='+goal} key={goal} className="flex min-h-[76px] items-center justify-between gap-2 rounded-xl border border-border bg-background p-3 hover:bg-accent">
-            <span><strong className="block text-xs">{name}</strong><span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{stage}</span></span><ArrowRight size={15} className="shrink-0 text-primary"/>
-          </Link>)}
-        </div>
-        <p className="mt-3 text-xs text-muted-foreground">Skill links open the existing movement library or readiness test. Nothing is added to your workout unless you choose it.</p>
-      </section>
-
-      <AssistedSkillsLab />
-
-      <section aria-labelledby="coaching-library" className="rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-primary">Technique references</p><h2 id="coaching-library" className="mt-1 text-base font-black">Coach reel library</h2><p className="mt-1 text-xs text-muted-foreground">Eight reels you shared · public Instagram embeds inside the app.</p></div>
-          <button type="button" onClick={()=>setAllVideos(v=>!v)} className="min-h-10 rounded-lg border border-border px-3 text-xs font-bold hover:bg-accent">{allVideos?'Show Day '+day:'View all 8'}</button>
-        </div>
-        <div className="mt-4 grid gap-2 sm:grid-cols-2">
-          {reels.map(clip=><button key={clip.id} type="button" onClick={()=>setSelectedVideo(clip.id)}
-            className="flex min-h-[88px] items-center gap-3 rounded-xl border border-border bg-background p-3 text-left transition-colors hover:border-primary/60 hover:bg-accent">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-card"><Play size={17} className="text-primary"/></span>
-            <span className="min-w-0 flex-1"><strong className="block text-[12px] leading-snug">{clip.title}</strong><small className="mt-1 block text-[11px] text-primary">{clip.skill}</small><small className="mt-0.5 block text-[11px] leading-snug text-muted-foreground">{clip.teaches}</small></span>
+          {refs.map(clip=><button key={clip.id} type="button" onClick={()=>setSelectedVideo(clip.id)}
+            className="flex min-h-[70px] items-center gap-3 rounded-xl border border-border bg-background p-3 text-left hover:bg-accent">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border"><Play size={17} className="text-primary"/></span>
+            <span className="min-w-0 flex-1"><strong className="block text-xs">{clip.title}</strong><span className="mt-1 block text-[11px] text-muted-foreground">{clip.teaches}</span></span>
           </button>)}
         </div>
-        <p className="mt-3 text-[11px] text-muted-foreground">Embedded reels depend on creator permissions and Instagram availability; videos have not been independently technique-reviewed.</p>
+        <p className="mt-2 text-[11px] text-muted-foreground">Creator permissions determine whether public Instagram reels can play in-app. These are technique references, not independently verified demonstrations.</p>
       </section>
 
-      <footer className="flex flex-wrap items-center justify-between gap-3 px-1 pb-3">
-        <p className="max-w-lg text-xs leading-relaxed text-muted-foreground">Retest clean holds every 3 weeks. Halve sets every 4th week. Treat all targets as adjustable suggestions, not readiness standards.</p>
-        <Link to="/" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-foreground px-4 text-xs font-bold text-background">Open my workout builder <ArrowRight size={16}/></Link>
+      <section aria-label="Safety rules" className="rounded-xl border border-border p-4 text-xs leading-relaxed text-muted-foreground">
+        <strong className="text-foreground">Stop rule:</strong> A pinch or pain in the wrist, elbow, or front of the shoulder means stop that drill for the day. Never push through sharp pain, and don't force a stage change to match a calendar date. Rest sufficiently after harder straight-arm sessions.
+      </section>
+      <footer className="flex flex-wrap items-center justify-between gap-3 pb-3">
+        <p className="max-w-xl text-[11px] leading-relaxed text-muted-foreground">These session durations are approximate; quality, rest and readiness take priority. Everything here is optional guidance.</p>
+        <Link to="/" className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-foreground px-4 text-xs font-bold text-background">Back to builder <ArrowRight size={16}/></Link>
       </footer>
     </div>
-
     <Dialog open={Boolean(playing)} onOpenChange={open=>{if(!open)setSelectedVideo(null);}}>
       <DialogContent className="max-h-[88dvh] max-w-[min(94vw,650px)] overflow-y-auto">
-        <DialogTitle className="pr-5 text-lg">{playing?.title || 'Coach reel'}</DialogTitle>
-        <DialogDescription>{playing?.teaches || 'Movement reference'} · plays inside TLC's Super Human Strength.</DialogDescription>
-        {playing && <EmbeddedMedia key={playing.id} url={playing.url} title={playing.title}/>}
+        <DialogTitle>{playing?.title||'Coach reel'}</DialogTitle>
+        <DialogDescription>{playing?.teaches||'Movement reference'}</DialogDescription>
+        {playing&&<EmbeddedMedia key={playing.id} url={playing.url} title={playing.title}/>}
       </DialogContent>
     </Dialog>
   </main>;
