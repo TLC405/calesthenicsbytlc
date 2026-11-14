@@ -9,6 +9,7 @@ import { InlineSoundtrackSlot } from "./components/Music/InlineSoundtrackSlot";
 import Skills from "./pages/Skills";
 import More from "./pages/More";
 import LevelAssessment from "./pages/LevelAssessment";
+import ClientPortal from "./pages/ClientPortal";
 import VideoAudit from "./pages/VideoAudit";
 import VideoAnalyzer from "./pages/VideoAnalyzer";
 import { MobileNav } from "./components/Layout/MobileNav";
@@ -40,6 +41,7 @@ import "./styles/superhuman-ui-v2.css";
 import "./styles/tlctv-inline.css";
 import "./styles/tlctv-analyzer.css";
 import "./styles/atomic-screen-fixes.css";
+import "./styles/client-portal.css";
 import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();
@@ -66,6 +68,8 @@ function AppContent() {
           <Route path="/skills" element={<Skills />} />
           <Route path="/program" element={<SuperHumanProgram />} />
           <Route path="/assessment" element={<LevelAssessment />} />
+          <Route path="/client" element={<ClientPortal />} />
+          <Route path="/client/:tab" element={<ClientPortal />} />
           <Route path="/videos" element={<VideoAudit />} />
           <Route path="/tlctv/analyzer" element={<VideoAnalyzer />} />
           <Route path="/more" element={<More />} />
