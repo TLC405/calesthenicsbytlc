@@ -102,7 +102,7 @@ export default function MasterSkillMap({embedded=false}:{embedded?:boolean}){
   const n=nodeMap.get(id);if(!n)return;
   setSelectedId(id);
   // Keep mobile graph/list in place while opening the node details.
-  if(!mobile)setLane(n.lane);
+  // Keep the selected lane filter stable so the list does not collapse beneath the reader.
   setDetailsOpen(true);
   setParams(prev=>{const updated=new URLSearchParams(prev);updated.set('skill',id);return updated;},{replace:true,preventScrollReset:true});
  }
@@ -222,7 +222,7 @@ export default function MasterSkillMap({embedded=false}:{embedded?:boolean}){
     <SheetContent side="bottom" className="tlc-atomic-movement-sheet tlc-atomic-tree-sheet">
       <SheetTitle className="tlc-atomic-sheet-title">{selected.label}</SheetTitle>
       <SheetDescription className="sr-only">Movement checkpoint, tutorial, supporting exercises and next steps.</SheetDescription>
-      <div className="tlc-atomic-sheet-body">
+      <div key={selectedId} className="tlc-atomic-sheet-body">
        <SkillDetails node={selected} lane={laneInfo} linked={linked} progress={progress} prereqs={directPrereqs} next={nextSteps} onChoose={selectNode} upstream={prereqs.size} downstream={unlocks.size}/>
       </div>
     </SheetContent>
