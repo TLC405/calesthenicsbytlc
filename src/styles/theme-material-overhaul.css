@@ -84,7 +84,6 @@
 :root{
   --su-card-shadow:var(--tlc-panel-shadow);
   --su-raised-shadow:0 6px 0 var(--tlc-shadow),0 23px 32px -26px var(--tlc-shadow);
-  --su-top-edge:var(--tlc-highlight);
 }
 html,body{background-color:hsl(var(--background));color:hsl(var(--foreground))}
 body{
