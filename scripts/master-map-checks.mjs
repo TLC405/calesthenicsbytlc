@@ -21,7 +21,11 @@ for(const n of graph.nodes){
  assert(n.label.length>2&&n.passStandard.length>2,'Missing chart test benchmark '+n.id);
  const cell=n.lane+':'+n.row;assert(!cells.has(cell),'Overlapping card cell '+cell);cells.add(cell);
  if(n.exerciseSlug)assert(slugs.has(n.exerciseSlug),'Missing mapped catalog exercise '+n.id+': '+n.exerciseSlug);
- assert(n.mapping===(n.exerciseSlug?'related':'missing')||n.mapping==='exact'&&Boolean(n.exerciseSlug),'Invalid mapping state '+n.id);
+ assert(['exact','related','compound'].includes(n.mapping),'Unresolved map-to-library node '+n.id);
+ assert(Array.isArray(n.linkedSlugs)&&n.linkedSlugs.length>0,'Each chart node must link to a real movement or compound checklist: '+n.id);
+ assert(n.linkedSlugs.every(slug=>slugs.has(slug)),'Unmatched supporting movement in '+n.id);
+ if(n.mapping==='exact')assert(Boolean(n.exerciseSlug)&&n.linkedSlugs.includes(n.exerciseSlug),'Exact map node must have primary exercise');
+ if(n.mapping==='compound')assert(!n.exerciseSlug&&n.linkedSlugs.length>1,'Compound hub must not impersonate one exercise');
 }
 for(const l of graph.lanes)assert(paths.includes('"id": "'+l.path+'"'),'Lane path not in skill library '+l.path);
 for(const e of graph.edges){
@@ -52,6 +56,7 @@ assert(source.includes("mapping==='exact'"),'Related skill attempts must not imp
 assert(source.includes('CHECKPOINT · NOT A WORKOUT'),'Exit standards not working sets');
 assert(source.includes('Optional hold-time planning example'),'Opt-in practice guidance');
 assert(source.includes('XMLSerializer'),'Vector export available');
+assert(source.includes('addToWorkout')&&source.includes('writeWorkoutDraft'),'Manual draft handoff and actual persistence required');
 assert(source.includes('routeMasterTree(visible,edges'),'Poster routes use deterministic metro tracks');
 assert(source.includes('updated.set(\'skill\',id)'),'Map selection preserves the active Skills tab URL');
 assert(source.includes("embedded?'section':'main'"),'Embedded tree avoids nested main landmark');
