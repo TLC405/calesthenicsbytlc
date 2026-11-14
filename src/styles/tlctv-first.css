@@ -135,3 +135,26 @@ body .power-movement-library .power-library-head>.max-w-6xl{padding-top:12px;pad
  .tlc-watch-dialog{padding:10px!important}
 }
 @media(prefers-reduced-motion:reduce){.tlctv-inline__more>summary:after{transition:none}}
+
+/* Keep supporting resources and skill-check context available without forcing reading. */
+.tlc-watch-and-learn>.tlc-guide-extra{
+  width:100%;min-width:0;padding:0 13px 12px;border:1px solid hsl(var(--border));
+  background:hsl(var(--card));border-radius:12px;color:hsl(var(--foreground));
+}
+.tlc-watch-and-learn>.tlc-guide-extra>summary{
+  display:flex;align-items:center;min-height:47px;
+  font-size:12px;font-weight:850;cursor:pointer;list-style:none;
+}
+.tlc-watch-and-learn>.tlc-guide-extra>summary::-webkit-details-marker{display:none}
+.tlc-watch-and-learn>.tlc-guide-extra>summary::after{content:'+';margin-left:auto;color:hsl(var(--primary));font-size:19px}
+.tlc-watch-and-learn>.tlc-guide-extra[open]>summary::after{content:'−'}
+.tlc-watch-and-learn .power-learning-relations{border-top:1px solid hsl(var(--border));margin-top:12px;padding-top:11px}
+.tlc-test-info{
+  border:1px solid hsl(var(--border));border-radius:11px;
+  background:hsl(var(--secondary)/.3);padding:9px 12px;
+}
+.tlc-test-info>summary{font-size:12px;font-weight:850;cursor:pointer;color:hsl(var(--primary));min-height:28px}
+.tlc-test-info p{font-size:12px;line-height:1.55;color:hsl(var(--muted-foreground));padding-top:7px}
+body .power-movement-dialog .power-movement-dialog-body .tlc-watch-and-learn{
+  padding-block:0 14px;
+}
