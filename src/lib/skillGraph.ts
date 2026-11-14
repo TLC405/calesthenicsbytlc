@@ -7,7 +7,7 @@ export type SkillEdge = { from: string; to: string; type: EdgeType; hardGate: bo
 export type SkillAttempt = {
   id: string; nodeId: string; sessionId: string; at: string;
   metric: 'reps' | 'seconds'; value: number; target: number; quality: number;
-  leanCm?: number; assistanceKg?: number; negativeSeconds?: number; clearanceCm?: number;
+  leanCm?: number; assistanceKg?: number; bandSetup?: string; negativeSeconds?: number; clearanceCm?: number;
   assistance?: 'none' | 'feet' | 'wall' | 'band'; rom?: 'partial' | 'full';
   elbowLocked?: boolean; scapularControl?: boolean; discomfort?: string;
 };
