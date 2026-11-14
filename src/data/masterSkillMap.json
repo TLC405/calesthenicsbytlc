@@ -1,5 +1,5 @@
 {
-  "source": "Unified 3-chart map provided 2026-11-14; map standards are exit benchmarks, not set prescriptions",
+  "source": "Transcribed from user-supplied 3-chart blueprint. Source benchmarks are preserved as exit tests and NOT daily prescriptions or universal readiness rules. OG2 levels marked * are chart estimates.",
   "lanes": [
     {
       "id": "PLANCHE",
@@ -342,7 +342,7 @@
       "domain": "push",
       "og": "L3",
       "label": "Back-to-wall heel pulls + kick-up",
-      "passStandard": "5 heel pulls; balanced kick-ups",
+      "passStandard": "5 heel pulls; balance found on most kick-ups",
       "exerciseSlug": "handstand-heel-pull",
       "mapping": "related"
     },
@@ -762,7 +762,7 @@
       "domain": "legs",
       "og": "L3*",
       "label": "Reverse Nordic (partial)",
-      "passStandard": "3 × 8 at comfortable range",
+      "passStandard": "3 × 8, lean back approximately 45°",
       "exerciseSlug": null,
       "mapping": "missing"
     },
@@ -786,7 +786,7 @@
       "domain": "legs",
       "og": "L6–7*",
       "label": "Full reverse Nordic",
-      "passStandard": "3 × 5 within controlled range",
+      "passStandard": "3 × 5, back toward floor and up",
       "exerciseSlug": null,
       "mapping": "missing"
     },
@@ -798,7 +798,7 @@
       "domain": "mob",
       "og": "Pre*",
       "label": "Shoulder extension & pike mobility",
-      "passStandard": "3 × 30 s supported mobility; standing pike fold",
+      "passStandard": "3 × 30 s butcher's block; standing pike fold",
       "exerciseSlug": "shoulder-cars",
       "mapping": "related"
     },
@@ -822,7 +822,7 @@
       "domain": "mob",
       "og": "Pre*",
       "label": "Ankle dorsiflexion & hip rotation",
-      "passStandard": "Knee-to-wall benchmark from source; 3 × 30 s active 90/90",
+      "passStandard": "≥14 cm knee-to-wall; 3 × 30 s active 90/90",
       "exerciseSlug": "wall-ankle-dorsiflexion",
       "mapping": "related"
     },
@@ -834,7 +834,7 @@
       "domain": "mob",
       "og": "L3–4*",
       "label": "Pancake",
-      "passStandard": "60 s, chest near floor with control",
+      "passStandard": "60 s, chest within a hand of the floor",
       "exerciseSlug": "pancake-stretch",
       "mapping": "exact"
     },
