@@ -1,0 +1,285 @@
+/* TLC SUPER HUMAN — MATERIAL ENGINE V4
+   Deep skeuomorphism 2.0, no imported art or third-party logos.
+   Every theme receives its own layered ceramic/alloy/rubber finish and chromatic accents.
+   Controls preserve semantics, focus, disabled states, and touch target dimensions. */
+
+/* Shared depth language: four material layers, independently tuned by theme. */
+:root:not([data-theme]),:root[data-theme="default"]{
+  --tlc-material-top:#fffef6;--tlc-material-bottom:#ece1c6;
+  --tlc-material-rim:#a7b9d1;--tlc-material-core:#f6f9ff;
+  --tlc-material-shadow:rgb(49 65 98 / .29);--tlc-material-etch:rgb(30 57 103 / .15);
+  --tlc-face-accent:#f18920;--tlc-face-secondary:#1761bd;--tlc-face-tertiary:#e1b83d;
+  --tlc-dial-light:#d6ecff;--tlc-dial-dark:#819eb8;
+  --tlc-hero-surface:#174b95;--tlc-hero-accent:#ff9827;
+  --tlc-fiber:rgb(21 72 145 / .045);--tlc-glass:rgb(255 255 255 / .94);
+}
+:root[data-theme="vasa"]{
+  --tlc-material-top:#fffefa;--tlc-material-bottom:#d8d0c5;
+  --tlc-material-rim:#ad9f92;--tlc-material-core:#faf7f0;
+  --tlc-material-shadow:rgb(46 35 28 / .33);--tlc-material-etch:rgb(63 55 47 / .19);
+  --tlc-face-accent:#b61e36;--tlc-face-secondary:#293642;--tlc-face-tertiary:#b57f41;
+  --tlc-dial-light:#f7ece6;--tlc-dial-dark:#b7afa5;
+  --tlc-hero-surface:#262e38;--tlc-hero-accent:#cd2642;
+  --tlc-fiber:rgb(43 41 38 / .05);--tlc-glass:rgb(255 255 255 / .9);
+}
+:root[data-theme="planet-fitness"]{
+  --tlc-material-top:#513263;--tlc-material-bottom:#25152f;
+  --tlc-material-rim:#916eab;--tlc-material-core:#382445;
+  --tlc-material-shadow:rgb(5 0 12 / .75);--tlc-material-etch:rgb(245 205 255 / .14);
+  --tlc-face-accent:#cc99fb;--tlc-face-secondary:#ebca69;--tlc-face-tertiary:#f19bb8;
+  --tlc-dial-light:#78528f;--tlc-dial-dark:#20102d;
+  --tlc-hero-surface:#3d244d;--tlc-hero-accent:#eac668;
+  --tlc-fiber:rgb(222 168 253 / .035);--tlc-glass:rgb(255 239 255 / .12);
+}
+:root[data-theme="ymca"]{
+  --tlc-material-top:#fff;--tlc-material-bottom:#cae4ec;
+  --tlc-material-rim:#76a9bd;--tlc-material-core:#f4fbfe;
+  --tlc-material-shadow:rgb(10 56 80 / .27);--tlc-material-etch:rgb(30 84 110 / .13);
+  --tlc-face-accent:#086997;--tlc-face-secondary:#087e7a;--tlc-face-tertiary:#d98b3d;
+  --tlc-dial-light:#e3f7ff;--tlc-dial-dark:#8fbacb;
+  --tlc-hero-surface:#143c55;--tlc-hero-accent:#36ada4;
+  --tlc-fiber:rgb(31 109 141 / .04);--tlc-glass:rgb(255 255 255 / .93);
+}
+:root[data-theme="okc-thunder"]{
+  --tlc-material-top:#2a5786;--tlc-material-bottom:#0e2748;
+  --tlc-material-rim:#4e8cbd;--tlc-material-core:#183d67;
+  --tlc-material-shadow:rgb(0 7 24 / .75);--tlc-material-etch:rgb(178 224 255 / .13);
+  --tlc-face-accent:#fa8645;--tlc-face-secondary:#60bbf1;--tlc-face-tertiary:#efbf60;
+  --tlc-dial-light:#4b8ab8;--tlc-dial-dark:#0d2545;
+  --tlc-hero-surface:#082f59;--tlc-hero-accent:#ff863e;
+  --tlc-fiber:rgb(130 193 255 / .04);--tlc-glass:rgb(202 233 255 / .14);
+}
+/* Tactile page inset / material backplate. Subtle graphic lines are original CSS. */
+body .power-app-shell,body .power-simple-page,body .power-movements-page{
+  background-color:transparent!important;
+}
+body .power-app-shell::before{
+  content:"";position:fixed;z-index:-1;inset:0;pointer-events:none;
+  background-image:
+    repeating-linear-gradient(90deg,transparent 0 58px,var(--tlc-fiber) 59px 60px),
+    repeating-linear-gradient(0deg,transparent 0 58px,var(--tlc-fiber) 59px 60px);
+  opacity:.36;
+}
+body :is(.power-elevated,.power-practice-card,.compact-level-group,.compact-workout,
+ .power-category-grid>button,.power-path-row,.power-exercise-row,.power-studio-node,
+ .power-more-section,.power-setting-section,.power-more-links>a,.tlc-client-panel,
+ .su-assessment-form,.power-custom-movement,.tlc-atomic-summary,.su-active-theme,.su-theme-option){
+  position:relative;
+  border:1px solid var(--tlc-material-rim)!important;
+  background:linear-gradient(160deg,var(--tlc-material-top),var(--tlc-material-core) 36%,var(--tlc-material-bottom))!important;
+  color:var(--tlc-ink)!important;
+  box-shadow:
+    inset 0 2px 0 var(--tlc-glass),
+    inset 1px 0 0 var(--tlc-highlight),
+    inset 0 -3px 0 var(--tlc-material-etch),
+    0 4px 0 var(--tlc-material-rim),
+    0 11px 22px -13px var(--tlc-material-shadow)!important;
+  border-radius:var(--tlc-surface-radius)!important;
+}
+body :is(.power-elevated,.power-practice-card,.compact-level-group,.compact-workout,
+ .power-category-grid>button,.power-path-row,.power-exercise-row,.power-studio-node,
+ .power-more-section,.power-setting-section,.power-more-links>a,.tlc-client-panel,
+ .su-assessment-form,.power-custom-movement,.tlc-atomic-summary) :is(h1,h2,h3,strong){
+  color:var(--tlc-ink);
+}
+/* Highlighted heads have their own inlaid nameplate strip. */
+body :is(.power-simple-heading,.power-page-intro,.compact-builder-heading.su-builder-titlebar,
+ .su-assessment-form,.tlc-client-test-head,.tlc-client-results-head){
+  background:linear-gradient(158deg,var(--tlc-material-top),var(--tlc-material-core) 50%,var(--tlc-material-bottom))!important;
+  border:1px solid var(--tlc-material-rim)!important;
+  border-top:5px solid var(--tlc-face-accent)!important;
+  box-shadow:inset 0 2px 0 var(--tlc-glass),inset 0 -3px var(--tlc-material-etch),0 5px 0 var(--tlc-material-rim),0 15px 24px -14px var(--tlc-material-shadow)!important;
+  border-radius:var(--tlc-surface-radius)!important;
+}
+/* Deliberate color separation on repeated surface cards rather than monochrome blocks. */
+body .power-category-grid>button:nth-child(6n+1){
+  border-top:4px solid hsl(var(--cat-push))!important;
+  border-left:5px solid hsl(var(--cat-push))!important;
+}
+body .power-category-grid>button:nth-child(6n+2){
+  border-top:4px solid hsl(var(--cat-pull))!important;
+  border-left:5px solid hsl(var(--cat-pull))!important;
+}
+body .power-category-grid>button:nth-child(6n+3){
+  border-top:4px solid hsl(var(--cat-legs))!important;
+  border-left:5px solid hsl(var(--cat-legs))!important;
+}
+body .power-category-grid>button:nth-child(6n+4){
+  border-top:4px solid hsl(var(--cat-core))!important;
+  border-left:5px solid hsl(var(--cat-core))!important;
+}
+body .power-category-grid>button:nth-child(6n+5){
+  border-top:4px solid hsl(var(--cat-skills))!important;
+  border-left:5px solid hsl(var(--cat-skills))!important;
+}
+body .power-category-grid>button:nth-child(6n){
+  border-top:4px solid hsl(var(--cat-mobility))!important;
+  border-left:5px solid hsl(var(--cat-mobility))!important;
+}
+body :is(.power-path-row,.power-studio-node,.power-more-links>a){
+  border-left:5px solid var(--tlc-face-secondary)!important;
+}
+body :is(.power-practice-card,.compact-workout,.tlc-client-panel,.tlc-atomic-summary){
+  border-top:4px solid var(--tlc-face-accent)!important;
+}
+body :is(.compact-level-group,.power-exercise-row,.power-custom-movement,.tlc-client-metric){
+  border-top:3px solid var(--tlc-face-tertiary)!important;
+}
+body :is(.power-studio-node,.power-path-row)[aria-pressed="true"]{
+  background:linear-gradient(165deg,var(--tlc-material-top),var(--tlc-dial-light))!important;
+  border:2px solid var(--tlc-face-accent)!important;
+  border-left:6px solid var(--tlc-face-accent)!important;
+  box-shadow:inset 0 2px 5px var(--tlc-material-shadow),0 2px 0 var(--tlc-material-rim)!important;
+}
+/* Mechanical navigation dock and metal-finished header. */
+body .power-app-controls{
+  background:linear-gradient(180deg,var(--tlc-material-top) 0%,var(--tlc-panel) 28%,var(--tlc-material-bottom) 100%)!important;
+  color:var(--tlc-ink)!important;
+  border-top:5px solid var(--tlc-face-accent)!important;
+  border-bottom:2px solid var(--tlc-material-rim)!important;
+  box-shadow:inset 0 2px 0 var(--tlc-glass),0 6px 0 var(--tlc-material-etch),0 15px 25px -14px var(--tlc-material-shadow)!important;
+}
+body .power-app-controls .power-app-wordmark>img{
+  background:var(--tlc-material-core)!important;
+  box-shadow:inset 0 2px 2px var(--tlc-material-shadow),0 2px 0 var(--tlc-glass)!important;
+  border:1px solid var(--tlc-material-rim)!important;
+}
+body .power-app-controls :is(button,.tlctv-masthead-btn){
+  background:linear-gradient(175deg,var(--tlc-material-top),var(--tlc-control) 53%,var(--tlc-dial-dark))!important;
+  color:var(--tlc-ink)!important;border:1px solid var(--tlc-material-rim)!important;
+  box-shadow:inset 0 2px 0 var(--tlc-glass),inset 0 -2px var(--tlc-material-etch),0 3px 0 var(--tlc-material-rim)!important;
+}
+body .power-mobile-nav.power-simple-nav .power-nav-surface{
+  background:linear-gradient(165deg,var(--tlc-material-top),var(--tlc-material-core) 38%,var(--tlc-material-bottom))!important;
+  border:2px solid var(--tlc-material-rim)!important;
+  border-top:4px solid var(--tlc-face-accent)!important;
+  box-shadow:inset 0 2px var(--tlc-glass),inset 0 -2px var(--tlc-material-etch),0 5px 0 var(--tlc-material-rim),0 19px 28px -16px var(--tlc-material-shadow)!important;
+}
+body .power-mobile-nav .power-simple-nav-link{
+  border:1px solid transparent!important;
+  color:var(--tlc-ink)!important;
+}
+body .power-mobile-nav .power-simple-nav-link.is-active{
+  background:linear-gradient(175deg,var(--tlc-dial-light),var(--tlc-material-core),var(--tlc-dial-dark))!important;
+  color:var(--tlc-ink)!important;
+  border:1px solid var(--tlc-face-accent)!important;
+  box-shadow:inset 0 2px 4px var(--tlc-material-shadow),0 2px 0 var(--tlc-material-rim)!important;
+}
+body .power-mobile-nav .power-simple-nav-link.is-active svg{color:var(--tlc-face-accent)!important}
+/* Tactile controls, not empty flat outlined buttons. Keep semantics intact. */
+body :is(.power-view-tabs,.compact-builder-tabs,.tlc-client-tabs,.tlc-client-mode-tabs){
+  background:linear-gradient(180deg,var(--tlc-dial-dark),var(--tlc-panel-inset))!important;
+  border:2px solid var(--tlc-material-rim)!important;
+  border-radius:15px!important;
+  box-shadow:inset 0 3px 7px var(--tlc-material-shadow),inset 0 -1px var(--tlc-glass)!important;
+}
+body :is(.power-view-tabs button,.compact-builder-tabs button,.tlc-client-mode-tabs button,.tlc-client-tabs a){
+  border-radius:10px!important;
+  color:var(--tlc-ink)!important;
+}
+body :is(.power-view-tabs button[aria-pressed="true"],.compact-builder-tabs button[aria-pressed="true"],
+ .tlc-client-mode-tabs button[aria-pressed="true"],.tlc-client-tabs a.is-active){
+  background:linear-gradient(180deg,var(--tlc-material-top),var(--tlc-control) 65%,var(--tlc-dial-dark))!important;
+  border:1px solid var(--tlc-face-accent)!important;
+  box-shadow:inset 0 1px var(--tlc-glass),0 3px 0 var(--tlc-material-rim)!important;
+}
+body :is(.tlc-client-cta,button.bg-primary,button[class*="bg-primary"]){
+  background:linear-gradient(180deg,hsl(var(--primary)/.87),hsl(var(--primary)) 38%,hsl(var(--primary)/.94))!important;
+  color:hsl(var(--primary-foreground))!important;
+  border:1px solid hsl(var(--primary))!important;
+  box-shadow:inset 0 2px rgb(255 255 255 / .24),inset 0 -2px rgb(0 0 0 / .14),0 4px 0 var(--tlc-material-rim)!important;
+}
+body :is(.tlc-client-secondary,.tlc-client-quiet,.su-builder-actions button,
+ .power-app-controls button,.tlc-client-quality button){
+  background:linear-gradient(180deg,var(--tlc-material-top),var(--tlc-control) 48%,var(--tlc-dial-dark))!important;
+  border:1px solid var(--tlc-material-rim)!important;
+  color:var(--tlc-ink)!important;
+  box-shadow:inset 0 2px 0 var(--tlc-glass),inset 0 -2px 0 var(--tlc-material-etch),0 3px 0 var(--tlc-material-rim)!important;
+}
+body :is(.tlc-client-quality button[aria-pressed="true"],.tlc-client-switch button[aria-pressed="true"]){
+  background:var(--tlc-face-secondary)!important;color:#fff!important;border-color:var(--tlc-face-secondary)!important;
+}
+body :is(.tlc-client-secondary,.tlc-client-quiet,.tlc-client-cta,.power-view-tabs button,.compact-builder-tabs button):active{
+  transform:translateY(2px)!important;
+  box-shadow:inset 0 2px 6px var(--tlc-material-shadow)!important;
+}
+/* Sunken numeric inputs and etched form wells. */
+body :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea){
+  background:linear-gradient(180deg,var(--tlc-panel-inset),var(--tlc-material-core) 74%)!important;
+  color:var(--tlc-ink)!important;
+  border:1px solid var(--tlc-material-rim)!important;
+  box-shadow:inset 0 3px 5px var(--tlc-material-shadow),inset 0 -1px var(--tlc-glass)!important;
+}
+body :is(input,select,textarea):focus-visible{
+  outline:3px solid var(--tlc-face-secondary)!important;
+  outline-offset:2px!important;
+}
+/* Theme selector: miniature 3-D material tiles, visibly different. */
+body .su-theme-option{
+  border:2px solid var(--tlc-material-rim)!important;
+  background:linear-gradient(170deg,var(--tlc-material-top),var(--tlc-material-bottom))!important;
+  box-shadow:inset 0 2px var(--tlc-glass),inset 0 -3px var(--tlc-material-etch),0 4px 0 var(--tlc-material-rim)!important;
+}
+body .su-theme-option.is-selected{
+  border-color:var(--tlc-face-accent)!important;
+  box-shadow:inset 0 2px var(--tlc-glass),0 0 0 2px var(--tlc-face-accent),0 5px 0 var(--tlc-material-rim)!important;
+}
+body .su-theme-preview{box-shadow:inset 0 3px 6px rgb(0 0 0 / .17),0 2px 0 var(--tlc-glass)!important}
+body .su-theme-preview .su-preview-hero{box-shadow:0 3px 0 var(--su-preview-accent),inset 0 1px rgba(255,255,255,.25)!important}
+body .su-theme-preview .su-preview-metrics i{box-shadow:0 2px 0 rgb(0 0 0 / .23)!important}
+/* Exercise video channel remains dark for focus, not stained with page colors. */
+body :is(.tlctv-inline,.tlc-tv-inline){
+  border:2px solid var(--tlc-material-rim)!important;
+  box-shadow:inset 0 2px var(--tlc-highlight),0 5px 0 var(--tlc-material-rim),0 16px 26px -12px var(--tlc-material-shadow)!important;
+}
+/* Three-tone specifically to prevent all sections resembling one colored slab. */
+body .tlc-client-metric:nth-child(3n+1){border-top:4px solid var(--tlc-face-accent)!important}
+body .tlc-client-metric:nth-child(3n+2){border-top:4px solid var(--tlc-face-secondary)!important}
+body .tlc-client-metric:nth-child(3n){border-top:4px solid var(--tlc-face-tertiary)!important}
+body .tlc-client-page .tlc-client-hero{
+  background:var(--tlc-hero-surface)!important;
+  border:2px solid var(--tlc-material-rim)!important;
+  border-top:5px solid var(--tlc-hero-accent)!important;
+  box-shadow:inset 0 2px rgba(255,255,255,.21),0 5px 0 var(--tlc-material-rim),0 15px 22px -15px var(--tlc-material-shadow)!important;
+}
+:root:not([data-theme]) body .power-simple-heading,
+:root[data-theme="default"] body .power-simple-heading{
+  border-top:6px solid #f4891f!important;
+  border-left:6px solid #1558b7!important;
+}
+:root:not([data-theme]) body .power-app-controls,
+:root[data-theme="default"] body .power-app-controls{
+  border-top:5px solid #f68c24!important;border-bottom:3px solid #1959a8!important;
+}
+:root:not([data-theme]) body .power-practice-card,
+:root[data-theme="default"] body .power-practice-card{
+  border-left:6px solid #1663b2!important;
+}
+/* DBZ-inspired original energy motif, subtle, not an IP illustration. */
+:root:not([data-theme]) body .power-simple-heading::before,
+:root[data-theme="default"] body .power-simple-heading::before{
+  content:"";position:absolute;right:14px;top:14px;width:29px;height:29px;pointer-events:none;
+  border:4px solid #ed8a27;border-radius:50%;
+  box-shadow:inset 0 0 0 4px #fff5d7,0 0 0 2px #1b5bb2;
+  opacity:.65;
+}
+:root[data-theme="vasa"] body .power-practice-card{
+  border-left:6px solid #ae1c34!important;
+}
+:root[data-theme="planet-fitness"] body .power-studio-node{
+  border-left:6px solid #eac668!important;
+}
+:root[data-theme="ymca"] body .power-category-grid>button{
+  border-bottom:3px solid #0d8784!important;
+}
+:root[data-theme="okc-thunder"] body .power-practice-card{
+  border-left:6px solid #f6833c!important;
+}
+@media(max-width:420px){
+ body :is(.power-elevated,.power-practice-card,.compact-workout,.tlc-client-panel){border-radius:12px!important}
+ body .power-app-controls{border-top-width:3px!important}
+ body .power-mobile-nav .power-simple-nav-link.is-active{box-shadow:inset 0 2px 3px var(--tlc-material-shadow)!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body :is(.power-view-tabs button,.compact-builder-tabs button,.tlc-client-cta,.tlc-client-secondary,.su-theme-option){transition:none!important}
+}
