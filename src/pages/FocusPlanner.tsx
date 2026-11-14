@@ -1,9 +1,9 @@
-import { SkillCategoryBrowser } from '@/components/Progression/SkillCategoryBrowser';
+const SkillCategoryBrowser=lazy(()=>import('@/components/Progression/SkillCategoryBrowser').then(m=>({default:m.SkillCategoryBrowser})));
 import { MovementTutorialButton } from '@/components/Exercise/MovementTutorialButton';
 import { ResultPager } from '@/components/Exercise/ResultPager';
 import { pageSlice } from '@/lib/skillBrowse';
 import '@/styles/workout-workspace.css';
-import { useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowDown, ArrowUp, ArrowRight, Check, ChevronDown, LockKeyhole, Plus, Search, Sparkles, Trash2 } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
@@ -11,9 +11,9 @@ import { PracticeCalendar } from '@/components/Calendar/PracticeCalendar';
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from '@/components/ui/sheet';
 import { skillCoverMovement } from '@/lib/movementThumbnails';
 import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
-import { MovementLearningPanel } from '@/components/Exercise/MovementLearningPanel';
+const MovementLearningPanel=lazy(()=>import('@/components/Exercise/MovementLearningPanel').then(m=>({default:m.MovementLearningPanel})));
 import { DifficultyBadge } from '@/components/Exercise/DifficultyBadge';
-import { WorkoutCoach } from '@/components/Workout/WorkoutCoach';
+const WorkoutCoach=lazy(()=>import('@/components/Workout/WorkoutCoach').then(m=>({default:m.WorkoutCoach})));
 import { getSkillPath } from '@/data/skillPaths';
 import { minimumTier, TRAINING_LEVELS } from '@/lib/trainingPolicy';
 import { canonicalSlug } from '@/lib/exerciseProgressions';
@@ -34,7 +34,8 @@ function WorkoutWorkspace({owner,home}:{owner:string;home:boolean}){
  const [profile,setProfile]=useState(readTrainingProfile);const [attempts,setAttempts]=useState(()=>deviceSkillProgress.read(owner));
  const [items,setItems]=useState(()=>readWorkoutDraft(owner));const [tab,setTab]=useState<'movements'|'workout'>(()=>params.get('view')==='workout'?'workout':'movements');
  const [browsePage,setBrowsePage]=useState(0);const [level,setLevel]=useState(0);const [query,setQuery]=useState('');const [focusOpen,setFocusOpen]=useState(false);const [addTo,setAddTo]=useState<WorkoutPhase>('skill');
- const [allMovements,setAllMovements]=useState(false);const [expanded,setExpanded]=useState<string|null>(params.get('node')?canonicalSlug(params.get('node')!):null);const [comfortable,setComfortable]=useState(false);const [coachOpen,setCoachOpen]=useState(false);
+ const [allMovements,setAllMovements]=useState(false);const [expanded,setExpanded]=useState<string|null>(params.get('node')?canonicalSlug(params.get('node')!):null);const [comfortable,setComfortable]=useState(false);const [coachOpen,setCoachOpen]=useState(false);const [coachActivated,setCoachActivated]=useState(false);
+ useEffect(()=>{if(coachOpen)setCoachActivated(true);},[coachOpen]);
  const [selectedDay,setSelectedDay]=useState(localDay);const [scheduled,setScheduled]=useState(()=>readScheduledPractice(owner));
  const [suggestionsOpen,setSuggestionsOpen]=useState(false);
  const [checks,setChecks]=useState<Record<string,SkillCheck>>(()=>readSkillChecks(owner));
@@ -95,8 +96,8 @@ function WorkoutWorkspace({owner,home}:{owner:string;home:boolean}){
     {blockers.map(reason=><p className="focus-inline-warning" key={reason}>{plainTrainingText(reason)}</p>)}{selectedDay===today&&<label className="compact-confirm"><input type="checkbox" checked={comfortable} onChange={e=>setComfortable(e.target.checked)}/><span>These movements feel comfortable, and I can control their setup and exit.</span></label>}{selectedDay===today&&<button type="button" className="focus-primary compact-start" disabled={!comfortable||blockers.length>0} onClick={start}>Start workout <ArrowRight size={18}/></button>}<button type="button" className="compact-save" disabled={blockers.length>0} onClick={save}>{selectedPlan?'Update':'Save'} for {dayLabel}</button><p className="compact-footnote">No session time limit. Finish when you’re ready.</p></>}
    </aside>
   </div>
-  <Sheet open={focusOpen} onOpenChange={setFocusOpen}><SheetContent className="compact-detail-sheet"><SheetTitle>What do you want to work on?</SheetTitle><SheetDescription>Choose a category to see a short list of skills.</SheetDescription><SkillCategoryBrowser selected={path.id} onChoose={p=>choose(p.id)}/><button type="button" className="power-browse-all" onClick={()=>{setAllMovements(true);setQuery('');setExpanded(null);setFocusOpen(false);setTab('movements');setBrowsePage(0);setLevel(0);}}>Search every movement <ArrowRight size={16}/></button></SheetContent></Sheet>
-  <Sheet open={Boolean(selectedExercise)} onOpenChange={open=>{if(!open)setExpanded(null);}}><SheetContent className="compact-detail-sheet">{selectedExercise&&<><SheetTitle>{selectedExercise.name}</SheetTitle><SheetDescription>Movement steps, tutorial and progression options.</SheetDescription><MovementLearningPanel exercise={selectedExercise} profile={profile} onNavigate={setExpanded}/><div className="compact-detail-add"><label>Add to<select aria-label="Add movements to" value={addTo} onChange={e=>setAddTo(e.target.value as WorkoutPhase)}>{WORKOUT_PHASES.map(p=><option key={p} value={p}>{BUILDER_PHASE_LABELS[p]}</option>)}</select></label>{trainingBlockers(selectedExercise.slug,profile,true).map(reason=><p key={reason}>{plainTrainingText(reason)}</p>)}<button type="button" disabled={items.some(i=>i.exercise.slug===selectedExercise.slug)||trainingBlockers(selectedExercise.slug,profile,true).length>0} className="focus-primary" onClick={()=>add(selectedExercise.slug)}>{items.some(i=>i.exercise.slug===selectedExercise.slug)?'Added to workout':'Add to workout'}<Plus size={17}/></button></div></>}</SheetContent></Sheet>
-  <WorkoutCoach open={coachOpen} onOpenChange={setCoachOpen} workoutSlugs={items.map(i=>i.exercise.slug)} onAdd={addCoach}/>
+  <Sheet open={focusOpen} onOpenChange={setFocusOpen}><SheetContent className="compact-detail-sheet"><SheetTitle>What do you want to work on?</SheetTitle><SheetDescription>Choose a category to see a short list of skills.</SheetDescription>{focusOpen&&<Suspense fallback={<p role="status" className="p-4 text-sm">Loading skill categories…</p>}><SkillCategoryBrowser selected={path.id} onChoose={p=>choose(p.id)}/></Suspense>}<button type="button" className="power-browse-all" onClick={()=>{setAllMovements(true);setQuery('');setExpanded(null);setFocusOpen(false);setTab('movements');setBrowsePage(0);setLevel(0);}}>Search every movement <ArrowRight size={16}/></button></SheetContent></Sheet>
+  <Sheet open={Boolean(selectedExercise)} onOpenChange={open=>{if(!open)setExpanded(null);}}><SheetContent className="compact-detail-sheet">{selectedExercise&&<><SheetTitle>{selectedExercise.name}</SheetTitle><SheetDescription>Movement steps, tutorial and progression options.</SheetDescription><Suspense fallback={<p role="status" className="p-4 text-sm">Loading movement tutorial…</p>}><MovementLearningPanel exercise={selectedExercise} profile={profile} onNavigate={setExpanded}/></Suspense><div className="compact-detail-add"><label>Add to<select aria-label="Add movements to" value={addTo} onChange={e=>setAddTo(e.target.value as WorkoutPhase)}>{WORKOUT_PHASES.map(p=><option key={p} value={p}>{BUILDER_PHASE_LABELS[p]}</option>)}</select></label>{trainingBlockers(selectedExercise.slug,profile,true).map(reason=><p key={reason}>{plainTrainingText(reason)}</p>)}<button type="button" disabled={items.some(i=>i.exercise.slug===selectedExercise.slug)||trainingBlockers(selectedExercise.slug,profile,true).length>0} className="focus-primary" onClick={()=>add(selectedExercise.slug)}>{items.some(i=>i.exercise.slug===selectedExercise.slug)?'Added to workout':'Add to workout'}<Plus size={17}/></button></div></>}</SheetContent></Sheet>
+  {(coachOpen||coachActivated)&&<Suspense fallback={<p role="status" className="p-4 text-sm">Opening your coach…</p>}><WorkoutCoach open={coachOpen} onOpenChange={setCoachOpen} workoutSlugs={items.map(i=>i.exercise.slug)} onAdd={addCoach}/></Suspense>}
  </main>;
 }
