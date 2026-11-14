@@ -18,14 +18,14 @@ interface ThemeOption {
 const themes: ThemeOption[] = [
   {
     id: 'default',
-    name: 'Super Human Signature',
-    kicker: 'THE SIGNATURE COLLECTION',
-    description: 'Obsidian equipment, brass detailing and warm ivory ink.',
-    primary: '#F1CA83',
-    accent: '#718BA6',
-    bg: '#0D121A',
-    surface: '#202833',
-    text: '#F7F1E5',
+    name: 'Super Human · DBZ Light',
+    kicker: 'THE LIGHT POWER COLLECTION',
+    description: 'Dragon Ball Z-inspired training: warm ivory, bright orange, cobalt and tournament gold.',
+    primary: '#BD4B0B',
+    accent: '#1658AD',
+    bg: '#EAD9B2',
+    surface: '#FFFAF0',
+    text: '#162B4C',
   },
   {
     id: 'vasa',
@@ -103,7 +103,7 @@ export function ThemeSwitcher() {
         <div>
           <p className="su-theme-overline">TLC / APPEARANCE STUDIO</p>
           <h2>Make strength your own.</h2>
-          <p>Five different visual identities. Each has its own materials, controls, and contrast.</p>
+          <p>Five tactile training worlds. Distinct surfaces, real depth, and precise color contrast.</p>
         </div>
       </header>
       <div className="su-active-theme" role="status" aria-live="polite">
