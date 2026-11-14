@@ -26,6 +26,11 @@ try{
  for(const url of ["path:'/'","path:'/program'","path:'/skills'","path:'/more'"])
   assert(nav.includes(url),`Missing dock destination ${url}`);
  assert(!nav.includes("label:'Client Portal'"),'Narrow cover-screen nav must avoid stacked labels');
+ assert(nav.includes('scrollPositions.current.set(pathname,window.scrollY)'),'Dock must remember current scroll position before switching tabs');
+ assert(nav.includes('scrollPositions.current.get(pathname)'),'Returning to a tab should restore its previous scroll position');
+ assert(nav.includes('if(path===pathname)event.preventDefault()'),'Tapping the already active tab must not reset browsing position');
+ assert(nav.includes("aria-label=\"Bottom navigation\""),'Dock needs an accessible name');
+ assert(nav.includes("aria-current={active ? 'page' : undefined}"),'Dock must identify active destination accessibly');
  const pages=await readFile('src/pages/More.tsx','utf8');
  for(const url of ['/client','/integrations','/library','/tlctv/analyzer','/dashboard'])
   assert(pages.includes("to:'"+url+"'"),`More hub missing reachable destination: ${url}`);
@@ -51,5 +56,9 @@ try{
  const s=await readFile('src/styles/atomic-screen-fixes.css','utf8');
  assert(s.includes('grid-template-columns:repeat(4,minmax(0,1fr))'),'Four-key Fold dock layout must remain');
  assert(s.includes('env(safe-area-inset-bottom'),'Device safe-area spacing missing');
- console.log('PASS: 13 browser/PWA deep links, 8 live routes, all 4 Fold navigation actions, More hub, video-first scroll, honest TLCtv lookup, 5 themes, reduced motion and safe-area regression checks.');
+ assert(s.includes('@media(max-width:350px)'),'Fold cover screens need a dedicated compact breakpoint');
+ assert(s.includes('min-height:53px!important'),'280px-wide screens need reliable 44px+ tap targets');
+ assert(s.includes('scroll-padding-bottom:var(--power-nav-space)'),'Scrollable controls need space above the navigation');
+ assert(s.includes('body:has(textarea:focus) .power-mobile-nav'),'Dock should stay out of the way of the mobile keyboard');
+ console.log('PASS: 13 browser/PWA deep links, 8 live routes, four balanced Fold tabs, safe-area sizing, scroll-position restoration, mobile keyboard clearance, five themes and movement detail sheets.');
 }finally{await rm(root,{recursive:true,force:true});}
