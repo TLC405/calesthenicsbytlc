@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 const css=await readFile('src/styles/theme-material-overhaul.css','utf8');
 const app=await readFile('src/App.tsx','utf8');
 const chooser=await readFile('src/components/ThemeSwitcher.tsx','utf8');
+const skeuo=await readFile('src/styles/skeuomorphic-themes-v4.css','utf8');
 const themes=[
   {id:'default',selector:':root:not([data-theme])'},
   {id:'vasa',selector:':root[data-theme="vasa"]'},
@@ -64,4 +65,24 @@ assert(css.includes('@media(prefers-reduced-motion:reduce)'), 'Reduced motion co
 assert(!css.includes('linear-gradient('),'Theme layer should not fall back to generic gradients');
 assert(app.includes('import "./styles/theme-material-overhaul.css";'),'Overhaul not registered');
 assert(app.indexOf('import "./styles/theme-material-overhaul.css";')>app.indexOf('import "./styles/mobile-dock-v3.css";'),'Final style layer must load after legacy overrides');
-console.log('PASS: five distinct material environments, readable UI tokens, visual component coverage and final style priority.');
+assert(app.includes('import "./styles/skeuomorphic-themes-v4.css";'),'Skeuomorphic layer not registered');
+assert(app.indexOf('import "./styles/skeuomorphic-themes-v4.css";')>app.indexOf('import "./styles/theme-material-overhaul.css";'),'Skeuomorphic layer must load last');
+assert(chooser.includes("name: 'Super Human · DBZ Light'"),'Signature theme name not updated');
+assert(chooser.includes('Dragon Ball Z-inspired training'),'DBZ light picker preview not updated');
+for(const theme of themes){
+  assert(skeuo.includes(theme.selector),'Missing skeuomorphic material definition '+theme.id);
+}
+for(const token of ['tlc-material-top','tlc-material-bottom','tlc-material-rim','tlc-material-shadow','tlc-material-etch',
+'tlc-face-accent','tlc-face-secondary','tlc-face-tertiary','tlc-dial-light','tlc-dial-dark']){
+  assert(skeuo.split('--'+token+':').length>=6,'Missing five-theme skeuomorphic token '+token);
+}
+for(const selector of ['.power-app-controls','.power-category-grid>button','.power-mobile-nav',
+'.power-view-tabs','.tlc-client-panel','.su-theme-option','.power-simple-heading','.tlctv-inline']){
+  assert(skeuo.includes(selector),'Skeuomorphic UI coverage missing '+selector);
+}
+assert(skeuo.includes('linear-gradient('),'Layered physical material finish missing');
+assert(skeuo.includes('@media(prefers-reduced-motion:reduce)'),'Missing reduced-motion preference');
+assert(skeuo.includes('@media(max-width:420px)'),'Missing narrow-screen styles');
+assert(themeBody(':root:not([data-theme])').includes('color-scheme:light'),'DBZ Signature must be light');
+
+console.log('PASS: five material themes including light DBZ signature, physical depth, accessibility, multi-color controls, and stylesheet order.');
