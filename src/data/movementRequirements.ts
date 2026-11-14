@@ -1,5 +1,5 @@
-import catalog from '@/data/publicExerciseCatalog.json';
-import { type SkillPath } from '@/data/skillPaths';
+import catalog from './publicExerciseCatalog.json';
+import { type SkillPath } from './skillPaths';
 
 /** Supporting movements are curated OPTIONAL assistance, never hard prerequisites.
  * Source: movements already present in the TLC catalog, curated by movement pattern.
