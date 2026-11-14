@@ -55,6 +55,7 @@ import "./styles/mobile-dock-v3.css";
 import "./styles/theme-material-overhaul.css";
 import "./styles/skeuomorphic-themes-v4.css";
 import "./styles/train-screen-bugfix-v5.css";
+import "./styles/atomic-ui-sweep-v6.css";
 import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();
