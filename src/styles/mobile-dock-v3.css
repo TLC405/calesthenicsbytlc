@@ -1,0 +1,139 @@
+/* TLC / mobile dock 3.0
+ * Four stable destinations across Fold cover / unfolded / Android / iOS.
+ * Overrides older atomic dock constraints without altering theme tokens.
+ */
+:root{
+ --tlc-dock-height:78px;
+ --power-nav-space:calc(113px + env(safe-area-inset-bottom,0px));
+}
+body .power-mobile-nav.power-simple-nav.power-mobile-dock-v3{
+ position:fixed!important;
+ inset-inline:auto!important;
+ left:50%!important;
+ right:auto!important;
+ top:auto!important;
+ bottom:calc(9px + env(safe-area-inset-bottom,0px))!important;
+ width:min(calc(100vw - 18px),540px)!important;
+ max-width:540px!important;
+ max-height:none!important;
+ padding:0!important;
+ border:0!important;
+ transform:translateX(-50%)!important;
+ background:transparent!important;
+ z-index:48!important;
+ isolation:isolate;
+ touch-action:manipulation;
+}
+body .power-mobile-dock-v3 .power-nav-surface{
+ display:grid!important;
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ grid-template-rows:1fr!important;
+ grid-auto-rows:auto!important;
+ align-items:stretch!important;
+ gap:5px!important;
+ box-sizing:border-box;
+ height:78px!important;
+ min-height:78px!important;
+ max-height:78px!important;
+ overflow:visible!important;
+ padding:6px!important;
+ border-radius:19px!important;
+ border:1px solid hsl(var(--border))!important;
+ background:hsl(var(--card)/.98)!important;
+ box-shadow:0 8px 26px rgb(0 0 0/.20),inset 0 1px 0 hsl(var(--background)/.80)!important;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link{
+ box-sizing:border-box!important;
+ display:flex!important;
+ flex-direction:column!important;
+ align-items:center!important;
+ justify-content:center!important;
+ flex:1!important;
+ gap:3px!important;
+ width:100%!important;
+ min-width:0!important;
+ min-height:64px!important;
+ max-height:64px!important;
+ height:64px!important;
+ padding:6px 3px!important;
+ border:1px solid transparent!important;
+ border-radius:13px!important;
+ color:hsl(var(--muted-foreground))!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ text-decoration:none!important;
+ white-space:nowrap!important;
+ overflow:hidden!important;
+ transition:background .15s ease,border-color .15s ease,color .15s ease!important;
+ -webkit-tap-highlight-color:transparent;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link>.power-dock-icon{
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ height:25px!important;
+ width:30px!important;
+ flex:0 0 25px!important;
+ color:inherit;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link>.power-dock-icon svg{
+ width:22px!important;height:22px!important;
+ flex:none!important;display:block!important;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link>.power-dock-label{
+ display:block!important;
+ max-width:100%!important;
+ overflow:hidden!important;
+ text-overflow:ellipsis!important;
+ white-space:nowrap!important;
+ font-family:Inter,system-ui,sans-serif;
+ font-size:11px!important;
+ line-height:1.25!important;
+ font-weight:750!important;
+ letter-spacing:0!important;
+ text-align:center!important;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link[aria-current="page"]{
+ background:hsl(var(--primary)/.12)!important;
+ border-color:hsl(var(--primary)/.33)!important;
+ color:hsl(var(--primary))!important;
+ box-shadow:inset 0 1px 0 hsl(var(--background)/.45)!important;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link[aria-current="page"]::after{
+ content:"";
+ position:absolute;
+ top:1px!important;bottom:auto!important;
+ width:21px;height:3px;
+ border-radius:0 0 4px 4px;
+ background:hsl(var(--primary))!important;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link:not([aria-current="page"]):active{
+ background:hsl(var(--secondary)/.7)!important;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link:focus-visible{
+ outline:3px solid hsl(var(--ring))!important;
+ outline-offset:-3px!important;
+}
+body .power-mobile-dock-v3.is-keyboard-open{
+ display:none!important;
+}
+body .power-app-shell{padding-bottom:calc(var(--power-nav-space) + 18px)!important;}
+body :is(.power-simple-page,.power-movements-page,.power-compact-builder,.power-skill-studio,.power-library-results,.power-builder-home,.power-session){
+ scroll-padding-bottom:var(--power-nav-space);
+ padding-bottom:calc(var(--power-nav-space) + 23px)!important;
+}
+@media(max-width:540px){
+ :root{--tlc-dock-height:76px;--power-nav-space:calc(109px + env(safe-area-inset-bottom,0px))}
+ body .power-mobile-nav.power-simple-nav.power-mobile-dock-v3{width:calc(100vw - 14px)!important;bottom:calc(7px + env(safe-area-inset-bottom,0px))!important}
+ body .power-mobile-dock-v3 .power-nav-surface{height:76px!important;min-height:76px!important;max-height:76px!important;padding:5px!important;gap:4px!important}
+ body .power-mobile-dock-v3 .power-simple-nav-link{height:64px!important;min-height:64px!important;max-height:64px!important}
+}
+@media(max-width:350px){
+ body .power-mobile-dock-v3 .power-nav-surface{gap:2px!important;padding:4px!important}
+ body .power-mobile-dock-v3 .power-simple-nav-link{padding:5px 1px!important}
+ body .power-mobile-dock-v3 .power-simple-nav-link>.power-dock-icon svg{width:21px!important;height:21px!important}
+ body .power-mobile-dock-v3 .power-simple-nav-link>.power-dock-label{font-size:10px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body .power-mobile-dock-v3 .power-simple-nav-link{transition:none!important}
+}
