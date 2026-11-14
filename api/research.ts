@@ -12,8 +12,11 @@ function send(res:ServerResponse,status:number,data:object){
 }
 export default async function handler(req:Request,res:ServerResponse){
  if(req.method!=='GET')return send(res,405,{error:'GET required'});
- const q=Array.isArray(req.query?.q)?'':clip(req.query?.q,140);
- const sort=req.query?.sort==='recent'?'recent':'relevance';
+ const paramsIn=new URL(req.url||'/', 'https://tlc.local').searchParams;
+ const rawQuery=req.query?.q??paramsIn.get('q');
+ const rawSort=req.query?.sort??paramsIn.get('sort');
+ const q=Array.isArray(rawQuery)?'':clip(rawQuery,140);
+ const sort=rawSort==='recent'?'recent':'relevance';
  if(q.length<3)return send(res,400,{error:'Enter at least three characters to search research.'});
  if(/[\u0000-\u001F]/.test(q))return send(res,400,{error:'Invalid search text.'});
  const params=new URLSearchParams({query:q,format:'json',pageSize:'8',resultType:'lite'});
