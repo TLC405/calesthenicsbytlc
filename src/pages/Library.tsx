@@ -1,6 +1,7 @@
 import { ResultPager } from '@/components/Exercise/ResultPager';
 import { pageSlice } from '@/lib/skillBrowse';
-import { movementTutorialSources } from '@/lib/movementThumbnails';
+import { videoLessonCoverage } from '@/lib/videoLessonCoverage';
+import { TlcTvTopBar } from '@/components/Media/TlcTvTopBar';
 import { matchesProgression, canonicalSlug } from '@/lib/exerciseProgressions';
 import { resolveTutorialUrl, tutorialState } from '@/lib/mediaAudit';
 import { exerciseReadinessReasons } from '@/lib/trainingPolicy';
@@ -117,7 +118,7 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
       exercise.primary_muscles.some(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = matchesExerciseCategory(exercise,activeCategory);
     const matchesOwner = !mineOnly || exercise.created_by === ownerId;
-    const matchesVideo = !videosOnly || movementTutorialSources(exercise).some(source=>source.url);
+    const matchesVideo = !videosOnly || videoLessonCoverage(exercise).exactCount>0;
     return (showAliases||canonicalSlug(exercise.slug)===exercise.slug) && matchesSearch && matchesCategory && matchesOwner && matchesVideo && matchesProgression(exercise.slug,pathId);
   });
 
@@ -177,13 +178,13 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
     <div className={`power-movement-library ${embedded?'is-embedded':''}`}>
       <header className="power-library-head relative bg-background border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 py-5 space-y-4">
-          {!embedded&&<div className="flex items-center justify-between gap-3"><div className="min-w-0"><h1 className="font-display text-2xl font-bold">Find a movement</h1><p className="text-xs text-muted-foreground mt-1">{exercises.filter(e=>showAliases||canonicalSlug(e.slug)===e.slug).length} movements</p></div><Button variant="outline" className="min-h-12 shrink-0" onClick={()=>navigate('/skills')}><Target className="w-4 h-4 mr-2"/>Skills</Button></div>}
+          {!embedded&&<div className="flex items-center justify-between gap-3"><div className="min-w-0"><h1 className="font-display text-2xl font-bold">Exercise Library</h1><p className="text-xs text-muted-foreground mt-1">{exercises.filter(e=>showAliases||canonicalSlug(e.slug)===e.slug).length} movements</p></div><Button variant="outline" className="min-h-12 shrink-0" onClick={()=>navigate('/skills')}><Target className="w-4 h-4 mr-2"/>Skills</Button></div>}
           <div className="relative"><Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"/><Input aria-label="Search exercises" placeholder="Search exercises…" value={searchTerm} onChange={e=>setSearchTerm(e.target.value)} className="pl-10 h-12 rounded-xl"/></div>
           <CategoryTabs exercises={exercises.filter(e=>showAliases||canonicalSlug(e.slug)===e.slug)} categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} counts={categoryCounts}/>
-          <details className="power-library-tools"><summary className="min-h-12 flex items-center cursor-pointer font-bold text-sm">Filters and tools</summary><div className="space-y-3 pt-3">
-            <label className="block text-xs font-bold mb-3">Progression<select className="w-full h-12 border rounded-xl bg-card px-3 mt-2" value={pathId} onChange={e=>setPathId(e.target.value)}><option value="">All progression families</option>{SKILL_PATHS.map(path=><option key={path.id} value={path.id}>{path.title}</option>)}</select></label>
+          <details className="power-library-tools"><summary className="min-h-12 flex items-center cursor-pointer font-bold text-sm">More filters</summary><div className="space-y-3 pt-3">
+            <label className="block text-xs font-bold mb-3">Progression<select className="w-full h-12 border rounded-xl bg-card px-3 mt-2" value={pathId} onChange={e=>setPathId(e.target.value)}><option value="">All skill groups</option>{SKILL_PATHS.map(path=><option key={path.id} value={path.id}>{path.title}</option>)}</select></label>
         <label className="flex min-h-11 items-center gap-3 text-xs mb-2"><input type="checkbox" className="h-5 w-5" checked={showAliases} onChange={e=>setShowAliases(e.target.checked)}/>Include legacy duplicate records</label>
-            <div className="flex flex-wrap gap-2"><Button variant={videosOnly?'default':'outline'} className="min-h-12" aria-pressed={videosOnly} onClick={()=>setVideosOnly(v=>!v)}><PlayCircle className="h-4 w-4 mr-2"/>With tutorials</Button><Button variant={mineOnly?'default':'outline'} className="min-h-12" aria-pressed={mineOnly} onClick={()=>setMineOnly(v=>!v)}>My exercises</Button><Button variant="outline" className="min-h-12" onClick={()=>{setEditingExercise(null);setShowAddModal(true);}}><Plus className="h-4 w-4 mr-2"/>New movement</Button><Button variant="outline" className="min-h-12" disabled={!filteredExercises.length} onClick={downloadExerciseList}><Download className="h-4 w-4 mr-2"/>Export</Button></div>
+            <div className="flex flex-wrap gap-2"><Button variant={videosOnly?'default':'outline'} className="min-h-12" aria-pressed={videosOnly} onClick={()=>setVideosOnly(v=>!v)}><PlayCircle className="h-4 w-4 mr-2"/>Exact videos</Button><Button variant={mineOnly?'default':'outline'} className="min-h-12" aria-pressed={mineOnly} onClick={()=>setMineOnly(v=>!v)}>My exercises</Button><Button variant="outline" className="min-h-12" onClick={()=>{setEditingExercise(null);setShowAddModal(true);}}><Plus className="h-4 w-4 mr-2"/>New movement</Button><Button variant="outline" className="min-h-12" disabled={!filteredExercises.length} onClick={downloadExerciseList}><Download className="h-4 w-4 mr-2"/>Export</Button></div>
             {(activeCategory||mineOnly||videosOnly)&&<Button variant="ghost" className="min-h-12" onClick={()=>{setActiveCategory(null);setMineOnly(false);setVideosOnly(false);}}>Clear filters</Button>}
           </div></details>
         </div>
