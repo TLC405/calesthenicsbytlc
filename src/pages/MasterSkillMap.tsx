@@ -2,7 +2,9 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronDown, Download, GitBranch, Play, Search, ShieldAlert, Target, TvMinimal, Waypoints } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
-import { deviceSkillProgress, exerciseBySlug, nodeProgress, type SkillAttempt } from '@/lib/skillGraph';
+import { deviceSkillProgress, exerciseBySlug, nodeProgress, readTrainingProfile, type SkillAttempt } from '@/lib/skillGraph';
+import { addWorkoutMovement, readWorkoutDraft, writeWorkoutDraft } from '@/lib/workoutWorkspace';
+import { toast } from 'sonner';
 import { InlineTlcTv } from '@/components/Exercise/InlineTlcTv';
 import { MovementOverview } from '@/components/Exercise/MovementOverview';
 import source from '@/data/masterSkillMap.json';
@@ -10,7 +12,7 @@ import { routeMasterTree } from '@/lib/masterTreeRouting';
 
 type Domain='push'|'pull'|'core'|'legs'|'mob';
 type Kind='start'|'orig'|'merged'|'bridge'|'apex'|'hub';
-type Node={id:string;lane:string;row:number;kind:Kind;domain:Domain;og:string;label:string;passStandard:string;exerciseSlug:string|null;mapping:'exact'|'related'|'missing'};
+type Node={id:string;lane:string;row:number;kind:Kind;domain:Domain;og:string;label:string;passStandard:string;exerciseSlug:string|null;linkedSlugs?:string[];mapping:'exact'|'related'|'compound'|'missing'};
 type Edge={from:string;to:string;type:'primary'|'cross_explicit'|'cross_implicit'|'reconciled'|'bridge'};
 type Lane={id:string;name:string;domain:Domain;path:string;index:number};
 const map=source as {lanes:Lane[];nodes:Node[];edges:Edge[];source:string};
@@ -216,6 +218,16 @@ function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,
  prereqs:Edge[];next:Edge[];onChoose:(id:string)=>void;upstream:number;downstream:number
 }){
  const exact=node.mapping==='exact'&&!!linked;
+ const {user}=useAuth();
+ const owner=user?.id||'guest';
+ const connected=(node.linkedSlugs||[]).flatMap(slug=>exerciseBySlug.get(slug)?[exerciseBySlug.get(slug)!]:[]);
+ function addToWorkout(slug:string){
+  const before=readWorkoutDraft(owner);
+  if(before.some(item=>item.exercise.slug===slug)){toast.info('Already in your workout draft.');return;}
+  const after=addWorkoutMovement(before,slug,'skill',readTrainingProfile());
+  if(after.length<=before.length){toast.info('Review your equipment and starting level before adding this movement.');return;}
+  try{writeWorkoutDraft(owner,after);toast.success('Added to your workout draft.');}catch{toast.error('Could not save the draft on this device.');}
+ }
  const [maxHold,setMaxHold]=useState('');
  const isHold=/planche|lever|flag|stand|l-sit|hang|wall sit|support|hold/i.test(node.label)&&!/(push-up|pull-up|dip|squat|curl|press to handstand)/i.test(node.label);
  const max=Number(maxHold);
@@ -238,12 +250,16 @@ function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,
    <Link to={'/skills/'+lane.path}>Open {lane.name} path <ArrowRight size={15}/></Link>
    <Link to={'/assessment?skill='+encodeURIComponent(lane.path)}>Check my level <ArrowRight size={15}/></Link>
   </div>
+  {connected.length>0&&<section className="master-map-connected" aria-label="Linked exercises"><div className="master-map-video-heading"><BookOpen size={18}/><strong>{node.mapping==='compound'?'Foundation checklist':node.mapping==='related'?'Related exercises and preparation':'Exercise and supporting movements'}</strong></div>
+    <p>{node.mapping==='compound'?'This is a multi-exercise benchmark, not one exercise. These are the individual movements to practice and assess.':node.mapping==='related'?'This chart step combines movements or specifies a variation. Each linked exercise is labeled separately; none is falsely presented as the exact combined tutorial.':'Choose an exercise to see its full instructions, or add it to your draft manually.'}</p>
+    <div className="master-map-connected-items">{connected.map((item,i)=><div key={item.slug} className="master-map-connected-item"><span><strong>{item.name}</strong><small>{node.mapping==='exact'&&item.slug===node.exerciseSlug?'EXACT MOVEMENT':'RELATED MOVEMENT'}</small></span><Link to="/library" state={{search:item.name}} aria-label={'Watch and learn '+item.name}>Watch & learn <ArrowRight size={14}/></Link><button type="button" onClick={()=>addToWorkout(item.slug)} aria-label={'Add '+item.name+' to my workout draft'}>Add to workout</button></div>)}</div>
+   </section>}
   {linked?<div className="master-map-video">
     <div className="master-map-video-heading"><TvMinimal size={18}/><strong>{exact?'Watch this exercise':'Watch a related exercise'}</strong></div>
     {!exact&&<p>This clip teaches a related movement, not necessarily this exact chart step.</p>}
     <InlineTlcTv key={node.id} exercise={linked} compact/>
-    {exact&&<details className="master-map-more-technique"><summary><BookOpen size={15}/> How to do this exercise</summary><MovementOverview exercise={linked}/></details>}
-   </div>:<div className="master-map-unmatched"><TvMinimal size={20}/><div><strong>Exact tutorial not connected yet</strong><p>The chart node is preserved. Find a matching exercise without substituting a different one.</p><Link to="/library" state={{search:node.label}}>Find a tutorial <ArrowRight size={14}/></Link></div></div>}
+    <details className="master-map-more-technique"><summary><BookOpen size={15}/> {exact?'Instructions and easier options':'Related exercise instructions and easier options'}</summary><MovementOverview exercise={linked}/></details>
+   </div>:node.mapping==='compound'?<div className="master-map-unmatched"><TvMinimal size={20}/><div><strong>No single video represents this checkpoint</strong><p>Choose one of the linked movements above to watch its real tutorial and check your form.</p></div></div>:<div className="master-map-unmatched"><TvMinimal size={20}/><div><strong>Exact tutorial not connected yet</strong><p>The chart node remains available. Use exercise search to find the right demonstration.</p><Link to="/library" state={{search:node.label}}>Find a tutorial <ArrowRight size={14}/></Link></div></div>}
   {progress&&<p className="master-map-progress"><Check size={15}/> Your linked exercise: {progress.state} · {progress.logs.length} saved attempts. Chart pass standards are assessed separately.</p>}
   <div className="master-map-deps"><h3>How this skill connects</h3><div className="master-map-chain-count"><span>{upstream} earlier skills in its wider chain</span><span>{downstream} later skills</span></div>
    <div className="master-map-dependency"><h4>Useful preparation ({prereqs.length})</h4>{prereqs.map(edge=>{const n=nodeMap.get(edge.from)!;return <button type="button" key={edge.from+'-'+edge.type} onClick={()=>onChoose(n.id)}><span>{n.label}</span><small>{edge.type==='bridge'?'Added step':edge.type==='cross_implicit'?'Chart benchmark':edge.type==='reconciled'?'Reconciled link':'Skill link'}</small><ArrowRight size={14}/></button>;})}{!prereqs.length&&<p>This node has no incoming chart links.</p>}</div>
