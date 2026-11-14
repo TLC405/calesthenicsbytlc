@@ -1,0 +1,312 @@
+/* TLC visual bug sweep — screenshot-driven repairs, all five tactile themes.
+   Applies after material engine. Fixes contrast, non-clipped headings, workbook legibility,
+   inset search, button states, and Fold/mobile layout without touching saved training data. */
+
+:root{
+  --tlc-workout-ink:var(--tlc-ink);
+  --tlc-workout-secondary:var(--tlc-secondary-ink);
+  --tlc-workout-surface:var(--tlc-material-core);
+  --tlc-workout-outline:var(--tlc-material-rim);
+  --tlc-list-surface:var(--tlc-panel);
+  --tlc-list-ink:var(--tlc-ink);
+  --tlc-list-secondary:var(--tlc-secondary-ink);
+}
+/* Work area must be taller than the bottom nav's occlusion footprint. */
+body .power-compact-builder.workout-workspace{
+  overflow:visible!important;
+  padding-bottom:calc(var(--power-nav-space,120px) + 54px)!important;
+  scroll-padding-bottom:calc(var(--power-nav-space,120px) + 40px);
+  max-width:1280px!important;
+}
+body .power-compact-builder .compact-workspace-grid{
+  grid-template-columns:minmax(0,1.35fr) minmax(350px,0.95fr);
+  gap:clamp(15px,2vw,28px);
+  align-items:start;
+  min-width:0;
+  scroll-margin-top:90px;
+}
+body .power-compact-builder .compact-browser,
+body .power-compact-builder .compact-workout{
+  min-width:0;
+}
+/* Fix clipped "Your workout" title (sticky, scrollable card with hidden top content). */
+body .power-compact-builder .compact-workout{
+  position:static!important;
+  top:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+  contain:none!important;
+  padding:clamp(15px,2vw,23px)!important;
+  background:linear-gradient(158deg,var(--tlc-material-top),var(--tlc-material-core) 60%,var(--tlc-material-bottom))!important;
+  border:2px solid var(--tlc-workout-outline)!important;
+  border-top:5px solid var(--tlc-face-accent)!important;
+  box-shadow:inset 0 2px 0 var(--tlc-glass),0 5px 0 var(--tlc-material-rim),0 16px 26px -15px var(--tlc-material-shadow)!important;
+}
+body .power-compact-builder .compact-workout>header{
+  display:flex!important;min-height:76px!important;align-items:center!important;
+  gap:10px!important;
+  padding:6px 0 15px!important;
+  border-bottom:2px solid var(--tlc-workout-outline)!important;
+  overflow:visible!important;
+}
+body .power-compact-builder .compact-workout>header>div{
+  min-width:0;display:grid;gap:4px;align-content:center;
+}
+body .power-compact-builder .compact-workout>header h2{
+  font-size:clamp(20px,2.4vw,27px)!important;
+  line-height:1.25!important;
+  overflow:visible!important;
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+  margin:0!important;
+  color:var(--tlc-workout-ink)!important;
+  text-wrap:balance;
+}
+body .power-compact-builder .compact-workout>header small{
+  color:var(--tlc-workout-secondary)!important;
+  font-size:11px!important;line-height:1.4!important;
+}
+body .power-compact-builder .compact-workout h2>span{
+  background:var(--tlc-dial-light)!important;color:var(--tlc-workout-ink)!important;
+  border:1px solid var(--tlc-workout-outline)!important;
+  font-size:12px!important;
+}
+body .power-compact-builder .compact-workout>header>button{
+  flex:0 0 44px;min-width:44px;color:var(--tlc-workout-ink)!important;
+  background:var(--tlc-control)!important;border:1px solid var(--tlc-workout-outline)!important;
+}
+/* Never fade the entire workout card: disabled action buttons get the disabled treatment only. */
+body .power-compact-builder :is(.compact-workout-phase,.compact-workout-item,.compact-planned-heading,.compact-dose-editor){
+  opacity:1!important;filter:none!important;
+}
+body .power-compact-builder .compact-workout-phase>h3{
+  font-size:13px!important;line-height:1.35!important;
+  font-weight:850!important;
+  color:var(--tlc-workout-ink)!important;
+  margin:14px 0 5px!important;
+}
+body .power-compact-builder .compact-workout-phase>h3>button{
+  color:var(--tlc-face-secondary)!important;
+}
+body .power-compact-builder .compact-workout-item{
+  padding:clamp(10px,1.5vw,15px)!important;
+  background:linear-gradient(145deg,var(--tlc-material-top),var(--tlc-workout-surface) 65%,var(--tlc-material-bottom))!important;
+  color:var(--tlc-workout-ink)!important;
+  border:1px solid var(--tlc-workout-outline)!important;
+  border-left:4px solid var(--tlc-face-secondary)!important;
+  border-radius:13px!important;
+  box-shadow:inset 0 2px 0 var(--tlc-glass),inset 0 -2px var(--tlc-material-etch),0 3px 0 var(--tlc-material-rim)!important;
+  margin-bottom:13px!important;
+}
+body .power-compact-builder .compact-workout-item:nth-child(3n+2){border-left-color:var(--tlc-face-accent)!important}
+body .power-compact-builder .compact-workout-item:nth-child(3n){border-left-color:var(--tlc-face-tertiary)!important}
+body .power-compact-builder .compact-planned-heading{
+  display:flex!important;align-items:center!important;gap:6px!important;
+  flex-wrap:nowrap!important;min-width:0!important;
+}
+body .power-compact-builder .compact-planned-heading>button:first-child{
+  min-width:0!important;flex:1 1 auto!important;
+  grid-template-columns:clamp(66px,7vw,80px) minmax(0,1fr)!important;
+}
+body .power-compact-builder .compact-planned-heading :is(strong,.text-foreground){
+  color:var(--tlc-workout-ink)!important;
+  font-size:clamp(12px,1.15vw,15px)!important;
+  line-height:1.35!important;
+  opacity:1!important;
+}
+body .power-compact-builder .compact-planned-heading :is(small,.text-muted-foreground){
+  color:var(--tlc-workout-secondary)!important;
+  opacity:1!important;
+  font-size:11px!important;
+}
+body .power-compact-builder .compact-planned-heading>button:not(:first-child){
+  flex:0 0 42px!important;min-width:42px!important;
+  color:var(--tlc-workout-ink)!important;
+}
+body .power-compact-builder .compact-dose-editor{
+  border-top:1px solid var(--tlc-workout-outline)!important;
+  color:var(--tlc-workout-ink)!important;
+}
+body .power-compact-builder .compact-dose-editor>summary{
+  min-height:48px!important;
+  font-size:12px!important;font-weight:750!important;
+  color:var(--tlc-workout-ink)!important;
+}
+body .power-compact-builder .compact-extra-sections>summary,
+body .power-compact-builder .compact-confirm,
+body .power-compact-builder .compact-footnote{
+  color:var(--tlc-workout-secondary)!important;
+}
+/* The dark name/preview mismatch from screenshot: enforce actual contrast in both contexts. */
+body .power-compact-builder .compact-level-group{
+  background:var(--tlc-list-surface)!important;
+  border:2px solid var(--tlc-material-rim)!important;
+  border-radius:16px!important;
+  box-shadow:0 4px 0 var(--tlc-material-rim),0 12px 18px -15px var(--tlc-material-shadow)!important;
+  overflow:hidden!important;
+}
+body .power-compact-builder .compact-level-group>header{
+  display:flex;align-items:center;justify-content:space-between;
+  min-height:54px!important;gap:10px;
+  padding:10px 12px!important;
+  background:linear-gradient(175deg,var(--tlc-material-top),var(--tlc-material-bottom))!important;
+  color:var(--tlc-ink)!important;
+  border-bottom:2px solid var(--tlc-material-rim)!important;
+}
+body .power-compact-builder .compact-level-group>header>small{
+  color:var(--tlc-secondary-ink)!important;font-size:11px!important;font-weight:700!important;
+}
+body .power-compact-builder .compact-movement-row{
+  background:var(--tlc-list-surface)!important;
+  border-color:var(--tlc-material-rim)!important;
+  color:var(--tlc-list-ink)!important;
+  opacity:1!important;
+}
+body .power-compact-builder .compact-movement-row:nth-child(even){
+  background:var(--tlc-panel-raised)!important;
+}
+body .power-compact-builder .compact-movement-open{
+  color:var(--tlc-list-ink)!important;opacity:1!important;
+}
+body .power-compact-builder .compact-movement-open strong{
+  color:var(--tlc-list-ink)!important;
+  opacity:1!important;
+  font-size:clamp(13px,1.28vw,16px)!important;
+  line-height:1.35!important;font-weight:850!important;
+}
+body .power-compact-builder .compact-movement-open small{
+  color:var(--tlc-list-secondary)!important;opacity:1!important;
+}
+body .power-compact-builder .compact-movement-open .compact-movement-hint{
+  color:var(--tlc-face-secondary)!important;
+  text-decoration:underline;text-underline-offset:3px;
+  font-weight:850!important;
+}
+body .power-compact-builder .compact-movement-row .power-row-actions{
+  display:flex;align-items:center;gap:5px;flex-shrink:0;
+}
+/* Search must not be black outside / washed out inside. */
+body .power-compact-builder .compact-browser-tools{
+  display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;
+  min-width:0;margin-block:12px 16px;
+}
+body .power-compact-builder .compact-search{
+  display:flex;flex:1 1 220px;min-width:0;
+  border:2px solid var(--tlc-material-rim)!important;
+  border-radius:14px!important;
+  background:var(--tlc-material-core)!important;
+  box-shadow:inset 0 3px 5px var(--tlc-material-shadow),0 2px 0 var(--tlc-glass)!important;
+  color:var(--tlc-ink)!important;
+}
+body .power-compact-builder .compact-search svg{
+  color:var(--tlc-face-secondary)!important;
+}
+body .power-compact-builder .compact-search input{
+  background:transparent!important;box-shadow:none!important;border:none!important;
+  color:var(--tlc-ink)!important;
+  font-size:15px!important;font-weight:650!important;
+  min-width:0!important;width:100%!important;
+}
+body .power-compact-builder .compact-search input::placeholder{
+  color:var(--tlc-secondary-ink)!important;opacity:1!important;
+}
+body .power-compact-builder .compact-suggest{
+  flex:0 1 auto;min-width:max-content;min-height:48px;
+  background:var(--tlc-face-secondary)!important;
+  border:2px solid var(--tlc-material-rim)!important;
+  color:#fff!important;
+  font-size:12px!important;font-weight:850!important;
+  box-shadow:inset 0 2px 0 rgb(255 255 255 / .2),0 3px 0 var(--tlc-material-rim)!important;
+}
+body .power-compact-builder .compact-suggest svg{color:inherit!important}
+body .power-compact-builder .power-level-filter{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:var(--tlc-panel)!important;
+  border:2px solid var(--tlc-material-rim)!important;
+  color:var(--tlc-ink)!important;
+  border-radius:13px!important;
+  padding:7px 10px!important;
+  font-size:12px!important;font-weight:850!important;
+}
+body .power-compact-builder .power-level-filter select{
+  background:var(--tlc-material-core)!important;
+  color:var(--tlc-ink)!important;min-width:0;width:min(58%,260px)!important;
+  border:1px solid var(--tlc-material-rim)!important;
+  box-shadow:inset 0 2px 3px var(--tlc-material-shadow)!important;
+}
+/* Fixed readable header of focus selection. */
+body .power-compact-builder .compact-focus-choice{
+  background:#17191e!important;color:#fff!important;
+  border:2px solid var(--tlc-face-secondary)!important;
+  border-left:6px solid var(--tlc-face-accent)!important;
+  box-shadow:inset 0 1px 0 rgb(255 255 255 / .12),0 4px 0 var(--tlc-material-rim)!important;
+}
+body .power-compact-builder .compact-focus-choice strong{
+  color:#fff!important;font-weight:850!important;
+}
+body .power-compact-builder .compact-focus-choice small{
+  color:#e0dede!important;opacity:1!important;
+}
+body .power-compact-builder .compact-focus-choice>svg{color:#f5f5f5!important}
+/* The persistent dock must not cover bottom action rows. */
+body .power-builder-home,body .workout-workspace{
+  min-height:calc(100dvh - 95px);
+  padding-bottom:calc(var(--power-nav-space,120px) + 54px)!important;
+}
+@media(min-width:1121px){
+  body .power-compact-builder .compact-workspace-grid{
+    grid-template-columns:minmax(0,1.35fr) minmax(350px,.95fr)!important;
+  }
+}
+@media(max-width:1120px){
+  /* On Fold open screens, two squeezed columns destroy text readability. */
+  body .power-compact-builder .compact-workspace-grid{
+    display:block!important;
+    scroll-margin-top:96px!important;
+  }
+  body .power-compact-builder .compact-builder-tabs{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    position:sticky!important;
+    top:0;z-index:25;
+    gap:6px;padding:6px;margin-bottom:14px;
+    border:2px solid var(--tlc-material-rim)!important;
+    background:var(--tlc-material-core)!important;
+  }
+  body .power-compact-builder .compact-builder-tabs button{
+    font-weight:850!important;color:var(--tlc-ink)!important;
+    min-height:46px!important;
+  }
+  body .power-compact-builder .compact-builder-tabs button[aria-pressed="true"]{
+    color:hsl(var(--primary-foreground))!important;
+    background:hsl(var(--primary))!important;
+  }
+  body .power-compact-builder .compact-browser,
+  body .power-compact-builder .compact-workout{
+    display:none!important;
+  }
+  body .power-compact-builder .compact-browser.is-visible,
+  body .power-compact-builder .compact-workout.is-visible{
+    display:block!important;
+  }
+  body .power-compact-builder .compact-workout{
+    padding:clamp(12px,3vw,22px)!important;
+  }
+}
+@media(max-width:420px){
+  body .power-compact-builder .compact-browser-tools{
+    display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:6px;
+  }
+  body .power-compact-builder .compact-suggest{
+    min-width:0;padding:8px 9px!important;font-size:10px!important;
+  }
+  body .power-compact-builder .compact-search{flex:none}
+  body .power-compact-builder .compact-workout-item{
+    padding:10px!important;
+  }
+  body .power-compact-builder .compact-planned-heading>button:first-child{
+    grid-template-columns:66px minmax(0,1fr)!important;gap:7px!important;
+  }
+  body .power-compact-builder .compact-planned-heading>button:not(:first-child){
+    flex-basis:38px!important;min-width:38px!important;
+  }
+}
