@@ -44,12 +44,14 @@ try{
   assert(app.includes('path="/client"')&&app.includes('path="/client/:tab"'),'client portal routes registered');
   const more=await readFile('src/pages/More.tsx','utf8');
   assert(nav.includes("path:'/more',label:'More'"),'Fold-safe navigation must expose the More tools hub');
-  assert(more.includes("to:'/client',label:'Client Portal / Sign Up'"),'Client Portal / sign-up must remain reachable from More');
+  assert(more.includes("to:'/client',label:'Client Portal'"),'Grammatically named Client Portal must remain reachable from More');
   assert(portal.includes('className="tlc-client-access__actions"'),'Client access shows signup and sign-in buttons');
   assert(portal.includes("saveSkillCheck(owner,check)"),'client result integrates with the existing skill-check store');
   assert(portal.includes("owner!=='guest'"),'guest tests do not overwrite the shared legacy guest assessment');
   assert(portal.includes('questionIndex')&&portal.includes('currentQuestion.options'),'starter assessment is a step-by-step wizard');
   assert(portal.includes('Copy client test link'),'public client entry can be shared');
+  assert(portal.includes("label:'Skill Test'")&&portal.includes("label:'Overview'"),'Portal navigation uses clear, parallel tab labels');
+  assert(portal.includes('Explore the Skill Tree'),'Client results lead to the Skill Tree');
   assert(portal.includes('coach review and cross-device cloud sync are not active yet'),'UI must not falsely promise remote results');
 
   console.log('PASS: client test routes, onboarding, wizard, owner-isolated local records, session-only guest, invalid records and honest sync notices.');
