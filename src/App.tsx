@@ -10,6 +10,7 @@ import Skills from "./pages/Skills";
 import More from "./pages/More";
 import LevelAssessment from "./pages/LevelAssessment";
 import VideoAudit from "./pages/VideoAudit";
+import VideoAnalyzer from "./pages/VideoAnalyzer";
 import { MobileNav } from "./components/Layout/MobileNav";
 import Index from "./pages/Index";
 import PowerIntro from "./pages/PowerIntro";
@@ -37,6 +38,8 @@ import "./styles/movement-learning.css";
 import "./styles/superhuman-brand.css";
 import "./styles/superhuman-ui-v2.css";
 import "./styles/tlctv-inline.css";
+import "./styles/tlctv-analyzer.css";
+import "./styles/atomic-screen-fixes.css";
 import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();
@@ -64,6 +67,7 @@ function AppContent() {
           <Route path="/program" element={<SuperHumanProgram />} />
           <Route path="/assessment" element={<LevelAssessment />} />
           <Route path="/videos" element={<VideoAudit />} />
+          <Route path="/tlctv/analyzer" element={<VideoAnalyzer />} />
           <Route path="/more" element={<More />} />
           <Route path="/workout" element={<ActiveWorkout />} />
           <Route path="/skills/:skillId" element={<SkillStudio />} />
