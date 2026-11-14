@@ -40,7 +40,8 @@ try{
  assert(source.includes('videoLessonCoverage(exercise)'),'TLCtv uses the coverage layer');
  assert(source.includes('Find exact video'),'Related lessons must offer an exact demo search');
  assert(source.includes('<details className="tlctv-inline__more">'),'Additional video controls must be collapsed');
- assert(page.indexOf('tlctv-studio-first')>=0&&page.indexOf('tlctv-studio-first')<page.indexOf('Your current progression step'),'TV must be above the skill ladder');
+ assert(page.indexOf('id="tlctv-studio-first"')>=0&&page.includes('<InlineTlcTv key={exercise.slug} exercise={exercise} compact/>'),'Video must lead the selected movement detail panel');
+ assert(page.includes('tlc-atomic-movement-sheet')&&page.includes('SheetTitle'),'On mobile, video opens directly with the tapped movement without page jumping');
  assert(guide.includes('Full instructions')&&guide.includes('Safety & form tips'),'Complete coaching detail remains available');
  assert(button.includes('InlineTlcTv')&&!button.includes('if(!available)return null'),'Every exercise card exposes video');
  assert(skills.includes('<TlcTvTopBar')&&library.includes('<TlcTvTopBar'),'TLCtv must be at the top of browsing screens');
