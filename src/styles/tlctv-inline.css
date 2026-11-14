@@ -179,3 +179,15 @@
 .tlctv-inline__personal-form button:disabled{opacity:.5}
 .tlctv-inline__personal-form p{font-size:10px;line-height:1.45;color:#abb6c1;margin:0}
 .tlctv-inline__empty-action{margin-top:12px}
+
+/* A shared doodle signature for the global TLCtv media drawer. */
+.tlctv-sheet-head{display:flex;align-items:center;gap:10px;font-size:23px;letter-spacing:-.055em;font-weight:950;color:hsl(var(--foreground))}
+.tlctv-sheet-head>img{width:43px;height:43px;flex:none;border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--card));padding:4px}
+.tlctv-sheet-head>span{display:flex;flex-direction:column;line-height:1.05}
+.tlctv-sheet-head__tv{display:inline;color:hsl(var(--primary))}
+.tlctv-sheet-head small{font-size:9px;color:hsl(var(--muted-foreground));letter-spacing:.13em;font-weight:850;margin-top:6px}
+body .power-app-controls button[aria-label="Open videos and live streams"]>img{
+  width:22px;height:22px;object-fit:contain;flex:none;
+  border-radius:7px;border:1px solid hsl(var(--border));padding:2px;
+  background:hsl(var(--card))
+}
