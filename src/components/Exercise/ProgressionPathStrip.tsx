@@ -52,9 +52,15 @@ export function ProgressionPathStrip({ exerciseId, chainGroup, onNavigate }: Pro
   }, [chainGroup]);
 
   useEffect(() => {
-    if (activeRef.current) {
-      activeRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
+    const target=activeRef.current;
+    const viewport=target?.closest('[data-radix-scroll-area-viewport]') as HTMLElement|null;
+    if (!target||!viewport) return;
+    // Center the active movement inside its own horizontal strip only.
+    // scrollIntoView also scrolls the *page*, jumping users away from the exercise.
+    const item=target.getBoundingClientRect();
+    const bounds=viewport.getBoundingClientRect();
+    const delta=(item.left+item.width/2)-(bounds.left+bounds.width/2);
+    if (Math.abs(delta)>2)viewport.scrollLeft+=delta;
   }, [chain, exerciseId]);
 
   if (!chainGroup || chain.length < 2) return null;
