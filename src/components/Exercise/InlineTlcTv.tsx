@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Bookmark, Check, ChevronLeft, ChevronRight, ExternalLink, Link2, Play, Plus, RotateCcw, Square, Trash2, TvMinimal, VideoOff } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAuth } from '@/providers/AuthProvider';
@@ -54,7 +54,7 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
     }catch{setSaved(false);}
   },[lesson?.url,libraryKey]);
 
-  function attach(e:React.FormEvent<HTMLFormElement>){
+  function attach(e:FormEvent<HTMLFormElement>){
     e.preventDefault();
     const source=parseEmbeddedMedia(customUrl);
     if(!source){toast.error('Use a public YouTube video or Instagram reel/post URL.');return;}
