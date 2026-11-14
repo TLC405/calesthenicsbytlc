@@ -1,7 +1,7 @@
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, GitBranch, Layers3, Search } from 'lucide-react';
 import { SkillCategoryBrowser } from '@/components/Progression/SkillCategoryBrowser';
-import Library from './Library';
+const Library = lazy(()=>import('./Library'));
 import { lazy, Suspense } from 'react';
 const MasterSkillMap = lazy(()=>import('./MasterSkillMap'));
 import { TlcTvTopBar } from '@/components/Media/TlcTvTopBar';
@@ -28,7 +28,7 @@ export default function Skills(){
   {view==='tree'?<>
     <div className="master-tree-standalone-link"><span>13 connected pathways · 6 training levels</span><Link to="/skills/map">Open full-screen Skill Tree <ArrowRight size={16}/></Link></div>
     <Suspense fallback={<div className="master-tree-loading" role="status">Loading the 80-skill tree…</div>}><MasterSkillMap embedded/></Suspense>
-  </>:view==='all'?<Library embedded/>:<>
+  </>:view==='all'?<Suspense fallback={<div className="master-tree-loading" role="status">Loading all exercises…</div>}><Library embedded/></Suspense>:<>
     <button className="master-tree-quick" type="button" onClick={()=>chooseView('tree')}>
       <GitBranch size={20}/><span><strong>Explore the Skill Tree</strong><small>See every path from beginner foundations to elite skills.</small></span><ArrowRight size={17}/>
     </button>
