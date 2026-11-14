@@ -159,13 +159,13 @@ export default function SkillStudio() {
         {path.id==='foundation'&&<details className="tlc-atomic-extra"><summary>Foundation guide</summary><FoundationProgram attempts={attempts}/></details>}
         <p className="tlc-atomic-safety">{path.safety}</p>
       </section>
-      {!mobile&&<aside className="power-elevated tlc-atomic-desktop-detail">{detail}</aside>}
+      {!mobile&&<aside key={selected} className="power-elevated tlc-atomic-desktop-detail">{detail}</aside>}
     </div>
     <Sheet open={mobile&&detailOpen&&Boolean(exercise)} onOpenChange={setDetailOpen}>
       <SheetContent side="bottom" className="tlc-atomic-movement-sheet">
         <SheetTitle className="tlc-atomic-sheet-title">{exercise?.name||'Movement'}</SheetTitle>
         <SheetDescription className="sr-only">Video, technique, difficulty, easier options and training record for the selected movement.</SheetDescription>
-        <div className="tlc-atomic-sheet-body">{detail}</div>
+        <div key={selected} className="tlc-atomic-sheet-body">{detail}</div>
       </SheetContent>
     </Sheet>
     {studioLessons(path.id).length>0&&<details className="tlc-atomic-extra"><summary>More tutorials</summary><div className="space-y-4 pt-3">{studioLessons(path.id).map(source=><article key={source.url}><h3 className="font-bold text-sm mb-2">{source.title}</h3><VideoPlayer youtubeUrl={source.url} title={source.title} thumbnailMode clean/></article>)}</div></details>}
