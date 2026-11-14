@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import { build } from 'esbuild';
+import {mkdtemp,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {pathToFileURL} from 'node:url';
+const folder=await mkdtemp(join(tmpdir(),'tlc-alternatives-'));
+try{
+ const file=join(folder,'graph.mjs');
+ await build({entryPoints:['src/lib/skillGraph.ts'],outfile:file,bundle:true,format:'esm',platform:'node',logLevel:'silent'});
+ const {recommendedNode,nodeDose,skillEdges}=await import(pathToFileURL(file).href);
+ const pathId='front-lever';
+ const graph=await import(pathToFileURL(file).href);
+ const pathsFile=join(folder,'paths.mjs');
+ await build({entryPoints:['src/data/skillPaths.ts'],outfile:pathsFile,bundle:true,format:'esm',platform:'node',logLevel:'silent'});
+ const {SKILL_PATHS}=await import(pathToFileURL(pathsFile).href);
+ const path=SKILL_PATHS.find(p=>p.id===pathId);
+ assert(path,'Front lever pathway present');
+ const alt=['one-leg-front-lever','straddle-front-lever'];
+ assert(path.branches?.some(branch=>alt.every(x=>branch.includes(x))),'Alternatives declared as branches');
+ const linked=skillEdges.find(e=>e.from===alt[0]&&e.to===alt[1]);
+ assert(linked&&linked.type==='alternative'&&!linked.hardGate,'Alternatives must not be compulsory graph dependencies');
+ const allBefore=path.slugs.slice(0,path.slugs.indexOf(alt[0]));
+ const profile={tier:5,capabilities:['pull-base','support-base','straight-arm-base'],equipmentMode:'informational',equipment:['bar','rings']};
+ const attempt=(slug,j)=>({id:slug+'-'+j,nodeId:slug,sessionId:'session-'+(j%2),at:new Date(Date.UTC(2026,10,5+j)).toISOString(),metric:nodeDose(slug).metric,value:10,target:5,quality:5,assistance:'none',rom:'full'});
+ const mastered=(slugs)=>slugs.flatMap(slug=>[0,1,2].map(j=>attempt(slug,j)));
+ const allButAlternates=mastered([...allBefore,alt[1]]);
+ const next=recommendedNode(pathId,allButAlternates,profile,'front-lever');
+ assert.equal(next,'front-lever','Demonstrating straddle form must not force the one-leg variant');
+ const onlyOneLeg=mastered([...allBefore,alt[0]]);
+ assert.equal(recommendedNode(pathId,onlyOneLeg,profile,'front-lever'),'front-lever','Demonstrating one-leg form must not force the straddle variant');
+ console.log('PASS: One-leg and straddle lever shapes are interchangeable in source graph and actual next-movement selection.');
+}finally{await rm(folder,{recursive:true,force:true});}
