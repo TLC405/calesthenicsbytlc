@@ -1,0 +1,155 @@
+/* TLCtv — in-context movement cinema.
+   Distinct physical controls, restrained contrast, and the user's existing doodle mark. */
+.tlctv-inline{
+  --tv-face:#171a1e;
+  --tv-screen:#0a0e12;
+  --tv-rim:#323943;
+  --tv-ink:#f5f1e8;
+  --tv-soft:#aeb7c0;
+  --tv-accent:hsl(var(--primary));
+  width:100%;
+  min-width:0;
+  overflow:hidden;
+  border:1px solid hsl(var(--border));
+  border-radius:22px;
+  background:var(--tv-face);
+  box-shadow:0 12px 34px -24px rgba(0,0,0,.65),inset 0 1px rgba(255,255,255,.13);
+  color:var(--tv-ink);
+}
+.tlctv-inline *{box-sizing:border-box}
+.tlctv-inline__head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:13px 16px;
+  border-bottom:1px solid rgba(255,255,255,.11);
+  background:#1f2328;
+}
+.tlctv-inline__identity{display:flex;min-width:0;align-items:center;gap:11px}
+.tlctv-inline__identity>img{
+  width:42px;height:42px;object-fit:contain;flex:none;
+  border-radius:12px;background:#30343a;
+  border:1px solid rgba(255,255,255,.16);padding:4px;
+  box-shadow:inset 0 1px rgba(255,255,255,.14),0 2px 5px rgba(0,0,0,.32);
+}
+.tlctv-inline__branding{display:flex;min-width:0;flex-direction:column;gap:2px}
+.tlctv-inline__branding strong{color:#fff;font-weight:900;font-size:20px;line-height:1;letter-spacing:-.06em}
+.tlctv-inline__branding strong span{color:var(--tv-accent);letter-spacing:-.08em}
+.tlctv-inline__branding small{font-size:8px;font-weight:800;letter-spacing:.15em;color:var(--tv-soft);white-space:nowrap}
+.tlctv-inline__counter{display:flex;align-items:center;gap:6px;color:var(--tv-soft);font-size:9px;font-weight:850;letter-spacing:.12em;white-space:nowrap}
+.tlctv-inline__counter svg{color:var(--tv-accent)}
+.tlctv-inline__stage{
+  position:relative;aspect-ratio:16/9;min-height:172px;
+  width:100%;overflow:hidden;background:var(--tv-screen);
+  box-shadow:inset 0 0 0 5px #11161b;
+}
+.tlctv-inline__embedded{height:100%;width:100%}
+.tlctv-inline__embedded .power-embedded-stage,
+.tlctv-inline__embedded .power-instagram-embed{
+  height:100%;min-height:100%;width:100%;
+  border-radius:0!important;
+}
+.tlctv-inline__embedded .power-instagram-embed{overflow:auto}
+.tlctv-inline__embedded .power-instagram-embed iframe{width:100%;height:100%;min-height:100%}
+.tlctv-inline__embedded .power-embedded-stage iframe{width:100%!important;height:100%!important}
+.tlctv-inline__embedded .power-instagram-embed .power-embed-note{
+  background:#15191e;color:#bec5cf;padding:10px;font-size:10px
+}
+.tlctv-inline__poster{
+  appearance:none;border:0;position:relative;display:grid;place-items:center;
+  width:100%;height:100%;min-height:172px;cursor:pointer;color:var(--tv-ink);
+  background-color:var(--tv-screen);
+  background-image:
+    linear-gradient(transparent 49%,rgba(255,255,255,.024) 50%,transparent 51%);
+  background-size:100% 7px;
+}
+.tlctv-inline__poster:before{
+  content:"";position:absolute;inset:14px;
+  border:1px solid rgba(255,255,255,.11);border-radius:13px;
+  pointer-events:none
+}
+.tlctv-inline__poster:hover .tlctv-inline__play-disc{transform:translateY(-2px);border-color:var(--tv-accent)}
+.tlctv-inline__poster-mark{
+  pointer-events:none;position:absolute;right:5%;top:2%;height:95%;
+  opacity:.11;filter:grayscale(1);
+}
+.tlctv-inline__poster-mark img{height:100%;width:auto;max-width:40vw;object-fit:contain}
+.tlctv-inline__poster-center{z-index:1;display:flex;align-items:center;flex-direction:column;gap:8px;text-align:center}
+.tlctv-inline__play-disc{
+  display:grid;place-items:center;width:66px;height:66px;border-radius:18px;
+  border:1px solid rgba(255,255,255,.28);background:#282d32;color:var(--tv-accent);
+  box-shadow:inset 0 1px rgba(255,255,255,.2),0 7px 14px rgba(0,0,0,.4);
+  transition:transform .2s ease,border-color .2s ease
+}
+.tlctv-inline__poster-center strong{font-size:12px;letter-spacing:.18em;font-weight:950}
+.tlctv-inline__poster-center small{font-size:9px;letter-spacing:.16em;color:#b6c0ca;font-weight:700}
+.tlctv-inline__poster-label{
+  position:absolute;left:22px;bottom:19px;right:22px;text-align:left;
+  color:#9fabb7;font-size:11px;font-weight:700;overflow:hidden;
+  white-space:nowrap;text-overflow:ellipsis
+}
+.tlctv-inline__console{padding:14px 16px 15px}
+.tlctv-inline__now{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.tlctv-inline__now-copy{flex:1;min-width:0}
+.tlctv-inline__eyebrow{margin:0 0 5px;color:var(--tv-accent);font-weight:900;font-size:9px;letter-spacing:.18em}
+.tlctv-inline__now h3{font-size:13px;line-height:1.35;font-weight:850;color:var(--tv-ink);margin:0;overflow-wrap:anywhere}
+.tlctv-inline__now-copy>span{display:block;margin-top:5px;font-size:9px;font-weight:700;letter-spacing:.09em;color:#b5bdc5}
+.tlctv-inline__source-stepper{display:flex;gap:4px;align-items:center;flex:none}
+.tlctv-inline__source-stepper button{
+  display:grid;place-items:center;width:36px;height:38px;color:var(--tv-ink);
+  border:1px solid rgba(255,255,255,.22);border-radius:10px;
+  background:#282c32;box-shadow:inset 0 1px rgba(255,255,255,.10);
+}
+.tlctv-inline__source-stepper button:disabled{opacity:.4;cursor:not-allowed}
+.tlctv-inline__source-stepper span{font-size:10px;font-weight:800;color:var(--tv-soft);min-width:26px;text-align:center}
+.tlctv-inline__buttons{display:grid;grid-template-columns:minmax(0,1.45fr) repeat(3,minmax(0,1fr));gap:7px;margin-top:15px}
+.tlctv-inline__buttons button,.tlctv-inline__buttons a{
+  display:inline-flex;min-width:0;min-height:44px;align-items:center;justify-content:center;gap:7px;
+  border:1px solid rgba(255,255,255,.20);border-radius:11px;
+  text-decoration:none;background:#292e34;color:var(--tv-ink);
+  box-shadow:inset 0 1px rgba(255,255,255,.14),0 3px 7px rgba(0,0,0,.16);
+  font-size:11px;font-weight:850;white-space:nowrap
+}
+.tlctv-inline__buttons .tlctv-inline__primary{background:var(--tv-accent);color:#0a0b0e;border-color:transparent}
+.tlctv-inline__buttons button:disabled{opacity:.48;cursor:not-allowed}
+.tlctv-inline__buttons button:not(:disabled):active,.tlctv-inline__buttons a:active,.tlctv-inline__source-stepper button:not(:disabled):active{transform:translateY(1px);box-shadow:inset 0 2px 4px rgba(0,0,0,.30)}
+.tlctv-inline__channels{display:flex;gap:7px;overflow-x:auto;padding:12px 1px 3px;scrollbar-width:thin}
+.tlctv-inline__channels button{
+  flex:none;min-height:37px;padding:0 12px;
+  border:1px solid rgba(255,255,255,.21);border-radius:9px;
+  color:var(--tv-soft);background:#22262b;font-size:10px;
+  letter-spacing:.04em;font-weight:800
+}
+.tlctv-inline__channels button[aria-pressed=true]{border-color:var(--tv-accent);background:#38392e;color:var(--tv-ink)}
+.tlctv-inline__footnote{font-size:10px;line-height:1.55;margin:12px 1px 0;color:#aeb6bf}
+.tlctv-inline__empty{display:flex;gap:14px;align-items:flex-start;padding:22px 18px;min-height:150px}
+.tlctv-inline__empty svg{flex:none;color:var(--tv-accent)}
+.tlctv-inline__empty strong{font-size:13px}
+.tlctv-inline__empty p{font-size:12px;line-height:1.55;color:var(--tv-soft);margin:8px 0 0}
+.tlctv-inline button:focus-visible,.tlctv-inline a:focus-visible{outline:3px solid var(--tv-accent);outline-offset:3px}
+@media(min-width:800px){
+  .power-learning-panel:has(.tlctv-inline){display:grid;grid-template-columns:minmax(0,1.15fr) minmax(250px,1fr);gap:16px;align-items:start}
+  .power-learning-panel:has(.tlctv-inline)>.tlctv-inline{grid-column:1/3}
+  .power-learning-panel:has(.tlctv-inline)>.power-photo-gallery,.power-learning-panel:has(.tlctv-inline)>.power-illustration-gallery{grid-column:1}
+  .power-learning-panel:has(.tlctv-inline)>.power-movement-overview{grid-column:1/-1}
+  .power-learning-panel:has(.tlctv-inline)>.power-learning-relations{grid-column:1/-1}
+}
+@media(max-width:520px){
+  .tlctv-inline{border-radius:17px}
+  .tlctv-inline__head{padding:11px 12px}
+  .tlctv-inline__identity>img{width:36px;height:36px}
+  .tlctv-inline__branding strong{font-size:18px}
+  .tlctv-inline__branding small{font-size:7px;letter-spacing:.095em}
+  .tlctv-inline__counter{font-size:8px;gap:4px}
+  .tlctv-inline__stage,.tlctv-inline__poster{min-height:164px}
+  .tlctv-inline__console{padding:12px 11px}
+  .tlctv-inline__buttons{grid-template-columns:1.2fr repeat(3,minmax(0,.85fr));gap:5px}
+  .tlctv-inline__buttons button,.tlctv-inline__buttons a{font-size:10px;gap:5px;padding:0 5px;min-height:44px}
+  .tlctv-inline__buttons svg{width:15px}
+  .tlctv-inline__poster-center strong{font-size:11px}
+}
+@media(max-width:350px){
+  .tlctv-inline__counter svg{display:none}
+  .tlctv-inline__buttons button,.tlctv-inline__buttons a{font-size:9px}
+  .tlctv-inline__buttons button:not(.tlctv-inline__primary) span,.tlctv-inline__buttons a span{display:none}
+  .tlctv-inline__branding small{font-size:6.5px}
+}
+@media(prefers-reduced-motion:reduce){.tlctv-inline__play-disc{transition:none}}
