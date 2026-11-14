@@ -28,6 +28,7 @@ import ActiveWorkout from "./pages/ActiveWorkout";
 import SkillStudio from "./pages/SkillStudio";
 import Anatomy from "./pages/Anatomy";
 import NotFound from "./pages/NotFound";
+import SuperHumanProgram from "./pages/SuperHumanProgram";
 import Community from "./pages/Community";
 import Admin from "./pages/Admin";
 import "./styles/neumorph.css";
@@ -59,6 +60,7 @@ function AppContent() {
           <Route path="/train" element={<TrainingEntry />} />
           <Route path="/routine-days" element={<Navigate to="/skills" replace />} />
           <Route path="/skills" element={<Skills />} />
+          <Route path="/program" element={<SuperHumanProgram />} />
           <Route path="/assessment" element={<LevelAssessment />} />
           <Route path="/videos" element={<VideoAudit />} />
           <Route path="/more" element={<More />} />
