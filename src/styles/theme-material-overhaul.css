@@ -3,22 +3,23 @@
    Theme IDs, stored preferences, business logic and category semantics remain unchanged.
    Visual differentiation is structural: separate background / material / accent / ink layers. */
 
+/* Dragon Ball Z-inspired light Signature: warm capsule ivory, tournament orange, cobalt, gold.
+   Original TLC mark only; no third-party character art or logos. */
 :root:not([data-theme]),
 :root[data-theme="default"]{
-  color-scheme:dark;
-  --background:225 23% 7%;--foreground:44 39% 94%;--card:221 20% 13%;--card-foreground:44 39% 94%;
-  --popover:221 20% 13%;--popover-foreground:44 39% 94%;
-  --primary:40 74% 73%;--primary-foreground:227 32% 9%;--secondary:222 18% 21%;--secondary-foreground:45 28% 95%;
-  --muted:222 16% 21%;--muted-foreground:38 14% 78%;--accent:222 17% 26%;--accent-foreground:45 26% 96%;
-  --border:222 16% 36%;--input:222 16% 36%;--ring:40 74% 73%;
-  --surface:228 20% 10%;--surface-raised:221 20% 16%;--power-metal:224 15% 32%;--power-highlight:221 12% 49%;
-  --cat-push:4 78% 67%;--cat-pull:205 80% 68%;--cat-legs:146 48% 66%;--cat-core:36 83% 70%;--cat-skills:270 60% 75%;--cat-mobility:178 51% 69%;
-  --su-trim:#d5ac64;--su-hero:#252b33;--su-hero-text:#fff6e4;--su-hero-muted:#e0d4be;
-  --tlc-page:#0d121a;--tlc-panel:#202833;--tlc-panel-inset:#151e28;--tlc-panel-raised:#2b3542;
-  --tlc-ink:#f7f1e5;--tlc-secondary-ink:#d6c9b2;--tlc-line:#58606c;--tlc-emphasis:#f1ca83;
-  --tlc-alt:#718ba6;--tlc-tertiary:#ca906b;--tlc-hero:#212b37;--tlc-hero-ink:#fff3db;
-  --tlc-control:#333e4b;--tlc-shadow:rgb(0 0 0 / .46);--tlc-highlight:rgb(255 245 222 / .14);
-  --tlc-frame-width:3px;--tlc-surface-radius:15px;--tlc-panel-shadow:0 5px 0 #0a0e14,0 16px 30px -20px #000d;
+  color-scheme:light;
+  --background:38 63% 88%;--foreground:222 44% 13%;--card:41 70% 99%;--card-foreground:222 44% 13%;
+  --popover:41 70% 99%;--popover-foreground:222 44% 13%;--primary:21 90% 40%;--primary-foreground:0 0% 100%;
+  --secondary:210 56% 78%;--secondary-foreground:222 44% 13%;--muted:39 37% 82%;--muted-foreground:222 31% 27%;
+  --accent:209 65% 72%;--accent-foreground:222 44% 13%;--border:221 21% 52%;--input:221 21% 52%;--ring:214 91% 34%;
+  --surface:39 48% 83%;--surface-raised:41 76% 99%;--power-metal:218 20% 57%;--power-highlight:0 0% 100%;
+  --cat-push:21 90% 40%;--cat-pull:211 86% 36%;--cat-legs:145 63% 27%;--cat-core:41 85% 35%;--cat-skills:270 57% 41%;--cat-mobility:185 66% 27%;
+  --su-trim:#ef821e;--su-hero:#154a9c;--su-hero-text:#fff9eb;--su-hero-muted:#f2e6d2;
+  --tlc-page:#ead9b2;--tlc-panel:#fffaf0;--tlc-panel-inset:#d7e3ec;--tlc-panel-raised:#ffffff;
+  --tlc-ink:#162b4c;--tlc-secondary-ink:#3a526a;--tlc-line:#8394a7;--tlc-emphasis:#bd4b0b;
+  --tlc-alt:#1658ad;--tlc-tertiary:#c68c11;--tlc-hero:#174b95;--tlc-hero-ink:#fffaf0;
+  --tlc-control:#d9e8f5;--tlc-shadow:rgb(41 59 87 / .27);--tlc-highlight:rgb(255 255 255 / .98);
+  --tlc-frame-width:4px;--tlc-surface-radius:18px;--tlc-panel-shadow:0 5px 0 #b5bfcb,0 16px 29px -18px #334c7080;
 }
 :root[data-theme="vasa"]{
   color-scheme:light;
