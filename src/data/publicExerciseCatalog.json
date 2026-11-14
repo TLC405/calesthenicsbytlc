@@ -8922,5 +8922,124 @@
     "chain_order": null,
     "visibility": "public",
     "created_by": null
+  },
+  {
+    "id": "c405b000-0000-4000-8000-000000000001",
+    "slug": "one-leg-front-lever",
+    "name": "One-Leg Front Lever",
+    "category": "Pull",
+    "primary_muscles": [
+      "Lats",
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Pull-up bar or rings"
+    ],
+    "cues": [
+      "Start in a controlled advanced-tuck lever.",
+      "Extend one leg while keeping the torso level and both elbows straight.",
+      "Return to the tuck before losing scapular control."
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Intermediate lever variation. Hip and leg length can make one-leg and straddle variations differently demanding; neither is a universal prerequisite for the other.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405b000-0000-4000-8000-000000000002",
+    "slug": "straddle-front-lever",
+    "name": "Straddle Front Lever",
+    "category": "Pull",
+    "primary_muscles": [
+      "Lats",
+      "Core",
+      "Shoulders"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Pull-up bar or rings"
+    ],
+    "cues": [
+      "Start in a controlled advanced-tuck front lever.",
+      "Extend both knees into a straddle only as far as a level torso and steady shoulders allow.",
+      "Bend the legs to exit before elbow or shoulder discomfort appears."
+    ],
+    "difficulty_level": 5,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Advanced straight-arm front lever variation. Straddle width changes the leverage, so compare controlled positions rather than assuming one fixed ranking.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405b000-0000-4000-8000-000000000003",
+    "slug": "sliding-leg-curl",
+    "name": "Sliding Hamstring Curl",
+    "category": "Legs",
+    "primary_muscles": [
+      "Hamstrings",
+      "Glutes"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Towel or sliders",
+      "Smooth floor"
+    ],
+    "cues": [
+      "Lie supine with heels on sliders and hips lifted only as comfortable.",
+      "Extend and curl the knees under control without dropping the hips.",
+      "Reduce the movement range if hamstring cramping or loss of pelvis control develops."
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Low-equipment hamstring knee-flexion progression. A short supported range or two-leg curl can precede demanding Nordic eccentrics.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405b000-0000-4000-8000-000000000004",
+    "slug": "nordic-curl-negative",
+    "name": "Nordic Curl Eccentric",
+    "category": "Legs",
+    "primary_muscles": [
+      "Hamstrings"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Secure ankle anchor",
+      "Thick knee pad"
+    ],
+    "cues": [
+      "Kneel on a pad with both ankles anchored to a rated, stable support.",
+      "Lower gradually with hips extended; use hands or a low support to control the landing.",
+      "Push up with the hands to reset rather than forcing a concentric return."
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "High-load eccentric hamstring progression. Begin with short assisted ranges and small total volume; a 4 × 3 chart benchmark is an exit test, not a starting working dose.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
   }
 ]
