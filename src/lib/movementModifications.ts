@@ -26,6 +26,10 @@ const canonical = (slug:string) => canonicalSlug(slug);
  * These are optional ways to reduce demand, not proof of readiness or equivalent exercise prescriptions.
  */
 const curated: Record<string, readonly string[]> = {
+ 'one-leg-front-lever':['advanced-tuck-front-lever-on-rings','tuck-front-lever'],
+ 'straddle-front-lever':['advanced-tuck-front-lever-on-rings','tuck-front-lever'],
+ 'sliding-leg-curl':['ring-hamstring-curl','glute-bridge'],
+ 'nordic-curl-negative':['sliding-leg-curl','ring-hamstring-curl'],
  'straight-bar-dip':['parallel-bar-dip','assisted-ring-support-hold'],
  'reverse-nordic-partial':['bodyweight-squat','wall-sit'],
  'reverse-nordic':['reverse-nordic-partial','bodyweight-squat'],
