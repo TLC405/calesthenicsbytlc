@@ -42,7 +42,8 @@ try{
   const nav=await readFile('src/components/Layout/MobileNav.tsx','utf8');
   const portal=await readFile('src/pages/ClientPortal.tsx','utf8');
   assert(app.includes('path="/client"')&&app.includes('path="/client/:tab"'),'client portal routes registered');
-  assert(nav.includes("path:'/client/test'"),'Test tab points into the client portal');
+  assert(nav.includes("path:'/client',label:'Client Portal',sublabel:'Sign Up'"),'Primary tab is Client Portal / Sign Up');
+  assert(portal.includes('className="tlc-client-access__actions"'),'Client access shows signup and sign-in buttons');
   assert(portal.includes("saveSkillCheck(owner,check)"),'client result integrates with the existing skill-check store');
   assert(portal.includes("owner!=='guest'"),'guest tests do not overwrite the shared legacy guest assessment');
   assert(portal.includes('questionIndex')&&portal.includes('currentQuestion.options'),'starter assessment is a step-by-step wizard');
