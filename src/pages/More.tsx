@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Library, TrendingUp, SlidersHorizontal, Users, Sparkles, Crown, FileText, Shield } from 'lucide-react';
+import { ArrowRight, Library, TrendingUp, SlidersHorizontal, Users, Sparkles, Crown, FileText, Shield, Target } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { MusicControl } from '@/components/Music/MusicControl';
@@ -8,6 +8,7 @@ import { InstallPowerApp } from '@/components/InstallPowerApp';
 export default function More() {
   const {user}=useAuth();
   const links=[
+    {to:'/program',label:'My skill training plan',note:'A / C / B / D, handstand practice and assisted progressions',icon:Target},
     {to:'/library',label:'All exercises',note:'Search, videos and your own movements',icon:Library},
     {to:'/videos',label:'Tutorial checks',note:'Missing sources, playback and movement review',icon:Shield},
     {to:'/dashboard',label:'My strength progress',note:'Workout history and recorded activity',icon:TrendingUp},
