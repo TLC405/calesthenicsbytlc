@@ -4,6 +4,7 @@ import catalog from '@/data/publicExerciseCatalog.json';
 import { movementTutorialSources, movementVisualDetails } from '@/lib/movementThumbnails';
 import { canonicalSlug } from '@/lib/exerciseProgressions';
 import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Play, Bookmark, Trash2, BrainCircuit } from 'lucide-react';
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { EmbeddedMedia } from '@/components/Exercise/EmbeddedMedia';
