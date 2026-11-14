@@ -23,8 +23,8 @@ const pages={
   '/more':'src/pages/More.tsx',
   '/videos':'src/pages/VideoAudit.tsx',
   '/workout':'src/pages/ActiveWorkout.tsx',
-  '/settings':'src/pages/Settings.tsx',
-  '/account-settings':'src/pages/AccountSettings.tsx',
+  '/settings':'src/pages/TrainingSettings.tsx',
+  '/account-settings':'src/pages/Settings.tsx',
   '/integrations':'src/pages/Integrations.tsx',
   '/community':'src/pages/Community.tsx',
   '/anatomy':'src/pages/Anatomy.tsx',
@@ -52,7 +52,7 @@ for(const [label,selectors] of Object.entries({
   video:['.tlctv-inline','.tlctv-inline__stage','.tlctv-inline__buttons'],
   settings:['.power-setting-section','.power-more-section'],
   activity:['.power-session'],
-  nav:['.power-mobile-dock-v3','.power-nav-space'],
+  nav:['.power-mobile-dock-v3','--power-nav-space'],
 })){
   for(const selector of selectors){
     assert(css.includes(selector)||prior.includes(selector),'Uncovered '+label+' selector '+selector);
