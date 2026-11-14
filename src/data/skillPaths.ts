@@ -1,4 +1,4 @@
-export interface SkillPath {id:string;title:string;short:string;focus:string;equipment:string;cue:string;safety:string;group:string;slugs:readonly string[];accessories?:readonly string[];kind?:"progression"|"collection";}
+export interface SkillPath {id:string;title:string;short:string;focus:string;equipment:string;cue:string;safety:string;group:string;slugs:readonly string[];accessories?:readonly string[];kind:"progression"|"collection";}
 export const SKILL_PATHS: readonly SkillPath[] = [
   {
     "id": "grip",
@@ -29,6 +29,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "foundation",
+    "kind": "collection",
     "title": "Calisthenics Foundation",
     "short": "Four focus days · learn control first",
     "focus": "Joint comfort • body line • quiet control",
@@ -54,6 +55,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "planche",
+    "kind": "progression",
     "title": "Planche",
     "short": "Lean, tuck, straddle and full planche",
     "focus": "Lean, tuck, straddle and full planche",
@@ -80,6 +82,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "straight-arm",
+    "kind": "collection",
     "title": "Straight-Arm Strength",
     "short": "Scapular control and locked-arm loading",
     "focus": "Scapular control and locked-arm loading",
@@ -100,6 +103,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "pike-compression",
+    "kind": "progression",
     "title": "Pike Compression",
     "short": "Active hip flexion and straight-leg lifts",
     "focus": "Active hip flexion and straight-leg lifts",
@@ -118,6 +122,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "straddle-compression",
+    "kind": "progression",
     "title": "Straddle Compression",
     "short": "Active straddle lift and low support",
     "focus": "Active straddle lift and low support",
@@ -136,6 +141,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "straddle-press",
+    "kind": "progression",
     "title": "Straddle Press",
     "short": "Hip lifts, froggers, negatives and presses",
     "focus": "Hip lifts, froggers, negatives and presses",
@@ -157,6 +163,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "stalder",
+    "kind": "progression",
     "title": "Stalder Press",
     "short": "Low support to straddle press",
     "focus": "Low support to straddle press",
@@ -176,6 +183,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "handstand",
+    "kind": "progression",
     "title": "Handstand",
     "short": "Wall line, exits and freestanding balance",
     "focus": "Wall line, exits and freestanding balance",
@@ -205,6 +213,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "pike-press",
+    "kind": "progression",
     "title": "Pike Pressing",
     "short": "Incline pike to vertical pressing",
     "focus": "Incline pike to vertical pressing",
@@ -225,6 +234,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "hspu",
+    "kind": "progression",
     "title": "Handstand Push-Up",
     "short": "Overhead support, range and pressing",
     "focus": "Overhead support, range and pressing",
@@ -248,6 +258,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "l-sit",
+    "kind": "progression",
     "title": "L-Sit & V-Sit",
     "short": "Support strength plus compression",
     "focus": "Support strength plus compression",
@@ -269,6 +280,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "rings",
+    "kind": "collection",
     "title": "Rings",
     "short": "Supported rows, support and dips",
     "focus": "Supported rows, support and dips",
@@ -289,6 +301,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "ring-muscle-up",
+    "kind": "progression",
     "title": "Ring Muscle-Up",
     "short": "False grip, pull, transition and dip",
     "focus": "False grip, pull, transition and dip",
@@ -310,6 +323,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "front-lever",
+    "kind": "progression",
     "title": "Front Lever",
     "short": "Pulling base into horizontal holds",
     "focus": "Pulling base into horizontal holds",
@@ -332,6 +346,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "pull-up",
+    "kind": "progression",
     "title": "Pull-Ups",
     "short": "Rows, hangs and progressive pulling",
     "focus": "Rows, hangs and progressive pulling",
@@ -358,6 +373,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "push-up",
+    "kind": "progression",
     "title": "Push-Ups",
     "short": "Wall to advanced one-arm pressing",
     "focus": "Wall to advanced one-arm pressing",
@@ -381,6 +397,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "dip",
+    "kind": "progression",
     "title": "Dips",
     "short": "Assisted support to controlled dips",
     "focus": "Assisted support to controlled dips",
@@ -401,6 +418,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "crow",
+    "kind": "progression",
     "title": "Crow Balance",
     "short": "Supported balance into crow",
     "focus": "Supported balance into crow",
@@ -418,6 +436,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "elbow-lever",
+    "kind": "progression",
     "title": "Elbow Lever",
     "short": "Assisted support into lever balance",
     "focus": "Assisted support into lever balance",
@@ -435,6 +454,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "pistol",
+    "kind": "progression",
     "title": "Pistol Squat",
     "short": "Split squats to single-leg strength",
     "focus": "Split squats to single-leg strength",
@@ -454,6 +474,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "pancake",
+    "kind": "collection",
     "title": "Pancake & Mobility",
     "short": "Usable pike and straddle range",
     "focus": "Usable pike and straddle range",
@@ -475,6 +496,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "back-lever",
+    "kind": "progression",
     "title": "Back Lever",
     "short": "Support and controlled shoulder extension",
     "focus": "Support and controlled shoulder extension",
@@ -497,6 +519,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   },
   {
     "id": "human-flag",
+    "kind": "progression",
     "title": "Human Flag",
     "short": "Supported entries, band help and sideways holds",
     "focus": "Push, pull and side-body control",
