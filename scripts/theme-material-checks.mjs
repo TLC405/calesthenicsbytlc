@@ -12,9 +12,9 @@ const themes=[
   {id:'okc-thunder',selector:':root[data-theme="okc-thunder"]'},
 ];
 function themeBody(selector){
-  const a=css.indexOf(selector+'{');
+  const a=css.indexOf(selector);
   assert(a>=0,'Missing theme '+selector);
-  const start=a+selector.length+1, end=css.indexOf('}',start);
+  const start=css.indexOf('{',a)+1, end=css.indexOf('}',start);
   assert(end>start,'Unclosed theme '+selector);
   return css.slice(start,end);
 }
