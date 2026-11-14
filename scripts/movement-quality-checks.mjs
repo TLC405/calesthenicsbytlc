@@ -63,6 +63,8 @@ try{
  assert(SKILL_PATHS.find(p=>p.id==='pike-press').title==='Pike Push-Ups to HSPU','Distinguish bent-arm presses from straight-arm press to handstand');
  const [studio,tree,app,more]=await Promise.all(['src/pages/SkillStudio.tsx','src/pages/MasterSkillMap.tsx','src/App.tsx','src/pages/More.tsx'].map(x=>readFile(x,'utf8')));
  assert(studio.includes('<MovementRequirementsPanel')&&studio.includes('requestedMove')&&studio.includes("next.set('movement',slug)"),'Studio needs real supporting UI and deep-linked movement selection');
+ assert(studio.includes('exerciseBySlug.has(slug)'),'Cross-lane chart links must accept any known exercise without fake or wrong movement fallback');
+ assert(tree.includes("linkedPath=node.id==='foundation'?'foundation':lane.path"),'Foundation hub links to Foundation instead of the L-sit lane');
  assert(tree.includes('<MovementRequirementsPanel')&&tree.includes('?movement='),'Tree needs matching movement drill routes');
  assert(app.includes('progression-quality.css')&&app.includes('lazy(()=>import("./pages/SkillStudio"))'),'Performance quality: deferred Studio chunk and new theme-safe styles');
  assert(!more.includes('Community and coaching'),'No unwanted community marketing on the training tools page');
