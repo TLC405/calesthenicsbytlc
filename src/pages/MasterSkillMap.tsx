@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronDown, Download, GitBranch, Play, Search, ShieldAlert, Target, TvMinimal, Waypoints } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { deviceSkillProgress, exerciseBySlug, nodeProgress, readTrainingProfile, type SkillAttempt } from '@/lib/skillGraph';
@@ -7,6 +7,8 @@ import { addWorkoutMovement, readWorkoutDraft, writeWorkoutDraft } from '@/lib/w
 import { toast } from 'sonner';
 import { InlineTlcTv } from '@/components/Exercise/InlineTlcTv';
 import { MovementOverview } from '@/components/Exercise/MovementOverview';
+import { MovementRequirementsPanel } from '@/components/Progression/MovementRequirementsPanel';
+import { getSkillPath } from '@/data/skillPaths';
 import source from '@/data/masterSkillMap.json';
 import { routeMasterTree } from '@/lib/masterTreeRouting';
 
@@ -219,6 +221,8 @@ function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,
 }){
  const exact=node.mapping==='exact'&&!!linked;
  const {user}=useAuth();
+ const navigate=useNavigate();
+ const supportivePath=getSkillPath(lane.path);
  const owner=user?.id||'guest';
  const connected=(node.linkedSlugs||[]).flatMap(slug=>exerciseBySlug.get(slug)?[exerciseBySlug.get(slug)!]:[]);
  function addToWorkout(slug:string){
@@ -247,13 +251,14 @@ function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,
    </details>}
 
   <div className="master-map-links">
-   <Link to={'/skills/'+lane.path}>Open {lane.name} path <ArrowRight size={15}/></Link>
+   <Link to={'/skills/'+lane.path+(node.exerciseSlug?'?movement='+encodeURIComponent(node.exerciseSlug):'')}>Open {lane.name} path <ArrowRight size={15}/></Link>
    <Link to={'/assessment?skill='+encodeURIComponent(lane.path)}>Check my level <ArrowRight size={15}/></Link>
   </div>
   {connected.length>0&&<section className="master-map-connected" aria-label="Linked exercises"><div className="master-map-video-heading"><BookOpen size={18}/><strong>{node.mapping==='compound'?'Foundation checklist':node.mapping==='related'?'Related exercises and preparation':'Exercise and supporting movements'}</strong></div>
     <p>{node.mapping==='compound'?'This is a multi-exercise benchmark, not one exercise. These are the individual movements to practice and assess.':node.mapping==='related'?'This chart step combines movements or specifies a variation. Each linked exercise is labeled separately; none is falsely presented as the exact combined tutorial.':'Choose an exercise to see its full instructions, or add it to your draft manually.'}</p>
-    <div className="master-map-connected-items">{connected.map((item,i)=><div key={item.slug} className="master-map-connected-item"><span><strong>{item.name}</strong><small>{node.mapping==='exact'&&item.slug===node.exerciseSlug?'EXACT MOVEMENT':'RELATED MOVEMENT'}</small></span><Link to="/library" state={{search:item.name}} aria-label={'Watch and learn '+item.name}>Watch & learn <ArrowRight size={14}/></Link><button type="button" onClick={()=>addToWorkout(item.slug)} aria-label={'Add '+item.name+' to my workout draft'}>Add to workout</button></div>)}</div>
+    <div className="master-map-connected-items">{connected.map((item,i)=><div key={item.slug} className="master-map-connected-item"><span><strong>{item.name}</strong><small>{node.mapping==='exact'&&item.slug===node.exerciseSlug?'EXACT MOVEMENT':'RELATED MOVEMENT'}</small></span><Link to={'/skills/'+lane.path+'?movement='+encodeURIComponent(item.slug)} aria-label={'Watch and learn '+item.name}>Watch & learn <ArrowRight size={14}/></Link><button type="button" onClick={()=>addToWorkout(item.slug)} aria-label={'Add '+item.name+' to my workout draft'}>Add to workout</button></div>)}</div>
    </section>}
+  {supportivePath&&<MovementRequirementsPanel path={supportivePath} compact onChoose={slug=>navigate('/skills/'+lane.path+'?movement='+encodeURIComponent(slug))}/>}
   {linked?<div className="master-map-video">
     <div className="master-map-video-heading"><TvMinimal size={18}/><strong>{exact?'Watch this exercise':'Watch a related exercise'}</strong></div>
     {!exact&&<p>This clip teaches a related movement, not necessarily this exact chart step.</p>}
