@@ -25,7 +25,7 @@ try{
   assert.equal(SKILL_PATHS.find(p=>p.id===id)?.kind,'collection','Non-sequential group should never render a compulsory ladder: '+id);
  for(const id of ['planche','handstand','pull-up','push-up','ring-muscle-up','pistol','front-lever','back-lever'])
   assert.equal(SKILL_PATHS.find(p=>p.id===id)?.kind,'progression','Ordered skill needs authentic progression: '+id);
- assert.equal(catalog.length,299,'The eleven new drills must remain in the exercise library');
+ assert.equal(catalog.length,303,'The catalog must retain 11 chart drills and 4 progression bridge drills');
  assert.equal(graph.nodes.length,80);
  assert(graph.nodes.every(n=>n.mapping!=='missing'&&n.linkedSlugs?.length>0),'All 80 map nodes are supported');
  assert(graph.nodes.every(n=>n.linkedSlugs.every(s=>slugs.has(s))),'No dead exercise links');
