@@ -39,7 +39,7 @@ for(const pathname of ['/power-sw.js','/manifest.json','/index.html']){
 }
 const serviceWorker=readFileSync('public/power-sw.js','utf8');
 assert(serviceWorker.includes("url.origin!==self.location.origin"),'Service worker must not cache foreign origins');
-assert(serviceWorker.includes("/api|auth|admin"),'Service worker must bypass private API paths');
+assert(serviceWorker.includes('admin(?:-login)?') && serviceWorker.includes('(api|auth|admin'),'Service worker must bypass private API paths');
 const css=files.filter(name=>name.endsWith('.css')).sort((a,b)=>statSync(join(path,b)).size-statSync(join(path,a)).size)[0];
 assert(css&&statSync(join(path,css)).size<600000,'CSS output exceeds agreed budget');
 function summary(asset){
