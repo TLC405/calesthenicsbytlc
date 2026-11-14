@@ -82,8 +82,8 @@ export default function LevelAssessment() {
     <header className="power-simple-heading mt-5 mb-6">
       <div>
         <p className="power-simple-eyebrow flex items-center gap-2"><ClipboardCheck size={16}/> TLC / SUPER HUMAN SKILLS CHECK</p>
-        <h1>Discover your super human starting point.</h1>
-        <p>See where your super human strength stands. Measure one skill at a time, then explore optional next-level suggestions—never preset workouts.</p><Link to="/client/test" className="ml-3 mt-3 inline-flex min-h-10 items-center gap-2 text-xs font-bold text-primary">Client Portal Test <ArrowRight size={15}/></Link><Link to="/program" className="mt-3 inline-flex min-h-10 items-center gap-2 text-xs font-bold text-primary">View A/D/E/B/C plan and progression ladders <ArrowRight size={15}/></Link>
+        <h1>Check your strength.</h1>
+        <p>Pick a skill. Record what you can do. See what to try next.</p><Link to="/client/test" className="ml-3 mt-3 inline-flex min-h-10 items-center gap-2 text-xs font-bold text-primary">Client Portal Test <ArrowRight size={15}/></Link><Link to="/program" className="mt-3 inline-flex min-h-10 items-center gap-2 text-xs font-bold text-primary">My training plan <ArrowRight size={15}/></Link>
       </div>
     </header>
 
@@ -117,26 +117,26 @@ export default function LevelAssessment() {
     <section id="skill-check-form" className="power-elevated su-assessment-form rounded-2xl p-4 sm:p-7 space-y-5 scroll-mt-20" aria-label="Individual skill test">
       <div className="flex gap-3 items-center">
         <span className="h-11 w-11 flex items-center justify-center rounded-xl bg-primary/10 text-primary"><Target size={22}/></span>
-        <div><p className="text-[10px] uppercase tracking-widest text-primary">Individual baseline</p><h2 className="font-display text-xl font-bold">Test your current strength</h2></div>
+        <div><p className="text-[10px] uppercase tracking-widest text-primary">YOUR STARTING POINT</p><h2 className="font-display text-xl font-bold">My skill check</h2></div>
       </div>
       <label className="block text-sm font-semibold">Skill category
         <select className="mt-2 w-full min-h-12 rounded-xl border border-border bg-background px-3 text-sm" value={path.id} onChange={event => setPathId(event.target.value)}>
           {allPaths.map(item => <option value={item.id} key={item.id}>{item.title}</option>)}
         </select>
       </label>
-      <p className="text-sm text-muted-foreground">{path.focus}. Use a recent controlled result, or test gently with appropriate equipment and a safe exit. This is not a max-effort challenge.</p>
+      <p className="text-sm text-muted-foreground">Choose a comfortable level. Stop for pain or loss of control.</p><details className="tlc-test-info"><summary>About this skill</summary><p>{path.focus}. Use a recent controlled result, or test gently with appropriate equipment and a safe exit. This is not a max-effort challenge.</p></details>
       <label className="flex items-center gap-3 rounded-xl border border-border bg-background/50 p-3 text-sm cursor-pointer">
         <input type="checkbox" className="h-5 w-5 accent-[hsl(var(--primary))]" checked={untested} onChange={event => setUntested(event.target.checked)}/>
-        I haven't tested this skill yet / I'm not sure
+        I haven't tried this yet
       </label>
       {!untested && <>
-        <label className="block text-sm font-semibold">Hardest variation you can perform with control
+        <label className="block text-sm font-semibold">Hardest version I can do well
           <select className="mt-2 w-full min-h-12 rounded-xl border border-border bg-background px-3 text-sm" value={selected} onChange={event => { setSlug(event.target.value); setValue(''); }}>
             {path.slugs.map((movement, index) => <option key={movement} value={movement}>{index + 1}. {exerciseBySlug.get(movement)?.name || movement}</option>)}
           </select>
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <label className="block text-sm font-semibold">Best controlled {metric === 'seconds' ? 'hold (seconds)' : 'repetitions'}
+          <label className="block text-sm font-semibold">My best {metric === 'seconds' ? 'hold (seconds)' : 'reps'}
             <input type="number" inputMode="numeric" min="1" max="999" value={value} onChange={event => setValue(event.target.value)}
               className="mt-2 w-full min-h-12 rounded-xl border border-border bg-background px-3 text-base" placeholder={metric === 'seconds' ? 'e.g. 12' : 'e.g. 6'}/>
           </label>
@@ -147,8 +147,8 @@ export default function LevelAssessment() {
           </label>
         </div>
         <fieldset>
-          <legend className="font-semibold text-sm mb-2">Technique quality</legend>
-          <p className="text-xs text-muted-foreground mb-3">1 = lost control · 3 = inconsistent · 5 = clean and repeatable</p>
+          <legend className="font-semibold text-sm mb-2">How controlled was it?</legend>
+          <p className="text-xs text-muted-foreground mb-3">1 = struggled · 3 = okay · 5 = controlled</p>
           <div className="grid grid-cols-5 gap-2">
             {[1,2,3,4,5].map(n => <button key={n} type="button" aria-pressed={quality === n} onClick={() => setQuality(n)}
               className={'h-12 rounded-xl border font-bold text-sm ' + (quality === n ? 'bg-primary text-primary-foreground border-primary' : 'border-border bg-card')}>{n}</button>)}
@@ -160,13 +160,13 @@ export default function LevelAssessment() {
         </label>
       </>}
       <button type="button" onClick={save} className="w-full min-h-12 flex justify-center items-center gap-2 rounded-xl bg-primary text-primary-foreground font-bold text-sm">
-        <Check size={18}/> Save my skill check
+        <Check size={18}/> Save result
       </button>
       {message && <p role="status" className="text-xs text-primary font-semibold">{message}</p>}
     </section>
 
     <section className="power-elevated su-assessment-result rounded-2xl p-4 sm:p-6 mt-5 space-y-3" aria-label="Your skill assessment result">
-      <div className="flex items-center gap-2"><Activity className="text-primary" size={19}/><h2 className="font-bold text-lg">Your super human level · {path.title}</h2></div>
+      <div className="flex items-center gap-2"><Activity className="text-primary" size={19}/><h2 className="font-bold text-lg">My level · {path.title}</h2></div>
       {current ? <>
         <p className="text-sm font-semibold">{formatResult(current)}</p>
         {current.slug && <div className="h-2 rounded-full bg-muted overflow-hidden" aria-label={'Step ' + stepNumber + ' of ' + path.slugs.length}>
@@ -174,11 +174,11 @@ export default function LevelAssessment() {
         </div>}
         <p className="text-xs text-muted-foreground">{current.slug ? 'Variation ' + stepNumber + ' of ' + path.slugs.length : 'Baseline not established'} · Last checked {new Date(current.at).toLocaleDateString()}</p>
         <div className="border-t border-border/50 pt-3">
-          <p className="text-[10px] uppercase tracking-widest text-primary">Optional suggestion</p>
+          <p className="text-[10px] uppercase tracking-widest text-primary">WHAT TO TRY NEXT</p>
           <p className="font-bold text-base mt-1">{suggestion.label}</p>
           <p className="text-sm mt-1">{suggestion.slug ? exerciseBySlug.get(suggestion.slug)?.name || suggestion.slug : 'Choose a skill'}</p>
           <p className="text-xs text-muted-foreground mt-2">{suggestion.reason}</p>
-          <Link to={'/skills/' + path.id} className="inline-flex items-center gap-2 min-h-11 text-sm font-semibold text-primary mt-2">Explore skill progression <ArrowRight size={17}/></Link>
+          <Link to={'/skills/' + path.id} className="inline-flex items-center gap-2 min-h-11 text-sm font-semibold text-primary mt-2">Watch skill steps <ArrowRight size={17}/></Link>
         </div>
       </> : <div className="text-sm text-muted-foreground">No result saved for this skill yet. Choose your current variation above or mark it untested.</div>}
       <p className="text-[11px] text-muted-foreground">Based on self-reported performance, not a verified physical evaluation. Suggested steps are not automatic clearance for advanced skills. No workout has been added or scheduled.</p>
