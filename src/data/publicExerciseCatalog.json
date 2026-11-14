@@ -8598,5 +8598,329 @@
     "chain_order": 3,
     "visibility": "public",
     "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000001",
+    "slug": "straight-bar-dip",
+    "name": "Straight-Bar Dip",
+    "category": "Push",
+    "primary_muscles": [
+      "Triceps",
+      "Chest"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Bar"
+    ],
+    "cues": [
+      "Start supported above a stable bar with straight arms.",
+      "Lower through a comfortable controlled range while keeping shoulders stable.",
+      "Press back to the top without swinging."
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Use a stable low bar and build parallel-bar dips before trying straight-bar support.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000002",
+    "slug": "wall-sit",
+    "name": "Wall Sit",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Wall"
+    ],
+    "cues": [
+      "Keep your back against a wall and feet on a non-slip floor.",
+      "Lower to a comfortable knee angle and distribute pressure through the feet.",
+      "Stand when knee discomfort or control changes."
+    ],
+    "difficulty_level": 1,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Choose a comfortable knee angle, not a forced parallel position.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000003",
+    "slug": "reverse-nordic-partial",
+    "name": "Partial Reverse Nordic",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Rectus Femoris"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Knee pad"
+    ],
+    "cues": [
+      "Kneel on a comfortable pad with hips extended and ribs stacked.",
+      "Lean backward a short distance as one line from knees to shoulders.",
+      "Return under control before the knees or hips become uncomfortable."
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Start with a small pain-free range. The target angle from the source chart is not a required starting position.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000004",
+    "slug": "reverse-nordic",
+    "name": "Reverse Nordic",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Rectus Femoris"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Knee pad"
+    ],
+    "cues": [
+      "Start kneeling with the torso and hips aligned.",
+      "Lean backward with controlled knee extension loading as tolerated.",
+      "Return without forcing range, dropping or arching excessively."
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Progress from partial reverse Nordics gradually; avoid forcing knee flexion or a floor-touching range.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000005",
+    "slug": "dragon-pistol",
+    "name": "Dragon Pistol Squat",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Stable support optional"
+    ],
+    "cues": [
+      "Practice a controlled cross-behind leg position with secure hand support.",
+      "Lower only as far as balance and joint comfort allow.",
+      "Build full-depth control without bouncing or twisting the planted knee."
+    ],
+    "difficulty_level": 5,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Elite one-leg squat; assisted cross-behind practice, mobility and a stable exit come first.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000006",
+    "slug": "broad-jump",
+    "name": "Standing Broad Jump",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes",
+      "Calves"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Clear floor"
+    ],
+    "cues": [
+      "Start with a balanced hip hinge and coordinated arm swing.",
+      "Jump forward into a clear space and land softly on both feet.",
+      "Stick the landing before repeating."
+    ],
+    "difficulty_level": 2,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Use short distances and a non-slip landing surface before increasing power.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000007",
+    "slug": "tuck-jump",
+    "name": "Tuck Jump",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes",
+      "Calves"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Clear floor"
+    ],
+    "cues": [
+      "Start with a small controlled vertical jump.",
+      "Lift the knees without leaning back or losing midair balance.",
+      "Land softly and reset before the next repetition."
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Quality landings matter more than jump height; reduce volume if impact control fades.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000008",
+    "slug": "skater-hop",
+    "name": "Skater Hop",
+    "category": "Legs",
+    "primary_muscles": [
+      "Glutes",
+      "Quadriceps"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Clear floor"
+    ],
+    "cues": [
+      "Bound sideways to the other foot over a manageable distance.",
+      "Land with a quiet knee bend and balanced trunk.",
+      "Pause to stabilize before returning."
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Begin with small side steps or supported transfers if single-leg landing control is limited.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000009",
+    "slug": "single-leg-bound",
+    "name": "Single-Leg Bound",
+    "category": "Legs",
+    "primary_muscles": [
+      "Glutes",
+      "Quadriceps",
+      "Calves"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Clear floor"
+    ],
+    "cues": [
+      "Begin with controlled single-leg hopping before adding distance.",
+      "Keep the knee aligned over the foot when landing.",
+      "Land, stabilize, and stop if the ankle or knee feels unstable."
+    ],
+    "difficulty_level": 4,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Build single-leg landing control before repeatedly bounding for distance.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000010",
+    "slug": "box-jump",
+    "name": "Box Jump",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Glutes",
+      "Calves"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Low sturdy box"
+    ],
+    "cues": [
+      "Choose a stable box height you can clear easily.",
+      "Land quietly with full foot contact and upright control.",
+      "Step down deliberately; do not rebound from the top."
+    ],
+    "difficulty_level": 3,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Start low. Never choose a box height requiring excessive knee tucking.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
+  },
+  {
+    "id": "c405a000-0000-4000-8000-000000000011",
+    "slug": "depth-jump",
+    "name": "Depth Jump",
+    "category": "Legs",
+    "primary_muscles": [
+      "Quadriceps",
+      "Calves"
+    ],
+    "secondary_muscles": [],
+    "equipment": [
+      "Low sturdy box",
+      "Clear landing"
+    ],
+    "cues": [
+      "Step from a low secure box into a controlled landing.",
+      "Begin with step-off and stick-landing drills before reactive jumps.",
+      "Use a soft controlled landing and stop when quality falls."
+    ],
+    "difficulty_level": 5,
+    "youtube_url": null,
+    "instagram_url": null,
+    "image_url": null,
+    "description": "Reactive depth jumps are high-impact plyometrics; use after landing-strength preparation, not as a beginner exercise.",
+    "sets_reps": null,
+    "chain_group": null,
+    "chain_order": null,
+    "visibility": "public",
+    "created_by": null
   }
 ]
