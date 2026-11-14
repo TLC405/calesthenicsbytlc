@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
-  Activity, ArrowLeft, ArrowRight, BadgeCheck, BookOpen, Check, ChevronRight,
+  Activity, ArrowLeft, ArrowRight, BadgeCheck, Check, ChevronRight,
   ClipboardCheck, Download, Dumbbell, FileCheck2, HeartPulse, LockKeyhole,
-  LogIn, LogOut, RefreshCcw, ShieldCheck, Sparkles, Target, UserRound,
+  LogIn, LogOut, RefreshCcw, ShieldCheck, Share2, Sparkles, Target, UserRound,
 } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { ASSESSMENT_QUESTIONS, assessStartingLevel, type AssessmentAnswers } from '@/lib/trainingAssessment';
-import { SKILL_PATHS, getSkillPath } from '@/data/skillPaths';
+import { getSkillPath } from '@/data/skillPaths';
 import { exerciseBySlug, nodeDose } from '@/lib/skillGraph';
 import { readSkillChecks, saveSkillCheck, suggestedSkillStep, type SkillCheck } from '@/lib/skillCheck';
 import {
@@ -92,7 +92,6 @@ function ClientAccess({onSignedIn}:{onSignedIn:()=>void}){
 
 export default function ClientPortal(){
   const {tab:rawTab}=useParams<{tab?:string}>();
-  const navigate=useNavigate();
   const activeTab:Tab=rawTab==='test'||rawTab==='results'?rawTab:'overview';
   const {user}=useAuth();
   const owner=user?.id||'guest';
@@ -137,6 +136,11 @@ export default function ClientPortal(){
   function persist(next:ClientPortalData,message:string):boolean{
     if(!writeClientPortal(owner,next)){setNotice('Could not store this result in browser storage. Copy or export results and check browser privacy settings.');return false;}
     setData(next);setNotice(message);return true;
+  }
+  async function copyClientLink(){
+    const link=window.location.origin+'/client/test';
+    try{await navigator.clipboard.writeText(link);setNotice('Public client test link copied. Results do not automatically reach your coach.');}
+    catch{setNotice('Copy this client test address: '+link);}
   }
   function saveProfile(e:FormEvent<HTMLFormElement>){
     e.preventDefault();
@@ -201,6 +205,7 @@ export default function ClientPortal(){
             <h2>{data.profile?.displayName?'Welcome, '+data.profile.displayName+'.':'Welcome to your starting line.'}</h2>
             <p>Start with a gentle seven-question readiness check, then select the movement you want to measure. The system makes suggestions, not diagnoses or automatic level promotions.</p>
             <Link to="/client/test" className="tlc-client-cta">Open the Test tab <ArrowRight size={17}/></Link>
+            <button type="button" onClick={()=>{void copyClientLink();}} className="tlc-client-secondary tlc-client-share"><Share2 size={16}/> Copy client test link</button>
           </div>
           <div className="tlc-client-panel">
             <h2>Client preferences</h2><p className="tlc-client-muted">Personalize your on-device portal without setting a fixed workout plan.</p>
