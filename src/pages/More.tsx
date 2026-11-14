@@ -8,7 +8,7 @@ import { InstallPowerApp } from '@/components/InstallPowerApp';
 export default function More() {
   const {user}=useAuth();
   const links=[
-    {to:'/program',label:'My skill training plan',note:'A / C / B / D, handstand practice and assisted progressions',icon:Target},
+    {to:'/program',label:'My skill training plan',note:'A / D / E / B / C, handstands and readiness ladders',icon:Target},
     {to:'/library',label:'All exercises',note:'Search, videos and your own movements',icon:Library},
     {to:'/videos',label:'Tutorial checks',note:'Missing sources, playback and movement review',icon:Shield},
     {to:'/dashboard',label:'My strength progress',note:'Workout history and recorded activity',icon:TrendingUp},
