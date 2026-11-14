@@ -34,9 +34,11 @@ try{
   assert(main.includes('path="'+url+'"'),`Missing active router entry ${url}`);
  const studio=await readFile('src/pages/SkillStudio.tsx','utf8');
  assert(studio.includes('id="tlctv-studio-first"'),'Studio video-first target missing');
- assert(studio.includes("getElementById('tlctv-studio-first')"),'Skill selections must scroll to their video');
- assert(!studio.includes("getElementById('tlctv-studio-inline-detail')"),'Mobile selections must not skip past video');
- assert(studio.includes('prefers-reduced-motion'),'Movement navigation respects reduced motion');
+ assert(!studio.includes('scrollIntoView('),'Selecting a movement must never forcibly scroll the document');
+ assert(studio.includes('preventScrollReset:true'),'Updating a movement deep link must preserve scroll position');
+ assert(studio.includes('tlc-atomic-movement-sheet'),'Phone movement details open in-place, not at page top');
+ assert(!studio.includes('tlctv-studio-inline-detail'),'No duplicate above-the-list mobile detail which shifts document height');
+ assert(studio.includes('onOpenChange={setDetailOpen}'),'Movement sheet can close without changing the list position');
  const media=await readFile('src/components/Media/MediaSheet.tsx','utf8');
  assert(media.includes("useState<'files'|'tutorials'|'analyzer'>('tutorials')"),'Opening TLCtv should show video search, not offline storage');
  assert(media.includes('videoLessonCoverage(exercise).lessons[0]'),'Global TLCtv must search the same library as exercise pages');
