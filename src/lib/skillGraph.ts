@@ -22,7 +22,14 @@ const known = new Set(catalog.map(e => e.slug));
 export const exerciseBySlug = new Map(catalog.map(e => [e.slug,e]));
 export const skillEdges: SkillEdge[] = [];
 for (const path of SKILL_PATHS) {
-  for (let i=1;path.kind!=='collection'&&i<path.slugs.length;i++) skillEdges.push({from:path.slugs[i-1],to:path.slugs[i],type:'supports',hardGate:false});
+  if(path.kind==='collection')continue;
+  for(let i=1;i<path.slugs.length;i++){
+   const from=path.slugs[i-1],to=path.slugs[i];
+   const parallel=path.branches?.some(branch=>branch.includes(from)&&branch.includes(to));
+   // Different biomechanical lever shapes may be interchangeable. Never turn
+   // their display order into a compulsory progression dependency.
+   skillEdges.push({from,to,type:parallel?'alternative':'supports',hardGate:false});
+  }
 }
 const cross: [string,string,EdgeType][] = [
   ['wrist-circles','planche-lean','supports'],['wrist-circles','wall-handstand','supports'],
