@@ -49,7 +49,7 @@ try{
   assert(portal.includes("saveSkillCheck(owner,check)"),'client result integrates with the existing skill-check store');
   assert(portal.includes("owner!=='guest'"),'guest tests do not overwrite the shared legacy guest assessment');
   assert(portal.includes('questionIndex')&&portal.includes('currentQuestion.options'),'starter assessment is a step-by-step wizard');
-  assert(portal.includes('Copy client test link'),'public client entry can be shared');
+  assert(portal.includes('Copy assessment link'),'public client entry can be shared');
   assert(portal.includes("label:'Skill Test'")&&portal.includes("label:'Overview'"),'Portal navigation uses clear, parallel tab labels');
   assert(portal.includes('Explore the Skill Tree'),'Client results lead to the Skill Tree');
   assert(portal.includes('coach review and cross-device cloud sync are not active yet'),'UI must not falsely promise remote results');
