@@ -8,6 +8,7 @@ import { InstallPowerApp } from '@/components/InstallPowerApp';
 export default function More() {
   const {user}=useAuth();
   const links=[
+    {to:'/client/test',label:'Client Portal · Test',note:'Client-facing baseline, movement tests and progress',icon:Target},
     {to:'/program',label:'My skill training plan',note:'A / D / E / B / C, handstands and readiness ladders',icon:Target},
     {to:'/library',label:'All exercises',note:'Search, videos and your own movements',icon:Library},
     {to:'/videos',label:'Tutorial checks',note:'Missing sources, playback and movement review',icon:Shield},
