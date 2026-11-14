@@ -12,6 +12,7 @@ import LevelAssessment from "./pages/LevelAssessment";
 import ClientPortal from "./pages/ClientPortal";
 import VideoAudit from "./pages/VideoAudit";
 import VideoAnalyzer from "./pages/VideoAnalyzer";
+import Integrations from "./pages/Integrations";
 import { MobileNav } from "./components/Layout/MobileNav";
 import Index from "./pages/Index";
 import PowerIntro from "./pages/PowerIntro";
@@ -42,6 +43,7 @@ import "./styles/tlctv-inline.css";
 import "./styles/tlctv-analyzer.css";
 import "./styles/atomic-screen-fixes.css";
 import "./styles/client-portal.css";
+import "./styles/tlc-integrations.css";
 import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();
@@ -72,6 +74,7 @@ function AppContent() {
           <Route path="/client/:tab" element={<ClientPortal />} />
           <Route path="/videos" element={<VideoAudit />} />
           <Route path="/tlctv/analyzer" element={<VideoAnalyzer />} />
+          <Route path="/integrations" element={<Integrations />} />
           <Route path="/more" element={<More />} />
           <Route path="/workout" element={<ActiveWorkout />} />
           <Route path="/skills/:skillId" element={<SkillStudio />} />
