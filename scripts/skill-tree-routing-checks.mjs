@@ -54,7 +54,7 @@ try{
  const landing=await readFile('src/pages/Skills.tsx','utf8'),page=await readFile('src/pages/MasterSkillMap.tsx','utf8');
  const client=await readFile('src/pages/ClientPortal.tsx','utf8'),more=await readFile('src/pages/More.tsx','utf8');
  assert(landing.includes("raw==='paths'||raw==='all'?raw:'tree'")&&landing.includes('Skill Tree')&&landing.includes('<MasterSkillMap embedded/>'),'Skills Studio defaults to the actual Skill Tree');
- assert(landing.includes('setParams(updated,{replace:true})'),'Skills tab selection uses URL state');
+ assert(landing.includes('setParams(updated,{replace:true,preventScrollReset:true})'),'Skills tabs preserve scroll position when switching views');
  assert(page.includes("updated.set('skill',id)")&&page.includes('new URLSearchParams(prev)'),'Selecting skill preserves URL tab');
  assert(page.includes("typeof window!=='undefined'&&window.matchMedia"),'Mobile defaults to readable focused tree');
  assert(page.includes('const Wrapper=embedded?'),'Nested main avoided');
