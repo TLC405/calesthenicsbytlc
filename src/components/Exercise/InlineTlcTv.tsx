@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Bookmark, Check, ChevronLeft, ChevronRight, ExternalLink, Link2, Play, Plus, RotateCcw, Square, Trash2, TvMinimal, VideoOff } from 'lucide-react';
 import { toast } from 'sonner';
+import { BrainCircuit } from 'lucide-react';
+import { SocialVideoAnalyzer } from '@/components/Media/SocialVideoAnalyzer';
 import { useAuth } from '@/providers/AuthProvider';
 import { movementTutorialSources, type ThumbnailExercise } from '@/lib/movementThumbnails';
 import { parseEmbeddedMedia } from '@/lib/embeddedMedia';
@@ -38,6 +40,7 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
   const owner=user?.id||'guest';
   const [personal,setPersonal]=useState<Lesson[]>(()=>readPersonal(owner,exercise.slug));
   const [addOpen,setAddOpen]=useState(false);
+  const [analyzerOpen,setAnalyzerOpen]=useState(false);
   const [customUrl,setCustomUrl]=useState('');
   const [customTitle,setCustomTitle]=useState('');
   const lessons=useMemo(()=>[...lessonsFor(exercise),...personal],[exercise.slug,exercise.youtube_url,exercise.instagram_url,personal]);
@@ -47,7 +50,7 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
   const [saved,setSaved]=useState(false);
   const lesson=lessons[Math.min(selected,Math.max(lessons.length-1,0))];
   const libraryKey='power-watch-library-v1:'+owner;
-  useEffect(()=>{setSelected(0);setPlaying(false);setRevision(0);setPersonal(readPersonal(owner,exercise.slug));setCustomUrl('');setCustomTitle('');setAddOpen(false);},[exercise.slug,owner]);
+  useEffect(()=>{setSelected(0);setPlaying(false);setRevision(0);setPersonal(readPersonal(owner,exercise.slug));setCustomUrl('');setCustomTitle('');setAddOpen(false);setAnalyzerOpen(false);},[exercise.slug,owner]);
   useEffect(()=>{
     try{const rows=JSON.parse(localStorage.getItem(libraryKey)||'[]');
       setSaved(Boolean(lesson&&Array.isArray(rows)&&rows.some((row:{url?:string})=>row?.url===lesson.url)));
@@ -131,6 +134,7 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
         </div>}
         <div className="tlctv-inline__personal-actions">
           <button type="button" onClick={()=>setAddOpen(v=>!v)} aria-expanded={addOpen}><Plus size={15}/> Add my video</button>
+          <button type="button" aria-expanded={analyzerOpen} onClick={()=>setAnalyzerOpen(v=>!v)}><BrainCircuit size={16}/> Analyze this skill video</button>
           {lesson.scope==='other'&&<button type="button" onClick={removePersonal}><Trash2 size={15}/> Remove this link</button>}
         </div>
         {addOpen&&<form className="tlctv-inline__personal-form" onSubmit={attach}>
@@ -139,12 +143,15 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
           <button type="submit" disabled={personal.length>=3}><Link2 size={15}/> Attach to {exercise.name}</button>
           <p>Public YouTube/Instagram links only. Attached per exercise on this device; videos remain hosted by their creators.</p>
         </form>}
+        {analyzerOpen&&<div className="tlctv-inline__analyzer"><SocialVideoAnalyzer initialUrl={lesson.url} exerciseName={exercise.name}/></div>}
         <p className="tlctv-inline__footnote">TLCtv keeps the video beside your exercise. Use playback controls inside YouTube or Instagram for pause, speed and fullscreen. External creators may restrict embeds.</p>
       </div>
     </>:<div className="tlctv-inline__empty">
       <VideoOff size={23}/>
       <div><strong>No approved video attached yet.</strong><p>Keep training with the instructions below. You can attach a personal video link here without leaving the exercise.</p>
         <button className="tlctv-inline__empty-action" type="button" onClick={()=>setAddOpen(v=>!v)}><Plus size={15}/> Add my video link</button>
+        <button className="tlctv-inline__empty-action" type="button" onClick={()=>setAnalyzerOpen(v=>!v)} aria-expanded={analyzerOpen}><BrainCircuit size={15}/> Analyze a social clip</button>
+        {analyzerOpen&&<SocialVideoAnalyzer exerciseName={exercise.name}/>}
         {addOpen&&<form className="tlctv-inline__personal-form" onSubmit={attach}>
           <label>Public YouTube or Instagram URL<input type="url" required value={customUrl} placeholder="https://www.youtube.com/watch?v=…" onChange={e=>setCustomUrl(e.target.value)}/></label>
           <label>Title (optional)<input type="text" maxLength={90} value={customTitle} placeholder="My exercise tutorial" onChange={e=>setCustomTitle(e.target.value)}/></label>
