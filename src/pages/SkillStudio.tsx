@@ -6,7 +6,6 @@ import { MovementThumbnail } from '@/components/Exercise/MovementThumbnail';
 import { InlineTlcTv } from '@/components/Exercise/InlineTlcTv';
 import { MovementConnections } from '@/components/Progression/MovementConnections';
 import { MovementRequirementsPanel } from '@/components/Progression/MovementRequirementsPanel';
-import { movementRequirementsFor } from '@/data/movementRequirements';
 import { readProgressionGoal, writeProgressionGoal, writeProgressionFocus } from '@/lib/progressionFocus';
 import { PROGRESSION_SOURCES } from '@/data/progressionSources';
 import { tutorialState } from '@/lib/mediaAudit';
@@ -39,7 +38,9 @@ export default function SkillStudio() {
   const {user}=useAuth(); const owner=user?.id||'guest';
   const navigate=useNavigate(); const [params,setParams]=useSearchParams(); const mobile=useIsMobile(900);
   const requestedMove=params.get('movement')||'';
-  const allowedMove=(slug:string)=>!!path&&(path.slugs.includes(slug)||(path.accessories||[]).includes(slug)||movementRequirementsFor(path).some(item=>item.slug===slug));
+  // Map nodes may cross lanes: allow any verified catalog exercise by deep link.
+  // Such movements are labeled as support, never silently inserted into this ladder.
+  const allowedMove=(slug:string)=>Boolean(path&&exerciseBySlug.has(slug));
   const session=useRef(crypto.randomUUID());
   const [attempts,setAttempts]=useState<SkillAttempt[]>(()=>deviceSkillProgress.read(owner));
   const [profile,setProfile]=useState<SkillTrainingProfile>(readTrainingProfile);
@@ -88,7 +89,7 @@ export default function SkillStudio() {
     navigate(`/today?goal=${path!.id}&node=${encodeURIComponent(selected)}`);
   }
   const detail=exercise&&<div className="space-y-4">
-    <div className="flex items-start justify-between gap-3"><div><p className="text-xs uppercase tracking-widest text-primary">{progress.state} · {dose.metric}</p><h2 className="font-display text-2xl font-bold mt-1">{exercise.name}</h2></div><MovementThumbnail exercise={exercise} className="is-small"/></div>
+    <div className="flex items-start justify-between gap-3"><div><p className="text-xs uppercase tracking-widest text-primary">{progress.state} · {dose.metric}</p><h2 className="font-display text-2xl font-bold mt-1">{exercise.name}</h2>{!path.slugs.includes(selected)&&<small className="tlc-studio-parallel">SUPPORTING MOVEMENT · NOT A MANDATORY PATH STEP</small>}</div><MovementThumbnail exercise={exercise} className="is-small"/></div>
     <MovementOverview exercise={exercise} onChoose={choose}/><details className="power-learn-section"><summary>Exercise photos & illustrations</summary><MovementPhotoGallery exercise={exercise}/></details><details className="power-learn-section"><summary>Easier options & next steps</summary><MovementConnections slug={selected} profile={profile} attempts={attempts} onChoose={choose}/></details>
     <details className="power-learn-section"><summary>Supporting drills</summary>
       {incoming.length?incoming.map((edge,i)=>{const slug=edge.to===selected?edge.from:edge.to;const e=exerciseBySlug.get(slug);return e&&<button key={i} className="power-related-movement w-full min-h-12 flex items-center justify-between gap-2 text-left text-xs border-b last:border-0" onClick={()=>choose(slug)}><MovementThumbnail exercise={e} className="is-small"/><span className="flex-1 min-w-0">{e.name}<small className="block text-muted-foreground mt-1">{edge.type.replace(/_/g,' ')} · {nodeProgress(slug,attempts).state}</small></span><ArrowRight className="h-4 w-4 shrink-0 text-primary"/></button>;}):<p className="text-xs text-muted-foreground">Start with a variation you can control.</p>}
