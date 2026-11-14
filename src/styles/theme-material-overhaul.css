@@ -1,0 +1,309 @@
+/* TLC / SUPER HUMAN STRENGTH — DISTINCT MATERIAL THEMES V3
+   A production-level contrast pass over *all* existing screens.
+   Theme IDs, stored preferences, business logic and category semantics remain unchanged.
+   Visual differentiation is structural: separate background / material / accent / ink layers. */
+
+:root:not([data-theme]),
+:root[data-theme="default"]{
+  color-scheme:dark;
+  --background:225 23% 7%;--foreground:44 39% 94%;--card:221 20% 13%;--card-foreground:44 39% 94%;
+  --popover:221 20% 13%;--popover-foreground:44 39% 94%;
+  --primary:40 74% 73%;--primary-foreground:227 32% 9%;--secondary:222 18% 21%;--secondary-foreground:45 28% 95%;
+  --muted:222 16% 21%;--muted-foreground:38 14% 78%;--accent:222 17% 26%;--accent-foreground:45 26% 96%;
+  --border:222 16% 36%;--input:222 16% 36%;--ring:40 74% 73%;
+  --surface:228 20% 10%;--surface-raised:221 20% 16%;--power-metal:224 15% 32%;--power-highlight:221 12% 49%;
+  --cat-push:4 78% 67%;--cat-pull:205 80% 68%;--cat-legs:146 48% 66%;--cat-core:36 83% 70%;--cat-skills:270 60% 75%;--cat-mobility:178 51% 69%;
+  --su-trim:#d5ac64;--su-hero:#252b33;--su-hero-text:#fff6e4;--su-hero-muted:#e0d4be;
+  --tlc-page:#0d121a;--tlc-panel:#202833;--tlc-panel-inset:#151e28;--tlc-panel-raised:#2b3542;
+  --tlc-ink:#f7f1e5;--tlc-secondary-ink:#d6c9b2;--tlc-line:#58606c;--tlc-emphasis:#f1ca83;
+  --tlc-alt:#718ba6;--tlc-tertiary:#ca906b;--tlc-hero:#212b37;--tlc-hero-ink:#fff3db;
+  --tlc-control:#333e4b;--tlc-shadow:rgb(0 0 0 / .46);--tlc-highlight:rgb(255 245 222 / .14);
+  --tlc-frame-width:3px;--tlc-surface-radius:15px;--tlc-panel-shadow:0 5px 0 #0a0e14,0 16px 30px -20px #000d;
+}
+:root[data-theme="vasa"]{
+  color-scheme:light;
+  --background:35 17% 89%;--foreground:213 18% 12%;--card:38 27% 98%;--card-foreground:213 18% 12%;
+  --popover:38 27% 98%;--popover-foreground:213 18% 12%;--primary:351 77% 35%;--primary-foreground:0 0% 100%;
+  --secondary:28 12% 78%;--secondary-foreground:216 16% 14%;--muted:35 13% 82%;--muted-foreground:214 12% 30%;
+  --accent:29 18% 75%;--accent-foreground:214 17% 13%;--border:28 12% 59%;--input:28 12% 59%;--ring:351 77% 35%;
+  --surface:34 15% 84%;--surface-raised:38 27% 99%;--power-metal:29 11% 66%;--power-highlight:43 34% 99%;
+  --cat-push:351 77% 35%;--cat-pull:209 63% 32%;--cat-legs:154 59% 28%;--cat-core:24 79% 39%;--cat-skills:275 51% 43%;--cat-mobility:184 58% 31%;
+  --su-trim:#ad2034;--su-hero:#222932;--su-hero-text:#fffaf3;--su-hero-muted:#e1d5cf;
+  --tlc-page:#e6e2da;--tlc-panel:#fffdfa;--tlc-panel-inset:#d8d1c7;--tlc-panel-raised:#ffffff;
+  --tlc-ink:#24272c;--tlc-secondary-ink:#52504f;--tlc-line:#ada293;--tlc-emphasis:#ab1e34;
+  --tlc-alt:#303e4b;--tlc-tertiary:#b77d47;--tlc-hero:#262d35;--tlc-hero-ink:#fffaf4;
+  --tlc-control:#e7dfd3;--tlc-shadow:rgb(43 36 30 / .19);--tlc-highlight:rgb(255 255 255 / .94);
+  --tlc-frame-width:2px;--tlc-surface-radius:13px;--tlc-panel-shadow:0 4px 0 #c5bbae,0 16px 25px -20px #33271b55;
+}
+:root[data-theme="planet-fitness"]{
+  color-scheme:dark;
+  --background:284 28% 7%;--foreground:279 21% 97%;--card:279 23% 15%;--card-foreground:279 21% 97%;
+  --popover:279 23% 15%;--popover-foreground:279 21% 97%;--primary:280 60% 72%;--primary-foreground:280 32% 9%;
+  --secondary:279 23% 23%;--secondary-foreground:280 16% 96%;--muted:282 18% 24%;--muted-foreground:276 19% 81%;
+  --accent:282 27% 32%;--accent-foreground:279 20% 97%;--border:280 24% 43%;--input:280 24% 43%;--ring:45 84% 72%;
+  --surface:283 27% 10%;--surface-raised:282 24% 20%;--power-metal:275 19% 34%;--power-highlight:277 26% 51%;
+  --cat-push:338 71% 72%;--cat-pull:265 62% 75%;--cat-legs:157 45% 67%;--cat-core:45 84% 72%;--cat-skills:286 60% 73%;--cat-mobility:197 57% 72%;
+  --su-trim:#f1cf70;--su-hero:#351d44;--su-hero-text:#fff6da;--su-hero-muted:#e0d5e8;
+  --tlc-page:#140d1b;--tlc-panel:#2c1d37;--tlc-panel-inset:#1e122a;--tlc-panel-raised:#392549;
+  --tlc-ink:#faf3ff;--tlc-secondary-ink:#e5d5ee;--tlc-line:#806394;--tlc-emphasis:#efd27e;
+  --tlc-alt:#b992eb;--tlc-tertiary:#e2b66d;--tlc-hero:#361f43;--tlc-hero-ink:#fff6df;
+  --tlc-control:#443052;--tlc-shadow:rgb(10 3 19 / .68);--tlc-highlight:rgb(246 218 255 / .16);
+  --tlc-frame-width:2px;--tlc-surface-radius:20px;--tlc-panel-shadow:0 4px 0 #100918,0 20px 36px -23px #000;
+}
+:root[data-theme="ymca"]{
+  color-scheme:light;
+  --background:197 29% 89%;--foreground:210 49% 13%;--card:0 0% 100%;--card-foreground:210 49% 13%;
+  --popover:0 0% 100%;--popover-foreground:210 49% 13%;--primary:204 92% 28%;--primary-foreground:0 0% 100%;
+  --secondary:195 32% 78%;--secondary-foreground:210 49% 13%;--muted:193 27% 84%;--muted-foreground:211 35% 29%;
+  --accent:180 28% 75%;--accent-foreground:210 49% 13%;--border:198 31% 57%;--input:198 31% 57%;--ring:204 92% 28%;
+  --surface:197 32% 84%;--surface-raised:0 0% 100%;--power-metal:194 21% 66%;--power-highlight:0 0% 100%;
+  --cat-push:357 75% 43%;--cat-pull:204 92% 31%;--cat-legs:162 62% 30%;--cat-core:27 80% 41%;--cat-skills:255 56% 42%;--cat-mobility:184 68% 29%;
+  --su-trim:#0d8683;--su-hero:#12374e;--su-hero-text:#f4fcff;--su-hero-muted:#d0e8ef;
+  --tlc-page:#dcebf0;--tlc-panel:#ffffff;--tlc-panel-inset:#c8e1e8;--tlc-panel-raised:#fbfeff;
+  --tlc-ink:#0c2c3e;--tlc-secondary-ink:#315468;--tlc-line:#87adb9;--tlc-emphasis:#00669b;
+  --tlc-alt:#0d8784;--tlc-tertiary:#e19d49;--tlc-hero:#123c56;--tlc-hero-ink:#fff;
+  --tlc-control:#d7edf2;--tlc-shadow:rgb(6 53 80 / .19);--tlc-highlight:rgb(255 255 255 / .96);
+  --tlc-frame-width:2px;--tlc-surface-radius:11px;--tlc-panel-shadow:0 4px 0 #aac6cd,0 15px 22px -20px #143e565b;
+}
+:root[data-theme="okc-thunder"]{
+  color-scheme:dark;
+  --background:222 65% 7%;--foreground:210 45% 98%;--card:216 47% 15%;--card-foreground:210 45% 98%;
+  --popover:216 47% 15%;--popover-foreground:210 45% 98%;--primary:202 96% 69%;--primary-foreground:220 61% 10%;
+  --secondary:217 49% 24%;--secondary-foreground:210 44% 98%;--muted:218 46% 25%;--muted-foreground:210 32% 82%;
+  --accent:217 52% 32%;--accent-foreground:210 44% 98%;--border:212 48% 41%;--input:212 48% 41%;--ring:23 92% 68%;
+  --surface:219 61% 11%;--surface-raised:216 45% 21%;--power-metal:215 42% 30%;--power-highlight:208 64% 48%;
+  --cat-push:23 91% 66%;--cat-pull:202 96% 69%;--cat-legs:44 90% 64%;--cat-core:23 91% 66%;--cat-skills:218 81% 78%;--cat-mobility:169 58% 64%;
+  --su-trim:#f07d3f;--su-hero:#132b50;--su-hero-text:#f4f9ff;--su-hero-muted:#d4e7fb;
+  --tlc-page:#07162d;--tlc-panel:#153a62;--tlc-panel-inset:#0a2445;--tlc-panel-raised:#214b75;
+  --tlc-ink:#f5faff;--tlc-secondary-ink:#d4e6f7;--tlc-line:#4c80a9;--tlc-emphasis:#f78b49;
+  --tlc-alt:#51b6ed;--tlc-tertiary:#f6b55c;--tlc-hero:#092a53;--tlc-hero-ink:#faffff;
+  --tlc-control:#24476c;--tlc-shadow:rgb(0 10 30 / .69);--tlc-highlight:rgb(187 226 255 / .17);
+  --tlc-frame-width:3px;--tlc-surface-radius:11px;--tlc-panel-shadow:0 4px 0 #071a34,0 20px 35px -22px #000d;
+}
+/* Re-map shared legacy surfaces and shadows to the final palette. */
+:root{
+  --su-card-shadow:var(--tlc-panel-shadow);
+  --su-raised-shadow:0 6px 0 var(--tlc-shadow),0 23px 32px -26px var(--tlc-shadow);
+  --su-top-edge:var(--tlc-highlight);
+}
+html,body{background-color:hsl(var(--background));color:hsl(var(--foreground))}
+body{
+  background-image:none!important;
+  background-color:var(--tlc-page)!important;
+}
+body #root{min-height:100vh}
+body .power-app-shell{background:transparent;color:var(--tlc-ink)}
+/* Primary site header — recognizable metal instead of flat white. */
+body .power-app-controls{
+  border-top:var(--tlc-frame-width) solid var(--tlc-emphasis)!important;
+  border-bottom:2px solid var(--tlc-line)!important;
+  background:var(--tlc-panel)!important;color:var(--tlc-ink)!important;
+  box-shadow:inset 0 1px 0 var(--tlc-highlight),0 9px 22px -14px var(--tlc-shadow)!important;
+  backdrop-filter:none!important;
+}
+body .power-app-controls .power-app-wordmark{color:var(--tlc-ink)!important}
+body .power-app-controls .power-app-wordmark>img{
+  background:var(--tlc-panel-inset)!important;border:1px solid var(--tlc-line)!important;
+  border-radius:11px;box-shadow:inset 0 2px 3px var(--tlc-shadow),0 1px 0 var(--tlc-highlight);
+}
+body .power-app-controls :is(button,.tlctv-masthead-btn){
+  background:var(--tlc-control)!important;border:1px solid var(--tlc-line)!important;
+  color:var(--tlc-ink)!important;
+  box-shadow:inset 0 1px var(--tlc-highlight),0 3px 0 var(--tlc-shadow)!important;
+}
+body .power-app-controls :is(button,.tlctv-masthead-btn):active{
+  transform:translateY(2px);box-shadow:inset 0 2px 3px var(--tlc-shadow)!important;
+}
+body .power-app-controls .power-level-shortcut{background:var(--tlc-panel-inset)!important}
+/* Global headings: ink is legible; accent belongs to structure, not all text. */
+body :is(.power-simple-heading,.power-page-intro,.compact-builder-heading.su-builder-titlebar,.su-assessment-form){
+  border:1px solid var(--tlc-line)!important;
+  border-top:var(--tlc-frame-width) solid var(--tlc-emphasis)!important;
+  border-radius:var(--tlc-surface-radius)!important;
+  background:var(--tlc-panel)!important;color:var(--tlc-ink)!important;
+  box-shadow:var(--tlc-panel-shadow)!important;
+}
+body :is(.power-simple-heading,.power-page-intro,.compact-builder-heading.su-builder-titlebar) :is(h1,h2,h3){
+  color:var(--tlc-ink)!important;
+}
+body :is(.power-simple-heading,.power-page-intro,.compact-builder-heading.su-builder-titlebar) p:not(.power-simple-eyebrow):not(.su-builder-kicker){
+  color:var(--tlc-secondary-ink)!important;
+}
+body :is(.power-simple-eyebrow,.power-eyebrow,.su-builder-kicker){
+  color:var(--tlc-emphasis)!important;
+}
+/* Sculpted surface hierarchy: replace identical gray cards with tactile layers. */
+body :is(.power-elevated,.power-practice-card,.compact-level-group,.compact-workout,
+ .power-category-grid>button,.power-path-row,.power-exercise-row,.power-studio-node,
+ .power-more-section,.power-setting-section,.power-more-links>a,.tlc-client-panel,
+ .su-assessment-form,.power-custom-movement,.tlc-atomic-summary){
+  background:var(--tlc-panel)!important;color:var(--tlc-ink)!important;
+  border:1px solid var(--tlc-line)!important;
+  border-radius:var(--tlc-surface-radius)!important;
+  box-shadow:inset 0 1px 0 var(--tlc-highlight),var(--tlc-panel-shadow)!important;
+}
+body :is(.power-practice-card,.compact-workout,.power-compact-builder .compact-builder-heading){
+  border-top:var(--tlc-frame-width) solid var(--tlc-emphasis)!important;
+}
+body :is(.power-path-row,.power-studio-node,.compact-focus-choice){
+  border-left:4px solid var(--tlc-alt)!important;
+}
+body :is(.power-path-row,.power-studio-node)[aria-pressed="true"],
+body .power-path-row.is-active{
+  border-color:var(--tlc-emphasis)!important;
+  border-left:5px solid var(--tlc-emphasis)!important;
+  background:var(--tlc-panel-raised)!important;
+}
+body :is(.power-category-grid>button,.power-studio-node,.power-path-row,.compact-level-group)
+ :is(strong,h2,h3){
+  color:var(--tlc-ink)!important;
+}
+body :is(.power-category-grid>button,.power-studio-node,.power-path-row,.compact-level-group)
+ :is(small,.text-muted-foreground){
+  color:var(--tlc-secondary-ink)!important;
+}
+body .power-category-grid>button:nth-child(6n+1){border-left:5px solid hsl(var(--cat-push))!important}
+body .power-category-grid>button:nth-child(6n+2){border-left:5px solid hsl(var(--cat-pull))!important}
+body .power-category-grid>button:nth-child(6n+3){border-left:5px solid hsl(var(--cat-legs))!important}
+body .power-category-grid>button:nth-child(6n+4){border-left:5px solid hsl(var(--cat-core))!important}
+body .power-category-grid>button:nth-child(6n+5){border-left:5px solid hsl(var(--cat-skills))!important}
+body .power-category-grid>button:nth-child(6n){border-left:5px solid hsl(var(--cat-mobility))!important}
+body :is(.power-category-grid>button,.power-studio-node,.power-path-row,.power-more-links>a):hover{
+  background:var(--tlc-panel-raised)!important;border-color:var(--tlc-alt)!important;
+}
+body :is(.power-simple-heading,.power-page-intro,.compact-workout,.power-practice-card) :is(h1,h2,h3){
+  letter-spacing:-.035em;text-wrap:balance;
+}
+/* Functional controls: strong selected state, real fill/line contrast. */
+body :is(.power-view-tabs,.compact-builder-tabs,.tlc-client-tabs,.tlc-client-mode-tabs){
+  background:var(--tlc-panel-inset)!important;
+  border:1px solid var(--tlc-line)!important;
+  box-shadow:inset 0 2px 5px var(--tlc-shadow)!important;
+}
+body :is(.power-view-tabs button,.compact-builder-tabs button,.tlc-client-mode-tabs button){
+  color:var(--tlc-secondary-ink)!important;
+}
+body :is(.power-view-tabs button,.compact-builder-tabs button,.tlc-client-mode-tabs button)
+ :is(svg){color:inherit}
+body :is(.power-view-tabs button[aria-pressed="true"],.compact-builder-tabs button[aria-pressed="true"],
+ .tlc-client-mode-tabs button[aria-pressed="true"]){
+  background:var(--tlc-panel-raised)!important;color:var(--tlc-ink)!important;
+  border-color:var(--tlc-emphasis)!important;
+  box-shadow:inset 0 0 0 1px var(--tlc-highlight),0 3px 0 var(--tlc-shadow)!important;
+}
+body :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea){
+  border:1px solid var(--tlc-line)!important;
+  background:var(--tlc-panel-inset)!important;color:var(--tlc-ink)!important;
+  box-shadow:inset 0 2px 4px var(--tlc-shadow);
+}
+body :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea)::placeholder{
+  color:var(--tlc-secondary-ink)!important;opacity:.83!important;
+}
+body :is(input,select,textarea):focus-visible{outline:3px solid var(--tlc-emphasis)!important;outline-offset:2px!important}
+body :is(input,button,textarea,select):disabled{opacity:.65!important}
+body button.bg-primary,body :is(a,button).tlc-client-cta,body button[class*="bg-primary"]{
+  background:hsl(var(--primary))!important;
+  color:hsl(var(--primary-foreground))!important;
+  border:1px solid hsl(var(--primary))!important;
+  box-shadow:inset 0 1px 0 rgb(255 255 255 / .18),0 3px 0 var(--tlc-shadow)!important;
+}
+body button.bg-primary:hover,body :is(a,button).tlc-client-cta:hover{
+  filter:brightness(1.07);
+}
+body :is(button.bg-primary,button[class*="bg-primary"],.tlc-client-cta):active{
+  transform:translateY(2px);
+}
+body :is(.tlc-client-secondary,.tlc-client-quiet,.su-builder-actions button){
+  background:var(--tlc-control)!important;border:1px solid var(--tlc-line)!important;
+  color:var(--tlc-ink)!important;box-shadow:inset 0 1px 0 var(--tlc-highlight),0 2px 0 var(--tlc-shadow)!important;
+}
+/* The bottom dock must read as a navigation instrument, not floating gray fog. */
+body .power-mobile-nav.power-simple-nav .power-nav-surface{
+  background:var(--tlc-panel)!important;
+  border:2px solid var(--tlc-line)!important;
+  border-top:3px solid var(--tlc-emphasis)!important;
+  box-shadow:0 8px 0 var(--tlc-shadow),0 20px 35px -15px var(--tlc-shadow)!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+body .power-mobile-nav .power-simple-nav-link{
+  background:transparent!important;color:var(--tlc-secondary-ink)!important;
+}
+body .power-mobile-nav .power-simple-nav-link.is-active{
+  color:var(--tlc-ink)!important;
+  background:var(--tlc-control)!important;
+  box-shadow:inset 0 0 0 1px var(--tlc-emphasis),0 2px 0 var(--tlc-shadow)!important;
+}
+body .power-mobile-nav .power-simple-nav-link.is-active svg{color:var(--tlc-emphasis)!important}
+body .power-mobile-nav .power-simple-nav-link.is-active::after{background:var(--tlc-emphasis)!important}
+/* A theme's secondary and tertiary colors have distinct jobs. */
+body :is(.su-assessment-stat,.tlc-client-metric,.power-goal-card,.power-studio-lessons){
+  border-top:3px solid var(--tlc-alt)!important;
+}
+body :is(.power-practice-card,.tlc-client-test-head,.tlc-client-results-head){
+  border-top:3px solid var(--tlc-tertiary)!important;
+}
+body :is(.power-simple-heading,.power-page-intro,.tlc-client-hero){
+  box-shadow:inset 0 1px 0 var(--tlc-highlight),var(--tlc-panel-shadow)!important;
+}
+/* Training details and embedded media should look like a dedicated black-box viewing station. */
+body :is(.tlctv-inline,.tlc-tv-inline,.power-studio-detail,.power-settings-sheet){
+  border-color:var(--tlc-line)!important;
+}
+body .power-studio-detail{background:var(--tlc-panel)!important;box-shadow:var(--tlc-panel-shadow)!important}
+body :is(.tlc-client-access,.tlc-client-metric,.tlc-client-steps>div,.tlc-client-assessment .tlc-client-questions fieldset){
+  background:var(--tlc-panel)!important;
+  color:var(--tlc-ink)!important;border-color:var(--tlc-line)!important;
+}
+body .tlc-client-page .tlc-client-hero{
+  background:var(--tlc-hero)!important;color:var(--tlc-hero-ink)!important;
+  border:2px solid var(--tlc-line)!important;border-top:4px solid var(--tlc-emphasis)!important;
+}
+body .tlc-client-tabs{background:var(--tlc-panel-inset)!important}
+body .tlc-client-tabs a.is-active{
+  color:var(--tlc-ink)!important;background:var(--tlc-control)!important;
+  box-shadow:inset 0 0 0 1px var(--tlc-emphasis)!important;
+}
+body .tlc-client-tabs a:not(.is-active){color:var(--tlc-secondary-ink)!important}
+body .tlc-client-tabs a svg{color:var(--tlc-emphasis)!important}
+body .tlc-client-hero__trim{border-color:var(--tlc-line)!important}
+/* The theme picker should show the actual difference instead of five nearly identical placeholder blocks. */
+body .su-theme-option{border-radius:15px!important;border:2px solid var(--tlc-line)!important;overflow:hidden}
+body .su-theme-option.is-selected{border-color:var(--tlc-emphasis)!important;box-shadow:0 0 0 2px var(--tlc-emphasis),var(--tlc-panel-shadow)!important}
+body .su-theme-preview{border:1px solid var(--su-preview-accent)!important;background:var(--su-preview-bg)!important}
+body .su-theme-preview .su-preview-hero{background:var(--su-preview-panel)!important;border-left:4px solid var(--su-preview-main)!important}
+body .su-theme-preview .su-preview-hero b{color:var(--su-preview-ink)!important}
+body .su-theme-preview .su-preview-metrics i:nth-child(1){background:var(--su-preview-main)!important}
+body .su-theme-preview .su-preview-metrics i:nth-child(2){background:var(--su-preview-accent)!important}
+body .su-theme-preview .su-preview-metrics i:nth-child(3){background:var(--su-preview-ink)!important}
+/* Theme-specific construction accents and editorial character. */
+:root:not([data-theme]) body .power-app-controls,
+:root:not([data-theme]) body .power-simple-heading{border-top-color:#d5ac64!important}
+:root[data-theme="vasa"] body .power-simple-heading{border-left:5px solid #b51d34!important}
+:root[data-theme="vasa"] body .power-category-grid>button{border-radius:10px!important}
+:root[data-theme="planet-fitness"] body .power-simple-heading{border-right:4px solid #efd27e!important}
+:root[data-theme="planet-fitness"] body .power-category-grid>button{border-top:2px solid #9274b1!important}
+:root[data-theme="ymca"] body .power-simple-heading{border-left:5px solid #0d8784!important}
+:root[data-theme="ymca"] body .power-category-grid>button{border-radius:8px!important}
+:root[data-theme="okc-thunder"] body .power-simple-heading{border-right:5px solid #f78b49!important}
+:root[data-theme="okc-thunder"] body .power-category-grid>button{border-top:2px solid #51b6ed!important}
+/* Text remains readable when cards include tool-specific classes. */
+body :is(.power-elevated,.power-path-row,.power-studio-node,.compact-level-group,.tlc-client-panel)
+ .text-muted-foreground{color:var(--tlc-secondary-ink)!important}
+body :is(.power-elevated,.power-path-row,.power-studio-node,.compact-level-group,.tlc-client-panel)
+ .text-foreground{color:var(--tlc-ink)!important}
+body :is(.power-elevated,.power-path-row,.power-studio-node,.compact-level-group,.tlc-client-panel)
+ .text-primary{color:var(--tlc-emphasis)!important}
+@media(hover:hover){
+ body :is(.power-category-grid>button,.power-path-row,.power-studio-node,.power-more-links>a):hover{
+  transform:translateY(-2px);
+  box-shadow:inset 0 1px var(--tlc-highlight),0 7px 0 var(--tlc-shadow),0 22px 27px -19px var(--tlc-shadow)!important;
+ }
+}
+@media(max-width:420px){
+ body .power-app-controls{border-top-width:2px!important}
+ body :is(.power-simple-heading,.power-page-intro,.power-elevated,.power-practice-card){border-radius:12px!important}
+ body .power-mobile-nav .power-simple-nav-link.is-active{box-shadow:inset 0 0 0 1px var(--tlc-emphasis)!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body :is(.power-category-grid>button,.power-path-row,.power-studio-node,.power-more-links>a){transition:none!important;transform:none!important}
+}
