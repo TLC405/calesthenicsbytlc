@@ -17,7 +17,7 @@ export function MobileNav() {
     {path:'/assessment',label:'Test',icon:ClipboardCheck,active:pathname==='/assessment'},
   ];
   return <nav className="power-mobile-nav power-simple-nav" aria-label="Primary navigation">
-    <div className="power-nav-surface">{items.map(({path,label,icon:Icon,active}) =>
+    <div className="power-nav-surface" style={{gridTemplateColumns:`repeat(${items.length},minmax(0,1fr))`}}>{items.map(({path,label,icon:Icon,active}) =>
       <Link key={path} to={path} aria-current={active ? 'page' : undefined} className={`power-simple-nav-link ${active ? 'is-active' : ''}`}>
         <Icon size={21} aria-hidden="true"/><span>{label}</span>
       </Link>
