@@ -19,8 +19,8 @@ export function MovementRequirementsPanel({path,onChoose,activeSlug,compact=fals
  return <section className={'tlc-movement-needs'+(compact?' tlc-movement-needs--compact':'')} aria-label={'Supporting movements for '+path.title}>
   <header className="tlc-movement-needs__heading">
    <div><span className="tlc-movement-needs__eyebrow">MOVEMENTS NEEDED · SUPPORTING WORK</span>
-    <h2>Build the movements behind {path.title}</h2>
-    <p>Main steps are shown separately. These movements help develop strength, control, mobility or preparation; they are <strong>options, not mandatory unlocks</strong>.</p>
+    <h2>Supporting movements</h2>
+    <p>Optional strength, mobility and control work. <strong>No mandatory unlocks.</strong></p>
    </div>
    <span className="tlc-movement-needs__count">{extras.length} options</span>
   </header>
@@ -41,6 +41,6 @@ export function MovementRequirementsPanel({path,onChoose,activeSlug,compact=fals
   {extras.length>(compact?3:5)&&<button type="button" className="tlc-movement-needs__expand" aria-expanded={expanded} onClick={()=>setExpanded(v=>!v)}>
    {expanded?'Show fewer supporting movements':'Show all '+extras.length+' supporting movements'}<ChevronDown size={16} className={expanded?'is-up':''}/>
   </button>}
-  <div className="tlc-movement-needs__footer"><CheckCircle2 size={15}/> Main progression and supporting movements serve different purposes. Practice only what fits your equipment, comfort and current ability.</div>
+  <div className="tlc-movement-needs__footer"><CheckCircle2 size={15}/> Use only the drills that fit your ability, equipment and comfort.</div>
  </section>;
 }
