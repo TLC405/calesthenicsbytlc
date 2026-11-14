@@ -224,3 +224,15 @@
   .tlc-client-questions legend{font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){.tlc-client-tabs a,.tlc-client-progress>span{transition:none}}
+
+/* Calm, one-question-at-a-time baseline. No eight-screen intake flow. */
+.tlc-client-wizard-question{min-height:220px;display:flex;flex-direction:column;justify-content:flex-start}
+.tlc-client-wizard-question .tlc-client-answer-grid{margin-top:3px}
+.tlc-client-wizard-actions{display:flex;flex-wrap:wrap;justify-content:space-between;gap:9px}
+.tlc-client-wizard-actions .tlc-client-cta{flex:1;max-width:330px}
+.tlc-client-wizard-actions .tlc-client-secondary:disabled{opacity:.4;cursor:not-allowed}
+.tlc-client-share{margin-top:10px}
+@media(max-width:360px){
+ .tlc-client-wizard-actions{display:grid;grid-template-columns:1fr 1.5fr}
+ .tlc-client-wizard-actions>button{font-size:10px;padding:8px 6px}
+}
