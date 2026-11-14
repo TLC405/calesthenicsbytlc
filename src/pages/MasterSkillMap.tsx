@@ -6,6 +6,7 @@ import { deviceSkillProgress, exerciseBySlug, nodeProgress, type SkillAttempt } 
 import { InlineTlcTv } from '@/components/Exercise/InlineTlcTv';
 import { MovementOverview } from '@/components/Exercise/MovementOverview';
 import source from '@/data/masterSkillMap.json';
+import { routeMasterTree } from '@/lib/masterTreeRouting';
 
 type Domain='push'|'pull'|'core'|'legs'|'mob';
 type Kind='start'|'orig'|'merged'|'bridge'|'apex'|'hub';
@@ -49,20 +50,11 @@ function shortLines(value:string,maxChars:number,maxLines:number){
  return lines;
 }
 const CW=186,CH=116,PX=224,PY=157,LEFT=160,TOP=125;
-const WIDTH=LEFT+PX*map.lanes.length+28,HEIGHT=TOP+PY*11+20;
+const WIDTH=LEFT+PX*map.lanes.length+28,HEIGHT=TOP+PY*11+120;
 function pos(node:Node){
  const ix=map.lanes.findIndex(l=>l.id===node.lane);
  const x=LEFT+ix*PX+(PX-CW)/2,y=TOP+(11-node.row)*PY+14;
  return {x,y,cx:x+CW/2,cy:y+CH/2,bottom:y+CH,top:y,ix};
-}
-function graphPath(edge:Edge,visible:Set<string>){
- const a=nodeMap.get(edge.from)!,b=nodeMap.get(edge.to)!,p=pos(a),q=pos(b);
- const sourceX=p.cx,sourceY=p.top,targetX=q.cx,targetY=q.bottom+2;
- const blocked=a.lane===b.lane && map.nodes.some(n=>visible.has(n.id)&&n.lane===a.lane&&n.row>a.row&&n.row<b.row);
- if(a.lane===b.lane&&!blocked)return 'M '+sourceX+' '+sourceY+' L '+targetX+' '+targetY;
- const startBus=sourceY-13,endBus=targetY+12;
- const midBus=p.ix===q.ix?p.x-12:(p.ix<q.ix?q.x-13:q.x+CW+13);
- return 'M '+sourceX+' '+sourceY+' L '+sourceX+' '+startBus+' L '+midBus+' '+startBus+' L '+midBus+' '+endBus+' L '+targetX+' '+endBus+' L '+targetX+' '+targetY;
 }
 function graphColor(type:Edge['type']){
  return type==='bridge'?'#0F766E':type==='cross_implicit'?'#6F8096':type==='reconciled'?'#D55E00':type==='cross_explicit'?'#0072B2':'#738397';
@@ -70,13 +62,13 @@ function graphColor(type:Edge['type']){
 function graphDash(type:Edge['type']){
  return type==='bridge'?'3 4':type==='cross_implicit'?'6 5':undefined;
 }
-export default function MasterSkillMap(){
+export default function MasterSkillMap({embedded=false}:{embedded?:boolean}){
  const {user}=useAuth(),owner=user?.id||'guest';
  const [params,setParams]=useSearchParams();
  const first=params.get('skill');
  const [selectedId,setSelectedId]=useState(first&&nodeMap.has(first)?first:'hs_ctw');
  const [lane,setLane]=useState(nodeMap.get(first||'hs_ctw')?.lane||'HANDSTAND');
- const [view,setView]=useState<'focus'|'poster'>('focus');
+ const [view,setView]=useState<'focus'|'poster'>(()=>typeof window!=='undefined'&&window.matchMedia('(max-width:780px)').matches?'focus':'poster');
  const [bridges,setBridges]=useState(true);
  const [crossLinks,setCrossLinks]=useState(true);
  const [search,setSearch]=useState('');
@@ -93,6 +85,7 @@ export default function MasterSkillMap(){
  const visible=useMemo(()=>map.nodes.filter(n=>bridges||n.kind!=='bridge'),[bridges]);
  const visibleIds=useMemo(()=>new Set(visible.map(n=>n.id)),[visible]);
  const edges=useMemo(()=>map.edges.filter(e=>visibleIds.has(e.from)&&visibleIds.has(e.to)&&(crossLinks||e.type==='primary'||e.type==='bridge')),[visibleIds,crossLinks]);
+ const routes=useMemo(()=>routeMasterTree(visible,edges,map.lanes,{left:LEFT,top:TOP,colPitch:PX,rowPitch:PY,cardWidth:CW,cardHeight:CH}),[visible,edges]);
  const filtered=useMemo(()=>visible.filter(n=>(!search||n.label.toLowerCase().includes(search.toLowerCase()))&&(!lane||n.lane===lane)).sort((a,b)=>a.row-b.row),[visible,lane,search]);
  const linked=selected.exerciseSlug?exerciseBySlug.get(selected.exerciseSlug):null;
  const progress=linked&&selected.mapping==='exact'?nodeProgress(linked.slug,attempts):null;
@@ -100,7 +93,7 @@ export default function MasterSkillMap(){
  function selectNode(id:string){
   const n=nodeMap.get(id);if(!n)return;
   setSelectedId(id);setLane(n.lane);
-  setParams({skill:id},{replace:true});
+  setParams(prev=>{const updated=new URLSearchParams(prev);updated.set('skill',id);return updated;},{replace:true});
  }
  function downloadSvg(){
   const current=svgRef.current;if(!current)return;
@@ -111,14 +104,15 @@ export default function MasterSkillMap(){
   const link=document.createElement('a');link.href=url;link.download='tlc-master-strength-map.svg';link.click();
   window.setTimeout(()=>URL.revokeObjectURL(url),1500);
  }
- return <main className="master-map-page">
-  <div className="master-map-top">
+ const Wrapper=embedded?'section':'main';
+ return <Wrapper className={'master-map-page'+(embedded?' is-embedded':'')}>
+  {embedded?<header className="master-map-embedded-head"><span><Waypoints size={19}/> 80 SKILLS · 13 PATHS · 93 CONNECTIONS</span><h2>Skill Tree</h2><p>Follow the branches from foundation to elite. Tap a node to find its tutorial and next step.</p></header>:<div className="master-map-top">
    <Link to="/skills" className="master-map-back"><ArrowLeft size={16}/> Skills</Link>
    <span className="master-map-overline"><Waypoints size={15}/> TLC / SUPER HUMAN SYSTEM</span>
-   <h1>Master Skill Map<span>.</span></h1>
+   <h1>Skill Tree<span>.</span></h1>
    <p>See how strength skills connect. Choose a move, watch its video and check what comes next.</p>
    <div className="master-map-numbers" aria-label="Map overview"><span><b>80</b> skills</span><span><b>13</b> paths</span><span><b>93</b> connections</span><span><b>6</b> levels</span></div>
-  </div>
+  </div>}
   <section className="master-map-tools" aria-label="Map controls">
    <div className="master-map-switch" role="group" aria-label="Choose view">
     <button type="button" aria-pressed={view==='focus'} onClick={()=>setView('focus')}>Explore skills</button>
@@ -153,7 +147,7 @@ export default function MasterSkillMap(){
     </div>
     <SkillDetails key={selectedId} node={selected} lane={laneInfo} linked={linked} progress={progress} prereqs={directPrereqs} next={nextSteps} onChoose={selectNode} upstream={prereqs.size} downstream={unlocks.size}/>
   </section>:<section className="master-map-poster-layout">
-   <div className="master-map-poster-hint"><GitBranch size={16}/> Select a card to trace its prerequisites. Scroll sideways to explore all 13 paths. <span>Labels are benchmark goals, not daily workouts.</span></div>
+   <div className="master-map-poster-hint"><GitBranch size={16}/> Tap a node to trace its connections. Scroll sideways through all 13 branches. <span>Checkpoints are goals, not daily workouts.</span></div>
    <div className={'master-map-scroll '+(fit?'is-fit':'')} tabIndex={0} aria-label="Scrollable 13-lane skill map">
     <svg ref={svgRef} xmlns="http://www.w3.org/2000/svg" viewBox={'0 0 '+WIDTH+' '+HEIGHT} width={WIDTH} height={HEIGHT} role="img" aria-label="80-skill graph, 13 vertical paths and 11 rows">
      <defs>{['primary','cross_explicit','cross_implicit','reconciled','bridge'].map(type=><marker key={type} id={'master-arrow-'+type} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 1 L 9 5 L 0 9 Z" fill={graphColor(type as Edge['type'])}/></marker>)}</defs>
@@ -164,9 +158,9 @@ export default function MasterSkillMap(){
      })}
      {map.lanes.map(l=>{
       const x=LEFT+(l.index-1)*PX+11;const domain=domainColors[l.domain];
-      return <g key={l.id}><rect x={x} y={63} width={PX-22} height={43} rx={9} fill={domain.color}/><text x={x+(PX-22)/2} y={89} textAnchor="middle" fontWeight={800} fontSize={11} fill={domain.ink}>{l.name.toUpperCase()}</text></g>;
+      return <g key={l.id}><rect x={x} y={63} width={PX-22} height={43} rx={9} fill={domain.color}/><text x={x+(PX-22)/2} y={80} textAnchor="middle" fontWeight={800} fontSize={11} fill={domain.ink}>{l.name.toUpperCase()}</text><text x={x+(PX-22)/2} y={96} textAnchor="middle" fontWeight={680} fontSize={8} fill={domain.ink}>{domain.label.toUpperCase()}</text></g>;
      })}
-     <text x={24} y={35} fontSize={23} fontWeight={850} fill="#152333">TLC MASTER SKILL MAP</text>
+     <text x={24} y={35} fontSize={23} fontWeight={850} fill="#152333">TLC SUPER HUMAN · SKILL TREE</text>
      <text x={24} y={52} fontSize={11} fill="#475569">80 skills · 93 directional connections · 13 paths · 6 tiers · chart benchmarks ≠ training volume</text>
      <g>
       {edges.map((ed,i)=>{
@@ -174,7 +168,7 @@ export default function MasterSkillMap(){
        const descendant=unlocks.has(ed.to)&&(unlocks.has(ed.from)||ed.from===selectedId);
        const active=tracing&&(ancestor||descendant);
        const muted=tracing&&!active;
-       return <path key={ed.from+'-'+ed.to+'-'+i} d={graphPath(ed,visibleIds)} fill="none" stroke={graphColor(ed.type)} strokeWidth={active?3:1.55} strokeDasharray={graphDash(ed.type)} opacity={muted?0.17:0.78} strokeLinejoin="round" markerEnd={'url(#master-arrow-'+ed.type+')'}/>;
+       return <path key={ed.from+'-'+ed.to+'-'+i} d={routes[i].d} fill="none" stroke={graphColor(ed.type)} strokeWidth={active?3:1.55} strokeDasharray={graphDash(ed.type)} opacity={muted?0.17:0.78} strokeLinejoin="round" markerEnd={'url(#master-arrow-'+ed.type+')'}/>;
       })}
      </g>
      {visible.map(n=>{
@@ -193,16 +187,28 @@ export default function MasterSkillMap(){
        <text x={p.x+CW-9} y={p.y+24} textAnchor="end" fontSize={8.5} fill={n.kind==='hub'?'#CBD5E1':'#526578'}>{'R'+n.row+' · '+n.og}</text>
        {shortLines(n.label,27,2).map((line,i)=><text key={i} x={p.x+10} y={p.y+43+i*13} fontSize={11} fontWeight={780} fill={primaryText}>{line}</text>)}
        <rect x={p.x+6} y={p.y+70} width={CW-12} height={CH-76} rx={5} fill={n.kind==='hub'?'#334155':'#F0F4F8'}/>
-       {shortLines(n.passStandard,35,2).map((line,i)=><text key={i} x={p.x+11} y={p.y+87+i*12} fontSize={9} fill={n.kind==='hub'?'#EFF6FF':'#334155'}>{line}</text>)}
+       {shortLines(n.passStandard,34,3).map((line,i,all)=><text key={i} x={p.x+11} y={p.y+(all.length===3?82:all.length===2?87:92)+i*11} fontSize={all.length===3?8.2:9} fill={n.kind==='hub'?'#EFF6FF':'#334155'}>{line}</text>)}
       </g>;
      })}
+     <g aria-label="Poster legend and exit-standard note">
+      <rect x={18} y={TOP+11*PY+18} width={WIDTH-36} height={74} rx={9} fill="#FFFFFF" stroke="#CAD5E1"/>
+      <text x={34} y={TOP+11*PY+41} fontSize={12} fontWeight={850} fill="#152333">READ THE TREE</text>
+      {[
+       ['#334155','Primary path · 55'],
+       ['#0072B2','Cross-skill · 9'],
+       ['#D55E00','Reconciled · 1'],
+       ['#64748B','Chart prerequisite · 8'],
+       ['#0F766E','Added support · 20']
+      ].map(([color,label],i)=><g key={label}><line x1={194+i*324} y1={TOP+11*PY+36} x2={222+i*324} y2={TOP+11*PY+36} stroke={color} strokeWidth={2.5}/><text x={230+i*324} y={TOP+11*PY+40} fontSize={11} fontWeight={700} fill="#334155">{label}</text></g>)}
+      <text x={34} y={TOP+11*PY+68} fontSize={10} fill="#475569">SOLID = chart progression or explicit connection · DASHED = inferred / added coaching link · YELLOW = chart starting position · IN-CARD FOOTER = milestone benchmark, not a daily set</text>
+     </g>
     </svg>
    </div>
    <div className="master-map-poster-bottom"><label><input type="checkbox" checked={tracing} onChange={e=>setTracing(e.target.checked)}/> Highlight prerequisites and next steps</label><button type="button" onClick={()=>setView('focus')}><Target size={15}/> See selected skill</button></div>
    <SkillDetails key={selectedId} node={selected} lane={laneInfo} linked={linked} progress={progress} prereqs={directPrereqs} next={nextSteps} onChoose={selectNode} upstream={prereqs.size} downstream={unlocks.size}/>
   </section>}
   <div className="master-map-note"><ShieldAlert size={18}/><p><strong>Training note:</strong> A pass standard is a goal for evaluating the next step, not a daily workout target or proof of safe readiness. Chart tiers and links are coaching references. Progress depends on technique, recovery, equipment and comfort, not a fixed calendar.</p></div>
- </main>;
+ </Wrapper>;
 }
 
 function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,downstream}:{
