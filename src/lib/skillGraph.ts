@@ -108,6 +108,10 @@ export function recommendedNode(pathId:string,attempts:SkillAttempt[],profile:Tr
   const targetIndex=targetSlug?path.slugs.indexOf(targetSlug):-1;
   const slugs=targetIndex>=0?path.slugs.slice(0,targetIndex+1):path.slugs;
   for(const slug of slugs) {
+    // Alternative shapes (e.g. one-leg vs straddle front lever) never require
+    // both milestones. A controlled logged alternative can satisfy that branch.
+    const alternate=path.branches?.find(branch=>branch.includes(slug));
+    if(alternate?.some(other=>other!==slug&&nodeProgress(other,attempts).consistent))continue;
     if(!allowedAtLevel(slug,profile)||equipmentReadinessReasons(slug,profile).length||nodeProgress(slug,attempts).consistent)continue;
     const dependencies=skillEdges.filter(e=>e.to===slug&&e.type==='prerequisite');
     return dependencies.find(e=>allowedAtLevel(e.from,profile)&&!equipmentReadinessReasons(e.from,profile).length&&!nodeProgress(e.from,attempts).consistent)?.from || slug;
