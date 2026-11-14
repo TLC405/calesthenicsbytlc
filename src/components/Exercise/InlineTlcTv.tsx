@@ -4,7 +4,8 @@ import { toast } from 'sonner';
 import { BrainCircuit } from 'lucide-react';
 import { SocialVideoAnalyzer } from '@/components/Media/SocialVideoAnalyzer';
 import { useAuth } from '@/providers/AuthProvider';
-import { movementTutorialSources, type ThumbnailExercise } from '@/lib/movementThumbnails';
+import type { ThumbnailExercise } from '@/lib/movementThumbnails';
+import { videoLessonCoverage, tutorialSearchUrl } from '@/lib/videoLessonCoverage';
 import { parseEmbeddedMedia } from '@/lib/embeddedMedia';
 import { EmbeddedMedia } from './EmbeddedMedia';
 
@@ -18,18 +19,7 @@ function readPersonal(owner:string,slug:string):Lesson[]{
   }catch{return [];}
 }
 function lessonsFor(exercise:ThumbnailExercise):Lesson[]{
-  const urls=[...movementTutorialSources(exercise).filter(source=>source.url).map(source=>({
-    title:source.title||exercise.name,
-    url:source.url!,
-    scope:source.scope==='guide'?'guide' as const:'clip' as const,
-  })),...(exercise.instagram_url?[{title:exercise.name+' · Instagram',url:exercise.instagram_url,scope:'clip' as const}]:[])];
-  const seen=new Set<string>();
-  return urls.flatMap(source=>{
-    const parsed=parseEmbeddedMedia(source.url);
-    if(!parsed||seen.has(parsed.url))return [];
-    seen.add(parsed.url);
-    return [{title:source.title,url:parsed.url,scope:source.scope,provider:parsed.provider}];
-  }).slice(0,12);
+  return videoLessonCoverage(exercise).lessons.map(source=>({title:source.title,url:source.url,scope:source.scope,provider:source.provider}));
 }
 
 /** TLCtv is embedded directly beside movement cues and training controls.
@@ -43,6 +33,7 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
   const [analyzerOpen,setAnalyzerOpen]=useState(false);
   const [customUrl,setCustomUrl]=useState('');
   const [customTitle,setCustomTitle]=useState('');
+  const coverage=useMemo(()=>videoLessonCoverage(exercise),[exercise.slug,exercise.youtube_url,exercise.instagram_url]);
   const lessons=useMemo(()=>[...lessonsFor(exercise),...personal],[exercise.slug,exercise.youtube_url,exercise.instagram_url,personal]);
   const [selected,setSelected]=useState(0);
   const [playing,setPlaying]=useState(false);
@@ -91,9 +82,9 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
     <header className="tlctv-inline__head">
       <span className="tlctv-inline__identity">
         <img src="/icons/tlc-doodle-180.png" width={44} height={44} alt="TLC doodle mark"/>
-        <span className="tlctv-inline__branding"><strong>TLC<span>tv</span></strong><small>SPREAD TLC / SKILL CINEMA</small></span>
+        <span className="tlctv-inline__branding"><strong>TLC<span>tv</span></strong><small>WATCH YOUR EXERCISE</small></span>
       </span>
-      <span className="tlctv-inline__counter"><TvMinimal size={15}/>{lessons.length?String(lessons.length).padStart(2,'0')+' LESSON'+(lessons.length===1?'':'S'):'NO VIDEO YET'}</span>
+      <span className="tlctv-inline__counter"><TvMinimal size={15}/>{lessons.length?String(lessons.length).padStart(2,'0')+' VIDEO'+(lessons.length===1?'':'S'):'ADD A VIDEO'}</span>
     </header>
     {lesson?<>
       <div className="tlctv-inline__stage">
@@ -101,7 +92,7 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
           ?<div className="tlctv-inline__embedded" key={lesson.url+'-'+revision}><EmbeddedMedia url={lesson.url} title={lesson.title}/></div>
           :<button type="button" className="tlctv-inline__poster" onClick={()=>setPlaying(true)} aria-label={'Play '+lesson.title+' here'}>
             <span className="tlctv-inline__poster-mark" aria-hidden="true"><img src="/icons/tlc-doodle-180.png" alt=""/></span>
-            <span className="tlctv-inline__poster-center"><span className="tlctv-inline__play-disc"><Play size={30} fill="currentColor"/></span><strong>PLAY SKILL FILM</strong><small>{lesson.provider==='instagram'?'INSTAGRAM REEL':'YOUTUBE LESSON'}</small></span>
+            <span className="tlctv-inline__poster-center"><span className="tlctv-inline__play-disc"><Play size={30} fill="currentColor"/></span><strong>WATCH VIDEO</strong><small>{lesson.provider==='instagram'?'INSTAGRAM REEL':'YOUTUBE LESSON'}</small></span>
             <span className="tlctv-inline__poster-label">{exercise.name}</span>
           </button>
         }
@@ -109,9 +100,9 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
       <div className="tlctv-inline__console">
         <div className="tlctv-inline__now">
           <div className="tlctv-inline__now-copy">
-            <p className="tlctv-inline__eyebrow">NOW SELECTED / {String(selected+1).padStart(2,'0')}</p>
+            <p className="tlctv-inline__eyebrow">{lesson.scope==='guide'?'RELATED SKILL LESSON':lesson.scope==='other'?'YOUR VIDEO':'EXERCISE VIDEO'} · {String(selected+1).padStart(2,'0')}</p>
             <h3>{lesson.title}</h3>
-            <span>{lesson.scope==='guide'?'RELATED COACHING · BROADER SKILL':lesson.scope==='other'?'PERSONAL LINK · USER ADDED':'EXERCISE VIDEO'} <span aria-hidden="true">·</span> {lesson.provider==='youtube'?'YOUTUBE':'INSTAGRAM'}</span>
+            <span>{lesson.scope==='guide'?'Helpful for this skill, not a demo of the exact move':lesson.scope==='other'?'Your added video':'Exercise demo'} <span aria-hidden="true">·</span> {lesson.provider==='youtube'?'YOUTUBE':'INSTAGRAM'}</span>
           </div>
           <div className="tlctv-inline__source-stepper" aria-label="Choose tutorial">
             <button type="button" onClick={()=>choose(selected-1)} disabled={selected===0} aria-label="Previous tutorial" title="Previous tutorial"><ChevronLeft size={19}/></button>
@@ -121,12 +112,14 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
         </div>
         <div className="tlctv-inline__buttons" aria-label="TLCtv playback controls">
           <button type="button" className="tlctv-inline__primary" onClick={()=>setPlaying(v=>!v)}>
-            {playing?<><Square size={15}/>Stop video</>:<><Play size={16} fill="currentColor"/>Play here</>}
+            {playing?<><Square size={15}/>Stop</>:<><Play size={16} fill="currentColor"/>Play</>}
           </button>
           <button type="button" onClick={()=>{setRevision(v=>v+1);setPlaying(true);}} aria-label="Restart the selected tutorial" title="Restart lesson"><RotateCcw size={17}/><span>Replay</span></button>
           <button type="button" onClick={save} aria-label={saved?'Lesson saved in TLCtv':'Save lesson to TLCtv'} disabled={saved} title={saved?'Saved':'Save to TLCtv'}>{saved?<Check size={17}/>:<Bookmark size={17}/>}<span>{saved?'Saved':'Save'}</span></button>
           <a href={lesson.url} target="_blank" rel="noopener noreferrer" aria-label="Open original video in new tab" title="Open original source"><ExternalLink size={17}/><span>Source</span></a>
         </div>
+        {coverage.exactCount===0&&<div className="tlctv-inline__match-note"><span>Related lesson—not the exact exercise demo.</span><a href={tutorialSearchUrl(exercise.name)} target="_blank" rel="noopener noreferrer"><ExternalLink size={14}/> Find exact video</a></div>}
+        <details className="tlctv-inline__more"><summary>More videos & tools</summary>
         {lessons.length>1&&<div className="tlctv-inline__channels" role="group" aria-label="Available tutorials">
           {lessons.map((source,i)=><button key={source.url} type="button" aria-pressed={selected===i} onClick={()=>choose(i)}>
             {String(i+1).padStart(2,'0')} {source.scope==='guide'?'SKILL GUIDE':source.scope==='other'?'MY CLIP':'DEMO'}
@@ -134,7 +127,7 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
         </div>}
         <div className="tlctv-inline__personal-actions">
           <button type="button" onClick={()=>setAddOpen(v=>!v)} aria-expanded={addOpen}><Plus size={15}/> Add my video</button>
-          <button type="button" aria-expanded={analyzerOpen} onClick={()=>setAnalyzerOpen(v=>!v)}><BrainCircuit size={16}/> Analyze this skill video</button>
+          <button type="button" aria-expanded={analyzerOpen} onClick={()=>setAnalyzerOpen(v=>!v)}><BrainCircuit size={16}/> Analyze clip</button>
           {lesson.scope==='other'&&<button type="button" onClick={removePersonal}><Trash2 size={15}/> Remove this link</button>}
         </div>
         {addOpen&&<form className="tlctv-inline__personal-form" onSubmit={attach}>
@@ -144,11 +137,13 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
           <p>Public YouTube/Instagram links only. Attached per exercise on this device; videos remain hosted by their creators.</p>
         </form>}
         {analyzerOpen&&<div className="tlctv-inline__analyzer"><SocialVideoAnalyzer initialUrl={lesson.url} exerciseName={exercise.name}/></div>}
-        <p className="tlctv-inline__footnote">TLCtv keeps the video beside your exercise. Use playback controls inside YouTube or Instagram for pause, speed and fullscreen. External creators may restrict embeds.</p>
+        <p className="tlctv-inline__footnote">Videos play here when the creator allows it. Use Source if playback is blocked.</p>
+        </details>
       </div>
     </>:<div className="tlctv-inline__empty">
       <VideoOff size={23}/>
-      <div><strong>No approved video attached yet.</strong><p>Keep training with the instructions below. You can attach a personal video link here without leaving the exercise.</p>
+      <div><strong>No matching video attached yet.</strong><p>Find a tutorial, then add it here. Your exercise instructions are still below.</p>
+        <a className="tlctv-inline__empty-action" href={tutorialSearchUrl(exercise.name)} target="_blank" rel="noopener noreferrer"><ExternalLink size={15}/> Find tutorial</a>
         <button className="tlctv-inline__empty-action" type="button" onClick={()=>setAddOpen(v=>!v)}><Plus size={15}/> Add my video link</button>
         <button className="tlctv-inline__empty-action" type="button" onClick={()=>setAnalyzerOpen(v=>!v)} aria-expanded={analyzerOpen}><BrainCircuit size={15}/> Analyze a social clip</button>
         {analyzerOpen&&<SocialVideoAnalyzer exerciseName={exercise.name}/>}
