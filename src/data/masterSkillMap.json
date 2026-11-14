@@ -809,9 +809,10 @@
       "og": "L7",
       "label": "One-leg front lever",
       "passStandard": "3 × 8 s each leg",
-      "exerciseSlug": "front-lever",
-      "mapping": "related",
+      "exerciseSlug": "one-leg-front-lever",
+      "mapping": "exact",
       "linkedSlugs": [
+        "one-leg-front-lever",
         "front-lever",
         "tuck-front-lever"
       ]
@@ -825,9 +826,10 @@
       "og": "L6",
       "label": "Straddle front lever",
       "passStandard": "3 × 5 s",
-      "exerciseSlug": "front-lever",
-      "mapping": "related",
+      "exerciseSlug": "straddle-front-lever",
+      "mapping": "exact",
       "linkedSlugs": [
+        "straddle-front-lever",
         "front-lever",
         "tuck-front-lever"
       ]
@@ -1288,9 +1290,10 @@
       "og": "L2*",
       "label": "Sliding leg curl",
       "passStandard": "3 × 10",
-      "exerciseSlug": "ring-hamstring-curl",
-      "mapping": "related",
+      "exerciseSlug": "sliding-leg-curl",
+      "mapping": "exact",
       "linkedSlugs": [
+        "sliding-leg-curl",
         "ring-hamstring-curl",
         "nordic-curl"
       ]
@@ -1319,9 +1322,10 @@
       "og": "L4–5*",
       "label": "Nordic curl negatives",
       "passStandard": "4 × 3, 5 s down (EXIT TEST; ease into eccentric work)",
-      "exerciseSlug": "nordic-curl",
-      "mapping": "related",
+      "exerciseSlug": "nordic-curl-negative",
+      "mapping": "exact",
       "linkedSlugs": [
+        "nordic-curl-negative",
         "nordic-curl",
         "ring-hamstring-curl"
       ]
