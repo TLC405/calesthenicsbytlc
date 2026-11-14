@@ -7,6 +7,10 @@ export type Capability=typeof CAPABILITIES[number]['id'];
 export type TrainingReadiness={equipmentMode?:'selected'|'informational';tier?:TrainingTier;capabilities?:Capability[];equipment?:readonly string[]};
 type Rule={tier?:TrainingTier;requires?:Capability[];regression?:string;metric?:'seconds'|'reps';target?:number};
 export const RULES:Record<string,Rule>={
+ 'one-leg-front-lever':{tier:5,requires:['pull-base'],regression:'advanced-tuck-front-lever-on-rings',metric:'seconds'},
+ 'straddle-front-lever':{tier:5,requires:['pull-base'],regression:'advanced-tuck-front-lever-on-rings',metric:'seconds'},
+ 'sliding-leg-curl':{tier:2,regression:'glute-bridge'},
+ 'nordic-curl-negative':{tier:4,regression:'sliding-leg-curl'},
  'straight-bar-dip':{tier:4,requires:['push-base'],regression:'parallel-bar-dip'},
  'wall-sit':{tier:1,metric:'seconds',target:20},
  'reverse-nordic-partial':{tier:3,regression:'bodyweight-squat'},
