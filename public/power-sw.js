@@ -1,5 +1,5 @@
 /* Public app shell and static images only. Private APIs and account data stay network-only. */
-const CACHE='power-public-shell-v2-tlc-doodle';
+const CACHE='power-public-shell-v3-skill-studio-recovery';
 const ASSETS=['/','/manifest.json','/icon-192.png','/icon-512.png','/icons/tlc-doodle-192.png','/icons/tlc-doodle-512.png','/icons/tlc-doodle-maskable-512.png','/icons/tlc-doodle-180.png','/icons/tlc-doodle-32.png'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)));self.skipWaiting();});
 self.addEventListener('activate',event=>{event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('power-public-shell-')&&key!==CACHE).map(key=>caches.delete(key)))),self.clients.claim()]));});
