@@ -5,6 +5,7 @@ const css=await readFile('src/styles/theme-material-overhaul.css','utf8');
 const app=await readFile('src/App.tsx','utf8');
 const chooser=await readFile('src/components/ThemeSwitcher.tsx','utf8');
 const skeuo=await readFile('src/styles/skeuomorphic-themes-v4.css','utf8');
+const trainFix=await readFile('src/styles/train-screen-bugfix-v5.css','utf8');
 const themes=[
   {id:'default',selector:':root:not([data-theme])'},
   {id:'vasa',selector:':root[data-theme="vasa"]'},
@@ -85,4 +86,16 @@ assert(skeuo.includes('@media(prefers-reduced-motion:reduce)'),'Missing reduced-
 assert(skeuo.includes('@media(max-width:420px)'),'Missing narrow-screen styles');
 assert(themeBody(':root:not([data-theme])').includes('color-scheme:light'),'DBZ Signature must be light');
 
+assert(app.includes('import "./styles/train-screen-bugfix-v5.css";'),'Train visual repair layer not loaded');
+assert(app.indexOf('import "./styles/train-screen-bugfix-v5.css";')>app.indexOf('import "./styles/skeuomorphic-themes-v4.css";'),'Train bug fixes must load after theme layer');
+for(const selector of ['.compact-workout>header','.compact-workout-item','.compact-movement-open strong',
+'.compact-search input','.compact-suggest','.compact-focus-choice','.compact-workspace-grid','.compact-builder-tabs',
+'.compact-planned-heading','.compact-dose-editor','.power-level-filter']){
+  assert(trainFix.includes(selector),'Screenshot-driven repair missing '+selector);
+}
+assert(trainFix.includes('max-height:none!important'),'Workout clipping safeguard missing');
+assert(trainFix.includes('overflow:visible!important'),'Workout title must not clip');
+assert(trainFix.includes('@media(max-width:1120px)'),'Fold width must avoid squeezed two-column layout');
+assert(trainFix.includes('padding-bottom:calc(var(--power-nav-space'),'Dock overlap clearance missing');
+console.log('PASS: screenshot UI repairs — readable movements, clear workout cards, nonclipped headings, Fold stacks and dock clearance.');
 console.log('PASS: five material themes including light DBZ signature, physical depth, accessibility, multi-color controls, and stylesheet order.');
