@@ -151,7 +151,7 @@ export default function SkillStudio() {
           </button>;
          })}
         </div>
-        {mobile&&path.slugs.length>3&&<button className="tlc-atomic-show-all" type="button" onClick={()=>setShowAll(v=>!v)} aria-expanded={showAll}>{showAll?'Show fewer movements':`Show all ${path.slugs.length} movements`}</button>}
+        {mobile&&!showAll&&path.slugs.length>3&&<button className="tlc-atomic-show-all" type="button" onClick={()=>setShowAll(true)} aria-expanded={showAll}>{`Show all ${path.slugs.length} movements`}</button>}
         <div className="tlc-atomic-support">
           <MovementRequirementsPanel key={path.id} path={path} activeSlug={selected} onChoose={choose} compact/>
         </div>
