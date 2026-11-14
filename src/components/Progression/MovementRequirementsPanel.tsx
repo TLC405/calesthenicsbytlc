@@ -38,8 +38,8 @@ export function MovementRequirementsPanel({path,onChoose,activeSlug,compact=fals
     </button>;
    })}
   </div>:<p className="tlc-movement-needs__empty">The main path contains the core exercises. Choose one above to see its movement requirements.</p>}
-  {extras.length>(compact?3:5)&&<button type="button" className="tlc-movement-needs__expand" aria-expanded={expanded} onClick={()=>setExpanded(v=>!v)}>
-   {expanded?'Show fewer supporting movements':'Show all '+extras.length+' supporting movements'}<ChevronDown size={16} className={expanded?'is-up':''}/>
+  {!expanded&&extras.length>(compact?3:5)&&<button type="button" className="tlc-movement-needs__expand" aria-expanded={expanded} onClick={()=>setExpanded(true)}>
+   {'Show all '+extras.length+' supporting movements'}<ChevronDown size={16}/>
   </button>}
   <div className="tlc-movement-needs__footer"><CheckCircle2 size={15}/> Use only the drills that fit your ability, equipment and comfort.</div>
  </section>;
