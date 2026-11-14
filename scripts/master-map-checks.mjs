@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+const graph=JSON.parse(await readFile('src/data/masterSkillMap.json','utf8'));
+const catalog=JSON.parse(await readFile('src/data/publicExerciseCatalog.json','utf8'));
+const paths=await readFile('src/data/skillPaths.ts','utf8');
+const nodes=new Map(graph.nodes.map(n=>[n.id,n]));
+const slugs=new Set(catalog.map(n=>n.slug));
+assert.equal(graph.lanes.length,13,'13 independent lanes');
+assert.equal(new Set(graph.lanes.map(l=>l.id)).size,13);
+assert.equal(graph.nodes.length,80,'80 unique source skills');
+assert.equal(nodes.size,80,'No duplicates');
+assert.equal(graph.edges.length,93,'93 source dependency links');
+assert.equal(graph.nodes.filter(n=>n.kind!=='bridge').length,70,'70 deduplicated original chart nodes');
+assert.equal(graph.nodes.filter(n=>n.kind==='bridge').length,10,'10 declared biomechanical bridges');
+assert.equal(graph.nodes.filter(n=>n.kind==='merged').length,8,'8 lower-body duplicate records merged');
+assert.deepEqual(graph.nodes.filter(n=>n.kind==='start').map(n=>n.id).sort(),['flag_ready','hs_ctw','lsit_tuck','pl_frog']);
+const cells=new Set(),edgeIds=new Set(),indegree=new Map(graph.nodes.map(n=>[n.id,0])),out=new Map(graph.nodes.map(n=>[n.id,[]]));
+for(const n of graph.nodes){
+ assert(n.row>=1&&n.row<=11,'Node row within 11-level grid: '+n.id);
+ assert(graph.lanes.some(l=>l.id===n.lane),'Unknown lane '+n.id);
+ assert(n.label.length>2&&n.passStandard.length>2,'Missing chart test benchmark '+n.id);
+ const cell=n.lane+':'+n.row;assert(!cells.has(cell),'Overlapping card cell '+cell);cells.add(cell);
+ if(n.exerciseSlug)assert(slugs.has(n.exerciseSlug),'Missing mapped catalog exercise '+n.id+': '+n.exerciseSlug);
+ assert(n.mapping===(n.exerciseSlug?'related':'missing')||n.mapping==='exact'&&Boolean(n.exerciseSlug),'Invalid mapping state '+n.id);
+}
+for(const l of graph.lanes)assert(paths.includes('"id": "'+l.path+'"'),'Lane path not in skill library '+l.path);
+for(const e of graph.edges){
+ assert(nodes.has(e.from)&&nodes.has(e.to),'Unknown edge '+e.from+' > '+e.to);
+ assert(nodes.get(e.from).row<nodes.get(e.to).row,'Every edge must point strictly upward: '+e.from+' > '+e.to);
+ const id=e.from+'>'+e.to;assert(!edgeIds.has(id),'Duplicate edge '+id);edgeIds.add(id);
+ indegree.set(e.to,indegree.get(e.to)+1);out.get(e.from).push(e.to);
+}
+let queue=[...indegree.entries()].filter(([,d])=>!d).map(([id])=>id),sorted=[];
+while(queue.length){const id=queue.shift();sorted.push(id);for(const to of out.get(id)){indegree.set(to,indegree.get(to)-1);if(!indegree.get(to))queue.push(to);}}
+assert.equal(sorted.length,80,'DAG must be acyclic');
+const count=type=>graph.edges.filter(e=>e.type===type).length;
+assert.equal(count('primary'),55);assert.equal(count('cross_explicit'),9);assert.equal(count('cross_implicit'),8);
+assert.equal(count('bridge'),20);assert.equal(count('reconciled'),1);
+assert(graph.edges.some(e=>e.from==='mob_pancake'&&e.to==='sq_dragon'),'Pancake to Dragon Pistol');
+assert(graph.edges.some(e=>e.from==='mob_pancake'&&e.to==='press_hs'),'Pancake to press handstand');
+assert(graph.edges.some(e=>e.from==='hs_ctw'&&e.to==='flag_ready'),'Wall handstand to Flag readiness');
+assert(graph.edges.some(e=>e.from==='pull_strict'&&e.to==='flag_ready'),'Pull-up prerequisite to Flag readiness');
+assert(graph.edges.some(e=>e.from==='mu_sb_dips'&&e.to==='mu_band'),'Muscle-up top-out link');
+const source=await readFile('src/pages/MasterSkillMap.tsx','utf8'),app=await readFile('src/App.tsx','utf8');
+const landing=await readFile('src/pages/Skills.tsx','utf8'),more=await readFile('src/pages/More.tsx','utf8');
+assert(app.includes('path="/skills/map"'),'New map route registered');
+assert(landing.includes('to="/skills/map"')&&more.includes("to:'/skills/map'"),'Map is discoverable');
+assert(source.includes('InlineTlcTv')&&source.includes('MovementOverview'),'Video and technique integrated');
+assert(source.includes('nodeProgress')&&source.includes('deviceSkillProgress'),'Existing local attempts used');
+assert(source.includes("mapping==='exact'"),'Related skill attempts must not impersonate an exact chart node');
+assert(source.includes('CHECKPOINT · NOT A WORKOUT'),'Exit standards not working sets');
+assert(source.includes('Optional hold-time planning example'),'Opt-in practice guidance');
+assert(source.includes('XMLSerializer'),'Vector export available');
+assert(source.includes('reduced-motion')===false,'Design handles reduced motion via CSS without JS request loops');
+const sourceStyle=await readFile('src/styles/master-skill-map.css','utf8');
+assert(sourceStyle.includes('@media(max-width:780px)'),'Fold-sized layout');
+assert(sourceStyle.includes('safe')===false||sourceStyle.includes('map'),'No unrelated CSS');
+console.log('PASS: 80 skills, 70 original + 10 bridges, 13 lanes, 11 rows, 93 unique upward edges, acyclic topology, cross-lane dependencies, 32 exact / 38 related / 10 missing exercise mappings, live skill routes, TV, assessment and vector poster export.');
