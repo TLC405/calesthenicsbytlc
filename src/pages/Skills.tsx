@@ -15,7 +15,7 @@ export default function Skills(){
  const chooseView=(next:View)=>{
   const updated=new URLSearchParams(params);
   if(next==='tree')updated.delete('view');else updated.set('view',next);
-  setParams(updated,{replace:true});
+  setParams(updated,{replace:true,preventScrollReset:true});
  };
  return <main className="power-movements-page master-skills-shell" aria-label="Skills Studio">
   <TlcTvTopBar/>
