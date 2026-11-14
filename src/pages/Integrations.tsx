@@ -52,7 +52,7 @@ function makeBrief(owner:string,focus:string,includeRecords:boolean,study:Study|
    for(const c of checks.slice(0,12)){
     const path=getSkillPath(c.pathId);
     const movement=c.slug?exerciseBySlug.get(c.slug)?.name||c.slug:'not tested';
-    lines.push('- '+(path?.name||c.pathId)+': '+movement+
+    lines.push('- '+(path?.title||c.pathId)+': '+movement+
       (c.slug?' · '+(c.value===null?'unmeasured':c.value+' '+c.metric)+', form '+c.quality+'/5, assistance '+c.assistance+', comfortable '+(c.comfortable?'yes':'no'):'')+
       ' · '+c.at.slice(0,10));
    }
