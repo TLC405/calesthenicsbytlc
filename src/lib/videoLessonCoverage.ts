@@ -10,7 +10,7 @@ const bySlug=new Map(catalog.map(x=>[x.slug,x]));
  * A direct, playable exercise-specific tutorial always takes priority. */
 const guides:Record<string,{url:string;title:string}>={
  Core:{url:'https://www.youtube.com/watch?v=cu0fHp8HCDo',title:'L-sit & core strength · related lesson'},
- Flexibility:{url:'https://www.youtube.com/watch?v=UbFx3kVaqZE',title:'Flexibility and split practice · related lesson'},
+ Flexibility:{url:'https://www.youtube.com/watch?v=LWmjrFXEy5Q',title:'Daniela Suarez · split and flexibility practice · related lesson'},
  Legs:{url:'https://www.youtube.com/watch?v=cB0cOX7gePg',title:'Squat and leg technique · related lesson'},
  Mobility:{url:'https://www.youtube.com/watch?v=BMUmyW1jepU',title:'Hip mobility basics · related lesson'},
  Pull:{url:'https://www.youtube.com/watch?v=Fl0UMfdEzsE',title:'Rowing and pull strength · related lesson'},
@@ -26,8 +26,8 @@ const matchedFamilies=[
  {pattern:/planche|straight.arm|pseudo/,url:'https://www.youtube.com/watch?v=6snDOgFBBFA',title:'GMB Fitness · planche preparation · related lesson'},
  {pattern:/handstand|press.to.hs|hspu|pike.press|stalder|inversion/,url:'https://www.youtube.com/watch?v=d6_lcWtQDxw',title:'GMB Fitness · handstand skills · related lesson'},
  {pattern:/front.lever|back.lever|tuck.lever|muscle.up/,url:'https://www.youtube.com/watch?v=fsl08Copg-U',title:'GMB Fitness · ring strength and levers · related lesson'},
- {pattern:/split|pancake|straddle.stretch/,url:'https://www.youtube.com/watch?v=UbFx3kVaqZE',title:'Split flexibility · related lesson'},
- {pattern:/plie|tendu|developpe|arabesque|attitude|battement|releve/,url:'https://www.youtube.com/watch?v=DrBhcopjDZQ',title:'Ballet barre basics · related lesson'},
+ {pattern:/split|pancake|straddle.stretch/,url:'https://www.youtube.com/watch?v=LWmjrFXEy5Q',title:'Daniela Suarez · split flexibility · related lesson'},
+ {pattern:/plie|tendu|developpe|arabesque|attitude|battement|releve|pass[eé]|port.de.bras|penche/,url:'https://www.youtube.com/watch?v=trFLciNB1hA',title:'Kathryn Morgan · ballet barre foundations · related lesson'},
  {pattern:/pull.up|chin.up|row/,url:'https://www.youtube.com/watch?v=Fl0UMfdEzsE',title:'Rows and pull progressions · related lesson'},
  {pattern:/push.up|dip|press/,url:'https://www.youtube.com/watch?v=0JUrOH--Kdk',title:'Push-up technique and progressions · related lesson'},
  {pattern:/pistol|squat|lunge/,url:'https://www.youtube.com/watch?v=cB0cOX7gePg',title:'Bodyweight squat basics · related lesson'},
@@ -50,7 +50,7 @@ export function videoLessonCoverage(exercise:ThumbnailExercise){
   const parsed=parseEmbeddedMedia(s.url);
   if(!parsed||seen.has(parsed.url)||tutorialState(parsed.url).blocked)return [];
   seen.add(parsed.url);
-  return [{url:parsed.url,title:s.title||exercise.name,scope:s.scope==='clip'?'clip' as const:'guide' as const,provider:parsed.provider,origin:'catalog' as const}];
+  return [{url:parsed.url,title:s.scope==='clip'?(s.title||exercise.name):/related|guide/i.test(s.title)?s.title:(s.title||exercise.name)+' · related lesson',scope:s.scope==='clip'?'clip' as const:'guide' as const,provider:parsed.provider,origin:'catalog' as const}];
  });
  const direct=existing.filter(s=>s.scope==='clip');
  const related=existing.filter(s=>s.scope==='guide');
