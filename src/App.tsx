@@ -7,7 +7,8 @@ import { AuthProvider } from "./providers/AuthProvider";
 import { MusicProvider } from "./providers/MusicProvider";
 import { InlineSoundtrackSlot } from "./components/Music/InlineSoundtrackSlot";
 import Skills from "./pages/Skills";
-import MasterSkillMap from "./pages/MasterSkillMap";
+import { lazy, Suspense } from "react";
+const MasterSkillMap = lazy(()=>import("./pages/MasterSkillMap"));
 import More from "./pages/More";
 import LevelAssessment from "./pages/LevelAssessment";
 import ClientPortal from "./pages/ClientPortal";
@@ -15,6 +16,7 @@ import VideoAudit from "./pages/VideoAudit";
 import VideoAnalyzer from "./pages/VideoAnalyzer";
 import Integrations from "./pages/Integrations";
 import { MobileNav } from "./components/Layout/MobileNav";
+import { RouteGuard } from "./components/Layout/RouteGuard";
 import Index from "./pages/Index";
 import PowerIntro from "./pages/PowerIntro";
 import Auth from "./pages/Auth";
@@ -59,7 +61,7 @@ function AppContent() {
       <LaunchHome />
       <AppControls />
       <div className="power-app-shell min-w-0 md:pb-0">
-        <Routes>
+        <RouteGuard><Suspense fallback={<div className="master-tree-loading" role="status">Opening TLC training studio…</div>}><Routes>
           <Route path="/" element={<Index />} />
           <Route path="/intro" element={<PowerIntro />} />
           <Route path="/auth" element={<Navigate to="/" replace />} />
@@ -90,7 +92,7 @@ function AppContent() {
           <Route path="/account-settings" element={<AccountSettings />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
+        </Routes></Suspense></RouteGuard>
         <InlineSoundtrackSlot />
       </div>
       <MobileNav />
