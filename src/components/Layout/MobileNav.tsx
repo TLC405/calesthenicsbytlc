@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { Link, useLocation, useNavigationType } from 'react-router-dom';
-import { Target, ClipboardCheck, Home, CalendarDays } from 'lucide-react';
+import { Target, UserRoundPlus, Home, CalendarDays } from 'lucide-react';
 
 /** One navigation bar. Secondary tools live on More, away from workout controls. */
 export function MobileNav() {
@@ -14,12 +14,12 @@ export function MobileNav() {
     {path:'/',label:'Train',icon:Home,active:pathname==='/'||pathname==='/intro'||['/today','/build','/train'].includes(pathname)},
     {path:'/program',label:'My Plan',icon:CalendarDays,active:pathname==='/program'},
     {path:'/skills',label:'Skills',icon:Target,active:pathname.startsWith('/skills')},
-    {path:'/client/test',label:'Test',icon:ClipboardCheck,active:pathname.startsWith('/client')||pathname==='/assessment'},
+    {path:'/client',label:'Client Portal',sublabel:'Sign Up',icon:UserRoundPlus,active:pathname.startsWith('/client')||pathname==='/assessment'},
   ];
   return <nav className="power-mobile-nav power-simple-nav" aria-label="Primary navigation">
     <div className="power-nav-surface" style={{gridTemplateColumns:`repeat(${items.length},minmax(0,1fr))`}}>{items.map(({path,label,icon:Icon,active}) =>
-      <Link key={path} to={path} aria-current={active ? 'page' : undefined} className={`power-simple-nav-link ${active ? 'is-active' : ''}`}>
-        <Icon size={21} aria-hidden="true"/><span>{label}</span>
+      <Link key={path} to={path} aria-label={sublabel ? `${label} / ${sublabel}` : label} aria-current={active ? 'page' : undefined} className={`power-simple-nav-link ${active ? 'is-active' : ''}`}>
+        <Icon size={21} aria-hidden="true"/><span className={sublabel ? 'power-nav-two-line' : undefined}>{label}{sublabel && <small>{sublabel}</small>}</span>
       </Link>
     )}</div>
   </nav>;
