@@ -174,7 +174,7 @@ export default function MasterSkillMap(){
        const descendant=unlocks.has(ed.to)&&(unlocks.has(ed.from)||ed.from===selectedId);
        const active=tracing&&(ancestor||descendant);
        const muted=tracing&&!active;
-       return <path key={ed.from+'-'+ed.to+'-'+i} d={graphPath(ed,visibleIds)} fill="none" stroke={graphColor(ed.type)} strokeWidth={active?3:1.55} strokeDasharray={graphDash(ed.type)} opacity={muted?.17:.78} strokeLinejoin="round" markerEnd={'url(#master-arrow-'+ed.type+')'}/>;
+       return <path key={ed.from+'-'+ed.to+'-'+i} d={graphPath(ed,visibleIds)} fill="none" stroke={graphColor(ed.type)} strokeWidth={active?3:1.55} strokeDasharray={graphDash(ed.type)} opacity={muted?0.17:0.78} strokeLinejoin="round" markerEnd={'url(#master-arrow-'+ed.type+')'}/>;
       })}
      </g>
      {visible.map(n=>{
@@ -183,7 +183,7 @@ export default function MasterSkillMap(){
       const background=n.kind==='hub'?'#1E293B':n.kind==='start'?'#FFFEF4':'#FFFFFF';
       const primaryText=n.kind==='hub'?'#FFFFFF':'#102338';
       return <g key={n.id} className="master-svg-node" role="button" tabIndex={0} aria-label={n.label+', row '+n.row+', '+n.passStandard}
-       onClick={()=>selectNode(n.id)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectNode(n.id);}}} opacity={faded?.43:1}>
+       onClick={()=>selectNode(n.id)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectNode(n.id);}}} opacity={faded?0.43:1}>
        <title>{n.label+' · Exit: '+n.passStandard}</title>
        {n.kind==='start'&&<rect x={p.x-4} y={p.y-4} width={CW+8} height={CH+8} rx={12} fill="#F0E442" stroke="#0F172A" strokeWidth={2.5}/>}
        <rect x={p.x} y={p.y} width={CW} height={CH} rx={9} fill={background} stroke={active?'#111827':n.kind==='bridge'?'#0F766E':'#BAC8D6'} strokeWidth={active?3:n.kind==='bridge'?2:1.3} strokeDasharray={n.kind==='bridge'?'5 3':undefined}/>
@@ -210,6 +210,10 @@ function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,
  prereqs:Edge[];next:Edge[];onChoose:(id:string)=>void;upstream:number;downstream:number
 }){
  const exact=node.mapping==='exact'&&!!linked;
+ const [maxHold,setMaxHold]=useState('');
+ const isHold=/planche|lever|flag|stand|l-sit|hang|wall sit|support|hold/i.test(node.label)&&!/(push-up|pull-up|dip|squat|curl|press to handstand)/i.test(node.label);
+ const max=Number(maxHold);
+ const holdRange=isHold&&Number.isFinite(max)&&max>=3&&max<=180?[Math.max(1,Math.round(max*.6)),Math.max(1,Math.round(max*.7))]:null;
  return <aside className="master-map-detail" id="master-selected-skill" aria-label="Selected skill details">
   <div className="master-map-detail-head" style={{'--master-accent':domainColors[node.domain].color} as CSSProperties}>
    <span className="master-map-breadcrumb">{lane.name} · Tier {node.row<=2?'I':node.row<=4?'II':node.row<=6?'III':node.row<=8?'IV':node.row<=10?'V':'VI'}</span>
@@ -217,6 +221,13 @@ function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,
    <div className="master-map-tags"><span>{node.kind==='start'?'★ YOUR CHART START':node.kind==='bridge'?'ADDED SUPPORT':node.kind==='hub'?'FOUNDATION HUB':node.kind==='merged'?'MERGED SOURCE':node.kind==='apex'?'APEX':'ORIGINAL'}</span><span>{node.og}{node.og.includes('*')?' · estimated':''}</span></div>
   </div>
   <div className="master-map-standard"><span><Target size={16}/> CHECKPOINT · NOT A WORKOUT</span><strong>{node.passStandard}</strong></div>
+  {isHold&&<details className="master-map-science master-map-dose">
+    <summary><Target size={15}/> Optional hold-time planning example <ChevronDown size={14}/></summary>
+    <p>For practice, the chart suggests using about 60–70% of a recent controlled maximum hold. This is one coaching method, not a fixed prescription or readiness guarantee.</p>
+    <label>Controlled max hold, seconds <input type="number" min="3" max="180" step="1" value={maxHold} onChange={e=>setMaxHold(e.target.value)} placeholder="e.g. 10"/></label>
+    {holdRange&&<p className="master-map-dose-result">Example working holds: <strong>{holdRange[0]}–{holdRange[1]} seconds</strong> per attempt, adjusted for technique and comfort. Your exit checkpoint above is a separate test.</p>}
+   </details>}
+
   <div className="master-map-links">
    <Link to={'/skills/'+lane.path}>Open {lane.name} path <ArrowRight size={15}/></Link>
    <Link to={'/assessment?skill='+encodeURIComponent(lane.path)}>Check my level <ArrowRight size={15}/></Link>
@@ -235,7 +246,7 @@ function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,
   <details className="master-map-science"><summary><ShieldAlert size={15}/> Coaching, safety & research notes <ChevronDown size={14}/></summary>
    <p>These benchmarks are transcribed or conservatively restated from the supplied chart. They should not be used as unmodified daily working-set prescriptions. Training volume should be individualized.</p>
    <p>For straight-arm loading, handbalancing, knee-dominant variations and Nordic eccentrics, increase load gradually. Avoid attempting new milestones through joint pain or unstable equipment.</p>
-   <p>The chart's estimated Overcoming Gravity levels (marked *) are not official ratings. Cross-lane links are helpful coaching relationships, not automatic physical-clearance certificates.</p>
+   <p>The chart's estimated Overcoming Gravity levels (marked *) are not official ratings. Cross-lane links are helpful coaching relationships, not automatic physical-clearance certificates.</p><p>The 14 cm knee-to-wall benchmark comes from the source chart; it is not a universal cutoff for pistol squat readiness. The front-lever one-leg / straddle ordering is also individual rather than an absolute difficulty ranking.</p>
    <a href="https://stevenlow.org/overcoming-gravity/" target="_blank" rel="noopener noreferrer">Overcoming Gravity · progressions <ArrowRight size={13}/></a>
    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4532714/" target="_blank" rel="noopener noreferrer">Tendon loading · systematic review <ArrowRight size={13}/></a>
    <a href="https://pubmed.ncbi.nlm.nih.gov/40991853/" target="_blank" rel="noopener noreferrer">Nordic exercise dosing review <ArrowRight size={13}/></a>
