@@ -98,3 +98,14 @@ body .power-watch-sheet:has(.tlc-analyzer) .tlc-tv-tabs button[aria-pressed="tru
   body .power-watch-sheet:has(.tlc-analyzer){padding:62px 12px calc(70px + env(safe-area-inset-bottom))!important}
 }
 @media(prefers-reduced-motion:reduce){.tlc-analyzer *{scroll-behavior:auto}}
+
+.tlc-analyzer-fullscreen,.tlc-analyzer-back{
+  display:inline-flex;align-items:center;gap:8px;
+  min-height:42px;padding:9px 13px;margin-top:4px;
+  font-size:12px;font-weight:850;color:hsl(var(--primary));
+  background:hsl(var(--primary)/.08);border:1px solid hsl(var(--primary)/.35);
+  border-radius:11px;text-decoration:none;
+}
+.tlc-analyzer-fullscreen:hover,.tlc-analyzer-back:hover{background:hsl(var(--primary)/.14)}
+.tlctv-analyzer-page{max-width:1070px;padding-top:20px}
+.tlctv-analyzer-page .power-simple-heading{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
