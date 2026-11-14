@@ -53,12 +53,13 @@ try{
  const themes=await readFile('src/components/ThemeSwitcher.tsx','utf8');
  for(const theme of ["id: 'default'","id: 'vasa'","id: 'planet-fitness'","id: 'ymca'","id: 'okc-thunder'"])
   assert(themes.includes(theme),`Theme lost in atomic sweep: ${theme}`);
- const s=await readFile('src/styles/atomic-screen-fixes.css','utf8');
+ const s=await readFile('src/styles/mobile-dock-v3.css','utf8');
  assert(s.includes('grid-template-columns:repeat(4,minmax(0,1fr))'),'Four-key Fold dock layout must remain');
  assert(s.includes('env(safe-area-inset-bottom'),'Device safe-area spacing missing');
  assert(s.includes('@media(max-width:350px)'),'Fold cover screens need a dedicated compact breakpoint');
- assert(s.includes('min-height:53px!important'),'280px-wide screens need reliable 44px+ tap targets');
+ assert(s.includes('min-height:64px!important'),'280px-wide screens need reliable 44px+ touch targets');
  assert(s.includes('scroll-padding-bottom:var(--power-nav-space)'),'Scrollable controls need space above the navigation');
  assert(s.includes('body:has(textarea:focus) .power-mobile-nav'),'Dock should stay out of the way of the mobile keyboard');
+ assert(nav.includes('keyboardOpen')&&nav.includes('power-dock-icon'),'Keyboard-aware dock with labeled icons must remain');
  console.log('PASS: 13 browser/PWA deep links, 8 live routes, four balanced Fold tabs, safe-area sizing, scroll-position restoration, mobile keyboard clearance, five themes and movement detail sheets.');
 }finally{await rm(root,{recursive:true,force:true});}
