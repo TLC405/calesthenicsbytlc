@@ -137,3 +137,34 @@ body :is(.power-simple-page,.power-movements-page,.power-compact-builder,.power-
 @media(prefers-reduced-motion:reduce){
  body .power-mobile-dock-v3 .power-simple-nav-link{transition:none!important}
 }
+
+/* The keyboard may resize the layout viewport instead of visualViewport.
+   Focus fallback keeps the dock clear of forms on those Android variants. */
+@media(max-width:900px){
+ body:has(textarea:focus) .power-mobile-nav.power-mobile-dock-v3,
+ body:has(input:focus) .power-mobile-nav.power-mobile-dock-v3,
+ body:has(select:focus) .power-mobile-nav.power-mobile-dock-v3,
+ body:has([contenteditable="true"]:focus) .power-mobile-nav.power-mobile-dock-v3{
+  display:none!important;
+ }
+}
+/* In-place reveal replaces pagination: cards already read never disappear. */
+.tlc-library-load-more{
+ display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+ gap:10px;min-width:0;margin:14px auto 6px;padding:11px 12px;
+ border:1px solid hsl(var(--border));border-radius:12px;
+ background:hsl(var(--card));color:hsl(var(--muted-foreground));
+ font-size:11px;font-weight:750;
+}
+.tlc-library-load-more>button{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:44px;gap:8px;padding:9px 15px;
+ border:1px solid hsl(var(--primary)/.4);border-radius:10px;
+ color:hsl(var(--primary));background:hsl(var(--primary)/.08);
+ font-size:11px;font-weight:850;
+}
+.tlc-library-load-more>button:focus-visible{outline:3px solid hsl(var(--ring));outline-offset:2px}
+@media(max-width:350px){
+ .tlc-library-load-more{justify-content:center;text-align:center}
+ .tlc-library-load-more>button{width:100%}
+}
