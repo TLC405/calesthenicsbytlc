@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Library, TrendingUp, SlidersHorizontal, Users, Sparkles, Crown, FileText, Shield, Target, BrainCircuit, PlugZap } from 'lucide-react';
+import { ArrowRight, Library, TrendingUp, SlidersHorizontal, GitBranch, Users, Sparkles, Crown, FileText, Shield, Target, BrainCircuit, PlugZap } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { MusicControl } from '@/components/Music/MusicControl';
@@ -8,6 +8,7 @@ import { InstallPowerApp } from '@/components/InstallPowerApp';
 export default function More() {
   const {user}=useAuth();
   const links=[
+    {to:'/skills/map',label:'Master Skill Map',note:'80 skills, 13 paths and linked training checkpoints',icon:GitBranch},
     {to:'/integrations',label:'My ChatGPT & Integrations',note:'ChatGPT, research and training tools',icon:PlugZap},
     {to:'/client',label:'Client Portal / Sign Up',note:'Create an account, take movement tests and track results',icon:Target},
     {to:'/program',label:'My skill training plan',note:'Training days, handstands and skill steps',icon:Target},
