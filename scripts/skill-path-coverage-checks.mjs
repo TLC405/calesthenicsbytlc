@@ -42,5 +42,5 @@ try{
  const skills=await readFile('src/pages/Skills.tsx','utf8'),app=await readFile('src/App.tsx','utf8');
  assert(skills.includes("raw==='paths'||raw==='all'?raw:'tree'"),'The Skills tab must show the tree by default');
  assert(app.includes('<RouteGuard>'),'Rendering errors must not leave blank pages');
- console.log('PASS: All 54 paths classified, 299 real catalog drills, 80 connected chart nodes, authentic compound hubs, Skills tree default and recoverable route errors.');
+ console.log('PASS: All 54 paths classified, 303 real catalog drills, 80 connected chart nodes, authentic compound hubs, Skills tree default and recoverable route errors.');
 }finally{await rm(dir,{recursive:true,force:true});}
