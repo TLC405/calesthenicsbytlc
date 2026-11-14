@@ -14,7 +14,7 @@ export function MobileNav() {
     {path:'/',label:'Train',icon:Home,active:pathname==='/'||pathname==='/intro'||['/today','/build','/train'].includes(pathname)},
     {path:'/program',label:'My Plan',icon:CalendarDays,active:pathname==='/program'},
     {path:'/skills',label:'Skills',icon:Target,active:pathname.startsWith('/skills')},
-    {path:'/assessment',label:'Test',icon:ClipboardCheck,active:pathname==='/assessment'},
+    {path:'/client/test',label:'Test',icon:ClipboardCheck,active:pathname.startsWith('/client')||pathname==='/assessment'},
   ];
   return <nav className="power-mobile-nav power-simple-nav" aria-label="Primary navigation">
     <div className="power-nav-surface" style={{gridTemplateColumns:`repeat(${items.length},minmax(0,1fr))`}}>{items.map(({path,label,icon:Icon,active}) =>
