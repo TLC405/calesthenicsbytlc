@@ -1,0 +1,1525 @@
+{
+  "source": "Unified 3-chart map provided 2026-11-14; map standards are exit benchmarks, not set prescriptions",
+  "lanes": [
+    {
+      "id": "PLANCHE",
+      "name": "Planche",
+      "domain": "push",
+      "path": "planche",
+      "index": 1
+    },
+    {
+      "id": "CORE_COMP",
+      "name": "Core / Press",
+      "domain": "core",
+      "path": "l-sit",
+      "index": 2
+    },
+    {
+      "id": "HANDSTAND",
+      "name": "Handstand",
+      "domain": "push",
+      "path": "handstand",
+      "index": 3
+    },
+    {
+      "id": "PULL_UP",
+      "name": "Pull-Up",
+      "domain": "pull",
+      "path": "pull-up",
+      "index": 4
+    },
+    {
+      "id": "MUSCLE_UP",
+      "name": "Muscle-Up",
+      "domain": "pull",
+      "path": "ring-muscle-up",
+      "index": 5
+    },
+    {
+      "id": "HUMAN_FLAG",
+      "name": "Human Flag",
+      "domain": "core",
+      "path": "human-flag",
+      "index": 6
+    },
+    {
+      "id": "FRONT_LEVER",
+      "name": "Front Lever",
+      "domain": "pull",
+      "path": "front-lever",
+      "index": 7
+    },
+    {
+      "id": "BACK_LEVER",
+      "name": "Back Lever",
+      "domain": "pull",
+      "path": "back-lever",
+      "index": 8
+    },
+    {
+      "id": "QUAD_KNEE",
+      "name": "Quad / Knee",
+      "domain": "legs",
+      "path": "leg-strength",
+      "index": 9
+    },
+    {
+      "id": "MOBILITY",
+      "name": "Mobility / Splits",
+      "domain": "mob",
+      "path": "splits",
+      "index": 10
+    },
+    {
+      "id": "SL_SQUAT",
+      "name": "Single-Leg Squat",
+      "domain": "legs",
+      "path": "pistol",
+      "index": 11
+    },
+    {
+      "id": "POWER",
+      "name": "Power / Jumps",
+      "domain": "legs",
+      "path": "leg-strength",
+      "index": 12
+    },
+    {
+      "id": "HAM_NORDIC",
+      "name": "Hamstring / Nordic",
+      "domain": "legs",
+      "path": "posterior-chain",
+      "index": 13
+    }
+  ],
+  "nodes": [
+    {
+      "id": "b_pushup",
+      "lane": "PLANCHE",
+      "row": 2,
+      "kind": "bridge",
+      "domain": "push",
+      "og": "L1–2",
+      "label": "Push-up progression (full to diamond)",
+      "passStandard": "3 × 12 strict push-ups; 3 × 8 diamond",
+      "exerciseSlug": "push-up",
+      "mapping": "related"
+    },
+    {
+      "id": "pl_lean",
+      "lane": "PLANCHE",
+      "row": 5,
+      "kind": "orig",
+      "domain": "push",
+      "og": "L2–3*",
+      "label": "Planche lean",
+      "passStandard": "3 × 20 s, shoulders past wrists",
+      "exerciseSlug": "planche-lean",
+      "mapping": "exact"
+    },
+    {
+      "id": "pl_frog",
+      "lane": "PLANCHE",
+      "row": 6,
+      "kind": "start",
+      "domain": "push",
+      "og": "L3–4",
+      "label": "Frog stand / straight-arm frog",
+      "passStandard": "3 × 20 s",
+      "exerciseSlug": "frog-stand",
+      "mapping": "related"
+    },
+    {
+      "id": "pl_tuck",
+      "lane": "PLANCHE",
+      "row": 7,
+      "kind": "orig",
+      "domain": "push",
+      "og": "L5",
+      "label": "Tuck planche",
+      "passStandard": "3 × 12 s or 20 s best",
+      "exerciseSlug": "tuck-planche",
+      "mapping": "exact"
+    },
+    {
+      "id": "b_pppu",
+      "lane": "PLANCHE",
+      "row": 8,
+      "kind": "bridge",
+      "domain": "push",
+      "og": "L5–6*",
+      "label": "Pseudo planche push-up (PPPU)",
+      "passStandard": "3 × 8–10 reps with 1 s lean pause",
+      "exerciseSlug": "pseudo-planche-push-up",
+      "mapping": "exact"
+    },
+    {
+      "id": "pl_adv_tuck",
+      "lane": "PLANCHE",
+      "row": 9,
+      "kind": "orig",
+      "domain": "push",
+      "og": "L6",
+      "label": "Advanced tuck planche",
+      "passStandard": "3 × 10 s, flat back",
+      "exerciseSlug": "advanced-tuck-planche",
+      "mapping": "exact"
+    },
+    {
+      "id": "pl_straddle",
+      "lane": "PLANCHE",
+      "row": 10,
+      "kind": "orig",
+      "domain": "push",
+      "og": "L8–10",
+      "label": "Straddle planche",
+      "passStandard": "3 × 5 s",
+      "exerciseSlug": "straddle-planche",
+      "mapping": "exact"
+    },
+    {
+      "id": "pl_full",
+      "lane": "PLANCHE",
+      "row": 11,
+      "kind": "apex",
+      "domain": "push",
+      "og": "L11",
+      "label": "Full planche",
+      "passStandard": "2–3 s clean",
+      "exerciseSlug": "full-planche",
+      "mapping": "exact"
+    },
+    {
+      "id": "b_hollow",
+      "lane": "CORE_COMP",
+      "row": 2,
+      "kind": "bridge",
+      "domain": "core",
+      "og": "L1*",
+      "label": "Hollow & arch body hold",
+      "passStandard": "3 × 30 s hollow; 3 × 30 s arch",
+      "exerciseSlug": "hollow-body-hold",
+      "mapping": "related"
+    },
+    {
+      "id": "foundation",
+      "lane": "CORE_COMP",
+      "row": 4,
+      "kind": "hub",
+      "domain": "core",
+      "og": "L2–3*",
+      "label": "Foundation strength",
+      "passStandard": "10 push-ups; 5 pull-ups; 10 dips; 30 s hollow; 20 s wrist-loaded plank",
+      "exerciseSlug": null,
+      "mapping": "missing"
+    },
+    {
+      "id": "lsit_tuck",
+      "lane": "CORE_COMP",
+      "row": 5,
+      "kind": "start",
+      "domain": "core",
+      "og": "L1",
+      "label": "Tuck L-sit",
+      "passStandard": "3 × 15 s",
+      "exerciseSlug": "l-sit-tuck-hold",
+      "mapping": "exact"
+    },
+    {
+      "id": "lsit_1leg",
+      "lane": "CORE_COMP",
+      "row": 6,
+      "kind": "orig",
+      "domain": "core",
+      "og": "L2",
+      "label": "One-leg L-sit",
+      "passStandard": "3 × 10 s each leg",
+      "exerciseSlug": "one-leg-l-sit",
+      "mapping": "exact"
+    },
+    {
+      "id": "lsit_full",
+      "lane": "CORE_COMP",
+      "row": 7,
+      "kind": "orig",
+      "domain": "core",
+      "og": "L3",
+      "label": "L-sit",
+      "passStandard": "3 × 10 s",
+      "exerciseSlug": "l-sit",
+      "mapping": "exact"
+    },
+    {
+      "id": "lsit_straddle",
+      "lane": "CORE_COMP",
+      "row": 8,
+      "kind": "orig",
+      "domain": "core",
+      "og": "L4",
+      "label": "Straddle L-sit",
+      "passStandard": "3 × 10 s",
+      "exerciseSlug": "l-sit",
+      "mapping": "related"
+    },
+    {
+      "id": "comp_lifts",
+      "lane": "CORE_COMP",
+      "row": 9,
+      "kind": "orig",
+      "domain": "core",
+      "og": "L5–6*",
+      "label": "Compression lifts + press walks",
+      "passStandard": "Pike/straddle lifts 3 × 10 with 2 s hold",
+      "exerciseSlug": "seated-straddle-compression-lift",
+      "mapping": "related"
+    },
+    {
+      "id": "press_hs",
+      "lane": "CORE_COMP",
+      "row": 11,
+      "kind": "apex",
+      "domain": "core",
+      "og": "L7",
+      "label": "Straddle press to handstand",
+      "passStandard": "1 clean rep",
+      "exerciseSlug": "straddle-press-to-hs",
+      "mapping": "exact"
+    },
+    {
+      "id": "b_wrist",
+      "lane": "HANDSTAND",
+      "row": 2,
+      "kind": "bridge",
+      "domain": "push",
+      "og": "Pre*",
+      "label": "Wrist prep & scapular push-ups",
+      "passStandard": "3 min multi-angle wrist flow; 3 × 12 scap push-ups",
+      "exerciseSlug": "scapular-push-up",
+      "mapping": "related"
+    },
+    {
+      "id": "b_pike_hspu",
+      "lane": "HANDSTAND",
+      "row": 4,
+      "kind": "bridge",
+      "domain": "push",
+      "og": "L1–2",
+      "label": "Pike & elevated box HSPU",
+      "passStandard": "3 × 8 elevated pike push-ups",
+      "exerciseSlug": "elevated-pike-push-up",
+      "mapping": "related"
+    },
+    {
+      "id": "hs_ctw",
+      "lane": "HANDSTAND",
+      "row": 5,
+      "kind": "start",
+      "domain": "push",
+      "og": "L1–2",
+      "label": "Chest-to-wall handstand",
+      "passStandard": "3 × 30 s, arms locked",
+      "exerciseSlug": "chest-to-wall-handstand",
+      "mapping": "exact"
+    },
+    {
+      "id": "hs_bail",
+      "lane": "HANDSTAND",
+      "row": 6,
+      "kind": "orig",
+      "domain": "push",
+      "og": "L2–3",
+      "label": "Bail-out + wall toe pulls",
+      "passStandard": "Confident bail; 5 clean toe pulls",
+      "exerciseSlug": "handstand-bail",
+      "mapping": "related"
+    },
+    {
+      "id": "hs_heel",
+      "lane": "HANDSTAND",
+      "row": 7,
+      "kind": "orig",
+      "domain": "push",
+      "og": "L3",
+      "label": "Back-to-wall heel pulls + kick-up",
+      "passStandard": "5 heel pulls; balanced kick-ups",
+      "exerciseSlug": "handstand-heel-pull",
+      "mapping": "related"
+    },
+    {
+      "id": "hs_free",
+      "lane": "HANDSTAND",
+      "row": 8,
+      "kind": "orig",
+      "domain": "push",
+      "og": "L4–6",
+      "label": "Freestanding handstand",
+      "passStandard": "10 s, then 30 s, then 60 s",
+      "exerciseSlug": "handstand",
+      "mapping": "exact"
+    },
+    {
+      "id": "hspu",
+      "lane": "HANDSTAND",
+      "row": 10,
+      "kind": "orig",
+      "domain": "push",
+      "og": "L5–6",
+      "label": "Handstand push-up (wall, then free)",
+      "passStandard": "5 wall HSPU",
+      "exerciseSlug": "handstand-push-up",
+      "mapping": "related"
+    },
+    {
+      "id": "pull_hang",
+      "lane": "PULL_UP",
+      "row": 1,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L1*",
+      "label": "Dead hang + scap pulls",
+      "passStandard": "30 s hang; 10 scap pulls",
+      "exerciseSlug": "dead-hang",
+      "mapping": "related"
+    },
+    {
+      "id": "pull_neg",
+      "lane": "PULL_UP",
+      "row": 2,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L2",
+      "label": "Negatives + band pull-ups",
+      "passStandard": "5 × 5 s negatives",
+      "exerciseSlug": "band-assisted-pull-up",
+      "mapping": "related"
+    },
+    {
+      "id": "pull_strict",
+      "lane": "PULL_UP",
+      "row": 3,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L3",
+      "label": "Strict pull-up",
+      "passStandard": "5 clean reps, dead hang start",
+      "exerciseSlug": "pull-up",
+      "mapping": "exact"
+    },
+    {
+      "id": "pull_10",
+      "lane": "PULL_UP",
+      "row": 5,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L3–4*",
+      "label": "10 strict pull-ups",
+      "passStandard": "10 reps, chin over bar",
+      "exerciseSlug": "pull-up",
+      "mapping": "related"
+    },
+    {
+      "id": "pull_c2b_arch",
+      "lane": "PULL_UP",
+      "row": 7,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L5–6*",
+      "label": "Chest-to-bar + archer",
+      "passStandard": "8 chest-to-bar; 5 archer each side",
+      "exerciseSlug": "archer-pull-up",
+      "mapping": "related"
+    },
+    {
+      "id": "pull_w_oac",
+      "lane": "PULL_UP",
+      "row": 9,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L7–8*",
+      "label": "Weighted / one-arm assisted",
+      "passStandard": "+20% bodyweight × 5 or towel-assisted one-arm × 3",
+      "exerciseSlug": "weighted-pull-up",
+      "mapping": "related"
+    },
+    {
+      "id": "b_pb_dips",
+      "lane": "MUSCLE_UP",
+      "row": 2,
+      "kind": "bridge",
+      "domain": "pull",
+      "og": "L3",
+      "label": "Parallel-bar dips",
+      "passStandard": "3 × 10 full-range dips",
+      "exerciseSlug": "parallel-bar-dip",
+      "mapping": "exact"
+    },
+    {
+      "id": "mu_sb_dips",
+      "lane": "MUSCLE_UP",
+      "row": 3,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L4*",
+      "label": "Straight-bar dips",
+      "passStandard": "10 reps on the bar",
+      "exerciseSlug": null,
+      "mapping": "missing"
+    },
+    {
+      "id": "mu_expl_c2b",
+      "lane": "MUSCLE_UP",
+      "row": 7,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L4–5*",
+      "label": "Explosive chest-to-bar",
+      "passStandard": "5 reps touching chest to bar",
+      "exerciseSlug": "pull-up",
+      "mapping": "related"
+    },
+    {
+      "id": "mu_high_pull",
+      "lane": "MUSCLE_UP",
+      "row": 8,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L5–6*",
+      "label": "High pull to waist",
+      "passStandard": "3 reps with bar reaching waist",
+      "exerciseSlug": "pull-up",
+      "mapping": "related"
+    },
+    {
+      "id": "mu_band",
+      "lane": "MUSCLE_UP",
+      "row": 9,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L5–6*",
+      "label": "Band / jumping muscle-up",
+      "passStandard": "3 band reps + 3 slow negatives",
+      "exerciseSlug": "low-ring-muscle-up-assisted",
+      "mapping": "related"
+    },
+    {
+      "id": "mu_strict",
+      "lane": "MUSCLE_UP",
+      "row": 11,
+      "kind": "apex",
+      "domain": "pull",
+      "og": "L7",
+      "label": "Strict muscle-up",
+      "passStandard": "1 clean rep, no kip",
+      "exerciseSlug": "muscle-up",
+      "mapping": "related"
+    },
+    {
+      "id": "flag_ready",
+      "lane": "HUMAN_FLAG",
+      "row": 6,
+      "kind": "start",
+      "domain": "core",
+      "og": "L3–4*",
+      "label": "Flag readiness",
+      "passStandard": "8 pull-ups; 30 s wall handstand; 45 s side plank; 5 hanging side pulls",
+      "exerciseSlug": "feet-assisted-human-flag",
+      "mapping": "related"
+    },
+    {
+      "id": "flag_plank",
+      "lane": "HUMAN_FLAG",
+      "row": 7,
+      "kind": "orig",
+      "domain": "core",
+      "og": "L4*",
+      "label": "Flag plank + 45° support press",
+      "passStandard": "3 × 20 s plank; 3 × 8 s support press",
+      "exerciseSlug": "side-plank",
+      "mapping": "related"
+    },
+    {
+      "id": "flag_vert",
+      "lane": "HUMAN_FLAG",
+      "row": 8,
+      "kind": "orig",
+      "domain": "core",
+      "og": "L4–5*",
+      "label": "Vertical flag",
+      "passStandard": "3 × 15 s",
+      "exerciseSlug": "vertical-human-flag",
+      "mapping": "exact"
+    },
+    {
+      "id": "flag_tuck",
+      "lane": "HUMAN_FLAG",
+      "row": 9,
+      "kind": "orig",
+      "domain": "core",
+      "og": "L5",
+      "label": "Tuck flag",
+      "passStandard": "3 × 8 s",
+      "exerciseSlug": "tuck-human-flag",
+      "mapping": "exact"
+    },
+    {
+      "id": "flag_straddle",
+      "lane": "HUMAN_FLAG",
+      "row": 10,
+      "kind": "orig",
+      "domain": "core",
+      "og": "L6–7",
+      "label": "One-leg / straddle flag",
+      "passStandard": "3 × 8 s each",
+      "exerciseSlug": "straddle-human-flag",
+      "mapping": "related"
+    },
+    {
+      "id": "flag_full",
+      "lane": "HUMAN_FLAG",
+      "row": 11,
+      "kind": "apex",
+      "domain": "core",
+      "og": "L8",
+      "label": "Full human flag",
+      "passStandard": "2 s clean",
+      "exerciseSlug": "human-flag",
+      "mapping": "exact"
+    },
+    {
+      "id": "b_rows",
+      "lane": "FRONT_LEVER",
+      "row": 2,
+      "kind": "bridge",
+      "domain": "pull",
+      "og": "L2",
+      "label": "Horizontal inverted rows",
+      "passStandard": "3 × 10 chest-to-bar rows",
+      "exerciseSlug": "bodyweight-row",
+      "mapping": "exact"
+    },
+    {
+      "id": "b_wide_rows",
+      "lane": "FRONT_LEVER",
+      "row": 3,
+      "kind": "bridge",
+      "domain": "pull",
+      "og": "L3–4",
+      "label": "Wide / archer ring rows",
+      "passStandard": "3 × 8 wide; 3 × 6 archer each",
+      "exerciseSlug": "archer-ring-row",
+      "mapping": "related"
+    },
+    {
+      "id": "fl_tuck",
+      "lane": "FRONT_LEVER",
+      "row": 5,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L4",
+      "label": "Tuck front lever",
+      "passStandard": "3 × 15 s, straight arms",
+      "exerciseSlug": "tuck-front-lever",
+      "mapping": "exact"
+    },
+    {
+      "id": "fl_adv_tuck",
+      "lane": "FRONT_LEVER",
+      "row": 7,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L5",
+      "label": "Advanced tuck front lever",
+      "passStandard": "3 × 10 s, flat back",
+      "exerciseSlug": "advanced-tuck-front-lever-on-rings",
+      "mapping": "related"
+    },
+    {
+      "id": "fl_1leg",
+      "lane": "FRONT_LEVER",
+      "row": 8,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L7",
+      "label": "One-leg front lever",
+      "passStandard": "3 × 8 s each leg",
+      "exerciseSlug": "front-lever",
+      "mapping": "related"
+    },
+    {
+      "id": "fl_straddle",
+      "lane": "FRONT_LEVER",
+      "row": 9,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L6",
+      "label": "Straddle front lever",
+      "passStandard": "3 × 5 s",
+      "exerciseSlug": "front-lever",
+      "mapping": "related"
+    },
+    {
+      "id": "fl_full",
+      "lane": "FRONT_LEVER",
+      "row": 11,
+      "kind": "apex",
+      "domain": "pull",
+      "og": "L8",
+      "label": "Full front lever",
+      "passStandard": "3 s clean",
+      "exerciseSlug": "front-lever",
+      "mapping": "exact"
+    },
+    {
+      "id": "bl_stc",
+      "lane": "BACK_LEVER",
+      "row": 3,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L1–2",
+      "label": "Skin the cat / German hang",
+      "passStandard": "3 × 15 s German hang, building to 30 s pronated",
+      "exerciseSlug": "skin-the-cat",
+      "mapping": "related"
+    },
+    {
+      "id": "bl_tuck",
+      "lane": "BACK_LEVER",
+      "row": 5,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L3",
+      "label": "Tuck back lever",
+      "passStandard": "3 × 15 s, pronated grip",
+      "exerciseSlug": "ring-back-lever-tuck",
+      "mapping": "related"
+    },
+    {
+      "id": "bl_adv_tuck",
+      "lane": "BACK_LEVER",
+      "row": 6,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L4",
+      "label": "Advanced tuck back lever",
+      "passStandard": "3 × 10 s",
+      "exerciseSlug": "back-lever",
+      "mapping": "related"
+    },
+    {
+      "id": "bl_straddle",
+      "lane": "BACK_LEVER",
+      "row": 7,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L5",
+      "label": "Straddle back lever",
+      "passStandard": "3 × 8 s",
+      "exerciseSlug": "back-lever",
+      "mapping": "related"
+    },
+    {
+      "id": "bl_full",
+      "lane": "BACK_LEVER",
+      "row": 9,
+      "kind": "orig",
+      "domain": "pull",
+      "og": "L7",
+      "label": "Full back lever",
+      "passStandard": "5 s clean",
+      "exerciseSlug": "back-lever",
+      "mapping": "exact"
+    },
+    {
+      "id": "qd_wall_sit",
+      "lane": "QUAD_KNEE",
+      "row": 1,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L1*",
+      "label": "Wall sit",
+      "passStandard": "60 s, thighs parallel",
+      "exerciseSlug": null,
+      "mapping": "missing"
+    },
+    {
+      "id": "qd_sissy_ast",
+      "lane": "QUAD_KNEE",
+      "row": 3,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L2*",
+      "label": "Assisted sissy squat",
+      "passStandard": "3 × 10 holding a pole",
+      "exerciseSlug": "sissy-squat",
+      "mapping": "related"
+    },
+    {
+      "id": "qd_rev_nord_part",
+      "lane": "QUAD_KNEE",
+      "row": 5,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L3*",
+      "label": "Reverse Nordic (partial)",
+      "passStandard": "3 × 8 at comfortable range",
+      "exerciseSlug": null,
+      "mapping": "missing"
+    },
+    {
+      "id": "qd_sissy_full",
+      "lane": "QUAD_KNEE",
+      "row": 7,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L4–6*",
+      "label": "Full sissy squat",
+      "passStandard": "3 × 8 no hands",
+      "exerciseSlug": "sissy-squat",
+      "mapping": "exact"
+    },
+    {
+      "id": "qd_rev_nord_full",
+      "lane": "QUAD_KNEE",
+      "row": 9,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L6–7*",
+      "label": "Full reverse Nordic",
+      "passStandard": "3 × 5 within controlled range",
+      "exerciseSlug": null,
+      "mapping": "missing"
+    },
+    {
+      "id": "b_sh_ext",
+      "lane": "MOBILITY",
+      "row": 1,
+      "kind": "bridge",
+      "domain": "mob",
+      "og": "Pre*",
+      "label": "Shoulder extension & pike mobility",
+      "passStandard": "3 × 30 s supported mobility; standing pike fold",
+      "exerciseSlug": "shoulder-cars",
+      "mapping": "related"
+    },
+    {
+      "id": "mob_cossack",
+      "lane": "MOBILITY",
+      "row": 2,
+      "kind": "orig",
+      "domain": "mob",
+      "og": "L2–3*",
+      "label": "Cossack squat",
+      "passStandard": "3 × 8 each side, heel down",
+      "exerciseSlug": "cossack-squat",
+      "mapping": "exact"
+    },
+    {
+      "id": "b_ankle",
+      "lane": "MOBILITY",
+      "row": 3,
+      "kind": "bridge",
+      "domain": "mob",
+      "og": "Pre*",
+      "label": "Ankle dorsiflexion & hip rotation",
+      "passStandard": "Knee-to-wall benchmark from source; 3 × 30 s active 90/90",
+      "exerciseSlug": "wall-ankle-dorsiflexion",
+      "mapping": "related"
+    },
+    {
+      "id": "mob_pancake",
+      "lane": "MOBILITY",
+      "row": 5,
+      "kind": "orig",
+      "domain": "mob",
+      "og": "L3–4*",
+      "label": "Pancake",
+      "passStandard": "60 s, chest near floor with control",
+      "exerciseSlug": "pancake-stretch",
+      "mapping": "exact"
+    },
+    {
+      "id": "mob_front_split",
+      "lane": "MOBILITY",
+      "row": 7,
+      "kind": "orig",
+      "domain": "mob",
+      "og": "L5*",
+      "label": "Front split",
+      "passStandard": "Hips within a hand of the floor each side",
+      "exerciseSlug": "front-split",
+      "mapping": "exact"
+    },
+    {
+      "id": "mob_mid_split",
+      "lane": "MOBILITY",
+      "row": 9,
+      "kind": "orig",
+      "domain": "mob",
+      "og": "L6*",
+      "label": "Middle split",
+      "passStandard": "Hips within a hand of the floor",
+      "exerciseSlug": "middle-split",
+      "mapping": "exact"
+    },
+    {
+      "id": "sq_deep",
+      "lane": "SL_SQUAT",
+      "row": 1,
+      "kind": "merged",
+      "domain": "legs",
+      "og": "L1–2",
+      "label": "Deep squat + 20 squats",
+      "passStandard": "60 s deep squat; 20 clean squats",
+      "exerciseSlug": "deep-squat-hold",
+      "mapping": "related"
+    },
+    {
+      "id": "sq_bss",
+      "lane": "SL_SQUAT",
+      "row": 3,
+      "kind": "merged",
+      "domain": "legs",
+      "og": "L2–3*",
+      "label": "Bulgarian split squat",
+      "passStandard": "3 × 10 each leg",
+      "exerciseSlug": "bulgarian-split-squat",
+      "mapping": "exact"
+    },
+    {
+      "id": "sq_box_pistol",
+      "lane": "SL_SQUAT",
+      "row": 5,
+      "kind": "merged",
+      "domain": "legs",
+      "og": "L3*",
+      "label": "Box pistol",
+      "passStandard": "5 each leg to knee-high box",
+      "exerciseSlug": "assisted-box-pistol-sit",
+      "mapping": "related"
+    },
+    {
+      "id": "sq_pistol",
+      "lane": "SL_SQUAT",
+      "row": 7,
+      "kind": "merged",
+      "domain": "legs",
+      "og": "L4",
+      "label": "Pistol squat",
+      "passStandard": "5 each leg",
+      "exerciseSlug": "pistol-squat",
+      "mapping": "exact"
+    },
+    {
+      "id": "sq_shrimp",
+      "lane": "SL_SQUAT",
+      "row": 9,
+      "kind": "merged",
+      "domain": "legs",
+      "og": "L5*",
+      "label": "Shrimp squat",
+      "passStandard": "5 each leg, knee touches floor",
+      "exerciseSlug": "shrimp-squat",
+      "mapping": "exact"
+    },
+    {
+      "id": "sq_dragon",
+      "lane": "SL_SQUAT",
+      "row": 11,
+      "kind": "apex",
+      "domain": "legs",
+      "og": "L7–8*",
+      "label": "Dragon pistol",
+      "passStandard": "3 each leg",
+      "exerciseSlug": null,
+      "mapping": "missing"
+    },
+    {
+      "id": "pwr_squat_jump",
+      "lane": "POWER",
+      "row": 2,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L1*",
+      "label": "Squat jumps",
+      "passStandard": "3 × 8, soft landing",
+      "exerciseSlug": "jump-squat",
+      "mapping": "exact"
+    },
+    {
+      "id": "pwr_broad",
+      "lane": "POWER",
+      "row": 4,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L2*",
+      "label": "Broad jump",
+      "passStandard": "3 × 5, stick landing",
+      "exerciseSlug": null,
+      "mapping": "missing"
+    },
+    {
+      "id": "pwr_tuck",
+      "lane": "POWER",
+      "row": 6,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L3*",
+      "label": "Tuck jumps",
+      "passStandard": "3 × 6",
+      "exerciseSlug": null,
+      "mapping": "missing"
+    },
+    {
+      "id": "pwr_skater",
+      "lane": "POWER",
+      "row": 8,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L4*",
+      "label": "Skater hops / single-leg bounds",
+      "passStandard": "3 × 6 each side",
+      "exerciseSlug": null,
+      "mapping": "missing"
+    },
+    {
+      "id": "pwr_depth",
+      "lane": "POWER",
+      "row": 10,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L5*",
+      "label": "Box / depth jumps",
+      "passStandard": "3 × 5, step down",
+      "exerciseSlug": null,
+      "mapping": "missing"
+    },
+    {
+      "id": "hm_bridge",
+      "lane": "HAM_NORDIC",
+      "row": 1,
+      "kind": "merged",
+      "domain": "legs",
+      "og": "L1*",
+      "label": "Single-leg hip bridge",
+      "passStandard": "3 × 12 each leg",
+      "exerciseSlug": "glute-bridge",
+      "mapping": "related"
+    },
+    {
+      "id": "hm_slide",
+      "lane": "HAM_NORDIC",
+      "row": 3,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L2*",
+      "label": "Sliding leg curl",
+      "passStandard": "3 × 10",
+      "exerciseSlug": "ring-hamstring-curl",
+      "mapping": "related"
+    },
+    {
+      "id": "hm_rdl",
+      "lane": "HAM_NORDIC",
+      "row": 5,
+      "kind": "orig",
+      "domain": "legs",
+      "og": "L3*",
+      "label": "Single-leg RDL",
+      "passStandard": "3 × 10 each leg",
+      "exerciseSlug": "single-leg-rdl",
+      "mapping": "exact"
+    },
+    {
+      "id": "hm_nord_neg",
+      "lane": "HAM_NORDIC",
+      "row": 7,
+      "kind": "merged",
+      "domain": "legs",
+      "og": "L4–5*",
+      "label": "Nordic curl negatives",
+      "passStandard": "4 × 3, 5 s down (EXIT TEST; ease into eccentric work)",
+      "exerciseSlug": "nordic-curl",
+      "mapping": "related"
+    },
+    {
+      "id": "hm_nord_full",
+      "lane": "HAM_NORDIC",
+      "row": 9,
+      "kind": "merged",
+      "domain": "legs",
+      "og": "L6–7*",
+      "label": "Full Nordic curl",
+      "passStandard": "3 clean reps",
+      "exerciseSlug": "nordic-curl",
+      "mapping": "exact"
+    }
+  ],
+  "edges": [
+    {
+      "from": "hs_ctw",
+      "to": "hs_bail",
+      "type": "primary"
+    },
+    {
+      "from": "hs_bail",
+      "to": "hs_heel",
+      "type": "primary"
+    },
+    {
+      "from": "hs_heel",
+      "to": "hs_free",
+      "type": "primary"
+    },
+    {
+      "from": "hs_free",
+      "to": "hspu",
+      "type": "primary"
+    },
+    {
+      "from": "pl_lean",
+      "to": "pl_frog",
+      "type": "primary"
+    },
+    {
+      "from": "pl_frog",
+      "to": "pl_tuck",
+      "type": "primary"
+    },
+    {
+      "from": "pl_tuck",
+      "to": "pl_adv_tuck",
+      "type": "primary"
+    },
+    {
+      "from": "pl_adv_tuck",
+      "to": "pl_straddle",
+      "type": "primary"
+    },
+    {
+      "from": "pl_straddle",
+      "to": "pl_full",
+      "type": "primary"
+    },
+    {
+      "from": "lsit_tuck",
+      "to": "lsit_1leg",
+      "type": "primary"
+    },
+    {
+      "from": "lsit_1leg",
+      "to": "lsit_full",
+      "type": "primary"
+    },
+    {
+      "from": "lsit_full",
+      "to": "lsit_straddle",
+      "type": "primary"
+    },
+    {
+      "from": "lsit_straddle",
+      "to": "comp_lifts",
+      "type": "primary"
+    },
+    {
+      "from": "comp_lifts",
+      "to": "press_hs",
+      "type": "primary"
+    },
+    {
+      "from": "flag_ready",
+      "to": "flag_plank",
+      "type": "primary"
+    },
+    {
+      "from": "flag_plank",
+      "to": "flag_vert",
+      "type": "primary"
+    },
+    {
+      "from": "flag_vert",
+      "to": "flag_tuck",
+      "type": "primary"
+    },
+    {
+      "from": "flag_tuck",
+      "to": "flag_straddle",
+      "type": "primary"
+    },
+    {
+      "from": "flag_straddle",
+      "to": "flag_full",
+      "type": "primary"
+    },
+    {
+      "from": "pull_hang",
+      "to": "pull_neg",
+      "type": "primary"
+    },
+    {
+      "from": "pull_neg",
+      "to": "pull_strict",
+      "type": "primary"
+    },
+    {
+      "from": "pull_strict",
+      "to": "pull_10",
+      "type": "primary"
+    },
+    {
+      "from": "pull_10",
+      "to": "pull_c2b_arch",
+      "type": "primary"
+    },
+    {
+      "from": "pull_c2b_arch",
+      "to": "pull_w_oac",
+      "type": "primary"
+    },
+    {
+      "from": "mu_expl_c2b",
+      "to": "mu_high_pull",
+      "type": "primary"
+    },
+    {
+      "from": "mu_high_pull",
+      "to": "mu_band",
+      "type": "primary"
+    },
+    {
+      "from": "mu_band",
+      "to": "mu_strict",
+      "type": "primary"
+    },
+    {
+      "from": "fl_tuck",
+      "to": "fl_adv_tuck",
+      "type": "primary"
+    },
+    {
+      "from": "fl_adv_tuck",
+      "to": "fl_1leg",
+      "type": "primary"
+    },
+    {
+      "from": "fl_1leg",
+      "to": "fl_straddle",
+      "type": "primary"
+    },
+    {
+      "from": "fl_straddle",
+      "to": "fl_full",
+      "type": "primary"
+    },
+    {
+      "from": "bl_stc",
+      "to": "bl_tuck",
+      "type": "primary"
+    },
+    {
+      "from": "bl_tuck",
+      "to": "bl_adv_tuck",
+      "type": "primary"
+    },
+    {
+      "from": "bl_adv_tuck",
+      "to": "bl_straddle",
+      "type": "primary"
+    },
+    {
+      "from": "bl_straddle",
+      "to": "bl_full",
+      "type": "primary"
+    },
+    {
+      "from": "sq_deep",
+      "to": "sq_bss",
+      "type": "primary"
+    },
+    {
+      "from": "sq_bss",
+      "to": "sq_box_pistol",
+      "type": "primary"
+    },
+    {
+      "from": "sq_box_pistol",
+      "to": "sq_pistol",
+      "type": "primary"
+    },
+    {
+      "from": "sq_pistol",
+      "to": "sq_shrimp",
+      "type": "primary"
+    },
+    {
+      "from": "sq_shrimp",
+      "to": "sq_dragon",
+      "type": "primary"
+    },
+    {
+      "from": "qd_wall_sit",
+      "to": "qd_sissy_ast",
+      "type": "primary"
+    },
+    {
+      "from": "qd_sissy_ast",
+      "to": "qd_rev_nord_part",
+      "type": "primary"
+    },
+    {
+      "from": "qd_rev_nord_part",
+      "to": "qd_sissy_full",
+      "type": "primary"
+    },
+    {
+      "from": "qd_sissy_full",
+      "to": "qd_rev_nord_full",
+      "type": "primary"
+    },
+    {
+      "from": "hm_bridge",
+      "to": "hm_slide",
+      "type": "primary"
+    },
+    {
+      "from": "hm_slide",
+      "to": "hm_rdl",
+      "type": "primary"
+    },
+    {
+      "from": "hm_rdl",
+      "to": "hm_nord_neg",
+      "type": "primary"
+    },
+    {
+      "from": "hm_nord_neg",
+      "to": "hm_nord_full",
+      "type": "primary"
+    },
+    {
+      "from": "mob_cossack",
+      "to": "mob_pancake",
+      "type": "primary"
+    },
+    {
+      "from": "mob_pancake",
+      "to": "mob_front_split",
+      "type": "primary"
+    },
+    {
+      "from": "mob_front_split",
+      "to": "mob_mid_split",
+      "type": "primary"
+    },
+    {
+      "from": "pwr_squat_jump",
+      "to": "pwr_broad",
+      "type": "primary"
+    },
+    {
+      "from": "pwr_broad",
+      "to": "pwr_tuck",
+      "type": "primary"
+    },
+    {
+      "from": "pwr_tuck",
+      "to": "pwr_skater",
+      "type": "primary"
+    },
+    {
+      "from": "pwr_skater",
+      "to": "pwr_depth",
+      "type": "primary"
+    },
+    {
+      "from": "foundation",
+      "to": "hs_ctw",
+      "type": "cross_explicit"
+    },
+    {
+      "from": "foundation",
+      "to": "pl_lean",
+      "type": "cross_explicit"
+    },
+    {
+      "from": "foundation",
+      "to": "lsit_tuck",
+      "type": "cross_explicit"
+    },
+    {
+      "from": "foundation",
+      "to": "flag_ready",
+      "type": "cross_explicit"
+    },
+    {
+      "from": "hs_free",
+      "to": "press_hs",
+      "type": "cross_explicit"
+    },
+    {
+      "from": "lsit_full",
+      "to": "pl_straddle",
+      "type": "cross_explicit"
+    },
+    {
+      "from": "pull_10",
+      "to": "mu_expl_c2b",
+      "type": "cross_explicit"
+    },
+    {
+      "from": "pull_strict",
+      "to": "fl_tuck",
+      "type": "cross_explicit"
+    },
+    {
+      "from": "pull_hang",
+      "to": "bl_stc",
+      "type": "cross_explicit"
+    },
+    {
+      "from": "pull_strict",
+      "to": "foundation",
+      "type": "cross_implicit"
+    },
+    {
+      "from": "mu_sb_dips",
+      "to": "foundation",
+      "type": "cross_implicit"
+    },
+    {
+      "from": "hs_ctw",
+      "to": "flag_ready",
+      "type": "cross_implicit"
+    },
+    {
+      "from": "pull_strict",
+      "to": "flag_ready",
+      "type": "cross_implicit"
+    },
+    {
+      "from": "mob_pancake",
+      "to": "sq_dragon",
+      "type": "cross_implicit"
+    },
+    {
+      "from": "mob_pancake",
+      "to": "press_hs",
+      "type": "cross_implicit"
+    },
+    {
+      "from": "sq_deep",
+      "to": "pwr_squat_jump",
+      "type": "cross_implicit"
+    },
+    {
+      "from": "sq_deep",
+      "to": "mob_cossack",
+      "type": "cross_implicit"
+    },
+    {
+      "from": "mu_sb_dips",
+      "to": "mu_band",
+      "type": "reconciled"
+    },
+    {
+      "from": "b_pushup",
+      "to": "foundation",
+      "type": "bridge"
+    },
+    {
+      "from": "b_pushup",
+      "to": "pl_lean",
+      "type": "bridge"
+    },
+    {
+      "from": "b_pushup",
+      "to": "b_pike_hspu",
+      "type": "bridge"
+    },
+    {
+      "from": "b_hollow",
+      "to": "foundation",
+      "type": "bridge"
+    },
+    {
+      "from": "b_hollow",
+      "to": "lsit_tuck",
+      "type": "bridge"
+    },
+    {
+      "from": "b_wrist",
+      "to": "foundation",
+      "type": "bridge"
+    },
+    {
+      "from": "b_wrist",
+      "to": "hs_ctw",
+      "type": "bridge"
+    },
+    {
+      "from": "b_wrist",
+      "to": "pl_lean",
+      "type": "bridge"
+    },
+    {
+      "from": "b_pb_dips",
+      "to": "foundation",
+      "type": "bridge"
+    },
+    {
+      "from": "b_pb_dips",
+      "to": "mu_sb_dips",
+      "type": "bridge"
+    },
+    {
+      "from": "b_rows",
+      "to": "b_wide_rows",
+      "type": "bridge"
+    },
+    {
+      "from": "b_wide_rows",
+      "to": "fl_tuck",
+      "type": "bridge"
+    },
+    {
+      "from": "pl_lean",
+      "to": "b_pppu",
+      "type": "bridge"
+    },
+    {
+      "from": "b_pppu",
+      "to": "pl_adv_tuck",
+      "type": "bridge"
+    },
+    {
+      "from": "b_pike_hspu",
+      "to": "hspu",
+      "type": "bridge"
+    },
+    {
+      "from": "b_sh_ext",
+      "to": "bl_stc",
+      "type": "bridge"
+    },
+    {
+      "from": "b_sh_ext",
+      "to": "mob_pancake",
+      "type": "bridge"
+    },
+    {
+      "from": "sq_deep",
+      "to": "b_ankle",
+      "type": "bridge"
+    },
+    {
+      "from": "b_ankle",
+      "to": "sq_box_pistol",
+      "type": "bridge"
+    },
+    {
+      "from": "b_ankle",
+      "to": "sq_dragon",
+      "type": "bridge"
+    }
+  ]
+}
