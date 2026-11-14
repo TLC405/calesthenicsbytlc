@@ -99,6 +99,7 @@ export default function ClientPortal(){
   const [data,setData]=useState<ClientPortalData>(()=>readClientPortal(owner));
   const [notice,setNotice]=useState('');
   const [testMode,setTestMode]=useState<TestMode>('starter');
+  const [questionIndex,setQuestionIndex]=useState(0);
   const [answers,setAnswers]=useState<AssessmentAnswers>({});
   const [draftName,setDraftName]=useState('');
   const [draftGoal,setDraftGoal]=useState<ClientGoal>('calisthenics');
@@ -116,6 +117,7 @@ export default function ClientPortal(){
   const dose=nodeDose(selected);
   const completedSkills=new Set(data.history.filter(x=>x.value!==null).map(x=>x.pathId)).size;
   const completedQuestions=ASSESSMENT_QUESTIONS.filter(q=>Number.isInteger(answers[q.id])).length;
+  const currentQuestion=ASSESSMENT_QUESTIONS[questionIndex];
   const latestChecks=useMemo(()=>{
     const seen=new Set<string>();
     return data.history.filter(row=>{if(seen.has(row.pathId))return false;seen.add(row.pathId);return true;});
@@ -191,6 +193,7 @@ export default function ClientPortal(){
         </Link>)}
       </nav>
       <ClientAccess onSignedIn={()=>setNotice('Account connected. Assessment data from other devices is not yet synchronized.')}/>
+      {notice&&<p className="tlc-client-notice" role="status">{notice}</p>}
       {activeTab==='overview'&&<>
         <section className="tlc-client-overview" aria-label="Client overview">
           <div className="tlc-client-panel tlc-client-welcome">
@@ -234,23 +237,33 @@ export default function ClientPortal(){
           </div>
         </section>
         {testMode==='starter'?<section className="tlc-client-panel tlc-client-assessment">
-          <div className="tlc-client-section-title"><div><span>01 / READINESS BASELINE</span><h2>Seven questions, one starting point</h2></div><strong>{completedQuestions}/{ASSESSMENT_QUESTIONS.length}</strong></div>
-          <div className="tlc-client-progress" aria-label="Starter questions completed"><span style={{width:(completedQuestions/ASSESSMENT_QUESTIONS.length*100)+'%'}}/></div>
+          <div className="tlc-client-section-title"><div><span>01 / READINESS BASELINE</span><h2>Seven questions, one starting point</h2></div><strong>{questionIndex+1}/{ASSESSMENT_QUESTIONS.length}</strong></div>
+          <div className="tlc-client-progress" aria-label="Starter assessment steps"><span style={{width:((questionIndex+1)/ASSESSMENT_QUESTIONS.length*100)+'%'}}/></div>
           <p className="tlc-client-muted">Use what you've already done comfortably; do not perform difficult or inverted movements solely to fill in a test.</p>
           <form onSubmit={saveStarter} className="tlc-client-questions">
-            {ASSESSMENT_QUESTIONS.map((q,i)=><fieldset key={q.id}>
-              <legend><span>{String(i+1).padStart(2,'0')}</span>{q.title}</legend>
-              <p>{q.note}</p>
+            <fieldset className="tlc-client-wizard-question">
+              <legend><span>{String(questionIndex+1).padStart(2,'0')}</span>{currentQuestion.title}</legend>
+              <p>{currentQuestion.note}</p>
               <div className="tlc-client-answer-grid">
-                {q.options.map((option,index)=><label key={index} className={answers[q.id]===index?'is-checked':''}>
-                  <input type="radio" name={'question-'+q.id} value={index} checked={answers[q.id]===index}
-                    onChange={()=>setAnswers(old=>({...old,[q.id]:index}))}/>
-                  <span className="tlc-client-answer-check">{answers[q.id]===index?<Check size={15}/>:null}</span>
+                {currentQuestion.options.map((option,index)=><label key={index} className={answers[currentQuestion.id]===index?'is-checked':''}>
+                  <input type="radio" name={'question-'+currentQuestion.id} value={index} checked={answers[currentQuestion.id]===index}
+                    onChange={()=>setAnswers(old=>({...old,[currentQuestion.id]:index}))}/>
+                  <span className="tlc-client-answer-check">{answers[currentQuestion.id]===index?<Check size={15}/>:null}</span>
                   <span>{option}</span>
                 </label>)}
               </div>
-            </fieldset>)}
-            <button className="tlc-client-cta" type="submit">Save starter assessment <ArrowRight size={17}/></button>
+            </fieldset>
+            <div className="tlc-client-wizard-actions">
+              <button type="button" className="tlc-client-secondary" disabled={questionIndex===0}
+                onClick={()=>setQuestionIndex(x=>Math.max(0,x-1))}><ArrowLeft size={16}/> Previous</button>
+              {questionIndex<ASSESSMENT_QUESTIONS.length-1
+                ?<button type="button" className="tlc-client-cta" disabled={!Number.isInteger(answers[currentQuestion.id])}
+                    onClick={()=>setQuestionIndex(x=>Math.min(ASSESSMENT_QUESTIONS.length-1,x+1))}>Next question <ArrowRight size={17}/></button>
+                :<button className="tlc-client-cta" type="submit" disabled={completedQuestions!==ASSESSMENT_QUESTIONS.length}>
+                  Save starter assessment <Check size={17}/>
+                </button>}
+            </div>
+            <p className="tlc-client-muted">{completedQuestions} of {ASSESSMENT_QUESTIONS.length} answers completed · Choose “not sure” whenever necessary.</p>
           </form>
           {data.baseline&&<div className="tlc-client-assessment-result" role="status"><BadgeCheck size={20}/><div><strong>Starting range · Level {data.baseline.tier} of 5</strong><p>Focus suggestion: {data.baseline.nextFocus}. The questionnaire intentionally cannot assign advanced levels 4 or 5.</p><span>Recorded {dateLabel(data.baseline.at)}</span></div></div>}
         </section>:<section className="tlc-client-panel tlc-client-assessment">
@@ -311,7 +324,7 @@ export default function ClientPortal(){
         {latestChecks.length>0&&<p className="tlc-client-muted tlc-client-results-disclaimer">Latest measured skills: {latestChecks.map(x=>getSkillPath(x.pathId)?.title||x.pathId).slice(0,5).join(' · ')}. Measurements are client-reported, not independently verified by a coach.</p>}
       </>}
 
-      {notice&&<p className="tlc-client-notice" role="status">{notice}</p>}
+
       <footer className="tlc-client-footer">
         <div><ShieldCheck size={17}/><span>{owner==='guest'?'Guest preview uses temporary session storage. Do not use a shared device for personal client records.':'Test records stay on this browser; coach review and cross-device cloud sync are not active yet.'}</span></div>
         <p>Physical tests are educational, not medical clearance. Stop for sharp pain, dizziness or loss of control. No training plans or appointments are automatically created.</p>
