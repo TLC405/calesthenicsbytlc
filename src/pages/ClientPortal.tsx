@@ -142,8 +142,8 @@ export default function ClientPortal(){
   }
   async function copyClientLink(){
     const link=window.location.origin+'/client/test';
-    try{await navigator.clipboard.writeText(link);setNotice('Public client test link copied. Results do not automatically reach your coach.');}
-    catch{setNotice('Copy this client test address: '+link);}
+    try{await navigator.clipboard.writeText(link);setNotice('Assessment link copied. Results are private to this browser unless you explicitly share them.');}
+    catch{setNotice('Copy this assessment address: '+link);}
   }
   function saveProfile(e:FormEvent<HTMLFormElement>){
     e.preventDefault();
@@ -187,10 +187,10 @@ export default function ClientPortal(){
   const heading=activeTab==='overview'?'Your starting point.':activeTab==='test'?'Find your starting level.':'Track your progress.';
   return <main className="tlc-client-page min-h-screen pb-32">
     <div className="tlc-client-wrap">
-      <div className="tlc-client-topline"><Link to="/" className="tlc-client-back"><ArrowLeft size={15}/>Back to Super Human Strength</Link><span>CLIENT PORTAL · PREVIEW</span></div>
+      <div className="tlc-client-topline"><Link to="/" className="tlc-client-back"><ArrowLeft size={15}/>Back to Super Human Strength</Link><span>CLIENT PORTAL · YOUR RESULTS STAY PRIVATE</span></div>
       <header className="tlc-client-hero">
-        <div className="tlc-client-hero__identity"><img src="/icons/tlc-doodle-180.png" width={72} height={72} alt="TLC sketch logo"/><span><strong>SPREAD TLC</strong><small>COACH TLC / CLIENT PERFORMANCE STUDIO</small></span></div>
-        <div className="tlc-client-hero__copy"><span>PERSONAL BASELINE / COACHING TOOLS</span><h1>{heading}</h1><p>Find your starting level, test one movement at a time, and choose a progression you can control. No games or preloaded workouts.</p></div>
+        <div className="tlc-client-hero__identity"><img src="/icons/tlc-doodle-180.png" width={72} height={72} alt="TLC sketch logo"/><span><strong>SPREAD TLC</strong><small>COACH TLC / PERSONAL STRENGTH</small></span></div>
+        <div className="tlc-client-hero__copy"><span>PERSONAL ASSESSMENT / TRAINING TOOLS</span><h1>{heading}</h1><p>Find your starting level, test one movement at a time, and choose a progression you can control. No games or preloaded workouts.</p></div>
         <div className="tlc-client-hero__trim"><span>TRUTH</span><span>LOVE</span><span>COMMUNITY</span></div>
       </header>
       <nav className="tlc-client-tabs" aria-label="Client portal tabs">
@@ -207,8 +207,8 @@ export default function ClientPortal(){
             <p className="tlc-client-eyebrow"><Sparkles size={15}/> START HERE</p>
             <h2>{data.profile?.displayName?'Welcome, '+data.profile.displayName+'.':'Welcome to your starting line.'}</h2>
             <p>Start with a gentle seven-question readiness check, then select the movement you want to measure. The system makes suggestions, not diagnoses or automatic level promotions.</p>
-            <Link to="/client/test" className="tlc-client-cta">Take a skills test <ArrowRight size={17}/></Link>
-            <button type="button" onClick={()=>{void copyClientLink();}} className="tlc-client-secondary tlc-client-share"><Share2 size={16}/> Copy client test link</button>
+            <Link to="/client/test" className="tlc-client-cta">Take a skill test <ArrowRight size={17}/></Link>
+            <button type="button" onClick={()=>{void copyClientLink();}} className="tlc-client-secondary tlc-client-share"><Share2 size={16}/> Copy assessment link</button>
           </div>
           <div className="tlc-client-panel">
             <h2>Your training preferences</h2><p className="tlc-client-muted">Choose your goals. This does not create a workout.</p>
@@ -221,9 +221,9 @@ export default function ClientPortal(){
           </div>
         </section>
         <section className="tlc-client-metrics" aria-label="Progress snapshot">
-          <NumberMetric value={data.baseline?'Recorded':'—'} label="Starter baseline" note={data.baseline?dateLabel(data.baseline.at):'Ready when you are'}/>
-          <NumberMetric value={completedSkills} label="Skills measured" note="One movement at a time"/>
-          <NumberMetric value={data.history.length} label="Skill entries" note={owner==='guest'?'Session-only preview':'Saved in this browser'}/>
+          <NumberMetric value={data.baseline?'Recorded':'—'} label="Starting level" note={data.baseline?dateLabel(data.baseline.at):'Ready when you are'}/>
+          <NumberMetric value={completedSkills} label="Skills tested" note="One movement at a time"/>
+          <NumberMetric value={data.history.length} label="Recorded tests" note={owner==='guest'?'Session-only preview':'Saved in this browser'}/>
         </section>
         <section className="tlc-client-panel tlc-client-next">
           <h2>What happens after your test?</h2>
@@ -238,7 +238,7 @@ export default function ClientPortal(){
 
       {activeTab==='test'&&<>
         <section className="tlc-client-panel tlc-client-test-head">
-          <div><p className="tlc-client-eyebrow"><ClipboardCheck size={15}/> THE TEST STUDIO</p><h2>Choose your skills test</h2><p className="tlc-client-muted">Answer seven quick questions or record a movement you can perform comfortably. Results are self-reported.</p></div>
+          <div><p className="tlc-client-eyebrow"><ClipboardCheck size={15}/> CLIENT SKILL ASSESSMENT</p><h2>Choose a skills assessment</h2><p className="tlc-client-muted">Answer seven quick questions or record a movement you can perform comfortably. Results are self-reported.</p></div>
           <div role="group" className="tlc-client-mode-tabs" aria-label="Type of client test">
             <button type="button" aria-pressed={testMode==='starter'} onClick={()=>{setTestMode('starter');setNotice('');}}><HeartPulse size={16}/> Starter check</button>
             <button type="button" aria-pressed={testMode==='skill'} onClick={()=>{setTestMode('skill');setNotice('');}}><Dumbbell size={16}/> Skill test</button>
@@ -284,7 +284,7 @@ export default function ClientPortal(){
             <div className="tlc-client-path-context"><span>{path.focus}</span><small>{path.slugs.length} variations available</small></div>
             <label className="tlc-client-checkline"><input type="checkbox" checked={untested} onChange={e=>setUntested(e.target.checked)}/> I haven't tested this skill yet</label>
             {!untested&&<>
-              <label>Hardest controlled variation
+              <label>Hardest version you can do with control
                 <select value={selected} onChange={e=>{setSlug(e.target.value);setValue('');}}>
                   {path.slugs.map((s,i)=><option key={s} value={s}>{i+1}. {exerciseBySlug.get(s)?.name||s}</option>)}
                 </select>
