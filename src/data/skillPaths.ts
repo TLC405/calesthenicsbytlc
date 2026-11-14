@@ -1,4 +1,4 @@
-export interface SkillPath {id:string;title:string;short:string;focus:string;equipment:string;cue:string;safety:string;group:string;slugs:readonly string[];accessories?:readonly string[];kind:"progression"|"collection";}
+export interface SkillPath {id:string;title:string;short:string;focus:string;equipment:string;cue:string;safety:string;group:string;slugs:readonly string[];accessories?:readonly string[];kind:"progression"|"collection";branches?:readonly (readonly string[])[];}
 export const SKILL_PATHS: readonly SkillPath[] = [
   {
     "id": "grip",
@@ -57,23 +57,23 @@ export const SKILL_PATHS: readonly SkillPath[] = [
     "id": "planche",
     "kind": "progression",
     "title": "Planche",
-    "short": "Lean, tuck, straddle and full planche",
+    "short": "Planche lean → tuck → advanced tuck → straddle → full",
     "focus": "Lean, tuck, straddle and full planche",
     "equipment": "Floor; check each movement",
-    "cue": "Practice a controlled variation, then build repeatable quality before increasing leverage.",
+    "cue": "These are leverage milestones. Scapular pulses, bands and PPPUs are supporting drills rather than compulsory tests.",
     "safety": "Use a comfortable range and stop when technique deteriorates or joint pain appears.",
     "group": "Strength",
     "slugs": [
       "quadruped-planche-lean",
       "planche-lean",
-      "planche-scapular-pulse",
-      "band-assisted-tuck-planche",
       "tuck-planche",
       "advanced-tuck-planche",
       "straddle-planche",
       "full-planche"
     ],
     "accessories": [
+      "planche-scapular-pulse",
+      "band-assisted-tuck-planche",
       "planche-plank",
       "parallette-tuck-planche",
       "band-assisted-progressions",
@@ -188,13 +188,12 @@ export const SKILL_PATHS: readonly SkillPath[] = [
     "short": "Wall line, exits and freestanding balance",
     "focus": "Wall line, exits and freestanding balance",
     "equipment": "Floor; check each movement",
-    "cue": "Practice a controlled variation, then build repeatable quality before increasing leverage.",
+    "cue": "Practice safe bail-outs before unassisted inversion. Exits are safety preparation, not a harder balance milestone.",
     "safety": "Use a comfortable range and stop when technique deteriorates or joint pain appears.",
     "group": "Press & balance",
     "slugs": [
       "wall-support-shrug",
       "chest-to-wall-handstand",
-      "handstand-bail",
       "chest-to-wall-handstand-hold",
       "handstand-heel-pull",
       "freestanding-handstand-kick-up",
@@ -202,6 +201,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "handstand-walking"
     ],
     "accessories": [
+      "handstand-bail",
       "hs-shrugs",
       "wall-handstand-shoulder-taps",
       "wall-pull-aways",
@@ -214,11 +214,11 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   {
     "id": "pike-press",
     "kind": "progression",
-    "title": "Pike Pressing",
-    "short": "Incline pike to vertical pressing",
-    "focus": "Incline pike to vertical pressing",
+    "title": "Pike Push-Ups to HSPU",
+    "short": "Bent-arm overhead pressing, distinct from straight-arm pike-to-handstand presses",
+    "focus": "Pike push-up strength into wall handstand push-up",
     "equipment": "Floor; check each movement",
-    "cue": "Practice a controlled variation, then build repeatable quality before increasing leverage.",
+    "cue": "This is bent-arm pressing. For a straight-arm pike or straddle press, open the Press to Handstand pathways.",
     "safety": "Use a comfortable range and stop when technique deteriorates or joint pain appears.",
     "group": "Strength",
     "slugs": [
@@ -325,10 +325,10 @@ export const SKILL_PATHS: readonly SkillPath[] = [
     "id": "front-lever",
     "kind": "progression",
     "title": "Front Lever",
-    "short": "Pulling base into horizontal holds",
+    "short": "Tuck to advanced tuck; one-leg and straddle are alternate longer-lever options",
     "focus": "Pulling base into horizontal holds",
     "equipment": "Bar or rings; check each movement",
-    "cue": "Practice a controlled variation, then build repeatable quality before increasing leverage.",
+    "cue": "One-leg and straddle are parallel leverage options; choose the version you can control, not a compulsory order.",
     "safety": "Use a comfortable range and stop when technique deteriorates or joint pain appears.",
     "group": "Strength",
     "slugs": [
@@ -336,12 +336,16 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "scapular-pull-up",
       "australian-row",
       "tuck-front-lever",
-      "tuck-front-lever-on-rings",
       "advanced-tuck-front-lever-on-rings",
+      "one-leg-front-lever",
+      "straddle-front-lever",
       "front-lever"
     ],
+    "branches": [["one-leg-front-lever","straddle-front-lever"]],
     "accessories": [
-      "front-lever-raise"
+      "tuck-front-lever-on-rings",
+      "front-lever-raise",
+      "ring-row"
     ]
   },
   {
@@ -456,21 +460,26 @@ export const SKILL_PATHS: readonly SkillPath[] = [
     "id": "pistol",
     "kind": "progression",
     "title": "Pistol Squat",
-    "short": "Split squats to single-leg strength",
+    "short": "Supported one-leg depth through pistol and dragon variations",
     "focus": "Split squats to single-leg strength",
     "equipment": "Floor; check each movement",
-    "cue": "Practice a controlled variation, then build repeatable quality before increasing leverage.",
+    "cue": "Shrimp squats are an alternative branch; ankle mobility and hip control can help but do not create universal pass/fail gates.",
     "safety": "Use a comfortable range and stop when technique deteriorates or joint pain appears.",
     "group": "Lower body",
     "slugs": [
       "bodyweight-squat",
       "split-squat",
-      "reverse-lunge",
+      "assisted-box-pistol-sit",
       "assisted-pistol-squat",
       "pistol-squat",
-      "shrimp-squat"
+      "dragon-pistol"
     ],
-    "accessories": []
+    "accessories": [
+      "reverse-lunge",
+      "shrimp-squat",
+      "bulgarian-split-squat",
+      "cossack-squat"
+    ]
   },
   {
     "id": "pancake",
@@ -783,19 +792,20 @@ export const SKILL_PATHS: readonly SkillPath[] = [
     "short": "Dead bug and plank into hollow-body control",
     "focus": "Dead bug and plank into hollow-body control",
     "equipment": "Check the selected movement and available support",
-    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "cue": "Choose gradual trunk-control demands. Side planks and mountain climbers are independent useful options.",
     "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
     "group": "Core",
     "slugs": [
       "dead-bug",
       "plank",
-      "side-plank",
       "hollow-body-hold",
-      "mountain-climber",
       "v-up",
       "dragon-flag"
     ],
-    "accessories": [],
+    "accessories": [
+      "side-plank",
+      "mountain-climber"
+    ],
     "kind": "progression"
   },
   {
@@ -821,10 +831,10 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   {
     "id": "leg-strength",
     "title": "Legs · Squat & Lunge",
-    "short": "Squat, split squat and stable single-leg strength",
+    "short": "Squats, split squats and lunges are complementary patterns",
     "focus": "Squat, split squat and stable single-leg strength",
     "equipment": "Check the selected movement and available support",
-    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "cue": "These are lower-body exercise options, not one compulsory ladder from squat to Cossack.",
     "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
     "group": "Lower body",
     "slugs": [
@@ -840,24 +850,26 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "jump-squat",
       "sissy-squat"
     ],
-    "kind": "progression"
+    "kind": "collection"
   },
   {
     "id": "posterior-chain",
     "title": "Legs · Posterior Chain",
-    "short": "Bridges and hinge control before demanding curls",
+    "short": "Bridge, hinge, sliding curl and controlled Nordic eccentrics",
     "focus": "Bridges and hinge control before demanding curls",
     "equipment": "Check the selected movement and available support",
-    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
-    "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
+    "cue": "Nordic negatives begin with assisted short ranges and low volume, not repeated max-effort sets.",
+    "safety": "Use a secure ankle anchor and controlled landings. Nordic eccentric milestones in the source chart are tests, not a beginner dose.",
     "group": "Lower body",
     "slugs": [
       "glute-bridge",
       "single-leg-rdl",
-      "ring-hamstring-curl",
+      "sliding-leg-curl",
+      "nordic-curl-negative",
       "nordic-curl"
     ],
     "accessories": [
+      "ring-hamstring-curl",
       "jefferson-curl"
     ],
     "kind": "progression"
@@ -1048,7 +1060,7 @@ export const SKILL_PATHS: readonly SkillPath[] = [
     "short": "Hanging foundations before pullovers and muscle-ups",
     "focus": "Hanging foundations before pullovers and muscle-ups",
     "equipment": "Check the selected movement and available support",
-    "cue": "Use a supported range you can control. Progress by quality, not by forcing range.",
+    "cue": "Pullovers and chin-ups are related skills, not obligatory steps for a strict muscle-up. Strong high pulls and bar top-out control matter.",
     "safety": "Keep movement comfortable. Scale support, range and dose to your own control.",
     "group": "Strength",
     "slugs": [
@@ -1056,11 +1068,13 @@ export const SKILL_PATHS: readonly SkillPath[] = [
       "scapular-pull-up",
       "band-assisted-pull-up",
       "pull-up",
-      "chin-up",
-      "pullover",
       "muscle-up"
     ],
     "accessories": [
+      "chin-up",
+      "pullover",
+      "straight-bar-dip",
+      "weighted-pull-up",
       "360-pull"
     ],
     "kind": "progression"
@@ -1087,15 +1101,15 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   {
     id: "grip-support",
     title: "Grip · Hanging & Support",
-    short: "Control, load and one-arm hang foundations",
+    short: "Hangs, loaded carries and support work without a forced sequence",
     focus: "Support grip strength and shoulder control",
     equipment: "Bar, weights or suitable carry implements",
-    cue: "Start supported, load progressively and step down before grip fails.",
+    cue: "Carries and one-arm hangs train different grips and loads; select a variation deliberately.",
     safety: "Unilateral hanging is high demand; avoid sudden loading and stop for finger, elbow or shoulder pain.",
     group: "Grip",
     slugs: ["active-hang","dead-hang","farmers-carry","suitcase-carry","towel-hang","one-arm-assisted-hang","one-arm-hang"],
     accessories: ["wrist-circles","extensor-band","false-grip-hold"],
-    kind: "progression"
+    kind: "collection"
   },
   {
     id: "grip-pinch",
@@ -1126,15 +1140,15 @@ export const SKILL_PATHS: readonly SkillPath[] = [
   {
     id: "calves-tibialis",
     title: "Calves & Tibialis",
-    short: "Heel raises, soleus and shin strength",
+    short: "Calf strength, soleus work and tibialis movements",
     focus: "Ankle plantar flexion and dorsiflexion",
     equipment: "Floor, wall or optional resistance",
-    cue: "Control every repetition and increase resistance gradually.",
+    cue: "Tibialis raises and heel raises are separate movement patterns, not a single linear unlock sequence.",
     safety: "Avoid bouncing under load or pushing through Achilles or ankle pain.",
     group: "Lower body",
     slugs: ["tibialis-raise","calf-raise","seated-calf-raise","single-leg-calf-raise","weighted-calf-raise"],
     accessories: ["wall-ankle-dorsiflexion"],
-    kind: "progression"
+    kind: "collection"
   },
 ];
 export const getSkillPath=(id?:string)=>SKILL_PATHS.find(p=>p.id===id);
