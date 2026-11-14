@@ -113,3 +113,18 @@
 @media(max-width:780px){.master-map-body{grid-template-columns:minmax(0,1fr)}.master-map-detail{order:-1}.master-map-top{padding:18px}.master-map-numbers span{padding:8px 10px}.master-map-numbers b{font-size:18px}.master-map-links{grid-template-columns:1fr 1fr}.master-map-tools{padding:10px}.master-map-switch{flex:1 1 auto}.master-map-switch button{flex:1}.master-map-search{flex:1 1 100%}.master-map-legend{gap:8px}.master-map-poster-layout>.master-map-detail{max-width:none}.master-map-scroll{max-height:62dvh}}
 @media(max-width:360px){.master-map-top h1{font-size:31px}.master-map-links{grid-template-columns:1fr}.master-map-skill-meta{padding-left:3px}.master-map-poster-tools{gap:6px}.master-map-poster-tools label{flex:1 1 45%}}
 @media(prefers-reduced-motion:reduce){.master-map-skill,.master-map-switch button{transition:none}.master-map-skill:hover{transform:none}}
+
+/* Discoverability on the Skills landing page. */
+.master-map-cta{display:flex;align-items:center;gap:12px;width:calc(100% - 26px);max-width:1160px;margin:0 auto 13px;padding:14px 17px;border:1px solid hsl(var(--primary)/.45);border-left:4px solid hsl(var(--primary));border-radius:15px;background:hsl(var(--card));color:hsl(var(--foreground));text-decoration:none;box-shadow:var(--su-card-shadow);min-height:74px}
+.master-map-cta>svg:first-child{color:hsl(var(--primary));flex:0 0 auto;width:24px;height:24px}
+.master-map-cta>span{flex:1;min-width:0;display:grid;gap:5px}
+.master-map-cta strong{font-family:'Space Grotesk',sans-serif;font-size:16px;line-height:1.2;letter-spacing:-.026em}
+.master-map-cta small{font-size:11px;font-weight:650;color:hsl(var(--muted-foreground))}
+.master-map-cta>svg:last-child{color:hsl(var(--primary));flex-shrink:0}
+.master-map-cta:hover{border-color:hsl(var(--primary));background:hsl(var(--secondary)/.35)}
+.master-map-dose label{display:grid;gap:8px;color:hsl(var(--foreground));font-size:11px;font-weight:750;margin-top:12px}
+.master-map-dose input{border:1px solid hsl(var(--border));background:hsl(var(--background));color:hsl(var(--foreground));border-radius:10px;padding:10px;min-height:44px;font-size:13px;max-width:240px}
+.master-map-dose input:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px}
+.master-map-dose .master-map-dose-result{padding:10px 12px;border-radius:10px;border:1px solid hsl(var(--primary)/.25);background:hsl(var(--primary)/.08);color:hsl(var(--foreground))}
+.master-map-dose-result strong{color:hsl(var(--primary))}
+@media(max-width:600px){.master-map-cta{width:calc(100% - 18px);padding:12px;gap:10px}.master-map-cta strong{font-size:15px}}
