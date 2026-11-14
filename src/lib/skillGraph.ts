@@ -80,7 +80,7 @@ export function readTrainingProfile(): SkillTrainingProfile {
 export function writeTrainingProfile(profile:SkillTrainingProfile){localStorage.setItem('power-training-profile-v1',JSON.stringify({...profile,equipmentMode:'informational'}));window.dispatchEvent(new Event('power-training-profile'));}
 export function nodeDose(slug:string) {
  const timed=RULES[slug]?.metric==='seconds'||(!RULES[slug]?.metric&&/hold|hang|stand$|planche$|planche-lean|planche-plank|l-sit|tuck-sit|stretch|forward-fold|lever|plank$/.test(slug)&&!/(push-up|kick-up|bail|dip|lift|transition|raise|row)/.test(slug));
- return {metric:timed?'seconds' as const:'reps' as const,target:RULES[slug]?.target||(slug==='ring-muscle-up'?1:slug==='handstand-push-up'?3:timed?8:5),sets:3,restSeconds:/iron-cross|human-flag/.test(slug)?150:/planche|press|hspu|muscle-up/.test(slug)?120:60,stopRule:'End the attempt when technique deteriorates or joint pain appears.'};
+ return {metric:timed?'seconds' as const:'reps' as const,target:RULES[slug]?.target||(slug==='ring-muscle-up'?1:slug==='handstand-push-up'?3:timed?8:5),sets:slug==='nordic-curl-negative'?2:3,restSeconds:/iron-cross|human-flag|nordic-curl/.test(slug)?150:/planche|press|hspu|muscle-up/.test(slug)?120:60,stopRule:/nordic-curl/.test(slug)?'Start with assisted short ranges; stop when lowering control fades or discomfort appears. The chart benchmark is a separate test.':'End the attempt when technique deteriorates or joint pain appears.'};
 }
 export function nodeProgress(slug:string,attempts:SkillAttempt[]) {
   const logs=attempts.filter(a=>a.nodeId===slug).sort((a,b)=>a.at.localeCompare(b.at)).slice(-20);
