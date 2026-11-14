@@ -1,120 +1,154 @@
-/** Optional coaching reference — never automatically populates a workout draft. */
+/** Optional training blueprint. Nothing is automatically preloaded into the workout builder. */
 export type SessionKey = 'A' | 'B' | 'C' | 'D';
-export type HoldMetric = 'planche' | 'lsit';
+export type StageHold = 'planche' | 'flag' | 'front' | 'back' | 'lsit';
+export type TrainingBlock = SessionKey | 'rest';
 export interface RoutineMove {
-  name: string;
-  sets?: number;
-  target?: string;
-  count?: number;
-  countUnit?: string;
-  holdMetric?: HoldMetric;
-  slug?: string;
-  goal?: string;
-  note?: string;
+  name:string;
+  sets?:number;
+  target?:string;
+  count?:number;
+  countUnit?:string;
+  holdMetric?:StageHold;
+  goal?:string;
+  slug?:string;
+  note?:string;
 }
-export interface RoutineGroup { title: string; movements: RoutineMove[] }
+export interface RoutineGroup { title:string; movements:RoutineMove[] }
 export interface RoutineSession {
-  key: SessionKey;
-  name: string;
-  focus: string;
-  duration: string;
-  groups: RoutineGroup[];
+  key:SessionKey; title:string; subtitle:string; duration:string; groups:RoutineGroup[];
 }
 export interface CoachingReel {
-  id: string;
-  title: string;
-  skill: string;
-  teaches: string;
-  url: string;
-  days: SessionKey[];
+  id:string; title:string; skill:string; teaches:string; url:string; days:SessionKey[];
+}
+export interface HandstandSet {
+  id:'heidi'|'haz'; name:string; subtitle:string; drills:RoutineMove[];
 }
 
-export const SUPERHUMAN_SESSIONS: RoutineSession[] = [
+/** Ordered shifts-friendly sequence. Rest positions can move with the user's shifts. */
+export const SHIFT_CYCLE:TrainingBlock[]=['A','C','rest','B','D','rest','rest'];
+export const STAGE_HOLD_KEYS:StageHold[]=['planche','flag','front','back','lsit'];
+export const STAGE_HOLD_LABELS:Record<StageHold,string>={
+  planche:'Planche',flag:'Human flag',front:'Front lever',back:'Back lever',lsit:'L-sit',
+};
+export const HANDSTAND_SETS:HandstandSet[]=[
   {
-    key: 'A', name: 'Handstand · Planche · Push', focus: 'Alignment, straight-arm strength, pushing', duration: '~60 min',
-    groups: [
-      { title: '01 / Handstand', movements: [
-        { name: 'Side-to-wall handstand', sets: 3, target: '25 sec', slug: 'chest-to-wall-handstand', goal: 'handstand', note: 'Side-to-wall drill; linked catalog movement is a wall-supported alternative, not the same variation.' },
-        { name: 'Handstand heel pulls', sets: 3, target: '5 reps', slug: 'handstand-heel-pull', goal: 'handstand' },
-        { name: 'Free handstand attempts', count: 8, countUnit: 'controlled tries', slug: 'freestanding-handstand-kick-up', goal: 'handstand' },
-      ] },
-      { title: '02 / Planche', movements: [
-        { name: 'Planche lean', sets: 3, target: '20 sec', slug: 'planche-lean', goal: 'planche' },
-        { name: 'Straight-arm frog stand', sets: 3, target: '15 sec', slug: 'frog-stand', goal: 'planche', note: 'Straight-arm variation only when the shoulders and wrists tolerate it.' },
-        { name: 'Tuck planche — current stage', sets: 3, holdMetric: 'planche', slug: 'tuck-planche', goal: 'planche', note: 'Hold for 65% of your tested best; use frog stand if tuck control is not ready.' },
-        { name: 'Pseudo planche push-ups', sets: 3, target: '8 reps', slug: 'pseudo-planche-push-up', goal: 'planche' },
-      ] },
-      { title: '03 / Push strength', movements: [
-        { name: 'Pike push-ups', sets: 3, target: '8 reps', slug: 'pike-push-up', goal: 'handstand' },
-        { name: 'Dips', sets: 3, target: '8 reps', slug: 'parallel-bar-dip', goal: 'rings' },
-        { name: 'Hollow body hold', sets: 3, target: '30 sec', slug: 'hollow-body-hold', goal: 'l-sit' },
-      ] },
+    id:'heidi',name:"Set 1 · Heidi's wall drills",subtitle:'Tuck control, wall hops and L-handstand practice',
+    drills:[
+      {name:'Tuck slides',sets:2,target:'5 reps',goal:'handstand',note:'Choose a controlled wall-supported tuck variation.'},
+      {name:'Wall hops',sets:2,target:'8 reps',goal:'handstand',slug:'wall-pull-aways',note:'This linked movement is related wall practice, not an exact wall-hop demonstration.'},
+      {name:'Tuck switches',sets:2,target:'6 reps',goal:'handstand'},
+      {name:'Tuck holds',sets:2,target:'15 sec',goal:'handstand',slug:'chest-to-wall-handstand',note:'Wall handstand is a related regression when tuck control is not ready.'},
+      {name:'Wall L-handstand',sets:2,target:'5 reps',goal:'handstand',slug:'wall-handstand',note:'Use an L-handstand variation only with safe entry and exit.'},
     ],
   },
   {
-    key: 'B', name: 'Handstand · Compression · Press', focus: 'Active compression, press negatives and control', duration: '~60 min',
-    groups: [
-      { title: '01 / Handstand control', movements: [
-        { name: 'Box tuck leg extensions', sets: 3, target: '6 reps', note: 'Box-supported tuck to straight-leg control.' },
-        { name: 'Knee slides', sets: 3, target: '5 reps', note: 'Smooth compression and weight transfer.' },
-        { name: 'Parallette handstand holds', sets: 4, target: '15 sec', note: 'Use a supported hold if free balance is not ready.' },
-      ] },
-      { title: '02 / Compression', movements: [
-        { name: 'L-sit — current stage', sets: 3, holdMetric: 'lsit', slug: 'l-sit-tuck-hold', goal: 'l-sit', note: 'Start with tuck L-sit; choose the stage you can hold without collapsing.' },
-        { name: 'Seated pike lifts', sets: 3, target: '10 reps', slug: 'seated-pike-lift', goal: 'pike-compression' },
-        { name: 'Seated straddle lifts', sets: 3, target: '8 reps', slug: 'seated-straddle-lift', goal: 'straddle-compression' },
-        { name: 'Hip lift off blocks', sets: 4, target: '3 reps', slug: 'stalder-feet-assisted-hip-lift', goal: 'straddle-press', note: 'The linked exercise is a feet-assisted regression.' },
-      ] },
-      { title: '03 / Press', movements: [
-        { name: 'Controlled press negatives', sets: 3, target: '3 reps · 3–5 sec down', slug: 'wall-press-negative', goal: 'straddle-press', note: 'Assisted variation first; only lower as far as you control.' },
-        { name: 'Pike push-ups', sets: 3, target: '8 reps', slug: 'pike-push-up', goal: 'handstand' },
-      ] },
-    ],
-  },
-  {
-    key: 'C', name: 'Human Flag · Pull', focus: 'Side-body strength, grip and vertical pulling', duration: '~60 min',
-    groups: [
-      { title: '01 / Handstand touchpoint', movements: [
-        { name: 'Free handstand attempts', count: 8, countUnit: 'controlled tries', slug: 'freestanding-handstand-kick-up', goal: 'handstand' },
-      ] },
-      { title: '02 / Human flag', movements: [
-        { name: 'Human flag — current stage', sets: 4, target: 'holds / side', slug: 'feet-assisted-human-flag', goal: 'human-flag', note: 'Weak side first. Begin with flag plank until you pass the readiness assessment; catalog link shows an assisted flag step.' },
-        { name: 'Hanging side pulls', sets: 3, target: '5 reps / side', note: 'Train both sides; resist torso rotation.' },
-      ] },
-      { title: '03 / Pull + core', movements: [
-        { name: 'Pull-ups', sets: 4, target: '8 reps', slug: 'pull-up', goal: 'front-lever' },
-        { name: 'Hanging leg raises', sets: 3, target: '10 reps', slug: 'hanging-leg-raise', goal: 'l-sit' },
-        { name: 'Side plank', sets: 2, target: '45 sec / side', slug: 'side-plank', goal: 'human-flag' },
-        { name: 'Shoulder external rotations', sets: 2, target: '15 reps', note: 'Light controlled resistance; do not substitute unrelated shoulder exercises.' },
-      ] },
-    ],
-  },
-  {
-    key: 'D', name: 'Technique & Mobility', focus: 'Fourth-day option — easy volume only', duration: '~45 min',
-    groups: [
-      { title: '01 / Technique', movements: [
-        { name: 'Free handstand attempts', count: 10, countUnit: 'easy tries', slug: 'freestanding-handstand-kick-up', goal: 'handstand' },
-        { name: 'Planche — one stage easier', count: 5, countUnit: 'easy holds', slug: 'planche-lean', goal: 'planche', note: 'Use the regression below your current tested skill.' },
-        { name: 'Human flag — one stage easier', count: 5, countUnit: 'easy holds / side', slug: 'feet-assisted-human-flag', goal: 'human-flag', note: 'Use an easier stage than Day C; skip loaded flag work if not ready.' },
-        { name: 'Tuck L-sit', sets: 3, target: '15 sec', slug: 'l-sit-tuck-hold', goal: 'l-sit' },
-      ] },
-      { title: '02 / Mobility', movements: [
-        { name: 'Pancake stretch', target: 'comfortable range', slug: 'pancake-stretch', goal: 'straddle-compression' },
-        { name: 'Pike stretch', target: 'comfortable range', slug: 'pike-stretch', goal: 'pike-compression' },
-        { name: 'Wrist mobility', target: 'gentle, pain-free range', slug: 'wrist-circles', goal: 'handstand' },
-      ] },
+    id:'haz',name:"Set 2 · Coach Haz's drills",subtitle:'Leg extensions, knee slides and parallette stability',
+    drills:[
+      {name:'Box tuck leg extensions',sets:2,target:'6 reps',goal:'handstand'},
+      {name:'Chest-to-wall knee slides',sets:2,target:'5 reps',goal:'handstand',slug:'chest-to-wall-handstand'},
+      {name:'Back-to-wall bent-knee extensions',sets:2,target:'6 reps',goal:'handstand',slug:'wall-handstand'},
+      {name:'Side-to-wall hold',sets:2,target:'20–30 sec',goal:'handstand',slug:'wall-handstand'},
+      {name:'Parallette handstand hold',sets:3,target:'10–20 sec',goal:'handstand',slug:'chest-to-wall-handstand',note:'If unsupported, use a safely supported regression instead.'},
     ],
   },
 ];
 
-export const SUPERHUMAN_BALANCE: RoutineGroup[] = [
-  { title: '10-minute off-day practice', movements: [
-    { name: 'Wrist warm-up', target: 'easy, controlled range', slug: 'wrist-circles', goal: 'handstand' },
-    { name: 'Chest-to-wall handstand', sets: 2, target: '40 sec', slug: 'chest-to-wall-handstand', goal: 'handstand' },
-    { name: 'Wall toe pulls', sets: 3, target: '3 reps', slug: 'wall-pull-aways', goal: 'handstand', note: 'A linked wall-pull-away drill; check form before substituting.' },
-    { name: 'Kick-up practice', target: '5 min of controlled attempts', slug: 'freestanding-handstand-kick-up', goal: 'handstand' },
-  ] },
+export const SUPERHUMAN_SESSIONS:RoutineSession[]=[
+  {
+    key:'A',title:'Planche + Human Flag',subtitle:'Straight-arm support, ring work and lateral strength',duration:'~60 min',
+    groups:[
+      {title:'Preparation',movements:[
+        {name:'Wrist warm-up',target:'5 min',goal:'planche',slug:'wrist-circles'},
+        {name:'Ring support',sets:3,target:'20–30 sec',goal:'rings',slug:'ring-support-hold'},
+        {name:'Ring circles',sets:2,target:'5 reps',goal:'rings',note:'Small, controlled ring circles while supported; regress to static support if unstable.'},
+      ]},
+      {title:'Planche',movements:[
+        {name:'Ring planche lean',sets:3,target:'15 sec',goal:'planche',slug:'planche-lean',note:'Catalog link is the floor lean, not a ring variation. Rings increase instability.'},
+        {name:'Planche — your current stage (frog stand)',sets:5,holdMetric:'planche',goal:'planche',slug:'frog-stand',note:'Use frog stand now. Move toward tuck only when quality and readiness checks allow.'},
+        {name:'Pike lean → high planche',sets:3,target:'5 reps',goal:'straight-arm',slug:'planche-lean',note:'Controlled transition. The linked lean is a foundational related movement.'},
+        {name:'Tuck planche press',sets:3,target:'3 reps',goal:'planche',slug:'tuck-planche-push-up-preparation',note:'Assisted step if necessary; skip if the straight-arm shape breaks.'},
+      ]},
+      {title:'Human flag',movements:[
+        {name:'Vertical flag',sets:4,target:'10–15 sec',goal:'human-flag',slug:'vertical-human-flag'},
+        {name:'Flag — your current stage',sets:5,holdMetric:'flag',goal:'human-flag',slug:'feet-assisted-human-flag',note:'Begin with flag plank and readiness check; weak side first. Do not assume full flag readiness.'},
+        {name:'Bottom tuck flag lifts',sets:3,target:'5 reps / side',goal:'human-flag',slug:'tuck-human-flag',note:'Related tuck flag progression; lower assistance before adding height.'},
+        {name:'Ring side presses',sets:3,target:'5 reps / side',goal:'human-flag',note:'Use a controlled side-body support regression if shoulder or ring control is not ready.'},
+      ]},
+      {title:'Strength',movements:[
+        {name:'Ring push-ups',sets:3,target:'8 reps',goal:'rings',slug:'ring-push-up'},
+      ]},
+    ],
+  },
+  {
+    key:'C',title:'Compression',subtitle:'Active hip flexion, straddle control and press preparation',duration:'~50 min',
+    groups:[
+      {title:'Seated compression',movements:[
+        {name:'Seated pike lifts · 2-sec top',sets:3,target:'10 reps',goal:'pike-compression',slug:'seated-pike-lift'},
+        {name:'Seated straddle lifts · 2-sec top',sets:3,target:'8 reps',goal:'straddle-compression',slug:'seated-straddle-lift'},
+        {name:'Toe-to-wrist taps',sets:3,target:'10 reps',goal:'pike-compression',slug:'seated-pike-lift',note:'Related seated compression only, not an exact movement.'},
+        {name:'Sliding straddle on blocks',sets:3,target:'6 reps',goal:'straddle-compression',slug:'seated-straddle-compression-lift',note:'Use firm, non-slip blocks; catalog link is related compression work.'},
+        {name:'Block lift-offs · 3-sec float',sets:4,target:'3 reps',goal:'straddle-press',slug:'stalder-feet-assisted-hip-lift'},
+        {name:'Active hamstring compression',sets:3,target:'10 reps',goal:'pike-compression',slug:'seated-pike-lift'},
+      ]},
+      {title:'Pike to press',movements:[
+        {name:'Block pike lean',sets:3,target:'20 sec',goal:'straight-arm',slug:'pike-support-hold'},
+        {name:'Pike walk-in · hips over shoulders',sets:3,target:'5 reps',goal:'straddle-press',slug:'pike-support-hold',note:'Walk in only as far as shoulders and wrists stay controlled.'},
+        {name:'Ankle-weight leg lift (1–2 lb)',sets:3,target:'10 reps',goal:'pike-compression',slug:'single-leg-pike-lift',note:'Use no weight until strict unweighted reps are comfortable.'},
+        {name:'Box pike-up sliders',sets:3,target:'8 reps',goal:'straddle-press',slug:'elevated-straddle-press'},
+      ]},
+      {title:'Integrated strength',movements:[
+        {name:'L-sit → toes-to-bar',sets:3,target:'5 reps',goal:'l-sit',slug:'toes-to-bar',note:'Use distinct L-sit and toes-to-bar progressions until both are controlled.'},
+        {name:'Ring L-sit',sets:3,target:'10 sec',goal:'l-sit',slug:'ring-l-sit-hold'},
+      ]},
+    ],
+  },
+  {
+    key:'B',title:'Press to Handstand',subtitle:'Strength transfer, supported straddle press and eccentric control',duration:'~60 min',
+    groups:[
+      {title:'Preparation',movements:[
+        {name:'Dead hang',sets:2,target:'30 sec',goal:'front-lever',slug:'active-hang'},
+        {name:'L-handstand float · box or wall',sets:4,target:'10 sec',goal:'handstand',slug:'wall-handstand',note:'Linked wall hold is a related regression.'},
+      ]},
+      {title:'Press mechanics',movements:[
+        {name:'Handstand lowers',sets:3,target:'3 reps',goal:'straddle-press',slug:'wall-press-negative'},
+        {name:'Back-supported straddle press',sets:3,target:'5 reps',goal:'straddle-press',slug:'elevated-straddle-press',note:'The linked press is related, not identical to back support.'},
+        {name:'Puppy press',sets:4,target:'3 reps',goal:'straddle-press',slug:'stalder-toe-assisted-press',note:'Use a safe assisted press regression when exact drill is not familiar.'},
+        {name:'Ayesha lift',sets:3,target:'5 reps',goal:'human-flag',note:'Advanced side-support drill; only after flag/shoulder readiness checks.'},
+        {name:'Box pike feet-drop negative',sets:3,target:'5 reps',goal:'straddle-press',slug:'wall-press-negative',note:'The linked wall press negative is a related eccentric progression.'},
+        {name:'Pike loads',sets:3,target:'6 reps',goal:'pike-compression',slug:'pike-support-hold'},
+        {name:'Wall press compression',sets:3,target:'5 reps',goal:'straddle-press',slug:'wall-press-negative'},
+      ]},
+      {title:'Floor pressing',movements:[
+        {name:'Lolasana',sets:3,target:'10 sec',goal:'l-sit',slug:'tuck-sit',note:'Related tuck support only, not a lolasana tutorial.'},
+        {name:'Lifted L-sit',sets:3,target:'10 sec',goal:'l-sit',slug:'l-sit'},
+        {name:'Floor press attempts',sets:3,target:'2 reps',goal:'straddle-press',slug:'straddle-press-to-hs',note:'Use foot or band assistance unless an unassisted press is already controlled.'},
+      ]},
+      {title:'Mobility',movements:[
+        {name:'Weighted pike stretch + flutter',sets:3,target:'30 sec',goal:'pike-compression',slug:'pike-stretch',note:'Begin unloaded; weighted end-range stretches are optional.'},
+        {name:'Pancake stretch',sets:2,target:'60 sec',goal:'straddle-compression',slug:'pancake-stretch'},
+      ]},
+    ],
+  },
+  {
+    key:'D',title:'Levers + Pull',subtitle:'Front/back lever and secondary lateral pulling',duration:'~45 min',
+    groups:[
+      {title:'Lever skill holds',movements:[
+        {name:'Front lever — your current stage',sets:5,holdMetric:'front',goal:'front-lever',slug:'tuck-front-lever',note:'Band-assisted tuck allowed. Avoid progressing into longer levers without the skill check.'},
+        {name:'Back lever — your current stage',sets:4,holdMetric:'back',goal:'back-lever',slug:'ring-back-lever-tuck',note:'Shoulders should be comfortable in extension; use an assisted step first.'},
+      ]},
+      {title:'Pull and compression',movements:[
+        {name:'Hanging straddle leg lift / invert',sets:3,target:'5 reps',goal:'front-lever',slug:'hanging-leg-raise',note:'Linked movement is a related hanging leg raise, not a straddle inversion.'},
+        {name:'End-range hip-flexor leg lifts',sets:3,target:'10 reps',goal:'pike-compression',slug:'single-leg-pike-lift'},
+      ]},
+      {title:'Flag accessory',movements:[
+        {name:'Flag negatives · 3–5-sec down',sets:3,target:'3 reps',goal:'human-flag',slug:'feet-assisted-human-flag',note:'Only if flag support and exits are controlled; otherwise keep the assisted stage.'},
+        {name:'Side plank with hip raise',sets:2,target:'30 sec / side',goal:'human-flag',slug:'side-plank',note:'Side plank is a related regression, not the exact hip-raise drill.'},
+      ]},
+    ],
+  },
 ];
+
+export const SUPERHUMAN_BALANCE:RoutineGroup[]=[];
 
 export const SUPERHUMAN_REELS: CoachingReel[] = [
   { id: 'press-strength', title: 'Press strength progressions', skill: 'Press to handstand', teaches: 'Lifted L-sits, lolasana, handstand lowers and floor press', url: 'https://www.instagram.com/reel/DXNqiJnjrRU', days: ['A','B'] },
