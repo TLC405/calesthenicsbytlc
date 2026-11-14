@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/build-coach-policy.mjs && node scripts/client-portal-checks.mjs && node scripts/modification-checks.mjs && node scripts/video-coverage-checks.mjs && node scripts/atomic-sweep-checks.mjs && vite build",
+    "build": "node scripts/build-coach-policy.mjs && node scripts/client-portal-checks.mjs && node scripts/modification-checks.mjs && node scripts/video-coverage-checks.mjs && node scripts/atomic-sweep-checks.mjs && node scripts/master-map-checks.mjs && vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
