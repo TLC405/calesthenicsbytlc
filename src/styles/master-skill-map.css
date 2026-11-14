@@ -231,3 +231,48 @@
  .master-skills-shell .master-skills-tabs>button small{display:none}
  .master-tree-standalone-link>span{font-size:10px}
 }
+
+/* Durable fallback and real connected exercise actions on every chart node. */
+.master-tree-loading{
+ display:flex;align-items:center;justify-content:center;
+ min-height:240px;margin:18px auto;max-width:1150px;padding:25px;
+ border:1px solid hsl(var(--border));border-radius:17px;
+ color:hsl(var(--muted-foreground));background:hsl(var(--card));
+ font-size:14px;font-weight:800;text-align:center;
+}
+.tlc-screen-recovery{min-height:70dvh;padding:clamp(15px,5vw,48px);display:grid;place-items:center}
+.tlc-screen-recovery__inner{max-width:560px;width:100%;display:grid;gap:14px;padding:clamp(19px,5vw,35px);background:hsl(var(--card));color:hsl(var(--foreground));border:1px solid hsl(var(--border));border-radius:19px;box-shadow:var(--su-card-shadow)}
+.tlc-screen-recovery__inner>svg{color:hsl(var(--primary))}
+.tlc-screen-recovery h1{font:850 clamp(21px,4vw,30px)/1.2 'Space Grotesk',sans-serif;letter-spacing:-.04em}
+.tlc-screen-recovery p{font-size:13px;line-height:1.6;color:hsl(var(--muted-foreground))}
+.tlc-screen-recovery__actions{display:grid;gap:8px}
+.tlc-screen-recovery__actions>a,.tlc-screen-recovery__actions>button{
+ display:flex;align-items:center;justify-content:space-between;gap:9px;
+ min-height:46px;padding:11px 14px;border:1px solid hsl(var(--border));
+ border-radius:10px;background:hsl(var(--secondary)/.37);
+ color:hsl(var(--foreground));font-size:12px;font-weight:850;text-decoration:none;
+}
+.tlc-screen-recovery__actions>button{background:hsl(var(--primary));color:hsl(var(--primary-foreground));border-color:hsl(var(--primary))}
+.master-map-connected{min-width:0;display:grid;gap:10px;padding:13px;border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--secondary)/.24)}
+.master-map-connected>p{font-size:11px;color:hsl(var(--muted-foreground));line-height:1.55}
+.master-map-connected-items{display:grid;gap:7px}
+.master-map-connected-item{
+ display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:7px;
+ min-width:0;padding:10px;border:1px solid hsl(var(--border));border-radius:10px;background:hsl(var(--card))
+}
+.master-map-connected-item>span{display:grid;gap:5px;min-width:0}
+.master-map-connected-item>span strong{font-size:12px;font-weight:850;line-height:1.4;overflow-wrap:anywhere}
+.master-map-connected-item>span small{font-size:9px;font-weight:850;letter-spacing:.07em;color:hsl(var(--muted-foreground))}
+.master-map-connected-item>a,.master-map-connected-item>button{
+ min-height:42px;padding:9px 10px;display:inline-flex;align-items:center;gap:5px;
+ border:1px solid hsl(var(--border));border-radius:8px;background:hsl(var(--secondary)/.4);
+ text-decoration:none;color:hsl(var(--foreground));font-size:11px;line-height:1.3;font-weight:800;white-space:nowrap
+}
+.master-map-connected-item>button{background:hsl(var(--primary)/.11);color:hsl(var(--primary));border-color:hsl(var(--primary)/.4)}
+.master-map-connected-item>a:hover,.master-map-connected-item>button:hover{border-color:hsl(var(--primary))}
+@media(max-width:600px){
+ .master-map-connected-item{grid-template-columns:minmax(0,1fr) 1fr 1fr}
+ .master-map-connected-item>span{grid-column:1/-1}
+ .master-map-connected-item>a,.master-map-connected-item>button{justify-content:center;white-space:normal;text-align:center}
+}
+@media(max-width:340px){.master-map-connected-item>a,.master-map-connected-item>button{font-size:10px;padding-inline:5px}}
