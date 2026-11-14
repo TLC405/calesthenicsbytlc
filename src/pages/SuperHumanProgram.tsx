@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpen, CalendarDays, ChevronDown, Clock3, Play, ShieldCheck, Target } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
 import { EmbeddedMedia } from '@/components/Exercise/EmbeddedMedia';
+import { AssistedSkillsLab } from '@/components/Training/AssistedSkillsLab';
 import {
   SUPERHUMAN_BALANCE, SUPERHUMAN_REELS, SUPERHUMAN_SESSIONS,
   type RoutineMove, type SessionKey,
@@ -91,6 +92,7 @@ export default function SuperHumanProgram() {
           <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-semibold">3 or 4 sessions</span>
           <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-semibold">No fixed weekdays</span>
           <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[11px] font-semibold">Adaptive holds</span>
+          <a href="#assisted-skills" className="rounded-full border border-amber-400/50 bg-amber-400/10 px-3 py-1.5 text-[11px] font-bold text-amber-200 hover:bg-amber-400/20">Bands & gear ↓</a>
         </div>
       </header>
 
@@ -197,6 +199,8 @@ export default function SuperHumanProgram() {
         </div>
         <p className="mt-3 text-xs text-muted-foreground">Skill links open the existing movement library or readiness test. Nothing is added to your workout unless you choose it.</p>
       </section>
+
+      <AssistedSkillsLab />
 
       <section aria-labelledby="coaching-library" className="rounded-2xl border border-border bg-card p-4 shadow-sm sm:p-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
