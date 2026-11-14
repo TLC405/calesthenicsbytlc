@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Library, TrendingUp, SlidersHorizontal, Users, Sparkles, Crown, FileText, Shield, Target, BrainCircuit } from 'lucide-react';
+import { ArrowRight, Library, TrendingUp, SlidersHorizontal, Users, Sparkles, Crown, FileText, Shield, Target, BrainCircuit, PlugZap } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { MusicControl } from '@/components/Music/MusicControl';
@@ -8,6 +8,7 @@ import { InstallPowerApp } from '@/components/InstallPowerApp';
 export default function More() {
   const {user}=useAuth();
   const links=[
+    {to:'/integrations',label:'My ChatGPT & Integrations',note:'Your ChatGPT handoff, research search and connected training tools',icon:PlugZap},
     {to:'/client/test',label:'Client Portal · Test',note:'Client-facing baseline, movement tests and progress',icon:Target},
     {to:'/program',label:'My skill training plan',note:'A / D / E / B / C, handstands and readiness ladders',icon:Target},
     {to:'/library',label:'All exercises',note:'Search, videos and your own movements',icon:Library},
