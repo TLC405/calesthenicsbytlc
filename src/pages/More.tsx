@@ -9,7 +9,7 @@ export default function More() {
   const {user}=useAuth();
   const links=[
     {to:'/integrations',label:'My ChatGPT & Integrations',note:'Your ChatGPT handoff, research search and connected training tools',icon:PlugZap},
-    {to:'/client/test',label:'Client Portal · Test',note:'Client-facing baseline, movement tests and progress',icon:Target},
+    {to:'/client',label:'Client Portal / Sign Up',note:'Create an account, take movement tests and track results',icon:Target},
     {to:'/program',label:'My skill training plan',note:'A / D / E / B / C, handstands and readiness ladders',icon:Target},
     {to:'/library',label:'All exercises',note:'Search, videos and your own movements',icon:Library},
     {to:'/videos',label:'Tutorial checks',note:'Missing sources, playback and movement review',icon:Shield},
