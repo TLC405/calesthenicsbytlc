@@ -7,6 +7,17 @@ export type Capability=typeof CAPABILITIES[number]['id'];
 export type TrainingReadiness={equipmentMode?:'selected'|'informational';tier?:TrainingTier;capabilities?:Capability[];equipment?:readonly string[]};
 type Rule={tier?:TrainingTier;requires?:Capability[];regression?:string;metric?:'seconds'|'reps';target?:number};
 export const RULES:Record<string,Rule>={
+ 'straight-bar-dip':{tier:4,requires:['push-base'],regression:'parallel-bar-dip'},
+ 'wall-sit':{tier:1,metric:'seconds',target:20},
+ 'reverse-nordic-partial':{tier:3,regression:'bodyweight-squat'},
+ 'reverse-nordic':{tier:4,regression:'reverse-nordic-partial'},
+ 'dragon-pistol':{tier:5,regression:'pistol-squat'},
+ 'broad-jump':{tier:2,regression:'jump-squat'},
+ 'tuck-jump':{tier:3,regression:'jump-squat'},
+ 'skater-hop':{tier:3,regression:'bodyweight-squat'},
+ 'single-leg-bound':{tier:4,regression:'skater-hop'},
+ 'box-jump':{tier:3,regression:'jump-squat'},
+ 'depth-jump':{tier:5,regression:'box-jump'},
  'plate-pinch-hold':{tier:1,metric:'seconds'},
  'block-pinch-hold':{tier:3,metric:'seconds',regression:'plate-pinch-hold'},
  'gripper-crush':{tier:3,metric:'reps'},
