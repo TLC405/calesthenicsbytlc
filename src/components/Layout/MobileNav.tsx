@@ -1,14 +1,21 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { Link, useLocation, useNavigationType } from 'react-router-dom';
 import { Target, MoreHorizontal, Home, CalendarDays } from 'lucide-react';
 
 /** Keep four readable tabs on narrow Fold screens; clients, tools and coach live in More. */
 export function MobileNav() {
-  const { pathname, key } = useLocation();
+  const {pathname}=useLocation();
   const navigationType=useNavigationType();
+  const previousPath=useRef(pathname);
   useLayoutEffect(()=>{
-    if(navigationType!=='POP')window.scrollTo(0,0);
-  },[key,navigationType]);
+    const from=previousPath.current;
+    previousPath.current=pathname;
+    // Search, filters, selected tree nodes, tab views and history replacements
+    // must never reset page scroll. Client tabs are one continuous workspace.
+    if(from===pathname || navigationType==='POP')return;
+    if(from.startsWith('/client')&&pathname.startsWith('/client'))return;
+    window.scrollTo({top:0,left:0,behavior:'instant'});
+  },[pathname,navigationType]);
   if (pathname === '/workout') return null;
   const items = [
     {path:'/',label:'Train',icon:Home,active:pathname==='/'||pathname==='/intro'||['/today','/build','/train'].includes(pathname)},
