@@ -153,3 +153,29 @@
   .tlctv-inline__branding small{font-size:6.5px}
 }
 @media(prefers-reduced-motion:reduce){.tlctv-inline__play-disc{transition:none}}
+
+.tlctv-inline__personal-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.tlctv-inline__personal-actions button,.tlctv-inline__empty-action{
+  display:inline-flex;min-height:38px;align-items:center;justify-content:center;gap:6px;
+  padding:0 12px;border-radius:9px;border:1px solid rgba(255,255,255,.22);
+  background:#222a30;color:var(--tv-ink);font-size:11px;font-weight:850;
+  box-shadow:inset 0 1px rgba(255,255,255,.1)
+}
+.tlctv-inline__personal-form{
+  margin-top:10px;padding:13px;border:1px solid rgba(255,255,255,.14);
+  background:#11171b;border-radius:12px;display:grid;gap:10px
+}
+.tlctv-inline__personal-form label{display:grid;gap:5px;font-size:10px;color:#c3cad2;font-weight:800;letter-spacing:.03em}
+.tlctv-inline__personal-form input{
+  width:100%;min-width:0;min-height:43px;padding:0 11px;border:1px solid #414a54;
+  border-radius:8px;background:#1e2328;color:#f5f1e8;font-size:12px;outline-offset:2px
+}
+.tlctv-inline__personal-form input:focus-visible{outline:2px solid var(--tv-accent)}
+.tlctv-inline__personal-form button{
+  display:inline-flex;min-height:43px;align-items:center;justify-content:center;gap:8px;
+  border-radius:9px;border:1px solid transparent;background:var(--tv-accent);
+  color:#090d12;font-size:11px;font-weight:900;padding:0 12px
+}
+.tlctv-inline__personal-form button:disabled{opacity:.5}
+.tlctv-inline__personal-form p{font-size:10px;line-height:1.45;color:#abb6c1;margin:0}
+.tlctv-inline__empty-action{margin-top:12px}
