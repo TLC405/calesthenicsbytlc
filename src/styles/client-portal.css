@@ -236,3 +236,10 @@
  .tlc-client-wizard-actions{display:grid;grid-template-columns:1fr 1.5fr}
  .tlc-client-wizard-actions>button{font-size:10px;padding:8px 6px}
 }
+
+/* Show both client account paths without requiring an extra tap. */
+.tlc-client-access__actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tlc-client-access__actions .tlc-client-cta,.tlc-client-access__actions .tlc-client-quiet{
+  min-height:42px;padding:8px 13px
+}
+@media(max-width:420px){.tlc-client-access__actions{width:100%}.tlc-client-access__actions>button{flex:1}}
