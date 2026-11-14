@@ -7,6 +7,7 @@ import { AuthProvider } from "./providers/AuthProvider";
 import { MusicProvider } from "./providers/MusicProvider";
 import { InlineSoundtrackSlot } from "./components/Music/InlineSoundtrackSlot";
 import Skills from "./pages/Skills";
+import MasterSkillMap from "./pages/MasterSkillMap";
 import More from "./pages/More";
 import LevelAssessment from "./pages/LevelAssessment";
 import ClientPortal from "./pages/ClientPortal";
@@ -46,6 +47,7 @@ import "./styles/client-portal.css";
 import "./styles/tlc-integrations.css";
 import "./styles/movement-modifications.css";
 import "./styles/tlctv-first.css";
+import "./styles/master-skill-map.css";
 import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();
@@ -70,6 +72,7 @@ function AppContent() {
           <Route path="/train" element={<TrainingEntry />} />
           <Route path="/routine-days" element={<Navigate to="/skills" replace />} />
           <Route path="/skills" element={<Skills />} />
+          <Route path="/skills/map" element={<MasterSkillMap />} />
           <Route path="/program" element={<SuperHumanProgram />} />
           <Route path="/assessment" element={<LevelAssessment />} />
           <Route path="/client" element={<ClientPortal />} />
