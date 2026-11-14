@@ -104,7 +104,13 @@
       "label": "Push-up progression (full to diamond)",
       "passStandard": "3 × 12 strict push-ups; 3 × 8 diamond",
       "exerciseSlug": "push-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "push-up",
+        "diamond-push-up",
+        "incline-push-up",
+        "wall-push-up"
+      ]
     },
     {
       "id": "pl_lean",
@@ -116,7 +122,10 @@
       "label": "Planche lean",
       "passStandard": "3 × 20 s, shoulders past wrists",
       "exerciseSlug": "planche-lean",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "planche-lean"
+      ]
     },
     {
       "id": "pl_frog",
@@ -128,7 +137,11 @@
       "label": "Frog stand / straight-arm frog",
       "passStandard": "3 × 20 s",
       "exerciseSlug": "frog-stand",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "frog-stand",
+        "planche-lean"
+      ]
     },
     {
       "id": "pl_tuck",
@@ -140,7 +153,10 @@
       "label": "Tuck planche",
       "passStandard": "3 × 12 s or 20 s best",
       "exerciseSlug": "tuck-planche",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "tuck-planche"
+      ]
     },
     {
       "id": "b_pppu",
@@ -152,7 +168,10 @@
       "label": "Pseudo planche push-up (PPPU)",
       "passStandard": "3 × 8–10 reps with 1 s lean pause",
       "exerciseSlug": "pseudo-planche-push-up",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "pseudo-planche-push-up"
+      ]
     },
     {
       "id": "pl_adv_tuck",
@@ -164,7 +183,10 @@
       "label": "Advanced tuck planche",
       "passStandard": "3 × 10 s, flat back",
       "exerciseSlug": "advanced-tuck-planche",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "advanced-tuck-planche"
+      ]
     },
     {
       "id": "pl_straddle",
@@ -176,7 +198,10 @@
       "label": "Straddle planche",
       "passStandard": "3 × 5 s",
       "exerciseSlug": "straddle-planche",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "straddle-planche"
+      ]
     },
     {
       "id": "pl_full",
@@ -188,7 +213,10 @@
       "label": "Full planche",
       "passStandard": "2–3 s clean",
       "exerciseSlug": "full-planche",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "full-planche"
+      ]
     },
     {
       "id": "b_hollow",
@@ -200,7 +228,10 @@
       "label": "Hollow & arch body hold",
       "passStandard": "3 × 30 s hollow; 3 × 30 s arch",
       "exerciseSlug": "hollow-body-hold",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "hollow-body-hold"
+      ]
     },
     {
       "id": "foundation",
@@ -212,7 +243,14 @@
       "label": "Foundation strength",
       "passStandard": "10 push-ups; 5 pull-ups; 10 dips; 30 s hollow; 20 s wrist-loaded plank",
       "exerciseSlug": null,
-      "mapping": "missing"
+      "mapping": "compound",
+      "linkedSlugs": [
+        "push-up",
+        "pull-up",
+        "parallel-bar-dip",
+        "hollow-body-hold",
+        "wrist-circles"
+      ]
     },
     {
       "id": "lsit_tuck",
@@ -224,7 +262,10 @@
       "label": "Tuck L-sit",
       "passStandard": "3 × 15 s",
       "exerciseSlug": "l-sit-tuck-hold",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "l-sit-tuck-hold"
+      ]
     },
     {
       "id": "lsit_1leg",
@@ -236,7 +277,10 @@
       "label": "One-leg L-sit",
       "passStandard": "3 × 10 s each leg",
       "exerciseSlug": "one-leg-l-sit",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "one-leg-l-sit"
+      ]
     },
     {
       "id": "lsit_full",
@@ -248,7 +292,10 @@
       "label": "L-sit",
       "passStandard": "3 × 10 s",
       "exerciseSlug": "l-sit",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "l-sit"
+      ]
     },
     {
       "id": "lsit_straddle",
@@ -260,7 +307,11 @@
       "label": "Straddle L-sit",
       "passStandard": "3 × 10 s",
       "exerciseSlug": "l-sit",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "l-sit",
+        "straddle-compression-hold"
+      ]
     },
     {
       "id": "comp_lifts",
@@ -272,7 +323,11 @@
       "label": "Compression lifts + press walks",
       "passStandard": "Pike/straddle lifts 3 × 10 with 2 s hold",
       "exerciseSlug": "seated-straddle-compression-lift",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "seated-straddle-compression-lift",
+        "seated-pike-lift"
+      ]
     },
     {
       "id": "press_hs",
@@ -284,7 +339,10 @@
       "label": "Straddle press to handstand",
       "passStandard": "1 clean rep",
       "exerciseSlug": "straddle-press-to-hs",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "straddle-press-to-hs"
+      ]
     },
     {
       "id": "b_wrist",
@@ -296,7 +354,11 @@
       "label": "Wrist prep & scapular push-ups",
       "passStandard": "3 min multi-angle wrist flow; 3 × 12 scap push-ups",
       "exerciseSlug": "scapular-push-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "scapular-push-up",
+        "wrist-circles"
+      ]
     },
     {
       "id": "b_pike_hspu",
@@ -308,7 +370,11 @@
       "label": "Pike & elevated box HSPU",
       "passStandard": "3 × 8 elevated pike push-ups",
       "exerciseSlug": "elevated-pike-push-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "elevated-pike-push-up",
+        "pike-push-up"
+      ]
     },
     {
       "id": "hs_ctw",
@@ -320,7 +386,10 @@
       "label": "Chest-to-wall handstand",
       "passStandard": "3 × 30 s, arms locked",
       "exerciseSlug": "chest-to-wall-handstand",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "chest-to-wall-handstand"
+      ]
     },
     {
       "id": "hs_bail",
@@ -332,7 +401,11 @@
       "label": "Bail-out + wall toe pulls",
       "passStandard": "Confident bail; 5 clean toe pulls",
       "exerciseSlug": "handstand-bail",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "handstand-bail",
+        "wall-toe-taps"
+      ]
     },
     {
       "id": "hs_heel",
@@ -344,7 +417,11 @@
       "label": "Back-to-wall heel pulls + kick-up",
       "passStandard": "5 heel pulls; balance found on most kick-ups",
       "exerciseSlug": "handstand-heel-pull",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "handstand-heel-pull",
+        "wall-pull-aways"
+      ]
     },
     {
       "id": "hs_free",
@@ -356,7 +433,10 @@
       "label": "Freestanding handstand",
       "passStandard": "10 s, then 30 s, then 60 s",
       "exerciseSlug": "handstand",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "handstand"
+      ]
     },
     {
       "id": "hspu",
@@ -368,7 +448,12 @@
       "label": "Handstand push-up (wall, then free)",
       "passStandard": "5 wall HSPU",
       "exerciseSlug": "handstand-push-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "handstand-push-up",
+        "partial-rom-wall-hspu",
+        "wall-hspu-negative"
+      ]
     },
     {
       "id": "pull_hang",
@@ -380,7 +465,11 @@
       "label": "Dead hang + scap pulls",
       "passStandard": "30 s hang; 10 scap pulls",
       "exerciseSlug": "dead-hang",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "dead-hang",
+        "scapular-pull-up"
+      ]
     },
     {
       "id": "pull_neg",
@@ -392,7 +481,11 @@
       "label": "Negatives + band pull-ups",
       "passStandard": "5 × 5 s negatives",
       "exerciseSlug": "band-assisted-pull-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "band-assisted-pull-up",
+        "pull-up"
+      ]
     },
     {
       "id": "pull_strict",
@@ -404,7 +497,10 @@
       "label": "Strict pull-up",
       "passStandard": "5 clean reps, dead hang start",
       "exerciseSlug": "pull-up",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "pull-up"
+      ]
     },
     {
       "id": "pull_10",
@@ -416,7 +512,10 @@
       "label": "10 strict pull-ups",
       "passStandard": "10 reps, chin over bar",
       "exerciseSlug": "pull-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "pull-up"
+      ]
     },
     {
       "id": "pull_c2b_arch",
@@ -428,7 +527,11 @@
       "label": "Chest-to-bar + archer",
       "passStandard": "8 chest-to-bar; 5 archer each side",
       "exerciseSlug": "archer-pull-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "archer-pull-up",
+        "pull-up"
+      ]
     },
     {
       "id": "pull_w_oac",
@@ -440,7 +543,11 @@
       "label": "Weighted / one-arm assisted",
       "passStandard": "+20% bodyweight × 5 or towel-assisted one-arm × 3",
       "exerciseSlug": "weighted-pull-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "weighted-pull-up",
+        "one-arm-chin-up"
+      ]
     },
     {
       "id": "b_pb_dips",
@@ -452,7 +559,10 @@
       "label": "Parallel-bar dips",
       "passStandard": "3 × 10 full-range dips",
       "exerciseSlug": "parallel-bar-dip",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "parallel-bar-dip"
+      ]
     },
     {
       "id": "mu_sb_dips",
@@ -463,8 +573,11 @@
       "og": "L4*",
       "label": "Straight-bar dips",
       "passStandard": "10 reps on the bar",
-      "exerciseSlug": null,
-      "mapping": "missing"
+      "exerciseSlug": "straight-bar-dip",
+      "mapping": "exact",
+      "linkedSlugs": [
+        "straight-bar-dip"
+      ]
     },
     {
       "id": "mu_expl_c2b",
@@ -476,7 +589,11 @@
       "label": "Explosive chest-to-bar",
       "passStandard": "5 reps touching chest to bar",
       "exerciseSlug": "pull-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "pull-up",
+        "weighted-pull-up"
+      ]
     },
     {
       "id": "mu_high_pull",
@@ -488,7 +605,11 @@
       "label": "High pull to waist",
       "passStandard": "3 reps with bar reaching waist",
       "exerciseSlug": "pull-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "pull-up",
+        "muscle-up"
+      ]
     },
     {
       "id": "mu_band",
@@ -500,7 +621,11 @@
       "label": "Band / jumping muscle-up",
       "passStandard": "3 band reps + 3 slow negatives",
       "exerciseSlug": "low-ring-muscle-up-assisted",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "low-ring-muscle-up-assisted",
+        "ring-muscle-up-transition-drill"
+      ]
     },
     {
       "id": "mu_strict",
@@ -512,7 +637,11 @@
       "label": "Strict muscle-up",
       "passStandard": "1 clean rep, no kip",
       "exerciseSlug": "muscle-up",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "muscle-up",
+        "ring-muscle-up"
+      ]
     },
     {
       "id": "flag_ready",
@@ -524,7 +653,13 @@
       "label": "Flag readiness",
       "passStandard": "8 pull-ups; 30 s wall handstand; 45 s side plank; 5 hanging side pulls",
       "exerciseSlug": "feet-assisted-human-flag",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "feet-assisted-human-flag",
+        "side-plank",
+        "pull-up",
+        "chest-to-wall-handstand"
+      ]
     },
     {
       "id": "flag_plank",
@@ -536,7 +671,11 @@
       "label": "Flag plank + 45° support press",
       "passStandard": "3 × 20 s plank; 3 × 8 s support press",
       "exerciseSlug": "side-plank",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "side-plank",
+        "feet-assisted-human-flag"
+      ]
     },
     {
       "id": "flag_vert",
@@ -548,7 +687,10 @@
       "label": "Vertical flag",
       "passStandard": "3 × 15 s",
       "exerciseSlug": "vertical-human-flag",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "vertical-human-flag"
+      ]
     },
     {
       "id": "flag_tuck",
@@ -560,7 +702,10 @@
       "label": "Tuck flag",
       "passStandard": "3 × 8 s",
       "exerciseSlug": "tuck-human-flag",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "tuck-human-flag"
+      ]
     },
     {
       "id": "flag_straddle",
@@ -572,7 +717,11 @@
       "label": "One-leg / straddle flag",
       "passStandard": "3 × 8 s each",
       "exerciseSlug": "straddle-human-flag",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "straddle-human-flag",
+        "human-flag"
+      ]
     },
     {
       "id": "flag_full",
@@ -584,7 +733,10 @@
       "label": "Full human flag",
       "passStandard": "2 s clean",
       "exerciseSlug": "human-flag",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "human-flag"
+      ]
     },
     {
       "id": "b_rows",
@@ -596,7 +748,10 @@
       "label": "Horizontal inverted rows",
       "passStandard": "3 × 10 chest-to-bar rows",
       "exerciseSlug": "bodyweight-row",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "bodyweight-row"
+      ]
     },
     {
       "id": "b_wide_rows",
@@ -608,7 +763,11 @@
       "label": "Wide / archer ring rows",
       "passStandard": "3 × 8 wide; 3 × 6 archer each",
       "exerciseSlug": "archer-ring-row",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "archer-ring-row",
+        "ring-row"
+      ]
     },
     {
       "id": "fl_tuck",
@@ -620,7 +779,10 @@
       "label": "Tuck front lever",
       "passStandard": "3 × 15 s, straight arms",
       "exerciseSlug": "tuck-front-lever",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "tuck-front-lever"
+      ]
     },
     {
       "id": "fl_adv_tuck",
@@ -632,7 +794,11 @@
       "label": "Advanced tuck front lever",
       "passStandard": "3 × 10 s, flat back",
       "exerciseSlug": "advanced-tuck-front-lever-on-rings",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "advanced-tuck-front-lever-on-rings",
+        "tuck-front-lever"
+      ]
     },
     {
       "id": "fl_1leg",
@@ -644,7 +810,11 @@
       "label": "One-leg front lever",
       "passStandard": "3 × 8 s each leg",
       "exerciseSlug": "front-lever",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "front-lever",
+        "tuck-front-lever"
+      ]
     },
     {
       "id": "fl_straddle",
@@ -656,7 +826,11 @@
       "label": "Straddle front lever",
       "passStandard": "3 × 5 s",
       "exerciseSlug": "front-lever",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "front-lever",
+        "tuck-front-lever"
+      ]
     },
     {
       "id": "fl_full",
@@ -668,7 +842,10 @@
       "label": "Full front lever",
       "passStandard": "3 s clean",
       "exerciseSlug": "front-lever",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "front-lever"
+      ]
     },
     {
       "id": "bl_stc",
@@ -680,7 +857,11 @@
       "label": "Skin the cat / German hang",
       "passStandard": "3 × 15 s German hang, building to 30 s pronated",
       "exerciseSlug": "skin-the-cat",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "skin-the-cat",
+        "german-hang-preparation"
+      ]
     },
     {
       "id": "bl_tuck",
@@ -692,7 +873,11 @@
       "label": "Tuck back lever",
       "passStandard": "3 × 15 s, pronated grip",
       "exerciseSlug": "ring-back-lever-tuck",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "ring-back-lever-tuck",
+        "back-lever"
+      ]
     },
     {
       "id": "bl_adv_tuck",
@@ -704,7 +889,11 @@
       "label": "Advanced tuck back lever",
       "passStandard": "3 × 10 s",
       "exerciseSlug": "back-lever",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "back-lever",
+        "ring-back-lever-tuck"
+      ]
     },
     {
       "id": "bl_straddle",
@@ -716,7 +905,11 @@
       "label": "Straddle back lever",
       "passStandard": "3 × 8 s",
       "exerciseSlug": "back-lever",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "back-lever",
+        "ring-back-lever-tuck"
+      ]
     },
     {
       "id": "bl_full",
@@ -728,7 +921,10 @@
       "label": "Full back lever",
       "passStandard": "5 s clean",
       "exerciseSlug": "back-lever",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "back-lever"
+      ]
     },
     {
       "id": "qd_wall_sit",
@@ -739,8 +935,11 @@
       "og": "L1*",
       "label": "Wall sit",
       "passStandard": "60 s, thighs parallel",
-      "exerciseSlug": null,
-      "mapping": "missing"
+      "exerciseSlug": "wall-sit",
+      "mapping": "exact",
+      "linkedSlugs": [
+        "wall-sit"
+      ]
     },
     {
       "id": "qd_sissy_ast",
@@ -752,7 +951,11 @@
       "label": "Assisted sissy squat",
       "passStandard": "3 × 10 holding a pole",
       "exerciseSlug": "sissy-squat",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "sissy-squat",
+        "bodyweight-squat"
+      ]
     },
     {
       "id": "qd_rev_nord_part",
@@ -763,8 +966,11 @@
       "og": "L3*",
       "label": "Reverse Nordic (partial)",
       "passStandard": "3 × 8, lean back approximately 45°",
-      "exerciseSlug": null,
-      "mapping": "missing"
+      "exerciseSlug": "reverse-nordic-partial",
+      "mapping": "exact",
+      "linkedSlugs": [
+        "reverse-nordic-partial"
+      ]
     },
     {
       "id": "qd_sissy_full",
@@ -776,7 +982,10 @@
       "label": "Full sissy squat",
       "passStandard": "3 × 8 no hands",
       "exerciseSlug": "sissy-squat",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "sissy-squat"
+      ]
     },
     {
       "id": "qd_rev_nord_full",
@@ -787,8 +996,11 @@
       "og": "L6–7*",
       "label": "Full reverse Nordic",
       "passStandard": "3 × 5, back toward floor and up",
-      "exerciseSlug": null,
-      "mapping": "missing"
+      "exerciseSlug": "reverse-nordic",
+      "mapping": "exact",
+      "linkedSlugs": [
+        "reverse-nordic"
+      ]
     },
     {
       "id": "b_sh_ext",
@@ -800,7 +1012,11 @@
       "label": "Shoulder extension & pike mobility",
       "passStandard": "3 × 30 s butcher's block; standing pike fold",
       "exerciseSlug": "shoulder-cars",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "shoulder-cars",
+        "pike-stretch"
+      ]
     },
     {
       "id": "mob_cossack",
@@ -812,7 +1028,10 @@
       "label": "Cossack squat",
       "passStandard": "3 × 8 each side, heel down",
       "exerciseSlug": "cossack-squat",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "cossack-squat"
+      ]
     },
     {
       "id": "b_ankle",
@@ -824,7 +1043,11 @@
       "label": "Ankle dorsiflexion & hip rotation",
       "passStandard": "≥14 cm knee-to-wall; 3 × 30 s active 90/90",
       "exerciseSlug": "wall-ankle-dorsiflexion",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "wall-ankle-dorsiflexion",
+        "90-90-hip-switches"
+      ]
     },
     {
       "id": "mob_pancake",
@@ -836,7 +1059,10 @@
       "label": "Pancake",
       "passStandard": "60 s, chest within a hand of the floor",
       "exerciseSlug": "pancake-stretch",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "pancake-stretch"
+      ]
     },
     {
       "id": "mob_front_split",
@@ -848,7 +1074,10 @@
       "label": "Front split",
       "passStandard": "Hips within a hand of the floor each side",
       "exerciseSlug": "front-split",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "front-split"
+      ]
     },
     {
       "id": "mob_mid_split",
@@ -860,7 +1089,10 @@
       "label": "Middle split",
       "passStandard": "Hips within a hand of the floor",
       "exerciseSlug": "middle-split",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "middle-split"
+      ]
     },
     {
       "id": "sq_deep",
@@ -872,7 +1104,11 @@
       "label": "Deep squat + 20 squats",
       "passStandard": "60 s deep squat; 20 clean squats",
       "exerciseSlug": "deep-squat-hold",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "deep-squat-hold",
+        "bodyweight-squat"
+      ]
     },
     {
       "id": "sq_bss",
@@ -884,7 +1120,10 @@
       "label": "Bulgarian split squat",
       "passStandard": "3 × 10 each leg",
       "exerciseSlug": "bulgarian-split-squat",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "bulgarian-split-squat"
+      ]
     },
     {
       "id": "sq_box_pistol",
@@ -896,7 +1135,11 @@
       "label": "Box pistol",
       "passStandard": "5 each leg to knee-high box",
       "exerciseSlug": "assisted-box-pistol-sit",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "assisted-box-pistol-sit",
+        "assisted-pistol-squat"
+      ]
     },
     {
       "id": "sq_pistol",
@@ -908,7 +1151,10 @@
       "label": "Pistol squat",
       "passStandard": "5 each leg",
       "exerciseSlug": "pistol-squat",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "pistol-squat"
+      ]
     },
     {
       "id": "sq_shrimp",
@@ -920,7 +1166,10 @@
       "label": "Shrimp squat",
       "passStandard": "5 each leg, knee touches floor",
       "exerciseSlug": "shrimp-squat",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "shrimp-squat"
+      ]
     },
     {
       "id": "sq_dragon",
@@ -931,8 +1180,11 @@
       "og": "L7–8*",
       "label": "Dragon pistol",
       "passStandard": "3 each leg",
-      "exerciseSlug": null,
-      "mapping": "missing"
+      "exerciseSlug": "dragon-pistol",
+      "mapping": "exact",
+      "linkedSlugs": [
+        "dragon-pistol"
+      ]
     },
     {
       "id": "pwr_squat_jump",
@@ -944,7 +1196,10 @@
       "label": "Squat jumps",
       "passStandard": "3 × 8, soft landing",
       "exerciseSlug": "jump-squat",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "jump-squat"
+      ]
     },
     {
       "id": "pwr_broad",
@@ -955,8 +1210,11 @@
       "og": "L2*",
       "label": "Broad jump",
       "passStandard": "3 × 5, stick landing",
-      "exerciseSlug": null,
-      "mapping": "missing"
+      "exerciseSlug": "broad-jump",
+      "mapping": "exact",
+      "linkedSlugs": [
+        "broad-jump"
+      ]
     },
     {
       "id": "pwr_tuck",
@@ -967,8 +1225,11 @@
       "og": "L3*",
       "label": "Tuck jumps",
       "passStandard": "3 × 6",
-      "exerciseSlug": null,
-      "mapping": "missing"
+      "exerciseSlug": "tuck-jump",
+      "mapping": "exact",
+      "linkedSlugs": [
+        "tuck-jump"
+      ]
     },
     {
       "id": "pwr_skater",
@@ -979,8 +1240,12 @@
       "og": "L4*",
       "label": "Skater hops / single-leg bounds",
       "passStandard": "3 × 6 each side",
-      "exerciseSlug": null,
-      "mapping": "missing"
+      "exerciseSlug": "skater-hop",
+      "mapping": "related",
+      "linkedSlugs": [
+        "skater-hop",
+        "single-leg-bound"
+      ]
     },
     {
       "id": "pwr_depth",
@@ -991,8 +1256,12 @@
       "og": "L5*",
       "label": "Box / depth jumps",
       "passStandard": "3 × 5, step down",
-      "exerciseSlug": null,
-      "mapping": "missing"
+      "exerciseSlug": "box-jump",
+      "mapping": "related",
+      "linkedSlugs": [
+        "box-jump",
+        "depth-jump"
+      ]
     },
     {
       "id": "hm_bridge",
@@ -1004,7 +1273,11 @@
       "label": "Single-leg hip bridge",
       "passStandard": "3 × 12 each leg",
       "exerciseSlug": "glute-bridge",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "glute-bridge",
+        "single-leg-rdl"
+      ]
     },
     {
       "id": "hm_slide",
@@ -1016,7 +1289,11 @@
       "label": "Sliding leg curl",
       "passStandard": "3 × 10",
       "exerciseSlug": "ring-hamstring-curl",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "ring-hamstring-curl",
+        "nordic-curl"
+      ]
     },
     {
       "id": "hm_rdl",
@@ -1028,7 +1305,10 @@
       "label": "Single-leg RDL",
       "passStandard": "3 × 10 each leg",
       "exerciseSlug": "single-leg-rdl",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "single-leg-rdl"
+      ]
     },
     {
       "id": "hm_nord_neg",
@@ -1040,7 +1320,11 @@
       "label": "Nordic curl negatives",
       "passStandard": "4 × 3, 5 s down (EXIT TEST; ease into eccentric work)",
       "exerciseSlug": "nordic-curl",
-      "mapping": "related"
+      "mapping": "related",
+      "linkedSlugs": [
+        "nordic-curl",
+        "ring-hamstring-curl"
+      ]
     },
     {
       "id": "hm_nord_full",
@@ -1052,7 +1336,10 @@
       "label": "Full Nordic curl",
       "passStandard": "3 clean reps",
       "exerciseSlug": "nordic-curl",
-      "mapping": "exact"
+      "mapping": "exact",
+      "linkedSlugs": [
+        "nordic-curl"
+      ]
     }
   ],
   "edges": [
