@@ -236,6 +236,7 @@ body .power-mobile-nav.power-simple-nav {
   width: min(calc(100% - 20px), 540px); z-index: 40;
 }
 body .power-simple-nav .power-nav-surface {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 6px; padding: 6px;
   border: 1px solid hsl(var(--border))!important;
   border-radius: 20px; background: hsl(var(--card) / .98)!important;
