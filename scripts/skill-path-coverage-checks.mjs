@@ -37,7 +37,7 @@ try{
  for(const id of ['pwr_skater','pwr_depth'])
   assert.equal(graph.nodes.find(n=>n.id===id).linkedSlugs.length,2,'Combined chart drill needs separate genuine movement options: '+id);
  const studio=await readFile('src/pages/SkillStudio.tsx','utf8'),browser=await readFile('src/components/Progression/SkillCategoryBrowser.tsx','utf8');
- assert(studio.includes("path.kind==='collection'?'Move options':'Skill steps'"),'Collections cannot be presented as strict ladders');
+ assert(studio.includes("path.kind==='collection'?'Movements':'Main progression'"),'Collections must stay clearly separate from ordered progressions');
  assert(browser.includes('path.kind'), 'Browser should distinguish step-by-step progressions and movement collections');
  const skills=await readFile('src/pages/Skills.tsx','utf8'),app=await readFile('src/App.tsx','utf8');
  assert(skills.includes("raw==='paths'||raw==='all'?raw:'tree'"),'The Skills tab must show the tree by default');
