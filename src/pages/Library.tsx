@@ -1,5 +1,3 @@
-import { ResultPager } from '@/components/Exercise/ResultPager';
-import { pageSlice } from '@/lib/skillBrowse';
 import { videoLessonCoverage } from '@/lib/videoLessonCoverage';
 import { TlcTvTopBar } from '@/components/Media/TlcTvTopBar';
 import { matchesProgression, canonicalSlug } from '@/lib/exerciseProgressions';
@@ -123,7 +121,10 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
   });
 
   useEffect(()=>setPage(0),[searchTerm,activeCategory,mineOnly,videosOnly,pathId,showAliases]);
-  const resultPage=pageSlice(filteredExercises,page,10);
+  // Progressive reveal preserves the visible cards when the user wants more.
+  // Traditional paging discarded cards and then forcibly jumped to the top.
+  const visibleExercises=filteredExercises.slice(0,(page+1)*10);
+  const remainingExercises=Math.max(0,filteredExercises.length-visibleExercises.length);
 
   const handleAddToWorkout = (exercise: Exercise) => {
     const profile=readTrainingProfile();const reasons=exerciseReadinessReasons(exercise,profile);
@@ -209,7 +210,7 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
           </div>
         ) : (
           <div className="power-exercise-rows">
-            {resultPage.items.map(exercise => (
+            {visibleExercises.map(exercise => (
               <div key={exercise.id} className="power-library-record">
                 <ExerciseCard exercise={exercise} addDisabledReason={publicCatalog.some(e=>e.slug===exercise.slug)?trainingBlockers(canonicalSlug(exercise.slug),profile,true)[0]:exerciseReadinessReasons(exercise,profile)[0]} onViewDetails={setSelectedExercise} onAddToWorkout={handleAddToWorkout} isAdded={workoutSlugs.includes(canonicalSlug(exercise.slug))} />
                 {ownerId && exercise.created_by === ownerId && (
@@ -235,7 +236,12 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
             ))}
           </div>
         )}
-        <ResultPager result={resultPage} onPage={next=>{setPage(next);document.querySelector('.power-library-results')?.scrollIntoView({block:'start'});}}/>
+        <div className="tlc-library-load-more" role="group" aria-label="Exercise results">
+          <span role="status" aria-live="polite">Showing {visibleExercises.length} of {filteredExercises.length} movements</span>
+          {remainingExercises>0&&<button type="button" onClick={()=>setPage(n=>n+1)}>
+            Show {Math.min(10,remainingExercises)} more movements <ArrowRight size={16}/>
+          </button>}
+        </div>
       </main>
 
       <ExerciseDetailModal workoutSlugs={workoutSlugs} exercise={selectedExercise} open={!!selectedExercise} onClose={() => setSelectedExercise(null)} onAddToWorkout={handleAddToWorkout} />
