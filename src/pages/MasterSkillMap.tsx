@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronDown, Download, GitBranch, Play, Search, ShieldAlert, Target, TvMinimal, Waypoints } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Sheet, SheetContent, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { deviceSkillProgress, exerciseBySlug, nodeProgress, readTrainingProfile, type SkillAttempt } from '@/lib/skillGraph';
 import { addWorkoutMovement, readWorkoutDraft, writeWorkoutDraft } from '@/lib/workoutWorkspace';
 import { toast } from 'sonner';
@@ -68,9 +70,11 @@ function graphDash(type:Edge['type']){
 }
 export default function MasterSkillMap({embedded=false}:{embedded?:boolean}){
  const {user}=useAuth(),owner=user?.id||'guest';
+ const mobile=useIsMobile(780);
  const [params,setParams]=useSearchParams();
  const first=params.get('skill');
  const [selectedId,setSelectedId]=useState(first&&nodeMap.has(first)?first:'hs_ctw');
+ const [detailsOpen,setDetailsOpen]=useState(Boolean(first));
  const [lane,setLane]=useState(nodeMap.get(first||'hs_ctw')?.lane||'HANDSTAND');
  const [view,setView]=useState<'focus'|'poster'>(()=>typeof window!=='undefined'&&window.matchMedia('(max-width:780px)').matches?'focus':'poster');
  const [bridges,setBridges]=useState(true);
@@ -96,8 +100,11 @@ export default function MasterSkillMap({embedded=false}:{embedded?:boolean}){
  const laneInfo=map.lanes.find(l=>l.id===selected.lane)!;
  function selectNode(id:string){
   const n=nodeMap.get(id);if(!n)return;
-  setSelectedId(id);setLane(n.lane);
-  setParams(prev=>{const updated=new URLSearchParams(prev);updated.set('skill',id);return updated;},{replace:true});
+  setSelectedId(id);
+  // Keep mobile graph/list in place while opening the node details.
+  if(!mobile)setLane(n.lane);
+  setDetailsOpen(true);
+  setParams(prev=>{const updated=new URLSearchParams(prev);updated.set('skill',id);return updated;},{replace:true,preventScrollReset:true});
  }
  function downloadSvg(){
   const current=svgRef.current;if(!current)return;
@@ -149,7 +156,7 @@ export default function MasterSkillMap({embedded=false}:{embedded?:boolean}){
      })}
      {!filtered.length&&<p className="master-map-empty">No skills in this view. Change the search or path.</p>}
     </div>
-    <SkillDetails key={selectedId} node={selected} lane={laneInfo} linked={linked} progress={progress} prereqs={directPrereqs} next={nextSteps} onChoose={selectNode} upstream={prereqs.size} downstream={unlocks.size}/>
+    {!mobile&&<SkillDetails node={selected} lane={laneInfo} linked={linked} progress={progress} prereqs={directPrereqs} next={nextSteps} onChoose={selectNode} upstream={prereqs.size} downstream={unlocks.size}/>}
   </section>:<section className="master-map-poster-layout">
    <div className="master-map-poster-hint"><GitBranch size={16}/> Tap a node to trace its connections. Scroll sideways through all 13 branches. <span>Checkpoints are goals, not daily workouts.</span></div>
    <div className={'master-map-scroll '+(fit?'is-fit':'')} tabIndex={0} aria-label="Scrollable 13-lane skill map">
@@ -209,8 +216,17 @@ export default function MasterSkillMap({embedded=false}:{embedded?:boolean}){
     </svg>
    </div>
    <div className="master-map-poster-bottom"><label><input type="checkbox" checked={tracing} onChange={e=>setTracing(e.target.checked)}/> Highlight prerequisites and next steps</label><button type="button" onClick={()=>setView('focus')}><Target size={15}/> See selected skill</button></div>
-   <SkillDetails key={selectedId} node={selected} lane={laneInfo} linked={linked} progress={progress} prereqs={directPrereqs} next={nextSteps} onChoose={selectNode} upstream={prereqs.size} downstream={unlocks.size}/>
+   {!mobile&&<SkillDetails node={selected} lane={laneInfo} linked={linked} progress={progress} prereqs={directPrereqs} next={nextSteps} onChoose={selectNode} upstream={prereqs.size} downstream={unlocks.size}/>}
   </section>}
+  <Sheet open={mobile&&detailsOpen} onOpenChange={setDetailsOpen}>
+    <SheetContent side="bottom" className="tlc-atomic-movement-sheet tlc-atomic-tree-sheet">
+      <SheetTitle className="tlc-atomic-sheet-title">{selected.label}</SheetTitle>
+      <SheetDescription className="sr-only">Movement checkpoint, tutorial, supporting exercises and next steps.</SheetDescription>
+      <div className="tlc-atomic-sheet-body">
+       <SkillDetails node={selected} lane={laneInfo} linked={linked} progress={progress} prereqs={directPrereqs} next={nextSteps} onChoose={selectNode} upstream={prereqs.size} downstream={unlocks.size}/>
+      </div>
+    </SheetContent>
+   </Sheet>
   <div className="master-map-note"><ShieldAlert size={18}/><p><strong>Training note:</strong> A pass standard is a goal for evaluating the next step, not a daily workout target or proof of safe readiness. Chart tiers and links are coaching references. Progress depends on technique, recovery, equipment and comfort, not a fixed calendar.</p></div>
  </Wrapper>;
 }
@@ -234,6 +250,7 @@ function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,
   try{writeWorkoutDraft(owner,after);toast.success('Added to your workout draft.');}catch{toast.error('Could not save the draft on this device.');}
  }
  const [maxHold,setMaxHold]=useState('');
+ useEffect(()=>setMaxHold(''),[node.id]);
  const isHold=/planche|lever|flag|stand|l-sit|hang|wall sit|support|hold/i.test(node.label)&&!/(push-up|pull-up|dip|squat|curl|press to handstand)/i.test(node.label);
  const max=Number(maxHold);
  const holdRange=isHold&&Number.isFinite(max)&&max>=3&&max<=180?[Math.max(1,Math.round(max*.6)),Math.max(1,Math.round(max*.7))]:null;
@@ -259,7 +276,7 @@ function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,
     <p>{node.mapping==='compound'?'This is a multi-exercise benchmark, not one exercise. These are the individual movements to practice and assess.':node.mapping==='related'?'This chart step combines movements or specifies a variation. Each linked exercise is labeled separately; none is falsely presented as the exact combined tutorial.':'Choose an exercise to see its full instructions, or add it to your draft manually.'}</p>
     <div className="master-map-connected-items">{connected.map((item,i)=><div key={item.slug} className="master-map-connected-item"><span><strong>{item.name}</strong><small>{node.mapping==='exact'&&item.slug===node.exerciseSlug?'EXACT MOVEMENT':'RELATED MOVEMENT'}</small></span><Link to={'/skills/'+linkedPath+'?movement='+encodeURIComponent(item.slug)} aria-label={'Watch and learn '+item.name}>Watch & learn <ArrowRight size={14}/></Link><button type="button" onClick={()=>addToWorkout(item.slug)} aria-label={'Add '+item.name+' to my workout draft'}>Add to workout</button></div>)}</div>
    </section>}
-  {supportivePath&&<MovementRequirementsPanel path={supportivePath} compact onChoose={slug=>navigate('/skills/'+linkedPath+'?movement='+encodeURIComponent(slug))}/>}
+  {supportivePath&&<details className="tlc-atomic-tree-extra"><summary>Supporting movements</summary><MovementRequirementsPanel path={supportivePath} compact onChoose={slug=>navigate('/skills/'+linkedPath+'?movement='+encodeURIComponent(slug))}/></details>}
   {linked?<div className="master-map-video">
     <div className="master-map-video-heading"><TvMinimal size={18}/><strong>{exact?'Watch this exercise':'Watch a related exercise'}</strong></div>
     {!exact&&<p>This clip teaches a related movement, not necessarily this exact chart step.</p>}
@@ -267,10 +284,10 @@ function SkillDetails({node,lane,linked,progress,prereqs,next,onChoose,upstream,
     <details className="master-map-more-technique"><summary><BookOpen size={15}/> {exact?'Instructions and easier options':'Related exercise instructions and easier options'}</summary><MovementOverview exercise={linked}/></details>
    </div>:node.mapping==='compound'?<div className="master-map-unmatched"><TvMinimal size={20}/><div><strong>No single video represents this checkpoint</strong><p>Choose one of the linked movements above to watch its real tutorial and check your form.</p></div></div>:<div className="master-map-unmatched"><TvMinimal size={20}/><div><strong>Exact tutorial not connected yet</strong><p>The chart node remains available. Use exercise search to find the right demonstration.</p><Link to="/library" state={{search:node.label}}>Find a tutorial <ArrowRight size={14}/></Link></div></div>}
   {progress&&<p className="master-map-progress"><Check size={15}/> Your linked exercise: {progress.state} · {progress.logs.length} saved attempts. Chart pass standards are assessed separately.</p>}
-  <div className="master-map-deps"><h3>How this skill connects</h3><div className="master-map-chain-count"><span>{upstream} earlier skills in its wider chain</span><span>{downstream} later skills</span></div>
+  <details className="master-map-deps tlc-atomic-tree-extra"><summary>Prerequisites & next steps · {prereqs.length + next.length}</summary><h3>How this skill connects</h3><div className="master-map-chain-count"><span>{upstream} earlier skills in its wider chain</span><span>{downstream} later skills</span></div>
    <div className="master-map-dependency"><h4>Useful preparation ({prereqs.length})</h4>{prereqs.map(edge=>{const n=nodeMap.get(edge.from)!;return <button type="button" key={edge.from+'-'+edge.type} onClick={()=>onChoose(n.id)}><span>{n.label}</span><small>{edge.type==='bridge'?'Added step':edge.type==='cross_implicit'?'Chart benchmark':edge.type==='reconciled'?'Reconciled link':'Skill link'}</small><ArrowRight size={14}/></button>;})}{!prereqs.length&&<p>This node has no incoming chart links.</p>}</div>
    <div className="master-map-dependency"><h4>What it builds toward ({next.length})</h4>{next.map(edge=>{const n=nodeMap.get(edge.to)!;return <button type="button" key={edge.to+'-'+edge.type} onClick={()=>onChoose(n.id)}><span>{n.label}</span><small>R{n.row}</small><ArrowRight size={14}/></button>;})}{!next.length&&<p>This node is a chart endpoint.</p>}</div>
-  </div>
+  </details>
   <details className="master-map-science"><summary><ShieldAlert size={15}/> Coaching, safety & research notes <ChevronDown size={14}/></summary>
    <p>These benchmarks are transcribed or conservatively restated from the supplied chart. They should not be used as unmodified daily working-set prescriptions. Training volume should be individualized.</p>
    <p>For straight-arm loading, handbalancing, knee-dominant variations and Nordic eccentrics, increase load gradually. Avoid attempting new milestones through joint pain or unstable equipment.</p>
