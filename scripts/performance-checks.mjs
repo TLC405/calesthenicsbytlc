@@ -24,12 +24,19 @@ const pkg=JSON.parse(readFileSync('package.json','utf8'));
 const vite=readFileSync('vite.config.ts','utf8');
 const appSrc=readFileSync('src/App.tsx','utf8');
 const controls=readFileSync('src/components/Layout/AppControls.tsx','utf8');
+const planner=readFileSync('src/pages/FocusPlanner.tsx','utf8');
+const tutorial=readFileSync('src/components/Exercise/MovementTutorialButton.tsx','utf8');
 const vercel=JSON.parse(readFileSync('vercel.json','utf8'));
 assert(vite.includes('manualChunks('),'Stable framework chunking must be configured');
 assert(vite.includes('backend-sdk'),'Stable backend SDK chunking missing');
 assert(controls.includes("lazy(() => import('@/components/Media/MediaSheet')"),'Video sheet is no longer deferred');
 assert(controls.includes("lazy(() => import('@/components/Settings/TrainingSettings')"),'Settings sheet is no longer deferred');
 assert(!controls.includes("from '@/lib/skillGraph'"),'Header must not eagerly import full exercise graph');
+for(const symbol of ['MovementLearningPanel','WorkoutCoach','SkillCategoryBrowser']){
+ assert(planner.includes(symbol+'=lazy('),'Training should defer the '+symbol+' panel');
+}
+assert(planner.includes('(coachOpen||coachActivated)'),'Coach should not mount until explicitly opened');
+assert(tutorial.includes('InlineTlcTv = lazy('),'Inline tutorial video should wait for a Watch click');
 assert(appSrc.includes('const TrainingEntry=lazy('),'TrainingEntry redirects must not load the catalog at startup');
 assert(pkg.scripts.build.includes('performance-checks.mjs'),'Production build must enforce performance budgets');
 const immutable=vercel.headers.find(h=>h.source==='/assets/(.*)');
