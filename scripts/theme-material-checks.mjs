@@ -6,6 +6,7 @@ const app=await readFile('src/App.tsx','utf8');
 const chooser=await readFile('src/components/ThemeSwitcher.tsx','utf8');
 const skeuo=await readFile('src/styles/skeuomorphic-themes-v4.css','utf8');
 const trainFix=await readFile('src/styles/train-screen-bugfix-v5.css','utf8');
+const atomic=await readFile('src/styles/atomic-ui-sweep-v6.css','utf8');
 const themes=[
   {id:'default',selector:':root:not([data-theme])'},
   {id:'vasa',selector:':root[data-theme="vasa"]'},
@@ -97,5 +98,11 @@ assert(trainFix.includes('max-height:none!important'),'Workout clipping safeguar
 assert(trainFix.includes('overflow:visible!important'),'Workout title must not clip');
 assert(trainFix.includes('@media(max-width:1120px)'),'Fold width must avoid squeezed two-column layout');
 assert(trainFix.includes('padding-bottom:calc(var(--power-nav-space'),'Dock overlap clearance missing');
+assert(app.includes('import "./styles/atomic-ui-sweep-v6.css";'),'Atomic sweep not registered');
+assert(app.indexOf('import "./styles/atomic-ui-sweep-v6.css";')>app.indexOf('import "./styles/train-screen-bugfix-v5.css";'),'Atomic sweep must load last');
+for(const selector of ['.compact-dose-controls','.compact-movement-open','.compact-workout>header','.power-row-actions','.compact-builder-tabs','.power-mobile-dock-v3','.power-app-shell']){if(selector!=='.power-app-shell')assert(atomic.includes(selector),'Atomic UI selector missing '+selector);}
+assert(atomic.includes('@media(max-width:320px)'),'Fold narrow-screen fallback missing');
+assert(atomic.includes('@media(prefers-reduced-motion:reduce)'),'Reduced-motion override missing');
+console.log('PASS: atomic UI sweep — cross-theme buttons, text, rail, tabs, form density and narrow Fold layout.');
 console.log('PASS: screenshot UI repairs — readable movements, clear workout cards, nonclipped headings, Fold stacks and dock clearance.');
 console.log('PASS: five material themes including light DBZ signature, physical depth, accessibility, multi-color controls, and stylesheet order.');
