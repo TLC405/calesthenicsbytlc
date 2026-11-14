@@ -8,7 +8,7 @@ import {pathToFileURL} from 'node:url';
 const folder=await mkdtemp(join(tmpdir(),'tlc-quality-audit-'));
 try{
  const output=join(folder,'requirements.mjs');
- await build({entryPoints:['src/data/movementRequirements.ts'],outfile:output,bundle:true,format:'esm',platform:'node',logLevel:'silent',alias:{'@':'./src'}});
+ await build({entryPoints:['src/data/movementRequirements.ts'],outfile:output,bundle:true,format:'esm',platform:'node',logLevel:'silent'});
  const {movementRequirementsFor,MOVEMENT_REQUIREMENT_PATHS}=await import(pathToFileURL(output).href);
  const source=await readFile('src/data/skillPaths.ts','utf8');
  const pathFile=join(folder,'paths.mjs');
