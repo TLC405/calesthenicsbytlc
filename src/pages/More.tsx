@@ -8,9 +8,9 @@ import { InstallPowerApp } from '@/components/InstallPowerApp';
 export default function More() {
   const {user}=useAuth();
   const links=[
-    {to:'/skills/map',label:'Master Skill Map',note:'80 skills, 13 paths and linked training checkpoints',icon:GitBranch},
+    {to:'/skills?view=tree',label:'Skill Tree',note:'80 skills across 13 connected pathways',icon:GitBranch},
     {to:'/integrations',label:'My ChatGPT & Integrations',note:'ChatGPT, research and training tools',icon:PlugZap},
-    {to:'/client',label:'Client Portal / Sign Up',note:'Create an account, take movement tests and track results',icon:Target},
+    {to:'/client',label:'Client Portal',note:'Sign up, test your skills, and view your results',icon:Target},
     {to:'/program',label:'My skill training plan',note:'Training days, handstands and skill steps',icon:Target},
     {to:'/library',label:'All exercises',note:'Search, videos and your own movements',icon:Library},
     {to:'/videos',label:'Tutorial checks',note:'Missing sources, playback and movement review',icon:Shield},
