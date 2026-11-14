@@ -10,6 +10,7 @@ import { useAuth } from '@/providers/AuthProvider';
 import { readSkillChecks } from '@/lib/skillCheck';
 import { deviceSkillProgress, exerciseBySlug, readTrainingProfile } from '@/lib/skillGraph';
 import { getSkillPath } from '@/data/skillPaths';
+import { ChatGPTJournal } from '@/components/Integrations/ChatGPTJournal';
 
 type Study = {id:string;title:string;authors:string;year:string;journal:string;pmid:string;doi:string;isOpenAccess:boolean;url:string};
 type StudyResult = {query:string;retrievedAt:string;articles:Study[];count:number;source:string};
@@ -199,6 +200,7 @@ export default function Integrations(){
     <p className="tlc-integration-help">Results are bibliographic records, not AI-generated study summaries. Read the methods before applying a finding to training.</p>
    </article>
   </section>
+  <ChatGPTJournal owner={owner} focus={focus}/>
   <section className="tlc-integration-tools">
     <div className="tlc-integration-tools-head"><div><p className="tlc-integration-kicker">03 / YOUR TOOLS</p><h2>Connected to your training workflow</h2></div><button type="button" onClick={()=>{setRecordVersion(n=>n+1);toast.success('Local training counts refreshed.');}}><RefreshCcw size={15}/> Refresh</button></div>
     <div className="tlc-integration-toolgrid">{recommendations.map(({title,subtitle,to,icon:Icon,tag})=><Link to={to} key={to} className="tlc-integration-tool">
