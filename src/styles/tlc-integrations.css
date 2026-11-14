@@ -105,3 +105,34 @@
  .tlc-integration-panel{padding:15px}
 }
 @media(prefers-reduced-motion:reduce){.tlc-integration-tool{transition:none}}
+
+/* Personal ChatGPT reply journal: user-pasted text only, device-local by default. */
+.tlc-chatgpt-journal{
+ display:grid;gap:13px;background:hsl(var(--card));
+ border:1px solid hsl(var(--border));border-top:4px solid var(--su-trim);
+ border-radius:18px;padding:clamp(16px,2.3vw,26px);
+ box-shadow:var(--su-card-shadow);
+}
+.tlc-chatgpt-journal .tlc-integration-field textarea{
+ width:100%;min-height:132px;border:1px solid hsl(var(--border));
+ background:hsl(var(--background));color:hsl(var(--foreground));
+ padding:12px;font-size:13px;line-height:1.55;border-radius:12px;resize:vertical;
+}
+.tlc-chatgpt-journal-actions{display:flex;flex-wrap:wrap;gap:9px}
+.tlc-chatgpt-journal-actions button{
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ min-height:45px;padding:9px 14px;border:1px solid hsl(var(--border));border-radius:11px;
+ background:hsl(var(--secondary)/.5);color:hsl(var(--foreground));
+ font-size:12px;font-weight:850;
+}
+.tlc-chatgpt-journal-actions .is-primary{background:hsl(var(--primary));color:hsl(var(--primary-foreground));border-color:hsl(var(--primary))}
+.tlc-chatgpt-journal-actions button:disabled{opacity:.42}
+.tlc-chatgpt-journal-list{display:grid;gap:10px;max-height:400px;overflow:auto}
+.tlc-chatgpt-journal-list>article{padding:13px;border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--secondary)/.3)}
+.tlc-chatgpt-journal-list article header{display:flex;justify-content:space-between;align-items:center;gap:9px;border-bottom:1px solid hsl(var(--border));padding-bottom:8px}
+.tlc-chatgpt-journal-list article header span{font-size:10px;font-weight:800;color:hsl(var(--muted-foreground));text-transform:capitalize}
+.tlc-chatgpt-journal-list article header div{display:flex;gap:6px}
+.tlc-chatgpt-journal-list article header button{
+ display:grid;place-items:center;min-width:37px;min-height:37px;border:1px solid hsl(var(--border));border-radius:8px;color:hsl(var(--primary))
+}
+.tlc-chatgpt-journal-list article>p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.6;margin-top:10px}
