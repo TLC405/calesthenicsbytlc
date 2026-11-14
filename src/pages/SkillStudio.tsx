@@ -45,7 +45,7 @@ export default function SkillStudio() {
   const [goalSlug,setGoalSlug]=useState(()=>readProgressionGoal(owner,path?.id||''));
   const [comfortable,setComfortable]=useState(false);
   const [value,setValue]=useState(''); const [quality,setQuality]=useState(0);
-  const [lean,setLean]=useState(''); const [band,setBand]=useState('');
+  const [lean,setLean]=useState(''); const [band,setBand]=useState('');const [bandSetup,setBandSetup]=useState('');
   const [negative,setNegative]=useState(''); const [clearance,setClearance]=useState('');
   const [assistance,setAssistance]=useState<SkillAttempt['assistance']>('none');
   const [rom,setRom]=useState<SkillAttempt['rom']>('full');
@@ -57,7 +57,7 @@ export default function SkillStudio() {
   },[owner]);
   useEffect(()=>{const sync=()=>setProfile(readTrainingProfile());window.addEventListener('power-training-profile',sync);return()=>window.removeEventListener('power-training-profile',sync);},[]);
   useEffect(()=>{setSelected(path?.slugs[0]||'');setComfortable(false);setDetailOpen(true);setShowAll(false);setGoalSlug(readProgressionGoal(owner,path?.id||''));},[path?.id,owner]);
-  useEffect(()=>{setValue('');setQuality(0);setComfortable(false);setDiscomfort('');setLean('');setBand('');setNegative('');setClearance('');},[selected]);
+  useEffect(()=>{setValue('');setQuality(0);setComfortable(false);setDiscomfort('');setLean('');setBand('');setBandSetup('');setNegative('');setClearance('');},[selected]);
   if(!path)return <main className="p-6"><h1>Choose a skill studio</h1><Link to="/library">Return to library</Link></main>;
   const exercise=exerciseBySlug.get(selected);
   const dose=nodeDose(selected); const progress=nodeProgress(selected,attempts);
@@ -76,7 +76,7 @@ export default function SkillStudio() {
     if(!exercise||!value||!Number.isFinite(actual)||actual<0||!quality){toast.error('Enter your actual result and technique quality.');return;}
     const optional=(v:string)=>v!==''&&Number.isFinite(Number(v))?Math.max(0,Number(v)):undefined;
     saveAttempt(owner,{id:crypto.randomUUID(),nodeId:selected,sessionId:session.current,at:new Date().toISOString(),metric:dose.metric,value:actual,target:dose.target,quality,
-      leanCm:optional(lean),assistanceKg:optional(band),negativeSeconds:optional(negative),clearanceCm:optional(clearance),assistance,rom,discomfort:discomfort||undefined});
+      leanCm:optional(lean),assistanceKg:optional(band),bandSetup:assistance==='band'?bandSetup.trim().slice(0,140)||undefined:undefined,negativeSeconds:optional(negative),clearanceCm:optional(clearance),assistance,rom,discomfort:discomfort||undefined});
     toast.success('Attempt saved on this device.');setValue('');setQuality(0);
   }
   function train(){
@@ -98,8 +98,9 @@ export default function SkillStudio() {
     <details className="rounded-xl border p-3"><summary className="min-h-8 font-bold text-sm cursor-pointer">Log an attempt · seconds, leverage and quality</summary><div className="space-y-3 mt-3">
       <label className="block text-xs">Actual {dose.metric}<Input className="mt-1 h-12" type="number" min="0" max="999" value={value} onChange={e=>setValue(e.target.value)} /></label>
       <fieldset><legend className="text-xs mb-2">Technique quality · 1 lost control / 5 controlled</legend><div className="flex gap-2">{[1,2,3,4,5].map(n=><button key={n} aria-pressed={quality===n} className={`h-12 flex-1 rounded-lg border ${quality===n?'bg-primary text-primary-foreground':''}`} onClick={()=>setQuality(n)}>{n}</button>)}</div></fieldset>
-      <div className="grid grid-cols-2 gap-3">{[{label:'Lean distance (cm)',value:lean,set:setLean},{label:'Band assistance (kg)',value:band,set:setBand},{label:'Negative duration (s)',value:negative,set:setNegative},{label:'Foot clearance (cm)',value:clearance,set:setClearance}].map(field=><label className="text-xs" key={field.label}>{field.label}<Input className="mt-1 h-12" type="number" min="0" max="999" placeholder="Optional" value={field.value} onChange={e=>field.set(e.target.value)}/></label>)}</div>
+      <div className="grid grid-cols-2 gap-3">{[{label:'Lean distance (cm)',value:lean,set:setLean},{label:'Band force (kg, if measured)',value:band,set:setBand},{label:'Negative duration (s)',value:negative,set:setNegative},{label:'Foot clearance (cm)',value:clearance,set:setClearance}].map(field=><label className="text-xs" key={field.label}>{field.label}<Input className="mt-1 h-12" type="number" min="0" max="999" placeholder="Optional" value={field.value} onChange={e=>field.set(e.target.value)}/></label>)}</div>
       <div className="grid grid-cols-2 gap-3"><label className="text-xs">Assistance<select className="block w-full h-12 rounded-lg border bg-card px-2 mt-1" value={assistance} onChange={e=>setAssistance(e.target.value as SkillAttempt['assistance'])}>{['none','feet','wall','band'].map(x=><option key={x}>{x}</option>)}</select></label><label className="text-xs">Range<select className="block w-full h-12 rounded-lg border bg-card px-2 mt-1" value={rom} onChange={e=>setRom(e.target.value as SkillAttempt['rom'])}><option>full</option><option>partial</option></select></label></div>
+      {assistance==='band'&&<label className="block text-xs font-medium">Band setup used (brand, width, anchor & support)<Input className="mt-1 h-12" maxLength={140} value={bandSetup} placeholder="e.g. long loop, under knee, pull-up bar" onChange={e=>setBandSetup(e.target.value)}/><small className="block mt-2 leading-relaxed text-muted-foreground">Record the actual setup each session. Colors and advertised resistance do not give exact assistance force; only enter kg if independently measured.</small></label>}
       <label className="block text-xs">Discomfort / load note (optional)<Input className="h-12 mt-1" maxLength={200} value={discomfort} placeholder="Area and what you noticed" onChange={e=>setDiscomfort(e.target.value)}/></label>
       <Button className="h-12 w-full" disabled={!value||quality===0} onClick={record}><Save className="mr-2 h-4 w-4"/>Save actual attempt</Button>
     </div></details>
