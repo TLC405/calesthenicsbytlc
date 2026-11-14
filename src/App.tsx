@@ -52,6 +52,7 @@ import "./styles/tlctv-first.css";
 import "./styles/master-skill-map.css";
 import "./styles/progression-quality.css";
 import "./styles/mobile-dock-v3.css";
+import "./styles/theme-material-overhaul.css";
 import { useTheme } from './components/ThemeSwitcher';
 
 const queryClient = new QueryClient();
