@@ -1,0 +1,219 @@
+/* TLC / Atomic QA v7 • route-wide remedial styling
+   Scoped to real screens from App.tsx, protects dark and light palette legibility.
+   Keep material-system depth, avoid screen-wide forced text color on media. */
+:root{
+ --tlc-qa-ink:hsl(var(--foreground));
+ --tlc-qa-muted:hsl(var(--muted-foreground));
+ --tlc-qa-border:hsl(var(--border));
+ --tlc-qa-paper:hsl(var(--card));
+ --tlc-qa-pressed:hsl(var(--secondary));
+}
+html,body,#root{max-width:100%;min-width:0}
+body #root :is(main,section,article,aside,nav,header,footer){min-width:0}
+body #root :is(img,video,canvas,iframe){max-width:100%}
+body #root :is(.power-simple-page,.power-movements-page,.power-compact-builder,
+ .tlc-client-page,.master-map-page,.power-session,.tlctv-studio-first){box-sizing:border-box;max-width:100%}
+body #root :is(.power-simple-page,.power-movements-page,.power-compact-builder,
+ .tlc-client-page,.master-map-page,.power-session){scroll-margin-top:75px}
+/* Cards shared across Skills, Library, Plan, More, and Client Portal. */
+body :is(.power-simple-page,.power-movements-page,.master-map-page,.tlc-client-page)
+ :is(.power-elevated,.power-more-links>a,.power-practice-card,.power-studio-node,
+ .master-map-skill-list,.master-map-detail,.tlc-client-panel){
+ min-width:0;overflow-wrap:break-word;
+ border-color:var(--tlc-material-rim)!important;
+ box-shadow:inset 0 1px var(--tlc-glass),0 3px 0 var(--tlc-material-rim),
+   0 14px 25px -17px var(--tlc-material-shadow)!important;
+}
+/* Prevent faux-disabled text and one-line clipping in actual movement controls. */
+body .power-movement-library :is(.power-library-head,.power-library-results,.power-exercise-rows,
+ .power-library-record,.power-exercise-row){min-width:0}
+body .power-movement-library .power-library-record{
+ overflow-wrap:anywhere;
+}
+body .power-movement-library :is(.power-exercise-open,.power-exercise-row,.power-library-head)
+ :is(strong,h1,h2,h3){color:var(--tlc-qa-ink)!important;opacity:1!important}
+body .power-movement-library :is(.power-library-head,.power-exercise-open,.power-exercise-row)
+ :is(.text-muted-foreground,small){color:var(--tlc-qa-muted)!important;opacity:1!important}
+body .power-movement-library .power-library-head{
+ border-bottom:2px solid var(--tlc-face-secondary)!important;
+}
+body .power-movement-library .power-library-results{
+ padding-bottom:calc(var(--power-nav-space,115px) + 40px)!important;
+}
+body .power-movement-library .power-library-head input[aria-label="Search exercises"]{
+ background:var(--tlc-material-core)!important;
+ color:var(--tlc-ink)!important;
+ border:1px solid var(--tlc-material-rim)!important;
+ box-shadow:inset 0 3px 5px var(--tlc-material-shadow)!important;
+}
+body .power-movement-library .power-library-head input[aria-label="Search exercises"]::placeholder{
+ color:var(--tlc-secondary-ink)!important;opacity:1!important;
+}
+body .power-movement-library .power-library-tools{
+ border:1px solid var(--tlc-material-rim)!important;
+ background:var(--tlc-panel)!important;border-radius:12px;
+ color:var(--tlc-ink)!important;
+}
+body .power-movement-library .power-exercise-row:focus-within{
+ outline:2px solid var(--tlc-face-secondary)!important;outline-offset:1px;
+}
+/* Skill Tree: scroll area stays scrollable, content never shrinks to unreadable hairlines. */
+body .master-map-page{padding-bottom:calc(var(--power-nav-space,115px) + 35px)!important}
+body .master-map-tools{
+ background:var(--tlc-panel)!important;border:2px solid var(--tlc-material-rim)!important;
+ box-shadow:inset 0 2px var(--tlc-glass),0 3px 0 var(--tlc-material-rim)!important;
+}
+body .master-map-tools :is(input,select){
+ min-height:44px!important;max-width:100%;min-width:0;
+}
+body .master-map-switch button{
+ min-width:44px;min-height:44px;
+ color:var(--tlc-qa-ink)!important;
+}
+body .master-map-switch button[aria-pressed="true"]{
+ color:hsl(var(--primary-foreground))!important;
+}
+body .master-map-skill-name{color:var(--tlc-qa-ink)!important;overflow-wrap:anywhere}
+body .master-map-skill-meta span:not(:last-child){color:var(--tlc-qa-muted)!important}
+body .master-map-scroll{
+ width:100%!important;max-width:100%!important;min-width:0;
+ overflow:auto!important;
+ overscroll-behavior-x:contain;
+ -webkit-overflow-scrolling:touch;
+}
+body .master-map-scroll>svg:not(.is-fit){max-width:none!important}
+body .master-map-poster-tools{min-width:0}
+body .master-map-detail :is(h1,h2,h3,strong){color:var(--tlc-qa-ink)}
+body .master-map-detail .master-map-links{
+ grid-template-columns:repeat(2,minmax(0,1fr));
+}
+/* Client portal: themed materials retain readable fields and actions without
+   inheriting global light colors on a dark brand hero. */
+body .tlc-client-page{
+ --tc-ink:var(--tlc-ink);
+ --tc-muted:var(--tlc-secondary-ink);
+ --tc-panel:var(--tlc-panel);
+ --tc-border:var(--tlc-material-rim);
+ --tc-primary:var(--tlc-face-secondary);
+ overflow-wrap:break-word;
+ padding-bottom:calc(var(--power-nav-space,115px) + 35px)!important;
+}
+body .tlc-client-page .tlc-client-wrap{width:min(calc(100% - 24px),1050px)}
+body .tlc-client-page .tlc-client-panel{
+ background:var(--tlc-panel)!important;
+ border:1px solid var(--tlc-material-rim)!important;
+ color:var(--tlc-ink)!important;
+}
+body .tlc-client-page .tlc-client-panel :is(h1,h2,h3,strong){
+ color:var(--tlc-ink)!important;
+}
+body .tlc-client-page :is(.tlc-client-panel,.tlc-client-access,.tlc-client-metric)
+ :is(.tlc-client-muted,small){color:var(--tlc-secondary-ink)!important}
+body .tlc-client-page .tlc-client-hero :is(h1,h2,h3,p,strong,small){
+ color:var(--tlc-hero-ink)!important;
+}
+body .tlc-client-page .tlc-client-hero :is(.tlc-client-hero__identity small,
+ .tlc-client-hero__copy>span){color:#f4d39b!important}
+body .tlc-client-page .tlc-client-tabs{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ min-width:0;gap:6px;
+ border:2px solid var(--tlc-material-rim)!important;
+ background:var(--tlc-panel-inset)!important;
+}
+body .tlc-client-page .tlc-client-tabs a{
+ min-width:0;min-height:58px;
+ display:flex;align-items:center;justify-content:flex-start;gap:8px;
+ color:var(--tlc-ink)!important;
+}
+body .tlc-client-page .tlc-client-tabs a.is-active{
+ background:var(--tlc-material-core)!important;
+ border-color:var(--tlc-face-secondary)!important;
+}
+body .tlc-client-page .tlc-client-form :is(input,select,textarea),
+body .tlc-client-page .tlc-client-access__form :is(input,select){
+ min-width:0;max-width:100%;color:var(--tlc-ink)!important;
+}
+body .tlc-client-page :is(.tlc-client-steps,.tlc-client-metrics,.tlc-client-overview)>*{
+ min-width:0;
+}
+body .tlc-client-page .tlc-client-access__actions{
+ flex-wrap:wrap;min-width:0;
+}
+body .tlc-client-page :is(.tlc-client-cta,.tlc-client-secondary,.tlc-client-quiet){
+ min-width:44px;min-height:44px;overflow-wrap:break-word;
+}
+body .tlc-client-page .tlc-client-cta{
+ color:hsl(var(--primary-foreground))!important;background:hsl(var(--primary))!important;
+}
+body .tlc-client-page .tlc-client-access__actions .tlc-client-quiet,
+body .tlc-client-page .tlc-client-secondary{
+ color:var(--tlc-ink)!important;background:var(--tlc-material-core)!important;
+}
+/* More / appearance: ensure theme samples cannot crush text or clip palette */
+body .su-theme-control,body .su-theme-grid,body .su-theme-option{
+ min-width:0;max-width:100%;
+}
+body .su-theme-option{min-height:135px;overflow:hidden}
+body .su-theme-preview{max-width:100%;overflow:hidden}
+body .su-theme-option :is(strong,small,p){overflow-wrap:break-word}
+/* TLCtv controls and videos: minimum actionable hit areas and flexible control grid */
+body .tlctv-inline{width:100%;max-width:100%;min-width:0}
+body .tlctv-inline__stage{width:100%;max-width:100%}
+body .tlctv-inline__embedded iframe{display:block;max-width:100%}
+body .tlctv-inline__buttons{grid-template-columns:minmax(0,1.35fr) repeat(3,minmax(0,1fr))}
+body .tlctv-inline__buttons :is(button,a){
+ min-height:44px;min-width:0;max-width:100%;
+ overflow-wrap:break-word;white-space:normal;
+}
+body .tlctv-inline__source-stepper button{
+ min-width:44px;min-height:44px;
+}
+/* Settings / plan / workout: no accidental horizontal overflow */
+body :is(.power-setting-section,.power-more-section,.power-more-links,.power-session,.tlc-clear-guide){
+ max-width:100%;min-width:0;
+}
+body :is(.power-setting-section,.power-more-section) :is(input,select,textarea){
+ width:auto;max-width:100%;min-width:0;
+}
+body .power-session{padding-bottom:calc(var(--power-nav-space,115px) + 36px)}
+body .power-session :is(button,a,summary){
+ scroll-margin-bottom:var(--power-nav-space,115px);
+}
+body :is(.power-more-links>a,.power-simple-page .power-quiet-link) :is(strong,small){
+ overflow-wrap:anywhere;
+}
+/* Narrow Fold cover: choose clean stacks over shrunken side-by-side widgets. */
+@media(max-width:720px){
+ body .master-map-body{grid-template-columns:minmax(0,1fr)!important}
+ body .tlc-client-page .tlc-client-overview{grid-template-columns:minmax(0,1fr)!important}
+ body .tlc-client-page .tlc-client-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body .tlc-client-page .tlc-client-steps{grid-template-columns:minmax(0,1fr)}
+ body .master-map-tools :is(.master-map-search,.master-map-select){flex:1 1 100%;min-width:0}
+ body .power-simple-page .power-more-links>a{min-height:60px}
+}
+@media(max-width:480px){
+ body .tlc-client-page .tlc-client-tabs a{
+  min-height:58px;flex-direction:column;gap:5px;align-items:center;justify-content:center;text-align:center;
+  padding:7px 3px!important;
+ }
+ body .tlc-client-page .tlc-client-tabs a :is(strong,small){font-size:10px!important;line-height:1.2}
+ body .tlc-client-page .tlc-client-tabs svg{width:18px;height:18px}
+ body .tlc-client-page .tlc-client-metrics{grid-template-columns:minmax(0,1fr)!important}
+ body .tlc-client-page .tlc-client-topline{flex-wrap:wrap}
+ body .master-map-poster-tools label,.master-map-poster-bottom label{white-space:normal!important}
+ body .master-map-detail .master-map-links{grid-template-columns:minmax(0,1fr)!important}
+ body .master-map-legend{gap:7px 10px}
+ body .tlctv-inline__buttons{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body .tlctv-inline__buttons :is(button,a){min-height:46px}
+}
+@media(max-width:350px){
+ body .tlc-client-page .tlc-client-wrap{width:calc(100% - 16px)}
+ body .su-theme-grid{grid-template-columns:minmax(0,1fr)!important}
+ body .tlctv-inline__buttons{grid-template-columns:minmax(0,1fr)!important}
+ body .master-map-switch{flex-wrap:wrap;min-width:0}
+}
+@media(prefers-reduced-motion:reduce){
+ body :is(.power-simple-page,.power-movements-page,.master-map-page,.tlc-client-page) :is(button,a){
+  scroll-behavior:auto!important;transition:none!important
+ }
+}
