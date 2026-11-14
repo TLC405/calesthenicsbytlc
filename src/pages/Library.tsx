@@ -176,6 +176,7 @@ export default function Library({embedded=false}:{embedded?:boolean}) {
 
   return (
     <div className={`power-movement-library ${embedded?'is-embedded':''}`}>
+      {!embedded&&<TlcTvTopBar compact/>}
       <header className="power-library-head relative bg-background border-b border-border/50">
         <div className="max-w-6xl mx-auto px-4 py-5 space-y-4">
           {!embedded&&<div className="flex items-center justify-between gap-3"><div className="min-w-0"><h1 className="font-display text-2xl font-bold">Exercise Library</h1><p className="text-xs text-muted-foreground mt-1">{exercises.filter(e=>showAliases||canonicalSlug(e.slug)===e.slug).length} movements</p></div><Button variant="outline" className="min-h-12 shrink-0" onClick={()=>navigate('/skills')}><Target className="w-4 h-4 mr-2"/>Skills</Button></div>}
