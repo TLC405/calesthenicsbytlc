@@ -1,0 +1,177 @@
+/* TLC ATOMIC SWEEP / 2026-11 — precision across all five material themes
+   Final-layer accessibility, touch geometry, dense-card alignment and responsive rails.
+   No state changes. These rules deliberately avoid overriding exercise thumbnail media.
+*/
+:root{
+ --tlc-atom-focus:var(--tlc-face-secondary);
+ --tlc-atom-inset:var(--tlc-material-core);
+ --tlc-atom-edge:var(--tlc-material-rim);
+ --tlc-atom-ink:var(--tlc-ink);
+ --tlc-atom-muted:var(--tlc-secondary-ink);
+}
+body :is(.power-compact-builder,.power-skill-studio,.power-movements-page,.power-simple-page,.tlc-client-page){
+ min-width:0;
+}
+body :is(.compact-workspace-grid,.compact-movement-row,.compact-planned-heading,.compact-browser-tools,.power-row-actions,
+          .su-builder-actions,.su-theme-grid,.power-category-grid,.tlc-client-tabs)>*{min-width:0}
+/* Make navigable headers look like distinct solid components, not card text pasted on backgrounds. */
+body .power-compact-builder .compact-builder-heading.su-builder-titlebar{
+ display:flex;align-items:flex-start;flex-wrap:wrap;gap:12px;
+ border-top:5px solid var(--tlc-face-accent)!important;
+ padding:clamp(14px,2.3vw,25px)!important;
+ overflow:visible!important;
+}
+body .power-compact-builder .su-builder-copy{min-width:0;flex:1 1 250px}
+body .power-compact-builder .su-builder-copy h1{
+ font-size:clamp(24px,3.5vw,40px)!important;
+ line-height:1.13!important;
+ margin-block:3px 8px!important;
+ overflow-wrap:break-word;
+}
+body .power-compact-builder .su-builder-actions{
+ gap:8px;display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;
+}
+body .power-compact-builder .su-builder-actions :is(a,button){
+ min-height:44px;min-width:44px;white-space:normal;
+ border:1px solid var(--tlc-atom-edge)!important;
+ background:var(--tlc-atom-inset)!important;
+ color:var(--tlc-atom-ink)!important;
+ box-shadow:inset 0 1px var(--tlc-glass),0 3px 0 var(--tlc-atom-edge)!important;
+}
+body .power-compact-builder .su-builder-actions a{border-left:4px solid var(--tlc-face-secondary)!important}
+/* Zero-opacity shortcuts / actionable icons are no longer swallowed by surrounding surfaces. */
+body :is(.compact-workout,.compact-level-group,.compact-workout-item) button:not(:disabled):focus-visible,
+body :is(.power-mobile-dock-v3,.compact-builder-tabs,.tlc-client-tabs) a:focus-visible{
+ outline:3px solid var(--tlc-atom-focus)!important;outline-offset:2px!important;
+}
+body .power-compact-builder .power-row-actions :is(button,a){
+ display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;
+ border-radius:12px;
+}
+body .power-compact-builder .compact-add:not(:disabled){
+ background:hsl(var(--primary))!important;
+ color:hsl(var(--primary-foreground))!important;
+ border:2px solid hsl(var(--primary))!important;
+ box-shadow:inset 0 1px rgb(255 255 255 / .3),0 3px 0 var(--tlc-atom-edge)!important;
+}
+body .power-compact-builder .compact-add:disabled,
+body .power-compact-builder .compact-add.is-added{
+ color:var(--tlc-atom-ink)!important;background:var(--tlc-atom-inset)!important;
+ border:1px solid var(--tlc-atom-edge)!important;
+ opacity:.8!important;box-shadow:inset 0 2px 4px var(--tlc-material-shadow)!important;
+}
+body .power-compact-builder .compact-movement-row:focus-within{
+ box-shadow:inset 4px 0 0 var(--tlc-face-secondary)!important;
+}
+body .power-compact-builder .compact-movement-open,
+body .power-compact-builder .compact-planned-heading>button:first-child{
+ min-width:0!important;text-align:left!important;
+}
+body .power-compact-builder .compact-movement-open>span:not(.power-movement-thumbnail),
+body .power-compact-builder .compact-planned-heading>button:first-child>span:not(.power-movement-thumbnail){
+ min-width:0;max-width:100%;
+}
+body .power-compact-builder .compact-movement-open :is(strong,small),
+body .power-compact-builder .compact-planned-heading :is(strong,small){
+ display:block;max-width:100%;overflow-wrap:anywhere;word-break:normal;
+}
+/* Strong alternation among surfaces, not three near-identical gray swatches. */
+body .power-compact-builder .compact-workout-phase:nth-of-type(3n+1)>h3{border-left:4px solid var(--tlc-face-accent);padding-left:10px}
+body .power-compact-builder .compact-workout-phase:nth-of-type(3n+2)>h3{border-left:4px solid var(--tlc-face-secondary);padding-left:10px}
+body .power-compact-builder .compact-workout-phase:nth-of-type(3n)>h3{border-left:4px solid var(--tlc-face-tertiary);padding-left:10px}
+body .power-compact-builder .compact-dose-controls{
+ grid-template-columns:minmax(0,72px) minmax(0,96px) minmax(0,1fr);
+ align-items:end;gap:8px;
+}
+body .power-compact-builder .compact-dose-controls label{min-width:0;overflow-wrap:anywhere}
+body .power-compact-builder .compact-dose-controls :is(input,select){width:100%;min-width:0}
+body .power-compact-builder .compact-confirm{align-items:flex-start;gap:11px}
+body .power-compact-builder .compact-confirm input{flex:0 0 21px;min-width:21px;min-height:21px}
+/* Unselected switcher chips and tabs still have a visually discernible outline. */
+body .power-compact-builder .compact-builder-tabs button:not([aria-pressed="true"]){
+ color:var(--tlc-atom-ink)!important;border:1px solid var(--tlc-atom-edge)!important;
+ background:var(--tlc-material-core)!important;
+ box-shadow:inset 0 1px var(--tlc-glass)!important;
+}
+body .power-compact-builder .compact-builder-tabs button[aria-pressed="true"]{
+ border:2px solid hsl(var(--primary))!important;
+ color:hsl(var(--primary-foreground))!important;background:hsl(var(--primary))!important;
+ box-shadow:inset 0 1px rgb(255 255 255 / .25),0 3px 0 var(--tlc-atom-edge)!important;
+}
+body .power-compact-builder .compact-builder-tabs button>span{
+ color:inherit!important;border:1px solid currentColor;
+ background:transparent!important;
+}
+/* Mobile dock: remove old fixed-height clipping and keep labels centered on Fold cover width. */
+body .power-mobile-nav.power-mobile-dock-v3 .power-nav-surface{
+ height:auto!important;min-height:76px!important;max-height:none!important;overflow:visible!important;
+ align-items:stretch!important;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link{
+ min-height:64px!important;height:auto!important;max-height:none!important;
+ display:flex!important;justify-content:center!important;align-items:center!important;
+ gap:3px!important;padding:6px 2px!important;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link>.power-dock-label{
+ color:inherit!important;font-size:clamp(10px,2.5vw,11px)!important;
+ line-height:1.25!important;
+ white-space:normal!important;overflow-wrap:break-word;max-width:100%;
+}
+body .power-mobile-dock-v3 .power-simple-nav-link[aria-current="page"]{
+ background:var(--tlc-dial-light)!important;
+ border:2px solid var(--tlc-face-accent)!important;
+ color:var(--tlc-atom-ink)!important;
+ box-shadow:inset 0 2px 4px var(--tlc-material-shadow)!important;
+}
+/* Banner/feedback and media controls do not inherit washed-out placeholder colors. */
+body :is(.power-offline-banner,.focus-inline-warning,.power-workout-warning){
+ font-weight:700;line-height:1.5;
+}
+body :is(.compact-detail-sheet,.power-settings-sheet){
+ color:hsl(var(--foreground))!important;
+ border-left:2px solid var(--tlc-atom-edge)!important;
+}
+body :is(.compact-detail-sheet,.power-settings-sheet) :is(h1,h2,h3,strong){
+ color:hsl(var(--foreground));
+}
+body :is(.compact-detail-sheet,.power-settings-sheet) :is(input,select,textarea){
+ color:var(--tlc-atom-ink)!important;
+}
+/* Never visually disable an entire list row just because Add is unavailable. */
+body .power-compact-builder :is(.compact-movement-row,.compact-movement-open,.compact-workout-item){
+ opacity:1!important;filter:none!important;
+}
+body .power-compact-builder :is(.compact-movement-row,.compact-workout-item) :is(.builder-level,.power-level-badge){
+ opacity:1!important;filter:none!important;
+}
+@media(max-width:1120px){
+ body .power-compact-builder .compact-workspace-grid{display:block!important}
+ body .power-compact-builder .compact-workout{max-height:none!important;overflow:visible!important}
+}
+@media(max-width:420px){
+ body .power-compact-builder .su-builder-actions{width:100%}
+ body .power-compact-builder .su-builder-actions :is(a,button){flex:1 1 110px;text-align:center}
+ body .power-compact-builder .compact-dose-controls{
+  grid-template-columns:minmax(0,58px) minmax(0,78px) minmax(0,1fr);
+  gap:5px;
+ }
+ body .power-compact-builder .compact-dose-controls :is(input,select){font-size:13px!important;padding:6px!important}
+ body .power-compact-builder .compact-planned-heading{gap:3px!important}
+ body .power-compact-builder .compact-planned-heading>button:not(:first-child){
+  flex:0 0 36px!important;min-width:36px!important;
+ }
+ body .power-compact-builder .compact-workout>header{min-height:78px!important}
+ body .power-mobile-dock-v3 .power-simple-nav-link>.power-dock-label{font-size:10px!important}
+}
+@media(max-width:320px){
+ body .power-compact-builder .compact-browser-tools{grid-template-columns:minmax(0,1fr)!important}
+ body .power-compact-builder .compact-suggest{width:100%!important}
+ body .power-compact-builder .compact-planned-heading>button:first-child{
+  grid-template-columns:58px minmax(0,1fr)!important;gap:5px!important;
+ }
+ body .power-compact-builder .compact-dose-controls{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ body .power-compact-builder .compact-dose-controls label:last-child{grid-column:1/-1}
+}
+@media(prefers-reduced-motion:reduce){
+ body :is(.power-compact-builder,.power-mobile-dock-v3) :is(button,a){transition:none!important;scroll-behavior:auto!important}
+}
