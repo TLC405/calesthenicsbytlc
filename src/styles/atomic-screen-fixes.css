@@ -1,0 +1,84 @@
+/* Atomic Fold / tablet / mobile layout corrections (all TLC themes).
+   Protect four fixed navigation actions from inherited 3-column grid rules. */
+:root{--tlc-dock-height:82px;--power-nav-space:calc(122px + env(safe-area-inset-bottom,0px))}
+body .power-mobile-nav.power-simple-nav{
+  position:fixed!important;
+  left:50%!important;right:auto!important;top:auto!important;
+  bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+  width:min(calc(100% - 24px),540px)!important;
+  max-height:var(--tlc-dock-height)!important;
+  transform:translateX(-50%)!important;
+  padding:0!important;border:0!important;
+  background:transparent!important;z-index:48;
+}
+body .power-mobile-nav.power-simple-nav .power-nav-surface{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-template-rows:minmax(0,1fr)!important;
+  grid-auto-rows:0!important;
+  align-items:stretch;gap:4px!important;
+  min-height:0!important;max-height:var(--tlc-dock-height)!important;
+  padding:5px!important;overflow:hidden!important;
+  border-radius:19px;
+}
+body .power-mobile-nav .power-simple-nav-link{
+  box-sizing:border-box;
+  display:flex!important;flex-direction:column!important;
+  min-width:0!important;width:100%!important;max-width:100%!important;
+  min-height:65px!important;height:65px!important;
+  padding:6px 2px!important;gap:4px!important;
+  overflow:hidden;white-space:nowrap;justify-content:center;
+}
+body .power-mobile-nav .power-simple-nav-link>span{
+  display:block!important;max-width:100%!important;
+  font-size:clamp(9px,1.8vw,11px)!important;
+  line-height:1.12!important;overflow:hidden;text-overflow:ellipsis;
+  text-align:center;white-space:nowrap!important;
+}
+body .power-mobile-nav .power-simple-nav-link>svg{flex-shrink:0;width:21px!important;height:21px!important}
+body .power-app-shell{
+  padding-bottom:calc(var(--power-nav-space) + 24px)!important;
+  min-height:100dvh;
+}
+body :is(.power-simple-page,.power-movements-page,.power-compact-builder,.power-skill-studio,.power-library-results,.power-builder-home,.power-session){
+  scroll-padding-bottom:var(--power-nav-space);
+  padding-bottom:calc(var(--power-nav-space) + 40px)!important;
+}
+body .power-skill-browser,body .power-category-grid,body .power-path-list{min-width:0}
+body .power-category-grid>button{
+  min-width:0;max-width:100%;overflow:hidden;
+  grid-auto-flow:unset;box-sizing:border-box;
+}
+body .power-category-grid>button>span:not(.power-movement-thumbnail){min-width:0;flex:1}
+body .power-category-grid>button strong{
+  overflow-wrap:anywhere;line-height:1.25;
+}
+body .power-movements-page .power-quiet-link{max-width:100%}
+body .power-movements-page .power-quiet-link svg{flex-shrink:0}
+/* Fold cover screens get readable, full-width cards and a usable four-key dock. */
+@media(max-width:540px){
+  :root{--tlc-dock-height:78px;--power-nav-space:calc(116px + env(safe-area-inset-bottom,0px))}
+  body .power-mobile-nav.power-simple-nav{width:min(calc(100% - 16px),540px)!important}
+  body .power-mobile-nav .power-simple-nav-link{height:61px!important;min-height:61px!important}
+  body .power-category-grid{grid-template-columns:1fr!important;gap:10px!important}
+  body .power-category-grid>button{padding:12px!important;min-height:85px}
+  body .power-category-grid .power-movement-thumbnail{
+    width:86px!important;min-width:86px!important;
+    height:65px!important;min-height:65px!important;max-height:65px!important;
+  }
+  body .power-category-grid>button strong{font-size:15px!important}
+  body .power-category-grid>button small{font-size:11px!important}
+  body .power-category-grid>button>svg{display:block}
+  body .power-app-controls button{min-width:42px}
+}
+@media(min-width:541px) and (max-width:900px){
+  body .power-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:901px){
+  body .power-app-shell{padding-bottom:calc(var(--power-nav-space) + 24px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body .power-mobile-nav .power-simple-nav-link{transition:none!important}
+}
+/* When the native keyboard is open, do not trap focus behind the dock. */
+body :is(input,textarea,select):focus-visible{scroll-margin-bottom:calc(var(--power-nav-space) + 20px)}
