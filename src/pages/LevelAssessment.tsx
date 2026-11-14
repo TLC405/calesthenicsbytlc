@@ -83,7 +83,7 @@ export default function LevelAssessment() {
       <div>
         <p className="power-simple-eyebrow flex items-center gap-2"><ClipboardCheck size={16}/> TLC / SUPER HUMAN SKILLS CHECK</p>
         <h1>Discover your super human starting point.</h1>
-        <p>See where your super human strength stands. Measure one skill at a time, then explore optional next-level suggestions—never preset workouts.</p><Link to="/program" className="mt-3 inline-flex min-h-10 items-center gap-2 text-xs font-bold text-primary">View A/D/E/B/C plan and progression ladders <ArrowRight size={15}/></Link>
+        <p>See where your super human strength stands. Measure one skill at a time, then explore optional next-level suggestions—never preset workouts.</p><Link to="/client/test" className="ml-3 mt-3 inline-flex min-h-10 items-center gap-2 text-xs font-bold text-primary">Client Portal Test <ArrowRight size={15}/></Link><Link to="/program" className="mt-3 inline-flex min-h-10 items-center gap-2 text-xs font-bold text-primary">View A/D/E/B/C plan and progression ladders <ArrowRight size={15}/></Link>
       </div>
     </header>
 
