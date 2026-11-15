@@ -1,7 +1,7 @@
 {
-  "name": "I GOT THE POWER",
-  "short_name": "POWER",
-  "description": "Raw power training. 150+ exercises, skill progressions, and AI coaching.",
+  "name": "TLC Prime — Train, Lengthen, Control",
+  "short_name": "TLC Prime",
+  "description": "Strength, balance, mobility, and skill progressions. Train, Lengthen, Control.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
@@ -21,7 +21,11 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["fitness", "health", "sports"],
+  "categories": [
+    "fitness",
+    "health",
+    "sports"
+  ],
   "screenshots": [],
   "shortcuts": [
     {
