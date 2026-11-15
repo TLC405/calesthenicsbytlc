@@ -35,3 +35,10 @@
   .power-entry-wordmark h1.superhuman-entry-title{font-size:34px}
   .power-app-controls .power-app-wordmark>span small{font-size:6.5px;letter-spacing:.03em}
 }
+
+/* TLC Prime compact wordmark: Fold 5 cover and responsive headers. */
+@media(max-width:480px){
+ .power-app-controls .power-app-wordmark{min-width:0;max-width:calc(100% - 158px)!important;gap:7px!important}
+ .power-app-controls .power-app-wordmark>span{font-size:clamp(12px,3.45vw,16px)!important;line-height:1.04!important;white-space:normal!important;overflow-wrap:normal}
+ .power-app-controls .power-app-wordmark>span small{font-size:clamp(6.5px,1.8vw,8px)!important;line-height:1.22!important;letter-spacing:0!important}
+}
