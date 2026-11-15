@@ -53,3 +53,24 @@ body .tlc-integrations-page :is(button,a){
 }
 
 body .power-shell :is(.power-brand,.power-text-link){min-height:44px;display:inline-flex;align-items:center}
+
+/* The appearance picker follows its panel width, including narrow settings sheets. */
+body .su-theme-control{container-type:inline-size;min-width:0;box-sizing:border-box}
+body .power-setting-section>.su-theme-control{width:auto;max-width:calc(100% - 24px)}
+body .su-theme-grid{
+ width:100%;max-width:100%;min-width:0;box-sizing:border-box;
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))!important;
+ gap:12px;padding:3px 3px 7px;
+}
+body .su-theme-option{width:100%;min-width:0;max-width:100%;white-space:normal;box-sizing:border-box}
+body .su-theme-preview,body .su-option-bottom{min-width:0;max-width:100%;box-sizing:border-box}
+body .su-option-copy{min-width:0;overflow-wrap:anywhere}
+body .power-settings-content{min-width:0;max-width:100%}
+/* All nested skill actions meet the same minimum as the main training controls. */
+body :is(.master-map-page,.master-skills-shell,.power-skill-studio) :is(button,a,summary),
+body .tlctv-inline :is(button,a,summary),
+body .tlctv-studio-first :is(button,a,summary){min-height:44px!important}
+body :is(.master-map-back,.master-map-poster-bottom button){min-width:44px;display:inline-flex;align-items:center}
+body .master-map-poster-tools label{min-height:44px;display:inline-flex;align-items:center;gap:8px}
+body .master-map-detail :is(button,a){white-space:normal;overflow-wrap:anywhere}
+body .tlctv-inline label:has(input[type="file"]){min-height:44px!important;display:inline-flex;align-items:center}

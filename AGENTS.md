@@ -1,5 +1,10 @@
 # POWER design preferences
 
+## Delivery ownership
+- Complete implementation, build, cache migration, verification and deployment without handing compiling or routine testing work to Lord TLC.
+- Automatically recover stale app caches without deleting workouts, account sessions, localStorage or IndexedDB. Preserve the current branding and the existing site's audience.
+- Update both the existing Vercel app and the existing TLC Strength Site when changing their shared app source.
+
 - For app icons, logos, and other major branding changes, present several visibly different design options before replacing the live branding. Default to four concepts for icon or logo requests.
 - Use Lord TLC's hand-drawn TLC doodle/sketch identity: bold marker outlines, handmade lettering, and restrained integrated details. Use the user's artwork as the visual reference.
 - The user dislikes the current icon that looks like a blue bull. Do not use bull/bison imagery for the replacement.

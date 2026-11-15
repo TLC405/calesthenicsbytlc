@@ -8,7 +8,10 @@ import { AlertCircle, ArrowRight, RefreshCw } from 'lucide-react';
 class RouteFailureBoundary extends Component<{children:ReactNode},{failed:boolean}> {
  state={failed:false};
  static getDerivedStateFromError(){return {failed:true};}
- componentDidCatch(error:Error,info:{componentStack:string}){console.error('[TLC screen recovery]',error,info.componentStack);}
+ componentDidCatch(error:Error,info:{componentStack:string}){
+  console.error('[TLC screen recovery]',error,info.componentStack);
+  if(window.TLCBoot?.isChunkError(error))void window.TLCBoot.repair();
+ }
  render(){
   if(!this.state.failed)return this.props.children;
   return <main className="power-simple-page tlc-screen-recovery" role="alert">

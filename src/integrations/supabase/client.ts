@@ -8,10 +8,11 @@ export const backendConfigured = Boolean(
 );
 const backendUrl = import.meta.env.VITE_SUPABASE_URL || 'https://unconfigured.invalid';
 const publicKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'unconfigured-preview-key';
+function sessionStorage(){try{return typeof window==='undefined'?undefined:window.localStorage;}catch{return undefined;}}
 
 export const supabase = createClient<Database>(backendUrl, publicKey, {
   auth: {
-    storage: typeof window === 'undefined' ? undefined : window.localStorage,
+    storage: sessionStorage(),
     persistSession: true,
     autoRefreshToken: true,
     detectSessionInUrl: true,

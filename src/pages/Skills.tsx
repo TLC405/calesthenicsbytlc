@@ -1,8 +1,8 @@
+import { lazy, Suspense } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, GitBranch, Layers3, Search } from 'lucide-react';
 import { SkillCategoryBrowser } from '@/components/Progression/SkillCategoryBrowser';
 const Library = lazy(()=>import('./Library'));
-import { lazy, Suspense } from 'react';
 const MasterSkillMap = lazy(()=>import('./MasterSkillMap'));
 import { TlcTvTopBar } from '@/components/Media/TlcTvTopBar';
 import { SkillLaddersPanel } from '@/components/Training/SkillLaddersPanel';

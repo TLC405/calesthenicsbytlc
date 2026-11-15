@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { preparePowerInstall } from "./lib/installPower";
+import { prepareAppUpdates } from "./lib/appUpdates";
 import { themeSnapshot, applyThemeAppearance } from "./lib/themePreference";
 import "./index.css";
 import "./styles/neumorph.css";
@@ -15,22 +16,7 @@ import "./styles/prime-refinement.css";
 applyThemeAppearance(themeSnapshot());
 
 preparePowerInstall();
-if(import.meta.env.PROD&&"serviceWorker" in navigator){window.addEventListener("load",()=>{void navigator.serviceWorker.register("/power-sw.js",{scope:"/",updateViaCache:"none"}).catch(()=>{});});}
-
-const bootStarted=performance.now();
+prepareAppUpdates();
 const rootElement=document.getElementById("root")!;
 createRoot(rootElement).render(<App />);
-const boot=document.getElementById("tlc-prime-boot");
-if(boot){
- const release=()=>{
-  boot.classList.add("is-leaving");
-  window.setTimeout(()=>boot.remove(),340);
- };
- const waitForApp=()=>{
-  const elapsed=performance.now()-bootStarted;
-  const hasApp=Boolean(rootElement.querySelector(".power-app-shell"))&&!rootElement.querySelector('[data-route-loading]');
-  if((hasApp&&elapsed>=3400)||elapsed>=14000){release();return;}
-  window.setTimeout(waitForApp,90);
- };
- waitForApp();
-}
+window.TLCBoot?.ready();

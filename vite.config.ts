@@ -1,12 +1,16 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { readFileSync } from "node:fs";
 
 // Keep framework and backend SDK code in stable hashed chunks across deployments.
 // Route pages, media galleries and training modules stay automatically split by React.lazy.
 export default defineConfig(() => ({
   server: { host: "::", port: 8080 },
-  plugins: [react()],
+  plugins: [react(),{
+    name:'tlc-independent-boot-recovery',
+    transformIndexHtml:{order:'pre',handler(html){return html.replace('<!-- TLC_BOOTSTRAP -->','<script>'+readFileSync('public/power-boot.js','utf8').replace(/<\/script/gi,'<\\/script')+'</script>');}},
+  }],
   resolve: { alias: { "@": path.resolve(__dirname, "./src") } },
   build: {
     rollupOptions: {

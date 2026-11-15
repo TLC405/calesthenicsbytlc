@@ -1,9 +1,9 @@
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 const SkillCategoryBrowser=lazy(()=>import('@/components/Progression/SkillCategoryBrowser').then(m=>({default:m.SkillCategoryBrowser})));
 import { MovementTutorialButton } from '@/components/Exercise/MovementTutorialButton';
 import { ResultPager } from '@/components/Exercise/ResultPager';
 import { pageSlice } from '@/lib/skillBrowse';
 import '@/styles/workout-workspace.css';
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowDown, ArrowUp, ArrowRight, Check, ChevronDown, LockKeyhole, Plus, Search, Sparkles, Trash2 } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
@@ -27,7 +27,7 @@ import { toSessionEntries, type SkillExercise, type SkillWorkoutItem, type Worko
 import { addWorkoutMovement, readWorkoutDraft, writeWorkoutDraft, cleanWorkoutItems, orderedWorkout, moveWorkoutItem, workoutIdentity, workspaceMovements, workoutBlockers, WORKOUT_PHASES, BUILDER_PHASE_LABELS } from '@/lib/workoutWorkspace';
 import { toast } from 'sonner';
 function LevelBadge({slug}:{slug:string}){const tier=minimumTier(slug);return <DifficultyBadge level={tier}/>;}
-export default function FocusPlanner({home=false}:{home?:boolean}){const {user,loading}=useAuth();if(loading)return <main className="power-simple-page">Opening your workout builder…</main>;return <WorkoutWorkspace key={user?.id||'guest'} owner={user?.id||'guest'} home={home}/>;}
+export default function FocusPlanner({home=false}:{home?:boolean}){const {user,loading}=useAuth();if(loading)return <main data-auth-loading className="power-simple-page" role="status">Opening your workout builder…</main>;return <WorkoutWorkspace key={user?.id||'guest'} owner={user?.id||'guest'} home={home}/>;}
 function WorkoutWorkspace({owner,home}:{owner:string;home:boolean}){
  const navigate=useNavigate();const [params]=useSearchParams();
  const [prefs,setPrefs]=useState<FocusPreferences>(()=>{const saved=readFocusPreferences(owner);const requested=params.get('goal');return {...saved,focus:'auto',goalId:getSkillPath(requested||'')?requested!:getSkillPath(saved.goalId)?saved.goalId:'straight-arm'};});

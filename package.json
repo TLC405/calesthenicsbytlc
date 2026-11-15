@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/build-coach-policy.mjs && node scripts/client-portal-checks.mjs && node scripts/modification-checks.mjs && node scripts/video-coverage-checks.mjs && node scripts/atomic-sweep-checks.mjs && node scripts/master-map-checks.mjs && node scripts/skill-tree-routing-checks.mjs && node scripts/skill-path-coverage-checks.mjs && node scripts/movement-quality-checks.mjs && node scripts/alternate-branch-checks.mjs && node scripts/mobile-interaction-audit.mjs && node scripts/theme-material-checks.mjs && node scripts/route-qa-checks.mjs && vite build && node scripts/build-offline-shell.mjs && node scripts/prime-brand-checks.mjs && node scripts/performance-checks.mjs",
+    "build": "node scripts/build-coach-policy.mjs && node scripts/client-portal-checks.mjs && node scripts/modification-checks.mjs && node scripts/video-coverage-checks.mjs && node scripts/atomic-sweep-checks.mjs && node scripts/master-map-checks.mjs && node scripts/skill-tree-routing-checks.mjs && node scripts/skill-path-coverage-checks.mjs && node scripts/movement-quality-checks.mjs && node scripts/alternate-branch-checks.mjs && node scripts/mobile-interaction-audit.mjs && node scripts/theme-material-checks.mjs && node scripts/route-qa-checks.mjs && vite build && node scripts/build-offline-shell.mjs && node scripts/prime-brand-checks.mjs && node scripts/cache-recovery-checks.mjs && node scripts/performance-checks.mjs",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"

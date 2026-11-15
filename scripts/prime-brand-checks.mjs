@@ -52,12 +52,13 @@ assert.equal(createHash('sha256').update(original).digest('hex'),'da9f18c0d4b29c
 const main=await readFile('src/main.tsx','utf8');
 assert(main.indexOf('import "./index.css"')<main.indexOf('import App'),'Base styles must load before theme styles');
 assert(!main.includes('elapsed>=1350'),'Startup must not force a fake wait');
-assert(main.includes('[data-route-loading]'),'Startup must wait for the actual routed screen');
+const boot=await readFile('public/power-boot.js','utf8');
+assert(boot.includes('[data-route-loading]'),'Startup must wait for the actual routed screen');
 const loading=await readFile('src/components/LoadingScreen.tsx','utf8');
 assert(!loading.includes('setInterval'),'No fabricated load percentage');
 const builtWorker=await readFile('dist/power-sw.js','utf8');
 const assets=JSON.parse(builtWorker.match(/const BUILD_ASSETS=(\[[^;]*\]);/)[1]);
 const built=(await readdir('dist/assets')).filter(n=>/\.(js|css)$/.test(n));
 for(const name of built)assert(assets.includes('/assets/'+name),'Offline screen omitted: '+name);
-assert(builtWorker.includes("(await caches.open(CACHE)).match('/')"),'Offline navigation must use the current shell');
+assert(builtWorker.includes("await cached('/')"),'Offline navigation must use the current shell');
 console.log('PASS: versioned 192/512/maskable icon dimensions, original-resolution loading art, stable install identity, style order, real startup readiness and '+assets.length+' offline scripts/styles.');
