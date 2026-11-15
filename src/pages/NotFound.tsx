@@ -37,7 +37,7 @@ const NotFound = () => {
         </div>
 
         <p className="text-[8px] text-muted-foreground font-mono uppercase tracking-[0.3em]">
-          I Got The Power
+          TLC Prime
         </p>
       </div>
     </div>
