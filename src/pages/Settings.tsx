@@ -67,7 +67,7 @@ export default function Settings() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'power-training-data.json';
+    link.download = 'tlc-prime-training-data.json';
     link.click();
     toast({ title: 'Exported', description: 'Training data downloaded.' });
   };
@@ -241,7 +241,7 @@ export default function Settings() {
                 <div className="flex gap-2">
                   <Input
                     type="text"
-                    placeholder="I GOT THE POWER"
+                    placeholder="TLC PRIME"
                     value={siteConfig.app_tagline || ''}
                     onChange={e => setSiteConfig(prev => ({ ...prev, app_tagline: e.target.value }))}
                     className="h-11 rounded-xl border-border/50 bg-card focus:border-ring flex-1"
@@ -265,7 +265,7 @@ export default function Settings() {
             <h2 className="font-display text-sm font-bold tracking-tight text-destructive">Account</h2>
           </div>
           <p className="text-xs text-muted-foreground mb-4">Sign out of your account.</p>
-          <Button onClick={async () => { await signOut(); navigate('/auth'); }} variant="destructive" size="sm" className="font-mono uppercase tracking-wider text-[10px] rounded-xl">
+          <Button onClick={async () => { await signOut(); navigate('/auth?return=%2Fmore'); }} variant="destructive" size="sm" className="font-mono uppercase tracking-wider text-[10px] rounded-xl">
             <LogOut className="w-3.5 h-3.5 mr-1.5" />Sign Out
           </Button>
         </section>
