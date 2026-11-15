@@ -38,6 +38,11 @@ console.log('PASS: shared theme subscriptions, direct selection, cross-tab sync,
 const manifest=JSON.parse(await readFile('public/manifest.json','utf8'));
 assert.equal(manifest.id,'/power-independent-guest','Install identity must remain stable');
 for(const icon of manifest.icons){
+ if(icon.type==='image/svg+xml'){
+  const svg=await readFile('public'+icon.src,'utf8');
+  assert(svg.includes('SPREAD MORE')&&svg.includes('TLC'),'Primary SVG icon must feature large TLC and Spread More');
+  continue;
+ }
  const bytes=await readFile('public'+icon.src),[width,height]=icon.sizes.split('x').map(Number);
  assert.equal(bytes.readUInt32BE(16),width);assert.equal(bytes.readUInt32BE(20),height);
  assert(icon.src.includes('20261115'));
