@@ -9,7 +9,8 @@ import { Lock, Mail, User, Zap, Loader2 } from 'lucide-react';
 
 export default function Auth() {
   const [params]=useSearchParams();
-  const returnTo=params.get('return')==='workout'?'/planner?coach=1':'/admin';
+  const requested=params.get('return') || '/more';
+  const returnTo=requested.startsWith('/') && !requested.startsWith('//') && !requested.startsWith('/auth') ? requested : '/more';
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,9 +25,9 @@ export default function Auth() {
     e.preventDefault();
     setLoading(true);
     try {
-      const { error } = isSignUp ? await signUp(email, password, displayName) : await signIn(email, password);
+      const { error } = isSignUp ? await signUp(email, password, displayName, returnTo) : await signIn(email, password);
       if (error) toast({ title: 'Error', description: error.message, variant: 'destructive' });
-      else if (isSignUp) toast({ title: 'Welcome', description: 'Check your email to confirm your account.' });
+      else if (isSignUp) toast({ title: 'Welcome', description: 'Check your email to confirm your account, then sign in.' });
     } catch (error: any) {
       toast({ title: 'Error', description: error.message, variant: 'destructive' });
     } finally {
@@ -54,12 +55,12 @@ export default function Auth() {
             <div className="w-10 h-10 rounded-xl bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20">
               <Zap className="w-5 h-5" />
             </div>
-            <p className="text-[8px] text-white/40 uppercase tracking-[0.3em] font-mono">I GOT THE POWER</p>
+            <p className="text-[8px] text-white/40 uppercase tracking-[0.3em] font-mono">TLC PRIME</p>
           </div>
 
           <div className="space-y-8">
             <h2 className="font-display text-5xl xl:text-6xl font-black leading-[0.85] uppercase tracking-[-0.03em]">
-              Train.<br />Track.<br />Dominate.
+              Train.<br />Lengthen.<br />Control.
             </h2>
             <div className="flex gap-8">
               {[{ value: '150+', label: 'Exercises' }, { value: '8', label: 'Categories' }, { value: 'AI', label: 'Coach' }].map(stat => (
@@ -71,7 +72,7 @@ export default function Auth() {
             </div>
           </div>
 
-          <p className="text-white/15 text-[8px] font-mono uppercase tracking-[0.2em]">© {new Date().getFullYear()} I GOT THE POWER</p>
+          <p className="text-white/15 text-[8px] font-mono uppercase tracking-[0.2em]">© {new Date().getFullYear()} TLC PRIME</p>
         </div>
       </div>
 
@@ -83,14 +84,14 @@ export default function Auth() {
               <Zap className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="font-display text-sm font-bold uppercase tracking-wider">I GOT THE POWER</h1>
-              <p className="text-[8px] font-mono text-muted-foreground tracking-[0.2em]">TRAINING SYSTEM</p>
+              <h1 className="font-display text-sm font-bold uppercase tracking-wider">TLC PRIME</h1>
+              <p className="text-[8px] font-mono text-muted-foreground tracking-[0.2em]">TRAIN · LENGTHEN · CONTROL</p>
             </div>
           </div>
 
           <div>
             <h2 className="font-display text-2xl font-bold tracking-tight">{isSignUp ? 'Create Account' : 'Welcome Back'}</h2>
-            <p className="text-sm text-muted-foreground mt-1">{isSignUp ? 'Start your journey' : 'Continue training'}</p>
+            <p className="text-sm text-muted-foreground mt-1">{isSignUp ? 'Create an account to save progress across devices' : 'Stay signed in and keep training'}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
