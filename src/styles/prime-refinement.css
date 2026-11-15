@@ -19,13 +19,13 @@ body .power-app-wordmark img{object-fit:contain}
 .tlc-prime-loading{
  position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
  padding:calc(18px + env(safe-area-inset-top)) 16px calc(20px + env(safe-area-inset-bottom));
- background:#e9d8b7;color:#252338;overflow-y:auto;
+ background:#fafafa;color:#082b4a;overflow-y:auto;
 }
-.tlc-prime-loading__inner{width:min(100%,650px);text-align:center}
+.tlc-prime-loading__inner{width:min(100%,1200px);text-align:center}
 .tlc-prime-loading img{
- display:block;width:100%;height:auto;max-height:65dvh;object-fit:contain;
- border:2px solid #a98b63;border-radius:16px;
- box-shadow:0 12px 28px #30251e33;
+ display:block;width:100%;height:auto;max-height:88dvh;object-fit:contain;
+ border:0;border-radius:0;
+ box-shadow:none;
 }
 .tlc-prime-loading h1{font:900 clamp(20px,5vw,29px)/1.2 system-ui;letter-spacing:.14em;margin:22px 0 4px}
 .tlc-prime-loading p{font:600 12px/1.5 system-ui;letter-spacing:.14em}
