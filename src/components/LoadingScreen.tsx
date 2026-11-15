@@ -4,8 +4,6 @@ export function LoadingScreen() {
   <div className="tlc-prime-loading__inner">
    <img src="/brand/spread-tlc-original-20261115.jpg" width={1536} height={877}
     alt="Spread More TLC — Oklahoma City community artwork" loading="eager"/>
-   <div><h1>TLC PRIME</h1><p>TRAIN · LENGTHEN · CONTROL</p></div>
-   <div className="tlc-prime-loading__track" aria-hidden="true"><span/></div>
    <span className="sr-only">Opening your training screen…</span>
   </div>
  </div>;
