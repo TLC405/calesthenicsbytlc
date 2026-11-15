@@ -28,8 +28,8 @@
     <meta name="theme-color" content="#AD1D32" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="TLC Prime" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/tlc-prime-20261115-32.png" />
+    <meta name="apple-mobile-web-app-title" content="Spread More TLC" />
+    <link rel="icon" type="image/svg+xml" href="/icons/spread-more-tlc.svg?v=2" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/tlc-prime-20261115-180.png" />
     <link rel="preload" as="image" href="/brand/spread-tlc-original-20261115.jpg" />
     <link rel="manifest" href="/manifest.json" />
@@ -47,10 +47,10 @@
 
   <body>
     <style>
-      #tlc-prime-boot{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:calc(18px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));background:#e9d8b7;color:#252338;transition:opacity .3s ease}
+      #tlc-prime-boot{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:calc(18px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));background:#fafafa;color:#082b4a;transition:opacity .35s ease}
       #tlc-prime-boot.is-leaving{opacity:0;pointer-events:none}
-      #tlc-prime-boot .boot-inner{width:100%;max-width:650px;text-align:center}
-      #tlc-prime-boot img{display:block;width:100%;max-height:65dvh;object-fit:contain;border:2px solid #a98b63;border-radius:16px;background:#ead7b4;box-shadow:0 12px 28px #30251e33}
+      #tlc-prime-boot .boot-inner{width:100%;max-width:1200px;text-align:center}
+      #tlc-prime-boot img{display:block;width:100%;max-height:88dvh;object-fit:contain;background:#fafafa}
       #tlc-prime-boot h1{font:900 clamp(20px,5vw,29px)/1.2 system-ui,sans-serif;letter-spacing:.14em;margin:22px 0 4px}
       #tlc-prime-boot p{font:600 12px/1.5 system-ui,sans-serif;letter-spacing:.14em;margin:0}
       #tlc-prime-boot .boot-track{width:72%;height:6px;background:#fff8e5;border-radius:99px;margin:22px auto 0;overflow:hidden}
@@ -61,8 +61,7 @@
     <div id="tlc-prime-boot" role="status" aria-label="Opening TLC Prime">
       <div class="boot-inner">
         <img src="/brand/spread-tlc-original-20261115.jpg" alt="Spread More TLC Oklahoma City artwork" fetchpriority="high" width="1536" height="877" />
-        <h1>TLC PRIME</h1><p>TRAIN · LENGTHEN · CONTROL</p>
-        <div class="boot-track" aria-hidden="true"></div>
+
       </div>
     </div>
     <div id="root"></div>
