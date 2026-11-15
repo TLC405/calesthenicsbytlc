@@ -29,7 +29,7 @@ if(boot){
  const waitForApp=()=>{
   const elapsed=performance.now()-bootStarted;
   const hasApp=Boolean(rootElement.querySelector(".power-app-shell"))&&!rootElement.querySelector('[data-route-loading]');
-  if(hasApp||elapsed>=10000){release();return;}
+  if(hasApp||elapsed>=14000){release();return;}
   window.setTimeout(waitForApp,90);
  };
  waitForApp();
