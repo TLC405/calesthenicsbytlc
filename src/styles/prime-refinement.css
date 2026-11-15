@@ -74,3 +74,5 @@ body :is(.master-map-back,.master-map-poster-bottom button){min-width:44px;displ
 body .master-map-poster-tools label{min-height:44px;display:inline-flex;align-items:center;gap:8px}
 body .master-map-detail :is(button,a){white-space:normal;overflow-wrap:anywhere}
 body .tlctv-inline label:has(input[type="file"]){min-height:44px!important;display:inline-flex;align-items:center}
+/* Keep the level visible when phone headers hide secondary text labels. */
+body .power-app-controls .power-level-shortcut>.power-level-badge{display:inline-flex!important}
