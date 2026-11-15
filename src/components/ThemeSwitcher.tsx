@@ -4,7 +4,7 @@ import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const themes = [
-  { id: 'default', name: 'I Got the Power', tagline: 'White · Graphite · Gold' },
+  { id: 'default', name: 'TLC Prime', tagline: 'White · Graphite · Gold' },
   { id: 'vasa', name: 'VASA Fitness', tagline: 'White · Racing red' },
   { id: 'planet-fitness', name: 'Planet Fitness', tagline: 'White · Purple · Gold' },
   { id: 'ymca', name: 'YMCA', tagline: 'White · Red · Navy' },
