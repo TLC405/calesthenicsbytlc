@@ -95,20 +95,20 @@ export default function Dashboard() {
     <a href="#power-main" className="power-skip-link">Skip to training</a>
     <header className="power-topbar">
       <div className="power-container power-topinner">
-        <Link to="/" className="power-brand" aria-label="TLC's Super Human Strength home">
+        <Link to="/" className="power-brand" aria-label="TLC Prime home">
           <Crown className="power-brand-crown" size={27} strokeWidth={1.4} />
-          <span className="power-brand-wordmark"><small>TLC'S</small><strong>SUPER HUMAN STRENGTH<span>.</span></strong></span>
+          <span className="power-brand-wordmark"><small>TLC</small><strong>PRIME<span>.</span></strong></span>
           <span className="power-brand-line" /><span className="power-brand-label">BY TLC</span>
         </Link>
         <Link className="power-icon-button" to="/more" aria-label="More tools"><Settings size={20}/></Link>
       </div>
     </header>
     <main id="power-main" className="power-container">
-      <div className="power-welcome"><p>{greeting()}{name ? `, ${name}` : ''}<span className="power-welcome-dot">.</span></p><span className="power-smallprint">YOUR BODY. YOUR POSSIBILITIES.</span></div>
+      <div className="power-welcome"><p>{greeting()}{name ? `, ${name}` : ''}<span className="power-welcome-dot">.</span></p><span className="power-smallprint">TRAIN · LENGTHEN · CONTROL</span></div>
       <section className="power-hero" aria-labelledby="power-dashboard-title">
         <PowerAthleteArt />
         <div className="power-hero-content">
-          <p className="power-kicker">TLC's Super Human Strength</p>
+          <p className="power-kicker">TLC Prime</p>
           <h1 id="power-dashboard-title" className="power-hero-title superhuman-dashboard-title"><span>Build</span><span>Super Human</span><span>Strength<span className="power-title-stop">.</span></span></h1>
           <p className="power-hero-copy"><span className="power-speed-mark" aria-hidden="true" />Train <i aria-hidden="true">/</i> Master <i aria-hidden="true">/</i> Evolve</p>
           <p className="power-hero-description">Your strength is built one skill at a time.</p>
