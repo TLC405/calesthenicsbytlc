@@ -1,7 +1,7 @@
-import { useState, useEffect, type CSSProperties } from 'react';
+import { useSyncExternalStore, type CSSProperties } from 'react';
 import { cn } from '@/lib/utils';
 import { Check, Palette, ShieldCheck } from 'lucide-react';
-import { initialTheme } from '@/lib/themePreference';
+import { selectTheme, subscribeTheme, themeSnapshot, DEFAULT_THEME } from '@/lib/themePreference';
 
 interface ThemeOption {
   id: string;
@@ -74,23 +74,8 @@ const themes: ThemeOption[] = [
 ];
 
 export function useTheme() {
-  const [theme, setThemeState] = useState<string>(initialTheme);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'default') root.removeAttribute('data-theme');
-    else root.setAttribute('data-theme', theme);
-    localStorage.setItem('power-theme', theme);
-    window.dispatchEvent(new CustomEvent('power-theme-changed', { detail: theme }));
-  }, [theme]);
-
-  useEffect(() => {
-    const sync = (event: Event) => setThemeState((event as CustomEvent<string>).detail);
-    window.addEventListener('power-theme-changed', sync);
-    return () => window.removeEventListener('power-theme-changed', sync);
-  }, []);
-
-  return { theme, setTheme: setThemeState, themes };
+  const theme=useSyncExternalStore(subscribeTheme,themeSnapshot,()=>DEFAULT_THEME);
+  return { theme, setTheme: selectTheme, themes };
 }
 
 export function ThemeSwitcher() {

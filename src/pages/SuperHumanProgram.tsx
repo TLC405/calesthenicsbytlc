@@ -92,7 +92,7 @@ export default function SuperHumanProgram(){
   const playing=SUPERHUMAN_REELS.find(r=>r.id===selectedVideo);
   const recordHandstand=(change:1|-1)=>setPrefs(old=>({...old,handstand:{...old.handstand,[old.week]:Math.max(0,Math.min(5,(Number(old.handstand[old.week])||0)+change))}}));
   const recordClean=(key:StageHold,done:boolean)=>setPrefs(old=>({...old,clean:{...old.clean,[key]:done?Math.min(2,(old.clean[key]||0)+1):0}}));
-  return <main className="min-h-screen bg-background pb-28 text-foreground md:pb-16">
+  return <main className="tlc-prime-program min-h-screen bg-background pb-28 text-foreground md:pb-16">
     <div className="mx-auto max-w-5xl space-y-4 px-3 py-5 sm:space-y-5 sm:px-6">
       <Link to="/" className="inline-flex min-h-10 items-center gap-2 text-xs font-semibold text-muted-foreground hover:text-foreground">
         <ArrowLeft size={15}/> Workout builder

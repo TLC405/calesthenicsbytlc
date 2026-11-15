@@ -138,7 +138,7 @@ export default function Integrations(){
  }
  return <main className="tlc-integrations-page power-simple-page">
   <header className="tlc-integration-hero">
-   <div className="tlc-integration-logo"><img src="/icons/tlc-doodle-180.png" width={56} height={56} alt="TLC mark"/></div>
+   <div className="tlc-integration-logo"><img src="/icons/tlc-prime-20261115-180.png" width={56} height={56} alt="TLC mark"/></div>
    <p className="tlc-integration-kicker">TLC'S SUPER HUMAN STRENGTH / AI & CONNECTIONS</p>
    <h1>Your AI & Integrations Studio</h1>
    <p>Use your own ChatGPT account alongside real skill records, published exercise science, and the tools already in TLCtv.</p>

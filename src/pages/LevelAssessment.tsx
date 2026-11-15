@@ -78,7 +78,7 @@ export default function LevelAssessment() {
     document.getElementById('skill-check-form')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }
 
-  return <main className="power-simple-page max-w-6xl mx-auto px-4 sm:px-6 pb-32">
+  return <main className="tlc-prime-assessment power-simple-page max-w-6xl mx-auto px-4 sm:px-6 pb-32">
     <header className="power-simple-heading mt-5 mb-6">
       <div>
         <p className="power-simple-eyebrow flex items-center gap-2"><ClipboardCheck size={16}/> TLC / SUPER HUMAN SKILLS CHECK</p>

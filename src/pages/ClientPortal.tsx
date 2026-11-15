@@ -187,7 +187,7 @@ export default function ClientPortal(){
   const heading=activeTab==='overview'?'Your starting point.':activeTab==='test'?'Find your starting level.':'Track your progress.';
   return <main className="tlc-client-page min-h-screen pb-32">
     <div className="tlc-client-wrap">
-      <div className="tlc-client-topline"><Link to="/" className="tlc-client-back"><ArrowLeft size={15}/>Back to Super Human Strength</Link><span>CLIENT PORTAL · YOUR RESULTS STAY PRIVATE</span></div>
+      <div className="tlc-client-topline"><Link to="/" className="tlc-client-back"><ArrowLeft size={15}/>Back to TLC Prime</Link><span>CLIENT PORTAL · YOUR RESULTS STAY PRIVATE</span></div>
       <header className="tlc-client-hero">
         <div className="tlc-client-hero__identity"><img src="/icons/tlc-doodle-180.png" width={72} height={72} alt="TLC sketch logo"/><span><strong>SPREAD TLC</strong><small>COACH TLC / PERSONAL STRENGTH</small></span></div>
         <div className="tlc-client-hero__copy"><span>PERSONAL ASSESSMENT / TRAINING TOOLS</span><h1>{heading}</h1><p>Find your starting level, test one movement at a time, and choose a progression you can control. No games or preloaded workouts.</p></div>

@@ -1,0 +1,55 @@
+/* Small, evidence-based repairs. All surfaces follow the shared theme tokens. */
+html{scroll-padding-block:85px calc(var(--power-nav-space,115px) + 20px)}
+body #root :is(button,a,input,select,textarea,summary):focus-visible,
+body [role="dialog"] :is(button,a,input,select,textarea,summary):focus-visible{
+ outline:3px solid hsl(var(--ring));outline-offset:3px;
+}
+body .power-practice-calendar header button{
+ min-width:44px!important;min-height:44px!important;height:44px!important;
+ touch-action:manipulation;
+}
+body .power-settings-sheet{
+ background:hsl(var(--card))!important;color:hsl(var(--card-foreground));
+ padding-bottom:calc(26px + env(safe-area-inset-bottom));
+ overscroll-behavior:contain;scroll-padding-block:64px 30px;
+}
+body .power-settings-sheet>h2{color:hsl(var(--card-foreground))}
+body .power-settings-sheet>p{color:hsl(var(--muted-foreground))}
+body .power-app-wordmark img{object-fit:contain}
+.tlc-prime-loading{
+ position:fixed;inset:0;z-index:9999;display:grid;place-items:center;
+ padding:calc(18px + env(safe-area-inset-top)) 16px calc(20px + env(safe-area-inset-bottom));
+ background:#e9d8b7;color:#252338;overflow-y:auto;
+}
+.tlc-prime-loading__inner{width:min(100%,650px);text-align:center}
+.tlc-prime-loading img{
+ display:block;width:100%;height:auto;max-height:65dvh;object-fit:contain;
+ border:2px solid #a98b63;border-radius:16px;
+ box-shadow:0 12px 28px #30251e33;
+}
+.tlc-prime-loading h1{font:900 clamp(20px,5vw,29px)/1.2 system-ui;letter-spacing:.14em;margin:22px 0 4px}
+.tlc-prime-loading p{font:600 12px/1.5 system-ui;letter-spacing:.14em}
+.tlc-prime-loading__track{width:72%;height:6px;background:#fff8e5;border-radius:99px;margin:22px auto 0;overflow:hidden}
+.tlc-prime-loading__track span{display:block;width:38%;height:100%;border-radius:99px;background:#c27c28;animation:tlc-prime-loading 1.2s ease-in-out infinite alternate}
+@media(prefers-reduced-motion:reduce){
+ .tlc-prime-loading__track span{animation:none}
+ body #root :is(button,a,input,select,textarea,summary){scroll-behavior:auto}
+}
+
+/* Observed at runtime: plan links were 36–40px, map tools 41px, assessment links 20px. */
+body .tlc-prime-program :is(button,select),
+body :is(.master-map-tools,.master-map-poster-tools) button,
+body .master-skills-shell .power-quiet-link{min-height:44px!important}
+body :is(.tlc-prime-program,.tlc-prime-assessment) a{
+ min-height:44px;display:inline-flex;align-items:center;gap:6px;
+}
+body .tlc-prime-assessment>div:last-child{flex-wrap:wrap;gap:8px 16px}
+
+body :is(.tlc-client-actions,.tlc-client-footer__links) a,
+body .tlc-client-back,
+body .tlctv-analyzer-page a,
+body .tlc-integrations-page :is(button,a){
+ min-height:44px;display:inline-flex;align-items:center;
+}
+
+body .power-shell :is(.power-brand,.power-text-link){min-height:44px;display:inline-flex;align-items:center}

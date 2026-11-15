@@ -29,19 +29,20 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="TLC Prime" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/tlc-doodle-32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/tlc-doodle-180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/tlc-prime-20261115-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/tlc-prime-20261115-180.png" />
+    <link rel="preload" as="image" href="/brand/spread-tlc-original-20261115.jpg" />
     <link rel="manifest" href="/manifest.json" />
 
     <meta property="og:title" content="TLC Prime | Train, Lengthen, Control" />
     <meta property="og:description" content="Measure your strength, explore skill progressions and choose your next move. Created by TLC." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/icons/tlc-doodle-512.png" />
+    <meta property="og:image" content="/icons/tlc-prime-20261115-512.png" />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="TLC Prime" />
     <meta name="twitter:description" content="Know your strength. Master your movement. Train your way with optional progression suggestions." />
-    <meta name="twitter:image" content="/icons/tlc-doodle-512.png" />
+    <meta name="twitter:image" content="/icons/tlc-prime-20261115-512.png" />
   </head>
 
   <body>
@@ -55,11 +56,11 @@
       #tlc-prime-boot .boot-track{width:72%;height:6px;background:#fff8e5;border-radius:99px;margin:22px auto 0;overflow:hidden}
       #tlc-prime-boot .boot-track:after{content:'';display:block;width:38%;height:100%;border-radius:99px;background:#c27c28;animation:tlc-prime-loading 1.2s ease-in-out infinite alternate}
       @keyframes tlc-prime-loading{to{transform:translateX(165%)}}
-      @media(prefers-reduced-motion:reduce){#tlc-prime-boot .boot-track:after{animation:none}}
+      @media(prefers-reduced-motion:reduce){#tlc-prime-boot{transition:none}#tlc-prime-boot .boot-track:after{animation:none}}
     </style>
     <div id="tlc-prime-boot" role="status" aria-label="Opening TLC Prime">
       <div class="boot-inner">
-        <img src="/spread-more-tlc-loading.svg" alt="Spread More TLC Oklahoma City artwork" fetchpriority="high" />
+        <img src="/brand/spread-tlc-original-20261115.jpg" alt="Spread More TLC Oklahoma City artwork" fetchpriority="high" width="1536" height="877" />
         <h1>TLC PRIME</h1><p>TRAIN · LENGTHEN · CONTROL</p>
         <div class="boot-track" aria-hidden="true"></div>
       </div>

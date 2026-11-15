@@ -47,7 +47,7 @@ export function AppControls(){
  return <>
    <header className="power-app-controls">
      <Link to="/" aria-label="TLC Prime home" className="power-app-wordmark">
-       <img src="/icons/tlc-doodle-32.png" alt="" width={28} height={28}/>
+       <img src="/icons/tlc-prime-20261115-64.png" alt="" width={28} height={28}/>
        <span>TLC PRIME<small>TRAIN · LENGTHEN · CONTROL</small></span>
      </Link>
      <div>
