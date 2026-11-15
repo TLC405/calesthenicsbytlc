@@ -65,9 +65,9 @@ export function LoadingScreen() {
 
         <div className="text-center space-y-2">
           <h1 className="font-display text-3xl font-black text-foreground uppercase tracking-[-0.03em] leading-none">
-            I GOT THE <span className="transition-colors duration-300" style={{ color }}>POWER</span>
+            TLC <span className="transition-colors duration-300" style={{ color }}>PRIME</span>
           </h1>
-          <p className="text-[9px] text-muted-foreground font-mono uppercase tracking-[0.4em]">Initializing...</p>
+          <p className="text-[9px] text-muted-foreground font-mono uppercase tracking-[0.4em]">Train · Lengthen · Control</p>
         </div>
 
         <div className="w-48 h-[3px] bg-border/30 rounded-full overflow-hidden">
