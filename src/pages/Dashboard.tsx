@@ -1,3 +1,5 @@
+import KameHouseHome from '@/components/KameHouseHome';
+import { useTheme } from '@/components/ThemeSwitcher';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
@@ -29,6 +31,7 @@ function greeting() {
 
 export default function Dashboard() {
   const { user, loading: authLoading } = useAuth();
+  const { theme } = useTheme();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [recent, setRecent] = useState<RecentWorkout[]>([]);
   const [guestWorkouts, setGuestWorkouts] = useState(readGuestWorkouts);
@@ -90,6 +93,8 @@ export default function Dashboard() {
     { label: 'Last 7 days', value: `${guestWeekCount}`, unit: 'days trained', icon: TrendingUp },
   ];
 
+
+  if (theme === "default") return <KameHouseHome name={name ?? undefined} />;
 
   return <div className="power-shell">
     <a href="#power-main" className="power-skip-link">Skip to training</a>
