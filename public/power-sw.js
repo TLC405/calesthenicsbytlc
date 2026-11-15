@@ -1,6 +1,6 @@
 /* TLC Prime offline-first public shell. Account APIs and personal data are never cached. */
 const CACHE='tlc-prime-offline-v4';
-const CORE=['/','/manifest.json','/icons/tlc-doodle-192.png','/icons/tlc-doodle-512.png'];
+const CORE=['/','/manifest.json','/spread-more-tlc-loading.svg','/icons/tlc-doodle-192.png','/icons/tlc-doodle-512.png'];
 const MAX_ITEMS=320;
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(async cache=>{
