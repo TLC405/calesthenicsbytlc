@@ -68,7 +68,7 @@ function AppContent() {
       <LaunchHome />
       <AppControls />
       <div className="power-app-shell min-w-0 md:pb-0">
-        <RouteGuard><Suspense fallback={<LoadingScreen />}><Routes>
+        <RouteGuard><Suspense fallback={<div id="tlc-route-loading"><LoadingScreen /></div>}><Routes>
           <Route path="/" element={<Index />} />
           <Route path="/intro" element={<PowerIntro />} />
           <Route path="/auth" element={<Auth />} />
