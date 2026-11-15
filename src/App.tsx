@@ -57,6 +57,7 @@ import "./styles/train-screen-bugfix-v5.css";
 import "./styles/atomic-ui-sweep-v6.css";
 import "./styles/route-qa-v7.css";
 import { useTheme } from './components/ThemeSwitcher';
+import { LoadingScreen } from './components/LoadingScreen';
 
 const queryClient = new QueryClient();
 
@@ -67,7 +68,7 @@ function AppContent() {
       <LaunchHome />
       <AppControls />
       <div className="power-app-shell min-w-0 md:pb-0">
-        <RouteGuard><Suspense fallback={<div className="master-tree-loading" role="status">Opening TLC training studio…</div>}><Routes>
+        <RouteGuard><Suspense fallback={<LoadingScreen />}><Routes>
           <Route path="/" element={<Index />} />
           <Route path="/intro" element={<PowerIntro />} />
           <Route path="/auth" element={<Auth />} />
