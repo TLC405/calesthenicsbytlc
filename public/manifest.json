@@ -1,6 +1,6 @@
 {
-  "name": "TLC Prime \u2014 Train, Lengthen, Control",
-  "short_name": "TLC Prime",
+  "name": "Spread More TLC — TLC Prime",
+  "short_name": "Spread More TLC",
   "description": "Strength, balance, mobility, and skill progressions. Train, Lengthen, Control.",
   "start_url": "/?launch=home",
   "display": "standalone",
@@ -8,6 +8,12 @@
   "theme_color": "#AD1D32",
   "orientation": "any",
   "icons": [
+    {
+      "src": "/icons/spread-more-tlc.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "/icons/tlc-prime-20261115-192.png",
       "sizes": "192x192",
