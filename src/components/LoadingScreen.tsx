@@ -1,79 +1,22 @@
 import { useEffect, useState } from 'react';
-import { Zap } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
-
-const COLORS = [
-  'hsl(270, 100%, 65%)',
-  'hsl(217, 91%, 60%)',
-  'hsl(150, 100%, 50%)',
-  'hsl(0, 84%, 60%)',
-  'hsl(25, 95%, 53%)',
-  'hsl(174, 72%, 40%)',
-];
-
 export function LoadingScreen() {
-  const [progress, setProgress] = useState(0);
-  const [colorIdx, setColorIdx] = useState(0);
-  const [bgImage, setBgImage] = useState('');
-  const [bgVideo, setBgVideo] = useState('');
-
-  useEffect(() => {
-    const prog = setInterval(() => setProgress(prev => Math.min(prev + 2, 95)), 40);
-    const col = setInterval(() => setColorIdx(prev => (prev + 1) % COLORS.length), 350);
-
-    // Load custom loading media from site_config
-    supabase.from('site_config').select('key, value').in('key', ['loading_image_url', 'loading_video_url']).then(({ data }) => {
-      if (data) {
-        data.forEach(row => {
-          if (row.key === 'loading_image_url' && row.value) setBgImage(row.value);
-          if (row.key === 'loading_video_url' && row.value) setBgVideo(row.value);
-        });
-      }
-    });
-
-    return () => { clearInterval(prog); clearInterval(col); };
-  }, []);
-
-  const color = COLORS[colorIdx];
-
-  return (
-    <div className="fixed inset-0 bg-background flex items-center justify-center z-[9999]">
-      {/* Custom background video */}
-      {bgVideo && (
-        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-20">
-          <source src={bgVideo} type="video/mp4" />
-        </video>
-      )}
-
-      {/* Custom background image */}
-      {bgImage && !bgVideo && (
-        <div className="absolute inset-0 opacity-15 bg-center bg-cover" style={{ backgroundImage: `url(${bgImage})` }} />
-      )}
-
-      {/* Background glow */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-64 h-64 rounded-full opacity-10 transition-colors duration-300" style={{ backgroundColor: color, filter: 'blur(80px)' }} />
-      </div>
-
-      <div className="flex flex-col items-center gap-8 relative z-10">
-        <div
-          className="w-20 h-20 rounded-3xl flex items-center justify-center animate-scale-in transition-all duration-300"
-          style={{ backgroundColor: color, boxShadow: `0 0 50px ${color}40` }}
-        >
-          <Zap className="w-10 h-10 text-white" />
-        </div>
-
-        <div className="text-center space-y-2">
-          <h1 className="font-display text-3xl font-black text-foreground uppercase tracking-[-0.03em] leading-none">
-            I GOT THE <span className="transition-colors duration-300" style={{ color }}>POWER</span>
-          </h1>
-          <p className="text-[9px] text-muted-foreground font-mono uppercase tracking-[0.4em]">Initializing...</p>
-        </div>
-
-        <div className="w-48 h-[3px] bg-border/30 rounded-full overflow-hidden">
-          <div className="h-full rounded-full transition-all duration-100 ease-out" style={{ width: `${progress}%`, backgroundColor: color, boxShadow: `0 0 10px ${color}60` }} />
-        </div>
-      </div>
-    </div>
-  );
+ const [progress,setProgress]=useState(8);
+ useEffect(()=>{
+  const id=window.setInterval(()=>setProgress(v=>Math.min(94,v+4)),90);
+  return ()=>window.clearInterval(id);
+ },[]);
+ return <div role="status" aria-label="Loading TLC Prime" className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden" style={{background:'#e9d8b7',padding:'max(18px,env(safe-area-inset-top)) 16px max(20px,env(safe-area-inset-bottom))'}}>
+  <div className="w-full max-w-3xl flex flex-col items-center gap-5">
+   <div className="w-full overflow-hidden rounded-[18px] border-[3px] border-[#9e8055] bg-[#e8d5af]" style={{boxShadow:'inset 0 2px 0 #fff7,0 14px 36px #2a1e1740'}}>
+    <img src="/spread-more-tlc-loading.svg" alt="Spread More TLC — Oklahoma City community doodle artwork" className="block w-full h-auto object-contain" loading="eager"/>
+   </div>
+   <div className="text-center" style={{color:'#252338'}}>
+    <h1 className="font-black text-xl tracking-[.12em]">TLC PRIME</h1>
+    <p className="text-xs font-semibold mt-1 tracking-[.12em]">TRAIN · LENGTHEN · CONTROL</p>
+   </div>
+   <div className="w-full max-w-xs h-2 overflow-hidden rounded-full border border-[#a68e6d] bg-[#f7ecd7]">
+    <div className="h-full rounded-full transition-all duration-100" style={{width:progress+'%',background:'linear-gradient(90deg,#bf641d,#e3aa46)'}}/>
+   </div>
+  </div>
+ </div>;
 }
