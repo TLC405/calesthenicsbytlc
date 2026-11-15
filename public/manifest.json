@@ -4,10 +4,16 @@
   "description": "Strength, balance, mobility, and skill progressions. Train, Lengthen, Control.",
   "start_url": "/?launch=home",
   "display": "standalone",
-  "background_color": "#e9d8b7",
-  "theme_color": "#AD1D32",
+  "background_color": "#fafafa",
+  "theme_color": "#082b4a",
   "orientation": "any",
   "icons": [
+    {
+      "src": "/icons/spread-more-tlc.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "/icons/tlc-prime-20261115-192.png",
       "sizes": "192x192",
