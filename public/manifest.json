@@ -1,7 +1,7 @@
 {
-  "name": "TLC's Super Human Strength",
-  "short_name": "TLC Strength",
-  "description": "Assess your skills, explore your next progression, and build your own workouts—nothing preloaded.",
+  "name": "TLC Prime — Train, Lengthen, Control",
+  "short_name": "TLC Prime",
+  "description": "Strength, balance, mobility, and skill progressions. Train, Lengthen, Control.",
   "start_url": "/?launch=home",
   "display": "standalone",
   "background_color": "#FFF9F3",
@@ -37,7 +37,7 @@
     {
       "name": "Home",
       "url": "/",
-      "description": "Open TLC's Super Human Strength"
+      "description": "Open TLC Prime"
     },
     {
       "name": "Strength Skills",
