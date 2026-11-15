@@ -46,9 +46,9 @@ export function AppControls(){
  },[]);
  return <>
    <header className="power-app-controls">
-     <Link to="/" aria-label="TLC's Super Human Strength home" className="power-app-wordmark">
+     <Link to="/" aria-label="TLC Prime home" className="power-app-wordmark">
        <img src="/icons/tlc-doodle-32.png" alt="" width={28} height={28}/>
-       <span>TLC'S<small>SUPER HUMAN STRENGTH</small></span>
+       <span>TLC PRIME<small>TRAIN · LENGTHEN · CONTROL</small></span>
      </Link>
      <div>
        <button type="button" className="power-level-shortcut" aria-label="Review your training level" onClick={()=>setOpen(true)}>
