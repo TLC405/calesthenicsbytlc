@@ -17,4 +17,20 @@ else document.documentElement.setAttribute('data-theme',theme);
 preparePowerInstall();
 if(import.meta.env.PROD&&"serviceWorker" in navigator){window.addEventListener("load",()=>{void navigator.serviceWorker.register("/power-sw.js",{scope:"/",updateViaCache:"none"}).catch(()=>{});});}
 
-createRoot(document.getElementById("root")!).render(<App />);
+const bootStarted=performance.now();
+const rootElement=document.getElementById("root")!;
+createRoot(rootElement).render(<App />);
+const boot=document.getElementById("tlc-prime-boot");
+if(boot){
+ const release=()=>{
+  boot.classList.add("is-leaving");
+  window.setTimeout(()=>boot.remove(),340);
+ };
+ const waitForApp=()=>{
+  const elapsed=performance.now()-bootStarted;
+  const hasApp=Boolean(rootElement.querySelector(".power-app-shell"));
+  if((hasApp&&elapsed>=1350)||elapsed>=10000){release();return;}
+  window.setTimeout(waitForApp,90);
+ };
+ waitForApp();
+}
