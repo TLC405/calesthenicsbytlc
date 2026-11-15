@@ -70,7 +70,7 @@ function AppContent() {
         <RouteGuard><Suspense fallback={<div className="master-tree-loading" role="status">Opening TLC training studio…</div>}><Routes>
           <Route path="/" element={<Index />} />
           <Route path="/intro" element={<PowerIntro />} />
-          <Route path="/auth" element={<Navigate to="/" replace />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/admin-login" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/today" element={<TrainingEntry />} />
