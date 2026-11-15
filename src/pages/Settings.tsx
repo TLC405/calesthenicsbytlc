@@ -67,7 +67,7 @@ export default function Settings() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'power-training-data.json';
+    link.download = 'tlc-prime-training-data.json';
     link.click();
     toast({ title: 'Exported', description: 'Training data downloaded.' });
   };
@@ -229,7 +229,7 @@ export default function Settings() {
                 <div className="flex gap-2">
                   <Input
                     type="text"
-                    placeholder="I GOT THE POWER"
+                    placeholder="TLC PRIME"
                     value={siteConfig.app_tagline || ''}
                     onChange={e => setSiteConfig(prev => ({ ...prev, app_tagline: e.target.value }))}
                     className="h-11 rounded-xl border-border bg-card focus:border-ring flex-1 min-w-0"
