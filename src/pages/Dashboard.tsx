@@ -8,7 +8,7 @@ import { SkillTreeView } from '@/components/Progression/SkillTreeView';
 import {
   Settings, LogOut, Sparkles, ArrowRight, Library, Zap, Flame, TrendingUp,
   Palette, FileText, CircleDot, Hand, Dumbbell, Move, Shield, CalendarDays,
-  GitBranch, ChevronDown, ChevronUp, Mail, Clock3, Activity
+  GitBranch, ChevronDown, ChevronUp
 } from 'lucide-react';
 import { format, parseISO } from 'date-fns';
 import { NotificationBell } from '@/components/NotificationBell';
@@ -56,7 +56,6 @@ export default function Dashboard() {
   const xp = profile?.total_xp ?? 0;
   const level = profile?.level ?? 1;
   const name = profile?.display_name || 'Athlete';
-  const todayLabel = format(new Date(), 'EEEE, MMMM d');
   const weekCount = recent.filter(w => {
     if (!w.date) return false;
     const diff = (Date.now() - parseISO(w.date).getTime()) / 86400000;
@@ -94,9 +93,9 @@ export default function Dashboard() {
       <main className="power-container">
         <section className="power-hero" aria-labelledby="power-dashboard-title">
           <div className="power-hero-content">
-            <p className="power-kicker">TLC Prime · Life Computer</p>
-            <h1 id="power-dashboard-title" className="power-hero-title">Your life, one clear view.</h1>
-            <p className="power-hero-copy">{greeting()}, {name}. Your day, your movement, your priorities. Train · Lengthen · Control.</p>
+            <p className="power-kicker">Train · Lengthen · Control</p>
+            <h1 id="power-dashboard-title" className="power-hero-title">Build strength. Own your movement.</h1>
+            <p className="power-hero-copy">{greeting()}, {name}. Strength, balance, mobility, and control—one session at a time.</p>
             <div className="power-hero-actions">
               <Button variant="ghost" className="power-button power-button-primary" onClick={() => navigate('/planner')}>
                 Build workout <ArrowRight size={18} />
@@ -106,39 +105,6 @@ export default function Dashboard() {
               </Button>
             </div>
           </div>
-        </section>
-
-        <section className="power-main" aria-label="Today overview">
-          <div className="power-section-heading">
-            <h2>Today</h2>
-            <span className="power-section-meta">{todayLabel}</span>
-          </div>
-          <section className="power-feature-grid" aria-label="Life computer overview">
-            <div className="power-feature" role="group" aria-label="Calendar connection status">
-              <CalendarDays className="power-feature-icon" size={28} strokeWidth={1.6} />
-              <span className="power-feature-title">Calendar</span>
-              <span className="power-feature-desc">Not connected · No events shown</span>
-              <span className="power-smallprint">Private calendar sync requires your permission.</span>
-            </div>
-            <div className="power-feature" role="group" aria-label="Inbox connection status">
-              <Mail className="power-feature-icon" size={28} strokeWidth={1.6} />
-              <span className="power-feature-title">Inbox</span>
-              <span className="power-feature-desc">Not connected · No messages shown</span>
-              <span className="power-smallprint">Email summaries require a secure account connection.</span>
-            </div>
-            <Button variant="ghost" className="power-feature" onClick={() => navigate('/train')}>
-              <Activity className="power-feature-icon" size={28} strokeWidth={1.6} />
-              <span className="power-feature-title">Training</span>
-              <span className="power-feature-desc">{weekCount} session{weekCount === 1 ? '' : 's'} in the last 7 days</span>
-              <ArrowRight className="power-feature-arrow" size={17}/>
-            </Button>
-            <Button variant="ghost" className="power-feature" onClick={() => navigate('/planner')}>
-              <Clock3 className="power-feature-icon" size={28} strokeWidth={1.6} />
-              <span className="power-feature-title">Plan your day</span>
-              <span className="power-feature-desc">Open your workout planner</span>
-              <ArrowRight className="power-feature-arrow" size={17}/>
-            </Button>
-          </section>
         </section>
 
         <section className="power-rail" aria-label="Explore movement disciplines">
