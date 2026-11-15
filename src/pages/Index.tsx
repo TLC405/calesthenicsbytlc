@@ -26,9 +26,9 @@ export default function Index() {
       <header className="power-topbar">
         <div className="power-container power-topinner">
           <div className="power-brand">
-            <img className="w-9 h-9 object-contain" src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png" alt="I Got the Power" />
+            <img className="w-9 h-9 object-contain" src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png" alt="TLC Prime" />
             <span className="power-brand-line"/>
-            <span className="power-brand-label">I Got the Power</span>
+            <span className="power-brand-label">TLC Prime</span>
           </div>
           <Button variant="ghost" className="power-icon-button" onClick={() => navigate('/auth')} aria-label="Sign in">
             <span className="power-smallprint uppercase" >Sign in</span>
@@ -41,9 +41,9 @@ export default function Index() {
         <section className="power-hero power-splash-hero" aria-labelledby="landing-title">
           
           <div className="power-hero-content">
-            <p className="power-kicker">I got the power</p>
-            <h1 id="landing-title" className="power-hero-title">I Got the Power</h1>
-            <p className="power-hero-copy">Calisthenics by TLC <span aria-hidden="true">·</span> Train <span aria-hidden="true">·</span> Master <span aria-hidden="true">·</span> Evolve</p>
+            <p className="power-kicker">Train · Lengthen · Control</p>
+            <h1 id="landing-title" className="power-hero-title">TLC Prime</h1>
+            <p className="power-hero-copy">Train <span aria-hidden="true">·</span> Lengthen <span aria-hidden="true">·</span> Control</p>
             <div className="power-hero-actions">
               <Button variant="ghost" onClick={() => navigate('/auth')} className="power-button power-button-primary">
                 Enter the system <ArrowRight size={19}/>
@@ -56,7 +56,7 @@ export default function Index() {
         </section>
 
         <section className="power-rail" aria-label="Explore disciplines">
-          <p className="power-rail-label">Master your movement</p>
+          <p className="power-rail-label">Strength · Balance · Mobility</p>
           <div className="power-rail-grid">
             {disciplines.map(({ name, search, icon: Icon }) => (
               <Button variant="ghost" key={name} className="power-skill" onClick={() => navigate('/library', { state: { search } })} title={'Browse ' + name}>
@@ -91,7 +91,7 @@ export default function Index() {
             </Button>
           </div>
           <div className="flex items-center justify-between py-4" >
-            <span className="power-smallprint uppercase">Strong moves. Clear progress.</span>
+            <span className="power-smallprint uppercase">Move with strength. Master with control.</span>
             <span className="power-smallprint uppercase">Powered by TLC</span>
           </div>
         </section>
