@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useLocation, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/providers/AuthProvider';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,7 +9,8 @@ import { Lock, Mail, User, Zap, Loader2 } from 'lucide-react';
 
 export default function Auth() {
   const [params]=useSearchParams();
-  const requested=params.get('return') || '/more';
+  const { pathname }=useLocation();
+  const requested=params.get('return') || (pathname==='/admin-login'?'/admin':'/more');
   const returnTo=requested.startsWith('/') && !requested.startsWith('//') && !requested.startsWith('/auth') ? requested : '/more';
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
