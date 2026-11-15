@@ -109,8 +109,8 @@ export default function Dashboard() {
         <PowerAthleteArt />
         <div className="power-hero-content">
           <p className="power-kicker">TLC Prime</p>
-          <h1 id="power-dashboard-title" className="power-hero-title superhuman-dashboard-title"><span>Build</span><span>Super Human</span><span>Strength<span className="power-title-stop">.</span></span></h1>
-          <p className="power-hero-copy"><span className="power-speed-mark" aria-hidden="true" />Train <i aria-hidden="true">/</i> Master <i aria-hidden="true">/</i> Evolve</p>
+          <h1 id="power-dashboard-title" className="power-hero-title superhuman-dashboard-title"><span>Train</span><span>Lengthen</span><span>Control<span className="power-title-stop">.</span></span></h1>
+          <p className="power-hero-copy"><span className="power-speed-mark" aria-hidden="true" />Train <i aria-hidden="true">/</i> Lengthen <i aria-hidden="true">/</i> Control</p>
           <p className="power-hero-description">Your strength is built one skill at a time.</p>
           <div className="power-hero-actions">
             <Link className="power-button power-button-primary" to="/skills">Test your strength <ArrowUpRight size={18} /></Link>
@@ -127,12 +127,12 @@ export default function Dashboard() {
         </Link>)}</div>
       </section>
       <div className="power-main">
-        <div className="power-section-heading"><h2>Your Super Human Training Room</h2><span className="power-section-meta">Make your next move</span></div>
+        <div className="power-section-heading"><h2>Your TLC Prime Training Room</h2><span className="power-section-meta">Make your next move</span></div>
         <section className="power-feature-grid" aria-label="Main features">
           <Link className="power-feature" to="/build"><span className="power-feature-index">01 / TRAIN</span><CalendarDays className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Today's focus</span><span className="power-feature-desc">Step into your session</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
           <Link className="power-feature" to="/skills"><span className="power-feature-index">02 / MASTER</span><GitBranch className="power-feature-icon" size={27} strokeWidth={1.4}/><span className="power-feature-title">Strength skills</span><span className="power-feature-desc">Choose your progression</span><ArrowRight className="power-feature-arrow" size={18}/></Link>
           <Link className="power-feature" to="/ai-lab"><span className="power-feature-index">03 / EVOLVE</span><Sparkles className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">AI coach</span><span className="power-feature-desc">Find your next breakthrough</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
-          <Link className="power-feature" to="/community"><span className="power-feature-index">04 / CONNECT</span><Users className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Super Human Circle</span><span className="power-feature-desc">Progress is better together</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
+          <Link className="power-feature" to="/community"><span className="power-feature-index">04 / CONNECT</span><Users className="power-feature-icon" size={27} strokeWidth={1.4} /><span className="power-feature-title">Training Circle</span><span className="power-feature-desc">Progress is better together</span><ArrowUpRight className="power-feature-arrow" size={18} /></Link>
         </section>
 
         <div className="power-training-grid">
