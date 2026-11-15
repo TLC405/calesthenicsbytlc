@@ -73,10 +73,10 @@ export default function Dashboard() {
       <header className="power-topbar">
         <div className="power-container power-topinner">
           <div className="power-brand">
-            <img className="w-9 h-9 shrink-0 object-contain" src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png" alt="I Got the Power" />
+            <img className="w-9 h-9 shrink-0 object-contain" src="/lovable-uploads/7a4a3a95-2e51-4067-b126-c096a96fc31c.png" alt="TLC Prime" />
             <span className="power-brand-line" />
             <div>
-              <div className="power-brand-label">I Got the Power</div>
+              <div className="power-brand-label">TLC Prime</div>
               <div className="power-smallprint" >{greeting()}, {name}</div>
             </div>
           </div>
@@ -93,9 +93,9 @@ export default function Dashboard() {
       <main className="power-container">
         <section className="power-hero" aria-labelledby="power-dashboard-title">
           <div className="power-hero-content">
-            <p className="power-kicker">Your training studio</p>
-            <h1 id="power-dashboard-title" className="power-hero-title">Ready to train?</h1>
-            <p className="power-hero-copy">{greeting()}, {name}. Make this session count.</p>
+            <p className="power-kicker">Train · Lengthen · Control</p>
+            <h1 id="power-dashboard-title" className="power-hero-title">Build strength. Own your movement.</h1>
+            <p className="power-hero-copy">{greeting()}, {name}. Strength, balance, mobility, and control—one session at a time.</p>
             <div className="power-hero-actions">
               <Button variant="ghost" className="power-button power-button-primary" onClick={() => navigate('/planner')}>
                 Build workout <ArrowRight size={18} />
@@ -107,8 +107,8 @@ export default function Dashboard() {
           </div>
         </section>
 
-        <section className="power-rail" aria-label="Explore calisthenics disciplines">
-          <p className="power-rail-label">Choose your discipline</p>
+        <section className="power-rail" aria-label="Explore movement disciplines">
+          <p className="power-rail-label">Find your focus</p>
           <div className="power-rail-grid">
             {disciplines.map(({ label, search, icon: Icon }) => (
               <Button variant="ghost" className="power-skill" key={label} onClick={() => openLibrary(search)} title={'Browse ' + label + ' exercises'}>
