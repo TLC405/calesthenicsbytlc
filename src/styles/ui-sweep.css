@@ -8,10 +8,7 @@
   --power-nav-space: calc(105px + env(safe-area-inset-bottom, 0px));
 }
 :root[data-theme='vasa'] {
-  --background: 33 48% 97%;
-  --card: 0 0% 100%;
-  --border: 28 20% 81%;
-  --muted-foreground: 25 7% 36%;
+
   --power-soft: #fbf8f4;
   --power-shadow: 0 4px 16px #533d2510, 0 1px 2px #533d2508;
 }

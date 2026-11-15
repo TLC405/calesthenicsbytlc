@@ -316,13 +316,11 @@
 @media(min-width:380px){.power-practice-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* VASA Western Ave exterior: red entrance tower, graphite glazing, warm brick and concrete. */
 :root[data-theme="vasa"],:root[data-theme="vasa"].dark{
- color-scheme:light;--background:42 16% 92%;--foreground:210 8% 16%;--card:42 23% 98%;--card-foreground:210 8% 16%;
- --popover:42 23% 98%;--popover-foreground:210 8% 16%;--primary:353 72% 40%;--primary-foreground:0 0% 100%;
- --secondary:36 14% 84%;--secondary-foreground:210 8% 16%;--muted:38 14% 87%;--muted-foreground:30 7% 34%;
- --accent:32 14% 81%;--accent-foreground:210 8% 16%;--border:32 12% 71%;--input:32 12% 71%;--ring:353 72% 40%;
- --electric:353 72% 40%;--electric-glow:353 72% 50%;--surface:42 16% 92%;--surface-raised:42 23% 98%;--power-metal:32 10% 75%;--power-highlight:40 15% 97%;
+ color-scheme:light;
+
+ --electric:353 72% 40%;--electric-glow:353 72% 50%;
  --shadow-light:42 23% 99%;--shadow-dark:30 10% 52%;--gradient-start:353 72% 40%;--gradient-end:210 8% 25%;
- --cat-push:353 72% 40%;--cat-pull:210 8% 28%;--cat-legs:25 24% 34%;--cat-core:9 48% 35%;--cat-skills:353 55% 32%;--cat-mobility:30 12% 36%;
+
 }
 :root[data-theme="vasa"] body{background:linear-gradient(180deg,#e6e2da,#f3f1ec 440px);}
 :root[data-theme="vasa"] .power-elevated{border-color:#bfb5a6;background:linear-gradient(145deg,#fffefa,#f1ede6);box-shadow:0 3px 0 #c8c0b3,0 10px 24px #39332d09;}

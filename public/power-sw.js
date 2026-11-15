@@ -1,7 +1,7 @@
 /* TLC Prime offline shell v5. Never cache user/account API data. */
 const CACHE='tlc-prime-offline-v6';
 const BUILD_ASSETS=[];
-const CORE=['/','/manifest.json','/brand/spread-tlc-original-20261115.jpg','/icons/tlc-prime-20261115-192.png','/icons/tlc-prime-20261115-512.png','/icons/tlc-prime-20261115-maskable-512.png',...BUILD_ASSETS];
+const CORE=['/','/manifest.json','/icons/spread-more-tlc.svg','/brand/spread-tlc-original-20261115.jpg','/icons/tlc-prime-20261115-192.png','/icons/tlc-prime-20261115-512.png','/icons/tlc-prime-20261115-maskable-512.png',...BUILD_ASSETS];
 const MAX_ITEMS=380;
 const isPrivatePath=path=>/^\/(api|auth|admin(?:-login)?|account-settings|integrations)(\/|$)/.test(path);
 const isAssetPath=path=>/^\/(assets|art|brand|icons|movement-previews|movement-photos)\//.test(path);

@@ -28,155 +28,41 @@
 /* Signature: deep obsidian, champagne-metal accents, no neon. */
 html:root:not([data-theme]) {
   color-scheme: dark;
-  --background: 225 18% 8%;
-  --foreground: 42 23% 95%;
-  --card: 222 16% 14%;
-  --card-foreground: 42 23% 95%;
-  --popover: 222 16% 14%;
-  --popover-foreground: 42 23% 95%;
-  --primary: 39 66% 70%;
-  --primary-foreground: 222 28% 9%;
-  --secondary: 225 14% 21%;
-  --secondary-foreground: 42 21% 95%;
-  --muted: 225 12% 22%;
-  --muted-foreground: 36 13% 72%;
-  --accent: 225 13% 25%;
-  --accent-foreground: 42 23% 95%;
-  --border: 222 10% 33%;
-  --input: 222 10% 33%;
-  --ring: 39 66% 70%;
+
   --electric: 39 66% 70%;
   --glow-primary: 39 56% 58%;
-  --surface: 225 15% 11%;
-  --surface-raised: 222 16% 17%;
+
   --shadow-light: 222 12% 32%;
   --shadow-dark: 220 22% 2%;
-  --power-metal: 225 12% 28%;
-  --power-highlight: 224 13% 35%;
-  --su-hero: #222932;
-  --su-hero-text: #fbf5e8;
-  --su-hero-muted: #d9d1c4;
-  --su-trim: #d6b475;
+
 }
 /* VASA: warm premium studio, graphite equipment, confident red. */
 html:root[data-theme="vasa"] {
   color-scheme: light;
-  --background: 34 22% 96%;
-  --foreground: 218 16% 16%;
-  --card: 0 0% 100%;
-  --card-foreground: 218 16% 16%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 218 16% 16%;
-  --primary: 353 72% 41%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 32 10% 90%;
-  --secondary-foreground: 218 16% 16%;
-  --muted: 35 10% 91%;
-  --muted-foreground: 215 8% 37%;
-  --accent: 32 10% 88%;
-  --accent-foreground: 218 16% 16%;
-  --border: 30 10% 78%;
-  --input: 30 10% 78%;
-  --ring: 353 72% 41%;
+
   --electric: 353 72% 41%;
-  --surface: 34 19% 94%;
-  --surface-raised: 0 0% 100%;
-  --power-metal: 28 11% 83%;
-  --power-highlight: 0 0% 100%;
-  --su-hero: #292f37;
-  --su-hero-text: #fff9f4;
-  --su-hero-muted: #d5cdd0;
-  --su-trim: #b72841;
+
 }
 /* Planet Fitness: graphite-purple night club discipline; gold trim, no glow. */
 html:root[data-theme="planet-fitness"] {
   color-scheme: dark;
-  --background: 271 18% 9%;
-  --foreground: 270 24% 95%;
-  --card: 271 15% 15%;
-  --card-foreground: 270 24% 95%;
-  --popover: 271 15% 15%;
-  --popover-foreground: 270 24% 95%;
-  --primary: 286 52% 65%;
-  --primary-foreground: 273 35% 10%;
-  --secondary: 272 13% 23%;
-  --secondary-foreground: 270 24% 95%;
-  --muted: 271 13% 24%;
-  --muted-foreground: 268 14% 75%;
-  --accent: 272 12% 28%;
-  --accent-foreground: 270 24% 95%;
-  --border: 272 14% 35%;
-  --input: 272 14% 35%;
-  --ring: 42 76% 70%;
+
   --electric: 42 76% 70%;
-  --surface: 273 15% 12%;
-  --surface-raised: 271 14% 19%;
-  --power-metal: 268 12% 29%;
-  --power-highlight: 269 14% 38%;
-  --su-hero: #2b2032;
-  --su-hero-text: #f9f1fa;
-  --su-hero-muted: #dfcfdf;
-  --su-trim: #dfc178;
+
 }
 /* YMCA: daylight, white tile, deep ocean blue, brushed teal. */
 html:root[data-theme="ymca"] {
   color-scheme: light;
-  --background: 198 33% 97%;
-  --foreground: 210 46% 16%;
-  --card: 0 0% 100%;
-  --card-foreground: 210 46% 16%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 210 46% 16%;
-  --primary: 199 86% 32%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 193 29% 90%;
-  --secondary-foreground: 210 46% 16%;
-  --muted: 194 24% 92%;
-  --muted-foreground: 209 24% 37%;
-  --accent: 185 30% 87%;
-  --accent-foreground: 210 46% 16%;
-  --border: 195 23% 76%;
-  --input: 195 23% 76%;
-  --ring: 199 86% 32%;
+
   --electric: 175 71% 29%;
-  --surface: 195 29% 95%;
-  --surface-raised: 0 0% 100%;
-  --power-metal: 195 16% 83%;
-  --power-highlight: 0 0% 100%;
-  --su-hero: #17475d;
-  --su-hero-text: #f5fbff;
-  --su-hero-muted: #d8ebee;
-  --su-trim: #18857f;
+
 }
 /* OKC Thunder: navy arena, cobalt signal blue and controlled orange. */
 html:root[data-theme="okc-thunder"] {
   color-scheme: dark;
-  --background: 218 54% 10%;
-  --foreground: 210 33% 97%;
-  --card: 216 48% 17%;
-  --card-foreground: 210 33% 97%;
-  --popover: 216 48% 17%;
-  --popover-foreground: 210 33% 97%;
-  --primary: 202 84% 63%;
-  --primary-foreground: 217 60% 10%;
-  --secondary: 215 39% 25%;
-  --secondary-foreground: 210 33% 97%;
-  --muted: 214 37% 26%;
-  --muted-foreground: 210 21% 76%;
-  --accent: 215 36% 29%;
-  --accent-foreground: 210 33% 97%;
-  --border: 214 27% 36%;
-  --input: 214 27% 36%;
-  --ring: 19 86% 63%;
+
   --electric: 19 86% 63%;
-  --surface: 218 50% 14%;
-  --surface-raised: 216 45% 21%;
-  --power-metal: 216 24% 29%;
-  --power-highlight: 215 30% 40%;
-  --su-hero: #162e4e;
-  --su-hero-text: #f6f9ff;
-  --su-hero-muted: #cfdeee;
-  --su-trim: #ed7a45;
+
 }
 
 html { scroll-padding-top: 80px; }
