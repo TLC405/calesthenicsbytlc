@@ -28,7 +28,7 @@ if(boot){
  };
  const waitForApp=()=>{
   const elapsed=performance.now()-bootStarted;
-  const hasApp=Boolean(rootElement.querySelector(".power-app-shell"));
+  const hasApp=Boolean(rootElement.querySelector(".power-app-shell")) && !rootElement.querySelector("#tlc-route-loading");
   if((hasApp&&elapsed>=1350)||elapsed>=10000){release();return;}
   window.setTimeout(waitForApp,90);
  };
