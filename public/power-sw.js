@@ -1,5 +1,5 @@
 /* TLC Prime offline shell v5. Never cache user/account API data. */
-const CACHE='tlc-prime-offline-v5';
+const CACHE='tlc-prime-offline-v6';
 const BUILD_ASSETS=[];
 const CORE=['/','/manifest.json','/brand/spread-tlc-original-20261115.jpg','/icons/tlc-prime-20261115-192.png','/icons/tlc-prime-20261115-512.png','/icons/tlc-prime-20261115-maskable-512.png',...BUILD_ASSETS];
 const MAX_ITEMS=380;
