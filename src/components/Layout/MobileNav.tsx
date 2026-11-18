@@ -42,7 +42,7 @@ export function MobileNav() {
     {path:'/',label:'Train',icon:Home,active:pathname==='/'||pathname==='/intro'||['/today','/build','/train'].includes(pathname)},
     {path:'/program',label:'My Plan',icon:CalendarDays,active:pathname==='/program'||pathname==='/planner'},
     {path:'/skills',label:'Skills',icon:Target,active:pathname.startsWith('/skills')},
-    {path:'/more',label:'More',icon:MoreHorizontal,active:pathname==='/more'||['/integrations','/tlctv/analyzer','/client','/assessment','/dashboard','/library','/videos','/community','/ai-lab','/anatomy','/settings','/account-settings'].some(route=>pathname===route||pathname.startsWith(route+'/'))},
+    {path:'/more',label:'More',icon:MoreHorizontal,active:pathname==='/more'||['/coach','/integrations','/tlctv/analyzer','/client','/assessment','/dashboard','/library','/videos','/community','/ai-lab','/anatomy','/settings','/account-settings'].some(route=>pathname===route||pathname.startsWith(route+'/'))},
   ];
   return <nav className={"power-mobile-nav power-simple-nav power-mobile-dock-v3"+(keyboardOpen?" is-keyboard-open":"")} aria-label="Bottom navigation" aria-hidden={keyboardOpen||undefined}>
     <div className="power-nav-surface">{items.map(({path,label,icon:Icon,active}) =>
