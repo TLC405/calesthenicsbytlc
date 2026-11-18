@@ -1,8 +1,8 @@
-import { useLocation } from 'react-router-dom';
-import FocusPlanner from './FocusPlanner';
+import { Navigate, useLocation } from 'react-router-dom';
+import SimpleHome from './SimpleHome';
 
-/** Home is the working skill-based builder, with movement selection and an editable workout. */
+/** Short, action-first landing page. Legacy workout query links keep working. */
 export default function Index(){
- const location=useLocation();
- return <FocusPlanner key={location.key} home/>;
+ const {search}=useLocation();
+ return search?<Navigate replace to={'/build'+search}/>:<SimpleHome/>;
 }
