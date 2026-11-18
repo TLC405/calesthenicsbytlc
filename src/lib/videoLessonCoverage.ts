@@ -56,6 +56,14 @@ export function videoLessonCoverage(exercise:ThumbnailExercise){
  if(instagram&&instagram.provider==='instagram'&&!seen.has(instagram.url))existing.unshift({url:instagram.url,title:exercise.name+' · unverified Instagram link',scope:'guide',provider:'instagram',origin:'catalog'});
  const direct=existing.filter(s=>s.scope==='clip');
  const related=existing.filter(s=>s.scope==='guide');
+ // Put exercise-titled lessons ahead of broad skill-family discussions.
+ // They remain labelled title-matched, never certified from metadata alone.
+ const favoredId:Record<string,string>={
+  'frog-stand':'IaMCpp6CcWE',
+  'false-grip-ring-hang':'CtAui84zEAU',
+ };
+ const favorite=favoredId[exercise.slug];
+ if(favorite)related.sort((a,b)=>Number(b.url.includes(favorite))-Number(a.url.includes(favorite)));
  const extra=fallback(exercise);
  if(extra&&!seen.has(extra.url)){related.push(extra);seen.add(extra.url);}
  const all=[...direct,...related].slice(0,12);
