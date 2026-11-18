@@ -100,9 +100,9 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
       <div className="tlctv-inline__console">
         <div className="tlctv-inline__now">
           <div className="tlctv-inline__now-copy">
-            <p className="tlctv-inline__eyebrow">{lesson.scope==='guide'?'RELATED SKILL LESSON':lesson.scope==='other'?'YOUR VIDEO':'EXERCISE VIDEO'} · {String(selected+1).padStart(2,'0')}</p>
+            <p className="tlctv-inline__eyebrow">{lesson.scope==='guide'?'RELATED / TITLE-MATCHED LESSON':lesson.scope==='other'?'YOUR VIDEO':'REVIEWED PREVIEW'} · {String(selected+1).padStart(2,'0')}</p>
             <h3>{lesson.title}</h3>
-            <span>{lesson.scope==='guide'?'Helpful for this skill, not a demo of the exact move':lesson.scope==='other'?'Your added video':'Exercise demo'} <span aria-hidden="true">·</span> {lesson.provider==='youtube'?'YOUTUBE':'INSTAGRAM'}</span>
+            <span>{lesson.scope==='guide'?'Related or title-matched; full exercise technique is not certified':lesson.scope==='other'?'Your added video · independently check the variation':'Title and preview reviewed; verify the movement variation'} <span aria-hidden="true">·</span> {lesson.provider==='youtube'?'YOUTUBE':'INSTAGRAM'}</span>
           </div>
           <div className="tlctv-inline__source-stepper" aria-label="Choose tutorial">
             <button type="button" onClick={()=>choose(selected-1)} disabled={selected===0} aria-label="Previous tutorial" title="Previous tutorial"><ChevronLeft size={19}/></button>
@@ -118,11 +118,11 @@ export function InlineTlcTv({exercise,compact=false}:{exercise:ThumbnailExercise
           <button type="button" onClick={save} aria-label={saved?'Lesson saved in TLCtv':'Save lesson to TLCtv'} disabled={saved} title={saved?'Saved':'Save to TLCtv'}>{saved?<Check size={17}/>:<Bookmark size={17}/>}<span>{saved?'Saved':'Save'}</span></button>
           <a href={lesson.url} target="_blank" rel="noopener noreferrer" aria-label="Open original video in new tab" title="Open original source"><ExternalLink size={17}/><span>Source</span></a>
         </div>
-        {coverage.exactCount===0&&<div className="tlctv-inline__match-note"><span>Related lesson—not the exact exercise demo.</span><a href={tutorialSearchUrl(exercise.name)} target="_blank" rel="noopener noreferrer"><ExternalLink size={14}/> Find exact video</a></div>}
+        {coverage.exactCount===0&&<div className="tlctv-inline__match-note"><span>No reviewed exercise-specific preview yet. Related lessons may use different variations.</span><a href={tutorialSearchUrl(exercise.name)} target="_blank" rel="noopener noreferrer"><ExternalLink size={14}/> Find exact video</a></div>}
         <details className="tlctv-inline__more"><summary>More videos & tools</summary>
         {lessons.length>1&&<div className="tlctv-inline__channels" role="group" aria-label="Available tutorials">
           {lessons.map((source,i)=><button key={source.url} type="button" aria-pressed={selected===i} onClick={()=>choose(i)}>
-            {String(i+1).padStart(2,'0')} {source.scope==='guide'?'SKILL GUIDE':source.scope==='other'?'MY CLIP':'DEMO'}
+            {String(i+1).padStart(2,'0')} {source.scope==='guide'?'RELATED LESSON':source.scope==='other'?'MY CLIP':'REVIEWED PREVIEW'}
           </button>)}
         </div>}
         <div className="tlctv-inline__personal-actions">
