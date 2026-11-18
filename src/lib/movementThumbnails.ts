@@ -9,6 +9,7 @@ import { PROGRESSION_SOURCES } from '../data/progressionSources';
 import { exercisePaths, canonicalSlug } from './exerciseProgressions';
 import { tutorialState } from './mediaAudit';
 import { getYouTubeId } from './youtube';
+import { reviewedVideoForExercise, relatedVideoForExercise, videoMatch } from './videoMatchPolicy';
 export type ThumbnailExercise={slug:string;name:string;image_url?:string|null;youtube_url?:string|null;instagram_url?:string|null};
 export type ThumbnailSource={src:string;scope:'photo'|'clip'|'illustration'|'guide'|'category';label:string;title:string;url:string|null};
 const bySlug=new Map(catalog.map(e=>[e.slug,e]));
@@ -27,7 +28,7 @@ function movementMediaSources(input:ThumbnailExercise):ThumbnailSource[]{
  const review=reviewed.get(slug);
  const photos=movementPhotoSet(input);
  for(const src of photos?.images||[])results.push({src,scope:"photo",label:"Photo",title:`${title} · ${photos.author}`,url:null});
- for(const id of review?.approvedVideoIds||[]){const meta=videoMetadata.get(id);const url=`https://www.youtube.com/watch?v=${id}`;if(!tutorialState(url).blocked)results.push({src:`https://i.ytimg.com/vi/${id}/hqdefault.jpg`,scope:'clip',label:'Video',title:meta?`${meta.creator} · ${meta.title}`:title,url});}
+ for(const id of review?.approvedVideoIds||[]){const meta=videoMetadata.get(id);const url=`https://www.youtube.com/watch?v=${id}`;if(reviewedVideoForExercise(slug,id)&&!tutorialState(url).blocked)results.push({src:`https://i.ytimg.com/vi/${id}/hqdefault.jpg`,scope:'clip',label:'Video',title:meta?`${meta.creator} · ${meta.title}`:title,url});}
  const artwork=movementIllustration(input);
  if(artwork)results.push({src:artwork.src,scope:'illustration',label:'Illustration',title:`${title} · ${artwork.style}`,url:null});
  const ownPhoto=input.image_url&&input.image_url!==bySlug.get(input.slug)?.image_url&&input.image_url!==canonical?.image_url?input.image_url:null;
@@ -35,12 +36,21 @@ function movementMediaSources(input:ThumbnailExercise):ThumbnailSource[]{
  const photoSource=photo&&/^(https:\/\/|\/)/.test(photo)?{src:photo,scope:'photo' as const,label:'Photo',title:input.name,url:null}:null;
  if(photoSource&&input.image_url!==canonical?.image_url)results.unshift(photoSource);
  const direct=tutorialState(input.youtube_url||canonical?.youtube_url,title);
- if(direct.id&&!review?.rejectedVideoIds.includes(direct.id)&&!direct.blocked&&(direct.mapping?.titleSignal!=='title_needs_review'||direct.repair)){
-  const family=review?!review.approvedVideoIds.includes(direct.id):direct.repair?.scope==='family'||(sharedVideos.get(direct.id)?.size||0)>2;results.push({src:`https://i.ytimg.com/vi/${direct.id}/hqdefault.jpg`,scope:family?'guide':'clip',label:family?'Guide':'Video',title:family?`${title} · family tutorial`:`${title} · video preview`,url:direct.url});
+ if(direct.id&&!direct.blocked){
+  const status=videoMatch(slug,direct.url);
+  // Unreviewed/incorrect direct links are not displayed as a demo.
+  if(status==='reviewed'||status==='related'){
+    const family=status==='related';
+    results.push({src:`https://i.ytimg.com/vi/${direct.id}/hqdefault.jpg`,scope:family?'guide':'clip',label:family?'Related':'Reviewed',title:videoMetadata.get(direct.id)?.title||`${title} · video source`,url:direct.url});
+  }
  }
  if(photoSource&&input.image_url===canonical?.image_url)results.push(photoSource);
  const curated=MOVEMENT_MEDIA[slug];
- if(curated&&!review?.rejectedVideoIds.includes(curated.id)&&!tutorialState(`https://www.youtube.com/watch?v=${curated.id}`).blocked)results.push({src:`https://i.ytimg.com/vi/${curated.id}/hqdefault.jpg`,scope:review&&!review.approvedVideoIds.includes(curated.id)?'guide':curated.scope||'clip',label:curated.scope==='guide'?'Related':'Video',title:`${curated.creator} · ${curated.title}`,url:`https://www.youtube.com/watch?v=${curated.id}`});
+ if(curated&&!review?.rejectedVideoIds.includes(curated.id)&&!tutorialState(`https://www.youtube.com/watch?v=${curated.id}`).blocked){
+   const exact=reviewedVideoForExercise(slug,curated.id);
+   // A manually supplied creator title is helpful metadata, not exact-form certification.
+   results.push({src:`https://i.ytimg.com/vi/${curated.id}/hqdefault.jpg`,scope:exact?'clip':'guide',label:exact?'Reviewed':'Related',title:`${curated.creator} · ${curated.title}`,url:`https://www.youtube.com/watch?v=${curated.id}`});
+ }
  const paths=exercisePaths(input.slug).map(p=>p.id);
  const sources=PROGRESSION_SOURCES.filter(s=>s.paths.some(id=>paths.includes(id))&&getYouTubeId(s.url));
  for(const source of sources){const id=getYouTubeId(source.url)!;results.push({src:`https://i.ytimg.com/vi/${id}/hqdefault.jpg`,scope:'guide',label:'Guide',title:`${source.creator} · ${source.title}`,url:source.url});}
