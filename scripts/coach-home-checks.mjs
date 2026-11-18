@@ -23,7 +23,7 @@ assert(!home.includes('MovementLearningPanel')&&!home.includes('WorkoutCoach'),'
 assert(nav.includes("['/coach','/integrations'"),'Coach needs correct active More dock state');
 assert(more.includes("to:'/coach'"),'Coach must be discoverable in More');
 assert(integrations.includes('to="/coach"'),'ChatGPT integrations must offer in-app AI chat');
-for(const important of ["fetch('/api/discover-exercises'","await askCoach(","await signIn(","await signUp(","includeHistory:includeHistory","sessionStorage.setItem","rowsOwner!==owner","LOCAL PREVIEW · NOT AI"]){
+for(const important of ["fetch('/api/discover-exercises'","await askCoach(","await signIn(","await signUp(","includeProgress:includeHistory","sessionStorage.setItem","rowsOwner!==owner","LOCAL PREVIEW · NOT AI"]){
  assert(coach.includes(important),'Chat feature integration missing '+important);
 }
 assert(client.includes('includeProgress?:boolean'),'Private records must be opt-in for dedicated coach');
