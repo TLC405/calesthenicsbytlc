@@ -13,7 +13,9 @@ const skeuo=await read('src/styles/skeuomorphic-themes-v4.css');
 const nav=await read('src/components/Layout/MobileNav.tsx');
 const picker=await read('src/components/ThemeSwitcher.tsx');
 const pages={
-  '/':'src/pages/FocusPlanner.tsx',
+  '/':'src/pages/SimpleHome.tsx',
+  '/build':'src/pages/FocusPlanner.tsx',
+  '/coach':'src/pages/CoachChat.tsx',
   '/program':'src/pages/SuperHumanProgram.tsx',
   '/skills':'src/pages/Skills.tsx',
   '/skills/map':'src/pages/MasterSkillMap.tsx',
