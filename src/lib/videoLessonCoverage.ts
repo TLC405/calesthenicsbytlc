@@ -21,8 +21,8 @@ const guides:Record<string,{url:string;title:string}>={
  Grip:{url:'https://www.youtube.com/watch?v=YpQCysZfOhE',title:'Alexander Bromley · complete grip-strength guide'}
 };
 const matchedFamilies=[
- {pattern:/finger|pinch|towel|grip|wrist|hang|carry|gripper|crush/,url:'https://www.youtube.com/watch?v=YpQCysZfOhE',title:'Grip strength · related lesson'},
  {pattern:/ring|false-grip|iron-cross|maltese|victorian/,url:'https://www.youtube.com/watch?v=fsl08Copg-U',title:'GMB Fitness · ring skills · related lesson'},
+ {pattern:/finger|pinch|towel|grip|wrist|hang|carry|gripper|crush/,url:'https://www.youtube.com/watch?v=YpQCysZfOhE',title:'Grip strength · related lesson'},
  {pattern:/planche|straight.arm|pseudo/,url:'https://www.youtube.com/watch?v=6snDOgFBBFA',title:'GMB Fitness · planche preparation · related lesson'},
  {pattern:/handstand|press.to.hs|hspu|pike.press|stalder|inversion/,url:'https://www.youtube.com/watch?v=d6_lcWtQDxw',title:'GMB Fitness · handstand skills · related lesson'},
  {pattern:/front.lever|back.lever|tuck.lever|muscle.up/,url:'https://www.youtube.com/watch?v=fsl08Copg-U',title:'GMB Fitness · ring strength and levers · related lesson'},
@@ -53,7 +53,7 @@ export function videoLessonCoverage(exercise:ThumbnailExercise){
   return [{url:parsed.url,title:s.scope==='clip'?(s.title||exercise.name):/related|guide/i.test(s.title)?s.title:(s.title||exercise.name)+' · related lesson',scope:s.scope==='clip'?'clip' as const:'guide' as const,provider:parsed.provider,origin:'catalog' as const}];
  });
  const instagram=parseEmbeddedMedia(exercise.instagram_url||'');
- if(instagram&&instagram.provider==='instagram'&&!seen.has(instagram.url))existing.unshift({url:instagram.url,title:exercise.name+' · Instagram video',scope:'clip',provider:'instagram',origin:'catalog'});
+ if(instagram&&instagram.provider==='instagram'&&!seen.has(instagram.url))existing.unshift({url:instagram.url,title:exercise.name+' · unverified Instagram link',scope:'guide',provider:'instagram',origin:'catalog'});
  const direct=existing.filter(s=>s.scope==='clip');
  const related=existing.filter(s=>s.scope==='guide');
  const extra=fallback(exercise);
