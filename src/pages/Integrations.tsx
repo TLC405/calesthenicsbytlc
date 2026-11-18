@@ -26,7 +26,7 @@ const focusOptions=[
 ];
 const recommendations=[
  {title:'TLCtv analyzer',subtitle:'Inspect frames or captions from exercise videos',to:'/tlctv/analyzer',icon:Film,tag:'IN APP'},
- {title:'AI workout coach',subtitle:'Catalog-grounded exercise suggestions when AI is configured',to:'/ai-lab',icon:BrainCircuit,tag:'CONNECTION NEEDED'},
+ {title:'TLC AI Coach · chat inside the app',subtitle:'OpenAI-powered answers with safe exercise context',to:'/coach',icon:BrainCircuit,tag:'IN APP'},
  {title:'Skills assessment',subtitle:'Collect measurable baselines and progression checks',to:'/assessment',icon:Target,tag:'READY'},
  {title:'My workout plan',subtitle:'Review your training framework and adjust selections',to:'/program',icon:Video,tag:'READY'},
 ];
@@ -150,9 +150,9 @@ export default function Integrations(){
   </header>
   <section className="tlc-integration-grid">
    <article className="tlc-integration-panel tlc-integration-chatgpt">
-    <div className="tlc-integration-titleline"><span className="tlc-integration-symbol"><MessageSquare size={21}/></span><div><p className="tlc-integration-kicker">01 / PERSONAL ASSISTANT</p><h2>Bring your ChatGPT.</h2></div></div>
-    <p className="tlc-integration-copy">Take your live training context into the ChatGPT account you already use. You choose whether personal skill records are included; nothing is silently sent.</p>
-    <div className="tlc-connection-state"><Info size={17}/><span>ChatGPT handoff is ready. Automatic account sign-in and ChatGPT plan billing are <strong>not connected</strong> to this hosted site.</span></div>
+    <div className="tlc-integration-titleline"><span className="tlc-integration-symbol"><MessageSquare size={21}/></span><div><p className="tlc-integration-kicker">01 / PERSONAL ASSISTANT</p><h2>Chat directly in TLC, or use ChatGPT.</h2></div></div>
+    <p className="tlc-integration-copy">The built-in TLC AI Coach works with your TLC client sign-in. Your personal ChatGPT account and history remain separate. You can also export a coaching brief to your usual ChatGPT.</p>
+    <p><Link className="tlc-coach-inline-link" to="/coach"><BrainCircuit size={17}/> Open TLC AI Coach inside this app <ArrowRight size={15}/></Link></p><div className="tlc-connection-state"><Info size={17}/><span>ChatGPT handoff is ready. Automatic account sign-in and ChatGPT plan billing are <strong>not connected</strong> to this hosted site.</span></div>
     <label className="tlc-integration-field">What should ChatGPT help with?
      <select value={focus} onChange={e=>chooseFocus(e.target.value)}>
       {focusOptions.map(x=><option key={x.id} value={x.id}>{x.title}</option>)}
@@ -168,7 +168,7 @@ export default function Integrations(){
      <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={16}/> Open my ChatGPT</a>
      <button type="button" onClick={()=>void share()}><ArrowRight size={17}/> Android share</button>
     </div>
-    <p className="tlc-integration-help">Open ChatGPT and paste the copied brief. ChatGPT conversations and memories are not imported into the app automatically.</p>
+    <p className="tlc-integration-help">This optional handoff is separate from the built-in coach. ChatGPT conversations and memories are not imported into TLC automatically.</p>
     <a className="tlc-integration-documentation" href="https://developers.openai.com/siwc/quickstart" target="_blank" rel="noopener noreferrer">About native ChatGPT account connection <ExternalLink size={13}/></a>
    </article>
    <article className="tlc-integration-panel tlc-integration-science">
