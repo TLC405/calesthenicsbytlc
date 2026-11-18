@@ -11,9 +11,12 @@ const reviewedBySlug = new Map(review.exercises.map(item => [item.slug,item]));
 const videos = new Map(audit.videos.map(item => [item.videoId,item]));
 
 /** An approved preview can still be a DIFFERENT variation. */
+// Distinct movements are not interchangeable just because they appear in the same skill family.
+const wrongExercise: Readonly<Record<string,readonly string[]>> = {
+  'frog-stand':['SrYBD4yCI84'], // Crow pose: do not offer as the Frog Stand demonstration.
+  'bridge-pose':['wPM8icPu6H8'], // Glute bridge is not the Yoga Bridge backbend.
+};
 const variationMismatch: Readonly<Record<string,readonly string[]>> = {
-  'frog-stand':['SrYBD4yCI84'], // Crow pose is closely related; not an exact frog stand lesson.
-  'bridge-pose':['wPM8icPu6H8'], // Glute bridge is not the yoga backbend.
   'toes-to-bar':['_03pCKOv4l4'], // Kipping demonstration must not be labelled strict toes-to-bar.
   'ring-support-hold':['9PKChU9Ozs8'], // Rings-turned-out support is not a basic ring support.
   'headstand':['_ZTSkpBjhu0'], // Tripod variation is not generic headstand technique.
@@ -27,6 +30,7 @@ export function videoMatch(slug:string,url?:string|null):ExerciseVideoMatch{
   if(!id)return 'missing';
   const item=reviewedBySlug.get(slug);
   if(item?.rejectedVideoIds.includes(id))return 'rejected';
+  if(wrongExercise[slug]?.includes(id))return 'rejected';
   const video=videos.get(id);
   if(video?.availability==='unavailable'||video?.availability==='invalid')return 'unavailable';
   if(item?.approvedVideoIds.includes(id)){
