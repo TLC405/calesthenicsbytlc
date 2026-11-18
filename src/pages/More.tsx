@@ -9,7 +9,8 @@ export default function More() {
   const {user}=useAuth();
   const links=[
     {to:'/skills?view=tree',label:'Skill Tree',note:'80 skills across 13 connected pathways',icon:GitBranch},
-    {to:'/integrations',label:'My ChatGPT & Integrations',note:'ChatGPT, research and training tools',icon:PlugZap},
+    {to:'/coach',label:'TLC AI Coach · Chat inside',note:'OpenAI-powered strength questions and technique help',icon:BrainCircuit},
+    {to:'/integrations',label:'ChatGPT briefs & Research',note:'Export context, explore research and tools',icon:PlugZap},
     {to:'/client',label:'Client Portal',note:'Sign up, test your skills, and view your results',icon:Target},
     {to:'/program',label:'My skill training plan',note:'Training days, handstands and skill steps',icon:Target},
     {to:'/library',label:'All exercises',note:'Search, videos and your own movements',icon:Library},
