@@ -18,6 +18,8 @@ const Integrations = lazy(()=>import("./pages/Integrations"));
 import { MobileNav } from "./components/Layout/MobileNav";
 import { RouteGuard } from "./components/Layout/RouteGuard";
 const Index=lazy(()=>import("./pages/Index"));
+const FocusPlanner=lazy(()=>import("./pages/FocusPlanner"));
+const CoachChat=lazy(()=>import("./pages/CoachChat"));
 const PowerIntro=lazy(()=>import("./pages/PowerIntro"));
 const Auth=lazy(()=>import("./pages/Auth"));
 const Dashboard = lazy(()=>import("./pages/Dashboard"));
@@ -70,6 +72,8 @@ function AppContent() {
       <div className="power-app-shell min-w-0 md:pb-0">
         <RouteGuard><Suspense fallback={<div id="tlc-route-loading"><LoadingScreen /></div>}><Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/build" element={<FocusPlanner />} />
+          <Route path="/coach" element={<CoachChat />} />
           <Route path="/intro" element={<PowerIntro />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin-login" element={<Auth />} />
