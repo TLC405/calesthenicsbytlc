@@ -1,5 +1,7 @@
 /** Public creator sources matched by title/embed; these are not human technique certifications. */
 export const MOVEMENT_MEDIA:Record<string,{id:string;creator:string;title:string;source:string;scope?:'clip'|'guide'}>={
+ 'frog-stand':{id:'IaMCpp6CcWE',creator:'SplitsOnTheSide',title:'Calisthenics Skills Anyone Can Learn: The Frog Stand | Beginner Tutorial',source:'https://www.youtube.com/watch?v=IaMCpp6CcWE',scope:'guide'},
+ 'false-grip-ring-hang':{id:'CtAui84zEAU',creator:'Carl Paoli',title:'False Grip Progression | Build Strength for Muscle Ups',source:'https://www.youtube.com/watch?v=CtAui84zEAU',scope:'guide'},
  'band-assisted-iron-cross':{id:'kvxLvwsCmFQ',creator:'Nejc Hojc Personal Training Systems',title:'Iron Cross Band Assisted',source:'https://www.youtube.com/watch?v=kvxLvwsCmFQ',scope:'clip'},
  'band-assisted-human-flag':{id:'ngUFrZGO-bQ',creator:'Simonster Strength',title:'Tips for Band-Assisted Flags',source:'https://www.youtube.com/watch?v=ngUFrZGO-bQ',scope:'clip'},
  'ring-row':{id:'xhlReCpAE9k',creator:'CrossFit',title:'The Ring Row',source:'https://www.youtube.com/watch?v=xhlReCpAE9k'},
