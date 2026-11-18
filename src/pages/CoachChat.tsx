@@ -26,6 +26,7 @@ export default function CoachChat(){
  const {user,signIn,signUp}=useAuth();
  const owner=user?.id||'guest';
  const [rows,setRows]=useState<ChatRow[]>(()=>readHistory(owner));
+ const [rowsOwner,setRowsOwner]=useState(owner);
  const [question,setQuestion]=useState('');
  const [includeHistory,setIncludeHistory]=useState(false);
  const [busy,setBusy]=useState(false);
@@ -35,8 +36,9 @@ export default function CoachChat(){
  const [email,setEmail]=useState(''),[password,setPassword]=useState('');
  const [authBusy,setAuthBusy]=useState(false),[authMessage,setAuthMessage]=useState('');
  const end=useRef<HTMLDivElement>(null);
- useEffect(()=>{setRows(readHistory(owner));setError('');},[owner]);
- useEffect(()=>{try{sessionStorage.setItem('tlc-coach-conversation-v1:'+owner,JSON.stringify(rows.slice(-24)));}catch{}},[owner,rows]);
+ useEffect(()=>{setRowsOwner(owner);setRows(readHistory(owner));setError('');},[owner]);
+ // Do not persist one user's messages into another account during an auth transition.
+ useEffect(()=>{if(rowsOwner!==owner)return;try{sessionStorage.setItem('tlc-coach-conversation-v1:'+owner,JSON.stringify(rows.slice(-24)));}catch{}},[owner,rows,rowsOwner]);
  useEffect(()=>{end.current?.scrollIntoView({behavior:'smooth',block:'nearest'});},[rows.length,busy]);
  useEffect(()=>{
   const controller=new AbortController();
@@ -45,7 +47,8 @@ export default function CoachChat(){
   }).catch(()=>{if(!controller.signal.aborted)setConfigured(false)});
   return()=>controller.abort();
  },[]);
- const history=useMemo<CoachTurn[]>(()=>rows.filter(r=>r.source==='ai'||r.source==='user').slice(-16).map(({role,content})=>({role,content})),[rows]);
+ const visibleRows=rowsOwner===owner?rows:[];
+ const history=useMemo<CoachTurn[]>(()=>visibleRows.filter(r=>r.source==='ai'||r.source==='user').slice(-16).map(({role,content})=>({role,content})),[visibleRows]);
  async function ask(input:string){
   const text=input.trim();
   if(!text||busy||text.length>1000)return;
@@ -94,8 +97,8 @@ export default function CoachChat(){
     <section className="tlc-coach-chat" aria-label="Coach conversation">
       <div className="tlc-coach-chat-top"><div><MessageSquare size={19}/><strong>Conversation</strong></div><button type="button" onClick={()=>{setRows([]);setError('');}}><Eraser size={16}/> Clear</button></div>
       <div className="tlc-coach-messages" role="log" aria-label="Conversation messages" aria-live="polite">
-        {!rows.length&&<div className="tlc-coach-welcome"><img src="/icons/tlc-doodle-180.png" width={62} height={62} alt="TLC logo"/><h2>What are you working on?</h2><p>Choose a question or write your own. There are no automatic workout changes.</p><div>{starters.map(text=><button type="button" key={text} onClick={()=>void ask(text)}>{text}<ArrowRight size={15}/></button>)}</div></div>}
-        {rows.map(row=><article key={row.id} className={'tlc-coach-message is-'+row.role}>
+        {!visibleRows.length&&<div className="tlc-coach-welcome"><img src="/icons/tlc-doodle-180.png" width={62} height={62} alt="TLC logo"/><h2>What are you working on?</h2><p>Choose a question or write your own. There are no automatic workout changes.</p><div>{starters.map(text=><button type="button" key={text} onClick={()=>void ask(text)}>{text}<ArrowRight size={15}/></button>)}</div></div>}
+        {visibleRows.map(row=><article key={row.id} className={'tlc-coach-message is-'+row.role}>
           <span className="tlc-coach-message-tag">{row.role==='user'?'YOU':row.source==='ai'?'TLC AI COACH · OPENAI':'LOCAL PREVIEW · NOT AI'}</span>
           <p>{row.content}</p>
           {row.role==='assistant'&&<div className="tlc-coach-message-actions"><button type="button" onClick={()=>void copy(row.content)}><ClipboardCopy size={14}/> Copy</button>{row.goalId&&<Link to={'/build?goal='+encodeURIComponent(row.goalId)}>Explore related training <ArrowRight size={14}/></Link>}</div>}
