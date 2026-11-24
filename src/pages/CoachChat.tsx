@@ -23,7 +23,7 @@ function makeRow(role:'assistant'|'user',content:string,source:ChatRow['source']
  return {id:crypto.randomUUID(),role,content,source,goalId,at:new Date().toISOString()};
 }
 export default function CoachChat(){
- const {user,signIn,signUp}=useAuth();
+ const {user,loading,signIn,signUp}=useAuth();
  const owner=user?.id||'guest';
  const [rows,setRows]=useState<ChatRow[]>(()=>readHistory(owner));
  const [rowsOwner,setRowsOwner]=useState(owner);
@@ -51,7 +51,7 @@ export default function CoachChat(){
  const history=useMemo<CoachTurn[]>(()=>visibleRows.filter(r=>r.source==='ai'||r.source==='user').slice(-16).map(({role,content})=>({role,content})),[visibleRows]);
  async function ask(input:string){
   const text=input.trim();
-  if(!text||busy||text.length>1000)return;
+  if(!text||busy||loading||text.length>1000)return;
   const prior=history;
   setRows(old=>[...old,makeRow('user',text,'user')]);
   setQuestion('');setBusy(true);setError('');
@@ -91,7 +91,7 @@ export default function CoachChat(){
     <p className="tlc-coach-kicker"><Sparkles size={17}/> TLC / TRAINING INTELLIGENCE</p>
     <h1>Your AI strength coach.</h1>
     <p>Ask about form, progressions, grip, planche, balance and training. You decide what goes into a workout.</p>
-    <div className="tlc-coach-connection"><span className={isLive?'is-connected':''}/>{configured===null?'Checking AI provider':!configured?'AI provider unavailable':user?'OpenAI-powered coaching ready':'AI provider available · sign in to chat'}</div>
+    <div className="tlc-coach-connection"><span className={isLive?'is-connected':''}/>{loading?'Restoring your TLC session…':configured===null?'Checking AI connection…':!configured?'AI provider not connected':user?'TLC account signed in · AI access subject to provider authorization':'TLC AI provider configured · sign in to your TLC account'}</div>
    </header>
    <div className="tlc-coach-layout">
     <section className="tlc-coach-chat" aria-label="Coach conversation">
@@ -110,7 +110,7 @@ export default function CoachChat(){
       <form className="tlc-coach-compose" onSubmit={onSubmit}>
        <label htmlFor="tlc-coach-question">Ask TLC AI Coach</label>
        <textarea id="tlc-coach-question" rows={3} maxLength={1000} placeholder="Example: Why is my false grip slipping off the rings?" value={question} onChange={e=>setQuestion(e.target.value)}/>
-       <div><span>{question.length}/1000</span><button type="submit" disabled={!question.trim()||busy}><Send size={17}/>{user?'Send question':'Preview question'}</button></div>
+       <div><span>{question.length}/1000</span><button type="submit" disabled={!question.trim()||busy||loading}><Send size={17}/>{user?'Send question':'Preview question'}</button></div>
       </form>
     </section>
     <aside className="tlc-coach-aside" aria-label="AI connection and data controls">
@@ -120,8 +120,9 @@ export default function CoachChat(){
         <label className="tlc-coach-consent"><input type="checkbox" checked={includeHistory} onChange={e=>setIncludeHistory(e.target.checked)}/><span>Include up to 12 recent self-reported training attempts in my next question</span></label>
         <small>Your training level and selected equipment are shared with the coaching service for safety. Conversations are kept only in this browser tab; they are not saved to a coach dashboard.</small>
       </section>
-      {!user&&<section className="tlc-coach-signin">
-        <h2><LockKeyhole size={18}/> Sign in for AI replies</h2>
+      {loading&&<p role="status" className="tlc-coach-auth-message">Checking your saved TLC sign-in…</p>}
+      {!user&&!loading&&<section className="tlc-coach-signin">
+        <h2><LockKeyhole size={18}/> TLC account · stay signed in</h2><p>This is your TLC account, not a separate ChatGPT login. It stays signed in on this device unless you sign out or clear browser data.</p>
         <form onSubmit={authorize}>
          <label>Email<input type="email" autoComplete="email" required value={email} onChange={e=>setEmail(e.target.value)}/></label>
          <label>Password<input type="password" required minLength={6} autoComplete={mode==='login'?'current-password':'new-password'} value={password} onChange={e=>setPassword(e.target.value)}/></label>
