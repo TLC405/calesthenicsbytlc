@@ -4,7 +4,7 @@ import { validateCoachSelection } from './coachGrounding';
 import { sanitizeCoachHistory, sanitizeBuilderSlugs, type CoachTurn } from './coachConversation';
 export async function askCoach(query:string,owner:string,options:{history?:CoachTurn[];workoutSlugs?:string[];includeProgress?:boolean}={}){
  const {data}=await supabase.auth.getSession();const token=data.session?.access_token;
- if(!token)throw new Error('AI coaching requires your owner/member sign-in. The rule-based planner works without signing in.');
+ if(!token)throw new Error('Your TLC login session has expired. Sign in to your TLC account; your ChatGPT account is separate.');
  const profile=readTrainingProfile();
  const progress=(options.includeProgress===false?[]:deviceSkillProgress.read(owner).slice(-12)).map(({nodeId,value,metric,quality})=>({nodeId,value,metric,quality}));
  const response=await fetch('/api/discover-exercises',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},body:JSON.stringify({query,profile,progress,history:sanitizeCoachHistory(options.history),workoutSlugs:sanitizeBuilderSlugs(options.workoutSlugs)}),signal:AbortSignal.timeout(35000)});
