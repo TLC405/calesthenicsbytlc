@@ -1,4 +1,5 @@
 import illustrations from '../data/movementIllustrations.json';
+import {conceptArtwork} from './conceptArtwork';
 import reviewedPhotos from '../data/reviewedMovementPhotos.json';
 import thumbnailReview from '../data/thumbnailReview.json';
 import auditMetadata from '../data/videoAudit.json';
@@ -63,7 +64,7 @@ function movementMediaSources(input:ThumbnailExercise):ThumbnailSource[]{
 }
 
 /** Exercise cards never borrow an unrelated family lesson as their picture. */
-export function movementThumbnailSources(input:ThumbnailExercise):ThumbnailSource[]{return movementMediaSources(input).filter(source=>source.scope==='photo'||source.scope==='clip'||source.scope==='illustration');}
+export function movementThumbnailSources(input:ThumbnailExercise):ThumbnailSource[]{const approved=movementMediaSources(input).filter(source=>source.scope==='photo'||source.scope==='clip'||source.scope==='illustration');return approved.length?approved:(conceptArtwork(input)?[conceptArtwork(input)!]:[]);}
 export function movementTutorialSources(input:ThumbnailExercise):ThumbnailSource[]{const seen=new Set<string>();return movementMediaSources(input).filter(source=>{if(!source.url||seen.has(source.url))return false;seen.add(source.url);return true;});}
 export function movementVisualDetails(input:ThumbnailExercise){const e=bySlug.get(canonicalSlug(input.slug));const path=exercisePaths(input.slug)[0];return {family:path?.title||e?.category||'Your movement',cue:Array.isArray(e?.cues)?String(e.cues[0]||''):''};}
 const coverSlugs:Record<string,string[]>={'iron-cross':['band-assisted-iron-cross'],'human-flag':['band-assisted-human-flag'],planche:['tuck-planche','straddle-planche','planche-lean'],'straight-arm':['planche-lean','scapular-push-up'],rings:['ring-row','ring-dip'],'handstand':['freestanding-handstand','chest-to-wall-handstand'],'straddle-press':['straddle-press-to-hs','wall-press-negative'],stalder:['stalder-press-to-hs','stalder-negative'],'pike-compression':['seated-pike-lift'],'straddle-compression':['seated-straddle-lift'],'yoga-foundation':['downward-dog','cat-cow'],'ballet-barre':['first-position-plie','tendu'],'ballet-balance':['arabesque-hold','attitude-hold']};
