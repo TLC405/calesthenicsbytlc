@@ -21,5 +21,17 @@ export function validateCoachSelection(value:unknown,profile:TrainingReadiness){
 }
 export function matchCoachGoal(query:string){
  const q=query.toLowerCase();
+ if(/grip|hang|pinch|fingertip|finger|forearm|gripper|wrist/.test(q))return /plate|pinch|block/.test(q)?'grip-pinch':/wrist|extension|rotation|pronation|roller/.test(q)?'grip-wrist':'grip';
  if(/ballet|ballet|barre|pli[eé]|tendu/.test(q))return /balance|arabesque|attitude|pass[eé]/.test(q)?'ballet-balance':/pench|needle/.test(q)?'ballet-penche':/extension|battement|develop/.test(q)?'ballet-extension':'ballet-barre';if(/yoga/.test(q))return /balance|standing|warrior/.test(q)?'yoga-standing':/bridge|backbend|hips/.test(q)?'yoga-backbends':'yoga-foundation';if(/mobility|flexibility|stretch/.test(q))return /shoulder|thoracic/.test(q)?'shoulder-mobility':/split|hip/.test(q)?'splits':'pancake';if(/handstand.*push|hspu/.test(q))return 'hspu';if(/stalder/.test(q))return 'stalder';if(/straight.?arm/.test(q))return 'straight-arm';if(/straddle.*compress|compress.*straddle/.test(q))return 'straddle-compression';if(/compress|pike lift/.test(q))return 'pike-compression';if(/iron.?cross/.test(q))return 'iron-cross';if(/human.?flag|flag/.test(q))return 'human-flag';if(/planche/.test(q))return 'planche';if(/pike/.test(q))return 'pike-press';if(/press/.test(q))return 'straddle-press';if(/one.?arm.*push|push.?up/.test(q))return 'push-up';if(/front.*lever/.test(q))return 'front-lever';if(/back.*lever/.test(q))return 'back-lever';if(/muscle.?up/.test(q))return 'ring-muscle-up';if(/rings?/.test(q))return 'rings';if(/handstand.*push|hspu/.test(q))return 'hspu';if(/handstand/.test(q))return 'handstand';if(/pull/.test(q))return 'pull-up';if(/l.?sit|v.?sit/.test(q))return 'l-sit';if(/leg|pistol/.test(q))return 'foundation-legs';return 'foundation-push';
+}
+
+/** Real local skill-library guidance when the cloud AI provider is unavailable. */
+export function localCoachReply(question:string){
+ const id=matchCoachGoal(question);
+ const skill=SKILL_PATHS.find(s=>s.id===id)||SKILL_PATHS.find(s=>s.id==='grip');
+ const title=skill?.title||'Skill foundations';
+ const steps=skill?.slugs?.slice(0,4).map(slug=>known.get(slug)?.name).filter(Boolean)||[];
+ const first=steps.length?'Relevant movements to explore: '+steps.join(', ')+'.':'Open the Skill Library to choose a suitable starting movement.';
+ const warning=skill?.safety||'Use a controllable variation and stop if you lose position or experience pain.';
+ return 'LOCAL SKILL GUIDE · Not an OpenAI reply\n\n'+title+': '+(skill?.cue||'Practice a manageable movement with consistent technique.')+'\n\n'+first+'\n\n'+warning+'\n\nThis is catalog guidance, not a form assessment. Review the exact exercise instructions and a verified tutorial before loading a harder variation.';
 }
