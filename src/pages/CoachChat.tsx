@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, BookOpen, Check, ClipboardCopy, Eraser, LockKeyhole, MessageSquare, Send, ShieldCheck, Sparkles, UserRound } from 'lucide-react';
 import { useAuth } from '@/providers/AuthProvider';
 import { askCoach } from '@/lib/coachClient';
-import { matchCoachGoal } from '@/lib/coachGrounding';
+import { matchCoachGoal, localCoachReply } from '@/lib/coachGrounding';
 import type { CoachTurn } from '@/lib/coachConversation';
 import '@/styles/coach-chat.css';
 
@@ -58,9 +58,7 @@ export default function CoachChat(){
   try{
     if(!user||!configured){
       const goal=matchCoachGoal(text);
-      const explanation=!user
-        ?'Local preview: your question has not been sent to OpenAI. Sign in below to get an AI coaching reply. You can browse the Skill Library or explore relevant progressions in the meantime.'
-        :'The AI service is currently unavailable. Your question was not sent. Use the movement library and optional local progressions until the connection is restored.';
+      const explanation=localCoachReply(text)+(user?'\n\nThe OpenAI service is currently unavailable; this answer uses the built-in skill catalog.':'\n\nSign in to your TLC account to try OpenAI replies when your project is authorized.');
       setRows(old=>[...old,makeRow('assistant',explanation,'local',goal)]);
       return;
     }
@@ -69,6 +67,8 @@ export default function CoachChat(){
     setRows(old=>[...old,makeRow('assistant',msg,'ai',result.goalId)]);
   }catch(e){
     setError(e instanceof Error?e.message:'The AI coaching request failed.');
+    // Always provide clearly labelled local skill guidance rather than a blank chat.
+    setRows(old=>[...old,makeRow('assistant',localCoachReply(text),'local',matchCoachGoal(text))]);
   }finally{setBusy(false)}
  }
  function onSubmit(event:FormEvent){event.preventDefault();void ask(question);}
