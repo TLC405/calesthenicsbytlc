@@ -32,6 +32,7 @@ export default function CoachChat(){
  const [busy,setBusy]=useState(false);
  const [error,setError]=useState('');
  const [configured,setConfigured]=useState<boolean|null>(null);
+ const [aiVerified,setAiVerified]=useState(false);
  const [mode,setMode]=useState<'login'|'signup'>('login');
  const [email,setEmail]=useState(''),[password,setPassword]=useState('');
  const [authBusy,setAuthBusy]=useState(false),[authMessage,setAuthMessage]=useState('');
@@ -63,9 +64,11 @@ export default function CoachChat(){
       return;
     }
     const result=await askCoach(text,user.id,{history:prior,includeProgress:includeHistory});
+    setAiVerified(true);
     const msg=typeof result.message==='string'?result.message:'The coach did not return an explanation.';
     setRows(old=>[...old,makeRow('assistant',msg,'ai',result.goalId)]);
   }catch(e){
+    setAiVerified(false);
     setError(e instanceof Error?e.message:'The AI coaching request failed.');
     // Always provide clearly labelled local skill guidance rather than a blank chat.
     setRows(old=>[...old,makeRow('assistant',localCoachReply(text),'local',matchCoachGoal(text))]);
@@ -84,14 +87,14 @@ export default function CoachChat(){
   finally{setAuthBusy(false)}
  }
  async function copy(text:string){try{await navigator.clipboard.writeText(text);}catch{setError('Copy is unavailable in this browser.');}}
- const isLive=Boolean(user&&configured);
+ const isLive=Boolean(user&&configured&&aiVerified);
  return <main className="tlc-coach-page" aria-label="TLC AI Coach">
    <header className="tlc-coach-hero">
     <Link to="/" className="tlc-coach-back"><ArrowLeft size={16}/> Home</Link>
     <p className="tlc-coach-kicker"><Sparkles size={17}/> TLC / TRAINING INTELLIGENCE</p>
     <h1>Your AI strength coach.</h1>
     <p>Ask about form, progressions, grip, planche, balance and training. You decide what goes into a workout.</p>
-    <div className="tlc-coach-connection"><span className={isLive?'is-connected':''}/>{loading?'Restoring your TLC session…':configured===null?'Checking AI connection…':!configured?'AI provider not connected':user?'TLC account signed in · AI access subject to provider authorization':'TLC AI provider configured · sign in to your TLC account'}</div>
+    <div className="tlc-coach-connection"><span className={isLive?'is-connected':''}/>{loading?'Restoring your TLC session…':configured===null?'Checking AI connection…':!configured?'AI provider not connected':user?(aiVerified?'OpenAI reply verified in this session':'TLC account signed in · AI provider access unverified'):'TLC AI provider configured · sign in to your TLC account'}</div>
    </header>
    <div className="tlc-coach-layout">
     <section className="tlc-coach-chat" aria-label="Coach conversation">
