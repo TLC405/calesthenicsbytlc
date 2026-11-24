@@ -58,6 +58,7 @@ import "./styles/skeuomorphic-themes-v4.css";
 import "./styles/train-screen-bugfix-v5.css";
 import "./styles/atomic-ui-sweep-v6.css";
 import "./styles/route-qa-v7.css";
+import "./styles/dbz-kame-house-v9.css";
 import { useTheme } from './components/ThemeSwitcher';
 import { LoadingScreen } from './components/LoadingScreen';
 
