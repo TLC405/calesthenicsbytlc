@@ -18,14 +18,14 @@ interface ThemeOption {
 const themes: ThemeOption[] = [
   {
     id: 'default',
-    name: 'Super Human · DBZ Light',
-    kicker: 'THE LIGHT POWER COLLECTION',
-    description: 'Dragon Ball Z-inspired training: warm ivory, bright orange, cobalt and tournament gold.',
-    primary: '#BD4B0B',
-    accent: '#1658AD',
-    bg: '#EAD9B2',
-    surface: '#FFFAF0',
-    text: '#162B4C',
+    name: 'Kame House · DBZ Light',
+    kicker: 'HYPERBOLIC CHAMBER · LIGHT',
+    description: 'Kame House light dojo: blue sky, tournament orange, gold Ki energy and illustrated strength.',
+    primary: '#FF7A00',
+    accent: '#1F6FFF',
+    bg: '#F7F3E8',
+    surface: '#FFFFFF',
+    text: '#16193A',
   },
   {
     id: 'vasa',
