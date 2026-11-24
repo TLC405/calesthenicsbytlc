@@ -112,7 +112,11 @@ export default async function handler(req: ApiRequest, res: ServerResponse) {
     if (!response.ok) {
       // Never forward vendor internals or secret-bearing error payloads.
       console.error('AI provider status:', response.status);
-      return json(res, response.status === 429 ? 429 : 502, { error: response.status === 429 ? 'AI is temporarily busy' : 'AI coach is temporarily unavailable' });
+      return json(res, response.status === 429 ? 429 : response.status === 403 ? 503 : 502, {
+        error: response.status===403
+          ? 'AI Gateway access is blocked for this TLC project (403). The owner must enable Gateway access or configure a server-side OpenAI/Gateway API key; ChatGPT Plus login cannot authorize another website.'
+          : response.status===429?'AI is temporarily busy':'AI coach is temporarily unavailable'
+      });
     }
     const result = await response.json() as {
       choices?: { message?: { content?: string } }[];
