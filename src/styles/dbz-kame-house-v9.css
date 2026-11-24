@@ -1,0 +1,101 @@
+/* KAME HOUSE / TLC SUPER HUMAN — v9.
+   Rebuilt from the user's separately deployed TLC Prime Kame House light palette:
+   #f7f3e8, blue sky/cobalt, #ff7a00 tournament orange, #ffd400 gold.
+   This layer targets DBZ Light only. All other 4 themes stay untouched. */
+:root:not([data-theme]),:root[data-theme="default"]{
+ --background:43 53% 94%;--foreground:233 43% 17%;--card:0 0% 100%;--card-foreground:233 43% 17%;
+ --popover:40 45% 100%;--popover-foreground:233 43% 17%;
+ --primary:25 100% 44%;--primary-foreground:0 0% 100%;--secondary:218 76% 82%;--secondary-foreground:232 46% 17%;
+ --muted:38 22% 87%;--muted-foreground:230 20% 35%;--accent:215 90% 88%;--accent-foreground:233 43% 17%;
+ --border:226 23% 61%;--input:223 23% 57%;--ring:220 95% 49%;
+ --tlc-page:#f7f3e8;--tlc-panel:#fff;--tlc-panel-raised:#fffdf7;--tlc-panel-inset:#eef2fc;
+ --tlc-ink:#16193a;--tlc-secondary-ink:#525d80;--tlc-line:#9aa9c3;--tlc-emphasis:#c34700;
+ --tlc-alt:#1f6fff;--tlc-tertiary:#f0a600;--tlc-hero:#1d3fb8;--tlc-hero-ink:#fff;
+ --tlc-control:#f1ece0;--tlc-material-top:#fff;--tlc-material-bottom:#eee8dc;
+ --tlc-material-core:#fffdf7;--tlc-material-rim:#bec4d3;--tlc-material-shadow:#26396440;
+ --tlc-face-accent:#ff7a00;--tlc-face-secondary:#1f6fff;--tlc-face-tertiary:#f7b900;
+ --tlc-hero-surface:#1d3fb8;--tlc-hero-accent:#ffd400;
+ --tlc-dial-light:#e2efff;--tlc-dial-dark:#99b5e2;
+}
+:root:not([data-theme]) body,:root[data-theme="default"] body{background-color:#f7f3e8;color:#16193a}
+:root:not([data-theme]) .power-app-controls,:root[data-theme="default"] .power-app-controls{
+ background:#fffcf2!important;border-bottom:4px solid #1f6fff!important;
+ box-shadow:inset 0 2px #fff,0 4px 0 #ff9500,0 8px 17px #1f366a29!important;
+}
+:root:not([data-theme]) .power-app-controls .power-app-wordmark,
+:root[data-theme="default"] .power-app-controls .power-app-wordmark{color:#16193a!important}
+:root:not([data-theme]) .tlc-home-v8__hero,:root[data-theme="default"] .tlc-home-v8__hero{
+ background:#1d3fb8!important;border:3px solid #ffd400!important;border-bottom:7px solid #ff7a00!important;
+ box-shadow:inset 0 0 0 2px #fff2,0 7px 0 #0b257c,0 18px 28px #14255050!important;
+}
+:root:not([data-theme]) .tlc-home-v8__hero:before,:root[data-theme="default"] .tlc-home-v8__hero:before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.20;
+ background:repeating-conic-gradient(from 0deg at 50% 110%,#fff 0deg 1deg,transparent 1deg 10deg);
+ animation:tlcKameSpinV9 45s linear infinite;
+}
+:root:not([data-theme]) .tlc-home-v8__hero:after,:root[data-theme="default"] .tlc-home-v8__hero:after{
+ background:transparent;border:24px solid #ffd400!important;border-radius:50%;
+ width:210px;right:-50px;top:-45px;box-shadow:0 0 0 14px #ff8a001e;
+ animation:tlcKameAuraV9 4.3s ease-in-out infinite;
+}
+:root:not([data-theme]) .tlc-home-v8__hero h1,:root[data-theme="default"] .tlc-home-v8__hero h1{
+ font-family:Impact,"Arial Black",system-ui,sans-serif!important;font-style:italic!important;
+ text-transform:uppercase;letter-spacing:.01em!important;
+ text-shadow:2px 4px 0 #10276d!important;color:#fff!important;
+}
+:root:not([data-theme]) .tlc-home-v8__hero h1 span,:root[data-theme="default"] .tlc-home-v8__hero h1 span{color:#ffd400!important}
+:root:not([data-theme]) .tlc-home-v8__primary,:root[data-theme="default"] .tlc-home-v8__primary{
+ background:#ff7a00!important;color:#fff!important;border:2px solid #ffd400!important;
+ font:900 italic 15px Impact,"Arial Black",sans-serif!important;text-transform:uppercase;
+ letter-spacing:.035em;text-shadow:0 2px 0 #9c3600;
+ box-shadow:inset 0 2px #ffc75c,0 6px 0 #a6360a,0 12px 20px #ff7a0040!important;
+}
+:root:not([data-theme]) .tlc-home-v8__destination,:root[data-theme="default"] .tlc-home-v8__destination{
+ background:#fff!important;border:2px solid #d3d9e8!important;border-top:6px solid var(--tone)!important;
+ box-shadow:inset 0 2px #fff,0 5px 0 #c4ccdb,0 13px 21px #24396326!important;
+}
+:root:not([data-theme]) .tlc-home-v8__destination strong,:root[data-theme="default"] .tlc-home-v8__destination strong{
+ font:900 italic 20px Impact,"Arial Black",system-ui,sans-serif!important;text-transform:uppercase;
+}
+:root:not([data-theme]) .tlc-home-v8__destination:hover,:root[data-theme="default"] .tlc-home-v8__destination:hover{
+ transform:translateY(-2px);box-shadow:inset 0 2px #fff,0 7px 0 #b8c5dd,0 16px 25px #24396335!important;
+}
+:root:not([data-theme]) .power-compact-builder .compact-workout,
+:root[data-theme="default"] .power-compact-builder .compact-workout{
+ border-color:#9bb3da!important;border-top:6px solid #ff7a00!important;
+ background:#fffdf8!important;box-shadow:inset 0 2px #fff,0 4px 0 #b6c6df,0 17px 28px #1529562b!important;
+}
+:root:not([data-theme]) .power-compact-builder .compact-movement-row,
+:root[data-theme="default"] .power-compact-builder .compact-movement-row{background:#fff!important;border-color:#d8dfe8!important}
+:root:not([data-theme]) .power-compact-builder .compact-level-group>header,
+:root[data-theme="default"] .power-compact-builder .compact-level-group>header{background:#edf4ff!important;border-bottom:3px solid #1f6fff!important}
+:root:not([data-theme]) .power-compact-builder :is(.compact-suggest,.compact-add:not(:disabled)),
+:root[data-theme="default"] .power-compact-builder :is(.compact-suggest,.compact-add:not(:disabled)){
+ background:#1f6fff!important;color:#fff!important;border:2px solid #a6e6ff!important;
+ box-shadow:inset 0 2px #85c7ff,0 3px 0 #103887!important;
+}
+:root:not([data-theme]) .power-compact-builder :is(h1,h2,h3),
+:root[data-theme="default"] .power-compact-builder :is(h1,h2,h3){letter-spacing:-.01em}
+:root:not([data-theme]) .power-mobile-dock-v3 .power-nav-surface,
+:root[data-theme="default"] .power-mobile-dock-v3 .power-nav-surface{
+ background:#fffdf5!important;border:2px solid #8caede!important;border-top:4px solid #ff9e16!important;
+ box-shadow:inset 0 2px #fff,0 5px 0 #9ab4d5,0 11px 21px #1c3d6a40!important;
+}
+:root:not([data-theme]) .power-mobile-dock-v3 .power-simple-nav-link[aria-current="page"],
+:root[data-theme="default"] .power-mobile-dock-v3 .power-simple-nav-link[aria-current="page"]{
+ background:#dbeaff!important;border:2px solid #ff7a00!important;color:#16336a!important;
+ box-shadow:inset 0 2px 5px #2e5da82e,0 2px 0 #fcba56!important;
+}
+:root:not([data-theme]) .tlc-coach-page .tlc-coach-hero,:root[data-theme="default"] .tlc-coach-page .tlc-coach-hero{
+ background:#1d3fb8!important;border-color:#ffd400!important;border-bottom:6px solid #ff7a00!important;
+ box-shadow:inset 0 2px #fff2,0 6px 0 #0b257c!important;
+}
+:root:not([data-theme]) .tlc-coach-page .tlc-coach-chat,:root[data-theme="default"] .tlc-coach-page .tlc-coach-chat{
+ border-top:5px solid #ff7a00!important;background:#fff!important
+}
+:root:not([data-theme]) .tlc-coach-page .tlc-coach-message.is-assistant,:root[data-theme="default"] .tlc-coach-page .tlc-coach-message.is-assistant{
+ border-top-color:#ff7a00!important;
+}
+@keyframes tlcKameSpinV9{to{transform:rotate(1deg)}}
+@keyframes tlcKameAuraV9{0%,100%{box-shadow:0 0 0 12px #ffd40019}50%{box-shadow:0 0 0 22px #ffd40018}}
+@media(prefers-reduced-motion:reduce){:root:not([data-theme]) .tlc-home-v8__hero:before,:root:not([data-theme]) .tlc-home-v8__hero:after,:root[data-theme="default"] .tlc-home-v8__hero:before,:root[data-theme="default"] .tlc-home-v8__hero:after{animation:none!important}}
