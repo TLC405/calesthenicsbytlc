@@ -69,8 +69,8 @@ assert(app.includes('import "./styles/theme-material-overhaul.css";'),'Overhaul 
 assert(app.indexOf('import "./styles/theme-material-overhaul.css";')>app.indexOf('import "./styles/mobile-dock-v3.css";'),'Final style layer must load after legacy overrides');
 assert(app.includes('import "./styles/skeuomorphic-themes-v4.css";'),'Skeuomorphic layer not registered');
 assert(app.indexOf('import "./styles/skeuomorphic-themes-v4.css";')>app.indexOf('import "./styles/theme-material-overhaul.css";'),'Skeuomorphic layer must load last');
-assert(chooser.includes("name: 'Super Human · DBZ Light'"),'Signature theme name not updated');
-assert(chooser.includes('Dragon Ball Z-inspired training'),'DBZ light picker preview not updated');
+assert(chooser.includes("name: 'Kame House · DBZ Light'"),'Signature theme name not updated');
+assert(chooser.includes('Kame House light dojo'),'DBZ light picker preview not updated');
 for(const theme of themes){
   assert(skeuo.includes(theme.selector),'Missing skeuomorphic material definition '+theme.id);
 }
@@ -105,4 +105,8 @@ assert(atomic.includes('@media(max-width:320px)'),'Fold narrow-screen fallback m
 assert(atomic.includes('@media(prefers-reduced-motion:reduce)'),'Reduced-motion override missing');
 console.log('PASS: atomic UI sweep — cross-theme buttons, text, rail, tabs, form density and narrow Fold layout.');
 console.log('PASS: screenshot UI repairs — readable movements, clear workout cards, nonclipped headings, Fold stacks and dock clearance.');
+const kame=await readFile('src/styles/dbz-kame-house-v9.css','utf8');
+assert(app.includes('import "./styles/dbz-kame-house-v9.css";'),'DBZ Kame House visual layer missing');
+assert(kame.includes('#f7f3e8')&&kame.includes('#1d3fb8')&&kame.includes('#ff7a00'),'Kame House light palette not matched');
+assert(kame.includes('@media(prefers-reduced-motion:reduce)'),'DBZ aura must respect reduced motion');
 console.log('PASS: five material themes including light DBZ signature, physical depth, accessibility, multi-color controls, and stylesheet order.');
