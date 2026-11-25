@@ -2,13 +2,15 @@
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#07091a">
-<title>TLC Prime · Train · Lengthen · Control</title>
+<title>Supa Strength</title>
 <style>
 :root{--bg:#0b0d12;--bg2:#10131a;--card:#161a23;--card2:#1e2330;--line:#262c3a;--tx:#f4f6fa;--mut:#8d95a5;--acc:#ff9f2e;--acc2:#ff5e62;--ok:#2fd389;--blue:#4c8dff;--lock:#3a4152;--r:18px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--tx);font-family:"Inter",system-ui,-apple-system,Roboto,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased}
 body{padding-bottom:calc(86px + env(safe-area-inset-bottom))}
 button{font-family:inherit;cursor:pointer}
+button,.btn,.chip,.finder-chip,.blip,[role="button"]{touch-action:manipulation}
+button:active,.btn:active,.chip:active,.finder-chip:active,.blip:active,[role="button"]:active{transform:scale(.965)!important;filter:brightness(1.08)}
 header{position:sticky;top:0;z-index:5;padding:16px 18px 12px;background:linear-gradient(180deg,var(--bg) 70%,rgba(11,13,18,0));}
 .htop{display:flex;align-items:flex-end;gap:10px}
 h1{font-size:26px;font-weight:800;margin:0;letter-spacing:-.02em}
@@ -587,7 +589,7 @@ html.light .embo{background:#faf6ec;border-color:#cdbf9f}
 .scanchart{width:100%;height:90px;background:rgba(0,0,0,.3);border-radius:10px;display:block}
 html.light .dpre{background:#f1ece0;color:#16193a}html.light .anaErr .ae-h{color:#c62828}html.light .anaErr.soft .ae-h{color:#8a5a00}html.light .scanchart{background:#f1ece0}html.light .sharehow{border-left-color:#f5a300!important}
 
-/* TLC Prime Kame House home: additive, original training tools preserved */
+/* Supa Strength Kame House home: additive, original training tools preserved */
 .kame-scene{position:relative;isolation:isolate;min-height:245px;border-radius:24px;overflow:hidden;margin-bottom:14px;border:2px solid #254f76;background:linear-gradient(#75c7ee 0 48%,#c4e7e8 48% 51%,#2d9fc3 51% 78%,#e6d8a0 78%);box-shadow:0 8px 0 #10294a,0 18px 32px #0005;color:#152942}
 .kame-scene:before{content:"";position:absolute;width:160px;height:160px;right:-42px;top:-65px;border-radius:50%;background:#fff5b8;box-shadow:0 0 45px #fff4b9aa}
 .kame-cloud{position:absolute;top:22px;left:20px;width:90px;height:23px;border-radius:50px;background:#fff9;box-shadow:35px 10px 0 -4px #fffc,120px 40px 0 -6px #fff9}
@@ -609,7 +611,7 @@ html.light .kame-scene{border-color:#537f96}
 @media(prefers-reduced-motion:reduce){.kame-action{transition:none}}
 
 
-/* ===== TLC Prime v3.9 · Scanner-first home ===== */
+/* ===== Supa Strength v3.9 · Scanner-first home ===== */
 #main,.card,.hero,.stat,.row,.sp,.radar-readout,.master-detail,.mission-card{min-width:0}
 #main *{max-width:100%}
 h1,.sub,.dbz,.muted,.hero .t,.hero .d,.stat span,.radar-readout,.master-name,.master-meta,.mission-title-home,.mission-meta{overflow-wrap:anywhere;word-break:normal}
@@ -663,7 +665,7 @@ header .sub{line-height:1.25;white-space:normal;padding-right:4px}
 }
 
 
-/* ===== TLC Prime · Dragon Ball Finder mastery edition ===== */
+/* ===== Supa Strength · Dragon Ball Finder mastery edition ===== */
 .finder-title-wrap{text-align:center;margin:2px 0 10px}
 .finder-title{font:900 italic clamp(24px,7vw,34px)/.95 Impact,"Arial Black",sans-serif;letter-spacing:.025em;text-transform:uppercase;color:#ffd137;-webkit-text-stroke:1px #7b2600;text-shadow:0 3px 0 #b63b00,0 6px 18px rgba(255,153,0,.25)}
 .finder-sub{font:800 10px/1.3 "Courier New",monospace;letter-spacing:.11em;color:var(--mut);margin-top:6px;text-transform:uppercase}
@@ -703,7 +705,7 @@ header .sub{line-height:1.25;white-space:normal;padding-right:4px}
  .finder-legend{grid-template-columns:1fr}
 }
 
-/* ===== TLC Prime v3.8 · Simplified Focus Mission Builder ===== */
+/* ===== Supa Strength v3.8 · Simplified Focus Mission Builder ===== */
 .mission-console{position:relative;overflow:hidden;margin:0 0 12px;padding:14px;border:2px solid #2f6bff;border-radius:18px;background:#101633;box-shadow:0 10px 30px rgba(3,8,30,.28)}
 .light .mission-console{background:#fff7ea;border-color:#244fc2;box-shadow:0 8px 22px rgba(38,55,110,.12)}
 .mission-console:after{content:"";position:absolute;top:0;bottom:0;width:46px;left:-58px;background:rgba(95,212,255,.12);transform:skewX(-18deg);animation:missionScan 3.6s ease-in-out infinite;pointer-events:none}
@@ -811,7 +813,7 @@ function embPoster(code,key,title){return `<button class="embp" onclick="embLoad
 function embFrame(code){return `<div class="embf"><iframe src="https://www.instagram.com/${igKind(code)}/${encodeURIComponent(code)}/embed/" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation" referrerpolicy="strict-origin-when-cross-origin" title="Instagram tutorial"></iframe></div><div class="embbar"><span class="muted">${esc(handleOf(code))} · Instagram</span><button class="btn sm" onclick="embClose()">✕ Close video</button></div>`}
 function embOff(key,slow){return `<div class="embo"><div class="eoi" aria-hidden="true">📡</div><div><b>${slow?'Instagram didn\'t answer':'You\'re offline'}</b><div class="muted">${slow?'Check your connection, then retry.':'The tutorial loads here once you\'re back online. The form cues still work.'}</div></div><button class="btn sm" onclick="embLoad('${key}')">Retry</button></div>`}
 function embLoad(key){const el=document.getElementById('emb-'+key);if(!el)return;const code=el.dataset.c;
-  if(!/^(skilltree\.app|raw\.githack\.com|rawcdn\.githack\.com|[a-z0-9-]+\.github\.io|localhost|127\.0\.0\.1)$/.test(location.hostname)){el.innerHTML=`<div class="embnote" style="padding:22px 16px;text-align:center;background:#0d1030;color:#fff;border-radius:16px"><div style="font:900 italic 17px Impact,'Arial Black',sans-serif;color:#ffd400;letter-spacing:.03em">Plays in the installed app</div><p style="margin:8px 0 0;color:#e6e8f5;font-size:14px;line-height:1.45">This preview window blocks Instagram videos. Open TLC Prime on your phone and this tutorial (${esc(handleOf(code))}) plays right in the card.</p></div>`;return;}
+  if(!/^(skilltree\.app|raw\.githack\.com|rawcdn\.githack\.com|[a-z0-9-]+\.github\.io|localhost|127\.0\.0\.1)$/.test(location.hostname)){el.innerHTML=`<div class="embnote" style="padding:22px 16px;text-align:center;background:#0d1030;color:#fff;border-radius:16px"><div style="font:900 italic 17px Impact,'Arial Black',sans-serif;color:#ffd400;letter-spacing:.03em">Plays in the installed app</div><p style="margin:8px 0 0;color:#e6e8f5;font-size:14px;line-height:1.45">This preview window blocks Instagram videos. Open Supa Strength on your phone and this tutorial (${esc(handleOf(code))}) plays right in the card.</p></div>`;return;}
   if(navigator.onLine===false){el.classList.remove('live');el.innerHTML=embOff(key);return}
   if(EMB&&EMB.key!==key)embClose();EMB={key,code};el.classList.add('live');el.innerHTML=embFrame(code);
   const f=el.querySelector('iframe');let ok=false;f.addEventListener('load',()=>{ok=true});
@@ -878,19 +880,22 @@ function shout(t,sub,col){document.documentElement.style.setProperty('--fl',col|
 function sparks(x,y){for(let i=0;i<10;i++){const s=document.createElement('div');s.className='spark';const a=Math.random()*6.28,d=40+Math.random()*50;s.style.left=x+'px';s.style.top=y+'px';s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',Math.sin(a)*d+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),600)}}
 let lastXY=[innerWidth/2,innerHeight/2];document.addEventListener('pointerdown',e=>{lastXY=[e.clientX,e.clientY]},true);
 const DRAGON_MASTERY=[
-  {id:'handstand',name:'Handstand',short:'HANDSTAND',icon:'🤸',lane:'handstand',goal:'handstand',levels:['Wall line','Kick-up + bail','Freestanding hold','Handstand walk','Press / HSPU mastery']},
-  {id:'planche',name:'Planche',short:'PLANCHE',icon:'◆',lane:'planche',goal:'planche',levels:['Planche lean','Tuck planche','Advanced tuck','Straddle planche','Full planche']},
-  {id:'rings',name:'Olympic Rings',short:'RINGS',icon:'◎',goal:'rings',levels:['Support hold','Ring dips','False grip','Skin the cat','Ring strength mastery']},
-  {id:'grip',name:'Grip Strength',short:'GRIP',icon:'✊',goal:'grip',levels:['Active hang','Towel hang','Assisted one-arm hang','One-arm hang','Pinch + fingertip mastery']},
-  {id:'legs',name:'Leg Mastery',short:'LEGS',icon:'⚡',goal:'legs',levels:['Deep squat mobility','Single-leg control','Pistol / shrimp squat','Nordic + hinge strength','Power + full leg mastery']},
-  {id:'pull',name:'Pull-Up Mastery',short:'PULL-UP',icon:'⬆',lane:'pull_up',goal:'pull',levels:['Dead hang + scap pull','Negatives / assisted','Strict pull-up','Explosive chest-to-bar','Muscle-up pathway']},
-  {id:'core',name:'Core + Compression',short:'CORE',icon:'◉',lane:'compression',goal:'core',levels:['Hollow-body control','L-sit','Toes-to-bar','V-sit / compression','Press compression mastery']}
-];
+  {id:'handstand',name:'Handstand',short:'Handstand',icon:'🤸',lane:'handstand',goal:'handstand',levels:['Wall line','Kick-up + bail','Freestanding hold','Handstand walk','Press / HSPU mastery']},
+  {id:'plank',name:'Plank',short:'Plank',icon:'▰',lane:'planche',goal:'planche',levels:['Straight-body plank','Long-lever plank','Planche lean','Tuck strength','Advanced plank control']},
+  {id:'pullup',name:'Pull-Up',short:'Pull-Up',icon:'⬆',lane:'pull_up',goal:'pull',levels:['Dead hang + scap pull','Negatives / assisted','Strict pull-up','Chest-to-bar','Explosive pull-up']},
+  {id:'mobility',name:'Mobility',short:'Mobility',icon:'↔',lane:'legs_mobility',goal:'mobility',levels:['Ankles + wrists','Shoulders + hips','Deep squat mobility','Pancake + split range','Full-body mobility']},
+  {id:'balance_rings',name:'Balance Rings',short:'Balance Rings',icon:'◌',goal:'rings',levels:['Ring support','Turn-out support','Ring balance hold','Unstable support control','Balance rings mastery']},
+  {id:'olympic_rings',name:'Olympic Rings',short:'Olympic Rings',icon:'◎',goal:'rings',levels:['Support hold','Ring dip','False grip','Skin the cat','Olympic rings strength']},
+  {id:'pullup_mastery',name:'Pull-Up Mastery',short:'Pull-Up Mastery',icon:'⚡',lane:'muscle_up',goal:'pull',levels:['Strict pull-up','Explosive pull-up','High pull','Transition strength','Pull-up mastery']}
+]
 function dragonMasterProgress(m){
   if(m.lane)return lanePct(m.lane);
-  if(m.id==='legs'){const ids=['legs_single_leg','legs_quad','legs_hinge','legs_mobility','legs_power'];return ids.reduce((a,x)=>a+lanePct(x),0)/ids.length}
-  if(m.id==='rings'){const done=S.history.filter(h=>/ring/i.test(h.name||'')).length;return Math.min(1,done/12)}
-  if(m.id==='grip'){const done=S.history.filter(h=>/grip|hang|forearm/i.test(h.name||'')).length;return Math.min(1,done/12)}
+  if(m.id==='balance_rings'||m.id==='olympic_rings'){
+    const ringHistory=S.history.filter(h=>/ring/i.test(h.name||'')).length;
+    const ringBest=Object.keys(S.best||{}).filter(id=>T[id]&&/ring/i.test(T[id].name||'')).length;
+    const base=Math.min(1,(ringHistory+ringBest*2)/14);
+    return m.id==='balance_rings'?Math.min(1,base*.9):base;
+  }
   return 0
 }
 function dragonCurrentLevel(m,p){
@@ -925,15 +930,64 @@ function dragonOpenMastery(id){
   S.builderGoal=m.goal;save();go('train')
 }
 function dragonTrain(goal){S.builderGoal=goal;save();go('train')}
-function radarPing(){if(navigator.vibrate)navigator.vibrate([18,35,18,35,28]);const el=document.querySelector('.dragon-radar-shell');if(el){el.animate([{transform:'scale(1)'},{transform:'scale(1.012)'},{transform:'scale(1)'}],{duration:320})}sparks(innerWidth/2,Math.min(innerHeight*.34,260));toast('TLC Dragon Ball Finder scan complete')}
+function radarPing(){if(navigator.vibrate)navigator.vibrate([18,35,18,35,28]);const el=document.querySelector('.dragon-radar-shell');if(el){el.animate([{transform:'scale(1)'},{transform:'scale(1.012)'},{transform:'scale(1)'}],{duration:320})}sparks(innerWidth/2,Math.min(innerHeight*.34,260));toast('Supa Strength Mastery scan complete')}
+
+// ---------- Supa Strength sound system
+let SS_AUDIO=null;
+function ssAudio(){
+  if(SS_AUDIO)return SS_AUDIO;
+  try{
+    const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;
+    const ctx=new C(), master=ctx.createGain(), music=ctx.createGain(), sfx=ctx.createGain();
+    master.gain.value=.72;music.gain.value=.065;sfx.gain.value=.18;
+    music.connect(master);sfx.connect(master);master.connect(ctx.destination);
+    SS_AUDIO={ctx,master,music,sfx,started:false,step:0};
+    return SS_AUDIO;
+  }catch(e){return null}
+}
+function ssTone(freq,dur=.08,type='sine',gain=.12,when=0,bus='sfx'){
+  const a=ssAudio();if(!a)return;
+  const t=a.ctx.currentTime+when,o=a.ctx.createOscillator(),g=a.ctx.createGain();
+  o.type=type;o.frequency.setValueAtTime(freq,t);
+  g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.001,gain),t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g);g.connect(a[bus]);o.start(t);o.stop(t+dur+.03)
+}
+function ssStartMusic(){
+  const a=ssAudio();if(!a||a.started)return;
+  a.started=true;
+  const seq=[110,146.83,164.81,220,196,164.81,146.83,123.47];
+  const pulse=()=>{if(!S.musicOn)return;a.step=(a.step||0)%seq.length;const f=seq[a.step++];ssTone(f,.42,'triangle',.18,0,'music');ssTone(f*2,.18,'sine',.06,.03,'music')};
+  pulse();a.loop=setInterval(pulse,620);
+}
+function ssResume(){
+  const a=ssAudio();if(!a)return;
+  if(a.ctx.state==='suspended')a.ctx.resume().catch(()=>{});
+  if(S.musicOn!==false)ssStartMusic();
+}
+function ssPress(){
+  ssResume();ssTone(440,.055,'square',.11);ssTone(660,.045,'sine',.06,.018);
+  try{if(navigator.vibrate)navigator.vibrate(8)}catch(e){}
+}
+function ssPowerPress(){
+  ssResume();ssTone(220,.07,'sawtooth',.10);ssTone(440,.09,'triangle',.09,.025);ssTone(880,.08,'sine',.07,.055);
+  try{if(navigator.vibrate)navigator.vibrate([10,18,10])}catch(e){}
+}
+S.musicOn=S.musicOn!==false;
+document.addEventListener('pointerdown',e=>{
+  const b=e.target.closest&&e.target.closest('button,.btn,.chip,.lane,.finder-chip,.blip,[role="button"]');
+  if(b)ssPress(); else ssResume();
+},true);
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('button,.btn,[role="button"]'))ssPress()},true);
+window.addEventListener('load',()=>{setTimeout(ssResume,250)});
 
 // ---------- shell
 const TABS=['home','train','skills','learn','ana','log'];
 function go(t){if(tab==='ana'&&t!=='ana'){const v=document.getElementById('anaV');if(v)v.pause()}const mm=document.getElementById('main');mm.style.animation='none';mm.offsetHeight;mm.style.animation='';tab=t;openVid=null;EMB=null;TABS.forEach(x=>document.getElementById('n-'+x).classList.toggle('on',x===t));render();window.scrollTo(0,0)}
 function applyTheme(){const l=S.theme!=='dark';document.documentElement.classList.toggle('light',l);const tm=document.querySelector('meta[name=theme-color]');if(tm)tm.content=l?'#eaf4ff':'#07091a';try{if(window.Native&&Native.setBars)Native.setBars(l)}catch(e){}}
+function toggleMusic(){S.musicOn=S.musicOn===false;save();if(S.musicOn){ssResume();toast('Music on')}else{const a=SS_AUDIO;if(a&&a.loop){clearInterval(a.loop);a.loop=null;a.started=false}toast('Music off')}render(true)}
 function toggleTheme(){S.theme=S.theme==='dark'?'light':'dark';save();applyTheme();render(true);toast(S.theme==='dark'?'Night mode':'Day mode')}
 function render(keep){applyTheme();applyAura();const y=window.scrollY;setTimeout(()=>{document.querySelectorAll('.chips .chip.on').forEach(c=>c.scrollIntoView({block:'nearest',inline:'center'}))},0);({home:vHome,train:vTrain,skills:vSkills,learn:vLearn,ana:vAna,log:vLog})[tab]();if(keep)window.scrollTo(0,y)}
-function head(t,s,act){document.getElementById('title').textContent=t;document.getElementById('subtitle').textContent=s||'';document.getElementById('hact').innerHTML=`<span class="thm" role="button" aria-label="Toggle theme" onclick="toggleTheme()">${S.theme==='dark'?'☀️':'🌙'}</span>`+(act||'')+(typeof powerLevel==='function'&&tab!=='home'?`<span class="pchip" onclick="go('log')"><i></i>${fmt(powerLevel())}</span>`:'')}
+function head(t,s,act){document.getElementById('title').textContent=t;document.getElementById('subtitle').textContent=s||'';document.getElementById('hact').innerHTML=`<span class="thm" role="button" aria-label="Toggle music" onclick="toggleMusic()">${S.musicOn===false?'🔇':'🔊'}</span><span class="thm" role="button" aria-label="Toggle theme" onclick="toggleTheme()">${S.theme==='dark'?'☀️':'🌙'}</span>`+(act||'')+(typeof powerLevel==='function'&&tab!=='home'?`<span class="pchip" onclick="go('log')"><i></i>${fmt(powerLevel())}</span>`:'')}
 const M=h=>{const m=document.getElementById('main');const live=EMB&&document.getElementById('emb-'+EMB.key);if(live&&m.contains(live)&&live.querySelector('iframe')&&morph(m,h,live))return;m.innerHTML=h};
 
 // ---------- HOME
@@ -941,9 +995,9 @@ function vHome(){
   const nd=nextDay(),hr=new Date().getHours(),pl=powerLevel(),fm=formOf(pl),nf=nextForm(pl);
   const day=D.days.find(d=>d.id===nd),wk=streakWeek(),thisWeek=wk.filter(w=>w.done).length;
   const passedN=Object.keys(S.passed).filter(k=>S.passed[k]!=='start').length;
-  head('TLC Prime',(hr<12?'Morning':hr<18?'Afternoon':'Evening')+' · '+new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}));
+  head('Supa Strength',(hr<12?'Morning':hr<18?'Afternoon':'Evening')+' · '+new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}));
   let h=`<div class="home-scanner">
-    <div class="finder-title-wrap"><div class="finder-title">TLC's Dragon Ball Finder</div><div class="finder-sub">Seven training paths · one mastery radar</div></div>
+    <div class="finder-title-wrap"><div class="finder-title">Supa Strength Mastery</div><div class="finder-sub">Handstand · Plank · Pull-Up · Mobility · Balance Rings · Olympic Rings · Pull-Up Mastery</div></div>
     ${radar()}
     <div class="finder-legend">${DRAGON_MASTERY.map((m,i)=>`<div class="finder-chip" onclick="radarSelect(${i+1})">${m.icon} ${esc(m.name)}</div>`).join('')}</div>
   </div>`;
@@ -1082,7 +1136,7 @@ function openNode(id,keep){
   <button class="btn" style="flex:1" onclick="setCur('${id}')">Make current</button></div>${o?'':'<div class="muted" style="margin-top:8px">Locked until the steps it needs are passed.</div>'}`;
   document.getElementById('modal').classList.add('on');if(keep)sh.scrollTop=y;else sh.scrollTop=0;
 }
-function playReel(c){if(String(c).startsWith('local:')){closeM();anaOpen(c.slice(6));return}if(window.Native&&Native.playReel){Native.playReel(c)}else{toast('Instagram videos play in the TLC Prime app. The preview can\'t play them.')}}
+function playReel(c){if(String(c).startsWith('local:')){closeM();anaOpen(c.slice(6));return}if(window.Native&&Native.playReel){Native.playReel(c)}else{toast('Instagram videos play in the Supa Strength app. The preview can\'t play them.')}}
 function closeM(){document.getElementById('modal').classList.remove('on');curSheet=null;openVid=null;if(EMB&&EMB.key[0]==='n')EMB=null;const sh=document.getElementById('sheet');if(sh)sh.querySelectorAll('iframe').forEach(f=>f.remove())}
 function addReel(l,id){const c=parseCode(document.getElementById('reelIn').value);if(!c){toast('That link doesn\'t look like an Instagram reel.');return}S.myReels[l]=S.myReels[l]||[];if(!S.myReels[l].includes(c))S.myReels[l].unshift(c);save();openVid='n'+id+'0';openNode(id,true);toast('Tutorial added.')}
 function rmReel(l,c){S.myReels[l]=(S.myReels[l]||[]).filter(x=>x!==c);save();openNode(curSheet,true)}
@@ -1150,14 +1204,14 @@ function emsg(e){if(!e)return 'unknown error';if(typeof e==='string')return e;if
 function dlog(m){const t=new Date();DIAG.push(String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')+':'+String(t.getSeconds()).padStart(2,'0')+'.'+String(t.getMilliseconds()).padStart(3,'0')+'  '+m);if(DIAG.length>250)DIAG.splice(0,DIAG.length-250);const p=document.querySelector('#anaDiag pre');if(p&&document.getElementById('anaDiag').open)p.textContent=diagText()}
 function nInfo(){try{return window.Native&&Native.info?Native.info():'browser preview (no Android bridge)'}catch(e){return 'bridge error: '+emsg(e)}}
 function diagText(){let tfv='';try{tfv=window.tf?(tf.version_core||(tf.version&&tf.version['tfjs-core']))+' · backend '+(tf.getBackend&&tf.getBackend()):'not loaded'}catch(e){tfv='error'}
-  return ['TLC Prime '+APPV+' analyzer diagnostics','Device: '+nInfo(),'UA: '+navigator.userAgent,'Origin: '+location.origin+' · online '+navigator.onLine,'TF.js: '+tfv,'AI engine: '+(A.backend||'—')+' (setting: '+(S.aiBackend||'auto')+') · detector '+(A.det?'ready':DETP?'loading':'off'),'Video: '+(A.meta?JSON.stringify(A.meta):'none open'),'Last error: '+(A.err?A.err.title+' | '+A.err.detail:'none'),'— log —',...DIAG].join('\n')}
+  return ['Supa Strength '+APPV+' analyzer diagnostics','Device: '+nInfo(),'UA: '+navigator.userAgent,'Origin: '+location.origin+' · online '+navigator.onLine,'TF.js: '+tfv,'AI engine: '+(A.backend||'—')+' (setting: '+(S.aiBackend||'auto')+') · detector '+(A.det?'ready':DETP?'loading':'off'),'Video: '+(A.meta?JSON.stringify(A.meta):'none open'),'Last error: '+(A.err?A.err.title+' | '+A.err.detail:'none'),'— log —',...DIAG].join('\n')}
 function copyDiag(){const t=diagText();let done=false;try{if(window.Native&&Native.copy){Native.copy(t);done=true}}catch(e){}
   if(done){toast('Diagnostics copied. Paste them to Hark.');return}
   const fb=()=>{const ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}ta.remove();toast(ok?'Diagnostics copied.':'Select the text in Diagnostics and copy it.')};
   if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(()=>toast('Diagnostics copied.'),fb);else fb()}
 function errHint(s){s=String(s||'');
-  if(/load lib|Failed to fetch|404|NetworkError|model\.json|load error/i.test(s))return 'The AI files did not load from inside the app. Update to the newest TLC Prime APK; the AI files ship inside it and need no internet.';
-  if(/tainted|SecurityError|cross-origin/i.test(s))return 'The phone blocked reading frames from this video. Re-share the video file to TLC Prime, or load it with “Load video”.';
+  if(/load lib|Failed to fetch|404|NetworkError|model\.json|load error/i.test(s))return 'The AI files did not load from inside the app. Update to the newest Supa Strength APK; the AI files ship inside it and need no internet.';
+  if(/tainted|SecurityError|cross-origin/i.test(s))return 'The phone blocked reading frames from this video. Re-share the video file to Supa Strength, or load it with “Load video”.';
   if(/Quota|storage/i.test(s))return 'Your phone storage for the app is full. Delete old clips from the library, or use a shorter clip.';
   if(/memory|OOM|allocate/i.test(s))return 'The phone ran out of memory. Close other apps or trim the clip shorter.';
   if(/backend|WebGL|wasm|self-test/i.test(s))return 'The AI engine failed on this phone. Open Diagnostics, set AI engine to CPU, and tap Retry.';
@@ -1340,11 +1394,11 @@ function anaPlay(){const v=document.getElementById('anaV');if(!v)return;if(v.pau
 function anaStep(d){const v=document.getElementById('anaV');v.pause();v.currentTime=Math.max(0,Math.min(v.duration,v.currentTime+d));setTimeout(()=>anaFrame(true),120);document.getElementById('anaPB').textContent='▶'}
 function anaRate(r){A.rate=r;const v=document.getElementById('anaV');if(v)v.playbackRate=r;document.querySelectorAll('.rchip').forEach(c=>c.classList.toggle('on',+c.dataset.r===r))}
 function anaSeek(x){const v=document.getElementById('anaV');v.currentTime=x/1000*v.duration;setTimeout(()=>anaFrame(true),120)}
-// ---------- v3.7 Share to TLC Prime (Android share sheet → this app)
+// ---------- v3.7 Share to Supa Strength (Android share sheet → this app)
 async function stShare(){if(!(window.Native&&Native.takeShared))return;let items=[];try{items=JSON.parse(Native.takeShared()||'[]')}catch(e){dlog('share read failed: '+emsg(e))}
   if(!items.length){try{if(Native.shareBusy&&Native.shareBusy())stShareBusy(Native.shareBusy())}catch(e){}return}
   let first=true;for(const it of items){dlog('share in: '+it.type+' '+String(it.name||it.text||it.msg||'').slice(0,90));
-    if(it.type==='video'){await shareVideo(it,first);first=false}else if(it.type==='text')shareText(it);else if(it.type==='error'){A.recv=null;A.err={title:'Could not receive that share',detail:it.msg,hint:'Share the video file itself (from Gallery or My Files) to TLC Prime.',soft:true};if(tab!=='ana')go('ana');else render()}}}
+    if(it.type==='video'){await shareVideo(it,first);first=false}else if(it.type==='text')shareText(it);else if(it.type==='error'){A.recv=null;A.err={title:'Could not receive that share',detail:it.msg,hint:'Share the video file itself (from Gallery or My Files) to Supa Strength.',soft:true};if(tab!=='ana')go('ana');else render()}}}
 function stShareBusy(name){A.recv=name||'video';if(tab!=='ana')go('ana');else render()}
 async function shareVideo(it,open){try{const r=await fetch(it.url);if(!r.ok)throw new Error('HTTP '+r.status+' reading shared file');let b=await r.blob();if(it.mime&&b.type!==it.mime)b=new Blob([b],{type:it.mime});
     const rec=await storeVideo(b,it.name||'Shared video',{src:it.from||'share'});try{Native.release&&Native.release(it.url.split('/').pop())}catch(e){}
@@ -1355,22 +1409,22 @@ function shareText(it){const s=String((it.text||'')+' '+(it.subject||''));const 
   A.notice={type:'other',host:url?(url.match(/^https?:\/\/([^/?#]+)/i)||[,''])[1].replace(/^www\./,''):''};if(tab!=='ana')go('ana');else render()}
 function rmShared(c){S.shared=(S.shared||[]).filter(x=>x.c!==c);save();if(A.notice&&A.notice.code===c)A.notice=null;render(true)}
 function sharedToSkill(c,l){if(!l)return;S.myReels[l]=S.myReels[l]||[];if(!S.myReels[l].includes(c))S.myReels[l].unshift(c);save();toast('Added to '+((D.lanes.find(x=>x.id===l)||{}).name||'that skill')+' tutorials.')}
-const SHARE_HOW=`<b>Want an AI form check on a reel?</b><div class="muted" style="margin-top:4px;line-height:1.55">Instagram doesn't let other apps pull the video out of a link. So: in Instagram tap <b>⋯</b> on the reel → <b>Download</b> (or screen-record it). Then open the video in Gallery, tap <b>Share → TLC Prime</b>. The scouter opens it and scans it automatically.</div>`;
+const SHARE_HOW=`<b>Want an AI form check on a reel?</b><div class="muted" style="margin-top:4px;line-height:1.55">Instagram doesn't let other apps pull the video out of a link. So: in Instagram tap <b>⋯</b> on the reel → <b>Download</b> (or screen-record it). Then open the video in Gallery, tap <b>Share → Supa Strength</b>. The scouter opens it and scans it automatically.</div>`;
 function vAna(){
   head('Analyzer','AI form check · slow-mo · angle tool');
   let h='';
-  if(A.recv)h+=`<div class="card recv"><div class="spin"></div><div class="sp"><b>Receiving ${esc(A.recv==='video'||A.recv===true?'video':A.recv)}…</b><div class="muted">Copying it into TLC Prime. Big clips take a few seconds.</div></div></div>`;
+  if(A.recv)h+=`<div class="card recv"><div class="spin"></div><div class="sp"><b>Receiving ${esc(A.recv==='video'||A.recv===true?'video':A.recv)}…</b><div class="muted">Copying it into Supa Strength. Big clips take a few seconds.</div></div></div>`;
   h+='<div id="anaErr"></div>';
   if(!A.cur){
-    if(A.notice&&A.notice.type==='other')h+=`<div class="card sharehow"><b>That link can't be analyzed</b><div class="muted" style="margin-top:4px;line-height:1.55">${A.notice.host?esc(A.notice.host)+' links':'Links'} don't carry the video itself. Save the video to your phone, then share the <b>video file</b> to TLC Prime and the scouter scans it.</div><button class="btn sm" style="margin-top:8px" onclick="A.notice=null;render(true)">Got it</button></div>`;
-    h+=`<div class="hero" style="min-height:0"><div class="emblem">眼</div><div class="k">Saiyan Scouter · form analysis</div><div class="t">Analyze your form</div><div class="d">Load a training clip, or share any video to TLC Prime from Gallery, Instagram downloads or other apps. The AI tracks 17 body points, measures every joint angle, scores your form and counts reps. It all runs on your phone.</div>
+    if(A.notice&&A.notice.type==='other')h+=`<div class="card sharehow"><b>That link can't be analyzed</b><div class="muted" style="margin-top:4px;line-height:1.55">${A.notice.host?esc(A.notice.host)+' links':'Links'} don't carry the video itself. Save the video to your phone, then share the <b>video file</b> to Supa Strength and the scouter scans it.</div><button class="btn sm" style="margin-top:8px" onclick="A.notice=null;render(true)">Got it</button></div>`;
+    h+=`<div class="hero" style="min-height:0"><div class="emblem">眼</div><div class="k">Saiyan Scouter · form analysis</div><div class="t">Analyze your form</div><div class="d">Load a training clip, or share any video to Supa Strength from Gallery, Instagram downloads or other apps. The AI tracks 17 body points, measures every joint angle, scores your form and counts reps. It all runs on your phone.</div>
     <input type="file" id="anaFile" accept="video/*" style="display:none" onchange="anaPick(this)"><button class="btn p" style="margin-top:14px;width:100%" onclick="anaLoadBtn()">＋ Load video</button></div>`;
     const sh=S.shared||[];
     if(sh.length){h+='<div class="lbl">Shared reels</div>';
       h+=`<div class="card sharehow${A.notice&&A.notice.type==='ig'?' stnew':''}">${SHARE_HOW}</div>`;
       h+=sh.map((x,i)=>`<div class="shr">${igEmbed(x.c,'sh'+i,'Shared reel')}<div class="embmore"><select class="shsel" onchange="sharedToSkill('${esc(x.c)}',this.value);this.value=''" aria-label="Add to a skill's tutorials"><option value="">＋ Add to a skill's tutorials</option>${D.lanes.map(l=>`<option value="${l.id}">${esc(l.name)}</option>`).join('')}</select><button class="btn sm" onclick="rmShared('${esc(x.c)}')">Remove</button></div><div class="muted" style="margin-top:4px">Shared ${new Date(x.at).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</div></div>`).join('')}
     h+='<div class="lbl">Your video library</div>';
-    h+=LV.length?LV.slice().reverse().map(v=>`<div class="vcard" onclick="anaOpen('${v.id}')"><div class="vthumb">▶</div><div class="sp"><div class="t">${esc(v.name)}</div><div class="s">${v.lane?esc((D.lanes.find(l=>l.id===v.lane)||{}).name||''):'Not linked to a skill'} · ${new Date(v.date).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</div></div><button class="btn sm icon" onclick="event.stopPropagation();anaDel('${v.id}')" aria-label="Delete">🗑</button></div>`).join(''):'<div class="card">'+emptyState('🎥','No videos yet','Film yourself side-on with your whole body in frame, or share a saved reel to TLC Prime from your Gallery.')+'</div>';
+    h+=LV.length?LV.slice().reverse().map(v=>`<div class="vcard" onclick="anaOpen('${v.id}')"><div class="vthumb">▶</div><div class="sp"><div class="t">${esc(v.name)}</div><div class="s">${v.lane?esc((D.lanes.find(l=>l.id===v.lane)||{}).name||''):'Not linked to a skill'} · ${new Date(v.date).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</div></div><button class="btn sm icon" onclick="event.stopPropagation();anaDel('${v.id}')" aria-label="Delete">🗑</button></div>`).join(''):'<div class="card">'+emptyState('🎥','No videos yet','Film yourself side-on with your whole body in frame, or share a saved reel to Supa Strength from your Gallery.')+'</div>';
     if(!sh.length)h+=`<div class="card sharehow">${SHARE_HOW}</div>`;
     h+=`<div class="card"><div class="dbz" style="color:#ffd400;margin-bottom:6px">Filming tips for best results</div><div class="muted" style="line-height:1.6">• Side-on view for planche, levers, L-sit and pull-ups; front or side for handstands<br>• Whole body in frame, phone steady at hip height<br>• Good light, fitted clothes<br>• Link a clip to a skill and it plays inside that skill's tutorials, with no internet needed</div></div>`;
     h+=diagBlock();M(h);anaErrUI();return;
