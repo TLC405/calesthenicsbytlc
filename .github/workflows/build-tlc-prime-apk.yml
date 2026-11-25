@@ -33,9 +33,9 @@ jobs:
         working-directory: tlc-prime-android
         run: gradle --no-daemon :app:assembleDebug
       - name: Rename APK
-        run: cp tlc-prime-android/app/build/outputs/apk/debug/app-debug.apk Supa-Strength-v3.10-universal.apk
+        run: cp tlc-prime-android/app/build/outputs/apk/debug/app-debug.apk Supa-Strength-v3.11-universal.apk
       - uses: actions/upload-artifact@v4
         with:
-          name: Supa-Strength-v3.10-universal
-          path: Supa-Strength-v3.10-universal.apk
+          name: Supa-Strength-v3.11-universal
+          path: Supa-Strength-v3.11-universal.apk
           if-no-files-found: error
