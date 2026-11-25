@@ -608,6 +608,60 @@ html.light .kame-scene{border-color:#537f96}
 @media(max-width:360px){.kame-scene,.kame-content{min-height:225px}.kame-house{left:28%;transform:scale(.82);transform-origin:bottom left}.kame-palm{left:12%}.kame-heading{font-size:25px}}
 @media(prefers-reduced-motion:reduce){.kame-action{transition:none}}
 
+
+/* ===== TLC Prime v3.9 · Scanner-first home ===== */
+#main,.card,.hero,.stat,.row,.sp,.radar-readout,.master-detail,.mission-card{min-width:0}
+#main *{max-width:100%}
+h1,.sub,.dbz,.muted,.hero .t,.hero .d,.stat span,.radar-readout,.master-name,.master-meta,.mission-title-home,.mission-meta{overflow-wrap:anywhere;word-break:normal}
+header .htop{min-width:0;align-items:center}
+header .htop>div:first-child{min-width:0;flex:1}
+header h1{font-size:clamp(22px,6vw,28px);line-height:1.05}
+header .sub{line-height:1.25;white-space:normal;padding-right:4px}
+.home-scanner{margin-bottom:12px}
+.home-scanner .dragon-radar-shell{max-width:360px;margin:0 auto}
+.home-radar-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 2px 8px}
+.home-radar-head .title{font:900 italic 18px/1 Impact,"Arial Black",sans-serif;text-transform:uppercase;color:#ffd400;text-shadow:0 2px 0 #7a1d00}
+.home-radar-head .power{flex:none;font:900 11px/1 "Courier New",monospace;color:#7dffb0;background:#092713;border:1px solid #2a7546;border-radius:999px;padding:7px 9px}
+.master-detail{margin-top:11px;padding:11px 12px;border:2px solid #111;border-radius:13px;background:#24241e;color:#f8f4d8;box-shadow:inset 0 0 12px #0006}
+.master-detail .eyebrow{font:900 9px/1.2 "Courier New",monospace;letter-spacing:.16em;color:#84ff9f;text-transform:uppercase}
+.master-detail .master-name{font:900 italic 19px/1.05 Impact,"Arial Black",sans-serif;margin-top:4px;color:#fff2a0;text-transform:uppercase}
+.master-detail .master-meta{font-size:11px;line-height:1.35;color:#c8d5c4;margin-top:4px}
+.master-detail .master-status{display:inline-flex;margin-top:7px;padding:5px 8px;border-radius:999px;background:#12371e;border:1px solid #2c8449;color:#8cffaa;font:900 10px/1 "Courier New",monospace}
+.master-detail .master-status.locked{background:#2d2620;border-color:#75522c;color:#ffc06d}
+.blip.sel{outline:2px solid #fff6a8;outline-offset:5px}
+.blip.locked{filter:saturate(.55) brightness(.72)}
+.blip.locked:after{border-color:rgba(255,190,90,.35)}
+.radar-level-tag{position:absolute;left:50%;top:22px;transform:translateX(-50%);font:900 8px/1 "Courier New",monospace;color:#caffd5;text-shadow:0 1px 3px #000;white-space:nowrap;max-width:72px;overflow:hidden;text-overflow:ellipsis}
+.radar-stars{font-size:7px}
+.radar-controls{grid-template-columns:minmax(0,1fr) auto}
+.radar-readout{font-size:11px;line-height:1.35}
+.radar-btn{flex:none}
+.mission-card{border:1px solid #2a3470;border-radius:18px;background:#121738;padding:14px;margin-bottom:12px;box-shadow:0 8px 22px #0004}
+.light .mission-card{background:#fff8ea;border-color:#ddd0b4;box-shadow:0 7px 18px rgba(40,40,90,.1)}
+.mission-kicker-home{font:900 10px/1.2 "Courier New",monospace;letter-spacing:.16em;color:#5fd4ff;text-transform:uppercase}
+.light .mission-kicker-home{color:#2058bd}
+.mission-title-home{font:900 italic clamp(20px,6vw,28px)/1.02 Impact,"Arial Black",sans-serif;text-transform:uppercase;margin-top:4px}
+.mission-meta{font-size:12px;color:var(--mut);margin-top:5px;line-height:1.35}
+.mission-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.72fr);gap:8px;margin-top:12px}
+.mission-actions .btn{width:100%;white-space:normal;line-height:1.1;padding:10px 9px}
+.home-progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:8px}
+.home-progress .stat{padding:10px 8px;text-align:center}
+.home-progress .stat b{font-size:20px}
+.home-progress .stat span{display:block;line-height:1.15;margin-top:2px}
+.home-links{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.home-links .btn{width:100%;white-space:normal}
+@media(max-width:380px){
+  main{padding-left:10px;padding-right:10px}
+  header{padding-left:12px;padding-right:12px}
+  .dragon-radar-shell{padding:11px 10px 15px;border-radius:25px}
+  .radar-top{font-size:9px;margin-left:3px;margin-right:3px}
+  .radar-readout{font-size:9.5px;padding:7px 8px}
+  .radar-btn{width:43px;height:43px;font-size:10px}
+  .mission-actions{grid-template-columns:1fr}
+  .home-progress{gap:6px}
+  .home-progress .stat{padding:9px 5px}
+}
+
 /* ===== TLC Prime v3.8 · Simplified Focus Mission Builder ===== */
 .mission-console{position:relative;overflow:hidden;margin:0 0 12px;padding:14px;border:2px solid #2f6bff;border-radius:18px;background:#101633;box-shadow:0 10px 30px rgba(3,8,30,.28)}
 .light .mission-console{background:#fff7ea;border-color:#244fc2;box-shadow:0 8px 22px rgba(38,55,110,.12)}
@@ -783,16 +837,26 @@ function shout(t,sub,col){document.documentElement.style.setProperty('--fl',col|
 function sparks(x,y){for(let i=0;i<10;i++){const s=document.createElement('div');s.className='spark';const a=Math.random()*6.28,d=40+Math.random()*50;s.style.left=x+'px';s.style.top=y+'px';s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',Math.sin(a)*d+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),600)}}
 let lastXY=[innerWidth/2,innerHeight/2];document.addEventListener('pointerdown',e=>{lastXY=[e.clientX,e.clientY]},true);
 function radar(){
-  const wk=streakWeek(), found=wk.filter(w=>w.done).length;
+  const pl=powerLevel();
+  const masters=FORMS.slice(1);
+  let selected=Math.max(0,Math.min(6,+(S.radarBall||Math.max(1,masters.filter(f=>pl>=f[0]).length)||1)-1));
   const pts=[[48,16],[74,27],[82,56],[66,79],[36,80],[18,57],[24,29]];
+  const m=masters[selected],unlocked=pl>=m[0],next=masters.find(f=>f[0]>pl);
   return `<div class="dragon-radar-shell">
-    <div class="radar-top"><span><i class="radar-led"></i>DRAGON RADAR</span><span>RANGE · ${found===7?'LOCK':'x1'}</span></div>
+    <div class="radar-top"><span><i class="radar-led"></i>DRAGON BALL SCANNER</span><span>${masters.filter(f=>pl>=f[0]).length}/7 MASTERED</span></div>
     <div class="radar" onclick="radarPing()"><div class="rings"></div><div class="grid"></div><div class="cross"></div><div class="sweep"></div><div class="me"></div>
-      ${pts.map((p,i)=>`<div class="blip ${wk[i]&&wk[i].done?'done':''}" style="left:${p[0]}%;top:${p[1]}%;animation-delay:${(i*.13).toFixed(2)}s"><div class="radar-stars">${'★'.repeat(i+1)}</div><span>${i+1}</span></div>`).join('')}
+      ${pts.map((p,i)=>{const f=masters[i],ok=pl>=f[0];return `<button class="blip ${ok?'done':'locked'} ${i===selected?'sel':''}" style="left:${p[0]}%;top:${p[1]}%;animation-delay:${(i*.13).toFixed(2)}s;border:0" onclick="radarSelect(${i+1});event.stopPropagation()" aria-label="${i+1} star Dragon Ball, ${esc(f[1])}"><div class="radar-stars">${'★'.repeat(i+1)}</div><span class="radar-level-tag">${i+1}★</span></button>`}).join('')}
     </div>
-    <div class="radar-controls"><div class="radar-readout">SIGNALS ${found}/7<br>${found===7?'ALL BALLS DETECTED · WISH READY':7-found+' SIGNAL'+(7-found===1?'':'S')+' REMAIN'}</div><button class="radar-btn" onclick="radarPing();event.stopPropagation()" aria-label="Ping radar">PING</button></div>
+    <div class="master-detail">
+      <div class="eyebrow">${selected+1}★ Dragon Ball · Master level</div>
+      <div class="master-name">${esc(m[1])}</div>
+      <div class="master-meta">Unlock at power level ${fmt(m[0])} · Current power ${fmt(pl)}${!unlocked?' · '+fmt(Math.max(0,m[0]-pl))+' remaining':''}</div>
+      <div class="master-status ${unlocked?'':'locked'}">${unlocked?'MASTERED':'LOCKED'}</div>
+    </div>
+    <div class="radar-controls"><div class="radar-readout">CURRENT FORM · ${esc(formOf(pl)[1].toUpperCase())}<br>${next?'NEXT · '+esc(next[1].toUpperCase())+' @ '+fmt(next[0]):'ALL MASTER LEVELS UNLOCKED'}</div><button class="radar-btn" onclick="radarPing();event.stopPropagation()" aria-label="Ping radar">PING</button></div>
   </div>`}
-function radarPing(){if(navigator.vibrate)navigator.vibrate([18,35,18]);const el=document.querySelector('.dragon-radar-shell');if(el){el.animate([{transform:'scale(1)'},{transform:'scale(1.015)'},{transform:'scale(1)'}],{duration:260})}toast('Dragon Radar scan complete')}
+function radarSelect(n){S.radarBall=n;save();render(true);if(navigator.vibrate)navigator.vibrate(10)}
+function radarPing(){if(navigator.vibrate)navigator.vibrate([18,35,18]);const el=document.querySelector('.dragon-radar-shell');if(el){el.animate([{transform:'scale(1)'},{transform:'scale(1.015)'},{transform:'scale(1)'}],{duration:260})}toast('Dragon Ball scan complete')}
 
 // ---------- shell
 const TABS=['home','train','skills','learn','ana','log'];
@@ -805,18 +869,26 @@ const M=h=>{const m=document.getElementById('main');const live=EMB&&document.get
 
 // ---------- HOME
 function vHome(){
-  const nd=nextDay(),hr=new Date().getHours();
-  head('TLC Prime',(hr<12?'Morning training, Trevel':hr<18?'Afternoon training, Trevel':'Night training, Trevel')+' · '+new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}));const pl=powerLevel(),fm=formOf(pl),nf=nextForm(pl);
-  const day=D.days.find(d=>d.id===nd);const wk=streakWeek();const thisWeek=wk.filter(w=>w.done).length;
+  const nd=nextDay(),hr=new Date().getHours(),pl=powerLevel(),fm=formOf(pl),nf=nextForm(pl);
+  const day=D.days.find(d=>d.id===nd),wk=streakWeek(),thisWeek=wk.filter(w=>w.done).length;
   const passedN=Object.keys(S.passed).filter(k=>S.passed[k]!=='start').length;
-  let h=`<section class="kame-scene" aria-label="Kame House inspired training home"><div class="kame-cloud"></div><div class="kame-island"></div><div class="kame-palm"></div><div class="kame-house"><div class="kame-door"></div></div><div class="kame-content"><span class="kame-kicker">TLC PRIME · TRAINING ISLAND</span><span class="kame-heading">WELCOME HOME</span><span class="kame-desc">Train · Lengthen · Control</span></div><button class="kame-action" onclick="go('train')">START TRAINING →</button></section><div class="scouter"><div class="ret"></div><div class="cap">SCOUTER · POWER LEVEL</div><div class="pl" id="plnum">${fmt(pl)}</div>${pl>9000?'<div class="over9000">IT\'S OVER 9000!</div>':''}<div class="cap" style="margin-top:4px">${nf?fmt(nf[0]-pl)+' TO '+nf[1].toUpperCase():'MAX FORM REACHED'}</div><div class="plbar"><i style="width:${nf?Math.min(100,(pl-fm[0])/(nf[0]-fm[0])*100):100}%"></i></div></div>`;
-  const gp=nf?Math.min(1,(pl-fm[0])/(nf[0]-fm[0])):1,gc=2*Math.PI*36;
-  h+=`<div class="hero"><div class="gauge"><svg viewBox="0 0 84 84" width="84" height="84"><defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6b0"/><stop offset=".5" stop-color="var(--hero-b,#ffd400)"/><stop offset="1" stop-color="#ff7a00"/></linearGradient></defs><circle cx="42" cy="42" r="36" class="gt0"/><circle cx="42" cy="42" r="36" class="gt1" stroke="url(#gg)" stroke-dasharray="${gc.toFixed(1)}" stroke-dashoffset="${(gc*(1-gp)).toFixed(1)}" style="--c:${gc.toFixed(1)}" transform="rotate(-90 42 42)"/></svg><div class="emblem">修</div><div class="gpct">${Math.round(gp*100)}%</div></div><div class="k">Next training · Day ${nd}</div><div class="t">${esc(dayName(nd))}</div><div class="d">${day.items.length} drills · about ${Math.round(day.items.length*6)} min</div><div class="form">⚡ ${esc(fm[1])}</div>
-  <div class="row" style="margin-top:14px"><button class="btn p" onclick="S.day='${nd}';save();go('train')">Power up →</button><button class="btn ghost" style="border-color:#4a3a2e" onclick="S.day='H1';save();go('train')">Handstand set</button></div></div>`;
-  h+=`<div class="stats"><div class="stat"><b>${thisWeek}</b><span>balls this week</span></div><div class="stat"><b>${S.history.length}</b><span>battles</span></div><div class="stat"><b>${passedN}</b><span>techniques</span></div></div>`;
-  const plan=D.week;h+=`<div class="card"><div class="row" style="margin-bottom:10px"><div class="sp dbz" style="font-weight:900;color:#ffd400">Dragon Balls this week</div><div class="muted">${D.week.filter(x=>x!=='rest').join(' · ')}</div></div><div class="week">${wk.map((w,i)=>`<div class="wd ${plan[i]==='rest'?'rest':''} ${w.today?'today':''} ${w.done?'done':''}"><div class="orb">${stars(i+1)}</div><b>${'MTWTFSS'[i]}${plan[i]==='rest'?' · Senzu':''}</b></div>`).join('')}</div>${wk.filter(w=>w.done).length>=7?'<div class="shenron">🐉 All seven gathered. Make your wish.</div>':''}</div>`;
-  h+='<div class="lbl">Dragon Radar · 7 Signals</div><div class="card" style="padding:12px">'+radar()+'<div class="muted" style="text-align:center;margin-top:8px">Each completed training day locks one Dragon Ball signal. Hit PING to rescan.</div></div>';
-  h+='<div class="lbl">Training grounds</div><div class="lanes">'+D.lanes.filter(l=>l.id!=='foundation').map(l=>{const c=curNode(l.id);return `<div class="lane" onclick="lane='${l.id}';go('skills')">${ring(lanePct(l.id))}<div class="sp"><div class="n">${esc(l.name.replace('Legs: ',''))}</div><div class="c">${esc(c.name)}</div></div></div>`}).join('')+'</div>';
+  head('TLC Prime',(hr<12?'Morning':hr<18?'Afternoon':'Evening')+' · '+new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}));
+  let h=`<div class="home-scanner">
+    <div class="home-radar-head"><div class="title">Training Island Scanner</div><div class="power">PL ${fmt(pl)}</div></div>
+    ${radar()}
+  </div>`;
+  h+=`<section class="mission-card">
+    <div class="mission-kicker-home">Today's mission · Day ${esc(nd)}</div>
+    <div class="mission-title-home">${esc(dayName(nd))}</div>
+    <div class="mission-meta">${day.items.length} drills · about ${Math.round(day.items.length*6)} min · Current form: ${esc(fm[1])}</div>
+    <div class="mission-actions"><button class="btn p" onclick="S.day='${nd}';save();go('train')">Start mission</button><button class="btn" onclick="S.day='H1';save();go('train')">Handstand</button></div>
+  </section>`;
+  h+=`<div class="home-progress">
+    <div class="stat"><b>${thisWeek}</b><span>sessions this week</span></div>
+    <div class="stat"><b>${passedN}</b><span>skills mastered</span></div>
+    <div class="stat"><b>${S.history.length}</b><span>total battles</span></div>
+  </div>`;
+  h+=`<div class="home-links"><button class="btn" onclick="go('skills')">Mastery map</button><button class="btn" onclick="go('train')">Build workout</button></div>`;
   M(h);
 }
 
