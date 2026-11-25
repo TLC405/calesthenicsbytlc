@@ -1474,7 +1474,10 @@ function exerciseGlyph(e){
  return '●'
 }
 function exerciseMuscleText(list,limit){limit=limit||4;return (list||[]).slice(0,limit).join(' · ')||'Full-body control'}
-function exerciseCustomArt(name){return window.EXERCISE_ART[name]||null}
+function exerciseCustomArt(name){
+ const p=window.EXERCISE_ART[name];if(!p)return null;
+ return location.protocol==='file:'?p:'https://raw.githubusercontent.com/TLC405/calesthenicsbytlc/tlc-prime-apk-v38/tlc-prime-android/app/src/main/assets/'+p
+}
 function exerciseVisual(e,key){
  const art=exerciseCustomArt(e.name),vs=vidsForItem(e),verified=vs.length>0,mu=e.muscles||{primary:[],secondary:[]};
  const media=art?'<img class="exercise-photo" src="'+art+'" alt="'+esc(e.name)+' start and finish demonstration">':'<div class="exercise-visual-fallback" role="img" aria-label="'+esc(e.name)+' start and finish visual"><div class="pose-frame"><div class="pose-glyph">'+exerciseGlyph(e)+'</div><div class="pose-label">START</div></div><div class="pose-arrow">→</div><div class="pose-frame finish"><div class="pose-glyph">'+exerciseGlyph(e)+'</div><div class="pose-label">FINISH</div></div></div>';
