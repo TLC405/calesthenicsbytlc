@@ -1037,7 +1037,7 @@ function embBlock(vs,key){if(!vs.length)return '';let h=igEmbed(vs[0][0],key+'_0
   if(vs.length>1)h+=`<div class="embmore">${vs.slice(1).map(([c,t],j)=>`<button class="btn sm" onclick="embSwap('${ekey(key+'_0')}','${esc(c)}','${esc(String(t).replace(/'/g,''))}')">▶ Also: ${esc(handleOf(c,t))}</button>`).join('')}</div>`;return h}
 function embSwap(key,c,t){const el=document.getElementById('emb-'+key);if(!el)return;if(EMB&&EMB.key===key)EMB=null;el.dataset.c=c;el.dataset.t=t;el.classList.remove('live');el.innerHTML=embPoster(c,key,t);embLoad(key)}
 // ---------- Form: cues + muscles + body map
-const MREG=[[/thoracic/i,['midback']],[/anterior delt/i,['delts']],[/lateral delt/i,['delts','rdelts']],[/posterior delt|rotator|teres/i,['rdelts']],[/pector/i,['chest']],[/serratus/i,['serratus']],[/biceps|brachialis/i,['biceps']],[/triceps/i,['triceps']],[/wrist|forearm|brachiorad|grip/i,['forearms','forearmsB']],[/upper trap/i,['traps','trapsB']],[/middle trap|lower trap|rhomboid/i,['midback']],[/latissimus/i,['lats']],[/erector|quadratus/i,['lowback']],[/rectus abdominis|transverse/i,['abs']],[/oblique/i,['obliques']],[/rectus femoris/i,['hipflex','quads']],[/hip flexor|iliopsoas|tensor/i,['hipflex']],[/quadricep/i,['quads']],[/adductor/i,['adductors']],[/glute|piriformis/i,['glutes']],[/hamstring/i,['hams']],[/gastroc|soleus|calves|peroneal/i,['calves']],[/tibialis|extensor digitorum/i,['shins']]];
+const MREG=[[/thoracic/i,['midback']],[/anterior delt/i,['delts']],[/lateral delt/i,['delts','rdelts']],[/posterior delt|rotator|teres/i,['rdelts']],[/pector/i,['chest']],[/serratus/i,['serratus']],[/biceps|brachialis/i,['biceps']],[/triceps/i,['triceps']],[/wrist|forearm|brachiorad|grip|finger|thumb/i,['forearms','forearmsB']],[/upper trap/i,['traps','trapsB']],[/middle trap|lower trap|rhomboid/i,['midback']],[/latissimus/i,['lats']],[/erector|quadratus/i,['lowback']],[/rectus abdominis|transverse/i,['abs']],[/oblique/i,['obliques']],[/rectus femoris/i,['hipflex','quads']],[/hip flexor|iliopsoas|tensor/i,['hipflex']],[/quadricep/i,['quads']],[/adductor/i,['adductors']],[/glute|piriformis/i,['glutes']],[/hamstring/i,['hams']],[/gastroc|soleus|calves|peroneal/i,['calves']],[/tibialis|extensor digitorum/i,['shins']]];
 function regs(list){const o=new Set();(list||[]).forEach(m=>{for(const [r,a] of MREG)if(r.test(m)){a.forEach(x=>o.add(x));break}});return o}
 function muscleRegionName(name){
   const n=String(name||'');
@@ -1500,7 +1500,7 @@ function exerciseVisual(e,key){
 function luxExerciseCard(e,key,opts){
  opts=opts||{};
  const cls=['exercise-lux',opts.done?'done':'',opts.next?'next':''].filter(Boolean).join(' ');
- const tool=e.tool==='band'?'Band':e.tool==='roller'?'Foam roller':'Bodyweight';
+ const tool=({band:'Band',roller:'Foam roller',bar:'Pull-up bar',towel:'Towel',plates:'Weight plates',gripper:'Hand gripper',dumbbell:'Dumbbell',bodyweight:'Bodyweight'})[e.tool]||'Bodyweight';
  const note=e.note?'<div class="nt">'+esc(e.note)+'</div>':'';
  const vs=vidsForItem(e);
  return '<article class="'+cls+'" '+(opts.id?'id="'+opts.id+'"':'')+'><div class="exercise-lux-head"><div><div class="exercise-lux-title">'+esc(e.name)+'</div><div class="exercise-lux-sub">'+esc(e.group||opts.group||'Mastery work')+'</div></div><div class="exercise-lux-dose">'+esc(e.dose||'Practice')+'</div></div><div class="exercise-lux-body">'+exerciseVisual(e,key)+'<div class="exercise-lux-meta"><span class="exercise-pill">'+tool+'</span>'+(e.source&&e.source!=='standard'?'<span class="exercise-pill">Verified source</span>':'')+'</div>'+note+(opts.extra||'')+(opts.sets||'')+embBlock(vs,key)+formPanel(e,'f'+key)+'</div></article>'
@@ -1626,7 +1626,7 @@ const IDB={db:null,open(){return new Promise((res,rej)=>{if(this.db)return res(t
 let LV=[];async function loadLV(){try{LV=(await IDB.all()).map(v=>({id:v.id,name:v.name,lane:v.lane,date:v.date,dur:v.dur,skill:v.skill}))}catch(e){LV=[]}}
 const SKILLS=[['general','General'],['handstand','Handstand'],['planche','Planche'],['front_lever','Front lever'],['back_lever','Back lever'],['lsit','L-sit / compression'],['pullup','Pull-up'],['muscleup','Muscle-up'],['pistol','Pistol / squat'],['flag','Human flag']];
 const LANE2SK={handstand:'handstand',planche:'planche',front_lever:'front_lever',back_lever:'back_lever',compression:'lsit',pull_up:'pullup',muscle_up:'muscleup',legs_single_leg:'pistol',legs_quad:'pistol',human_flag:'flag'};
-const APPV='3.13';
+const APPV='3.14';
 const A={cur:null,url:null,pose:false,tool:false,pts:[],det:null,backend:null,err:null,last:null,lastDet:0,raf:0,skill:'general',scan:null,res:null,reps:0,repState:0,loop:false,rate:1,t:0,meta:null,scanning:false,cancel:false,autoScan:false,recv:null,notice:null,drawing:false};
 // ---------- v3.7 diagnostics: every step of the AI pipeline is logged so a failure says why
 const DIAG=[];
