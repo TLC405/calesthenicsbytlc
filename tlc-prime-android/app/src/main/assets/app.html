@@ -1150,7 +1150,7 @@ const DRAGON_MASTERY=[
   {id:'pullup',name:'Pull-Up',short:'Pull-Up',icon:'⬆',lane:'pull_up',goal:'pullup',levels:['Hang + scapular control','Assisted pulling','Eccentric strength','Strict pulling','Explosive pulling']},
   {id:'mobility',name:'Mobility',short:'Mobility',icon:'↔',lane:'legs_mobility',goal:'mobility',levels:['Joint preparation','Shoulders + upper body','Squat + lateral range','Hip + hamstring range','Advanced mobility control']},
   {id:'balance',name:'Balance',short:'Balance',icon:'⚖',lane:'legs_single_leg',goal:'balance',levels:['Stable base','Single-leg control','Assisted balance strength','Deep balance strength','Balance mastery']},
-  {id:'rings',name:'Rings',short:'Rings',icon:'◌',goal:'rings',levels:['Support foundation','Ring control','Pull + press basics','Core + support','Rings mastery']},
+  {id:'grip',name:'Grip',short:'Grip',icon:'✊',goal:'grip',levels:['Wrist + hang foundation','Hand + forearm strength','Towel + crush strength','Assisted one-arm hangs','Grip mastery']},
   {id:'olympic_rings',name:'Olympic Rings',short:'Olympic Rings',icon:'◎',goal:'olympic_rings',levels:['Support quality','Core position','Lever control','Straight-arm strength','Olympic Rings mastery']},
   {id:'pullup_mastery',name:'Pull-Up Mastery',short:'Pull-Up Mastery',icon:'⚡',lane:'muscle_up',goal:'pull_mastery',levels:['Strict base','Explosive height','Bar contact','Transition skill','Pull-Up Mastery']}
 ]
@@ -1191,12 +1191,12 @@ const MASTER_LEVEL_EXERCISES={
     {title:'Deep balance strength',items:['Shrimp squat progression','Single-leg squat at your stage (pistol -> shrimp -> dragon)']},
     {title:'Balance mastery',items:['Power at your stage (squat jump -> broad -> tuck -> skater -> box)']}
   ],
-  rings:[
-    {title:'Support foundation',items:['Ring support hold']},
-    {title:'Ring control',items:['Ring circles']},
-    {title:'Pull + press basics',items:['Ring rows','Ring push-ups']},
-    {title:'Core + support',items:['Ring L-sit']},
-    {title:'Rings mastery',items:['Ring planche lean','Ring side presses']}
+  grip:[
+    {title:'Wrist + hang foundation',items:['Wrist warm-up','Active bar hang','Dead hang']},
+    {title:'Hand + forearm strength',items:['Plate pinch','Finger-band extensions','Wrist extensions']},
+    {title:'Towel + crush strength',items:['Towel hang','Gripper squeeze','Hammer curls']},
+    {title:'Assisted one-arm hangs',items:['Assisted one-arm hang · 3 support fingers','Assisted one-arm hang · 2 support fingers','Assisted one-arm hang · 1 support finger']},
+    {title:'Grip mastery',items:['One-arm active hang','One-arm dead hang','Fingertip push-ups']}
   ],
   olympic_rings:[
     {title:'Support quality',items:['Ring support hold']},
@@ -1213,10 +1213,26 @@ const MASTER_LEVEL_EXERCISES={
     {title:'Pull-Up Mastery',items:['Muscle-up at your stage','Straight-bar dips','Straight-bar dip transitions']}
   ]
 };
+const EXTRA_EXERCISES={
+  'Active bar hang':{name:'Active bar hang',dose:'3x20-30s',group:'Grip foundation',tool:'bar',source:'standard',muscles:{primary:['Forearm flexors','Latissimus dorsi','Lower trapezius'],secondary:['Biceps brachii','Rectus abdominis']},cues:['Grip the bar with the whole hand.','Pull the shoulders gently down away from the ears.','Keep ribs stacked and body still.']},
+  'Plate pinch':{name:'Plate pinch',dose:'3x20-30s',group:'Pinch strength',tool:'plates',source:'standard',muscles:{primary:['Forearm flexors','Thumb adductors'],secondary:['Wrist extensors','Brachioradialis']},cues:['Pinch the plates between fingers and thumb.','Keep the wrist neutral.','Stop before the plates begin to slide.']},
+  'Finger-band extensions':{name:'Finger-band extensions',dose:'3x20',group:'Finger balance',tool:'band',source:'standard',muscles:{primary:['Finger extensors','Wrist extensors'],secondary:['Brachioradialis']},cues:['Place the band around the fingertips.','Open the hand fully against resistance.','Control the return instead of snapping closed.']},
+  'Wrist extensions':{name:'Wrist extensions',dose:'3x15',group:'Wrist strength',tool:'dumbbell',source:'standard',muscles:{primary:['Wrist extensors'],secondary:['Forearm extensors','Brachioradialis']},cues:['Support the forearm.','Lift through the wrist only.','Lower slowly through full comfortable range.']},
+  'Towel hang':{name:'Towel hang',dose:'3x15-30s',group:'Grip endurance',tool:'towel',source:'standard',muscles:{primary:['Forearm flexors','Finger flexors'],secondary:['Latissimus dorsi','Biceps brachii']},cues:['Loop a secure towel over the bar.','Squeeze the towel hard with both hands.','Keep shoulders active and body quiet.']},
+  'Gripper squeeze':{name:'Gripper squeeze',dose:'3x10-15',group:'Crush strength',tool:'gripper',source:'standard',muscles:{primary:['Finger flexors','Forearm flexors'],secondary:['Thumb flexors']},cues:['Set the gripper deep in the palm.','Close it under control.','Open slowly and keep the wrist neutral.']},
+  'Hammer curls':{name:'Hammer curls',dose:'3x10-12',group:'Forearm + elbow strength',tool:'dumbbell',source:'standard',muscles:{primary:['Brachioradialis','Brachialis'],secondary:['Biceps brachii','Forearm flexors']},cues:['Keep palms facing each other.','Keep elbows close to the torso.','Lower slowly without swinging.']},
+  'Assisted one-arm hang · 3 support fingers':{name:'Assisted one-arm hang · 3 support fingers',dose:'3x10-20s each side',group:'One-arm hang progression',tool:'bar',source:'standard',muscles:{primary:['Forearm flexors','Latissimus dorsi'],secondary:['Lower trapezius','Biceps brachii','Obliques']},cues:['Use one full gripping hand.','Keep three fingers of the other hand on the bar for assistance.','Keep the working shoulder active.']},
+  'Assisted one-arm hang · 2 support fingers':{name:'Assisted one-arm hang · 2 support fingers',dose:'3x8-15s each side',group:'One-arm hang progression',tool:'bar',source:'standard',muscles:{primary:['Forearm flexors','Latissimus dorsi'],secondary:['Lower trapezius','Biceps brachii','Obliques']},cues:['Use one full gripping hand.','Reduce the assisting hand to two fingers.','Do not twist or shrug into the working shoulder.']},
+  'Assisted one-arm hang · 1 support finger':{name:'Assisted one-arm hang · 1 support finger',dose:'3x5-12s each side',group:'One-arm hang progression',tool:'bar',source:'standard',muscles:{primary:['Forearm flexors','Latissimus dorsi'],secondary:['Lower trapezius','Biceps brachii','Obliques']},cues:['Use one full gripping hand.','Use only one support finger on the opposite hand.','End the set before shoulder position breaks down.']},
+  'One-arm active hang':{name:'One-arm active hang',dose:'3x5-10s each side',group:'Grip mastery',tool:'bar',source:'standard',muscles:{primary:['Forearm flexors','Latissimus dorsi','Lower trapezius'],secondary:['Biceps brachii','Obliques','Rectus abdominis']},cues:['Hang from one hand with a firm full-hand grip.','Depress the shoulder away from the ear.','Keep the torso controlled without excessive rotation.']},
+  'One-arm dead hang':{name:'One-arm dead hang',dose:'3x5-15s each side',group:'Grip mastery',tool:'bar',source:'standard',muscles:{primary:['Forearm flexors','Finger flexors'],secondary:['Latissimus dorsi','Biceps brachii','Obliques']},cues:['Use a full secure grip.','Keep the shoulder comfortable and controlled.','Stop immediately if the hand begins to slip.']},
+  'Fingertip push-ups':{name:'Fingertip push-ups',dose:'3x5-10',group:'Finger strength',tool:'bodyweight',source:'standard',muscles:{primary:['Finger flexors','Forearm flexors'],secondary:['Pectoralis major','Triceps brachii','Anterior deltoids']},cues:['Start from an elevated surface if needed.','Spread the fingers and load them gradually.','Keep the body rigid and use pain-free range only.']}
+};
 function masteryFamilyName(m){return m.name}
 function masteryExercise(name){
   for(const d of D.days){const e=d.items.find(x=>x.name===name);if(e)return {...e,day:d.id,dayName:d.name}}
-  return {name,dose:'',group:''}
+  if(EXTRA_EXERCISES[name])return {...EXTRA_EXERCISES[name],day:'GRIP',dayName:'Grip Mastery'};
+  return {name,dose:'Practice',group:'Mastery work',muscles:{primary:[],secondary:[]},cues:[]}
 }
 function masteryLevelStatus(m,levelIndex,p){
   const n=(MASTER_LEVEL_EXERCISES[m.id]||[]).length||5;
@@ -1238,7 +1254,7 @@ function masteryLevelStack(m,p){
 function missionCount(re){return S.history.filter(h=>re.test(String(h.name||''))).length}
 function dragonMasterProgress(m){
   if(m.id==='balance')return lanePct('legs_single_leg');
-  if(m.id==='rings')return Math.min(1,missionCount(/^Rings Mission$/i)/5);
+  if(m.id==='grip')return Math.min(1,missionCount(/^Grip Mission$/i)/5);
   if(m.id==='olympic_rings')return Math.min(1,missionCount(/^Olympic Rings Mission$/i)/5);
   if(m.lane)return lanePct(m.lane);
   return 0
@@ -1361,7 +1377,7 @@ function vHome(){
   const passedN=Object.keys(S.passed).filter(k=>S.passed[k]!=='start').length;
   head('Supa Strength',(hr<12?'Morning':hr<18?'Afternoon':'Evening')+' · '+new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}));
   let h=`<div class="home-scanner">
-    <div class="finder-title-wrap"><div class="finder-title">Supa Strength Mastery</div><div class="finder-sub">Handstand · Plank · Pull-Up · Mobility · Balance · Rings · Olympic Rings · Pull-Up Mastery</div></div>
+    <div class="finder-title-wrap"><div class="finder-title">Supa Strength Mastery</div><div class="finder-sub">Handstand · Plank · Pull-Up · Mobility · Balance · Grip · Olympic Rings · Pull-Up Mastery</div></div>
     ${radar()}
   </div>`;
   h+=`<section class="mission-card">
@@ -1383,7 +1399,7 @@ function vHome(){
 // ---------- v3.8 Focus Mission Builder
 const BUILDER_DAY='Z';
 const BUILDER_GOALS=[
-  {id:'grip',label:'Grip Strength',icon:'✊',desc:'Hangs · wrists · forearms',max:3,color:'#ffd400'},
+  {id:'grip',label:'Grip',icon:'✊',desc:'Hangs · pinch · wrists · fingers',max:7,color:'#ffd400'},
   {id:'plank',label:'Plank',icon:'▰',desc:'Body line · side plank · long lever',max:5,color:'#ff9d00'},
   {id:'pullup',label:'Pull-Up',icon:'⬆',desc:'Hang · assisted · strict · explosive',max:5,color:'#5fd4ff'},
   {id:'balance',label:'Balance',icon:'⚖',desc:'Single-leg control · stability',max:5,color:'#9cffae'},
@@ -1392,16 +1408,15 @@ const BUILDER_GOALS=[
   {id:'pull',label:'Pull Power',icon:'⬆',desc:'Pull-ups · rows · scapula',max:5,color:'#5fd4ff'},
   {id:'planche',label:'Planche',icon:'◆',desc:'Straight-arm planche only',max:5,color:'#ff9d00'},
   {id:'handstand',label:'Handstand',icon:'⇧',desc:'Line · balance · control',max:5,color:'#e9ecff'},
-  {id:'rings',label:'Rings',icon:'◎',desc:'Support · rows · strength',max:5,color:'#ffb000'},
   {id:'core',label:'Core',icon:'◉',desc:'Compression · L-sit · hollow',max:5,color:'#b9ff73'},
   {id:'legs',label:'Legs',icon:'⚡',desc:'Single-leg · hinge · calves',max:5,color:'#ff7a00'},
   {id:'mobility',label:'Mobility',icon:'↔',desc:'Range · prep · recovery',max:5,color:'#3ee07a'}
 ];
 function builderGoal(id){return BUILDER_GOALS.find(g=>g.id===id)||BUILDER_GOALS[0]}
-function catalogExercises(){const seen=new Set(),out=[];D.days.forEach(d=>d.items.forEach(e=>{const k=String(e.name).toLowerCase();if(!seen.has(k)){seen.add(k);out.push(e)}}));return out}
+function catalogExercises(){const seen=new Set(),out=[];D.days.forEach(d=>d.items.forEach(e=>{const k=String(e.name).toLowerCase();if(!seen.has(k)){seen.add(k);out.push(e)}}));Object.values(EXTRA_EXERCISES).forEach(e=>{const k=e.name.toLowerCase();if(!seen.has(k)){seen.add(k);out.push(e)}});return out}
 function goalMatch(id,e){
   const n=e.name||'',g=e.group||'';
-  if(id==='grip')return /^(Wrist warm-up|Dead hang|Scap pulls)$/i.test(n);
+  if(id==='grip')return /^(Wrist warm-up|Active bar hang|Dead hang|Plate pinch|Finger-band extensions|Wrist extensions|Towel hang|Gripper squeeze|Hammer curls|Assisted one-arm hang · 3 support fingers|Assisted one-arm hang · 2 support fingers|Assisted one-arm hang · 1 support finger|One-arm active hang|One-arm dead hang|Fingertip push-ups)$/i.test(n);
   if(id==='pull')return /(pull-up|scap pulls|ring rows)/i.test(n)&&!/muscle-up|toes-to-bar|handstand|pike|planche/i.test(n);
   if(id==='planche')return /planche/i.test(n+' '+g)&&!/handstand/i.test(n);
   if(id==='handstand')return /handstand|wall tuck|wall hops|toe pulls/i.test(n+' '+g)&&!/press handstand/i.test(n);
@@ -1410,14 +1425,13 @@ function goalMatch(id,e){
   if(id==='balance')return /^(Cossack squats|Single-leg calf raise|Bulgarian split squat|Sliding leg curl or single-leg RDL|Band-assisted pistol|Pistol squat progression|Shrimp squat progression|Single-leg squat at your stage \(pistol -> shrimp -> dragon\)|Power at your stage \(squat jump -> broad -> tuck -> skater -> box\))$/i.test(n);
   if(id==='olympic_rings')return /^(Ring support hold|Ring L-sit|Band-assisted ring back lever \(negatives, reps, holds\)|Ring planche lean|Ring side presses|Supported ring cross negatives \(band\/feet assist\))$/i.test(n);
   if(id==='pull_mastery')return /^(Pull-up at your stage|Weighted pull-up negatives|Explosive pull-ups \(chest\/belly to bar\)|Hip-to-bar drill|Kip swing to kipping chest-to-bar|Box transition practice \(fast pull to push\)|Jumping or banded muscle-up|Banded muscle-up reps \(band over the bar\)|Muscle-up at your stage|Straight-bar dips|Straight-bar dip transitions)$/i.test(n);
-  if(id==='rings')return /\bring\b/i.test(n)&&!/planche/i.test(n);
   if(id==='core')return /core|compression|l-sit|hollow|toes-to-bar|leg lift/i.test(n+' '+g)&&!/handstand|planche|press handstand/i.test(n);
   if(id==='legs')return /squat|pistol|nordic|hamstring|calf|tib|lunge|cossack|leg curl|rdl/i.test(n+' '+g);
   if(id==='mobility')return /mobility|stretch|foam roll|shoulder dislocates|pull-aparts|wrist warm-up|deep squat rocks/i.test(n+' '+g)&&!/planche|handstand|press/i.test(n);
   return false;
 }
 const BUILD_PRIORITY={
-  grip:['Wrist warm-up','Dead hang','Scap pulls'],
+  grip:['Wrist warm-up','Active bar hang','Dead hang','Plate pinch','Finger-band extensions','Wrist extensions','Towel hang','Gripper squeeze','Hammer curls','Assisted one-arm hang · 3 support fingers','Assisted one-arm hang · 2 support fingers','Assisted one-arm hang · 1 support finger','One-arm active hang','One-arm dead hang','Fingertip push-ups'],
   plank:['Hollow hold','Side plank, hip raise','Block pike lean','Pike lean to high planche','Planche hold at your stage'],
   pullup:['Dead hang','Scap pulls','Band-assisted pull-ups (neutral, then wide grip)','Pull-up at your stage','Explosive pull-ups (chest/belly to bar)'],
   balance:['Cossack squats','Sliding leg curl or single-leg RDL','Band-assisted pistol','Shrimp squat progression','Single-leg squat at your stage (pistol -> shrimp -> dragon)'],
@@ -1426,7 +1440,6 @@ const BUILD_PRIORITY={
   pull:['Scap pulls','Pull-up at your stage','Band-assisted pull-ups (neutral, then wide grip)','Slow pull-up negatives','Ring rows'],
   planche:['Planche hold at your stage','Band-assisted planche hold','Pike lean to high planche','Tuck planche press','Ring planche lean'],
   handstand:['Wall tuck slides','Wall hops','Wall tuck switches','Wall tuck holds','Parallette handstand hold'],
-  rings:['Ring support hold','Ring circles','Ring rows','Ring push-ups','Supported ring cross negatives (band/feet assist)'],
   core:['Hollow-body hold','L-sit','Toes-to-bar','Hanging straddle leg lift / invert','Seated compression'],
   legs:['Single-leg squat at your stage','Nordic curl at your stage','Sliding leg curl or single-leg RDL','Single-leg calf raise','Cossack squat'],
   mobility:['Foam roll upper back + chest','Banded shoulder dislocates','Band pull-aparts','Wrist warm-up','Deep squat rocks']
