@@ -662,6 +662,47 @@ header .sub{line-height:1.25;white-space:normal;padding-right:4px}
   .home-progress .stat{padding:9px 5px}
 }
 
+
+/* ===== TLC Prime · Dragon Ball Finder mastery edition ===== */
+.finder-title-wrap{text-align:center;margin:2px 0 10px}
+.finder-title{font:900 italic clamp(24px,7vw,34px)/.95 Impact,"Arial Black",sans-serif;letter-spacing:.025em;text-transform:uppercase;color:#ffd137;-webkit-text-stroke:1px #7b2600;text-shadow:0 3px 0 #b63b00,0 6px 18px rgba(255,153,0,.25)}
+.finder-sub{font:800 10px/1.3 "Courier New",monospace;letter-spacing:.11em;color:var(--mut);margin-top:6px;text-transform:uppercase}
+.dragon-radar-shell{overflow:visible}
+.dragon-radar-shell .radar{overflow:hidden}
+.dbz-finder-aura{position:absolute;inset:-12px;pointer-events:none;overflow:hidden;border-radius:38px}
+.ki-mote{position:absolute;width:4px;height:13px;border-radius:50%;background:#f8ffb6;box-shadow:0 0 8px #ffd400,0 0 16px #ff8a00;opacity:.7;animation:kiFloat var(--d,2.6s) ease-in-out infinite alternate}
+.ki-mote:nth-child(1){left:7%;top:75%;--d:2.4s}.ki-mote:nth-child(2){left:18%;top:12%;--d:3.1s}.ki-mote:nth-child(3){right:11%;top:24%;--d:2.8s}.ki-mote:nth-child(4){right:5%;bottom:18%;--d:3.4s}.ki-mote:nth-child(5){left:48%;top:2%;--d:2.2s}
+@keyframes kiFloat{from{transform:translateY(8px) scale(.75);opacity:.25}to{transform:translateY(-10px) scale(1.2);opacity:.9}}
+.radar .sweep{animation-duration:2.25s}
+.radar .scan-flash{position:absolute;inset:0;border-radius:50%;pointer-events:none;box-shadow:inset 0 0 0 0 rgba(118,255,151,0);animation:scanPulse 2.25s ease-out infinite}
+@keyframes scanPulse{0%,55%{box-shadow:inset 0 0 0 0 rgba(118,255,151,0)}75%{box-shadow:inset 0 0 34px 6px rgba(118,255,151,.22)}100%{box-shadow:inset 0 0 0 0 rgba(118,255,151,0)}}
+.blip{display:grid;place-items:center;cursor:pointer}
+.blip .ball-icon{font-size:15px;line-height:1;filter:drop-shadow(0 1px 0 #7b2500)}
+.blip .radar-level-tag{top:23px;max-width:88px;font-size:8px}
+.blip.sel{z-index:7;animation:radarping 1s ease-in-out infinite,selectedAura 1.6s ease-in-out infinite}
+@keyframes selectedAura{50%{box-shadow:0 0 12px #fff7a7,0 0 28px #ffae00,0 0 42px rgba(255,115,0,.5)}}
+.master-detail{position:relative;overflow:hidden}
+.master-detail:after{content:"";position:absolute;left:-25%;top:-70%;width:45%;height:230%;background:rgba(255,255,255,.06);transform:rotate(24deg);animation:cardSweep 4s ease-in-out infinite;pointer-events:none}
+@keyframes cardSweep{0%,55%{left:-35%}100%{left:125%}}
+.master-ladder{display:grid;gap:6px;margin-top:10px}
+.master-step{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;align-items:center;padding:7px 8px;border:1px solid #3a463a;border-radius:10px;background:#171b17;color:#d8e4d7;font-size:11px;line-height:1.22}
+.master-step i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#203323;color:#89ff9f;font:900 10px/1 "Courier New",monospace;font-style:normal}
+.master-step.current{border-color:#ffb000;background:#332a11;color:#fff0a1;box-shadow:0 0 0 1px rgba(255,176,0,.18),inset 0 0 18px rgba(255,176,0,.06)}
+.master-step.done{border-color:#28653a;background:#102619}
+.master-step.done i{background:#1e6d37;color:#c7ffd4}
+.master-step.locked{opacity:.6}
+.master-path-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.master-path-actions .btn{min-height:38px;padding:8px;font-size:12px;white-space:normal}
+.dbz-tidbit{display:flex;align-items:center;gap:9px;margin-top:9px;padding:8px 10px;border:1px solid #3c3a23;border-radius:11px;background:#1d1c14;color:#d8d2a6;font-size:10px;line-height:1.3}
+.dbz-tidbit b{color:#ffd137}
+.finder-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:8px}
+.finder-chip{min-width:0;padding:7px 8px;border-radius:10px;background:var(--card2);border:1px solid var(--line);font-size:10px;font-weight:800;color:var(--mut);overflow-wrap:anywhere}
+@media(max-width:370px){
+ .finder-title{font-size:26px}
+ .master-path-actions{grid-template-columns:1fr}
+ .finder-legend{grid-template-columns:1fr}
+}
+
 /* ===== TLC Prime v3.8 · Simplified Focus Mission Builder ===== */
 .mission-console{position:relative;overflow:hidden;margin:0 0 12px;padding:14px;border:2px solid #2f6bff;border-radius:18px;background:#101633;box-shadow:0 10px 30px rgba(3,8,30,.28)}
 .light .mission-console{background:#fff7ea;border-color:#244fc2;box-shadow:0 8px 22px rgba(38,55,110,.12)}
@@ -836,27 +877,55 @@ function fx(cls,ms,html){const e=document.createElement('div');e.className=cls;i
 function shout(t,sub,col){document.documentElement.style.setProperty('--fl',col||'#ffd400');fx('flash',1200);fx('speed',900);fx('shout',1600,esc(t)+(sub?'<small>'+esc(sub)+'</small>':''))}
 function sparks(x,y){for(let i=0;i<10;i++){const s=document.createElement('div');s.className='spark';const a=Math.random()*6.28,d=40+Math.random()*50;s.style.left=x+'px';s.style.top=y+'px';s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',Math.sin(a)*d+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),600)}}
 let lastXY=[innerWidth/2,innerHeight/2];document.addEventListener('pointerdown',e=>{lastXY=[e.clientX,e.clientY]},true);
+const DRAGON_MASTERY=[
+  {id:'handstand',name:'Handstand',short:'HANDSTAND',icon:'🤸',lane:'handstand',goal:'handstand',levels:['Wall line','Kick-up + bail','Freestanding hold','Handstand walk','Press / HSPU mastery']},
+  {id:'planche',name:'Planche',short:'PLANCHE',icon:'◆',lane:'planche',goal:'planche',levels:['Planche lean','Tuck planche','Advanced tuck','Straddle planche','Full planche']},
+  {id:'rings',name:'Olympic Rings',short:'RINGS',icon:'◎',goal:'rings',levels:['Support hold','Ring dips','False grip','Skin the cat','Ring strength mastery']},
+  {id:'grip',name:'Grip Strength',short:'GRIP',icon:'✊',goal:'grip',levels:['Active hang','Towel hang','Assisted one-arm hang','One-arm hang','Pinch + fingertip mastery']},
+  {id:'legs',name:'Leg Mastery',short:'LEGS',icon:'⚡',goal:'legs',levels:['Deep squat mobility','Single-leg control','Pistol / shrimp squat','Nordic + hinge strength','Power + full leg mastery']},
+  {id:'pull',name:'Pull-Up Mastery',short:'PULL-UP',icon:'⬆',lane:'pull_up',goal:'pull',levels:['Dead hang + scap pull','Negatives / assisted','Strict pull-up','Explosive chest-to-bar','Muscle-up pathway']},
+  {id:'core',name:'Core + Compression',short:'CORE',icon:'◉',lane:'compression',goal:'core',levels:['Hollow-body control','L-sit','Toes-to-bar','V-sit / compression','Press compression mastery']}
+];
+function dragonMasterProgress(m){
+  if(m.lane)return lanePct(m.lane);
+  if(m.id==='legs'){const ids=['legs_single_leg','legs_quad','legs_hinge','legs_mobility','legs_power'];return ids.reduce((a,x)=>a+lanePct(x),0)/ids.length}
+  if(m.id==='rings'){const done=S.history.filter(h=>/ring/i.test(h.name||'')).length;return Math.min(1,done/12)}
+  if(m.id==='grip'){const done=S.history.filter(h=>/grip|hang|forearm/i.test(h.name||'')).length;return Math.min(1,done/12)}
+  return 0
+}
+function dragonCurrentLevel(m,p){
+  if(m.lane){const n=curNode(m.lane);if(n)return n.name}
+  const ix=Math.min(m.levels.length-1,Math.floor(Math.min(.999,p)*m.levels.length));
+  return m.levels[ix]
+}
 function radar(){
-  const pl=powerLevel();
-  const masters=FORMS.slice(1);
-  let selected=Math.max(0,Math.min(6,+(S.radarBall||Math.max(1,masters.filter(f=>pl>=f[0]).length)||1)-1));
-  const pts=[[48,16],[74,27],[82,56],[66,79],[36,80],[18,57],[24,29]];
-  const m=masters[selected],unlocked=pl>=m[0],next=masters.find(f=>f[0]>pl);
+  let selected=Math.max(0,Math.min(6,+(S.radarBall||1)-1));
+  const pts=[[48,15],[74,27],[82,56],[66,79],[35,80],[17,57],[24,29]];
+  const m=DRAGON_MASTERY[selected],p=dragonMasterProgress(m),level=dragonCurrentLevel(m,p);
   return `<div class="dragon-radar-shell">
-    <div class="radar-top"><span><i class="radar-led"></i>DRAGON BALL SCANNER</span><span>${masters.filter(f=>pl>=f[0]).length}/7 MASTERED</span></div>
-    <div class="radar" onclick="radarPing()"><div class="rings"></div><div class="grid"></div><div class="cross"></div><div class="sweep"></div><div class="me"></div>
-      ${pts.map((p,i)=>{const f=masters[i],ok=pl>=f[0];return `<button class="blip ${ok?'done':'locked'} ${i===selected?'sel':''}" style="left:${p[0]}%;top:${p[1]}%;animation-delay:${(i*.13).toFixed(2)}s;border:0" onclick="radarSelect(${i+1});event.stopPropagation()" aria-label="${i+1} star Dragon Ball, ${esc(f[1])}"><div class="radar-stars">${'★'.repeat(i+1)}</div><span class="radar-level-tag">${i+1}★</span></button>`}).join('')}
+    <div class="dbz-finder-aura"><i class="ki-mote"></i><i class="ki-mote"></i><i class="ki-mote"></i><i class="ki-mote"></i><i class="ki-mote"></i></div>
+    <div class="radar-top"><span><i class="radar-led"></i>MASTERY SIGNALS</span><span>${DRAGON_MASTERY.filter(x=>dragonMasterProgress(x)>=1).length}/7 COMPLETE</span></div>
+    <div class="radar" onclick="radarPing()"><div class="rings"></div><div class="grid"></div><div class="cross"></div><div class="sweep"></div><div class="scan-flash"></div><div class="me"></div>
+      ${pts.map((pt,i)=>{const x=DRAGON_MASTERY[i],xp=dragonMasterProgress(x),ok=xp>=1;return `<button class="blip ${ok?'done':''} ${i===selected?'sel':''}" style="left:${pt[0]}%;top:${pt[1]}%;animation-delay:${(i*.13).toFixed(2)}s;border:0" onclick="radarSelect(${i+1});event.stopPropagation()" aria-label="${esc(x.name)} mastery Dragon Ball"><span class="ball-icon">${x.icon}</span><span class="radar-level-tag">${esc(x.short)}</span></button>`}).join('')}
     </div>
     <div class="master-detail">
-      <div class="eyebrow">${selected+1}★ Dragon Ball · Master level</div>
-      <div class="master-name">${esc(m[1])}</div>
-      <div class="master-meta">Unlock at power level ${fmt(m[0])} · Current power ${fmt(pl)}${!unlocked?' · '+fmt(Math.max(0,m[0]-pl))+' remaining':''}</div>
-      <div class="master-status ${unlocked?'':'locked'}">${unlocked?'MASTERED':'LOCKED'}</div>
+      <div class="eyebrow">Dragon Ball · ${esc(m.name)} mastery</div>
+      <div class="master-name">${esc(level)}</div>
+      <div class="master-meta">${Math.round(p*100)}% mastery · Tap another ball to inspect its path.</div>
+      <div class="master-ladder">${m.levels.map((x,i)=>{const li=(i+1)/m.levels.length,cls=p>=li?'done':(i===Math.min(m.levels.length-1,Math.floor(Math.min(.999,p)*m.levels.length))?'current':'locked');return `<div class="master-step ${cls}"><i>${p>=li?'✓':i+1}</i><span>${esc(x)}</span></div>`}).join('')}</div>
+      <div class="master-path-actions"><button class="btn" onclick="dragonOpenMastery('${m.id}')">Open mastery</button><button class="btn p" onclick="dragonTrain('${m.goal}')">Train ${esc(m.short.toLowerCase())}</button></div>
+      <div class="dbz-tidbit"><span>🐉</span><span><b>Radar note:</b> Master the path, power up the signal. Seven complete paths = full TLC mastery scan.</span></div>
     </div>
-    <div class="radar-controls"><div class="radar-readout">CURRENT FORM · ${esc(formOf(pl)[1].toUpperCase())}<br>${next?'NEXT · '+esc(next[1].toUpperCase())+' @ '+fmt(next[0]):'ALL MASTER LEVELS UNLOCKED'}</div><button class="radar-btn" onclick="radarPing();event.stopPropagation()" aria-label="Ping radar">PING</button></div>
+    <div class="radar-controls"><div class="radar-readout">SIGNAL · ${esc(m.short)}<br>STAGE · ${esc(level.toUpperCase())}</div><button class="radar-btn" onclick="radarPing();event.stopPropagation()" aria-label="Ping radar">PING</button></div>
   </div>`}
-function radarSelect(n){S.radarBall=n;save();render(true);if(navigator.vibrate)navigator.vibrate(10)}
-function radarPing(){if(navigator.vibrate)navigator.vibrate([18,35,18]);const el=document.querySelector('.dragon-radar-shell');if(el){el.animate([{transform:'scale(1)'},{transform:'scale(1.015)'},{transform:'scale(1)'}],{duration:260})}toast('Dragon Ball scan complete')}
+function radarSelect(n){S.radarBall=n;save();render(true);if(navigator.vibrate)navigator.vibrate([8,20,8]);sparks(innerWidth/2,Math.min(innerHeight*.38,300))}
+function dragonOpenMastery(id){
+  const m=DRAGON_MASTERY.find(x=>x.id===id);if(!m)return;
+  if(m.lane){lane=m.lane;go('skills');return}
+  S.builderGoal=m.goal;save();go('train')
+}
+function dragonTrain(goal){S.builderGoal=goal;save();go('train')}
+function radarPing(){if(navigator.vibrate)navigator.vibrate([18,35,18,35,28]);const el=document.querySelector('.dragon-radar-shell');if(el){el.animate([{transform:'scale(1)'},{transform:'scale(1.012)'},{transform:'scale(1)'}],{duration:320})}sparks(innerWidth/2,Math.min(innerHeight*.34,260));toast('TLC Dragon Ball Finder scan complete')}
 
 // ---------- shell
 const TABS=['home','train','skills','learn','ana','log'];
@@ -874,13 +943,14 @@ function vHome(){
   const passedN=Object.keys(S.passed).filter(k=>S.passed[k]!=='start').length;
   head('TLC Prime',(hr<12?'Morning':hr<18?'Afternoon':'Evening')+' · '+new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}));
   let h=`<div class="home-scanner">
-    <div class="home-radar-head"><div class="title">Training Island Scanner</div><div class="power">PL ${fmt(pl)}</div></div>
+    <div class="finder-title-wrap"><div class="finder-title">TLC's Dragon Ball Finder</div><div class="finder-sub">Seven training paths · one mastery radar</div></div>
     ${radar()}
+    <div class="finder-legend">${DRAGON_MASTERY.map((m,i)=>`<div class="finder-chip" onclick="radarSelect(${i+1})">${m.icon} ${esc(m.name)}</div>`).join('')}</div>
   </div>`;
   h+=`<section class="mission-card">
     <div class="mission-kicker-home">Today's mission · Day ${esc(nd)}</div>
     <div class="mission-title-home">${esc(dayName(nd))}</div>
-    <div class="mission-meta">${day.items.length} drills · about ${Math.round(day.items.length*6)} min · Current form: ${esc(fm[1])}</div>
+    <div class="mission-meta">${day.items.length} drills · about ${Math.round(day.items.length*6)} min · ${esc(fm[1])}</div><div class="dbz-tidbit"><span>⚡</span><span><b>Ki check:</b> finish today's mission to keep your mastery paths moving.</span></div>
     <div class="mission-actions"><button class="btn p" onclick="S.day='${nd}';save();go('train')">Start mission</button><button class="btn" onclick="S.day='H1';save();go('train')">Handstand</button></div>
   </section>`;
   h+=`<div class="home-progress">
