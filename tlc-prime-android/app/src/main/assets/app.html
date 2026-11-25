@@ -948,7 +948,7 @@ html.light .master-family-sub{color:#226c36}
 .muscle-band span{display:block;font-size:11px;line-height:1.25;color:#20263a;overflow-wrap:anywhere}
 .exercise-lux-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.exercise-pill{padding:6px 8px;border-radius:999px;background:#edf2fb;border:1px solid #cad5e8;color:#233254;font-size:10px;font-weight:800}
 .exercise-action-row{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:9px}
-.demo-btn{min-height:42px;border:0;border-radius:12px;background:#0b45a8;color:#fff;font-weight:900;font-size:12px}.demo-btn:disabled{opacity:.48}
+.media-btn{min-height:42px;border:0;border-radius:12px;background:#0b45a8;color:#fff;font-weight:900;font-size:12px}.media-btn:disabled{opacity:.48}
 .exercise-status{display:grid;place-items:center;min-width:50px;border-radius:12px;background:#121a2d;color:#e7efff;border:1px solid #2d3c5d;font:900 10px/1 "Courier New",monospace;padding:0 8px}
 .exercise-lux.done .exercise-status{background:#153c25;border-color:#2e7b48;color:#b8ffca}.exercise-lux.next .exercise-status{background:#4b3305;border-color:#b98523;color:#ffe3a1}
 .exercise-lux .sets{padding:10px 0 0!important;margin:0!important}.exercise-lux .set{min-width:46px;height:46px;font-size:15px;border-radius:13px}
@@ -973,23 +973,112 @@ nav{background:#07101f!important;border-top:1px solid #203353!important}nav butt
 .exercise-lux-head{background:#06162d!important;border-bottom-color:#355184!important}
 .exercise-lux-body{background:#fffdf6!important}
 .exercise-photo{filter:none!important;image-rendering:auto;object-position:center;transform:translateZ(0);background:#07101f}
-.verified-media-panel,.no-demo-panel{
+.verified-media-panel,.unverified-media-panel{
   min-height:168px;display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:18px;text-align:center;background:#08172f;color:#fff
 }
 .verified-media-panel{border-right:1px solid #27416f}
 .verified-media-panel .media-icon{font-size:30px;line-height:1;margin-bottom:8px}
-.verified-media-panel b,.no-demo-panel b{font-size:14px;line-height:1.15}
-.verified-media-panel span,.no-demo-panel span{margin-top:5px;font-size:10px;line-height:1.35;color:#aab9d5}
+.verified-media-panel b,.unverified-media-panel b{font-size:14px;line-height:1.15}
+.verified-media-panel span,.unverified-media-panel span{margin-top:5px;font-size:10px;line-height:1.35;color:#aab9d5}
 .verified-media-panel button{margin-top:10px;min-height:38px;border:0;border-radius:10px;padding:0 14px;background:#0b45a8;color:#fff;font-weight:900}
-.no-demo-panel{background:#101725;color:#eef3ff}
-.no-demo-panel .media-icon{font-size:24px;margin-bottom:7px}
+.unverified-media-panel{background:#101725;color:#eef3ff}
+.unverified-media-panel .media-icon{font-size:24px;margin-bottom:7px}
 .visual-source{display:none!important}
 .exercise-action-row{grid-template-columns:1fr!important}
 .exercise-status{min-height:36px!important}
 .exercise-lux .emb iframe{filter:none!important}
 @media(max-width:430px){
- .verified-media-panel,.no-demo-panel{min-height:148px}
+ .verified-media-panel,.unverified-media-panel{min-height:148px}
+}
+
+
+/* ===== Supa Strength v3.16 · anatomy atlas + real-media sweep ===== */
+:root{
+  --atlas-primary:#ed2638;
+  --atlas-primary-dark:#8f101d;
+  --atlas-secondary:#f2bd38;
+  --atlas-secondary-dark:#74520a;
+  --atlas-neutral:#29344c;
+  --atlas-bone:#d9e1ee;
+  --media-blue:#1768d5;
+  --media-cyan:#4fd9ff;
+  --success:#37a35a;
+  --locked:#69748a;
+}
+.exercise-lux-head{background:#06152a!important;border-bottom:2px solid #244977!important}
+.exercise-lux:nth-of-type(3n+1){border-color:#2c5d94!important}
+.exercise-lux:nth-of-type(3n+2){border-color:#7e4d22!important}
+.exercise-lux:nth-of-type(3n){border-color:#315f48!important}
+.exercise-lux-body{background:#fffaf0!important}
+.exercise-lux-meta{gap:7px!important}
+.exercise-pill:nth-child(1){background:#e9f2ff!important;border-color:#9bbdeb!important;color:#143a72!important}
+.exercise-pill:nth-child(2){background:#fff0d6!important;border-color:#e1bd77!important;color:#6c4300!important}
+.media-btn{min-height:42px;border:0;border-radius:12px;background:var(--media-blue);color:#fff;font-weight:900;font-size:12px;padding:0 14px}
+.media-btn:active{transform:translateY(1px)}
+.media-poster{position:relative;min-height:168px;background:#07152a;overflow:hidden;display:grid;place-items:center}
+.media-poster img{width:100%;height:168px;object-fit:cover;display:block;filter:none!important}
+.media-poster:after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.08);pointer-events:none}
+.media-play{position:absolute;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#0a0f1de8;border:2px solid #fff;color:#fff;font-size:24px;box-shadow:0 8px 24px rgba(0,0,0,.34)}
+.media-provider{position:absolute;left:8px;bottom:8px;padding:5px 8px;border-radius:999px;background:#07101fe8;color:#fff;font:900 8px/1 "Courier New",monospace;letter-spacing:.08em;border:1px solid rgba(255,255,255,.18)}
+.anatomy-thumb{min-height:168px;background:#081426;display:grid;grid-template-columns:minmax(0,1fr) 88px;align-items:center;gap:8px;padding:10px}
+.anatomy-thumb-copy{min-width:0}
+.anatomy-thumb-copy b{display:block;color:#fff;font:900 12px/1.15 system-ui,sans-serif;text-transform:uppercase}
+.anatomy-thumb-copy span{display:block;color:#aebbd2;font-size:9.5px;line-height:1.35;margin-top:5px}
+.anatomy-thumb .atlas-mini{width:86px;height:132px}
+.atlas-shell{background:#07111f;border:1px solid #273b61;border-radius:16px;padding:10px;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.atlas-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.atlas-head b{font:900 11px/1 "Courier New",monospace;color:#fff;letter-spacing:.08em}
+.atlas-head span{font:800 8px/1 "Courier New",monospace;color:#a9b7d0}
+.atlas-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:8px}
+.atlas-stat{padding:7px 5px;border-radius:9px;background:#111c30;border:1px solid #2b3c5b;text-align:center}
+.atlas-stat b{display:block;font-size:11px;color:#fff}.atlas-stat span{display:block;font-size:7.5px;color:#8fa0bd;text-transform:uppercase;margin-top:2px}
+.atlas-stat.p{border-color:#8e2731;background:#2b1117}.atlas-stat.p b{color:#ff7580}
+.atlas-stat.s{border-color:#8c6a22;background:#2b230f}.atlas-stat.s b{color:#ffd669}
+.atlas-map{width:100%;display:block}
+.atlas-map .outline{fill:#121c30;stroke:#5a6a87;stroke-width:.8}
+.atlas-map .bone{fill:none;stroke:#8793a8;stroke-width:.65;opacity:.6}
+.atlas-map .muscle{fill:#303a50;stroke:#56637c;stroke-width:.55}
+.atlas-map .muscle.p{fill:var(--atlas-primary);stroke:#ff97a0;stroke-width:1}
+.atlas-map .muscle.s{fill:var(--atlas-secondary);stroke:#ffe09a;stroke-width:1}
+.atlas-map .separator{stroke:#111827;stroke-width:.55;opacity:.8}
+.atlas-map text{fill:#aebbd2;font:700 5px/1 "Courier New",monospace;letter-spacing:.05em}
+.anatomy-layout{gap:12px!important;align-items:start!important}
+.anatomy-map{background:#07111f!important;border:1px solid #273b61!important;border-radius:16px!important;padding:9px!important}
+.anatomy-group{border-radius:14px!important;border-width:1px!important;padding:10px!important}
+.anatomy-group.primary{background:#fff1f2!important;border-color:#e7a8ad!important}
+.anatomy-group.secondary{background:#fff8e4!important;border-color:#e0c170!important}
+.anatomy-group.primary h4{color:#9c1520!important}.anatomy-group.secondary h4{color:#785600!important}
+.anatomy-muscle{padding:8px 0!important;border-bottom:1px solid rgba(0,0,0,.08)}
+.anatomy-muscle:last-child{border-bottom:0}
+.anatomy-muscle b{font-size:12px!important}.anatomy-muscle span{font-size:9.5px!important}
+.anatomy-note{background:#eaf2ff!important;border:1px solid #b8cbed!important;color:#24385c!important}
+.mleg{background:#07111f!important;border-radius:12px;padding:8px!important}
+.mleg span{color:#ff6f7c!important}.mleg span.s{color:#ffd260!important}
+.embp{min-height:154px!important;background:#07152a!important;border:1px solid #28436f!important;overflow:hidden!important}
+.embp .media-thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.86;filter:none!important}
+.embp .embglow{display:none!important}
+.embp .embplay{z-index:2;background:#07101fe8!important;border:2px solid #fff!important}
+.embp .embmeta{z-index:2;position:relative;background:linear-gradient(180deg,transparent,#07101fe6);padding:38px 10px 10px!important}
+.embh{color:#8fdcff!important}.embt{font-size:14px!important}.embs{color:#d4dcec!important}
+.embf iframe,.embf video{width:100%;min-height:240px;border:0;background:#000;display:block}
+.media-source-badge{display:inline-flex;align-items:center;gap:5px;padding:6px 8px;border-radius:999px;background:#eaf2ff;border:1px solid #a8c3ef;color:#173d76;font-size:9px;font-weight:900}
+.media-source-badge.yt{background:#ffe9eb;border-color:#efabb0;color:#8e1520}
+.media-source-badge.vm{background:#e8f8ff;border-color:#9ed7ef;color:#125473}
+.media-source-badge.ig{background:#fff0f7;border-color:#e1afd1;color:#7b285b}
+.media-source-badge.mw{background:#ecfff1;border-color:#a9d9b5;color:#1e6334}
+.master-level-card.current{border-color:#d69e2e!important;background:#171407!important}
+.master-level-card.done{border-color:#2d8050!important;background:#0c1c13!important}
+.master-level-card.locked{border-color:#4c5566!important;background:#151922!important}
+.pn{border-left:4px solid #2d4775!important}
+.pn.cur{border-left-color:#e0a92e!important}.pn.passed{border-left-color:#2f9a58!important}.pn.locked{border-left-color:#586173!important}
+.path-thumb{width:48px;height:48px;border-radius:12px;background:#081426;border:1px solid #2b426d;display:grid;place-items:center;overflow:hidden;flex:none}
+.path-thumb svg{width:42px;height:42px}
+@media(max-width:430px){
+ .anatomy-thumb{grid-template-columns:minmax(0,1fr) 76px;min-height:148px}
+ .anatomy-thumb .atlas-mini{width:74px;height:116px}
+ .atlas-stats{grid-template-columns:1fr 1fr 1fr}
+ .embf iframe,.embf video{min-height:210px}
 }
 
 </style></head>
@@ -1045,28 +1134,61 @@ function vidsForItem(e){
   for(const [r,l] of KW)if(r.test(e.name))return (IG[l]||[]).slice(0,1);return [];
 }
 function vidsForLane(l){return [...LV.filter(v=>v.lane===l).map(v=>['local:'+v.id,v.name,3]),...(S.myReels[l]||[]).map(c=>[c,'Added by you',2]),...(IG[l]||[])]}
-// ---------- v3.6 inline Instagram embeds: tap to load, one playing at a time, stays inside the app
+// ---------- real embedded exercise video system
 let EMB=null;const FORMS_OPEN=new Set();
-function rLabel(c,t){return t||RN[c]||(D.reelNames||{})[c]||'Instagram tutorial'}
-function handleOf(c,t){const m=String(rLabel(c,t)).match(/@[\w.]+/);return m?m[0]:'Instagram'}
-function titleOf(c,t){const x=String(rLabel(c,t)).replace(/^@[\w.]+\s*·\s*/,'').replace(/\s*\(@[\w.]+\)/,'');return /^@/.test(x)?'Tutorial':x}
+function mediaRef(raw){
+  const x=String(raw||'').trim(),o={raw:x,provider:'instagram',id:x,url:'',thumb:''};
+  let m;
+  if((m=x.match(/^yt:([\w-]{6,})$/i))||(m=x.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{6,})/i))){
+    o.provider='youtube';o.id=m[1];o.url='https://www.youtube-nocookie.com/embed/'+o.id+'?playsinline=1&rel=0';o.thumb='https://i.ytimg.com/vi/'+o.id+'/hqdefault.jpg';return o;
+  }
+  if((m=x.match(/^vimeo:(\d+)$/i))||(m=x.match(/vimeo\.com\/(?:video\/)?(\d+)/i))){
+    o.provider='vimeo';o.id=m[1];o.url='https://player.vimeo.com/video/'+o.id+'?playsinline=1';return o;
+  }
+  if(/^mw:/i.test(x)){
+    const parts=x.slice(3).split('|');o.provider='musclewiki';o.url=parts[0]||'';o.thumb=parts[1]||'';o.id=o.url;return o;
+  }
+  if(/^https?:\/\/.*\.(mp4|webm)(\?|$)/i.test(x)){o.provider='direct';o.url=x;o.id=x;return o}
+  if((m=x.match(/instagram\.com\/(?:reel|p)\/([\w-]+)/i))){o.provider='instagram';o.id=m[1];return o}
+  return o;
+}
+function mediaProviderName(r){return ({youtube:'YouTube',vimeo:'Vimeo',instagram:'Instagram',musclewiki:'MuscleWiki',direct:'Exercise video'})[r.provider]||'Exercise video'}
+function rLabel(c,t){return t||RN[c]||(D.reelNames||{})[c]||'Exercise video'}
+function handleOf(c,t){const r=mediaRef(c);if(r.provider!=='instagram')return mediaProviderName(r);const m=String(rLabel(c,t)).match(/@[\w.]+/);return m?m[0]:'Instagram'}
+function titleOf(c,t){const x=String(rLabel(c,t)).replace(/^@[\w.]+\s*·\s*/,'').replace(/\s*\(@[\w.]+\)/,'');return /^@/.test(x)?'Exercise video':x}
 function igKind(c){if((S.shared||[]).some(x=>x.c===c&&x.k==='p'))return 'p';return /\/p\//.test((D.reels||{})[c]||'')?'p':'reel'}
 function ekey(k){return String(k).replace(/[^\w-]/g,'_')}
-function igEmbed(code,key,title){key=ekey(key);const live=EMB&&EMB.key===key;
-  return `<div class="emb${live?' live':''}" id="emb-${key}" data-c="${esc(code)}" data-t="${esc(title||'')}" onclick="event.stopPropagation()">${live?embFrame(code):embPoster(code,key,title)}</div>`}
-function embPoster(code,key,title){return `<button class="embp" onclick="embLoad('${key}')" aria-label="Load tutorial: ${esc(titleOf(code,title))}"><span class="embglow"></span><span class="embplay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span><span class="embmeta"><span class="embh">${esc(handleOf(code,title))}</span><span class="embt">${esc(titleOf(code,title))}</span><span class="embs">Tap to load · plays right here</span></span></button>`}
-function embFrame(code){return `<div class="embf"><iframe src="https://www.instagram.com/${igKind(code)}/${encodeURIComponent(code)}/embed/" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation" referrerpolicy="strict-origin-when-cross-origin" title="Instagram tutorial"></iframe></div><div class="embbar"><span class="muted">${esc(handleOf(code))} · Instagram</span><button class="btn sm" onclick="embClose()">✕ Close video</button></div>`}
-function embOff(key,slow){return `<div class="embo"><div class="eoi" aria-hidden="true">📡</div><div><b>${slow?'Instagram didn\'t answer':'You\'re offline'}</b><div class="muted">${slow?'Check your connection, then retry.':'The tutorial loads here once you\'re back online. The form cues still work.'}</div></div><button class="btn sm" onclick="embLoad('${key}')">Retry</button></div>`}
-function embLoad(key){const el=document.getElementById('emb-'+key);if(!el)return;const code=el.dataset.c;
-  if(!/^(skilltree\.app|raw\.githack\.com|rawcdn\.githack\.com|[a-z0-9-]+\.github\.io|localhost|127\.0\.0\.1)$/.test(location.hostname)){el.innerHTML=`<div class="embnote" style="padding:22px 16px;text-align:center;background:#0d1030;color:#fff;border-radius:16px"><div style="font:900 italic 17px Impact,'Arial Black',sans-serif;color:#ffd400;letter-spacing:.03em">Plays in the installed app</div><p style="margin:8px 0 0;color:#e6e8f5;font-size:14px;line-height:1.45">This preview window blocks Instagram videos. Open Supa Strength on your phone and this tutorial (${esc(handleOf(code))}) plays right in the card.</p></div>`;return;}
+function mediaThumb(c){return mediaRef(c).thumb||''}
+function igEmbed(code,key,title){key=ekey(key);const live=EMB&&EMB.key===key;return '<div class="emb'+(live?' live':'')+'" id="emb-'+key+'" data-c="'+esc(code)+'" data-t="'+esc(title||'')+'" onclick="event.stopPropagation()">'+(live?embFrame(code):embPoster(code,key,title))+'</div>'}
+function embPoster(code,key,title){
+  const r=mediaRef(code),th=mediaThumb(code),img=th?'<img class="media-thumb-img" src="'+esc(th)+'" alt="'+esc(titleOf(code,title))+' thumbnail">':'';
+  return '<button class="embp" onclick="embLoad(\''+key+'\')" aria-label="Play exercise video: '+esc(titleOf(code,title))+'">'+img+'<span class="embplay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span><span class="embmeta"><span class="embh">'+esc(mediaProviderName(r))+'</span><span class="embt">'+esc(titleOf(code,title))+'</span><span class="embs">Tap to play inside Supa Strength</span></span></button>'
+}
+function embFrame(code){
+  const r=mediaRef(code);
+  if(r.provider==='youtube'||r.provider==='vimeo')return '<div class="embf"><iframe src="'+esc(r.url)+'" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" title="'+esc(mediaProviderName(r))+' exercise video"></iframe></div><div class="embbar"><span class="muted">'+esc(mediaProviderName(r))+'</span><button class="btn sm" onclick="embClose()">✕ Close video</button></div>';
+  if(r.provider==='musclewiki'||r.provider==='direct')return '<div class="embf"><video controls playsinline preload="metadata" '+(r.thumb?'poster="'+esc(r.thumb)+'"':'')+' src="'+esc(r.url)+'"></video></div><div class="embbar"><span class="muted">'+esc(mediaProviderName(r))+'</span><button class="btn sm" onclick="embClose()">✕ Close video</button></div>';
+  return '<div class="embf"><iframe src="https://www.instagram.com/'+igKind(code)+'/'+encodeURIComponent(r.id)+'/embed/" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation" referrerpolicy="strict-origin-when-cross-origin" title="Instagram exercise video"></iframe></div><div class="embbar"><span class="muted">'+esc(handleOf(code))+' · Instagram</span><button class="btn sm" onclick="embClose()">✕ Close video</button></div>'
+}
+function embOff(key,slow){return '<div class="embo"><div class="eoi" aria-hidden="true">📡</div><div><b>'+(slow?'Video source did not answer':'You are offline')+'</b><div class="muted">'+(slow?'Check the connection, then retry.':'Real exercise video streams resume when you are online.')+'</div></div><button class="btn sm" onclick="embLoad(\''+key+'\')">Retry</button></div>'}
+function embLoad(key){
+  const el=document.getElementById('emb-'+key);if(!el)return;const code=el.dataset.c;
   if(navigator.onLine===false){el.classList.remove('live');el.innerHTML=embOff(key);return}
-  if(EMB&&EMB.key!==key)embClose();EMB={key,code};el.classList.add('live');el.innerHTML=embFrame(code);
-  const f=el.querySelector('iframe');let ok=false;f.addEventListener('load',()=>{ok=true});
-  clearTimeout(window._embT);window._embT=setTimeout(()=>{if(!ok&&EMB&&EMB.key===key){EMB=null;el.classList.remove('live');el.innerHTML=embOff(key,1)}},20000)}
+  if(EMB&&EMB.key!==key)embClose();
+  EMB={key,code};el.classList.add('live');el.innerHTML=embFrame(code);
+  const f=el.querySelector('iframe,video');let ok=false;
+  if(f){f.addEventListener('load',()=>{ok=true});f.addEventListener('loadeddata',()=>{ok=true})}
+  clearTimeout(window._embT);window._embT=setTimeout(()=>{if(!ok&&EMB&&EMB.key===key){const r=mediaRef(code);if(r.provider==='instagram'){EMB=null;el.classList.remove('live');el.innerHTML=embOff(key,1)}}},20000)
+}
 function embClose(){if(!EMB)return;const k=EMB.key;EMB=null;clearTimeout(window._embT);const el=document.getElementById('emb-'+k);if(el){el.classList.remove('live');el.innerHTML=embPoster(el.dataset.c,k,el.dataset.t)}}
-function embBlock(vs,key){if(!vs.length)return '';let h=igEmbed(vs[0][0],key+'_0',vs[0][1]);
-  if(vs.length>1)h+=`<div class="embmore">${vs.slice(1).map(([c,t],j)=>`<button class="btn sm" onclick="embSwap('${ekey(key+'_0')}','${esc(c)}','${esc(String(t).replace(/'/g,''))}')">▶ Also: ${esc(handleOf(c,t))}</button>`).join('')}</div>`;return h}
+function embBlock(vs,key){
+  if(!vs.length)return '';
+  let h=igEmbed(vs[0][0],key+'_0',vs[0][1]);
+  if(vs.length>1)h+='<div class="embmore">'+vs.slice(1).map(([c,t],j)=>'<button class="btn sm" onclick="embSwap(\''+ekey(key+'_0')+'\',\''+esc(c)+'\',\''+esc(String(t).replace(/'/g,''))+'\')">▶ Also: '+esc(mediaProviderName(mediaRef(c)))+'</button>').join('')+'</div>';
+  return h
+}
 function embSwap(key,c,t){const el=document.getElementById('emb-'+key);if(!el)return;if(EMB&&EMB.key===key)EMB=null;el.dataset.c=c;el.dataset.t=t;el.classList.remove('live');el.innerHTML=embPoster(c,key,t);embLoad(key)}
+
 // ---------- Form: cues + muscles + body map
 const MREG=[[/thoracic/i,['midback']],[/anterior delt/i,['delts']],[/lateral delt/i,['delts','rdelts']],[/posterior delt|rotator|teres/i,['rdelts']],[/pector/i,['chest']],[/serratus/i,['serratus']],[/biceps|brachialis/i,['biceps']],[/triceps/i,['triceps']],[/wrist|forearm|brachiorad|grip|finger|thumb/i,['forearms','forearmsB']],[/upper trap/i,['traps','trapsB']],[/middle trap|lower trap|rhomboid/i,['midback']],[/latissimus/i,['lats']],[/erector|quadratus/i,['lowback']],[/rectus abdominis|transverse/i,['abs']],[/oblique/i,['obliques']],[/rectus femoris/i,['hipflex','quads']],[/hip flexor|iliopsoas|tensor/i,['hipflex']],[/quadricep/i,['quads']],[/adductor/i,['adductors']],[/glute|piriformis/i,['glutes']],[/hamstring/i,['hams']],[/gastroc|soleus|calves|peroneal/i,['calves']],[/tibialis|extensor digitorum/i,['shins']]];
 function regs(list){const o=new Set();(list||[]).forEach(m=>{for(const [r,a] of MREG)if(r.test(m)){a.forEach(x=>o.add(x));break}});return o}
@@ -1086,42 +1208,45 @@ function muscleRegionName(name){
   if(/tibialis|extensor digitorum/i.test(n))return 'Shin';
   return 'Muscle group'
 }
-function bodyMap(mu){
-  const P=regs(mu.primary),Sx=regs(mu.secondary),c=r=>'rg '+(P.has(r)?'p':Sx.has(r)?'s':'');
-  const E=(r,x,y,rx,ry,rot)=>`<ellipse class="${c(r)}" cx="${x}" cy="${y}" rx="${rx}" ry="${ry}"${rot?` transform="rotate(${rot} ${x} ${y})"`:''}/>`;
-  const path=(r,d)=>`<path class="${c(r)}" d="${d}"/>`;
+function bodyMap(mu,mini){
+  mu=mu||{primary:[],secondary:[]};
+  const P=regs(mu.primary),Sx=regs(mu.secondary),cls=r=>'muscle '+(P.has(r)?'p':Sx.has(r)?'s':'');
+  const E=(r,x,y,rx,ry,rot)=>'<ellipse class="'+cls(r)+'" cx="'+x+'" cy="'+y+'" rx="'+rx+'" ry="'+ry+'"'+(rot?' transform="rotate('+rot+' '+x+' '+y+')"':'')+'/>';
+  const Path=(r,d)=>'<path class="'+cls(r)+'" d="'+d+'"/>';
   const both=(r,cx,dx,y,rx,ry,rot)=>E(r,cx-dx,y,rx,ry,rot?-rot:0)+E(r,cx+dx,y,rx,ry,rot||0);
-  const base=cx=>`<g class="bs"><circle cx="${cx}" cy="13" r="8.5"/><rect x="${cx-3.8}" y="20.5" width="7.6" height="8" rx="3"/><path d="M${cx-18} 31 Q${cx} 26 ${cx+18} 31 L${cx+21} 59 Q${cx+18} 78 ${cx+14} 95 L${cx-14} 95 Q${cx-18} 78 ${cx-21} 59 Z"/><path d="M${cx-20} 34 Q${cx-29} 39 ${cx-30} 58 L${cx-34} 101 L${cx-28} 102 L${cx-23} 63 Z"/><path d="M${cx+20} 34 Q${cx+29} 39 ${cx+30} 58 L${cx+34} 101 L${cx+28} 102 L${cx+23} 63 Z"/><path d="M${cx-14} 93 L${cx-1} 97 L${cx-3} 186 L${cx-12} 186 L${cx-18} 119 Z"/><path d="M${cx+14} 93 L${cx+1} 97 L${cx+3} 186 L${cx+12} 186 L${cx+18} 119 Z"/></g>`;
-  const F=42,B=126;
-  let front=base(F);
-  front+=both('traps',F,8.5,31.5,5,2.4,-25);
-  front+=both('delts',F,18.5,39.5,5.8,6.5);
-  front+=path('chest',`M${F-16} 43 Q${F-7} 38 ${F} 43 L${F} 55 Q${F-9} 57 ${F-16} 52 Z`)+path('chest',`M${F+16} 43 Q${F+7} 38 ${F} 43 L${F} 55 Q${F+9} 57 ${F+16} 52 Z`);
-  front+=both('serratus',F,14,58,2.1,4.3,14);
-  front+=both('serratus',F,13.5,64,1.8,3.8,14);
-  front+=both('biceps',F,25.5,55.5,3.7,8.5,7);
-  front+=both('forearms',F,30,79.5,3.2,11.5,5);
-  front+=`<rect class="${c('abs')}" x="${F-5.8}" y="55" width="11.6" height="31" rx="4"/>`;
-  front+=`<path class="${c('abs')}" d="M${F} 56V86M${F-5.5} 65H${F+5.5}M${F-5.5} 75H${F+5.5}"/>`;
-  front+=both('obliques',F,10.5,70,3.1,10);
-  front+=both('hipflex',F,7,94,4.2,5,-18);
-  front+=both('quads',F,9,118,5.5,16,4)+both('quads',F,14,122,3.3,15,-4);
-  front+=both('adductors',F,3.6,113,2.5,11);
-  front+=both('shins',F,8.5,158,3.1,14,2);
-  front+=`<text x="${F}" y="198" text-anchor="middle">FRONT · ANTERIOR</text>`;
-  let back=base(B);
-  back+=path('trapsB',`M${B-14} 31 Q${B} 25 ${B+14} 31 L${B+9} 48 L${B} 43 L${B-9} 48 Z`);
-  back+=both('rdelts',B,18.5,39.5,5.8,6.5);
-  back+=E('midback',B,50,10,8)+both('midback',B,8.5,55,4.5,7,18);
-  back+=both('lats',B,11.5,65,6,13,-13);
-  back+=both('triceps',B,25.5,56.5,3.7,9,7);
-  back+=both('forearmsB',B,30,79.5,3.2,11.5,5);
-  back+=`<rect class="${c('lowback')}" x="${B-5.5}" y="70" width="11" height="19" rx="4"/>`;
-  back+=both('glutes',B,7.5,98,7.7,8.1);
-  back+=both('hams',B,9,124,5.8,17,4)+both('hams',B,14,128,3,14,-4);
-  back+=both('calves',B,8.5,157,4.4,13.5,2);
-  back+=`<text x="${B}" y="198" text-anchor="middle">BACK · POSTERIOR</text>`;
-  return `<svg viewBox="0 0 168 202" role="img" aria-label="Detailed front and back muscle anatomy. Primary: ${esc(mu.primary.join(', '))}. Secondary: ${esc(mu.secondary.join(', '))}">${front}${back}</svg>`
+  const F=58,B=172;
+  const outline=cx=>'<g class="outline"><circle cx="'+cx+'" cy="18" r="10"/><path d="M'+(cx-10)+' 29 Q'+cx+' 24 '+(cx+10)+' 29 L'+(cx+22)+' 42 L'+(cx+18)+' 91 L'+(cx+14)+' 111 L'+(cx+11)+' 193 L'+(cx-11)+' 193 L'+(cx-14)+' 111 L'+(cx-18)+' 91 L'+(cx-22)+' 42 Z"/><path d="M'+(cx-20)+' 42 L'+(cx-35)+' 53 L'+(cx-39)+' 111 L'+(cx-31)+' 112 L'+(cx-25)+' 61 Z"/><path d="M'+(cx+20)+' 42 L'+(cx+35)+' 53 L'+(cx+39)+' 111 L'+(cx+31)+' 112 L'+(cx+25)+' 61 Z"/></g>';
+  let front=outline(F);
+  front+=both('traps',F,9,38,6,3,-22);
+  front+=both('delts',F,21,47,7,8);
+  front+=Path('chest','M'+(F-18)+' 49 Q'+(F-8)+' 43 '+F+' 48 L'+F+' 63 Q'+(F-9)+' 66 '+(F-18)+' 59 Z')+Path('chest','M'+(F+18)+' 49 Q'+(F+8)+' 43 '+F+' 48 L'+F+' 63 Q'+(F+9)+' 66 '+(F+18)+' 59 Z');
+  front+=both('serratus',F,15,67,2.5,5.5,14)+both('serratus',F,14,74,2.1,4.8,14);
+  front+=both('biceps',F,28,65,4.3,10,6);
+  front+=both('forearms',F,34,92,3.8,14,4);
+  front+=Path('abs','M'+(F-7)+' 64 L'+(F+7)+' 64 L'+(F+6)+' 103 L'+(F-6)+' 103 Z');
+  front+='<path class="separator" d="M'+F+' 65V102M'+(F-6)+' 76H'+(F+6)+'M'+(F-6)+' 88H'+(F+6)+'"/>';
+  front+=both('obliques',F,12.5,82,3.6,13);
+  front+=both('hipflex',F,7.5,108,4.8,6,-18);
+  front+=both('quads',F,9.5,137,6.2,20,4)+both('quads',F,15,141,3.6,18,-5);
+  front+=both('adductors',F,4.2,130,2.9,15);
+  front+=both('shins',F,9.5,178,3.6,15,2);
+  front+='<g class="bone"><path d="M'+F+' 29V42M'+(F-13)+' 111L'+(F-10)+' 193M'+(F+13)+' 111L'+(F+10)+' 193"/></g><text x="'+F+'" y="211" text-anchor="middle">FRONT</text>';
+  let back=outline(B);
+  back+=Path('trapsB','M'+(B-16)+' 37 Q'+B+' 28 '+(B+16)+' 37 L'+(B+11)+' 58 L'+B+' 50 L'+(B-11)+' 58 Z');
+  back+=both('rdelts',B,21,47,7,8);
+  back+=E('midback',B,62,12,9)+both('midback',B,10,67,5,8,18);
+  back+=both('lats',B,13.5,78,7,16,-13);
+  back+=both('triceps',B,28,66,4.2,10,7);
+  back+=both('forearmsB',B,34,92,3.8,14,4);
+  back+=Path('lowback','M'+(B-7)+' 84 L'+(B+7)+' 84 L'+(B+6)+' 108 L'+(B-6)+' 108 Z');
+  back+=both('glutes',B,8.5,116,8.4,9);
+  back+=both('hams',B,10,143,6.3,21,4)+both('hams',B,15,148,3.4,18,-4);
+  back+=both('calves',B,9.5,179,5,15,2);
+  back+='<g class="bone"><path d="M'+B+' 29V45M'+(B-13)+' 111L'+(B-10)+' 193M'+(B+13)+' 111L'+(B+10)+' 193"/></g><text x="'+B+'" y="211" text-anchor="middle">BACK</text>';
+  const regions=new Set([...P,...Sx]).size;
+  const svg='<svg class="atlas-map'+(mini?' atlas-mini':'')+'" viewBox="0 0 230 218" role="img" aria-label="Exercise anatomy atlas. Primary: '+esc(mu.primary.join(', '))+'. Secondary: '+esc(mu.secondary.join(', '))+'">'+front+back+'</svg>';
+  if(mini)return svg;
+  return '<div class="atlas-shell"><div class="atlas-head"><b>ANATOMY ATLAS</b><span>PRIMARY / SECONDARY</span></div>'+svg+'<div class="atlas-stats"><div class="atlas-stat p"><b>'+mu.primary.length+'</b><span>Primary</span></div><div class="atlas-stat s"><b>'+mu.secondary.length+'</b><span>Secondary</span></div><div class="atlas-stat"><b>'+regions+'</b><span>Regions</span></div></div></div>'
 }
 function muscleDetailList(list,kind){
   return `<section class="anatomy-group ${kind}"><h4>${kind==='primary'?'Primary movers':'Secondary / stabilizers'}</h4>${(list||[]).map(m=>`<div class="anatomy-muscle"><b>${esc(m)}</b><span>${esc(muscleRegionName(m))}<br>${kind==='primary'?'Primary load':'Support / stabilize'}</span></div>`).join('')}</section>`
@@ -1129,8 +1254,8 @@ function muscleDetailList(list,kind){
 function formPanel(e,key){
   if(!e.cues||!e.muscles)return '';
   const op=FORMS_OPEN.has(key),mu=e.muscles;
-  let h=`<button class="fbtn${op?' on':''}" aria-expanded="${op}" onclick="event.stopPropagation();togForm('${key}')"><span class="fi" aria-hidden="true">◆</span><span class="sp">Form · ${e.cues.length} cues · ${mu.primary.length+mu.secondary.length} muscles</span><span class="chev" aria-hidden="true">${op?'▲':'▼'}</span></button>`;
-  if(op)h+=`<div class="fpanel" onclick="event.stopPropagation()"><div class="fh">Coach's cues</div><ul class="cues">${e.cues.map((c,i)=>`<li><i>${i+1}</i><span>${esc(c)}</span></li>`).join('')}</ul><div class="fh">Detailed muscle anatomy</div><div class="anatomy-layout"><div class="bmap anatomy-map">${bodyMap(mu)}</div><div class="anatomy-lists">${muscleDetailList(mu.primary,'primary')}${muscleDetailList(mu.secondary,'secondary')}</div></div><div class="mleg"><span>Primary</span><span class="s">Secondary / stabilizer</span></div><div class="anatomy-note"><b>Training anatomy:</b> highlights come from this exercise's programmed primary and secondary muscle list, so the map changes with the movement.</div></div>`;
+  let h=`<button class="fbtn${op?' on':''}" aria-expanded="${op}" onclick="event.stopPropagation();togForm('${key}')"><span class="fi" aria-hidden="true">◆</span><span class="sp">Technique · ${e.cues.length} cues · ${mu.primary.length+mu.secondary.length} muscles</span><span class="chev" aria-hidden="true">${op?'▲':'▼'}</span></button>`;
+  if(op)h+=`<div class="fpanel" onclick="event.stopPropagation()"><div class="fh">Coach's cues</div><ul class="cues">${e.cues.map((c,i)=>`<li><i>${i+1}</i><span>${esc(c)}</span></li>`).join('')}</ul><div class="fh">Anatomy atlas</div><div class="anatomy-layout"><div class="bmap anatomy-map">${bodyMap(mu)}</div><div class="anatomy-lists">${muscleDetailList(mu.primary,'primary')}${muscleDetailList(mu.secondary,'secondary')}</div></div><div class="mleg"><span>Primary</span><span class="s">Secondary / stabilizer</span></div><div class="anatomy-note"><b>Exercise anatomy:</b> highlights come from this exercise's programmed primary and secondary muscle list, so the map changes with the movement.</div></div>`;
   return h
 }
 function togForm(k){FORMS_OPEN.has(k)?FORMS_OPEN.delete(k):FORMS_OPEN.add(k);render(true)}
@@ -1555,24 +1680,26 @@ function exerciseGlyph(e){
  return '●'
 }
 function exerciseMuscleText(list,limit){limit=limit||4;return (list||[]).slice(0,limit).join(' · ')||'Full-body control'}
+function providerThumbForExercise(e){
+ const vs=vidsForItem(e);if(!vs.length)return '';
+ for(const v of vs){const t=mediaThumb(v[0]);if(t)return t}
+ return ''
+}
+function exerciseThumbnail(e,key){
+ const art=exerciseCustomArt(e.name),pt=providerThumbForExercise(e),mu=e.muscles||{primary:[],secondary:[]};
+ if(art)return '<div class="media-poster"><img src="'+art+'" alt="'+esc(e.name)+' exercise thumbnail"><span class="media-provider">VERIFIED PHOTO</span></div>';
+ if(pt)return '<div class="media-poster"><img src="'+esc(pt)+'" alt="'+esc(e.name)+' video thumbnail"><span class="media-play">▶</span><span class="media-provider">REAL VIDEO</span></div>';
+ return '<div class="anatomy-thumb"><div class="anatomy-thumb-copy"><b>'+esc(e.name)+'</b><span>'+esc(exerciseMuscleText(mu.primary,3))+'<br>Exercise anatomy thumbnail</span></div>'+bodyMap(mu,true)+'</div>'
+}
 function exerciseCustomArt(name){
  const p=window.EXERCISE_ART[name];if(!p)return null;
  return location.protocol==='file:'?p:'https://raw.githubusercontent.com/TLC405/calesthenicsbytlc/tlc-prime-apk-v38/tlc-prime-android/app/src/main/assets/'+p
 }
 function exerciseVisual(e,key){
- const art=exerciseCustomArt(e.name),vs=vidsForItem(e),verified=vs.length>0,mu=e.muscles||{primary:[],secondary:[]};
- let media='';
- if(art){
-   media='<img class="exercise-photo" src="'+art+'" alt="'+esc(e.name)+' verified exercise photo">';
- }else if(verified){
-   const action="embLoad('"+ekey(key+'_0')+"')";
-   media='<div class="verified-media-panel"><div class="media-icon">▶</div><b>Verified movement demo</b><span>No AI stand-in. Open the real sourced demonstration.</span><button onclick="event.stopPropagation();'+action+'">Play verified demo</button></div>';
- }else{
-   media='<div class="no-demo-panel"><div class="media-icon">✓</div><b>No fake demo shown</b><span>This exercise stays text + anatomy only until a real, movement-correct visual is verified.</span></div>';
- }
- return '<div class="exercise-lux-visual"><div class="exercise-media">'+media+'</div><div class="exercise-mini-anatomy"><div class="mini-title">MUSCLES USED</div>'+bodyMap(mu)+'</div></div>'+
+ const vs=vidsForItem(e),mu=e.muscles||{primary:[],secondary:[]};
+ return '<div class="exercise-lux-visual"><div class="exercise-media">'+exerciseThumbnail(e,key)+'</div><div class="exercise-mini-anatomy"><div class="mini-title">MUSCLES USED</div>'+bodyMap(mu,true)+'</div></div>'+
  '<div class="muscle-bands"><div class="muscle-band primary"><b>Primary</b><span>'+esc(exerciseMuscleText(mu.primary))+'</span></div><div class="muscle-band secondary"><b>Secondary</b><span>'+esc(exerciseMuscleText(mu.secondary))+'</span></div></div>'+
- '<div class="exercise-action-row"><div class="exercise-status">'+(art?'PHOTO VERIFIED':verified?'VIDEO VERIFIED':'AWAITING VERIFIED VISUAL')+'</div></div>'
+ '<div class="exercise-action-row"><div class="exercise-status">'+(vs.length?'REAL VIDEO SOURCE':'ANATOMY THUMBNAIL')+'</div></div>'
 }
 function luxExerciseCard(e,key,opts){
  opts=opts||{};
@@ -1619,7 +1746,7 @@ function vSkills(){
   h+=`<div class="card row">${ring(lanePct(lane),58)}<div class="sp"><div style="font-weight:800;font-size:18px">${esc(L.name)}</div><div class="muted">${ns.filter(n=>S.passed[n.id]).length} of ${ns.length} passed · now on ${esc(c.name)}</div></div></div>`;
   h+='<div class="path">'+ns.map((n,i)=>{const p=S.passed[n.id],o=isOpen(n),cur=c&&c.id===n.id;const cls=p?'passed':cur?'cur open':o?'open':'locked';
     const hasV=vidsForLane(n.skill).length;
-    return `<div class="pn ${cls}" onclick="openNode('${n.id}')"><div class="dot">${p?'★'.repeat(Math.min(3,1+Math.floor(i/3))):o?i+1:'🔒'}</div><div class="pbody"><div class="row"><div class="sp t">${esc(n.name)}</div>${p?'<span class="badge ok">MASTERED</span>':cur?'<span class="badge cur">TRAINING</span>':''}</div><div class="u">${esc(n.unlock_standard)}${S.best[n.id]?' · best '+S.best[n.id]:''}</div>${hasV?'<div style="margin-top:6px"><span class="badge v">▶ TUTORIAL</span></div>':''}</div></div>`}).join('')+'</div>';
+    return `<div class="pn ${cls}" onclick="openNode('${n.id}')"><div class="dot">${p?'★'.repeat(Math.min(3,1+Math.floor(i/3))):o?i+1:'🔒'}</div><div class="path-thumb">${bodyMap({primary:[n.name],secondary:[]},true)}</div><div class="pbody"><div class="row"><div class="sp t">${esc(n.name)}</div>${p?'<span class="badge ok">MASTERED</span>':cur?'<span class="badge cur">TRAINING</span>':''}</div><div class="u">${esc(n.unlock_standard)}${S.best[n.id]?' · best '+S.best[n.id]:''}</div>${hasV?'<div style="margin-top:6px"><span class="badge v">▶ TUTORIAL</span></div>':''}</div></div>`}).join('')+'</div>';
   M(h);
 }
 let curSheet=null;
@@ -1703,7 +1830,7 @@ const IDB={db:null,open(){return new Promise((res,rej)=>{if(this.db)return res(t
 let LV=[];async function loadLV(){try{LV=(await IDB.all()).map(v=>({id:v.id,name:v.name,lane:v.lane,date:v.date,dur:v.dur,skill:v.skill}))}catch(e){LV=[]}}
 const SKILLS=[['general','General'],['handstand','Handstand'],['planche','Planche'],['front_lever','Front lever'],['back_lever','Back lever'],['lsit','L-sit / compression'],['pullup','Pull-up'],['muscleup','Muscle-up'],['pistol','Pistol / squat'],['flag','Human flag']];
 const LANE2SK={handstand:'handstand',planche:'planche',front_lever:'front_lever',back_lever:'back_lever',compression:'lsit',pull_up:'pullup',muscle_up:'muscleup',legs_single_leg:'pistol',legs_quad:'pistol',human_flag:'flag'};
-const APPV='3.15';
+const APPV='3.16';
 const A={cur:null,url:null,pose:false,tool:false,pts:[],det:null,backend:null,err:null,last:null,lastDet:0,raf:0,skill:'general',scan:null,res:null,reps:0,repState:0,loop:false,rate:1,t:0,meta:null,scanning:false,cancel:false,autoScan:false,recv:null,notice:null,drawing:false};
 // ---------- v3.7 diagnostics: every step of the AI pipeline is logged so a failure says why
 const DIAG=[];
