@@ -171,15 +171,28 @@ header{background:linear-gradient(180deg,#07091a 70%,rgba(7,9,26,0))}
 .wd.rest .orb{opacity:.45}
 .wd b{font-size:11px;color:#9fa9d6;margin:0}.wd.done b{color:#ffd400}
 .shenron{margin-top:10px;font-family:"Impact","Arial Black",sans-serif;font-style:italic;color:#3ee07a;text-align:center;text-shadow:0 0 12px rgba(62,224,122,.8)}
-/* radar */
-.radar{position:relative;width:100%;aspect-ratio:1/1;max-width:270px;margin:6px auto 4px;border-radius:50%;background:radial-gradient(circle,#0c3b1e 0,#06200f 70%);border:6px solid #c9ced8;box-shadow:0 0 0 3px #6b7280,inset 0 0 30px rgba(0,0,0,.6);overflow:hidden}
-.radar .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(80,255,140,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(80,255,140,.18) 1px,transparent 1px);background-size:12.5% 12.5%}
-.radar .sweep{position:absolute;inset:0;background:conic-gradient(from 0deg,rgba(80,255,140,.35),transparent 18%);animation:spin 4s linear infinite;border-radius:50%}
-.radar .me{position:absolute;left:50%;top:50%;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid #ff3b3b;transform:translate(-50%,-60%)}
-.blip{position:absolute;width:14px;height:14px;margin:-7px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff 0 15%,#ffd400 30%,#ff8a00 75%);box-shadow:0 0 10px #ffd400;animation:pulse 1.4s ease-in-out infinite}
-.blip.done{background:radial-gradient(circle at 40% 35%,#fff 0 15%,#5fff9a 35%,#1fa154);box-shadow:0 0 10px #3ee07a}
-.blip span{position:absolute;left:50%;top:15px;transform:translateX(-50%);font-size:9px!important;white-space:nowrap;font-size:10px;font-weight:800;color:#bfffd5;font-family:"Courier New",monospace;text-shadow:0 0 4px #000}
-@keyframes pulse{50%{transform:scale(1.3)}}
+/* Dragon Radar */
+.dragon-radar-shell{max-width:340px;margin:4px auto 8px;padding:14px 14px 18px;border-radius:32px;background:#f0c82f;border:3px solid #171717;box-shadow:inset 0 -9px 0 #c89d16,inset 0 3px 0 #fff2a0,0 12px 26px rgba(0,0,0,.42);position:relative}
+.dragon-radar-shell:before,.dragon-radar-shell:after{content:"";position:absolute;top:54px;width:13px;height:76px;background:#333;border:3px solid #111}
+.dragon-radar-shell:before{left:-11px;border-radius:9px 0 0 9px}.dragon-radar-shell:after{right:-11px;border-radius:0 9px 9px 0}
+.radar-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 6px 10px;color:#1e1a0b;font:900 11px/1 "Courier New",monospace;letter-spacing:.08em}
+.radar-led{width:9px;height:9px;border-radius:50%;background:#e23b24;box-shadow:0 0 0 2px #6a170f,0 0 10px rgba(226,59,36,.55);display:inline-block;margin-right:5px}
+.radar{position:relative;width:100%;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(113,255,142,.13),transparent 45%),#082d18;border:8px solid #343b35;box-shadow:0 0 0 3px #111,inset 0 0 0 2px #6e806d,inset 0 0 38px rgba(0,0,0,.75);overflow:hidden}
+.radar .rings{position:absolute;inset:10%;border:1px solid rgba(110,255,150,.22);border-radius:50%;box-shadow:0 0 0 34px rgba(110,255,150,.055),0 0 0 68px rgba(110,255,150,.04)}
+.radar .grid{position:absolute;inset:0;background-image:linear-gradient(rgba(80,255,140,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(80,255,140,.13) 1px,transparent 1px);background-size:12.5% 12.5%}
+.radar .cross:before,.radar .cross:after{content:"";position:absolute;background:rgba(120,255,160,.3)}.radar .cross:before{left:50%;top:5%;bottom:5%;width:1px}.radar .cross:after{top:50%;left:5%;right:5%;height:1px}
+.radar .sweep{position:absolute;inset:-1px;background:conic-gradient(from 0deg,rgba(110,255,150,.44),rgba(110,255,150,.08) 12%,transparent 22%);animation:spin 2.8s linear infinite;border-radius:50%;filter:drop-shadow(0 0 4px #5cff8e)}
+.radar .me{position:absolute;left:50%;top:50%;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:13px solid #ff3b3b;transform:translate(-50%,-55%);filter:drop-shadow(0 0 4px #ff3b3b)}
+.blip{position:absolute;width:18px;height:18px;margin:-9px;border-radius:50%;background:radial-gradient(circle at 36% 30%,#fff 0 12%,#ffe36b 13% 26%,#ff9d00 58%,#d85400 100%);box-shadow:0 0 8px #ffd400,0 0 16px rgba(255,170,0,.8);animation:radarping 1.25s ease-in-out infinite;z-index:4}
+.blip:after{content:"";position:absolute;inset:-7px;border:1px solid rgba(255,220,70,.65);border-radius:50%;animation:ripple 1.25s ease-out infinite}
+.blip.done{background:radial-gradient(circle at 36% 30%,#fff 0 12%,#baffc7 13% 28%,#44ea78 58%,#148c42 100%);box-shadow:0 0 9px #5fff9a,0 0 18px rgba(62,224,122,.85)}
+.blip span{position:absolute;left:50%;top:22px;transform:translateX(-50%);font:900 9px/1 "Courier New",monospace;color:#caffd5;text-shadow:0 1px 3px #000;white-space:nowrap}
+.radar-stars{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:8px;color:#b31717;letter-spacing:-1px;font-weight:900;text-shadow:none}
+.radar-controls{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin:12px 5px 0}
+.radar-readout{background:#2a2a24;border:2px solid #111;border-radius:10px;padding:8px 10px;color:#78ff9a;font:900 12px/1.25 "Courier New",monospace;box-shadow:inset 0 0 12px #000}
+.radar-btn{width:48px;height:48px;border-radius:50%;border:3px solid #111;background:#e34b2f;color:#fff;font-weight:900;box-shadow:inset 0 3px 0 #ff9d86,0 5px 0 #8f1f10}
+.radar-btn:active{transform:translateY(3px);box-shadow:inset 0 2px 0 #ff9d86,0 2px 0 #8f1f10}
+@keyframes radarping{50%{transform:scale(1.24);filter:brightness(1.2)}}@keyframes ripple{from{transform:scale(.7);opacity:.9}to{transform:scale(1.7);opacity:0}}
 /* lanes */
 .lane .n{font-family:"Impact","Arial Black",sans-serif;font-style:italic;text-transform:uppercase;font-weight:900;letter-spacing:.02em}
 /* train */
@@ -769,7 +782,17 @@ function fx(cls,ms,html){const e=document.createElement('div');e.className=cls;i
 function shout(t,sub,col){document.documentElement.style.setProperty('--fl',col||'#ffd400');fx('flash',1200);fx('speed',900);fx('shout',1600,esc(t)+(sub?'<small>'+esc(sub)+'</small>':''))}
 function sparks(x,y){for(let i=0;i<10;i++){const s=document.createElement('div');s.className='spark';const a=Math.random()*6.28,d=40+Math.random()*50;s.style.left=x+'px';s.style.top=y+'px';s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',Math.sin(a)*d+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),600)}}
 let lastXY=[innerWidth/2,innerHeight/2];document.addEventListener('pointerdown',e=>{lastXY=[e.clientX,e.clientY]},true);
-function radar(){const ls=D.lanes.filter(l=>l.id!=='foundation');return `<div class="radar"><div class="grid"></div><div class="sweep"></div><div class="me"></div>${ls.map((l,i)=>{const p=lanePct(l.id),a=i/ls.length*6.283-1.57,r=40-p*34;return `<div class="blip ${p>=1?'done':''}" style="left:${50+Math.cos(a)*r}%;top:${50+Math.sin(a)*r}%" onclick="lane='${l.id}';go('skills')"><span>${esc(l.name.replace('Legs: ','').split(' ')[0])}</span></div>`}).join('')}</div>`}
+function radar(){
+  const wk=streakWeek(), found=wk.filter(w=>w.done).length;
+  const pts=[[48,16],[74,27],[82,56],[66,79],[36,80],[18,57],[24,29]];
+  return `<div class="dragon-radar-shell">
+    <div class="radar-top"><span><i class="radar-led"></i>DRAGON RADAR</span><span>RANGE · ${found===7?'LOCK':'x1'}</span></div>
+    <div class="radar" onclick="radarPing()"><div class="rings"></div><div class="grid"></div><div class="cross"></div><div class="sweep"></div><div class="me"></div>
+      ${pts.map((p,i)=>`<div class="blip ${wk[i]&&wk[i].done?'done':''}" style="left:${p[0]}%;top:${p[1]}%;animation-delay:${(i*.13).toFixed(2)}s"><div class="radar-stars">${'★'.repeat(i+1)}</div><span>${i+1}</span></div>`).join('')}
+    </div>
+    <div class="radar-controls"><div class="radar-readout">SIGNALS ${found}/7<br>${found===7?'ALL BALLS DETECTED · WISH READY':7-found+' SIGNAL'+(7-found===1?'':'S')+' REMAIN'}</div><button class="radar-btn" onclick="radarPing();event.stopPropagation()" aria-label="Ping radar">PING</button></div>
+  </div>`}
+function radarPing(){if(navigator.vibrate)navigator.vibrate([18,35,18]);const el=document.querySelector('.dragon-radar-shell');if(el){el.animate([{transform:'scale(1)'},{transform:'scale(1.015)'},{transform:'scale(1)'}],{duration:260})}toast('Dragon Radar scan complete')}
 
 // ---------- shell
 const TABS=['home','train','skills','learn','ana','log'];
@@ -792,7 +815,7 @@ function vHome(){
   <div class="row" style="margin-top:14px"><button class="btn p" onclick="S.day='${nd}';save();go('train')">Power up →</button><button class="btn ghost" style="border-color:#4a3a2e" onclick="S.day='H1';save();go('train')">Handstand set</button></div></div>`;
   h+=`<div class="stats"><div class="stat"><b>${thisWeek}</b><span>balls this week</span></div><div class="stat"><b>${S.history.length}</b><span>battles</span></div><div class="stat"><b>${passedN}</b><span>techniques</span></div></div>`;
   const plan=D.week;h+=`<div class="card"><div class="row" style="margin-bottom:10px"><div class="sp dbz" style="font-weight:900;color:#ffd400">Dragon Balls this week</div><div class="muted">${D.week.filter(x=>x!=='rest').join(' · ')}</div></div><div class="week">${wk.map((w,i)=>`<div class="wd ${plan[i]==='rest'?'rest':''} ${w.today?'today':''} ${w.done?'done':''}"><div class="orb">${stars(i+1)}</div><b>${'MTWTFSS'[i]}${plan[i]==='rest'?' · Senzu':''}</b></div>`).join('')}</div>${wk.filter(w=>w.done).length>=7?'<div class="shenron">🐉 All seven gathered. Make your wish.</div>':''}</div>`;
-  h+='<div class="lbl">Dragon Radar</div><div class="card">'+radar()+'<div class="muted" style="text-align:center">Blips move to the center as you master each skill. Tap one to open it.</div></div>';
+  h+='<div class="lbl">Dragon Radar · 7 Signals</div><div class="card" style="padding:12px">'+radar()+'<div class="muted" style="text-align:center;margin-top:8px">Each completed training day locks one Dragon Ball signal. Hit PING to rescan.</div></div>';
   h+='<div class="lbl">Training grounds</div><div class="lanes">'+D.lanes.filter(l=>l.id!=='foundation').map(l=>{const c=curNode(l.id);return `<div class="lane" onclick="lane='${l.id}';go('skills')">${ring(lanePct(l.id))}<div class="sp"><div class="n">${esc(l.name.replace('Legs: ',''))}</div><div class="c">${esc(c.name)}</div></div></div>`}).join('')+'</div>';
   M(h);
 }
