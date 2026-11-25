@@ -45,12 +45,26 @@ public class MainActivity extends Activity {
                 String url = request.getUrl().toString();
                 return !(url.startsWith("file:///android_asset/") || url.startsWith("https://www.instagram.com/") || url.startsWith("https://instagram.com/"));
             }
+
+            @Override public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                view.evaluateJavascript("if(window.ssResume){ssResume();}", null);
+            }
         });
 
         if (android.os.Build.VERSION.SDK_INT >= 19) {
             webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         }
         webView.loadUrl("file:///android_asset/app.html");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (webView != null) {
+            webView.onResume();
+            webView.evaluateJavascript("if(window.ssResume){ssResume();}", null);
+        }
     }
 
     @Override
