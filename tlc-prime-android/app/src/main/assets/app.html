@@ -1454,6 +1454,12 @@ function builderUI(){
 
 
 window.EXERCISE_ART=window.EXERCISE_ART||{};
+Object.assign(window.EXERCISE_ART,{
+ 'Cossack squats':'exercise-art/cossack.webp',
+ 'Single-leg calf raise':'exercise-art/single-leg-calf-raise.webp',
+ 'Ring support hold':'exercise-art/ring-support-hold.webp',
+ 'Ring L-sit':'exercise-art/ring-l-sit.webp'
+});
 function exerciseGlyph(e){
  const n=((e&&e.name)||'').toLowerCase(),g=((e&&e.group)||'').toLowerCase();
  if(/handstand|wall hop|wall tuck|parallette handstand/.test(n))return '🤸';
@@ -1473,7 +1479,7 @@ function exerciseVisual(e,key){
  const art=exerciseCustomArt(e.name),vs=vidsForItem(e),verified=vs.length>0,mu=e.muscles||{primary:[],secondary:[]};
  const media=art?'<img class="exercise-photo" src="'+art+'" alt="'+esc(e.name)+' start and finish demonstration">':'<div class="exercise-visual-fallback" role="img" aria-label="'+esc(e.name)+' start and finish visual"><div class="pose-frame"><div class="pose-glyph">'+exerciseGlyph(e)+'</div><div class="pose-label">START</div></div><div class="pose-arrow">→</div><div class="pose-frame finish"><div class="pose-glyph">'+exerciseGlyph(e)+'</div><div class="pose-label">FINISH</div></div></div>';
  const action=verified?"embLoad('"+ekey(key+'_0')+"')":"";
- return '<div class="exercise-lux-visual"><div class="exercise-media">'+media+'<span class="visual-source '+(verified?'verified':'')+'">'+(verified?'VERIFIED DEMO':'FORM VISUAL')+'</span></div><div class="exercise-mini-anatomy"><div class="mini-title">MUSCLES USED</div>'+bodyMap(mu)+'</div></div><div class="muscle-bands"><div class="muscle-band primary"><b>Primary</b><span>'+esc(exerciseMuscleText(mu.primary))+'</span></div><div class="muscle-band secondary"><b>Secondary</b><span>'+esc(exerciseMuscleText(mu.secondary))+'</span></div></div><div class="exercise-action-row"><button class="demo-btn" '+(verified?'':'disabled')+' onclick="event.stopPropagation();'+action+'">'+(verified?'▶ View verified demo':'Photo demo pending')+'</button><div class="exercise-status">FORM</div></div>'
+ return '<div class="exercise-lux-visual"><div class="exercise-media">'+media+'<span class="visual-source '+(verified?'verified':'')+'">'+(verified?'VERIFIED DEMO':'FORM VISUAL')+'</span></div><div class="exercise-mini-anatomy"><div class="mini-title">MUSCLES USED</div>'+bodyMap(mu)+'</div></div><div class="muscle-bands"><div class="muscle-band primary"><b>Primary</b><span>'+esc(exerciseMuscleText(mu.primary))+'</span></div><div class="muscle-band secondary"><b>Secondary</b><span>'+esc(exerciseMuscleText(mu.secondary))+'</span></div></div><div class="exercise-action-row"><button class="demo-btn" '+(verified?'':'disabled')+' onclick="event.stopPropagation();'+action+'">'+(verified?'▶ View verified demo':'Start / finish guide')+'</button><div class="exercise-status">FORM</div></div>'
 }
 function luxExerciseCard(e,key,opts){
  opts=opts||{};
