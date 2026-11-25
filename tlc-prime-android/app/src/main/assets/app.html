@@ -865,6 +865,45 @@ html.light .anatomy-group{background:#fff}
   .anatomy-lists{grid-template-columns:1fr}
 }
 
+
+/* ===== Supa Strength v3.11 · expandable mastery levels ===== */
+.master-family{font:900 italic 25px/1 Impact,"Arial Black",sans-serif;text-transform:uppercase;color:#fff4a8;margin:2px 0 2px}
+.master-family-sub{font:900 10px/1.25 "Courier New",monospace;letter-spacing:.09em;text-transform:uppercase;color:#83ff9d;margin-bottom:8px}
+.master-level-stack{display:grid;gap:7px;margin-top:10px}
+.master-level-card{border:1px solid #3d493e;border-radius:12px;background:#121713;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+.master-level-card[open]{border-color:#d99a16;box-shadow:0 0 0 1px rgba(255,182,38,.11),inset 0 0 18px rgba(255,166,0,.045)}
+.master-level-card summary{list-style:none;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:9px;align-items:center;padding:9px 10px;cursor:pointer;min-height:50px}
+.master-level-card summary::-webkit-details-marker{display:none}
+.level-num{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:#203022;border:1px solid #3d6a45;color:#9cffae;font:900 13px/1 "Courier New",monospace}
+.master-level-card.current .level-num{background:#5b3b06;border-color:#ffb000;color:#ffe58a}
+.master-level-card.done .level-num{background:#15542a;border-color:#39a45a;color:#ceffda}
+.level-summary-text{min-width:0}
+.level-title{font:900 13px/1.15 system-ui,-apple-system,Roboto,sans-serif;color:#f3f5ef;overflow-wrap:anywhere}
+.level-count{font-size:9.5px;color:#9ba99e;margin-top:2px}
+.level-chevron{font-size:12px;color:#ffd34d}
+.master-level-card[open] .level-chevron{transform:rotate(180deg)}
+.level-exercises{padding:0 9px 9px;display:grid;gap:6px}
+.level-exercise{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:start;padding:8px;border-radius:10px;background:#1a211b;border:1px solid #2f3930}
+.level-order{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:#263128;color:#d8ffdf;font:900 10px/1 "Courier New",monospace}
+.level-exercise-name{font-size:11.5px;line-height:1.22;font-weight:800;color:#f3f6f2;overflow-wrap:anywhere}
+.level-exercise-group{font-size:9px;color:#89978c;margin-top:2px}
+.level-dose{font:900 9.5px/1.2 "Courier New",monospace;color:#ffd36b;text-align:right;max-width:74px}
+.level-empty{padding:9px;font-size:10px;color:#9ca89f}
+.master-path-actions + .master-level-stack{margin-top:11px}
+html.light .master-level-card{background:#fffaf0;border-color:#ddd1b7}
+html.light .master-level-card[open]{border-color:#d59b2d}
+html.light .level-title{color:#17192b}
+html.light .level-exercise{background:#fff;border-color:#e2d8c3}
+html.light .level-exercise-name{color:#17192b}
+html.light .master-family{color:#7a2e00}
+html.light .master-family-sub{color:#226c36}
+@media(max-width:370px){
+ .master-level-card summary{grid-template-columns:31px minmax(0,1fr) auto;padding:8px}
+ .level-num{width:29px;height:29px}
+ .level-exercise{grid-template-columns:25px minmax(0,1fr)}
+ .level-dose{grid-column:2;text-align:left;max-width:none}
+}
+
 </style></head>
 <body>
 <header><div class="htop"><div class="sp"><h1 id="title">Home</h1><div class="sub" id="subtitle"></div></div><div id="hact"></div></div></header>
@@ -1057,6 +1096,81 @@ const DRAGON_MASTERY=[
   {id:'olympic_rings',name:'Olympic Rings',short:'Olympic Rings',icon:'◎',goal:'rings',levels:['Support hold','Ring dip','False grip','Skin the cat','Olympic rings strength']},
   {id:'pullup_mastery',name:'Pull-Up Mastery',short:'Pull-Up Mastery',icon:'⚡',lane:'muscle_up',goal:'pull',levels:['Strict pull-up','Explosive pull-up','High pull','Transition strength','Pull-up mastery']}
 ]
+
+const MASTER_LEVEL_EXERCISES={
+  handstand:[
+    {title:'Foundation line',items:['Wall L-handstand']},
+    {title:'Shape + balance',items:['Box tuck handstand leg extensions']},
+    {title:'Freestanding support',items:['Parallette handstand hold']},
+    {title:'Control + float',items:['L-handstand float (box or wall)','Clapping feet in handstand']},
+    {title:'Press mastery',items:['Handstand lowers','Band-assisted handstand press','Handstand press from elevation']}
+  ],
+  plank:[
+    {title:'Body-line foundation',items:['Side plank, hip raise']},
+    {title:'Forward lean strength',items:['Pike lean to high planche']},
+    {title:'Assisted hold',items:['Band-assisted planche hold']},
+    {title:'Tuck strength',items:['Band-assisted tuck planche press toe taps','Tuck planche press']},
+    {title:'Advanced plank mastery',items:['Planche hold at your stage','L-sit to tuck planche press']}
+  ],
+  pullup:[
+    {title:'Hang + scapular control',items:['Dead hang','Scap pulls','Ring rows']},
+    {title:'Assisted pulling',items:['Jump pull-ups','Band-assisted pull-ups (neutral, then wide grip)']},
+    {title:'Eccentric strength',items:['Slow pull-up negatives']},
+    {title:'Strict pulling',items:['Pull-up at your stage']},
+    {title:'Explosive pulling',items:['Explosive pull-ups (chest/belly to bar)','Weighted pull-up negatives']}
+  ],
+  mobility:[
+    {title:'Joint preparation',items:['Wrist warm-up','Banded ankle mobilization']},
+    {title:'Shoulders + upper body',items:['Banded shoulder dislocates','Band pull-aparts']},
+    {title:'Squat + lateral range',items:['Deep squat hold + ankle rocks','Cossack squats']},
+    {title:'Hip + hamstring range',items:['Pancake stretch','Mobility: pancake, front split each side, middle split','Elevated-hip / bent-knee pancake']},
+    {title:'Advanced mobility control',items:['Weighted pike stretch + flutter','Middle split transitions (hips elevated)']}
+  ],
+  balance_rings:[
+    {title:'Support foundation',items:['Ring support hold']},
+    {title:'Stability control',items:['Ring circles']},
+    {title:'Compression balance',items:['Ring L-sit']},
+    {title:'Unstable strength',items:['Ring planche lean','Ring side presses']},
+    {title:'Balance rings mastery',items:['Supported ring cross negatives (band/feet assist)']}
+  ],
+  olympic_rings:[
+    {title:'Pull foundation',items:['Ring rows']},
+    {title:'Press foundation',items:['Ring push-ups','Ring support hold']},
+    {title:'Core + support',items:['Ring L-sit','Ring circles']},
+    {title:'Advanced ring strength',items:['Ring side presses','Band-assisted ring back lever (negatives, reps, holds)']},
+    {title:'Olympic rings mastery',items:['Supported ring cross negatives (band/feet assist)','Ring planche lean']}
+  ],
+  pullup_mastery:[
+    {title:'Strict base',items:['Pull-up at your stage','Slow pull-up negatives']},
+    {title:'Explosive height',items:['Explosive pull-ups (chest/belly to bar)']},
+    {title:'Bar contact',items:['Hip-to-bar drill','Kip swing to kipping chest-to-bar']},
+    {title:'Transition skill',items:['Box transition practice (fast pull to push)','Jumping or banded muscle-up','Banded muscle-up reps (band over the bar)']},
+    {title:'Pull-up mastery',items:['Muscle-up at your stage','Straight-bar dips','Straight-bar dip transitions']}
+  ]
+};
+function masteryFamilyName(m){return (m.id==='balance_rings'||m.id==='olympic_rings')?'Rings':m.name}
+function masteryExercise(name){
+  for(const d of D.days){const e=d.items.find(x=>x.name===name);if(e)return {...e,day:d.id,dayName:d.name}}
+  return {name,dose:'',group:''}
+}
+function masteryLevelStatus(m,levelIndex,p){
+  const n=(MASTER_LEVEL_EXERCISES[m.id]||[]).length||5;
+  const threshold=(levelIndex+1)/n;
+  if(p>=threshold)return 'done';
+  const current=Math.min(n-1,Math.floor(Math.min(.999,p)*n));
+  return levelIndex===current?'current':'locked'
+}
+function masteryLevelStack(m,p){
+  const levels=MASTER_LEVEL_EXERCISES[m.id]||[];
+  return `<div class="master-level-stack">${levels.map((lvl,i)=>{
+    const status=masteryLevelStatus(m,i,p),ex=lvl.items.map(masteryExercise);
+    return `<details class="master-level-card ${status}" ${i===0?'open':''}>
+      <summary><span class="level-num">${status==='done'?'✓':i+1}</span><span class="level-summary-text"><span class="level-title">Level ${i+1} · ${esc(lvl.title)}</span><span class="level-count">${ex.length} exercise${ex.length===1?'':'s'} · correct order</span></span><span class="level-chevron">▼</span></summary>
+      <div class="level-exercises">${ex.length?ex.map((e,j)=>`<div class="level-exercise"><span class="level-order">${j+1}</span><span><div class="level-exercise-name">${esc(e.name)}</div><div class="level-exercise-group">${esc(e.group||'Mastery work')}</div></span><span class="level-dose">${esc(e.dose||'Practice')}</span></div>`).join(''):'<div class="level-empty">Exercises will appear here.</div>'}</div>
+    </details>`
+  }).join('')}</div>`
+}
+
 function dragonMasterProgress(m){
   if(m.lane)return lanePct(m.lane);
   if(m.id==='balance_rings'||m.id==='olympic_rings'){
@@ -1086,11 +1200,11 @@ function radar(){
     <div class="radar-controls"><div class="radar-readout">SIGNAL · ${esc(m.name)}<br>STAGE · ${esc(level)}</div><button class="radar-btn" onclick="radarPing();event.stopPropagation()" aria-label="Ping radar">PING</button></div>
   </div>
   <div class="master-detail home-master-detail">
-    <div class="eyebrow">${esc(m.name)} mastery</div>
-    <div class="master-name">${esc(level)}</div>
-    <div class="master-meta">${Math.round(p*100)}% mastery · Select any Dragon Ball to inspect that training path.</div>
+    <div class="master-family">${esc(masteryFamilyName(m))}</div>
+    <div class="master-family-sub">${esc(m.name)} mastery · ${Math.round(p*100)}%</div>
+    <div class="master-meta">Expand any level to see every exercise in order. Level 1 stays open by default.</div>
     <div class="master-path-actions"><button class="btn" onclick="dragonOpenMastery('${m.id}')">Open mastery</button><button class="btn p" onclick="dragonTrain('${m.goal}')">Train ${esc(m.name)}</button></div>
-    <details class="master-more"><summary>View mastery levels</summary><div class="master-ladder">${m.levels.map((x,i)=>{const li=(i+1)/m.levels.length,cls=p>=li?'done':(i===Math.min(m.levels.length-1,Math.floor(Math.min(.999,p)*m.levels.length))?'current':'locked');return `<div class="master-step ${cls}"><i>${p>=li?'✓':i+1}</i><span>${esc(x)}</span></div>`}).join('')}</div></details>
+    ${masteryLevelStack(m,p)}
   </div>`}
 function radarSelect(n){S.radarBall=n;save();render(true);if(navigator.vibrate)navigator.vibrate([8,20,8]);sparks(innerWidth/2,Math.min(innerHeight*.38,300))}
 function dragonOpenMastery(id){
