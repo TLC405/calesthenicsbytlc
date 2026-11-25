@@ -747,6 +747,124 @@ header .sub{line-height:1.25;white-space:normal;padding-right:4px}
 @media(min-width:700px){.mission-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.mission-btn{min-height:78px}}
 @media(prefers-reduced-motion:reduce){.mission-console:after,.ki-core,.mission-btn.on:before,.mission-lock .ret-mini{animation:none!important}}
 
+
+/* ===== Supa Strength v3.10 · readable mastery radar + detailed anatomy ===== */
+.home-scanner{
+  position:relative;isolation:isolate;overflow:hidden;border-radius:28px;
+  padding:14px 10px 16px;margin-bottom:12px;
+  background:
+    linear-gradient(180deg,rgba(2,10,28,.04) 0%,rgba(2,10,28,.16) 46%,rgba(2,10,28,.58) 100%),
+    url('training-planet.webp') center 42%/cover no-repeat;
+  border:1px solid rgba(255,215,70,.58);
+  box-shadow:0 14px 34px rgba(0,0,0,.28);
+}
+.home-scanner:before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(circle at 50% 44%,transparent 0 38%,rgba(2,8,20,.12) 70%,rgba(2,8,20,.32) 100%)
+}
+.home-scanner>.finder-title-wrap,.home-scanner>.dragon-radar-shell,.home-scanner>.master-detail{position:relative;z-index:1}
+.finder-title-wrap{margin:0 0 8px!important;padding:7px 8px;border-radius:14px;background:rgba(4,10,25,.62);backdrop-filter:blur(5px)}
+.finder-title{font-size:clamp(21px,6vw,29px)!important;line-height:1!important}
+.finder-sub{font-size:8.5px!important;line-height:1.3!important;color:#eef5ff!important;letter-spacing:.04em!important;text-shadow:0 1px 2px #000}
+.finder-legend{display:none!important}
+
+.dragon-radar-shell{
+  max-width:274px!important;margin:0 auto!important;padding:8px 8px 10px!important;
+  border-radius:23px!important;border-width:2px!important;
+  background:rgba(233,190,39,.93)!important;
+  box-shadow:inset 0 -6px 0 rgba(164,119,8,.78),0 8px 20px rgba(0,0,0,.36)!important;
+}
+.dragon-radar-shell:before,.dragon-radar-shell:after{display:none!important}
+.radar-top{font-size:8px!important;margin:0 3px 6px!important;letter-spacing:.04em!important}
+.dragon-radar-shell .radar{
+  width:218px!important;max-width:72vw!important;margin:0 auto!important;
+  border-width:5px!important;box-shadow:0 0 0 2px #101613,inset 0 0 0 1px #6e806d,inset 0 0 26px rgba(0,0,0,.72)!important;
+}
+.radar .rings{inset:13%!important}
+.radar-signal{
+  position:absolute;z-index:7;width:78px;transform:translate(-50%,-50%);
+  border:0;background:transparent!important;padding:0!important;margin:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  overflow:visible!important;color:#fff;box-shadow:none!important
+}
+.radar-signal:active{transform:translate(-50%,-50%) scale(.95)!important}
+.dball{
+  width:20px;height:20px;flex:0 0 20px;border-radius:50%;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 32% 25%,rgba(255,255,255,.98) 0 8%,rgba(255,246,164,.85) 9% 17%,transparent 18%),
+    radial-gradient(circle at 50% 50%,#ffd04a 0 24%,#ff9b00 57%,#e85200 100%);
+  border:1px solid #7d2c00;
+  box-shadow:inset -3px -4px 5px rgba(150,42,0,.28),0 0 7px #ffd34e,0 0 12px rgba(255,117,0,.62)
+}
+.radar-signal.done .dball{box-shadow:inset -3px -4px 5px rgba(150,42,0,.25),0 0 8px #fff5a7,0 0 18px #ffb000}
+.radar-signal.sel .dball{outline:2px solid #fff6a8;outline-offset:2px;animation:selectedAura 1.6s ease-in-out infinite}
+.db-stars{
+  width:14px;max-height:14px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;
+  color:#c91f18;font-size:4.8px;line-height:4.3px;letter-spacing:-.7px;text-shadow:0 .4px 0 #fff2;
+  overflow:hidden
+}
+.radar-full-label{
+  display:block;width:78px;min-height:16px;padding:3px 4px;
+  border-radius:6px;background:rgba(2,11,18,.90);border:1px solid rgba(137,255,174,.42);
+  color:#fff;font:900 8.5px/1.05 system-ui,-apple-system,Roboto,sans-serif;
+  text-align:center;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
+  overflow-wrap:normal!important;word-break:normal!important;text-shadow:0 1px 2px #000;
+  box-sizing:border-box
+}
+.radar-signal.sel .radar-full-label{background:#17351e;border-color:#ffd400;color:#fff5ab}
+.radar-controls{grid-template-columns:minmax(0,1fr) 39px!important;gap:7px!important;margin:7px 2px 0!important}
+.radar-readout{font-size:9px!important;padding:6px 7px!important;line-height:1.25!important}
+.radar-btn{width:39px!important;height:39px!important;font-size:9px!important;border-width:2px!important}
+.master-detail.home-master-detail{max-width:340px;margin:9px auto 0!important;padding:10px!important;background:rgba(24,25,20,.92)!important;backdrop-filter:blur(6px)}
+.home-master-detail .master-name{font-size:17px!important}
+.home-master-detail .master-meta{font-size:10.5px!important}
+.home-master-detail .master-ladder{margin-top:7px}
+.master-more{margin-top:8px;border:1px solid #3f493d;border-radius:10px;background:#151a15;overflow:hidden}
+.master-more summary{cursor:pointer;padding:8px 10px;font-size:11px;font-weight:900;color:#dfffe7;list-style:none}
+.master-more summary::-webkit-details-marker{display:none}
+.master-more summary:after{content:"▼";float:right;color:#ffd400}
+.master-more[open] summary:after{content:"▲"}
+.master-more .master-ladder{padding:0 8px 8px}
+.home-master-detail .dbz-tidbit{display:none!important}
+
+/* detailed anatomy atlas */
+.anatomy-layout{display:grid;grid-template-columns:minmax(190px,240px) minmax(0,1fr);gap:14px;align-items:start}
+.bmap.anatomy-map{width:100%!important;max-width:240px;margin:0 auto}
+.bmap.anatomy-map svg{width:100%!important;height:auto!important;display:block}
+.bmap.anatomy-map .bs{fill:#171e43;stroke:#6f7ab6;stroke-width:.8}
+.bmap.anatomy-map .rg{fill:#26306a;stroke:#11162f;stroke-width:.35}
+.bmap.anatomy-map .rg.s{fill:#ffb66d;opacity:.9}
+.bmap.anatomy-map .rg.p{fill:#ff5a16;stroke:#ffd17d;stroke-width:.55;filter:drop-shadow(0 0 2px rgba(255,98,24,.45))}
+.bmap.anatomy-map text{font-size:7px!important;fill:#cbd5ff!important;letter-spacing:.06em!important}
+.anatomy-lists{display:grid;gap:9px;min-width:0}
+.anatomy-group{border:1px solid var(--line);border-radius:12px;padding:9px;background:rgba(0,0,0,.16)}
+.anatomy-group.primary{border-color:rgba(255,100,24,.5)}
+.anatomy-group.secondary{border-color:rgba(255,182,109,.38)}
+.anatomy-group h4{margin:0 0 7px;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.anatomy-group.primary h4{color:#ff8a43}.anatomy-group.secondary h4{color:#ffc58e}
+.anatomy-muscle{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;padding:6px 0;border-top:1px solid rgba(255,255,255,.07)}
+.anatomy-muscle:first-of-type{border-top:0}
+.anatomy-muscle b{font-size:12px;line-height:1.15;overflow-wrap:anywhere}
+.anatomy-muscle span{font-size:9.5px;line-height:1.2;color:var(--mut);text-align:right;max-width:78px}
+.anatomy-note{margin-top:8px;padding:8px 9px;border-radius:10px;background:rgba(95,212,255,.08);border:1px solid rgba(95,212,255,.2);font-size:10px;line-height:1.35;color:var(--mut)}
+.anatomy-note b{color:#8be7ff}
+html.light .home-scanner{border-color:#e1af3e}
+html.light .home-master-detail{background:rgba(255,249,231,.94)!important}
+html.light .anatomy-group{background:#fff}
+@media(max-width:520px){
+  .anatomy-layout{grid-template-columns:1fr}
+  .bmap.anatomy-map{max-width:265px}
+  .anatomy-lists{grid-template-columns:1fr 1fr}
+}
+@media(max-width:380px){
+  .dragon-radar-shell{max-width:252px!important}
+  .dragon-radar-shell .radar{width:202px!important;max-width:68vw!important}
+  .radar-signal{width:72px}
+  .radar-full-label{width:72px;font-size:7.9px}
+  .anatomy-lists{grid-template-columns:1fr}
+}
+
 </style></head>
 <body>
 <header><div class="htop"><div class="sp"><h1 id="title">Home</h1><div class="sub" id="subtitle"></div></div><div id="hact"></div></div></header>
@@ -825,18 +943,69 @@ function embSwap(key,c,t){const el=document.getElementById('emb-'+key);if(!el)re
 // ---------- Form: cues + muscles + body map
 const MREG=[[/thoracic/i,['midback']],[/anterior delt/i,['delts']],[/lateral delt/i,['delts','rdelts']],[/posterior delt|rotator|teres/i,['rdelts']],[/pector/i,['chest']],[/serratus/i,['serratus']],[/biceps|brachialis/i,['biceps']],[/triceps/i,['triceps']],[/wrist|forearm|brachiorad|grip/i,['forearms','forearmsB']],[/upper trap/i,['traps','trapsB']],[/middle trap|lower trap|rhomboid/i,['midback']],[/latissimus/i,['lats']],[/erector|quadratus/i,['lowback']],[/rectus abdominis|transverse/i,['abs']],[/oblique/i,['obliques']],[/rectus femoris/i,['hipflex','quads']],[/hip flexor|iliopsoas|tensor/i,['hipflex']],[/quadricep/i,['quads']],[/adductor/i,['adductors']],[/glute|piriformis/i,['glutes']],[/hamstring/i,['hams']],[/gastroc|soleus|calves|peroneal/i,['calves']],[/tibialis|extensor digitorum/i,['shins']]];
 function regs(list){const o=new Set();(list||[]).forEach(m=>{for(const [r,a] of MREG)if(r.test(m)){a.forEach(x=>o.add(x));break}});return o}
-function bodyMap(mu){const P=regs(mu.primary),Sx=regs(mu.secondary);const c=r=>'rg '+(P.has(r)?'p':Sx.has(r)?'s':'');
+function muscleRegionName(name){
+  const n=String(name||'');
+  if(/deltoid|rotator|teres/i.test(n))return 'Shoulder';
+  if(/pector|serratus/i.test(n))return 'Chest / scapula';
+  if(/biceps|brachialis|triceps/i.test(n))return 'Upper arm';
+  if(/wrist|forearm|brachiorad|grip/i.test(n))return 'Forearm / hand';
+  if(/trap|rhomboid|latissimus|erector|quadratus/i.test(n))return 'Back';
+  if(/rectus abdominis|transverse|oblique/i.test(n))return 'Core';
+  if(/hip flexor|iliopsoas|tensor/i.test(n))return 'Hip';
+  if(/quadricep|rectus femoris|adductor/i.test(n))return 'Thigh';
+  if(/glute|piriformis/i.test(n))return 'Glutes / hip';
+  if(/hamstring/i.test(n))return 'Posterior thigh';
+  if(/gastroc|soleus|calves|peroneal/i.test(n))return 'Calf';
+  if(/tibialis|extensor digitorum/i.test(n))return 'Shin';
+  return 'Muscle group'
+}
+function bodyMap(mu){
+  const P=regs(mu.primary),Sx=regs(mu.secondary),c=r=>'rg '+(P.has(r)?'p':Sx.has(r)?'s':'');
   const E=(r,x,y,rx,ry,rot)=>`<ellipse class="${c(r)}" cx="${x}" cy="${y}" rx="${rx}" ry="${ry}"${rot?` transform="rotate(${rot} ${x} ${y})"`:''}/>`;
+  const path=(r,d)=>`<path class="${c(r)}" d="${d}"/>`;
   const both=(r,cx,dx,y,rx,ry,rot)=>E(r,cx-dx,y,rx,ry,rot?-rot:0)+E(r,cx+dx,y,rx,ry,rot||0);
-  const base=cx=>`<g class="bs"><circle cx="${cx}" cy="14" r="9"/><rect x="${cx-4}" y="21" width="8" height="8" rx="3"/><path d="M${cx-20} 34 Q${cx} 28 ${cx+20} 34 L${cx+22} 60 Q${cx+20} 80 ${cx+16} 96 L${cx-16} 96 Q${cx-20} 80 ${cx-22} 60 Z"/><path d="M${cx-21} 36 Q${cx-31} 40 ${cx-31} 60 L${cx-35} 102 L${cx-29} 103 L${cx-24} 64 Z"/><path d="M${cx+21} 36 Q${cx+31} 40 ${cx+31} 60 L${cx+35} 102 L${cx+29} 103 L${cx+24} 64 Z"/><path d="M${cx-16} 94 L${cx-1} 98 L${cx-3} 186 L${cx-12} 186 L${cx-19} 120 Z"/><path d="M${cx+16} 94 L${cx+1} 98 L${cx+3} 186 L${cx+12} 186 L${cx+19} 120 Z"/></g>`;
-  const F=34,B=100;
-  const front=base(F)+both('traps',F,9,33,5,2.5,-25)+both('delts',F,20,41,6,7)+both('chest',F,8,48,8.5,6.5)+both('serratus',F,15,60,2.6,5)+both('biceps',F,27,57,4,9,8)+both('forearms',F,31,82,3.6,12,6)+`<rect class="${c('abs')}" x="${F-6}" y="56" width="12" height="32" rx="4"/>`+both('obliques',F,12,72,3.4,10)+both('hipflex',F,8,95,4.5,5,-20)+both('quads',F,10,122,6.5,18,4)+both('adductors',F,3.5,114,2.6,11)+both('shins',F,9,160,3.4,14,2)+`<text x="${F}" y="198" text-anchor="middle">FRONT</text>`;
-  const back=base(B)+`<path class="${c('trapsB')}" d="M${B-14} 34 Q${B} 27 ${B+14} 34 L${B} 46 Z"/>`+both('rdelts',B,20,41,6,7)+`<ellipse class="${c('midback')}" cx="${B}" cy="53" rx="9" ry="9"/>`+both('lats',B,12,66,6,12,-12)+both('triceps',B,27,58,4,9,8)+both('forearmsB',B,31,82,3.6,12,6)+`<rect class="${c('lowback')}" x="${B-6}" y="70" width="12" height="20" rx="4"/>`+both('glutes',B,8,99,8,8)+both('hams',B,10,126,6,17,4)+both('calves',B,9,158,4.6,13,2)+`<text x="${B}" y="198" text-anchor="middle">BACK</text>`;
-  return `<svg viewBox="-4 0 142 202" role="img" aria-label="Muscles worked: ${esc(mu.primary.join(', '))}">${front}${back}</svg>`}
-function formPanel(e,key){if(!e.cues||!e.muscles)return '';const op=FORMS_OPEN.has(key),mu=e.muscles;
+  const base=cx=>`<g class="bs"><circle cx="${cx}" cy="13" r="8.5"/><rect x="${cx-3.8}" y="20.5" width="7.6" height="8" rx="3"/><path d="M${cx-18} 31 Q${cx} 26 ${cx+18} 31 L${cx+21} 59 Q${cx+18} 78 ${cx+14} 95 L${cx-14} 95 Q${cx-18} 78 ${cx-21} 59 Z"/><path d="M${cx-20} 34 Q${cx-29} 39 ${cx-30} 58 L${cx-34} 101 L${cx-28} 102 L${cx-23} 63 Z"/><path d="M${cx+20} 34 Q${cx+29} 39 ${cx+30} 58 L${cx+34} 101 L${cx+28} 102 L${cx+23} 63 Z"/><path d="M${cx-14} 93 L${cx-1} 97 L${cx-3} 186 L${cx-12} 186 L${cx-18} 119 Z"/><path d="M${cx+14} 93 L${cx+1} 97 L${cx+3} 186 L${cx+12} 186 L${cx+18} 119 Z"/></g>`;
+  const F=42,B=126;
+  let front=base(F);
+  front+=both('traps',F,8.5,31.5,5,2.4,-25);
+  front+=both('delts',F,18.5,39.5,5.8,6.5);
+  front+=path('chest',`M${F-16} 43 Q${F-7} 38 ${F} 43 L${F} 55 Q${F-9} 57 ${F-16} 52 Z`)+path('chest',`M${F+16} 43 Q${F+7} 38 ${F} 43 L${F} 55 Q${F+9} 57 ${F+16} 52 Z`);
+  front+=both('serratus',F,14,58,2.1,4.3,14);
+  front+=both('serratus',F,13.5,64,1.8,3.8,14);
+  front+=both('biceps',F,25.5,55.5,3.7,8.5,7);
+  front+=both('forearms',F,30,79.5,3.2,11.5,5);
+  front+=`<rect class="${c('abs')}" x="${F-5.8}" y="55" width="11.6" height="31" rx="4"/>`;
+  front+=`<path class="${c('abs')}" d="M${F} 56V86M${F-5.5} 65H${F+5.5}M${F-5.5} 75H${F+5.5}"/>`;
+  front+=both('obliques',F,10.5,70,3.1,10);
+  front+=both('hipflex',F,7,94,4.2,5,-18);
+  front+=both('quads',F,9,118,5.5,16,4)+both('quads',F,14,122,3.3,15,-4);
+  front+=both('adductors',F,3.6,113,2.5,11);
+  front+=both('shins',F,8.5,158,3.1,14,2);
+  front+=`<text x="${F}" y="198" text-anchor="middle">FRONT · ANTERIOR</text>`;
+  let back=base(B);
+  back+=path('trapsB',`M${B-14} 31 Q${B} 25 ${B+14} 31 L${B+9} 48 L${B} 43 L${B-9} 48 Z`);
+  back+=both('rdelts',B,18.5,39.5,5.8,6.5);
+  back+=E('midback',B,50,10,8)+both('midback',B,8.5,55,4.5,7,18);
+  back+=both('lats',B,11.5,65,6,13,-13);
+  back+=both('triceps',B,25.5,56.5,3.7,9,7);
+  back+=both('forearmsB',B,30,79.5,3.2,11.5,5);
+  back+=`<rect class="${c('lowback')}" x="${B-5.5}" y="70" width="11" height="19" rx="4"/>`;
+  back+=both('glutes',B,7.5,98,7.7,8.1);
+  back+=both('hams',B,9,124,5.8,17,4)+both('hams',B,14,128,3,14,-4);
+  back+=both('calves',B,8.5,157,4.4,13.5,2);
+  back+=`<text x="${B}" y="198" text-anchor="middle">BACK · POSTERIOR</text>`;
+  return `<svg viewBox="0 0 168 202" role="img" aria-label="Detailed front and back muscle anatomy. Primary: ${esc(mu.primary.join(', '))}. Secondary: ${esc(mu.secondary.join(', '))}">${front}${back}</svg>`
+}
+function muscleDetailList(list,kind){
+  return `<section class="anatomy-group ${kind}"><h4>${kind==='primary'?'Primary movers':'Secondary / stabilizers'}</h4>${(list||[]).map(m=>`<div class="anatomy-muscle"><b>${esc(m)}</b><span>${esc(muscleRegionName(m))}<br>${kind==='primary'?'Primary load':'Support / stabilize'}</span></div>`).join('')}</section>`
+}
+function formPanel(e,key){
+  if(!e.cues||!e.muscles)return '';
+  const op=FORMS_OPEN.has(key),mu=e.muscles;
   let h=`<button class="fbtn${op?' on':''}" aria-expanded="${op}" onclick="event.stopPropagation();togForm('${key}')"><span class="fi" aria-hidden="true">◆</span><span class="sp">Form · ${e.cues.length} cues · ${mu.primary.length+mu.secondary.length} muscles</span><span class="chev" aria-hidden="true">${op?'▲':'▼'}</span></button>`;
-  if(op)h+=`<div class="fpanel" onclick="event.stopPropagation()"><div class="fh">Coach's cues</div><ul class="cues">${e.cues.map((c,i)=>`<li><i>${i+1}</i><span>${esc(c)}</span></li>`).join('')}</ul><div class="fh">Muscles worked</div><div class="mwrap"><div class="mchips">${mu.primary.map(m=>`<span class="mc p">${esc(m)}</span>`).join('')}${mu.secondary.map(m=>`<span class="mc s">${esc(m)}</span>`).join('')}</div><div class="bmap">${bodyMap(mu)}</div></div><div class="mleg"><span>Primary</span><span class="s">Secondary</span></div></div>`;
-  return h}
+  if(op)h+=`<div class="fpanel" onclick="event.stopPropagation()"><div class="fh">Coach's cues</div><ul class="cues">${e.cues.map((c,i)=>`<li><i>${i+1}</i><span>${esc(c)}</span></li>`).join('')}</ul><div class="fh">Detailed muscle anatomy</div><div class="anatomy-layout"><div class="bmap anatomy-map">${bodyMap(mu)}</div><div class="anatomy-lists">${muscleDetailList(mu.primary,'primary')}${muscleDetailList(mu.secondary,'secondary')}</div></div><div class="mleg"><span>Primary</span><span class="s">Secondary / stabilizer</span></div><div class="anatomy-note"><b>Training anatomy:</b> highlights come from this exercise's programmed primary and secondary muscle list, so the map changes with the movement.</div></div>`;
+  return h
+}
 function togForm(k){FORMS_OPEN.has(k)?FORMS_OPEN.delete(k):FORMS_OPEN.add(k);render(true)}
 // keep a playing embed alive across re-renders (set taps, Form toggles)
 function morph(m,h,live){const card=live.parentNode;if(!card||card.parentNode!==m)return false;const t=document.createElement('div');t.innerHTML=h;
@@ -903,25 +1072,25 @@ function dragonCurrentLevel(m,p){
   const ix=Math.min(m.levels.length-1,Math.floor(Math.min(.999,p)*m.levels.length));
   return m.levels[ix]
 }
+function dbStars(n){return '<span class="db-stars">'+Array.from({length:Math.max(1,Math.min(7,n))},()=> '★').join('')+'</span>'}
 function radar(){
   let selected=Math.max(0,Math.min(6,+(S.radarBall||1)-1));
-  const pts=[[48,15],[74,27],[82,56],[66,79],[35,80],[17,57],[24,29]];
+  const pts=[[50,15],[27,32],[73,32],[22,58],[78,58],[35,79],[65,79]];
   const m=DRAGON_MASTERY[selected],p=dragonMasterProgress(m),level=dragonCurrentLevel(m,p);
   return `<div class="dragon-radar-shell">
     <div class="dbz-finder-aura"><i class="ki-mote"></i><i class="ki-mote"></i><i class="ki-mote"></i><i class="ki-mote"></i><i class="ki-mote"></i></div>
-    <div class="radar-top"><span><i class="radar-led"></i>MASTERY SIGNALS</span><span>${DRAGON_MASTERY.filter(x=>dragonMasterProgress(x)>=1).length}/7 COMPLETE</span></div>
+    <div class="radar-top"><span><i class="radar-led"></i>MASTERY RADAR</span><span>${DRAGON_MASTERY.filter(x=>dragonMasterProgress(x)>=1).length}/7 COMPLETE</span></div>
     <div class="radar" onclick="radarPing()"><div class="rings"></div><div class="grid"></div><div class="cross"></div><div class="sweep"></div><div class="scan-flash"></div><div class="me"></div>
-      ${pts.map((pt,i)=>{const x=DRAGON_MASTERY[i],xp=dragonMasterProgress(x),ok=xp>=1;return `<button class="blip ${ok?'done':''} ${i===selected?'sel':''}" style="left:${pt[0]}%;top:${pt[1]}%;animation-delay:${(i*.13).toFixed(2)}s;border:0" onclick="radarSelect(${i+1});event.stopPropagation()" aria-label="${esc(x.name)} mastery Dragon Ball"><span class="ball-icon">${x.icon}</span><span class="radar-level-tag">${esc(x.short)}</span></button>`}).join('')}
+      ${pts.map((pt,i)=>{const x=DRAGON_MASTERY[i],xp=dragonMasterProgress(x),ok=xp>=1;return `<button class="radar-signal ${ok?'done':''} ${i===selected?'sel':''}" style="left:${pt[0]}%;top:${pt[1]}%" onclick="radarSelect(${i+1});event.stopPropagation()" aria-label="${esc(x.name)}"><span class="dball">${dbStars(i+1)}</span><span class="radar-full-label">${esc(x.name)}</span></button>`}).join('')}
     </div>
-    <div class="master-detail">
-      <div class="eyebrow">Dragon Ball · ${esc(m.name)} mastery</div>
-      <div class="master-name">${esc(level)}</div>
-      <div class="master-meta">${Math.round(p*100)}% mastery · Tap another ball to inspect its path.</div>
-      <div class="master-ladder">${m.levels.map((x,i)=>{const li=(i+1)/m.levels.length,cls=p>=li?'done':(i===Math.min(m.levels.length-1,Math.floor(Math.min(.999,p)*m.levels.length))?'current':'locked');return `<div class="master-step ${cls}"><i>${p>=li?'✓':i+1}</i><span>${esc(x)}</span></div>`}).join('')}</div>
-      <div class="master-path-actions"><button class="btn" onclick="dragonOpenMastery('${m.id}')">Open mastery</button><button class="btn p" onclick="dragonTrain('${m.goal}')">Train ${esc(m.short.toLowerCase())}</button></div>
-      <div class="dbz-tidbit"><span>🐉</span><span><b>Radar note:</b> Master the path, power up the signal. Seven complete paths = full TLC mastery scan.</span></div>
-    </div>
-    <div class="radar-controls"><div class="radar-readout">SIGNAL · ${esc(m.short)}<br>STAGE · ${esc(level.toUpperCase())}</div><button class="radar-btn" onclick="radarPing();event.stopPropagation()" aria-label="Ping radar">PING</button></div>
+    <div class="radar-controls"><div class="radar-readout">SIGNAL · ${esc(m.name)}<br>STAGE · ${esc(level)}</div><button class="radar-btn" onclick="radarPing();event.stopPropagation()" aria-label="Ping radar">PING</button></div>
+  </div>
+  <div class="master-detail home-master-detail">
+    <div class="eyebrow">${esc(m.name)} mastery</div>
+    <div class="master-name">${esc(level)}</div>
+    <div class="master-meta">${Math.round(p*100)}% mastery · Select any Dragon Ball to inspect that training path.</div>
+    <div class="master-path-actions"><button class="btn" onclick="dragonOpenMastery('${m.id}')">Open mastery</button><button class="btn p" onclick="dragonTrain('${m.goal}')">Train ${esc(m.name)}</button></div>
+    <details class="master-more"><summary>View mastery levels</summary><div class="master-ladder">${m.levels.map((x,i)=>{const li=(i+1)/m.levels.length,cls=p>=li?'done':(i===Math.min(m.levels.length-1,Math.floor(Math.min(.999,p)*m.levels.length))?'current':'locked');return `<div class="master-step ${cls}"><i>${p>=li?'✓':i+1}</i><span>${esc(x)}</span></div>`}).join('')}</div></details>
   </div>`}
 function radarSelect(n){S.radarBall=n;save();render(true);if(navigator.vibrate)navigator.vibrate([8,20,8]);sparks(innerWidth/2,Math.min(innerHeight*.38,300))}
 function dragonOpenMastery(id){
@@ -999,7 +1168,6 @@ function vHome(){
   let h=`<div class="home-scanner">
     <div class="finder-title-wrap"><div class="finder-title">Supa Strength Mastery</div><div class="finder-sub">Handstand · Plank · Pull-Up · Mobility · Balance Rings · Olympic Rings · Pull-Up Mastery</div></div>
     ${radar()}
-    <div class="finder-legend">${DRAGON_MASTERY.map((m,i)=>`<div class="finder-chip" onclick="radarSelect(${i+1})">${m.icon} ${esc(m.name)}</div>`).join('')}</div>
   </div>`;
   h+=`<section class="mission-card">
     <div class="mission-kicker-home">Today's mission · Day ${esc(nd)}</div>
