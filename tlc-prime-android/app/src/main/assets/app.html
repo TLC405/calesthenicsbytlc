@@ -1676,13 +1676,6 @@ function builderUI(){
 }
 
 
-window.EXERCISE_ART=window.EXERCISE_ART||{};
-Object.assign(window.EXERCISE_ART,{
- 'Cossack squats':'exercise-art/cossack.webp',
- 'Single-leg calf raise':'exercise-art/single-leg-calf-raise.webp',
- 'Ring support hold':'exercise-art/ring-support-hold.webp',
- 'Ring L-sit':'exercise-art/ring-l-sit.webp'
-});
 function exerciseGlyph(e){
  const n=((e&&e.name)||'').toLowerCase(),g=((e&&e.group)||'').toLowerCase();
  if(/handstand|wall hop|wall tuck|parallette handstand/.test(n))return '🤸';
@@ -1702,15 +1695,20 @@ function providerThumbForExercise(e){
  for(const v of vs){const t=mediaThumb(v[0]);if(t)return t}
  return ''
 }
-function exerciseThumbnail(e,key){
- const art=exerciseCustomArt(e.name),pt=providerThumbForExercise(e),mu=e.muscles||{primary:[],secondary:[]};
- if(art)return '<div class="media-poster"><img src="'+art+'" alt="'+esc(e.name)+' exercise thumbnail"><span class="media-provider">VERIFIED PHOTO</span></div>';
- if(pt)return '<div class="media-poster"><img src="'+esc(pt)+'" alt="'+esc(e.name)+' video thumbnail"><span class="media-play">▶</span><span class="media-provider">REAL VIDEO</span></div>';
- return '<div class="anatomy-thumb"><div class="anatomy-thumb-copy"><b>'+esc(e.name)+'</b><span>'+esc(exerciseMuscleText(mu.primary,3))+'<br>Exercise anatomy thumbnail</span></div>'+bodyMap(mu,true)+'</div>'
+function exerciseProviderBadges(e){
+ const seen=new Set(),out=[];
+ vidsForItem(e).forEach(v=>{
+  const r=mediaRef(v[0]);if(seen.has(r.provider))return;seen.add(r.provider);
+  const cls=({youtube:'yt',vimeo:'vm',instagram:'ig',musclewiki:'mw'})[r.provider]||'';
+  out.push('<span class="media-source-badge '+cls+'">▶ '+esc(mediaProviderName(r))+'</span>')
+ });
+ return out.join('')
 }
-function exerciseCustomArt(name){
- const p=window.EXERCISE_ART[name];if(!p)return null;
- return location.protocol==='file:'?p:'https://raw.githubusercontent.com/TLC405/calesthenicsbytlc/tlc-prime-apk-v38/tlc-prime-android/app/src/main/assets/'+p
+function exerciseThumbnail(e,key){
+ const pt=providerThumbForExercise(e),mu=e.muscles||{primary:[],secondary:[]},vs=vidsForItem(e);
+ const provider=vs.length?mediaProviderName(mediaRef(vs[0][0])):'Exercise video';
+ if(pt)return '<div class="media-poster"><img src="'+esc(pt)+'" alt="'+esc(e.name)+' video thumbnail"><span class="media-play">▶</span><span class="media-provider">'+esc(provider.toUpperCase())+'</span></div>';
+ return '<div class="anatomy-thumb"><div class="anatomy-thumb-copy"><b>'+esc(e.name)+'</b><span>'+esc(exerciseMuscleText(mu.primary,3))+'<br>Real video · '+esc(provider)+'</span></div>'+bodyMap(mu,true)+'</div>'
 }
 function exerciseVisual(e,key){
  const vs=vidsForItem(e),mu=e.muscles||{primary:[],secondary:[]};
@@ -1724,7 +1722,7 @@ function luxExerciseCard(e,key,opts){
  const tool=({band:'Band',roller:'Foam roller',bar:'Pull-up bar',towel:'Towel',plates:'Weight plates',gripper:'Hand gripper',dumbbell:'Dumbbell',bodyweight:'Bodyweight'})[e.tool]||'Bodyweight';
  const note=e.note?'<div class="nt">'+esc(e.note)+'</div>':'';
  const vs=vidsForItem(e);
- return '<article class="'+cls+'" '+(opts.id?'id="'+opts.id+'"':'')+' data-exercise="'+esc(e.name)+'"><div class="exercise-lux-head"><div><div class="exercise-lux-title">'+esc(e.name)+'</div><div class="exercise-lux-sub">'+esc(e.group||opts.group||'Mastery work')+'</div></div><div class="exercise-lux-dose">'+esc(e.dose||'Practice')+'</div></div><div class="exercise-lux-body">'+exerciseVisual(e,key)+'<div class="exercise-lux-meta"><span class="exercise-pill">'+tool+'</span>'+(e.source&&e.source!=='standard'?'<span class="exercise-pill">Verified source</span>':'')+'</div>'+note+(opts.extra||'')+(opts.sets||'')+embBlock(vs,key)+formPanel(e,'f'+key)+'</div></article>'
+ return '<article class="'+cls+'" '+(opts.id?'id="'+opts.id+'"':'')+' data-exercise="'+esc(e.name)+'"><div class="exercise-lux-head"><div><div class="exercise-lux-title">'+esc(e.name)+'</div><div class="exercise-lux-sub">'+esc(e.group||opts.group||'Mastery work')+'</div></div><div class="exercise-lux-dose">'+esc(e.dose||'Practice')+'</div></div><div class="exercise-lux-body">'+exerciseVisual(e,key)+'<div class="exercise-lux-meta"><span class="exercise-pill">'+tool+'</span>'+exerciseProviderBadges(e)+'</div>'+note+(opts.extra||'')+(opts.sets||'')+embBlock(vs,key)+formPanel(e,'f'+key)+'</div></article>'
 }
 
 // ---------- TRAIN
