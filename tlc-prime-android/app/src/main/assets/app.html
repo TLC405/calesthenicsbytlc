@@ -909,6 +909,58 @@ html.light .master-family-sub{color:#226c36}
 .radar-signal{width:70px!important}
 .radar-full-label{width:70px!important;font-size:7.8px!important;line-height:1.02!important;min-height:15px!important;padding:3px 3px!important}
 @media(max-width:380px){.radar-signal{width:64px!important}.radar-full-label{width:64px!important;font-size:7.2px!important}}
+
+/* ===== Supa Strength v3.13 · luxury visual exercise system ===== */
+:root{--lux-navy:#07182f;--lux-blue:#0b45a8;--lux-red:#e11c2a;--lux-gold:#d8a936;--lux-cream:#fff9ed}
+.exercise-lux{margin:12px 0 16px;border:1px solid #2b416b;border-radius:22px;overflow:hidden;background:#081222;box-shadow:0 14px 34px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.05)}
+.exercise-lux.next{border-color:var(--lux-gold);box-shadow:0 0 0 1px rgba(216,169,54,.26),0 16px 38px rgba(0,0,0,.32)}
+.exercise-lux.done{border-color:#347b4c}
+.exercise-lux-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:13px 14px;background:#07182f;border-bottom:1px solid #263b62}
+.exercise-lux-title{font:900 italic clamp(19px,5.5vw,27px)/1.03 Impact,"Arial Black",system-ui,sans-serif;color:#fff;text-transform:uppercase;overflow-wrap:anywhere}
+.exercise-lux-sub{margin-top:4px;color:#b6c4df;font-size:12px;line-height:1.3}
+.exercise-lux-dose{min-width:86px;padding:9px 10px;border-radius:12px;background:#f4ead1;color:#0b1731;border:2px solid var(--lux-gold);font:900 11px/1.2 "Courier New",monospace;text-align:center}
+.exercise-lux-body{padding:10px;background:#fbf5e9;color:#11182b}
+.exercise-lux-visual{display:grid;grid-template-columns:minmax(0,1fr) 98px;gap:0;border:1px solid #cdbfa4;border-radius:16px;overflow:hidden;background:#fffaf1}
+.exercise-photo{width:100%;height:168px;object-fit:cover;display:block;background:#07101f}
+.exercise-visual-fallback{min-height:168px;display:grid;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);background:#07182f;color:#fff}
+.pose-frame{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 6px;background:#0b2346;min-width:0}
+.pose-frame.finish{background:#091a34}
+.pose-glyph{width:66px;height:66px;border:2px solid var(--lux-gold);border-radius:18px;display:grid;place-items:center;font-size:34px;background:#06101f;box-shadow:inset 0 0 18px rgba(216,169,54,.1)}
+.pose-label{margin-top:7px;font:900 9px/1 "Courier New",monospace;letter-spacing:.15em;color:#ffdc76}
+.pose-arrow{display:grid;place-items:center;font-size:25px;color:var(--lux-red);font-weight:900;background:#07182f}
+.exercise-media{position:relative;min-width:0}
+.visual-source{position:absolute;left:8px;top:8px;padding:5px 7px;border-radius:999px;background:rgba(6,13,27,.88);color:#fff;font:900 8px/1 "Courier New",monospace;letter-spacing:.07em;border:1px solid rgba(255,255,255,.2)}
+.visual-source.verified{background:rgba(20,62,34,.92);color:#b8ffc8;border-color:#42895a}
+.exercise-mini-anatomy{min-height:168px;padding:7px;background:#0a1020;border-left:1px solid #2a3858;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.exercise-mini-anatomy .mini-title{color:#fff;font:900 8px/1.1 "Courier New",monospace;letter-spacing:.06em;margin-bottom:4px;text-align:center}
+.exercise-mini-anatomy svg{width:88px!important;height:112px!important;overflow:visible}
+.exercise-mini-anatomy .bs{fill:#20283e;stroke:#56617b}.exercise-mini-anatomy .rg{fill:#2a3452}
+.exercise-mini-anatomy .rg.p{fill:#ef2535!important;stroke:#ff9ba4!important}
+.exercise-mini-anatomy .rg.s{fill:#f4bf36!important;stroke:#ffe29a!important}
+.exercise-mini-anatomy svg text{display:none!important}
+.muscle-bands{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}
+.muscle-band{border-radius:11px;padding:8px 9px;background:#fff;border:1px solid #d9ccb6;min-width:0}
+.muscle-band b{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.09em;margin-bottom:4px}
+.muscle-band.primary b{color:#d01628}.muscle-band.secondary b{color:#9d7000}
+.muscle-band span{display:block;font-size:11px;line-height:1.25;color:#20263a;overflow-wrap:anywhere}
+.exercise-lux-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.exercise-pill{padding:6px 8px;border-radius:999px;background:#edf2fb;border:1px solid #cad5e8;color:#233254;font-size:10px;font-weight:800}
+.exercise-action-row{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:9px}
+.demo-btn{min-height:42px;border:0;border-radius:12px;background:#0b45a8;color:#fff;font-weight:900;font-size:12px}.demo-btn:disabled{opacity:.48}
+.exercise-status{display:grid;place-items:center;min-width:50px;border-radius:12px;background:#121a2d;color:#e7efff;border:1px solid #2d3c5d;font:900 10px/1 "Courier New",monospace;padding:0 8px}
+.exercise-lux.done .exercise-status{background:#153c25;border-color:#2e7b48;color:#b8ffca}.exercise-lux.next .exercise-status{background:#4b3305;border-color:#b98523;color:#ffe3a1}
+.exercise-lux .sets{padding:10px 0 0!important;margin:0!important}.exercise-lux .set{min-width:46px;height:46px;font-size:15px;border-radius:13px}
+.exercise-lux .fbtn{margin-top:9px!important;font-size:13px!important;min-height:44px!important}.exercise-lux .emb{margin-top:9px}
+.level-exercises{gap:10px!important}.level-exercise{display:block!important;padding:0!important;border:0!important;background:transparent!important}.level-exercises .exercise-lux{margin:0}
+.master-level-card summary{padding:12px!important;min-height:58px!important}.level-title{font-size:15px!important;line-height:1.15!important}.level-count{font-size:11px!important;margin-top:4px!important}.level-num{font-size:15px!important;width:36px!important;height:36px!important}
+.master-level-card.locked{opacity:.62}.master-level-card.locked summary{cursor:not-allowed}.master-level-card.locked .level-chevron{display:none}.master-level-card.locked summary:after{content:"LOCKED";font:900 9px/1 "Courier New",monospace;color:#9d9380}
+.master-level-card.current{border-color:#d4a63b!important;box-shadow:0 0 0 1px rgba(212,166,59,.18),0 10px 22px rgba(0,0,0,.08)!important}.master-level-card.done{border-color:#398252!important}
+.grp{border:1px solid #2a416d!important;background:#0b1b35!important;color:#fff!important;border-radius:15px!important;padding:11px 12px!important}.grp .gt{font-size:15px!important}.grp .gc{color:#a8b8d4!important}
+.gravity{border-radius:16px!important;border-color:#28426f!important;background:#0b1730!important;color:#fff!important}.gravity b{color:#ffd15d!important}
+.progwrap{background:#f3ead8!important;border:1px solid #dac9a7!important;border-radius:16px!important;padding:10px!important}
+nav{background:#07101f!important;border-top:1px solid #203353!important}nav button{font-size:13px!important;color:#8998b7!important}nav button.on{background:#0d2348!important;color:#fff!important}nav button.on svg{color:#e2ad3d!important}
+@media(max-width:430px){.exercise-lux-head{grid-template-columns:1fr}.exercise-lux-dose{justify-self:start;min-width:0}.exercise-lux-visual{grid-template-columns:minmax(0,1fr) 84px}.exercise-photo,.exercise-visual-fallback,.exercise-mini-anatomy{height:148px;min-height:148px}.exercise-mini-anatomy svg{width:76px!important}.pose-glyph{width:58px;height:58px;font-size:29px}.muscle-bands{grid-template-columns:1fr}}
+@media(max-width:350px){.exercise-lux-visual{grid-template-columns:1fr}.exercise-mini-anatomy{border-left:0;border-top:1px solid #2a3858;height:auto;min-height:120px}.exercise-mini-anatomy svg{width:112px!important;height:120px!important}}
+
 </style></head>
 <body>
 <header><div class="htop"><div class="sp"><h1 id="title">Home</h1><div class="sub" id="subtitle"></div></div><div id="hact"></div></div></header>
@@ -1173,15 +1225,14 @@ function masteryLevelStatus(m,levelIndex,p){
   const current=Math.min(n-1,Math.floor(Math.min(.999,p)*n));
   return levelIndex===current?'current':'locked'
 }
+
 function masteryLevelStack(m,p){
-  const levels=MASTER_LEVEL_EXERCISES[m.id]||[];
-  return `<div class="master-level-stack">${levels.map((lvl,i)=>{
-    const status=masteryLevelStatus(m,i,p),ex=lvl.items.map(masteryExercise);
-    return `<details class="master-level-card ${status}" ${i===0?'open':''}>
-      <summary><span class="level-num">${status==='done'?'✓':i+1}</span><span class="level-summary-text"><span class="level-title">Level ${i+1} · ${esc(lvl.title)}</span><span class="level-count">${ex.length} exercise${ex.length===1?'':'s'} · correct order</span></span><span class="level-chevron">▼</span></summary>
-      <div class="level-exercises">${ex.length?ex.map((e,j)=>`<div class="level-exercise"><span class="level-order">${j+1}</span><span><div class="level-exercise-name">${esc(e.name)}</div><div class="level-exercise-group">${esc(e.group||'Mastery work')}</div></span><span class="level-dose">${esc(e.dose||'Practice')}</span></div>`).join(''):'<div class="level-empty">Exercises will appear here.</div>'}</div>
-    </details>`
-  }).join('')}</div>`
+ const levels=MASTER_LEVEL_EXERCISES[m.id]||[];
+ return '<div class="master-level-stack">'+levels.map((lvl,i)=>{
+  const status=masteryLevelStatus(m,i,p),ex=lvl.items.map(masteryExercise),locked=status==='locked';
+  const lockClick=locked?"event.preventDefault();toast('Complete Level "+i+" first')":"";
+  return '<details class="master-level-card '+status+'" '+(i===0&&!locked?'open':'')+'><summary onclick="'+lockClick+'"><span class="level-num">'+(status==='done'?'✓':i+1)+'</span><span class="level-summary-text"><span class="level-title">Level '+(i+1)+' · '+esc(lvl.title)+'</span><span class="level-count">'+ex.length+' exercise'+(ex.length===1?'':'s')+' · '+(status==='done'?'completed':status==='current'?'current level':'locked')+'</span></span><span class="level-chevron">▼</span></summary><div class="level-exercises">'+(ex.length?ex.map((e,j)=>'<div class="level-exercise">'+luxExerciseCard(e,'m'+m.id+i+'_'+j,{group:lvl.title})+'</div>').join(''):'<div class="level-empty">Exercises will appear here.</div>')+'</div></details>'
+ }).join('')+'</div>'
 }
 
 function missionCount(re){return S.history.filter(h=>re.test(String(h.name||''))).length}
@@ -1401,6 +1452,38 @@ function builderUI(){
   return h;
 }
 
+
+window.EXERCISE_ART=window.EXERCISE_ART||{};
+function exerciseGlyph(e){
+ const n=((e&&e.name)||'').toLowerCase(),g=((e&&e.group)||'').toLowerCase();
+ if(/handstand|wall hop|wall tuck|parallette handstand/.test(n))return '🤸';
+ if(/ring/.test(n)||/ring/.test(g))return '◎';
+ if(/pull-up|pullup|dead hang|scap pull|muscle-up|toes-to-bar/.test(n))return '⬆';
+ if(/planche|plank|push-up|press/.test(n))return '◆';
+ if(/pistol|shrimp|split squat|cossack|squat|wall sit|calf|tibialis|nordic|rdl|leg curl/.test(n))return '⚡';
+ if(/pike|pancake|split|mobility|stretch|roll/.test(n))return '↔';
+ if(/l-sit|compression|leg lift|hollow|arch/.test(n))return '◉';
+ if(/lever|flag/.test(n))return '◇';
+ if(/band/.test(n))return '〰';
+ return '●'
+}
+function exerciseMuscleText(list,limit){limit=limit||4;return (list||[]).slice(0,limit).join(' · ')||'Full-body control'}
+function exerciseCustomArt(name){return window.EXERCISE_ART[name]||null}
+function exerciseVisual(e,key){
+ const art=exerciseCustomArt(e.name),vs=vidsForItem(e),verified=vs.length>0,mu=e.muscles||{primary:[],secondary:[]};
+ const media=art?'<img class="exercise-photo" src="'+art+'" alt="'+esc(e.name)+' start and finish demonstration">':'<div class="exercise-visual-fallback" role="img" aria-label="'+esc(e.name)+' start and finish visual"><div class="pose-frame"><div class="pose-glyph">'+exerciseGlyph(e)+'</div><div class="pose-label">START</div></div><div class="pose-arrow">→</div><div class="pose-frame finish"><div class="pose-glyph">'+exerciseGlyph(e)+'</div><div class="pose-label">FINISH</div></div></div>';
+ const action=verified?"embLoad('"+ekey(key+'_0')+"')":"";
+ return '<div class="exercise-lux-visual"><div class="exercise-media">'+media+'<span class="visual-source '+(verified?'verified':'')+'">'+(verified?'VERIFIED DEMO':'FORM VISUAL')+'</span></div><div class="exercise-mini-anatomy"><div class="mini-title">MUSCLES USED</div>'+bodyMap(mu)+'</div></div><div class="muscle-bands"><div class="muscle-band primary"><b>Primary</b><span>'+esc(exerciseMuscleText(mu.primary))+'</span></div><div class="muscle-band secondary"><b>Secondary</b><span>'+esc(exerciseMuscleText(mu.secondary))+'</span></div></div><div class="exercise-action-row"><button class="demo-btn" '+(verified?'':'disabled')+' onclick="event.stopPropagation();'+action+'">'+(verified?'▶ View verified demo':'Photo demo pending')+'</button><div class="exercise-status">FORM</div></div>'
+}
+function luxExerciseCard(e,key,opts){
+ opts=opts||{};
+ const cls=['exercise-lux',opts.done?'done':'',opts.next?'next':''].filter(Boolean).join(' ');
+ const tool=e.tool==='band'?'Band':e.tool==='roller'?'Foam roller':'Bodyweight';
+ const note=e.note?'<div class="nt">'+esc(e.note)+'</div>':'';
+ const vs=vidsForItem(e);
+ return '<article class="'+cls+'" '+(opts.id?'id="'+opts.id+'"':'')+'><div class="exercise-lux-head"><div><div class="exercise-lux-title">'+esc(e.name)+'</div><div class="exercise-lux-sub">'+esc(e.group||opts.group||'Mastery work')+'</div></div><div class="exercise-lux-dose">'+esc(e.dose||'Practice')+'</div></div><div class="exercise-lux-body">'+exerciseVisual(e,key)+'<div class="exercise-lux-meta"><span class="exercise-pill">'+tool+'</span>'+(e.source&&e.source!=='standard'?'<span class="exercise-pill">Verified source</span>':'')+'</div>'+note+(opts.extra||'')+(opts.sets||'')+embBlock(vs,key)+formPanel(e,'f'+key)+'</div></article>'
+}
+
 // ---------- TRAIN
 function vTrain(){
   const day=getDay(S.day)||D.days[0],custom=day.id===BUILDER_DAY,g=custom?builderGoal(S.builderGoal||'grip'):null,sess=S.sess[day.id]||{};
@@ -1412,13 +1495,11 @@ function vTrain(){
   const nextI=day.items.findIndex((e,i)=>(sess[i]||0)<nSets(e.dose));
   day.items.forEach((e,i)=>{
     const n=nSets(e.dose),done=sess[i]||0,l=laneFor(e.name);let extra='';
-    if(l){const c=curNode(l);const t=holdTarget(c.id);extra=`<div class="nt">Your form: <b style="color:var(--tx)">${esc(c.name)}</b>${t?` · ${t}s holds (65% of ${S.best[c.id]}s)`:' · log a best hold in Skills'}</div>`}
-    const vs=vidsForItem(e);const src=e.source&&e.source!=='standard'?`<span class="tag">📜 From a reel</span>`:'';const tl=e.tool==='band'?'<span class="tag tband">〰 Band</span>':e.tool==='roller'?'<span class="tag troll">◉ Foam roller</span>':'';if(e.group&&(i===0||day.items[i-1].group!==e.group)){const gi=day.items.map((x,j)=>[x,j]).filter(([x])=>x.group===e.group);const gt=gi.reduce((a,[x])=>a+nSets(x.dose),0),gd=gi.reduce((a,[x,j])=>a+Math.min(sess[j]||0,nSets(x.dose)),0);h+=`<div class="grp ${gd>=gt?'gdone':''}"><span class="gi">${grpIcon(e.group)}</span><span class="gt">${esc(e.group)}</span><span class="gc">${gi.length} drills · ${gd}/${gt}</span></div>`}
-    h+=`<div class="ex ${done>=n?'done':''} ${i===nextI?'next':''}" id="ex${i}"><div class="row" style="align-items:flex-start"><div class="sp"><div class="nm">${esc(e.name)}</div><div class="ds">${esc(e.dose)}${e.rest?' · rest '+esc(e.rest):''}</div></div>${done>=n?'<span class="badge ok">DONE</span>':''}</div>${e.note?`<div class="nt">${esc(e.note)}</div>`:''}${extra}${src}${tl}
-    <div class="sets">${Array.from({length:n},(_,k)=>`<div class="set ${k<done?'on':''}${window._burst===day.id+'-'+i+'-'+k?' burst':''}" onclick="tapSet('${day.id}',${i},${k},${/2 min/.test(e.rest||'')?120:90})">${k<done?'✓':k+1}</div>`).join('')}</div>
-    ${embBlock(vs,'t'+day.id+i)}${formPanel(e,'f'+day.id+i)}</div>`;
-  });
-  if(!day.items.length)h+=`<div class="card">${emptyState('📡','No matching drills','This focus stays strict instead of filling the workout with unrelated movements.')}</div>`;
+    if(l){const c=curNode(l);const t=holdTarget(c.id);extra='<div class="nt">Your form: <b style="color:var(--tx)">'+esc(c.name)+'</b>'+(t?' · '+t+'s holds (65% of '+S.best[c.id]+'s)':' · log a best hold in Skills')+'</div>'}
+    if(e.group&&(i===0||day.items[i-1].group!==e.group)){const gi=day.items.map((x,j)=>[x,j]).filter(([x])=>x.group===e.group);const gt=gi.reduce((a,[x])=>a+nSets(x.dose),0),gd=gi.reduce((a,[x,j])=>a+Math.min(sess[j]||0,nSets(x.dose)),0);h+='<div class="grp '+(gd>=gt?'gdone':'')+'"><span class="gi">'+grpIcon(e.group)+'</span><span class="gt">'+esc(e.group)+'</span><span class="gc">'+gi.length+' drills · '+gd+'/'+gt+'</span></div>'}
+    const setsHtml='<div class="sets">'+Array.from({length:n},(_,k)=>'<div class="set '+(k<done?'on':'')+(window._burst===day.id+'-'+i+'-'+k?' burst':'')+'" onclick="tapSet(\''+day.id+'\','+i+','+k+','+(/2 min/.test(e.rest||'')?120:90)+')">'+(k<done?'✓':k+1)+'</div>').join('')+'</div>';
+    h+=luxExerciseCard(e,'t'+day.id+i,{id:'ex'+i,done:done>=n,next:i===nextI,extra:extra,sets:setsHtml});
+  });  if(!day.items.length)h+=`<div class="card">${emptyState('📡','No matching drills','This focus stays strict instead of filling the workout with unrelated movements.')}</div>`;
   h+=`<button class="btn g" style="width:100%;margin:8px 0 10px;min-height:52px;font-size:16px" onclick="finish('${day.id}')" ${day.items.length?'':'disabled'}>${custom?'Kamehameha! Complete mission':'Kamehameha! Finish workout'}</button>`;
   h+='<div class="muted" style="text-align:center">Pick a mission above to instantly rebuild this screen around one goal.</div>';
   M(h);
