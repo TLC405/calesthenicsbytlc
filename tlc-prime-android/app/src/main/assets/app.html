@@ -904,6 +904,11 @@ html.light .master-family-sub{color:#226c36}
  .level-dose{grid-column:2;text-align:left;max-width:none}
 }
 
+
+/* v3.12 eight separate masters */
+.radar-signal{width:70px!important}
+.radar-full-label{width:70px!important;font-size:7.8px!important;line-height:1.02!important;min-height:15px!important;padding:3px 3px!important}
+@media(max-width:380px){.radar-signal{width:64px!important}.radar-full-label{width:64px!important;font-size:7.2px!important}}
 </style></head>
 <body>
 <header><div class="htop"><div class="sp"><h1 id="title">Home</h1><div class="sub" id="subtitle"></div></div><div id="hact"></div></div></header>
@@ -1088,13 +1093,14 @@ function shout(t,sub,col){document.documentElement.style.setProperty('--fl',col|
 function sparks(x,y){for(let i=0;i<10;i++){const s=document.createElement('div');s.className='spark';const a=Math.random()*6.28,d=40+Math.random()*50;s.style.left=x+'px';s.style.top=y+'px';s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',Math.sin(a)*d+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),600)}}
 let lastXY=[innerWidth/2,innerHeight/2];document.addEventListener('pointerdown',e=>{lastXY=[e.clientX,e.clientY]},true);
 const DRAGON_MASTERY=[
-  {id:'handstand',name:'Handstand',short:'Handstand',icon:'🤸',lane:'handstand',goal:'handstand',levels:['Wall line','Kick-up + bail','Freestanding hold','Handstand walk','Press / HSPU mastery']},
-  {id:'plank',name:'Plank',short:'Plank',icon:'▰',lane:'planche',goal:'planche',levels:['Straight-body plank','Long-lever plank','Planche lean','Tuck strength','Advanced plank control']},
-  {id:'pullup',name:'Pull-Up',short:'Pull-Up',icon:'⬆',lane:'pull_up',goal:'pull',levels:['Dead hang + scap pull','Negatives / assisted','Strict pull-up','Chest-to-bar','Explosive pull-up']},
-  {id:'mobility',name:'Mobility',short:'Mobility',icon:'↔',lane:'legs_mobility',goal:'mobility',levels:['Ankles + wrists','Shoulders + hips','Deep squat mobility','Pancake + split range','Full-body mobility']},
-  {id:'balance_rings',name:'Balance Rings',short:'Balance Rings',icon:'◌',goal:'rings',levels:['Ring support','Turn-out support','Ring balance hold','Unstable support control','Balance rings mastery']},
-  {id:'olympic_rings',name:'Olympic Rings',short:'Olympic Rings',icon:'◎',goal:'rings',levels:['Support hold','Ring dip','False grip','Skin the cat','Olympic rings strength']},
-  {id:'pullup_mastery',name:'Pull-Up Mastery',short:'Pull-Up Mastery',icon:'⚡',lane:'muscle_up',goal:'pull',levels:['Strict pull-up','Explosive pull-up','High pull','Transition strength','Pull-up mastery']}
+  {id:'handstand',name:'Handstand',short:'Handstand',icon:'🤸',lane:'handstand',goal:'handstand',levels:['Foundation line','Shape + balance','Freestanding support','Control + float','Press mastery']},
+  {id:'plank',name:'Plank',short:'Plank',icon:'▰',lane:'planche',goal:'plank',levels:['Body-line foundation','Side-plank control','Long-lever strength','Forward lean','Plank mastery']},
+  {id:'pullup',name:'Pull-Up',short:'Pull-Up',icon:'⬆',lane:'pull_up',goal:'pullup',levels:['Hang + scapular control','Assisted pulling','Eccentric strength','Strict pulling','Explosive pulling']},
+  {id:'mobility',name:'Mobility',short:'Mobility',icon:'↔',lane:'legs_mobility',goal:'mobility',levels:['Joint preparation','Shoulders + upper body','Squat + lateral range','Hip + hamstring range','Advanced mobility control']},
+  {id:'balance',name:'Balance',short:'Balance',icon:'⚖',lane:'legs_single_leg',goal:'balance',levels:['Stable base','Single-leg control','Assisted balance strength','Deep balance strength','Balance mastery']},
+  {id:'rings',name:'Rings',short:'Rings',icon:'◌',goal:'rings',levels:['Support foundation','Ring control','Pull + press basics','Core + support','Rings mastery']},
+  {id:'olympic_rings',name:'Olympic Rings',short:'Olympic Rings',icon:'◎',goal:'olympic_rings',levels:['Support quality','Core position','Lever control','Straight-arm strength','Olympic Rings mastery']},
+  {id:'pullup_mastery',name:'Pull-Up Mastery',short:'Pull-Up Mastery',icon:'⚡',lane:'muscle_up',goal:'pull_mastery',levels:['Strict base','Explosive height','Bar contact','Transition skill','Pull-Up Mastery']}
 ]
 
 const MASTER_LEVEL_EXERCISES={
@@ -1106,16 +1112,16 @@ const MASTER_LEVEL_EXERCISES={
     {title:'Press mastery',items:['Handstand lowers','Band-assisted handstand press','Handstand press from elevation']}
   ],
   plank:[
-    {title:'Body-line foundation',items:['Side plank, hip raise']},
-    {title:'Forward lean strength',items:['Pike lean to high planche']},
-    {title:'Assisted hold',items:['Band-assisted planche hold']},
-    {title:'Tuck strength',items:['Band-assisted tuck planche press toe taps','Tuck planche press']},
-    {title:'Advanced plank mastery',items:['Planche hold at your stage','L-sit to tuck planche press']}
+    {title:'Body-line foundation',items:['Hollow hold','Arch hold']},
+    {title:'Side-plank control',items:['Side plank, hip raise']},
+    {title:'Long-lever strength',items:['Block pike lean']},
+    {title:'Forward lean',items:['Pike lean to high planche','Band-assisted planche hold']},
+    {title:'Plank mastery',items:['Planche hold at your stage','Tuck planche press']}
   ],
   pullup:[
-    {title:'Hang + scapular control',items:['Dead hang','Scap pulls','Ring rows']},
+    {title:'Hang + scapular control',items:['Dead hang','Scap pulls']},
     {title:'Assisted pulling',items:['Jump pull-ups','Band-assisted pull-ups (neutral, then wide grip)']},
-    {title:'Eccentric strength',items:['Slow pull-up negatives']},
+    {title:'Eccentric strength',items:['Slow pull-up negatives','Ring rows']},
     {title:'Strict pulling',items:['Pull-up at your stage']},
     {title:'Explosive pulling',items:['Explosive pull-ups (chest/belly to bar)','Weighted pull-up negatives']}
   ],
@@ -1126,29 +1132,36 @@ const MASTER_LEVEL_EXERCISES={
     {title:'Hip + hamstring range',items:['Pancake stretch','Mobility: pancake, front split each side, middle split','Elevated-hip / bent-knee pancake']},
     {title:'Advanced mobility control',items:['Weighted pike stretch + flutter','Middle split transitions (hips elevated)']}
   ],
-  balance_rings:[
-    {title:'Support foundation',items:['Ring support hold']},
-    {title:'Stability control',items:['Ring circles']},
-    {title:'Compression balance',items:['Ring L-sit']},
-    {title:'Unstable strength',items:['Ring planche lean','Ring side presses']},
-    {title:'Balance rings mastery',items:['Supported ring cross negatives (band/feet assist)']}
+  balance:[
+    {title:'Stable base',items:['Cossack squats','Single-leg calf raise']},
+    {title:'Single-leg control',items:['Bulgarian split squat','Sliding leg curl or single-leg RDL']},
+    {title:'Assisted balance strength',items:['Band-assisted pistol','Pistol squat progression']},
+    {title:'Deep balance strength',items:['Shrimp squat progression','Single-leg squat at your stage (pistol -> shrimp -> dragon)']},
+    {title:'Balance mastery',items:['Power at your stage (squat jump -> broad -> tuck -> skater -> box)']}
+  ],
+  rings:[
+    {title:'Support foundation',items:['Ring support hold','Ring circles']},
+    {title:'Ring control',items:['Ring rows']},
+    {title:'Pull + press basics',items:['Ring rows','Ring push-ups']},
+    {title:'Core + support',items:['Ring L-sit']},
+    {title:'Rings mastery',items:['Ring planche lean','Ring side presses']}
   ],
   olympic_rings:[
-    {title:'Pull foundation',items:['Ring rows']},
-    {title:'Press foundation',items:['Ring push-ups','Ring support hold']},
-    {title:'Core + support',items:['Ring L-sit','Ring circles']},
-    {title:'Advanced ring strength',items:['Ring side presses','Band-assisted ring back lever (negatives, reps, holds)']},
-    {title:'Olympic rings mastery',items:['Supported ring cross negatives (band/feet assist)','Ring planche lean']}
+    {title:'Support quality',items:['Ring support hold']},
+    {title:'Core position',items:['Ring L-sit']},
+    {title:'Lever control',items:['Band-assisted ring back lever (negatives, reps, holds)']},
+    {title:'Straight-arm strength',items:['Ring planche lean','Ring side presses']},
+    {title:'Olympic Rings mastery',items:['Supported ring cross negatives (band/feet assist)']}
   ],
   pullup_mastery:[
-    {title:'Strict base',items:['Pull-up at your stage','Slow pull-up negatives']},
+    {title:'Strict base',items:['Pull-up at your stage','Weighted pull-up negatives']},
     {title:'Explosive height',items:['Explosive pull-ups (chest/belly to bar)']},
     {title:'Bar contact',items:['Hip-to-bar drill','Kip swing to kipping chest-to-bar']},
     {title:'Transition skill',items:['Box transition practice (fast pull to push)','Jumping or banded muscle-up','Banded muscle-up reps (band over the bar)']},
-    {title:'Pull-up mastery',items:['Muscle-up at your stage','Straight-bar dips','Straight-bar dip transitions']}
+    {title:'Pull-Up Mastery',items:['Muscle-up at your stage','Straight-bar dips','Straight-bar dip transitions']}
   ]
 };
-function masteryFamilyName(m){return (m.id==='balance_rings'||m.id==='olympic_rings')?'Rings':m.name}
+function masteryFamilyName(m){return m.name}
 function masteryExercise(name){
   for(const d of D.days){const e=d.items.find(x=>x.name===name);if(e)return {...e,day:d.id,dayName:d.name}}
   return {name,dose:'',group:''}
@@ -1171,31 +1184,30 @@ function masteryLevelStack(m,p){
   }).join('')}</div>`
 }
 
+function missionCount(re){return S.history.filter(h=>re.test(String(h.name||''))).length}
 function dragonMasterProgress(m){
+  if(m.id==='balance')return lanePct('legs_single_leg');
+  if(m.id==='rings')return Math.min(1,missionCount(/^Rings Mission$/i)/5);
+  if(m.id==='olympic_rings')return Math.min(1,missionCount(/^Olympic Rings Mission$/i)/5);
   if(m.lane)return lanePct(m.lane);
-  if(m.id==='balance_rings'||m.id==='olympic_rings'){
-    const ringHistory=S.history.filter(h=>/ring/i.test(h.name||'')).length;
-    const ringBest=Object.keys(S.best||{}).filter(id=>T[id]&&/ring/i.test(T[id].name||'')).length;
-    const base=Math.min(1,(ringHistory+ringBest*2)/14);
-    return m.id==='balance_rings'?Math.min(1,base*.9):base;
-  }
   return 0
 }
 function dragonCurrentLevel(m,p){
-  if(m.lane){const n=curNode(m.lane);if(n)return n.name}
-  const ix=Math.min(m.levels.length-1,Math.floor(Math.min(.999,p)*m.levels.length));
-  return m.levels[ix]
+  const levels=MASTER_LEVEL_EXERCISES[m.id]||[];
+  if(!levels.length)return m.name;
+  const ix=Math.min(levels.length-1,Math.floor(Math.min(.999,Math.max(0,p))*levels.length));
+  return levels[ix].title
 }
 function dbStars(n){return '<span class="db-stars">'+Array.from({length:Math.max(1,Math.min(7,n))},()=> '★').join('')+'</span>'}
 function radar(){
-  let selected=Math.max(0,Math.min(6,+(S.radarBall||1)-1));
-  const pts=[[50,15],[27,32],[73,32],[22,58],[78,58],[35,79],[65,79]];
+  let selected=Math.max(0,Math.min(DRAGON_MASTERY.length-1,+(S.radarBall||1)-1));
+  const pts=[[50,12],[25,24],[75,24],[17,48],[83,48],[27,72],[73,72],[50,86]];
   const m=DRAGON_MASTERY[selected],p=dragonMasterProgress(m),level=dragonCurrentLevel(m,p);
   return `<div class="dragon-radar-shell">
     <div class="dbz-finder-aura"><i class="ki-mote"></i><i class="ki-mote"></i><i class="ki-mote"></i><i class="ki-mote"></i><i class="ki-mote"></i></div>
-    <div class="radar-top"><span><i class="radar-led"></i>MASTERY RADAR</span><span>${DRAGON_MASTERY.filter(x=>dragonMasterProgress(x)>=1).length}/7 COMPLETE</span></div>
+    <div class="radar-top"><span><i class="radar-led"></i>MASTERY RADAR</span><span>${DRAGON_MASTERY.filter(x=>dragonMasterProgress(x)>=1).length}/${DRAGON_MASTERY.length} COMPLETE</span></div>
     <div class="radar" onclick="radarPing()"><div class="rings"></div><div class="grid"></div><div class="cross"></div><div class="sweep"></div><div class="scan-flash"></div><div class="me"></div>
-      ${pts.map((pt,i)=>{const x=DRAGON_MASTERY[i],xp=dragonMasterProgress(x),ok=xp>=1;return `<button class="radar-signal ${ok?'done':''} ${i===selected?'sel':''}" style="left:${pt[0]}%;top:${pt[1]}%" onclick="radarSelect(${i+1});event.stopPropagation()" aria-label="${esc(x.name)}"><span class="dball">${dbStars(i+1)}</span><span class="radar-full-label">${esc(x.name)}</span></button>`}).join('')}
+      ${pts.map((pt,i)=>{const x=DRAGON_MASTERY[i],xp=dragonMasterProgress(x),ok=xp>=1;return `<button class="radar-signal ${ok?'done':''} ${i===selected?'sel':''}" style="left:${pt[0]}%;top:${pt[1]}%" onclick="radarSelect(${i+1});event.stopPropagation()" aria-label="${esc(x.name)}"><span class="dball">${dbStars((i%7)+1)}</span><span class="radar-full-label">${esc(x.name)}</span></button>`}).join('')}
     </div>
     <div class="radar-controls"><div class="radar-readout">SIGNAL · ${esc(m.name)}<br>STAGE · ${esc(level)}</div><button class="radar-btn" onclick="radarPing();event.stopPropagation()" aria-label="Ping radar">PING</button></div>
   </div>
@@ -1216,58 +1228,76 @@ function dragonTrain(goal){S.builderGoal=goal;save();go('train')}
 function radarPing(){if(navigator.vibrate)navigator.vibrate([18,35,18,35,28]);const el=document.querySelector('.dragon-radar-shell');if(el){el.animate([{transform:'scale(1)'},{transform:'scale(1.012)'},{transform:'scale(1)'}],{duration:320})}sparks(innerWidth/2,Math.min(innerHeight*.34,260));toast('Supa Strength Mastery scan complete')}
 
 // ---------- Supa Strength sound system
-let SS_AUDIO=null;
+let SS_AUDIO=null,SS_AUDIO_UNLOCKED=false;
 function ssAudio(){
   if(SS_AUDIO)return SS_AUDIO;
   try{
     const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;
-    const ctx=new C(), master=ctx.createGain(), music=ctx.createGain(), sfx=ctx.createGain();
-    master.gain.value=.72;music.gain.value=.065;sfx.gain.value=.18;
+    const ctx=new C(),master=ctx.createGain(),music=ctx.createGain(),sfx=ctx.createGain();
+    master.gain.value=.82;music.gain.value=.14;sfx.gain.value=.18;
     music.connect(master);sfx.connect(master);master.connect(ctx.destination);
-    SS_AUDIO={ctx,master,music,sfx,started:false,step:0};
+    SS_AUDIO={ctx,master,music,sfx,started:false,step:0,loop:null};
     return SS_AUDIO;
   }catch(e){return null}
 }
 function ssTone(freq,dur=.08,type='sine',gain=.12,when=0,bus='sfx'){
-  const a=ssAudio();if(!a)return;
+  const a=ssAudio();if(!a||a.ctx.state!=='running')return false;
   const t=a.ctx.currentTime+when,o=a.ctx.createOscillator(),g=a.ctx.createGain();
   o.type=type;o.frequency.setValueAtTime(freq,t);
-  g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.001,gain),t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
-  o.connect(g);g.connect(a[bus]);o.start(t);o.stop(t+dur+.03)
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(Math.max(.001,gain),t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g);g.connect(a[bus]);o.start(t);o.stop(t+dur+.03);return true
+}
+function ssMusicPulse(){
+  const a=SS_AUDIO;if(!a||a.ctx.state!=='running'||S.musicOn===false)return;
+  const bass=[110,110,146.83,164.81,98,123.47,146.83,82.41];
+  const lead=[220,246.94,293.66,329.63,293.66,246.94,220,196];
+  const i=(a.step||0)%bass.length;a.step=i+1;
+  ssTone(bass[i],.50,'triangle',.20,0,'music');
+  ssTone(lead[i],.20,'sine',.07,.045,'music');
+  if(i%2===0)ssTone(bass[i]*2,.10,'square',.025,.16,'music')
 }
 function ssStartMusic(){
-  const a=ssAudio();if(!a||a.started)return;
-  a.started=true;
-  const seq=[110,146.83,164.81,220,196,164.81,146.83,123.47];
-  const pulse=()=>{if(!S.musicOn)return;a.step=(a.step||0)%seq.length;const f=seq[a.step++];ssTone(f,.42,'triangle',.18,0,'music');ssTone(f*2,.18,'sine',.06,.03,'music')};
-  pulse();a.loop=setInterval(pulse,620);
+  const a=ssAudio();if(!a||a.started||a.ctx.state!=='running'||S.musicOn===false)return false;
+  a.started=true;ssMusicPulse();a.loop=setInterval(ssMusicPulse,680);return true
 }
-function ssResume(){
-  const a=ssAudio();if(!a)return;
-  if(a.ctx.state==='suspended')a.ctx.resume().catch(()=>{});
+async function ssResume(){
+  const a=ssAudio();if(!a)return false;
+  try{if(a.ctx.state!=='running')await a.ctx.resume()}catch(e){}
+  if(a.ctx.state!=='running')return false;
+  SS_AUDIO_UNLOCKED=true;
   if(S.musicOn!==false)ssStartMusic();
+  return true
 }
+function ssStopMusic(){
+  const a=SS_AUDIO;if(!a)return;
+  if(a.loop){clearInterval(a.loop);a.loop=null}
+  a.started=false
+}
+function ssPressTone(){ssTone(440,.055,'square',.11);ssTone(660,.045,'sine',.06,.018)}
 function ssPress(){
-  ssResume();ssTone(440,.055,'square',.11);ssTone(660,.045,'sine',.06,.018);
+  ssResume().then(ok=>{if(ok)ssPressTone()});
   try{if(navigator.vibrate)navigator.vibrate(8)}catch(e){}
 }
 function ssPowerPress(){
-  ssResume();ssTone(220,.07,'sawtooth',.10);ssTone(440,.09,'triangle',.09,.025);ssTone(880,.08,'sine',.07,.055);
+  ssResume().then(ok=>{if(ok){ssTone(220,.07,'sawtooth',.10);ssTone(440,.09,'triangle',.09,.025);ssTone(880,.08,'sine',.07,.055)}});
   try{if(navigator.vibrate)navigator.vibrate([10,18,10])}catch(e){}
 }
 S.musicOn=S.musicOn!==false;
-document.addEventListener('pointerdown',e=>{
-  const b=e.target.closest&&e.target.closest('button,.btn,.chip,.lane,.finder-chip,.blip,[role="button"]');
-  if(b)ssPress(); else ssResume();
-},true);
-document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('button,.btn,[role="button"]'))ssPress()},true);
-window.addEventListener('load',()=>{setTimeout(ssResume,250)});
+const ssUnlockFromGesture=e=>{
+  const b=e&&e.target&&e.target.closest&&e.target.closest('button,.btn,.chip,.lane,.finder-chip,.radar-signal,[role="button"]');
+  ssResume().then(ok=>{if(ok&&b)ssPressTone()})
+};
+document.addEventListener('pointerdown',ssUnlockFromGesture,true);
+document.addEventListener('touchstart',ssUnlockFromGesture,{capture:true,passive:true});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')ssResume().then(ok=>{if(ok)ssPressTone()})},true);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&SS_AUDIO_UNLOCKED&&S.musicOn!==false)ssResume()});
+window.addEventListener('pageshow',()=>{if(SS_AUDIO_UNLOCKED&&S.musicOn!==false)ssResume()});
 
 // ---------- shell
 const TABS=['home','train','skills','learn','ana','log'];
 function go(t){if(tab==='ana'&&t!=='ana'){const v=document.getElementById('anaV');if(v)v.pause()}const mm=document.getElementById('main');mm.style.animation='none';mm.offsetHeight;mm.style.animation='';tab=t;openVid=null;EMB=null;TABS.forEach(x=>document.getElementById('n-'+x).classList.toggle('on',x===t));render();window.scrollTo(0,0)}
 function applyTheme(){const l=S.theme!=='dark';document.documentElement.classList.toggle('light',l);const tm=document.querySelector('meta[name=theme-color]');if(tm)tm.content=l?'#eaf4ff':'#07091a';try{if(window.Native&&Native.setBars)Native.setBars(l)}catch(e){}}
-function toggleMusic(){S.musicOn=S.musicOn===false;save();if(S.musicOn){ssResume();toast('Music on')}else{const a=SS_AUDIO;if(a&&a.loop){clearInterval(a.loop);a.loop=null;a.started=false}toast('Music off')}render(true)}
+function toggleMusic(){S.musicOn=S.musicOn===false;save();if(S.musicOn){ssResume().then(ok=>toast(ok?'Music on':'Tap once to start music'))}else{ssStopMusic();toast('Music off')}render(true)}
 function toggleTheme(){S.theme=S.theme==='dark'?'light':'dark';save();applyTheme();render(true);toast(S.theme==='dark'?'Night mode':'Day mode')}
 function render(keep){applyTheme();applyAura();const y=window.scrollY;setTimeout(()=>{document.querySelectorAll('.chips .chip.on').forEach(c=>c.scrollIntoView({block:'nearest',inline:'center'}))},0);({home:vHome,train:vTrain,skills:vSkills,learn:vLearn,ana:vAna,log:vLog})[tab]();if(keep)window.scrollTo(0,y)}
 function head(t,s,act){document.getElementById('title').textContent=t;document.getElementById('subtitle').textContent=s||'';document.getElementById('hact').innerHTML=`<span class="thm" role="button" aria-label="Toggle music" onclick="toggleMusic()">${S.musicOn===false?'🔇':'🔊'}</span><span class="thm" role="button" aria-label="Toggle theme" onclick="toggleTheme()">${S.theme==='dark'?'☀️':'🌙'}</span>`+(act||'')+(typeof powerLevel==='function'&&tab!=='home'?`<span class="pchip" onclick="go('log')"><i></i>${fmt(powerLevel())}</span>`:'')}
@@ -1280,7 +1310,7 @@ function vHome(){
   const passedN=Object.keys(S.passed).filter(k=>S.passed[k]!=='start').length;
   head('Supa Strength',(hr<12?'Morning':hr<18?'Afternoon':'Evening')+' · '+new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}));
   let h=`<div class="home-scanner">
-    <div class="finder-title-wrap"><div class="finder-title">Supa Strength Mastery</div><div class="finder-sub">Handstand · Plank · Pull-Up · Mobility · Balance Rings · Olympic Rings · Pull-Up Mastery</div></div>
+    <div class="finder-title-wrap"><div class="finder-title">Supa Strength Mastery</div><div class="finder-sub">Handstand · Plank · Pull-Up · Mobility · Balance · Rings · Olympic Rings · Pull-Up Mastery</div></div>
     ${radar()}
   </div>`;
   h+=`<section class="mission-card">
@@ -1303,6 +1333,11 @@ function vHome(){
 const BUILDER_DAY='Z';
 const BUILDER_GOALS=[
   {id:'grip',label:'Grip Strength',icon:'✊',desc:'Hangs · wrists · forearms',max:3,color:'#ffd400'},
+  {id:'plank',label:'Plank',icon:'▰',desc:'Body line · side plank · long lever',max:5,color:'#ff9d00'},
+  {id:'pullup',label:'Pull-Up',icon:'⬆',desc:'Hang · assisted · strict · explosive',max:5,color:'#5fd4ff'},
+  {id:'balance',label:'Balance',icon:'⚖',desc:'Single-leg control · stability',max:5,color:'#9cffae'},
+  {id:'olympic_rings',label:'Olympic Rings',icon:'◎',desc:'Support · lever · straight-arm strength',max:5,color:'#ffb000'},
+  {id:'pull_mastery',label:'Pull-Up Mastery',icon:'⚡',desc:'Explosive pull · transition · muscle-up',max:5,color:'#ffd400'},
   {id:'pull',label:'Pull Power',icon:'⬆',desc:'Pull-ups · rows · scapula',max:5,color:'#5fd4ff'},
   {id:'planche',label:'Planche',icon:'◆',desc:'Straight-arm planche only',max:5,color:'#ff9d00'},
   {id:'handstand',label:'Handstand',icon:'⇧',desc:'Line · balance · control',max:5,color:'#e9ecff'},
@@ -1319,6 +1354,11 @@ function goalMatch(id,e){
   if(id==='pull')return /(pull-up|scap pulls|ring rows)/i.test(n)&&!/muscle-up|toes-to-bar|handstand|pike|planche/i.test(n);
   if(id==='planche')return /planche/i.test(n+' '+g)&&!/handstand/i.test(n);
   if(id==='handstand')return /handstand|wall tuck|wall hops|toe pulls/i.test(n+' '+g)&&!/press handstand/i.test(n);
+  if(id==='plank')return /^(Hollow hold|Arch hold|Side plank, hip raise|Block pike lean|Pike lean to high planche|Band-assisted planche hold|Planche hold at your stage|Tuck planche press)$/i.test(n);
+  if(id==='pullup')return /^(Dead hang|Scap pulls|Jump pull-ups|Band-assisted pull-ups \(neutral, then wide grip\)|Slow pull-up negatives|Ring rows|Pull-up at your stage|Explosive pull-ups \(chest\/belly to bar\)|Weighted pull-up negatives)$/i.test(n);
+  if(id==='balance')return /^(Cossack squats|Single-leg calf raise|Bulgarian split squat|Sliding leg curl or single-leg RDL|Band-assisted pistol|Pistol squat progression|Shrimp squat progression|Single-leg squat at your stage \(pistol -> shrimp -> dragon\)|Power at your stage \(squat jump -> broad -> tuck -> skater -> box\))$/i.test(n);
+  if(id==='olympic_rings')return /^(Ring support hold|Ring L-sit|Band-assisted ring back lever \(negatives, reps, holds\)|Ring planche lean|Ring side presses|Supported ring cross negatives \(band\/feet assist\))$/i.test(n);
+  if(id==='pull_mastery')return /^(Pull-up at your stage|Weighted pull-up negatives|Explosive pull-ups \(chest\/belly to bar\)|Hip-to-bar drill|Kip swing to kipping chest-to-bar|Box transition practice \(fast pull to push\)|Jumping or banded muscle-up|Banded muscle-up reps \(band over the bar\)|Muscle-up at your stage|Straight-bar dips|Straight-bar dip transitions)$/i.test(n);
   if(id==='rings')return /\bring\b/i.test(n)&&!/planche/i.test(n);
   if(id==='core')return /core|compression|l-sit|hollow|toes-to-bar|leg lift/i.test(n+' '+g)&&!/handstand|planche|press handstand/i.test(n);
   if(id==='legs')return /squat|pistol|nordic|hamstring|calf|tib|lunge|cossack|leg curl|rdl/i.test(n+' '+g);
@@ -1327,6 +1367,11 @@ function goalMatch(id,e){
 }
 const BUILD_PRIORITY={
   grip:['Wrist warm-up','Dead hang','Scap pulls'],
+  plank:['Hollow hold','Side plank, hip raise','Block pike lean','Pike lean to high planche','Planche hold at your stage'],
+  pullup:['Dead hang','Scap pulls','Band-assisted pull-ups (neutral, then wide grip)','Pull-up at your stage','Explosive pull-ups (chest/belly to bar)'],
+  balance:['Cossack squats','Sliding leg curl or single-leg RDL','Band-assisted pistol','Shrimp squat progression','Single-leg squat at your stage (pistol -> shrimp -> dragon)'],
+  olympic_rings:['Ring support hold','Ring L-sit','Band-assisted ring back lever (negatives, reps, holds)','Ring planche lean','Supported ring cross negatives (band/feet assist)'],
+  pull_mastery:['Pull-up at your stage','Explosive pull-ups (chest/belly to bar)','Hip-to-bar drill','Box transition practice (fast pull to push)','Muscle-up at your stage'],
   pull:['Scap pulls','Pull-up at your stage','Band-assisted pull-ups (neutral, then wide grip)','Slow pull-up negatives','Ring rows'],
   planche:['Planche hold at your stage','Band-assisted planche hold','Pike lean to high planche','Tuck planche press','Ring planche lean'],
   handstand:['Wall tuck slides','Wall hops','Wall tuck switches','Wall tuck holds','Parallette handstand hold'],
