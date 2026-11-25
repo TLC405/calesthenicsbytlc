@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:label="TLC Prime DBZ"
+        android:label="Supa Strength"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="false">
         <activity
